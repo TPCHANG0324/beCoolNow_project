@@ -3,7 +3,7 @@ import { createRouter, createWebHistory } from "vue-router";
 // path → component
 const routes = [
   {
-    path: '/', component: () => import('@/pages/index.vue'),
+    path: '/', component: () => import('@/pages/Home.vue'),
     meta: {
       title: '首頁',
       // requiredLogin: false
@@ -11,21 +11,21 @@ const routes = [
 
   },
   {
-    path: '/Ic', component: () => import('@/pages/Ic.vue'),
+    path: '/Ic', component: () => import('@/pages/Information.vue'),
     meta: {
       title: '島嶼危機',
       // requiredLogin: false
     }
   },
   {
-    path: '/Ac/', component: () => import('@/pages/Ac.vue'),
+    path: '/Ac/', component: () => import('@/pages/About.vue'),
     meta: {
       title: '永續行動',
       // requiredLogin: false
     }
   },
   {
-    path: '/social/', component: () => import('@/pages/social.vue'),
+    path: '/social/', component: () => import('@/pages/Social.vue'),
     meta: {
       title: '社群中心',
       // requiredLogin: true
@@ -53,7 +53,7 @@ const routes = [
     }
   },
   {
-    path: '/Sp_product/', component: () => import('@/pages/Sp_product.vue'),
+    path: '/Sp_product/', component: () => import('@/pages/Shop_product.vue'),
     meta: {
       title: '環保市集',
       // requiredLogin: true
