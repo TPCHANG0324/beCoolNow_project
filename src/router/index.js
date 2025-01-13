@@ -31,6 +31,36 @@ const routes = [
       // requiredLogin: true
     }
   },
+  {
+    path: '/loginPage/', component: () => import('@/pages/loginPage.vue'),
+    meta: {
+      title: '前後台登入',
+      // requiredLogin: true
+    }
+  },
+
+  {
+    path: '/pay1/', component: () => import('@/pages/pay1.vue'),
+    meta: {
+      title: '捐款頁面1',
+      // requiredLogin: true
+    }
+  },
+
+  {
+    path: '/pay2/', component: () => import('@/pages/pay2.vue'),
+    meta: {
+      title: '捐款頁面2',
+      // requiredLogin: true
+    }
+  },
+  {
+    path: '/Mb/', component: () => import('@/pages/Mb.vue'),
+    meta: {
+      title: '會員頁面',
+      // requiredLogin: true
+    }
+  },
   // {
   //   path: '/Ct/', component: () => import('@/pages/Ct.vue'),
   //   meta: {
