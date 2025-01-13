@@ -1,0 +1,280 @@
+
+//------------------------------- 首頁_主選單 --------------------------------------//
+
+.Fp_Header_H{
+    width: 100%;
+    height: 80px;
+    border: 1px solid blue;
+    text-align: center;
+    @include PC_h1($Yellow_1);
+    line-height: 80px;
+    position: fixed;
+    z-index: 999;
+}
+
+//---------------------------------------------------------------------------------//
+//-------------------------- 首頁_主視覺Banner區塊 ---------------------------------//
+
+.Fp_Banner_H{
+    background-image: url('@/assets/images/Fp01.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    overflow: hidden;
+
+    header{
+        max-width: $body_layout;
+        margin: 0 auto;
+        margin-top: 15%;
+        display: flex;
+        // border: 1px solid yellow;
+
+        article:first-of-type{
+            margin-bottom: 0;
+            // border: 1px solid yellow;
+            margin: 240px 0 0 160px;
+            width: 30%;
+
+            h2{
+                // border: 1px solid yellow;
+                font-size: 2rem; // 32px
+                line-height: $line_height_140;
+                color: $Ivory_white;
+                text-align: center;
+                font-weight: $font_weight_Bold;
+                text-shadow: $text_shadow;
+            }
+
+            a{
+                margin: 0 auto;
+                display: block;
+                text-decoration: none;
+                margin-top: 20px;
+                padding: 0;
+                @include btn_style($btn_radius_30px, 55%, 48px);
+                line-height: 16px;
+            }
+        }
+
+        article:last-of-type{
+            // border: 1px solid yellow;
+            width: 32%;
+            margin: 0 80px; 
+            @include PC_h1($Ivory_white);
+            
+            h1:first-of-type{
+                font-size: 6rem; // 96px
+                width: 100%;
+                text-shadow: $text_shadow;
+                line-height: $line_height_120;
+            }
+            h1:last-of-type{
+                font-size: 6rem; // 96px
+                text-align: end;
+                width: 100%;
+                text-shadow: $text_shadow;
+                line-height: $line_height_120;
+            }
+        }
+
+
+    }
+}
+
+//---------------------------------------------------------------------------------//
+//------------------------------ 首頁_災害Banner區塊 -------------------------------//
+
+.Fp_disaster_H{
+    background: linear-gradient(to right, rgba(0, 0, 0, .3), rgba(0, 0, 0, 0)), url('@/assets/images//Fp07.png');
+    // background-image: url('@/assets/images/Fp07.png');
+    height: 100vh;
+    background-position: center center;
+    background-size: cover;
+    width: 100%;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    // border: 2px solid red;
+
+}
+
+//---------------------------------------------------------------------------------//
+//----------------------------- 首頁_主要文字內容版型 -------------------------------//
+
+.Fp_textContent_H{
+    // border: 2px solid red;
+    width: 38%;
+    margin: 24% auto auto 8%;
+
+    h1{
+        @include PC_h1($Ivory_white);
+        text-align: center;
+        text-shadow: $text_shadow;
+    }
+
+    h2{
+        @include PC_h1($Gray_1);
+        text-align: center;
+        text-shadow: $text_shadow;
+        font-size: 48px;
+        margin-bottom: 20px
+    }
+
+    p{
+        margin-top: 20px;
+        @include PC_h3($Ivory_white);
+        text-shadow: $text_shadow;
+    }
+
+    span{
+        margin-top: 20px;
+        @include PC_h3($Gray_1);
+        text-shadow: $text_shadow;
+    }
+}
+
+//---------------------------------------------------------------------------------//
+//------------------------------ 首頁_什麼是全球暖化 --------------------------------//
+
+.Fp_globalWarming_H{
+    margin: 0 auto;
+    max-width: 1200px;
+    display: flex;
+    z-index: 2;
+
+    figure{
+        height: 100vh;
+        width: 50%;
+        @include center_flex;
+
+        img{
+            width: 67%;
+            // 待測試
+            position: sticky;
+            top: 120px;
+            margin-bottom: 120px;
+            //
+
+        }
+    }
+
+    article{
+        width: 50%;
+        // background-attachment: scroll;
+        margin-top: 24px;
+
+        height: 560px; /* 固定高度，讓內容溢出後滾動 */
+        overflow-y: scroll; /* 垂直滾動 */
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+
+        .Fp_textContent_H:last-of-type {
+            margin-bottom: 220px;
+            }
+
+        .Fp_textContent_H{
+            margin: 0;
+            width: 100%;
+            margin-top: 115px;
+            padding: 0 20px;
+
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------//
+//---------------------------- 首頁_暖化證據_二氧化碳與冰層 -------------------------------//
+
+.Fp_carbonData_H, .Fp_iceData_H{
+    // background-image: url('@/assets/images/Fp02.1.jpg');
+    background: linear-gradient(to right, rgba(0, 0, 0, .3), rgba(0, 0, 0, 0)), url('@/assets/images/Fp02.1.jpg');
+    height: 100vh;
+    background-size: cover;
+    background-position: center center;
+
+    div{
+        max-width: $body_layout;
+        margin: 0 auto;
+        display: flex;
+        margin-top: 10%;
+        justify-content: center;
+        article{
+            margin: 120px 40px 0 18px;
+            h2{
+                color: $Ivory_white;
+            }
+            p{
+                line-height: $line_height_140;
+            }
+        }
+
+        #carbonData, #iceData{
+            border: 4px solid $Yellow_1;
+            width: 57%;
+        }
+    }
+}
+
+.Fp_iceData_H{
+    background: linear-gradient(to right, rgba(0, 0, 0, .3), rgba(0, 0, 0, 0)), url('@/assets/images/Fp05.1.jpg');
+    background-size: cover;
+    background-position: center center;
+    // background-image: url('@/assets/images/Fp05.1.jpg');
+}
+
+//---------------------------------------------------------------------------------//
+//---------------------------- 首頁_暖化證據_全球氣溫與海平面 -------------------------------//
+
+.Fp_tempData_H, .Fp_seaLevelData_H{
+    // background-image: url('@/assets/images/FP03.jpeg');
+    background: linear-gradient(to left, rgba(0, 0, 0, .3), rgba(0, 0, 0, 0)), url('@/assets/images/FP03.jpeg');
+    height: 100vh;
+    background-size: cover;
+    background-position: center center;
+
+    div{
+        max-width: $body_layout;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: row-reverse;
+        margin-top: 10%;
+        justify-content: center;
+        article{
+            margin: 120px 18px 0 40px;
+            h2{
+                color: $Ivory_white;
+            }
+            p{
+                line-height: $line_height_140;
+            }
+        }
+
+        #tempData, #seaLevelData{
+            border: 4px solid $Yellow_1;
+            width: 57%;
+        }
+    }
+}
+
+.Fp_seaLevelData_H{
+    // background-image: url('@/assets/images/FP04.jpg');
+    background: linear-gradient(to left, rgba(0, 0, 0, .3), rgba(0, 0, 0, 0)), url('@/assets/images/FP04.jpg');
+    background-size: cover;
+    background-position: center center;
+}
+
+//---------------------------------------------------------------------------------//
+//-------------------------------- 首頁_頁尾- --------------------------------------//
+
+.Fp_Footer_H{
+    width: 100%;
+    height: 268px;
+    border: 2px solid red;
+    text-align: center;
+    @include PC_h1($Yellow_1);
+    line-height: 268px;
+}
+
+//---------------------------------------------------------------------------------//

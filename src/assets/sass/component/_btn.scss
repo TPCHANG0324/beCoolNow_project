@@ -1,0 +1,34 @@
+
+//---------------------------- 按鈕 class ------------------------------//
+// btn_style(圓角, 寬度, 高度)
+
+.btn{
+    @include btn_style(5px, 100%, 48px);
+
+    // 永續行動, 我也完成+1 按鈕
+    &-Ac_done_btn {
+            height: 48px;
+            margin-top: 20px;
+            font-size: $h6;
+            transition: background-color 0.3s;
+            background-color: $init;
+            padding: 16px 24px;
+            width: 60%;
+            @include border($Ivory_white);
+    
+            &:hover {
+                background-color: darken($Green_1, 10%);
+                color: $Ivory_white;
+            }
+        }
+
+    // RWD 購物車按鈕
+    &-SpB_addCart{
+        color: $Ivory_white;
+        background-color: $init;
+        @include border($Ivory_white);
+        box-shadow: $box_shadow;
+    }
+}
+
+//---------------------------------------------------------------------//

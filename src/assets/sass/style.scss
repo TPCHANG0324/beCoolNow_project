@@ -1,0 +1,51 @@
+// base 基本樣式
+@import 'base/reset';
+@import 'base/space';
+@import 'base/colors';
+@import 'base/font';
+@import 'base/var';
+
+// mixin 工具
+@import 'mixin/mixin';
+
+// component 組件
+@import 'component/component';
+
+// layout
+@import 'layout/header';
+@import 'layout/body';
+@import 'layout/footer';
+@import 'layout/nav';
+@import 'layout/popup';
+
+@import 'page/_Ic.scss';
+
+// page
+@import 'page/index';
+@import 'page/Ac';
+@import 'page/Fp';
+@import 'page/Shop';
+@import 'page/Sp_product';
+@import 'page/Fb';
+@import 'page/IcB';
+@import 'page/MmB';
+
+
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: $Light_Green;
+}
+
+button {
+    font-family: $font_family;
+}
+
+a {
+    text-decoration: none;
+}

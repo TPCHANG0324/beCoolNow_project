@@ -1,0 +1,57 @@
+
+
+.AcB_card {
+  background-color: $Green_1;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  padding: 8px 0 36px 0;
+  margin-top: 0px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+
+  header {
+    background-color: initial;
+    color: $Ivory_white;
+    width: 100%;
+    font-weight: $font_weight_Bold;
+    text-align: center;
+    margin: 0 auto 8px;
+    @include PC_h3($Ivory_white);
+
+    .fa-circle-check {
+      padding-right: 4px;
+    }
+  }
+
+  img {
+    max-width: 100%;
+    margin-bottom: 12px;
+  }
+
+  h3 {
+    color: $Ivory_white;
+    @include PC_h3($Ivory_white);
+    margin-bottom: 12px;
+  }
+
+  article {
+    color: $Ivory_white;
+    font-size: $h6;
+    line-height: $line_height_140;
+    padding: 0 16px;
+    text-align: left;
+    flex:1 0 auto;
+  }
+
+  .btn{
+    margin:auto;
+  }
+}
+
+.darkGreen_card{
+  background-color: $Green_2;
+}

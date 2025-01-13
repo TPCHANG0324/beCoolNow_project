@@ -1,0 +1,21 @@
+//------------ 輸入框樣式(含placeholder與focus) ----------------//
+
+.input {
+    width: 100%;
+    height: 36px;
+    border-radius: 5px;
+    @include PC_h4($Green_2);
+    padding: 16px;
+    background-color: $Ivory_white;
+    @include border($Gray_3);
+
+    &::placeholder {
+        color: $Gray_3;
+    }
+
+    &:focus {
+        outline: $input_focus;
+    }
+}
+
+//-------------------------------------------------------------//

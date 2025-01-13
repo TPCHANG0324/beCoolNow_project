@@ -1,0 +1,45 @@
+//----------------------------- border(顏色) ----------------------------------//
+
+@mixin border($color){
+    border: .5px solid $color;
+}
+
+//----------------------------------------------------------------------------//
+//---------------------------- 文字框線顏色 -----------------------------------//
+
+@mixin h1_stroke{
+    -webkit-text-stroke: .5px $Green_1;
+}
+
+//----------------------------------------------------------------------------//
+//-------------------------按鈕基本樣式(圓角, 寬度, 高度)-----------------------------//
+
+@mixin btn_style($br, $w, $h){
+    border-radius: $br;
+    width: $w;
+    height: $h;
+    padding: $btn_padding;
+    text-align: center;
+    background-color: $Yellow_1;
+    cursor: pointer;
+    border: none;
+    box-shadow: $box_shadow;
+    @include PC_h4($Ivory_white);
+    line-height: $line_height_100;
+    &:hover{
+        color: $Green_1;
+        opacity: 0.8;
+        transition: opacity 0.8s;
+    }
+}
+
+//----------------------------------------------------------------------------//
+//--------------------------- Flex垂直水平置中 --------------------------------//
+
+@mixin center_flex{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+//----------------------------------------------------------------------------//

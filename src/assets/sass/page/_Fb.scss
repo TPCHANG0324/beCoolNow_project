@@ -1,0 +1,183 @@
+/* ----- 社群中心 ----- */
+main{  //因為不知道要不要拿 main 當最外框+設置底色，所以新增了一個 Fb-X
+    width: 100%;
+}
+.Fb-X{
+    width: 100%;
+    background-color: $Light_Green;
+    .Fb-wrapper-X{
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        gap: 3%;
+        /* 文章 */
+        .Fb-post-X{
+            width: 70%;
+            flex-grow: 1;
+            flex-shrink: 0;
+            .Fb-post-category-X{
+                display: flex;
+                color: $Green_2;
+                justify-content: space-between;
+                align-items: center;
+                border-bottom: 1px solid $Green_2;
+                box-sizing: border-box;
+                margin: 32px 0;
+                padding: 10px;
+                li{
+                    // padding: 16px 30px;
+                    padding: 16px 0;
+                    // padding-top: 16px;
+                    // padding-bottom: 16px;
+                    cursor: pointer;
+                    // background-color: gold;
+                    &:nth-of-type(1){
+                        padding-left: 0;
+                    }
+                    &:last-child{
+                        padding-right: 0;
+                    }
+                }
+                li.Fb-post-category-X-active{
+                    font-weight: bold;
+                }
+                li.Fb-post-write-X{
+                    padding: 0;
+                    a{
+                        display: block;
+                        padding: 12px 36px;
+                        background-color: $Yellow_1;
+                        border-radius: 30px;
+                        color: $Green_2;
+                    }
+                }
+            }
+            .Fb-post-article-X{
+                .Fb-post-article-top-X{
+                    width: 100%;
+                    .Fb-post-article-banner-X{
+                        width: 100%;
+                        margin-bottom: 32px;
+                        height: 248px;
+                        background-image: url('../image/Fb01.jpg');
+                        background-size: cover;
+                        background-repeat: no-repeat;
+                    }
+                }
+                section{
+                    article{
+                        display: flex;
+                        gap: 16px;
+                        cursor: pointer;
+                        color: $Green_2;
+                        letter-spacing: 1px;
+                        background-color: $Ivory_white;
+                        box-sizing: border-box;
+                        padding: 1rem;
+                        margin-bottom: 20px;
+                        &:nth-child(even){
+                            background-color: #fff;
+                        }
+                        .Fb-post-article-left-X{
+                            flex-basis: 80%;
+                            flex-grow: 1;
+                            flex-shrink: 0;
+                            .Fb-post-article-left-C-T-X{
+                                @include PC_h6($Green_2);
+                                margin-bottom: 20px;
+                            }
+                            .Fb-post-article-left-title-X{
+                                @include PC_h5($Green_2);
+                                font-weight: 500;
+                                margin-right: 20px;
+                                line-height: 1.2;
+                                display: -webkit-box;
+                                -webkit-box-orient: vertical;
+                                overflow: hidden;
+                                -webkit-line-clamp: 1;
+                                text-overflow: ellipsis;
+                            }
+                            p{
+                                line-height: 1.5;
+                                text-align: justify;
+                                margin-top: 10px;
+                                margin-bottom: 20px;
+                                display: -webkit-box;
+                                -webkit-box-orient: vertical;
+                                overflow: hidden;
+                                -webkit-line-clamp: 2;
+                                text-overflow: ellipsis;
+                            }
+                            .Fb-post-react-X{
+                                i:not(:last-child){
+                                    margin-right: 12px;
+                                }
+                            }
+                        }
+                        .Fb-post-article-right-X{
+                            flex-grow: 0;
+                            flex-shrink: 1;
+                            flex-basis: 20%;
+                            img{
+                                width: 100%;
+                                height: 100%;
+                                object-fit: cover;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .Fb-news-X{
+            width: 25%;
+            flex-grow: 1;
+            flex-shrink: 0;
+            .Fb-news-header-X{
+                padding: 1rem;
+                margin: 32px 0;
+                background-color: $Green_1;
+                color: $Ivory_white;
+            }
+            .Fb-news-body-X{
+                article{
+                    margin-bottom: 20px;
+                    display: flex;
+                    gap: 5%;
+                    color: $Green_2;
+                    cursor: pointer;
+                    img{
+                        width: 50%;
+                        aspect-ratio: 1;
+                        object-fit: cover;
+                    }
+                    .Fb-news-body-container-X{
+                        width: 45%;
+                        .Fb-news-body-container-time-X{
+                            margin-bottom: 16px;
+                        }
+                        .Fb-news-body-container-title-X{
+                            @include PC_h5($Green_2);
+                            font-weight: 500;
+                            line-height: 1.2;
+                            display: -webkit-box;
+                            -webkit-box-orient: vertical;
+                            overflow: hidden;
+                            -webkit-line-clamp: 2;
+                            text-overflow: ellipsis;
+                            margin-bottom: 10px;
+                        }
+                        .Fb-news-body-container-content-X{
+                            line-height: 1.2;
+                            display: -webkit-box;
+                            -webkit-box-orient: vertical;
+                            overflow: hidden;
+                            -webkit-line-clamp: 3;
+                            text-overflow: ellipsis;
+                        }
+                    }
+                }
+            }
+
+        }
+    }
+}

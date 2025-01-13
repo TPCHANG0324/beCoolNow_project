@@ -1,0 +1,104 @@
+//-------------------------------- 文字樣式 -------------------------------------//
+
+$font_family:'DM Sans, Noto Sans';
+
+//------------------------------------------------------------------------------//
+//-------------------------------- 文字大小 -------------------------------------//
+
+$h1: 4rem; // 64px
+
+$h2: 3.5rem; // 56px
+
+$h3: 1.5rem; // 24px
+
+$h4: 1.25rem; // 20px
+
+$h5: 1.125rem; // 18px
+
+$h6: 1rem; // 16px
+
+$h7: 0.875rem; // 14px
+
+//------------------------------------------------------------------------------//
+//-------------------------------- 文字行高 -------------------------------------//
+
+$line_height_140: 140% !default;
+$line_height_120: 120% !default;
+$line_height_100: 100% !default;
+
+//------------------------------------------------------------------------------//
+//-------------------------------- 文字粗細度 ------------------------------------//
+
+$font_weight_Bold:bold;
+$font_weight_regular:normal;
+
+//-------------------------------------------------------------------------------//
+//---------------------------- 電腦版(PC) 文字打包 -------------------------------//
+// (重要!!!)需代入文字顏色的參數
+
+// 64px Banner大標題(有文字邊框)
+@mixin PC_h1($color){
+    font-size: $h1;
+    line-height: $line_height_140;
+    font-weight: $font_weight_Bold;
+    font-family: $font_family;
+    color: $color;
+}
+
+// 56px 次標題文字(無文字邊框)
+@mixin PC_h2($color){
+    font-size: $h2;
+    line-height: $line_height_140;
+    font-weight: $font_weight_Bold;
+    font-family: $font_family;
+    color: $color;
+}
+
+// 24px 主要內文文字大小(無文字邊框)
+@mixin PC_h3($color){
+    font-size: $h3;
+    line-height: $line_height_140;
+    font-weight: $font_weight_regular;
+    font-family: $font_family;
+    color: $color;
+}
+
+// 20px 次要內文文字大小(無文字邊框)
+@mixin PC_h4($color){
+    font-size: $h4;
+    line-height: $line_height_120;
+    font-weight: $font_weight_regular;
+    font-family: $font_family;
+    color: $color;
+}
+
+// 18px
+@mixin PC_h5($color){
+    font-size: $h5;
+    line-height: $line_height_120;
+    font-weight: $font_weight_regular;
+    font-family: $font_family;
+    color: $color;
+}
+
+// 16px
+@mixin PC_h6($color){
+    font-size: $h6;
+    line-height: $line_height_120;
+    font-weight: $font_weight_regular;
+    font-family: $font_family;
+    color: $color;
+}
+
+// 14px
+@mixin PC_h7($color){
+    font-size: $h7;
+    line-height: $line_height_100;
+    font-weight: $font_weight_regular;
+    font-family: $font_family;
+    color: $color;
+}
+
+//------------------------------------------------------------------------------//
+
+
