@@ -11,23 +11,37 @@ const routes = [
 
   },
   {
-    path: '/Ic', component: () => import('@/pages/Information.vue'),
+    path: '/information', component: () => import('@/pages/Information.vue'),
     meta: {
       title: '島嶼危機',
       // requiredLogin: false
     }
   },
   {
-    path: '/Ac/', component: () => import('@/pages/About.vue'),
+    path: '/about', component: () => import('@/pages/About.vue'),
     meta: {
       title: '永續行動',
       // requiredLogin: false
     }
   },
   {
-    path: '/social/', component: () => import('@/pages/Social.vue'),
+    path: '/social', component: () => import('@/pages/Social.vue'),
     meta: {
       title: '社群中心',
+      // requiredLogin: true
+    }
+  },
+  {
+    path: '/social_atricle', component: () => import('@/pages/Social_atricle.vue'),
+    meta: {
+      title: '文章',
+      // requiredLogin: true
+    }
+  },
+  {
+    path: '/social_write', component: () => import('@/pages/Social_write.vue'),
+    meta: {
+      title: '寫文章',
       // requiredLogin: true
     }
   },
@@ -46,26 +60,33 @@ const routes = [
   //   }
   // },
   {
-    path: '/Shop/', component: () => import('@/pages/Shop.vue'),
+    path: '/shop', component: () => import('@/pages/Shop.vue'),
     meta: {
       title: '環保市集',
       // requiredLogin: true
     }
   },
   {
-    path: '/Sp_product/', component: () => import('@/pages/Shop_product.vue'),
+    path: '/shop_product', component: () => import('@/pages/Shop_product.vue'),
     meta: {
       title: '環保市集',
       // requiredLogin: true
     }
   },
-  // {
-  //   path: '/Mb/', component: () => import('@/pages/Mb.vue'),
-  //   meta: {
-  //     title: '會員中心',
-  //     requiredLogin: true
-  //   }
-  // },
+  {
+    path: '/shop_cart', component: () => import('@/pages/Shop_cart.vue'),
+    meta: {
+      title: '環保市集',
+      // requiredLogin: true
+    }
+  },
+  {
+    path: '/member', component: () => import('@/pages/Member.vue'),
+    meta: {
+      title: '會員中心',
+      requiredLogin: true
+    }
+  },
   {
     path: '/test/', component: () => import('@/pages/test.vue'),
     meta: {
