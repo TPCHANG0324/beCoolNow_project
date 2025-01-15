@@ -61,6 +61,14 @@ const routes = [
       // requiredLogin: true
     }
   },
+
+  {
+    path: '/popup', component: () => import('@/pages/popup.vue'),
+    meta: {
+      title: '前台彈窗',
+      // requiredLogin: true
+    }
+  },
   // {
   //   path: '/Ct/', component: () => import('@/pages/Ct.vue'),
   //   meta: {
@@ -100,7 +108,7 @@ const routes = [
     path: '/member', component: () => import('@/pages/Member.vue'),
     meta: {
       title: '會員中心',
-      requiredLogin: true
+      // requiredLogin: true
     }
   },
   {

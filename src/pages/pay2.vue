@@ -1,3 +1,5 @@
+<!-- 已經 RWD 820/ 430 完成 -->
+
 <template>
       <div class="bcn-donation-container">
         <div class="bcn-top-place">

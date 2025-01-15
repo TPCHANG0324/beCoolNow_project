@@ -1,3 +1,4 @@
+<!-- 已經 RWD 820/ 430 完成 -->
 <template>
    <div class=" wrapper">
         <div class="hero-section">

@@ -1,3 +1,5 @@
+<!-- 已經 RWD 820/ 430 完成 -->
+
 <template>
     <div class="bcn-donation-container1">
         <div class="bcn-top-place1">
@@ -5,16 +7,16 @@
             <p>您選擇了 <strong>每月捐款 新臺幣 1000元</strong></p>
            
         </div>
-        <div class="bcn-donation-button11">
+        <!-- <div class="bcn-donation-button11">
         <button class="donation-button11">重新選擇捐款</button>
-    </div>
+    </div> -->
     </div>
     <div class="bcn-form-title_1">
         <h2>捐款人資料填寫</h2>
     </div>
     <div class="bcn-donation-form_1">
        
-        <form action="#" method="post">
+        <form action="#" method="post" >
             <div class="inside_form_1">
             <label for="email" class="bcn-label1">* 電子郵件地址</label>
             <input type="email" id="email" name="email" required class="bcn-input-text_1">
@@ -40,6 +42,10 @@
         </div>
         </form>
     </div>
+    <a href="./pay1/" class="bc-prev-step-button2">
+        <span class="bc-prev-step-icon2">❮</span>
+        <span class="bc-prev-step-text2">上一步</span>
+    </a>
 </div>
 </template>
 

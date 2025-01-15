@@ -198,7 +198,7 @@ margin-left: 200px;
         width: 100%;
         border-collapse: collapse;
         padding: 10px;
-        border-radius: 10px;
+        // border-radius: 10px;
         text-align: center;
         margin-top: 80px;
         width: 1194px;
@@ -413,6 +413,22 @@ margin-left: 200px;
         gap: 10px;               // ✅ 增加文字之間的間距
         margin: 0 auto;          // ✅ 讓整個元素在畫面中置中
     }
+
+    .purchase-record-special .purchase-record-btn11, .purchase-record-special .purchase-record-btn12.purchase-record-btn12 {
+      color: var(--second-Colors-fffff0, #FFFFF0);
+      font-family: "DM Sans";
+      font-size: 24px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+      padding-left: 40px;
+      margin-top: 40px;
+      margin-bottom: 40px;
+      background-color: initial;
+      display: inline-block;
+      text-shadow: #545454 1px 1px 1px;
+      border: none;
+  }
 
 
 $footer_layout: 430px;

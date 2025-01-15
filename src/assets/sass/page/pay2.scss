@@ -15,6 +15,45 @@ body {
     background: url('@/assets/images/do-1.png') no-repeat top center;
     // background-size: cover; // 可以保留或刪除，依需求調整背景大小
     padding: 20px;
+
+    .bc-prev-step-button {
+        display: flex;
+        align-items: center;
+        background-color: #e8edcd; // 淡綠色背景
+        border: none;
+        padding: 10px 20px;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: #4a4a4a;
+        transition: background-color 0.3s ease;
+        // margin-right:800px;
+        position: relative;
+        bottom: 100px;
+        left: -390px;
+    
+        // 滑鼠懸停效果
+        &:hover {
+            background-color: #d6e3b5;
+        }
+    
+        // 左側箭頭樣式
+        .bc-prev-step-icon {
+            font-size: 1.5rem;
+            margin-right: 10px;
+            color: #4a4a4a;
+        }
+    
+    
+    
+    
+        // 文字樣式
+        .bc-prev-step-text {
+            font-size: 1.2rem;
+            color: #4a4a4a;
+        }
+    }
 }
 
 .bcn-donation-header {
@@ -213,41 +252,11 @@ body {
 }
 
 // 特殊命名樣式避免與其他頁面衝突
-.bc-prev-step-button {
-    display: flex;
-    align-items: center;
-    background-color: #e8edcd; // 淡綠色背景
-    border: none;
-    padding: 10px 20px;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: #4a4a4a;
-    transition: background-color 0.3s ease;
-    margin-right:800px;
-
-    // 滑鼠懸停效果
-    &:hover {
-        background-color: #d6e3b5;
-    }
-
-    // 左側箭頭樣式
-    .bc-prev-step-icon {
-        font-size: 1.5rem;
-        margin-right: 10px;
-        color: #4a4a4a;
-    }
 
 
 
 
-    // 文字樣式
-    .bc-prev-step-text {
-        font-size: 1.2rem;
-        color: #4a4a4a;
-    }
-}
+
 
 
 .footer{
@@ -257,8 +266,7 @@ body {
 // 平板樣式 (小於 820px)
 @media (max-width: 820px) {
     // 不用 R
-
-    .bc-prev-step-button{
+    .bcn-donation-container .bc-prev-step-button{
         display: none;
     }
 }

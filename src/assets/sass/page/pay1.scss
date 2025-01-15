@@ -15,6 +15,50 @@ body {
     background: url('@/assets/images/do-1.png') no-repeat top center;
     // background-size: cover; // 可以保留或刪除，依需求調整背景大小
     padding: 20px;
+    // position: relative;
+    // max-width: 1200px;
+    margin: 0 auto;
+
+    // 特殊命名樣式避免與其他頁面衝突
+    .bc-prev-step-button2 {
+        display: flex;
+        align-items: center;
+        background-color: #e8edcd; // 淡綠色背景
+        border: none;
+        padding: 10px 20px;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: #4a4a4a;
+        transition: background-color 0.3s ease;
+        // margin-right:800px;
+        position: relative;
+        bottom: 170px;
+        left: -390px;
+    
+        // 滑鼠懸停效果
+        &:hover {
+            background-color: #d6e3b5;
+        }
+    
+        // 左側箭頭樣式
+        .bc-prev-step-icon2 {
+            font-size: 1.5rem;
+            margin-right: 10px;
+            color: #4a4a4a;
+        }
+    
+    
+    
+    
+        // 文字樣式
+        .bc-prev-step-text2 {
+            font-size: 1.2rem;
+            color: #4a4a4a;
+        }
+    }
+        
 }
 
 .bcn-donation-header1 {
@@ -42,27 +86,27 @@ body {
     margin-top: 100px;
 }
 
-.bcn-donation-button11 .donation-button11 {
-    background-color: #D0AD44;  // 金黃色
-    color: white;               // 白色文字
-    border: none;               // 無邊框
-    border-radius: 30px;        // 圓角設計
-    padding: 10px 20px;         // 內邊距
-    font-size: 16px;            // 字體大小
-    font-weight: bold;          // 粗體字
-    cursor: pointer;            // 滑鼠游標指標
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);  // 陰影效果
-    transition: background-color 0.3s ease; // 動態效果
-    margin-left: 57px;
+// .bcn-donation-button11 .donation-button11 {
+//     background-color: #D0AD44;  // 金黃色
+//     color: white;               // 白色文字
+//     border: none;               // 無邊框
+//     border-radius: 30px;        // 圓角設計
+//     padding: 10px 20px;         // 內邊距
+//     font-size: 16px;            // 字體大小
+//     font-weight: bold;          // 粗體字
+//     cursor: pointer;            // 滑鼠游標指標
+//     box-shadow: 0 2px 5px rgba(0,0,0,0.2);  // 陰影效果
+//     transition: background-color 0.3s ease; // 動態效果
+//     margin-left: 57px;
 
-    &:hover {
-        background-color: darken(#D0AD44, 10%); // 滑鼠懸停時顏色變深
-    }
+//     &:hover {
+//         background-color: darken(#D0AD44, 10%); // 滑鼠懸停時顏色變深
+//     }
 
-    &:active {
-        background-color: darken(#D0AD44, 20%); // 點擊時顏色更深
-    }
-}
+//     &:active {
+//         background-color: darken(#D0AD44, 20%); // 點擊時顏色更深
+//     }
+// }
 
 .bcn-form-title_1 {
     display: flex;
@@ -91,7 +135,7 @@ body {
     // height: 500px;
 
     .inside_form_1{
-        width: 401px;
+        width: 400px;
         margin: 0 auto;
     }
 
@@ -106,6 +150,7 @@ body {
         margin-bottom: 5px;
         text-shadow: none;
         text-align: left;
+        width: 100%;
         // padding-left: 98px;
         // padding-right: 97px;
     }
@@ -161,6 +206,7 @@ body {
             text-decoration: none;
         }
     }
+
 }
 
     .bcn-btn-primary_1 {
@@ -183,11 +229,20 @@ body {
             background: darken(#d8ba5b, 10%);
         }
     }
+
+
 }
 
 // 平板樣式 (小於 820px)
 @media (max-width: 820px) {
     // 不用 R
+
+    .bcn-donation-container1 .bc-prev-step-button2 .bc-prev-step-text2{
+        display: none;
+    }
+    .bcn-donation-container1 .bc-prev-step-button2{
+        display: none;
+    }
 }
 
 // 手機樣式 (小於 430px)
@@ -250,6 +305,30 @@ body {
     }
     button {
         font-family: "DM Sans, Noto Sans";
+    }
+
+    // .bcn-donation-form_1 .inside_form_1{
+    //     margin-right:100px;
+    // }
+    .bcn-donation-form_1 .inside_form_1 {
+        width: 350px;
+        margin: 0px auto;
+        margin-left: 20px;
+    }
+
+    .bcn-donation-form_1 .bcn-btn-primary_1 {
+        background: #d8ba5b;
+        border: none;
+        border-radius: 30px;
+        padding: 12px;
+        width: 100%;
+        color: white;
+        font-size: 1rem;
+        cursor: pointer;
+        font-weight: 700;
+        width: 240px;
+        margin-left: 18px;
+        margin-bottom: 55px;
     }
    }
 
