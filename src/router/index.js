@@ -19,8 +19,6 @@ const routes = [
   },
   {
     path: '/activity', component: () => import('@/pages/Activity.vue'),
-    path: '/Ac', component: () => import('@/pages/Activity.vue'),
-    path: '/about', component: () => import('@/pages/About.vue'),
     meta: {
       title: '永續行動',
       // requiredLogin: false
@@ -33,12 +31,12 @@ const routes = [
       // requiredLogin: true
     }
   },
-  {
-    path: '/About', component: () => import('@/pages/About.vue'),
-    meta: {
-      title: '關於我們',
-    }
-  },
+  // {
+  //   path: '/About', component: () => import('@/pages/About.vue'),
+  //   meta: {
+  //     title: '關於我們',
+  //   }
+  // },
   {
     path: '/loginPage/', component: () => import('@/pages/loginPage.vue'),
     meta: {
