@@ -174,6 +174,13 @@ const routes = [
       // requiredLogin: true
     }
   },
+  {
+    path: '/Support/', component: () => import('@/pages/Support.vue'),
+    meta: {
+      title: '支持我們',
+      // requiredLogin: true
+    }
+  },
 ];
 
 // 建立 router
