@@ -18,16 +18,37 @@ const routes = [
     }
   },
   {
-    path: '/Ac/', component: () => import('@/pages/About.vue'),
+    path: '/Ac', component: () => import('@/pages/Activity.vue'),
     meta: {
       title: '永續行動',
       // requiredLogin: false
     }
   },
   {
-    path: '/social/', component: () => import('@/pages/Social.vue'),
+    path: '/social', component: () => import('@/pages/Social.vue'),
     meta: {
       title: '社群中心',
+      // requiredLogin: true
+    }
+  },
+  {
+    path: '/About', component: () => import('@/pages/About.vue'),
+    meta: {
+      title: '關於我們',
+      // requiredLogin: true
+    }
+  },
+  {
+    path: '/shop_checkout', component: () => import('@/pages/Shop_checkout.vue'),
+    meta: {
+      title: '市集結帳',
+      // requiredLogin: true
+    }
+  },
+  {
+    path: '/shop_finish', component: () => import('@/pages/Shop_finish.vue'),
+    meta: {
+      title: '市集結束',
       // requiredLogin: true
     }
   },
@@ -46,14 +67,14 @@ const routes = [
   //   }
   // },
   {
-    path: '/Shop/', component: () => import('@/pages/Shop.vue'),
+    path: '/shop/', component: () => import('@/pages/Shop.vue'),
     meta: {
       title: '環保市集',
       // requiredLogin: true
     }
   },
   {
-    path: '/Sp_product/', component: () => import('@/pages/Shop_product.vue'),
+    path: '/shop_product/', component: () => import('@/pages/Shop_product.vue'),
     meta: {
       title: '環保市集',
       // requiredLogin: true
