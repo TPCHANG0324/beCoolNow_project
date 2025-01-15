@@ -19,8 +19,8 @@ const routes = [
     },
   },
   {
-    path: '/about',
-    component: () => import('@/pages/About.vue'),
+    path: '/activity',
+    component: () => import('@/pages/Activity.vue'),
     meta: {
       title: '永續行動',
       // requiredLogin: false
@@ -38,8 +38,38 @@ const routes = [
     path: '/social_article',
     component: () => import('@/pages/Social_article.vue'),
     meta: {
+      title: '社群中心_文章',
+      // requiredLogin: true
+    },
+  },
+  {
+    path: '/About',
+    component: () => import('@/pages/About.vue'),
+    meta: {
+      title: '關於我們',
+    },
+  },
+  {
+    path: '/loginPage/',
+    component: () => import('@/pages/loginPage.vue'),
+    meta: {
       title: '社群中心',
       // requiredLogin: true
+    },
+  },
+  {
+    path: '/shop_checkout',
+    component: () => import('@/pages/Shop_checkout.vue'),
+    meta: {
+      title: '市集結帳',
+      // requiredLogin: true
+    },
+  },
+  {
+    path: '/shop_finish',
+    component: () => import('@/pages/Shop_finish.vue'),
+    meta: {
+      title: '市集結束',
     },
   },
   {
@@ -47,6 +77,21 @@ const routes = [
     component: () => import('@/pages/Social_write.vue'),
     meta: {
       title: '寫文章',
+      // requiredLogin: true
+    },
+  },
+  {
+    path: '/social_news',
+    component: () => import('@/pages/Social_news.vue'),
+    meta: {
+      title: '新聞',
+    },
+  },
+  {
+    path: '/popup',
+    component: () => import('@/pages/popup.vue'),
+    meta: {
+      title: '前台彈窗',
       // requiredLogin: true
     },
   },
@@ -89,7 +134,7 @@ const routes = [
     },
   },
   {
-    path: '/shop_product',
+    path: '/shop_product/',
     component: () => import('@/pages/Shop_product.vue'),
     meta: {
       title: '環保市集-商品頁',
@@ -109,7 +154,7 @@ const routes = [
     component: () => import('@/pages/Member.vue'),
     meta: {
       title: '會員中心',
-      requiredLogin: true,
+      // requiredLogin: true
     },
   },
   {
@@ -223,6 +268,14 @@ const routes = [
     component: () => import('@/components/layout/BackStageLayout/BackStageSmallPopup.vue'),
     meta: {
       title: '後臺-確認彈窗',
+      // requiredLogin: true
+    },
+  },
+  {
+    path: '/Support/',
+    component: () => import('@/pages/Support.vue'),
+    meta: {
+      title: '支持我們',
       // requiredLogin: true
     },
   },

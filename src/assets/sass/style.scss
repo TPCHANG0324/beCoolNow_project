@@ -20,7 +20,6 @@
 @import 'layout/BackStageLayout/backStage_Header';
 @import 'layout/BackStageLayout/backStage_Popup';
 
-
 // page
 @import 'page/index';
 @import 'page/Ac';
@@ -32,13 +31,17 @@
 @import 'page/Fb';
 @import 'page/IcB';
 @import 'page/MmB';
-@import 'page/CB';
-@import 'page/CtB';
+@import 'page/about';
+@import 'page/shop_checkout';
+@import 'page/shopfinish';
+
 @import'page/loginpage';
 @import'page/pay1';
 @import'page/pay2';
 @import'page/Mb';
+@import'page/popup';
 
+@import 'page/Support';
 
 
 * {

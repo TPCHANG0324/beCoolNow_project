@@ -4,6 +4,7 @@ main {
     width: 100%;
 }
 
+/* 社群中心主頁面 */
 .Fb-X {
     width: 100%;
     background-color: $Light_Green;
@@ -13,6 +14,10 @@ main {
         margin: 0 auto;
         display: flex;
         gap: 3%;
+
+        @include max_1200() {
+            margin: 0 3vw;
+        }
 
         /* 文章 */
         .Fb-post-X {
@@ -28,15 +33,86 @@ main {
                 padding: 10px;
                 justify-content: space-between;
 
-                .Fb-post-category-X {
+                ul.Fb-post-category-X {
                     display: flex;
                     color: $Green_2;
                     align-items: center;
                     box-sizing: border-box;
 
+                    p {
+                        font-size: $h5;
+                        cursor: pointer;
+                        margin-left: 25px;
+                        display: none;
+
+                        @include max_1024() {
+                            display: inline-block;
+                        }
+
+                        &.active {
+                            font-weight: bold;
+                        }
+                    }
+
+                    /* RWD 後才會出現的下拉選單 */
+                    .Fb-post-category-box {
+                        position: relative;
+                        display: none;
+
+                        @include max_1024() {
+                            display: inline-block;
+                        }
+
+                        select {
+                            font-size: $h5;
+                            cursor: pointer;
+                            outline: none;
+                            border: 0px solid transparent;
+                            // padding: 10px 28px;
+                            // padding-left: 20px;
+                            // padding-right: 32px;
+                            padding: 0 10px;
+                            color: $Green_2;
+                            background-color: $Light_Green;
+                            -webkit-appearance: none;
+                            /* 隱藏箭頭 */
+                            -moz-appearance: none;
+                            /* 隱藏箭頭 */
+                            appearance: none;
+
+                            /* 隱藏箭頭 */
+                            option {
+                                background-color: #fff;
+                                color: $Green_1;
+                            }
+
+                            &.active {
+                                font-weight: bold;
+                            }
+                        }
+
+                        &::after {
+                            content: '\25BC';
+                            /* 使用不同的箭頭符號 */
+                            display: block;
+                            position: absolute;
+                            top: 50%;
+                            right: 0;
+                            transform: translate(50%, -50%);
+                            pointer-events: none;
+                            color: $Green_2;
+                            font-size: 12px;
+
+                        }
+                    }
+
                     li {
                         padding: 16px;
                         cursor: pointer;
+
+                        @include max_1024() {
+                            display: none;
+                        }
 
                         &:nth-of-type(1) {
                             padding-left: 0;
@@ -45,10 +121,10 @@ main {
                         &:last-child {
                             padding-right: 0;
                         }
-                    }
 
-                    li.Fb-post-category-X-active {
-                        font-weight: bold;
+                        &.active {
+                            font-weight: bold;
+                        }
                     }
 
                 }
@@ -73,10 +149,11 @@ main {
                     .Fb-post-article-banner-X {
                         width: 100%;
                         margin-bottom: 32px;
-                        height: 248px;
-                        background-image: url('../images/Fb01.jpg');
+                        height: 20vh;
+                        background-image: url('https://picsum.photos/seed/picsum/2000/3000');
                         background-size: cover;
                         background-repeat: no-repeat;
+                        background-position: center center;
                     }
                 }
 
@@ -96,9 +173,25 @@ main {
                         //     background-color: #fff;
                         // }
                         .Fb-post-article-left-X {
-                            flex-basis: 80%;
+                            flex-basis: calc((100% - 16px) * 0.8);
                             flex-grow: 1;
-                            flex-shrink: 0;
+                            // flex-shrink: 0;
+                            display: flex;
+                            flex-direction: column;
+
+                            @include max_768() {
+                                flex-basis: calc((100% - 16px) * 0.7);
+                            }
+
+                            @include max_430() {
+                                // flex-basis: 60%;
+                            }
+
+                            @include max_1024() {
+                                padding: .5rem;
+                                padding-right: 0;
+                                box-sizing: border-box;
+                            }
 
                             .Fb-post-article-left-C-T-X {
                                 @include PC_h6($Green_2);
@@ -109,27 +202,56 @@ main {
                                 @include PC_h5($Green_2);
                                 font-weight: 500;
                                 margin-right: 20px;
-                                line-height: 1.2;
+                                line-height: 1.5;
                                 display: -webkit-box;
                                 -webkit-box-orient: vertical;
                                 overflow: hidden;
                                 -webkit-line-clamp: 1;
                                 text-overflow: ellipsis;
+
+                                @include max_912() {
+                                    margin-bottom: 1.25rem;
+                                    -webkit-line-clamp: 2;
+                                }
+
+                                @include max_540() {
+                                    margin-bottom: 0;
+                                }
                             }
 
                             p {
                                 line-height: 1.5;
                                 text-align: justify;
-                                margin-top: 10px;
+                                margin-top: 12px;
                                 margin-bottom: 20px;
                                 display: -webkit-box;
                                 -webkit-box-orient: vertical;
                                 overflow: hidden;
                                 -webkit-line-clamp: 2;
                                 text-overflow: ellipsis;
+
+                                @include max_1200() {
+                                    -webkit-line-clamp: 1;
+                                }
+
+                                @include max_1024() {
+                                    display: -webkit-box;
+                                }
+
+                                @include max_912() {
+                                    display: none;
+                                }
                             }
 
                             .Fb-post-react-X {
+                                @include max_912() {
+                                    margin-top: auto;
+                                }
+
+                                @include max_540() {
+                                    display: none;
+                                }
+
                                 i:not(:last-child) {
                                     margin-right: 12px;
                                 }
@@ -137,14 +259,113 @@ main {
                         }
 
                         .Fb-post-article-right-X {
-                            flex-grow: 0;
-                            flex-shrink: 1;
-                            flex-basis: 20%;
+                            // flex-grow: 0;
+                            // flex-shrink: 1;
+                            flex-basis: calc((100% - 16px) * 0.2);
+
+                            @include max_768() {
+                                flex-basis: calc((100% - 16px) * 0.3);
+                            }
+
+                            @include max_430() {
+                                flex-basis: calc((100% - 16px) * 0.4);
+                            }
 
                             img {
-                                width: 100%;
-                                height: 100%;
+                                display: block;
+                                font-size: 0;
+                                max-width: 100%;
                                 object-fit: cover;
+                            }
+                        }
+                    }
+                }
+            }
+
+
+            /* RWD 的時候才會出現的新聞區 */
+            .Fb-news-article-X {
+                display: none;
+
+                @include max_1024() {
+                    display: block;
+                }
+
+                article {
+                    color: $Green_2;
+                    display: flex;
+                    gap: 16px;
+                    padding: 1rem;
+                    margin-bottom: 20px;
+                    box-sizing: border-box;
+                    background-color: $Ivory_white;
+
+                    .new-left-X {
+                        flex-basis: calc((100% - 16px) * 0.2);
+
+                        img {
+                            display: block;
+                            font-size: 0;
+                            width: 100%;
+                        }
+
+                        @include max_768() {
+                            flex-basis: calc((100% - 16px) * 0.3);
+                        }
+
+                        @include max_430() {
+                            flex-basis: calc((100% - 16px) * 0.4);
+                        }
+                    }
+
+                    .new-right-X {
+                        flex-basis: calc((100% - 16px) * 0.8);
+                        display: flex;
+                        flex-direction: column;
+                        padding: .5rem;
+                        padding-left: 0;
+
+                        @include max_768() {
+                            flex-basis: calc((100% - 16px) * 0.7);
+                        }
+
+                        // @include max_430(){
+                        //     flex-basis: calc((100% - 16px) * 0.6);
+                        // }
+                        .new-time-X {}
+
+                        .new-title-X {
+                            @include PC_h5($Green_2);
+                            line-height: 1.5;
+                            font-weight: 500;
+                            display: -webkit-box;
+                            -webkit-box-orient: vertical;
+                            overflow: hidden;
+                            -webkit-line-clamp: 1;
+                            text-overflow: ellipsis;
+                            margin-top: 12px;
+                            margin-bottom: 20px;
+
+                            @include max_768() {
+                                -webkit-line-clamp: 2;
+                            }
+
+                            @include max_540() {
+                                margin-bottom: 0;
+                            }
+                        }
+
+                        p {
+                            line-height: 1.5;
+                            text-align: justify;
+                            display: -webkit-box;
+                            -webkit-box-orient: vertical;
+                            overflow: hidden;
+                            -webkit-line-clamp: 2;
+                            text-overflow: ellipsis;
+
+                            @include max_768() {
+                                display: none;
                             }
                         }
                     }
@@ -156,6 +377,10 @@ main {
             width: 25%;
             flex-grow: 1;
             flex-shrink: 0;
+
+            @include max_1024() {
+                display: none;
+            }
 
             .Fb-news-header-X {
                 padding: 1rem;
@@ -197,6 +422,11 @@ main {
                             -webkit-line-clamp: 2;
                             text-overflow: ellipsis;
                             margin-bottom: 10px;
+
+                            @include max_1200() {
+                                -webkit-line-clamp: 3;
+                            }
+
                         }
 
                         .Fb-news-body-container-content-X {
@@ -206,6 +436,10 @@ main {
                             overflow: hidden;
                             -webkit-line-clamp: 2;
                             text-overflow: ellipsis;
+
+                            @include max_1200() {
+                                display: none;
+                            }
                         }
                     }
                 }
@@ -226,22 +460,38 @@ main {
     .Fb-Atricle-title-X {
         font-size: PC_h3($Green_1);
         font-weight: 700;
+        font-size: 1.25rem;
+        line-height: 1.5;
     }
 
     .Fb-Atricle-info-X {
         display: flex;
         align-items: center;
 
+        @include max_540() {
+            font-size: 14px;
+        }
+
         img {
-            width: 30px;
-            height: 30px;
+            width: 50px;
+            height: 50px;
             object-fit: cover;
             border-radius: 99rem;
             margin-right: 20px;
+
+            @include max_540() {
+                width: 40px;
+                height: 40px;
+            }
         }
 
-        span {
+        .Atricle-name-time-X {
             margin-right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+
+            span {}
         }
 
         i {
@@ -250,6 +500,16 @@ main {
             &:not(:last-child) {
                 margin-right: 20px;
                 margin-left: auto;
+
+                @include max_540() {
+                    margin-right: 0;
+                }
+            }
+
+            &.bi-share {
+                @include max_768() {
+                    display: none;
+                }
             }
         }
     }
@@ -257,6 +517,10 @@ main {
     p {
         white-space: pre-wrap;
         line-height: 2;
+
+        @include max_540() {
+            line-height: 1.5;
+        }
     }
 
     strong {
@@ -286,6 +550,25 @@ main {
     color: $Green_1;
     background-color: $Ivory_white;
     padding: 2rem;
+
+    .Fb-ms-other {
+        .Fb-message-section-X {
+            @include max_768() {
+                &:last-child {
+                    border-bottom: 0;
+                }
+            }
+
+            @include max_540() {
+                font-size: 14px;
+            }
+        }
+    }
+
+    /* 再調整 */
+    @include max_768() {
+        margin-bottom: 80px;
+    }
 
     .Fb-message-select-X {
         padding: 10px;
@@ -339,8 +622,13 @@ main {
     }
 
     .Fb-message-section-X {
-        &:last-child {
-            border: none;
+
+        &.self {
+            border-bottom: 0;
+
+            @include max_768 {
+                display: none;
+            }
         }
 
         padding: 20px 10px;
@@ -352,6 +640,10 @@ main {
         .Fb-message-section-seeMore-X {
             color: $Yellow_1;
             cursor: pointer;
+
+            @include max_540() {
+                font-size: 14px;
+            }
 
             i {
                 margin-right: 10px;
@@ -368,6 +660,11 @@ main {
             height: 50px;
             object-fit: cover;
             border-radius: 99rem;
+
+            @include max_540() {
+                width: 40px;
+                height: 40px;
+            }
         }
 
         .Fb-message-area-X {
@@ -401,16 +698,25 @@ main {
             .Fb-message-content-other-X {
                 display: flex;
                 justify-content: space-between;
+                align-items: center;
                 gap: 50px;
 
                 span {
                     line-height: 1.5;
+
+                    @include max_540() {
+                        line-height: 1.2;
+                    }
 
                     &:last-child {
                         color: $Error;
                         cursor: pointer;
                         flex-shrink: 0;
                         font-size: 14px;
+
+                        @include max_540() {
+                            font-size: 12px;
+                        }
                     }
                 }
             }
@@ -429,18 +735,376 @@ main {
     }
 }
 
+/* ----- RWD 時出現的置底評論區塊 ----- */
+.Fb-rwd-message-X {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 6vh;
+    align-items: center;
+    background-color: $Light_Green;
+    border-top: 1px solid $Green_4;
+
+    @include max_768() {
+        display: flex;
+    }
+
+    div {
+        padding: 1rem 2rem;
+        text-align: center;
+        width: 33.33vw;
+        position: relative;
+
+        @include max_540() {
+            font-size: 14px;
+        }
+
+        &::after {
+            content: '';
+            display: block;
+            width: 1px;
+            height: 50%;
+            background-color: $Green_1;
+            position: absolute;
+            top: 50%;
+            right: 0;
+            transform: translateY(-50%);
+        }
+
+        &:last-child {
+            border-right: 0;
+
+            &::after {
+                content: none;
+            }
+        }
+
+        span {
+            display: inline-block;
+            margin: 0 16px;
+        }
+    }
+}
+
+/* ----- 點擊評論按鈕才會出現的框 ----- */
+.Fb-comment-cover-X {
+    display: none;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 1;
+
+    &.active {
+        display: block;
+    }
+
+    .m-box {
+        width: 100vw;
+        display: flex;
+        padding: 1rem;
+        position: absolute;
+        gap: 16px;
+        background-color: $Ivory_white;
+        left: 0;
+        bottom: 0;
+
+        img {
+            display: block;
+            width: 50px;
+            height: 50px;
+            border-radius: 99rem;
+
+            @include max_540() {
+                width: 40px;
+                height: 40px;
+            }
+        }
+
+        .inner-box {
+            flex-grow: 1;
+
+            textarea {
+                display: block;
+                width: 100%;
+                height: 12vh;
+                padding: 10px;
+                margin: 10px 0;
+                outline: none;
+                border: 0px solid transparent;
+                background-color: #e6eccc;
+            }
+
+            button {
+                float: right;
+                margin: 10px 0;
+                padding: 10px 28px;
+                outline: none;
+                border: 0px solid transparent;
+                border-radius: 30px;
+                color: $Ivory_white;
+                background-color: $Yellow_1;
+
+            }
+        }
+    }
+
+}
+
+
+
 
 /* ----- 撰寫文章 ----- */
 .FbW-X {
-    background-image: url('../images/Fb08.jpg');
+    background-image: url('https://picsum.photos/seed/picsum/6000/4000');
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
     width: 100%;
-    // height: 800px;
     position: relative;
 
     // filter: blur(3px);
+    .FbW-wrapper-X {
+        padding: 50px 20px;
+        max-width: 792px;
+        margin: 0 auto;
+        color: $Ivory_white;
+
+        // background-color: skyblue;
+        @include max_820() {
+            margin: 0 3vw;
+        }
+
+        /* 標題 */
+        .FbW-title-X {
+            .FbW-postTilte {
+                position: relative;
+                display: flex;
+                align-items: center;
+                box-sizing: border-box;
+
+                label {
+                    display: flex;
+                    align-items: center;
+
+                    // text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.25);
+                    // -webkit-text-stroke-width: 0.5;
+                    // -webkit-text-stroke-color: var(--Primary-Colors-5b774a, #5B774A);
+                    span {
+                        &:first-child {
+                            font-size: 2rem;
+                            font-weight: 500;
+
+                            @include max_540() {
+                                font-size: 1.6rem;
+                            }
+                        }
+
+                        &:last-child {
+                            font-size: 14px;
+                            font-weight: normal;
+                            margin-left: 20px;
+
+                            @include max_540() {
+                                margin-left: 10px;
+                            }
+                        }
+                    }
+                }
+
+                select {
+                    margin-left: auto;
+                    font-size: 14px;
+                    cursor: pointer;
+                    outline: none;
+                    border: 0px solid transparent;
+                    padding: 10px 28px;
+                    padding-left: 20px;
+                    padding-right: 32px;
+                    border-radius: 30px;
+                    color: $Ivory_white;
+                    background-color: $Yellow_1;
+                    -webkit-appearance: none;
+                    /* 隱藏箭頭 */
+                    -moz-appearance: none;
+                    /* 隱藏箭頭 */
+                    appearance: none;
+
+                    @include max_540() {
+                        padding: 5px 0;
+                        padding-left: 10px;
+                        padding-right: 20px;
+                    }
+
+                    /* 隱藏箭頭 */
+                    option {
+                        background-color: #fff;
+                        color: $Green_1;
+                    }
+                }
+
+                &::after {
+                    content: '\25BC';
+                    /* 使用不同的箭頭符號 */
+                    display: block;
+                    position: absolute;
+                    top: 50%;
+                    right: 15px;
+                    transform: translateY(-50%);
+                    pointer-events: none;
+                    color: white;
+                    font-size: 12px;
+
+                    @include max_430() {
+                        right: 8px;
+                        font-size: 10px;
+                    }
+                }
+            }
+
+            input {
+                display: block;
+                outline: none;
+                color: $Green_1;
+                border: 2px solid $Green_1;
+                border-radius: 5px;
+                margin-top: 16px;
+                margin-bottom: 40px;
+                padding: 0 16px;
+                height: 40px;
+                width: 100%;
+                background-color: $Ivory_white;
+
+                &::placeholder {
+                    color: rgba(0, 0, 0, 0.3);
+                }
+            }
+        }
+
+        /* 內文 */
+        .FbW-content-X {
+            label {
+                display: flex;
+                align-items: center;
+
+                span {
+                    &:first-child {
+                        font-size: 32px;
+                        font-weight: 500;
+
+                        @include max_540() {
+                            font-size: 1.6rem;
+                        }
+                    }
+
+                    &:last-child {
+                        font-size: 14px;
+                        font-weight: normal;
+                        margin-left: 20px;
+
+                        @include max_540() {
+                            margin-left: 10px;
+                        }
+                    }
+                }
+            }
+
+            .FbW-translate-X {
+                border: 2px solid $Green_1;
+                border-radius: 5px 5px 0 0;
+                margin-top: 16px;
+                padding: 1rem;
+                height: 40px;
+                width: 100%;
+                background-color: $Ivory_white;
+                display: flex;
+                align-items: center;
+                gap: 24px;
+
+                a {
+                    cursor: pointer;
+                    font-size: 20px;
+                    color: rgba(0, 0, 0, 0.3);
+                }
+            }
+
+            textarea {
+                outline: none;
+                color: $Green_1;
+                border: 2px solid $Green_1;
+                border-top: 0;
+                border-radius: 0 0 5px 5px;
+                margin-bottom: 16px;
+                padding: 10px 16px;
+                height: 200px;
+                width: 100%;
+                background-color: $Ivory_white;
+
+                &::placeholder {
+                    color: rgba(0, 0, 0, 0.3);
+                }
+            }
+        }
+
+        /* 預覽圖 */
+        .FbW-picture-X {
+            padding: 1rem;
+            border: 2px solid $Green_1;
+            border-radius: 5px;
+            height: 200px;
+            width: 100%;
+            background-color: $Ivory_white;
+            box-sizing: border-box;
+
+            div {
+                display: flex;
+                align-items: center;
+
+                input#FbW-picChoose-X {
+                    transform: scale(1.5);
+                    cursor: pointer;
+                }
+
+                label {
+                    margin-left: 20px;
+                    color: $Green_1;
+                    font-size: 14px;
+                    cursor: pointer;
+                }
+            }
+
+            .FbW-picture-slider-X {
+                border: 1px solid $Green_1;
+                width: 200px;
+                height: 120px;
+                margin: 1.5rem 0;
+                overflow: hidden;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+        }
+    }
+
+    button {
+        display: block;
+        margin: 10px auto;
+        padding: 10px 28px;
+        outline: none;
+        border: 0px solid transparent;
+        border-radius: 30px;
+        color: $Ivory_white;
+        background-color: $Yellow_1;
+    }
+
+
     .FbW-overlay-X {
 
         // width: 100%;
@@ -450,210 +1114,5 @@ main {
         // left: 0;
         // background-color: rgba(0, 0, 0, 0.3);
         /* 發文區的 form */
-        .FbW-wrapper-X {
-            padding: 50px 20px;
-            max-width: 792px;
-            margin: 0 auto;
-            color: $Ivory_white;
-
-            // background-color: skyblue;
-            /* 標題 */
-            .FbW-title-X {
-                .FbW-postTilte {
-                    position: relative;
-                    display: flex;
-                    align-items: center;
-                    box-sizing: border-box;
-
-                    label {
-                        display: flex;
-                        align-items: center;
-
-                        // text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.25);
-                        // -webkit-text-stroke-width: 0.5;
-                        // -webkit-text-stroke-color: var(--Primary-Colors-5b774a, #5B774A);
-                        span {
-                            &:first-child {
-                                font-size: 32px;
-                                font-weight: 500;
-                            }
-
-                            &:last-child {
-                                font-size: 14px;
-                                font-weight: normal;
-                                margin-left: 20px;
-                            }
-                        }
-                    }
-
-                    select {
-                        margin-left: auto;
-                        font-size: 14px;
-                        cursor: pointer;
-                        outline: none;
-                        border: 0px solid transparent;
-                        padding: 10px 28px;
-                        padding-left: 20px;
-                        padding-right: 32px;
-                        border-radius: 30px;
-                        color: $Ivory_white;
-                        background-color: $Yellow_1;
-                        -webkit-appearance: none;
-                        /* 隱藏箭頭 */
-                        -moz-appearance: none;
-                        /* 隱藏箭頭 */
-                        appearance: none;
-
-                        /* 隱藏箭頭 */
-                        option {
-                            background-color: #fff;
-                            color: $Green_1;
-                        }
-                    }
-
-                    &::after {
-                        content: '\25BC';
-                        /* 使用不同的箭頭符號 */
-                        display: block;
-                        position: absolute;
-                        top: 50%;
-                        right: 15px;
-                        transform: translateY(-50%);
-                        pointer-events: none;
-                        color: white;
-                        font-size: 12px;
-
-                    }
-                }
-
-                input {
-                    display: block;
-                    outline: none;
-                    color: $Green_1;
-                    border: 2px solid $Green_1;
-                    border-radius: 5px;
-                    margin-top: 16px;
-                    margin-bottom: 40px;
-                    padding: 0 16px;
-                    height: 40px;
-                    width: 100%;
-                    background-color: $Ivory_white;
-
-                    &::placeholder {
-                        color: rgba(0, 0, 0, 0.3);
-                    }
-                }
-            }
-
-            /* 內文 */
-            .FbW-content-X {
-                label {
-                    display: flex;
-                    align-items: center;
-
-                    span {
-                        &:first-child {
-                            font-size: 32px;
-                            font-weight: 500;
-                        }
-
-                        &:last-child {
-                            font-size: 14px;
-                            font-weight: normal;
-                            margin-left: 20px;
-                        }
-                    }
-                }
-
-                .FbW-translate-X {
-                    border: 2px solid $Green_1;
-                    border-radius: 5px 5px 0 0;
-                    margin-top: 16px;
-                    padding: 1rem;
-                    height: 40px;
-                    width: 100%;
-                    background-color: $Ivory_white;
-                    display: flex;
-                    align-items: center;
-                    gap: 24px;
-
-                    a {
-                        cursor: pointer;
-                        font-size: 20px;
-                        color: rgba(0, 0, 0, 0.3);
-                    }
-                }
-
-                textarea {
-                    outline: none;
-                    color: $Green_1;
-                    border: 2px solid $Green_1;
-                    border-top: 0;
-                    border-radius: 0 0 5px 5px;
-                    margin-bottom: 16px;
-                    padding: 10px 16px;
-                    height: 200px;
-                    width: 100%;
-                    background-color: $Ivory_white;
-
-                    &::placeholder {
-                        color: rgba(0, 0, 0, 0.3);
-                    }
-                }
-            }
-
-            /* 預覽圖 */
-            .FbW-picture-X {
-                padding: 1rem;
-                border: 2px solid $Green_1;
-                border-radius: 5px;
-                height: 200px;
-                width: 100%;
-                background-color: $Ivory_white;
-                box-sizing: border-box;
-
-                div {
-                    display: flex;
-                    align-items: center;
-
-                    input#FbW-picChoose-X {
-                        transform: scale(1.5);
-                        cursor: pointer;
-                    }
-
-                    label {
-                        margin-left: 20px;
-                        color: $Green_1;
-                        font-size: 14px;
-                        cursor: pointer;
-                    }
-                }
-
-                .FbW-picture-slider-X {
-                    border: 1px solid $Green_1;
-                    width: 200px;
-                    height: 120px;
-                    margin: 1.5rem 0;
-                    overflow: hidden;
-
-                    img {
-                        width: 100%;
-                        height: 100%;
-                        object-fit: cover;
-                    }
-                }
-            }
-        }
-
-        button {
-            display: block;
-            margin: 10px auto;
-            padding: 10px 28px;
-            outline: none;
-            border: 0px solid transparent;
-            border-radius: 30px;
-            color: $Ivory_white;
-            background-color: $Yellow_1;
-        }
     }
 }

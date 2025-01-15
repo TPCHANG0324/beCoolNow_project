@@ -1,3 +1,5 @@
+<!-- 已經 RWD 820/ 430 完成 -->
+
 <template>
   <div class="be-cool-now-container">
     <div class="be-cool-now-button be-cool-now-front-btn">前台</div>
