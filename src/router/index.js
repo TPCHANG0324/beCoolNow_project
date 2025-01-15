@@ -32,7 +32,7 @@ const routes = [
     }
   },
   {
-    path: '/social_atricle', component: () => import('@/pages/Social_atricle.vue'),
+    path: '/social_article', component: () => import('@/pages/Social_article.vue'),
     meta: {
       title: '文章',
       // requiredLogin: true
@@ -42,6 +42,13 @@ const routes = [
     path: '/social_write', component: () => import('@/pages/Social_write.vue'),
     meta: {
       title: '寫文章',
+      // requiredLogin: true
+    }
+  },
+  {
+    path: '/social_news', component: () => import('@/pages/Social_news.vue'),
+    meta: {
+      title: '新聞',
       // requiredLogin: true
     }
   },
