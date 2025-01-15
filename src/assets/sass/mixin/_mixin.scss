@@ -43,3 +43,52 @@
 }
 
 //----------------------------------------------------------------------------//
+//------------------------------- RWD 斷點 ------------------------------------//
+
+//先以 820 & 430 這兩個斷點為主
+
+@mixin max_1024{
+    @media screen and (max-width:1024px) {
+        @content;
+    }
+}
+
+@mixin max_912{
+    @media screen and (max-width:912px) {
+        @content;
+    }
+}
+
+@mixin max_820{
+    @media screen and (max-width:820px) {
+        @content;
+    }
+}
+
+@mixin max_768{
+    @media screen and (max-width:768px) {
+        @content;
+    }
+}
+
+@mixin max_540{
+    @media screen and (max-width:540px) {
+        @content;
+    }
+}
+
+@mixin max_430{
+    @media screen and (max-width:430px) {
+        @content;
+    }
+}
+
+/* 
+
+使用方法：
+.test1{
+    @include max_820(){
+        background-color: pink;
+    }
+}
+*/
