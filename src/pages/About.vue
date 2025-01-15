@@ -1,505 +1,99 @@
+
 <template>
-  <div class=" wrapper">
-    <div class="hero-section">
-      <img src="../assets/images/Ac01-1.png" alt="banner">
-      <div class="hero-text">
-        <h1>「綠色行動，從今天開始」</h1>
-        <h2>改變，讓奇蹟發生</h2>
-      </div>
-    </div>
-    <h3 class="Ac_h3">21 日減碳環保活動</h3 class="Ac_h3">
-    <!-- 卡片容器 -->
-    <div class="daily_card">
-      <!-- 卡片範例 1 -->
-      <div class="AcB_card">
-        <header>
-          <i class="fa-regular fa-circle-check"></i>
-          累積<span class="action-count">1111</span>次行動
-        </header>
-        <img src="../assets/images/day21_1.jpg" alt="寫信圖片">
-
-        <h3 class="Ac_h3">
-          Day 1 給地球的一封信
-        </h3>
-        <article>
-          你有沒有什麼話想對地球說呢？無論是祝福、感謝、提醒，或者是另一種真實的聲音，歡迎你用不同的觀點，寫下給地球的一封信。
-        </article>
-        <button class="btn btn-Ac_done_btn">我也完成 +1</button>
-        <canvas id="dotlottie-canvas" style="width: 150px; height: 150px; display: none;"></canvas>
-
-      </div>
-
-
-      <!-- 卡片範例 2 -->
-      <div class="AcB_card darkGreen_card">
-        <header>
-          <i class="fa-regular fa-circle-check"></i>
-          累積<span class="action-count">1111</span>次行動
-        </header>
-        <img src="../assets/images/Ac03.jpg" alt="寫信圖片">
-
-        <h3 class="Ac_h3">
-          Day 2 現在，花 3 秒鐘和手機一起開啟「專注模式」
-        </h3>
-        <article>
-          開啟手機的「專注模式」，除了可以暫時遠離通知的干擾、沉浸當下，還能減少能源耗損。今天，為自己和手機開啟一段專注時間吧！
-        </article>
-        <button class="btn btn-Ac_done_btn">我也完成 +1</button>
-      </div>
-
-      <!-- 卡片範例 3 -->
-      <div class="AcB_card">
-        <header>
-          <i class="fa-regular fa-circle-check"></i>
-          累積<span class="action-count">1111</span>次行動
-        </header>
-        <img src="../assets/images/Ac04.jpg" alt="寫信圖片">
-
-        <h3 class="Ac_h3">
-          Day 3 向身邊一棵樹說謝謝
-        </h3 class="Ac_h3">
-        <article>
-          今天抽空走到身邊最近的樹旁，謝謝他吸收二氧化碳、釋放氧氣，也感謝他滋養著以樹為家的植物、動物，豐富了「高空生態系」。
-        </article>
-        <button class="btn btn-Ac_done_btn">我也完成 +1</button>
-      </div>
-      <!-- 卡片範例 4 -->
-      <div class="AcB_card darkGreen_card">
-        <header>
-          <i class="fa-regular fa-circle-check"></i>
-          累積<span class="action-count">1111</span>次行動
-        </header>
-        <img src="../assets/images/Ac05.jpg" alt="寫信圖片">
-
-        <h3 class="Ac_h3">
-          Day 4 前往離你最近的公園，
-          完成一次「無痕」散步
-        </h3 class="Ac_h3">
-        <article>
-          無痕精神，來自無痕山林的概念。前往離你最近的公園，試試看、只留下回憶與足跡，不留下垃圾。
-        </article>
-        <button class="btn btn-Ac_done_btn">我也完成 +1</button>
-      </div>
-
-
-      <!-- 卡片範例 5 -->
-      <div class="AcB_card">
-        <header>
-          <i class="fa-regular fa-circle-check"></i>
-          累積<span class="action-count">1111</span>次行動
-        </header>
-        <img src="../assets/images/acnew.png" alt="寫信圖片">
-
-        <h3 class="Ac_h3">
-          Day 5 退訂一份電子報
-        </h3 class="Ac_h3">
-        <article>
-          你「取消訂閱」信箱中超過一個月沒打開的電子報！花 10 秒取消一份天天發送的電子報，每年就能減少 109.5g 數位碳排放。
-        </article>
-        <button class="btn btn-Ac_done_btn">我也完成 +1</button>
-      </div>
-
-      <!-- 卡片範例 6 -->
-      <div class="AcB_card darkGreen_card">
-        <header>
-          <i class="fa-regular fa-circle-check"></i>
-          累積<span class="action-count">1111</span>次行動
-        </header>
-        <img src="../assets/images/Ac07.jpg" alt="寫信圖片">
-
-        <h3 class="Ac_h3">
-          Day 6 打消一個購買念頭
-        </h3 class="Ac_h3">
-        <article>
-          花一分鐘列出最近想買的東西，試著從清單中劃掉一項，決定不買它了！如果不知道要如何刪去，來參考這三個小練習。
-        </article>
-        <button class="btn btn-Ac_done_btn">我也完成 +1</button>
-      </div>
-    </div>
-    <div id="extraCards" class="expandable">
-      <!-- 卡片容器 -->
-      <div class="daily_card">
-        <!-- 卡片範例 7 -->
-        <div class="AcB_card">
-          <header>
-            <i class="fa-regular fa-circle-check"></i>
-            累積<span class="action-count">1111</span>次行動
-          </header>
-          <img src="../assets/images/AC_d7.jpg" alt="寫信圖片">
-
-          <h3 class="Ac_h3">
-            Day 7 出門前，把餐具、環保杯、購物袋放進包包
-          </h3 class="Ac_h3">
-          <article>
-            養成運動習慣的第一步，是帶運動衣出門；要擁抱更環保、減少廢棄的永續生活，現在把「餐具、環保杯、購物袋」放進包包。
-          </article>
-          <button class="btn btn-Ac_done_btn">我也完成 +1</button>
+    <div class="aboutus_top_R">
+            <div class="aboutus_toptitle_R">
+                <h1>關於我們</h1>
+                <h1>About Us</h1>
+            </div>
         </div>
-        <!-- 卡片範例 8 -->
-        <div class="AcB_card darkGreen_card">
-          <header>
-            <i class="fa-regular fa-circle-check"></i>
-            累積<span class="action-count">1111</span>次行動
-          </header>
-          <img src="../assets/images/day08_new.png" alt="寫信圖片">
-
-          <h3 class="Ac_h3">
-            Day 8 和 AI 聊聊 ─ 給「台灣第一個生成式 AI 永續機器人」一個問題
-          </h3 class="Ac_h3">
-          <article>
-            加入「小綠行動中」，並試著輸入一個關於永續的問題。透過生成式 AI 永續機器人，隨時隨地，即時獲得永續的解答和靈感。
-          </article>
-          <button class="btn btn-Ac_done_btn">我也完成 +1</button>
+        <div class="wrapper">
+            <div class="aboutus_top2_R">
+                <h2>我們的理念</h2>
+                <p>全球暖化是全人類的共同挑戰，對臺灣而言更是迫在眉睫。極端氣候頻發、海平面上升、生態失衡，
+                    正威脅我們的安全與未來，面對這場氣候危機，臺灣雖然渺小
+                    但我們擁有創新與行動的力量，需要你我一起關注!
+                </p>
+            </div>
+            <div class="aboutus_top3_R">
+                <div class="aboutus_top3pic_R">
+                    <img src="../assets/images/Au02.jpeg" alt="">
+                </div>
+                <div class="aboutus_top3word_R">
+                    <h2>提倡環保理念，宣傳活動</h2>
+                    <p>推動綠能、環保行動、守護環境
+                        從現在開始，每一步都至關重要！
+                        我們相信，改變的力量來自每一個人，
+                        從臺灣出發，與全球同行，創造永續的未來。
+                        讓我們攜手行動，為地球的明天發聲！
+                    </p>
+                </div>
+            </div>
+            <div class="aboutus_middle_R">
+                <div class="about_middlecard_R">
+                  <h3>改變並非一夕之間，拯救唯一的地球家園仍刻不容緩</h3>
+                  <p>Change doesn't happen overnight, but saving our one and only home—Earth—remains an urgent priority.</p>
+                  <h3>一人之力固然有限，請您立即伸出援手<br>讓我們集聚人之力，推動共同期盼的改變！</h3>
+                  <p>One person's power may be limited, but your immediate support can make a difference. Let us unite our strength to drive the change we all hope for!</p>
+                  <button class="btn">支持我們</button>
+                </div>
+              </div>
+              <div class="about_bottom_R">
+                <h3>聯絡我們</h3>
+                <h3>Contact</h3>
+                <div class="aboutus_input_R">
+                  <div class="form-group">
+                    <p>姓名:</p>
+                    <input class="input" type="text">
+                  </div>
+                  <div class="form-group">
+                    <p>* mail:</p>
+                    <input class="input" type="email">
+                  </div>
+                  <div class="form-group">
+                    <p>手機:</p>
+                    <input class="input" type="text">
+                  </div>
+                  <div class="form-group">
+                    <p>* 您的建議:</p>
+                    <textarea class="input"rows="4"></textarea>
+                  </div>
+                </div>
+                <button class="btn">送出</button>
+              </div>
+              
+              <div class="aboutus_lowest_R">
+                <h3>響應環保好夥伴</h3>
+                <ul class="aboutus_marquee_R">
+                  <li>
+                    <div class="icon-text-wrapper">
+                        <img src="../assets/images/Au04.png" alt="GitHub" style="width: 50px; height: 50px;">
+                        <span>Tibame</span>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="icon-text-wrapper">
+                        <img src="../assets/images/Au04.png" alt="GitHub" style="width: 50px; height: 50px;">
+                        <span>Git Hub</span>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="icon-text-wrapper">
+                        <img src="../assets/images/Au04.png" alt="Google" style="width: 50px; height: 50px;">
+                        <span>Google</span>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="icon-text-wrapper">
+                        <img src="../assets/images/Au04.png" alt="Facebook" style="width: 50px; height: 50px;">
+                        <span>Facebook</span>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              
         </div>
-        <!-- 卡片範例 9 -->
-        <div class="AcB_card">
-          <header>
-            <i class="fa-regular fa-circle-check"></i>
-            累積<span class="action-count">1111</span>次行動
-          </header>
-          <img src="../assets/images/AC_Day9.png" alt="寫信圖片">
-
-          <h3 class="Ac_h3">
-            Day 9 練習一次：關於洗手的減法
-          </h3 class="Ac_h3">
-          <article>
-            世界衛生組織：「覆蓋雙手表面」的泡沫量已足夠，用太多洗手乳不僅無益、還會耗費更多水。今天試試以平常一半的量來洗手。
-          </article>
-          <button class="btn btn-Ac_done_btn">我也完成 +1</button>
-
-        </div>
-        <!-- 卡片範例 10 -->
-        <div class="AcB_card darkGreen_card">
-          <header>
-            <i class="fa-regular fa-circle-check"></i>
-            累積<span class="action-count">1111</span>次行動
-          </header>
-          <img src="../assets/images/AC_day09.png" alt="寫信圖片">
-
-          <h3 class="Ac_h3">
-            Day 10 猜猜看，哪一個是「負碳」國家？
-          </h3 class="Ac_h3">
-          <article>
-            是冰島、不丹，還是紐西蘭？這個國家生產充足的潔淨能源，更以憲法規定國土的森林覆蓋率不低於 60%，成為全球少數的負碳國。
-          </article>
-          <button class="btn btn-Ac_done_btn">我也完成 +1</button>
-        </div>
-
-
-        <!-- 卡片範例 11 -->
-        <div class="AcB_card">
-          <header>
-            <i class="fa-regular fa-circle-check"></i>
-            累積<span class="action-count">1111</span>次行動
-          </header>
-          <img src="../assets/images/AC_Day11.png" alt="寫信圖片">
-
-          <h3 class="Ac_h3">
-            Day 11 憑直覺比比看，洗髮與保養的「碳排放」高低
-          </h3 class="Ac_h3">
-          <article>
-            每天，我們在洗沐和保養的過程中都會產生碳排放。根據自己的「碳直覺」，比比看洗髮和保養的「碳排放」。
-          </article>
-          <button class="btn btn-Ac_done_btn">我也完成 +1</button>
-        </div>
-
-        <!-- 卡片範例 12 -->
-        <div class="AcB_card darkGreen_card">
-          <header>
-            <i class="fa-regular fa-circle-check"></i>
-            累積<span class="action-count">1111</span>次行動
-          </header>
-          <img src="../assets/images/Ac_Day12.png" alt="寫信圖片">
-
-          <h3 class="Ac_h3">
-            Day 12 下一餐，蔬食
-          </h3 class="Ac_h3">
-          <article>
-            搜尋附近的美味蔬食，下一餐就去吃！美國環境工作小組估算，一餐不吃肉就能減少 760g 碳排、約為開車四公里所產生的碳排。
-          </article>
-          <button class="btn btn-Ac_done_btn">我也完成 +1</button>
-        </div>
-        <!-- 卡片範例 13 -->
-        <div class="AcB_card">
-          <header>
-            <i class="fa-regular fa-circle-check"></i>
-            累積<span class="action-count">1111</span>次行動
-          </header>
-          <img src="../assets/images/AC_Day13.png" alt="寫信圖片">
-
-          <h3 class="Ac_h3">
-            Day 13 投給你最喜歡的台灣特有種一票
-          </h3 class="Ac_h3">
-          <article>
-            台灣森林覆蓋率超過一半，孕育著豐富的生態和特有種，包括台灣黑熊、台灣山椒魚、紅檜、台灣百合等。
-          </article>
-          <button class="btn btn-Ac_done_btn">我也完成 +1</button>
-
-        </div>
-
-
-        <!-- 卡片範例 14 -->
-        <div class="AcB_card darkGreen_card">
-          <header>
-            <i class="fa-regular fa-circle-check"></i>
-            累積<span class="action-count">1111</span>次行動
-          </header>
-          <img src="../assets/images/AC_Day14.png" alt="寫信圖片">
-
-          <h3 class="Ac_h3">
-            Day 14 找出身邊用最久的物品
-          </h3 class="Ac_h3">
-          <article>
-            花十秒鐘，找出今天身邊陪你最久的物品！也歡迎你拍張照分享你和它的故事，「用久一點」就是為環境做的一件好事。
-          </article>
-          <button class="btn btn-Ac_done_btn">我也完成 +1</button>
-        </div>
-
-        <!-- 卡片範例 15 -->
-        <div class="AcB_card">
-          <header>
-            <i class="fa-regular fa-circle-check"></i>
-            累積<span class="action-count">1111</span>次行動
-          </header>
-          <img src="../assets/images/AC_Day15.png" alt="寫信圖片">
-
-          <h3 class="Ac_h3">
-            Day 15 解決碗中最後一粒米
-          </h3 class="Ac_h3">
-          <article>
-            下一餐，把飯菜都吃光！以台灣為例，平均每人每年產生約 22.2 公斤剩食，每餐飯都能以「完食」對地球好一次。
-          </article>
-          <button class="btn btn-Ac_done_btn">我也完成 +1</button>
-        </div>
-        <!-- 卡片範例 16 -->
-        <div class="AcB_card darkGreen_card">
-          <header>
-            <i class="fa-regular fa-circle-check"></i>
-            累積<span class="action-count">1111</span>次行動
-          </header>
-          <img src="../assets/images/AC_Day16.png" alt="寫信圖片">
-
-          <h3 class="Ac_h3">
-            Day 16 自我檢測你的發票雲端等級
-          </h3 class="Ac_h3">
-          <article>
-            以三個分級檢測 (A) 發票都記得存載具 (B) 有載具 App (C) 沒聽過載具，你是哪種？
-          </article>
-          <button class="btn btn-Ac_done_btn">我也完成 +1</button>
-        </div>
-
-
-        <!-- 卡片範例 17 -->
-        <div class="AcB_card">
-          <header>
-            <i class="fa-regular fa-circle-check"></i>
-            累積<span class="action-count">1111</span>次行動
-          </header>
-          <img src="../assets/images/AC_Day17.png" alt="寫信圖片">
-
-          <h3 class="Ac_h3">
-            Day 17 完成一次百分百垃圾分類
-          </h3 class="Ac_h3">
-          <article>
-            買網購、叫外送、喝一瓶罐裝飲料...你會將廢棄物一視同仁嗎？今天嘗試辨識一個可回收的廢棄物，從一般垃圾丟至回收區吧！
-          </article>
-          <button class="btn btn-Ac_done_btn">我也完成 +1</button>
-        </div>
-
-        <!-- 卡片範例 18 -->
-        <div class="AcB_card darkGreen_card">
-          <header>
-            <i class="fa-regular fa-circle-check"></i>
-            累積<span class="action-count">1111</span>次行動
-          </header>
-          <img src="../assets/images/AC_Day18.png" alt="寫信圖片">
-
-          <h3 class="Ac_h3">
-            Day 18 挑戰：下一餐，少一件垃圾
-          </h3 class="Ac_h3">
-          <article>
-            少一雙免洗筷、少一個塑膠湯匙、或是少一張衛生紙，挑戰讓下一餐少一件垃圾，也許，比想像中還容易！
-          </article>
-          <button class="btn btn-Ac_done_btn">我也完成 +1</button>
-        </div>
-        <!-- 卡片範例 19 -->
-        <div class="AcB_card">
-          <header>
-            <i class="fa-regular fa-circle-check"></i>
-            累積<span class="action-count">1111</span>次行動
-          </header>
-          <img src="../assets/images/AC_Day19.png" alt="寫信圖片">
-
-          <h3 class="Ac_h3">
-            Day 19 丟掉 3 個冰箱裡不要的東西
-          </h3 class="Ac_h3">
-          <article>
-            維持冰箱最佳表現小訣竅：丟棄那些以為還會拿來吃，但已是陳年食材、醬料。多一些空氣循環，少一些能源消耗與碳排。
-          </article>
-          <button class="btn btn-Ac_done_btn">我也完成 +1</button>
-
-        </div>
-
-
-        <!-- 卡片範例 20 -->
-        <div class="AcB_card darkGreen_card">
-          <header>
-            <i class="fa-regular fa-circle-check"></i>
-            累積<span class="action-count">1111</span>次行動
-          </header>
-          <img src="../assets/images/AC_DAY20.png" alt="寫信圖片">
-
-          <h3 class="Ac_h3">
-            Day 20 從衣櫃裡，找出「最熟悉的陌生衣」
-          </h3 class="Ac_h3">
-          <article>
-            找出深埋在衣櫃中那件「最熟悉的陌生衣」，讓你很喜歡卻忘記穿的它，重回日常穿搭！或是，二手與回收，也能賦予它新生命。
-
-
-          </article>
-          <button class="btn btn-Ac_done_btn">我也完成 +1</button>
-        </div>
-
-        <!-- 卡片範例 20 -->
-        <div class="AcB_card">
-          <header>
-            <i class="fa-regular fa-circle-check"></i>
-            累積<span class="action-count">1111</span>次行動
-          </header>
-          <img src="../assets/images/AC_Day21.png" alt="寫信圖片">
-
-          <h3 class="Ac_h3">
-            Day 21 找到離你最近的「循環杯」
-          </h3 class="Ac_h3">
-          <article>
-            喝飲料、外帶咖啡，不一定要自備環保杯也能降低一次性垃圾？搜尋看看，離你最近的「循環杯」在哪裡？
-          </article>
-          <button class="btn btn-Ac_done_btn">我也完成 +1</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div id="learnMoreBtn" class="learn_more">
-    <a href="#">Learn More</a>
-  </div>
-
-  <div class="collapse_section hidden">
-    <button id="collapseBtn" class="btnclose">收合</button>
-  </div>
-  <hr class="dashed-line">
-
-
-  <!-- 信件標題 -->
-
-
-  <h3 class="Ac_h3"><br>給地球的一封信</h3 class="Ac_h3">
-
-
-  <!-- 信件展示區 -->
-
-  <div class="letter-container">
-    <!-- 信件統計數字 -->
-    <!-- 模擬 MacOS 標題列 -->
-    <div class="mac-window">
-      <div class="mac-buttons">
-        <div class="mac-btn red"></div>
-        <div class="mac-btn yellow"></div>
-        <div class="mac-btn green"></div>
-      </div>
-    </div>
-    <div class="stats-bar">
-      現在總共有 1228 封給地球的信
-    </div>
-
-    <!-- 信件卡片 1 -->
-    <div class="letter">
-      <div class="letter_place1">
-        <div class="letter-card">
-          <p>
-            親愛的地球：<br>
-            你好！我是小明，我最喜歡在公園裡跑來跑去，也喜歡去海邊玩沙子。
-            <br>媽媽說，我們要愛護你，不能亂丟垃圾，也不能浪費水。地球，我想告訴你，以後我會和同學一起種很多小樹，讓你變得更漂亮。希望等我長大，你還是一個很美麗的大地球！
-          </p>
-          <br>
-          <div class="name">- 你的朋友 小明</div>
-        </div>
-        <img src="../assets/images/Ac08.jpg" alt="小明頭像" class="avatar">
-      </div>
-      <div class="letter_place1">
-        <div class="letter-card">
-          <p>
-            親愛的地球：<br>
-            謝謝你無私地滋養著我們，給予藍天、白雲、青山與綠水。你的四季輪替，讓我們感受到生命的變化與美好。
-            然而，我們也深知自己的行為正在傷害你。請相信我們仍在努力修補這段關係，從減少塑膠、節能減碳到
-            植樹造林。我們希望未來的你，依然能展現純淨與和平，讓我們的後代也能擁抱你。
-          </p>
-          <br>
-          <div class="name">- 愛你的地球公民</div>
-        </div>
-        <img src="../assets/images/newAC.png" alt="小明頭像" class="avatar">
-      </div>
-      <!-- 信件卡片 2 -->
-    </div>
-
-
-
-  </div>
-
-
-  <!-- 背景圖片容器 -->
-  <div class="background-container">
-    <img src="../assets/images/ACd.png" alt="背景圖片" class="background-image">
-
-    <!-- 信件表單區 -->
-    <div class="letter-form-container">
-      <form class="letter-form">
-        <!-- 姓名輸入欄 -->
-        <div class="form-group">
-          <label for="name" class="message0">姓名或暱稱：</label>
-          <input id="name" type="text" placeholder="請輸入您的姓名">
-        </div>
-
-        <!-- 信件內容輸入框 -->
-        <div class="form-group">
-          <label for="message" class="message">信件內容：</label>
-          <textarea id="message" placeholder="寫下你的信給地球吧！"></textarea>
-        </div>
-
-        <!-- 驗證碼區塊 -->
-        <div class="captcha-group">
-          <label for="captcha" class="message1">請輸入驗證碼：</label>
-          <input id="captcha" type="text">
-          <span class="captcha-code">3n3D</span>
-          <button type="button" class="refresh-captcha">換一張</button>
-        </div>
-
-        <!-- 送出按鈕 -->
-        <button type="submit" class="submit-btn">寫給地球的一封信</button>
-      </form>
-    </div>
-  </div>
-
-
-  <hr class="dashed-line">
-
-  <div class="carbon-reduction-card">
-    <div class="text-content">
-      <h1>今日減碳行動：<br>讓我們一‘碳’究竟碳排放的真相</h1>
-      <p>
-        透過即時的交通資訊與數據化的減碳工具，讓通勤族和環保推動者輕鬆採取更低碳、更高效的生活方式。<br>
-        一“碳”究竟的友站致力於讓低碳選擇變得便捷且有趣，激發更多人為地球的可持續發展貢獻力量。
-      </p>
-      <button class="learn-more-button">深入了解</button>
-    </div>
-    <div class="image-content">
-      <img src="../assets/images/acfinial.png" alt="煙囪排放煙霧的圖片">
-    </div>
-  </div>
-
-</template>
-
-<script>
-export default {
-
-}
-</script>
+    </template>
+    
+    <script>
+    </script>
+    
