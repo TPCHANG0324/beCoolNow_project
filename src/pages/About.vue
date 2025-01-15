@@ -1197,8 +1197,8 @@ export default {};
                 </div>
               </div>
               <div class="about_bottom_R">
-                <h3>聯絡我們</h3>
-                <h3>Contact</h3>
+                <h2>聯絡我們</h2>
+                <h2>Contact</h2>
                 <div class="aboutus_input_R">
                   <div class="form-group">
                     <p>姓名:</p>
