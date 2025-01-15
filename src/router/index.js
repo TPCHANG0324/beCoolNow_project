@@ -31,12 +31,12 @@ const routes = [
       // requiredLogin: true
     }
   },
-  // {
-  //   path: '/About', component: () => import('@/pages/About.vue'),
-  //   meta: {
-  //     title: '關於我們',
-  //   }
-  // },
+  {
+    path: '/About', component: () => import('@/pages/About.vue'),
+    meta: {
+      title: '關於我們',
+    }
+  },
   {
     path: '/loginPage/', component: () => import('@/pages/loginPage.vue'),
     meta: {
