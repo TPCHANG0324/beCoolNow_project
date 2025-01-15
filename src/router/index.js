@@ -18,7 +18,7 @@ const routes = [
     }
   },
   {
-    path: '/about', component: () => import('@/pages/About.vue'),
+    path: '/activity', component: () => import('@/pages/Activity.vue'),
     meta: {
       title: '永續行動',
       // requiredLogin: false
