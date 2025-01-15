@@ -19,6 +19,8 @@ const routes = [
   },
   {
     path: '/activity', component: () => import('@/pages/Activity.vue'),
+    path: '/Ac', component: () => import('@/pages/Activity.vue'),
+    path: '/about', component: () => import('@/pages/About.vue'),
     meta: {
       title: '永續行動',
       // requiredLogin: false
@@ -29,6 +31,12 @@ const routes = [
     meta: {
       title: '社群中心',
       // requiredLogin: true
+    }
+  },
+  {
+    path: '/About', component: () => import('@/pages/About.vue'),
+    meta: {
+      title: '關於我們',
     }
   },
   {
@@ -52,6 +60,19 @@ const routes = [
     meta: {
       title: '捐款頁面2',
       // requiredLogin: true
+    }
+  },
+  {
+    path: '/shop_checkout', component: () => import('@/pages/Shop_checkout.vue'),
+    meta: {
+      title: '市集結帳',
+      // requiredLogin: true
+    }
+  },
+  {
+    path: '/shop_finish', component: () => import('@/pages/Shop_finish.vue'),
+    meta: {
+      title: '市集結束',
     }
   },
   {
@@ -91,7 +112,7 @@ const routes = [
     }
   },
   {
-    path: '/shop_product', component: () => import('@/pages/Shop_product.vue'),
+    path: '/shop_product/', component: () => import('@/pages/Shop_product.vue'),
     meta: {
       title: '環保市集',
       // requiredLogin: true

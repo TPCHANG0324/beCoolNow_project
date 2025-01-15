@@ -1,0 +1,303 @@
+
+.si_content_R{
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+
+.breadcrumb{
+  display: flex;
+  gap: 2px;
+  text-decoration: none;
+  padding-top: 61px;
+  a{
+      color: #000;
+      cursor: pointer;
+  }
+  a:hover{
+      color: rgb(54, 54, 224)
+  }
+}
+
+.si_ordersummary_R{
+  cursor: pointer;
+  border: 1px solid gray;
+  margin-bottom: 40px;
+  box-shadow: 4px 4px 8px 0px rgba(0, 0, 0, 0.25);
+  background-color: $Ivory_white;
+  border-radius: 20px;
+  .si_orderhead_R{
+    // border: 1px solid gray;
+    text-align: center;
+    padding: 24px;
+    h2{
+      font-size: 32px;
+      font-weight: bold;
+    }
+    p{
+      font-size: 32px;
+    }
+  }
+
+  .si_orderdetails_R{
+    // border: 3px solid purple;
+    .si_orderbottom1_R{
+      border: 1px solid gray;
+      display: flex;
+      padding: 15px;
+      .item1{
+        width: 33.33333333%;
+      }
+      .item2{
+        width: 20.666667%;
+      }
+      .item3{
+        width: 20.666667%;
+      }
+      .item4{
+        width: 18.666667%;
+      }
+    }
+    .si_orderbottom2_R{
+      border: 1px solid gray;
+      display: flex;
+      padding: 15px;
+      .middle_item1{
+        width: 33.33333333%;
+      }
+      .middle_item2{
+        width: 20.666667%;
+      }
+      .middle_item3{
+        width: 21.666667%;
+      }
+      .middle_item4{
+        width: 17.666667%;
+      }
+    }
+    .si_orderbottom3_R{
+      // display: none;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      padding: 15px;
+      width: 35%;
+      margin-left: auto;
+      margin-right: 25px;
+      .bottom3_1{
+        display: flex;
+        justify-content: space-between;
+      }
+      .bottom3_2{
+        display: flex;
+        justify-content: space-between;
+      }
+      .bottom3_3{
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+    .si_orderbottom_R{
+      text-align: center;
+      border-top: 1px solid gray;
+    }
+  }
+}
+
+
+.si_bottomsection_R{
+  // order 1
+  .si_order1_R{
+    display: flex;
+    justify-content: space-between;
+    // gap: 30px;
+    .Si_customerinfo_R{
+      border: 1px solid gray;
+      box-shadow: 4px 4px 8px 0px rgba(0, 0, 0, 0.25);
+      background-color: $Ivory_white;
+      .Si_customerinfo_header{
+        font-size: 20px;
+        font-weight: 500;
+        padding: 10px 1rem;
+        background-color: $Light_Yellow;
+      }
+      .Si_customerinfo_body{
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        label{
+
+        }
+        input{
+          width: 34rem;
+          height: 2rem;
+          padding: 10px;
+        }
+        .si_phonenumber_R{
+          display: flex;
+          border: 1px solid gray;
+          select{
+            height: 2rem;
+            border: none;
+            border-right: 1px solid gray;
+          }
+          input{
+            border: none;
+            width: 448px;
+            padding: 10px;
+          }
+        }
+        #sex_R{
+          padding: 6px 12px;
+          select{
+            width: 47px;
+          }
+        }
+      }
+    }
+    .Si_deliveryinfo_R{
+      border: 1px solid gray;
+      box-shadow: 4px 4px 8px 0px rgba(0, 0, 0, 0.25);
+      background-color: $Ivory_white;
+      .Si_deliveryinfo_header{
+        font-size: 20px;
+        font-weight: 500;
+        padding: 10px 1rem;
+        background-color: $Light_Yellow;
+      }
+      .Si_deliveryinfo_body{
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        label{
+
+        }
+        input{
+          width: 34rem;
+          height: 2rem;
+          padding: 10px;
+        }
+        #si_check{
+          width: auto;
+          height: auto;
+        }
+        .si_phonenumber_R{
+          display: flex;
+          border: 1px solid gray;
+          select{
+            height: 2rem;
+            border: none;
+            border-right: 1px solid gray;
+          }
+          input{
+            border: none;
+            width: 448px;
+            padding: 10px;
+          }
+        }
+      }
+      .si_address{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        .si_aselect{
+          display: flex;
+          gap: 5px;
+        }
+        select{
+          width: 50%;
+        }
+      }
+    }
+  }
+
+
+  // order 2
+  .si_order2_R{
+    display: flex;
+    justify-content: space-between;
+    // gap: 30px;
+    margin-top: 23px;
+    .Si-ordernotes-R{
+      border: 1px solid gray;
+      box-shadow: 4px 4px 8px 0px rgba(0, 0, 0, 0.25);
+      background-color: $Ivory_white;
+      .Si_ordernotes_header{
+        font-size: 20px;
+        font-weight: 500;
+        padding: 10px 1rem;
+        background-color: $Light_Yellow;
+      }
+      .si_ordernotes_body{
+        padding: 1rem;
+        textarea{
+          width: 34rem;
+          height: 5rem;
+          padding: 10px;
+        }
+      }
+    }
+
+    .Si-payment-R{
+      border: 1px solid gray;
+      box-shadow: 4px 4px 8px 0px rgba(0, 0, 0, 0.25);
+      background-color: $Ivory_white;
+      .si_payment_header{
+        font-size: 20px;
+        font-weight: 500;
+        padding: 10px 1rem;
+        background-color: $Light_Yellow;
+      }
+      .si_payment_body{
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        input{
+          width: 34rem;
+          height: 2rem;
+          padding: 10px;
+        }
+      }
+
+    }
+  }
+  
+  .si_order3_R{
+    margin: 20px 0;
+    display: flex;
+    justify-content: space-between;
+    .si_return_R{
+      display: flex;
+      align-items: flex-end;
+    }
+    .Si_recipt_R{
+      border: 1px solid gray;
+      box-shadow: 4px 4px 8px 0px rgba(0, 0, 0, 0.25);
+      background-color: $Ivory_white;
+      .si_recipt_header{
+        font-size: 20px;
+        font-weight: 500;
+        padding: 10px 1rem;
+        background-color: $Light_Yellow;
+      }
+      .si_recipt_body{
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        select{
+          height: 2rem;
+          width: 34rem;
+        }
+      }
+    }
+    .btn{
+      margin-top: 20px;
+    }
+  }
+
+}
+
