@@ -6,7 +6,7 @@
         <h3>訂單管理</h3>
         <!-- <h3>會員管理</h3> -->
         <div class="MmB_searchBar_H">
-          <input class="input" type="text" name="" id="" placeholder="搜尋訂單">
+          <input id="" class="input" type="text" name="" placeholder="搜尋訂單" />
           <i class="fa-solid fa-magnifying-glass"></i>
         </div>
       </div>

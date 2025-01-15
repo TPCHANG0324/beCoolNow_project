@@ -1,0 +1,191 @@
+.backStage_wrapper {
+  .CB_tag_H {
+
+    .CB_titleF_H {
+      width: 10%;
+    }
+
+    .CB_titleM_H {
+      width: 10%;
+    }
+
+    .CB_searchBar_H {
+      margin-right: 40px;
+
+      div {
+        margin: 0;
+        margin-left: 20px;
+
+        input {
+          width: 160px;
+        }
+      }
+    }
+  }
+
+  .wrapper {
+
+    // 討論板 table
+    .CB_TableF_H {
+      width: 75%;
+      height: 100%;
+      table-layout: fixed;
+      border: 1px solid $Gray_1;
+      border-radius: 10px;
+      background-color: $Ivory_white;
+      padding: 24px 28px;
+      @include PC_h6($Gray_1);
+      font-weight: bold;
+
+      .CB_mainFTable_H {
+        width: 100%;
+
+        thead {
+          border-bottom: 1px solid $Gray_1;
+
+          tr {
+
+            .CB_numberF_H {
+              width: 70px;
+              text-align: center;
+              font-weight: bold;
+            }
+
+            .CB_memberIdF_H {
+              padding: 0;
+              width: 100px;
+            }
+
+            .CB_articleF_H {
+              width: 100px;
+            }
+
+            .CB_topicF_H {
+              width: 320px;
+            }
+
+            .CB_editDateF_H {
+              width: 80px;
+            }
+
+            .CB_goTopCheckF_H {
+              width: 80px;
+            }
+          }
+        }
+
+        th,
+        td {
+          // border: 1px solid;
+          padding: 12px 0;
+        }
+
+        tbody {
+          text-align: center;
+
+          .CB_content_H {
+            text-align: left;
+            padding-left: 16px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: wrap;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 1;
+            height: 50px;
+            line-height: 32px;
+          }
+        }
+
+
+
+
+      }
+
+
+
+    }
+
+    // 留言板 table
+    .CB_TableM_H {
+      width: 75%;
+      height: 100%;
+      table-layout: fixed;
+      border: 1px solid $Gray_1;
+      border-radius: 10px;
+      background-color: $Ivory_white;
+      padding: 24px 28px;
+      @include PC_h6($Gray_1);
+      font-weight: bold;
+
+      .CB_mainMTable_H {
+        width: 100%;
+
+        thead {
+          border-bottom: 1px solid $Gray_1;
+
+          tr {
+
+            .CB_numberM_H {
+              width: 70px;
+              text-align: center;
+              font-weight: bold;
+            }
+
+            .CB_memberIdM_H {
+              padding: 0;
+              width: 100px;
+            }
+
+            .CB_contentM_H {
+              width: 320px;
+            }
+
+            .CB_editDateM_H {
+              width: 80px;
+            }
+
+            .CB_report_H {
+              width: 100px;
+            }
+
+            .CB_goOffM_H {
+              width: 80px;
+            }
+          }
+        }
+
+        th,
+        td {
+          // border: 1px solid;
+          padding: 12px 0;
+        }
+
+        tbody {
+          text-align: center;
+
+          .CB_content_H {
+            text-align: left;
+            padding-left: 16px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: wrap;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 1;
+            height: 50px;
+            line-height: 32px;
+          }
+
+          .CB_buttonM_H {
+            @include btn_style($btn_radius_30px, 100%, 28px);
+            // line-height: 100%;
+            padding: 0;
+            font-size: $h6;
+          }
+        }
+      }
+    }
+  }
+
+}

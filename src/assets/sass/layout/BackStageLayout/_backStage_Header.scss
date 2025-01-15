@@ -1,0 +1,32 @@
+.backStage_header {
+  // border: 2px solid red;
+  background-color: $bgc_color;
+  width: 100%;
+  position: static;
+
+  div {
+    display: flex;
+    align-items: center;
+    max-width: $body_layout;
+    margin: 0 auto;
+    padding: 24px;
+
+    h2 {
+      @include PC_h2($Gray_1);
+      font-size: 40px;
+      margin-left: 40px;
+    }
+
+    img {
+      width: 140px;
+    }
+
+    svg {
+      margin-left: auto;
+      cursor: pointer;
+    }
+
+  }
+
+
+}

@@ -6,7 +6,7 @@
         <h3>會員管理</h3>
         <!-- <h3>會員管理</h3> -->
         <div class="MmB_searchBar_H">
-          <input class="input" type="text" name="" id="" placeholder="搜尋會員編號">
+          <input id="" class="input" type="text" name="" placeholder="搜尋會員編號" />
           <i class="fa-solid fa-magnifying-glass"></i>
         </div>
       </div>
@@ -76,12 +76,62 @@
       <BackStagePaginator></BackStagePaginator>
     </div>
   </div>
+  <BackStageSmallPopup class="MmB_EditView_H">
+    <span>
+      <p>編輯與查看</p>
+    </span>
+    <section>
+      <article>
+        <div>
+          <p>會員編號:&nbsp;</p>
+          <p>113122101</p>
+        </div>
+        <div>
+          <p>帳號:&nbsp;</p>
+          <p>tibame@gmail.com</p>
+        </div>
+        <div>
+          <p>姓名:&nbsp;</p>
+          <p>黃小吉</p>
+        </div>
+        <div>
+          <p>地址:&nbsp;</p>
+          <p>臺北市中山區南京東路三段219號5樓</p>
+        </div>
+      </article>
+
+      <article>
+        <div>
+          <p>性別:&nbsp;</p>
+          <p>女</p>
+        </div>
+        <div>
+          <p>手機:&nbsp;</p>
+          <p>0912345678</p>
+        </div>
+        <div>
+          <p>帳號狀態:&nbsp;</p>
+          <select id="" name="">
+            <option value="normal">正常</option>
+            <option value="suspend">停權</option>
+          </select>
+        </div>
+        <div>
+          <p>創建時間:&nbsp;</p>
+          <p>2025-01-12</p>
+        </div>
+      </article>
+    </section>
+    <div>
+      <button>取消</button>
+      <button>儲存</button>
+    </div>
+  </BackStageSmallPopup>
 </template>
 
 <script>
 import BackStageSidebar from '@/components/items/BackStageItems/BackStageSidebar.vue';
 import backStagePaginator from '@/components/items/BackStageItems/BackStagePaginator.vue';
 import BackStageHeader from '@/components/layout/BackStageLayout/BackStageHeader.vue';
+import BackStageSmallPopup from '@/components/layout/BackStageLayout/BackStageSmallPopup.vue';
 </script>
-
-<style lang="scss" scoped></style>

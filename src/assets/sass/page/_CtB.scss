@@ -1,0 +1,129 @@
+.IcB_table_H {
+  h5 {
+    @include PC_h5($Gray_1);
+    font-weight: bold;
+  }
+
+  section {
+    // border: 2px solid red;
+    margin-top: 24px;
+
+    div {
+      justify-content: space-between;
+
+      figure {
+        width: 340px;
+        margin-bottom: 40px;
+
+        div {
+          .cityUpload {
+            border: 1px solid $Gray_3;
+            border-radius: 0;
+            width: 210px;
+            margin-left: 16px;
+            height: 30px;
+            color: $Gray_3;
+
+            &::-webkit-file-upload-button {
+              color: $Ivory_white;
+              background: $Green_1;
+              border: 1px solid $Gray_3;
+              padding: 5px 10px;
+              cursor: pointer;
+            }
+          }
+        }
+
+        .preview {
+          width: 236px;
+          height: 120px;
+          border: 1.5px solid $Gray_3;
+          text-align: center;
+          display: block;
+          margin-left: 64px;
+
+          p {
+            line-height: 120px;
+          }
+        }
+
+        button {
+          width: 28%;
+          height: 44px;
+          margin: 0 auto;
+          display: block;
+          @include PC_h6($Gray_1);
+          padding: 0;
+          line-height: 100%;
+          background-color: $Green_1;
+          color: $Ivory_white;
+
+          &:hover {
+            background-color: darken($Green_1, 10%);
+            color: $Ivory_white;
+          }
+        }
+
+      }
+
+    }
+
+    figure {
+      width: 340px;
+      margin-bottom: 40px;
+      // border: 1px solid brown;
+
+      .cityUpload {
+        border: 1px solid $Gray_3;
+        border-radius: 0;
+        width: 210px;
+        margin-left: 36px;
+        height: 30px;
+        color: $Gray_3;
+        cursor: pointer;
+        font-weight: bold;
+
+        &::-webkit-file-upload-button {
+          color: $Ivory_white;
+          background: $Green_1;
+          border: 1px solid $Gray_3;
+          padding: 5px 10px;
+          cursor: pointer;
+        }
+
+      }
+
+      .preview {
+        width: 236px;
+        height: 120px;
+        border: 1.5px solid $Gray_3;
+        text-align: center;
+        display: block;
+        margin-left: 64px;
+        margin-top: 20px;
+
+        p {
+          line-height: 120px;
+        }
+      }
+
+      button {
+        width: 28%;
+        height: 44px;
+        margin: 0 auto;
+        display: block;
+        @include PC_h6($Gray_1);
+        padding: 0;
+        line-height: 100%;
+        background-color: $Green_1;
+        color: $Ivory_white;
+
+        &:hover {
+          background-color: darken($Green_1, 10%);
+          color: $Ivory_white;
+        }
+      }
+    }
+
+  }
+}
