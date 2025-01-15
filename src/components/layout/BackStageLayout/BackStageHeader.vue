@@ -3,7 +3,7 @@
 <template>
   <header class="backStage_header">
     <div>
-      <img src="../../../assets/images/logo_color1.svg" alt="網站標誌" />
+      <a href="#"><img src="../../../assets/images/logo_color1.svg" alt="網站標誌" /></a>
       <h2>後臺管理系統</h2>
       <svg xmlns="http://www.w3.org/2000/svg" width="54" height="50" viewBox="0 0 54 50" fill="none">
         <path

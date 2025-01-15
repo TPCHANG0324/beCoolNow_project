@@ -17,18 +17,23 @@
 @import 'layout/footer';
 @import 'layout/nav';
 @import 'layout/popup';
+@import 'layout/BackStageLayout/backStage_Header';
+@import 'layout/BackStageLayout/backStage_Popup';
 
-@import 'page/_Ic.scss';
 
 // page
 @import 'page/index';
 @import 'page/Ac';
+@import 'page/Ic.scss';
 @import 'page/Fp';
 @import 'page/Shop';
 @import 'page/Sp_product';
+@import 'page/shop_cart';
 @import 'page/Fb';
 @import 'page/IcB';
 @import 'page/MmB';
+@import 'page/CB';
+@import 'page/CtB';
 @import'page/loginpage';
 @import'page/pay1';
 @import'page/pay2';

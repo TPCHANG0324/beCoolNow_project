@@ -1,127 +1,108 @@
 <template>
-  <!-- 社群中心，縮寫Fb - 功能 - 代號X -->
+  <!-- 單一文章頁面，縮寫Fb - 功能 - 代號X -->
   <main>
     <div class="Fb-X">
       <div class="Fb-wrapper-X">
         <!-- 文章 -->
         <div class="Fb-post-X">
           <!-- 文章分類 -->
-          <ul class="Fb-post-category-X">
-            <li class="Fb-post-category-X-active">全部文章</li>
-            <li>氣候科學</li>
-            <li>生態危機</li>
-            <li>綠色生活</li>
-            <li>政策國際</li>
-            <li class="Fb-post-write-X"><a href="#">寫文章</a></li>
-          </ul>
-          <!-- 文章區 -->
-          <div class="Fb-post-article-X">
-            <!-- 置頂區：放廣告或站上的精華文章 -->
-            <div class="Fb-post-article-top-X">
-              <div class="Fb-post-article-banner-X"></div>
+          <div class="Fb-post-category-container-X">
+            <ul class="Fb-post-category-X">
+              <li class="Fb-post-category-X-active">全部文章</li>
+              <li>氣候科學</li>
+              <li>生態危機</li>
+              <li>綠色生活</li>
+              <li>政策國際</li>
+            </ul>
+            <div class="Fb-post-write-X"><a href="#">寫文章</a></div>
+          </div>
+          <!-- 單一文章區 -->
+          <div class="Fb-Atricle-X">
+            <div class="Fb-Atricle-title-X">10 個愛護地球的舉動，讓你親身響應環保理念！</div>
+            <div class="Fb-Atricle-info-X">
+              <img src="../assets/images/Fb02.jpg" alt="" />
+              <span>派大星教授加博士先生</span>
+              <span>2024-12-19 17:00</span>
+              <i class="bi bi-hand-thumbs-up">100</i>
+              <!-- <i class="bi bi-hand-thumbs-up-fill">100</i> -->
+              <i class="bi bi-share"></i>
             </div>
-            <!-- po 文顯示區 -->
-            <section>
-              <article>
-                <div class="Fb-post-article-left-X">
-                  <div class="Fb-post-article-left-C-T-X">
-                    <span>氣候科學</span>&nbsp;‧&nbsp;<span>2024-12-25</span>
-                  </div>
-                  <h6 class="Fb-post-article-left-title-X">日本異常高溫 預估2024年均溫將續創統計史新高</h6>
-                  <p>
-                    （中央社東京25日綜合外電報導）日本氣象廳今天公布天氣總結指出，日本今年1月到11月的平均氣溫較1991年到2020年平均氣溫升高攝氏1.64度，比2023年的升高1.29度還多，預料將連續兩年創統計史新高紀錄。
-                  </p>
-                  <div class="Fb-post-react-X">
-                    <i class="bi bi-hand-thumbs-up">100</i>
-                    <i class="bi bi-chat">100</i>
-                    <i class="bi bi-share"></i>
-                  </div>
-                </div>
-                <div class="Fb-post-article-right-X">
-                  <img src="../assets/images/Fb10.jpg" alt="" />
-                </div>
-              </article>
+            <p>
+              環保觀念深植國人心中，為了我們愛護的自然資源與地球環境，除了做好資源回收外，還有哪些可以採取的環保行動呢？本篇整理了
+              10 個日常生活中常見的環保例子，讓大家可以透過這些案例，學習如何更加善待我們的地球。
 
-              <article>
-                <div class="Fb-post-article-left-X">
-                  <div class="Fb-post-article-left-C-T-X">
-                    <span>政策國際</span>&nbsp;‧&nbsp;<span>2024-12-25</span>
-                  </div>
-                  <h6 class="Fb-post-article-left-title-X">調查：助低收者因應極端氣候 8成6支持政府釋資源</h6>
-                  <p>
-                    台大風險中心舉辦「2024台灣公正轉型調查發布」記者會，針對淨零排放、氣候變遷雙主軸，對全國18歲以上民眾，在17日到25日使用室內電話、行動電話2種電話訪問調查，有效樣本1102份，以95%信賴度估計，抽樣誤差在正、負2.95個百分點之內。
-                  </p>
-                  <div class="Fb-post-react-X">
-                    <i class="bi bi-hand-thumbs-up">100</i>
-                    <i class="bi bi-chat">100</i>
-                    <i class="bi bi-share"></i>
-                  </div>
-                </div>
-                <!-- <div class="Fb-post-article-right-X">
-                                <img src="../assets/images/Fb10.jpg" alt="">
-                            </div> -->
-              </article>
+              <strong>環保活動例子 1：外出搭乘綠色載具</strong>
+              自駕汽機車所造成廢氣排放，是空氣污染的主要來源之一。您不妨嘗試騎乘單車搭配大眾運輸工具，降低由交通工具製造的廢氣及碳排放。
 
-              <article>
-                <div class="Fb-post-article-left-X">
-                  <div class="Fb-post-article-left-C-T-X">
-                    <span>生態危機</span>&nbsp;‧&nbsp;<span>2024-12-25</span>
-                  </div>
-                  <h6 class="Fb-post-article-left-title-X">北極氣候暖化 耶誕老人故鄉不下雪引擔憂</h6>
-                  <p>
-                    （中央社芬蘭羅文尼米26日綜合外電報導）隨著耶誕節的腳步日漸接近，耶誕老人的工作進入緊鑼密鼓的忙碌階段。但是氣候暖化導致他位在北極圈的老家下雪量不足，就連耶誕老人都十分擔心。
-                  </p>
-                  <div class="Fb-post-react-X">
-                    <i class="bi bi-hand-thumbs-up">100</i>
-                    <i class="bi bi-chat">100</i>
-                    <i class="bi bi-share"></i>
-                  </div>
-                </div>
-                <div class="Fb-post-article-right-X">
-                  <img src="../assets/images/Fb11.jpg" alt="" />
-                </div>
-              </article>
+              <strong>環保活動例子 2：確實做好垃圾分類</strong>
+              家中的廢棄物，可以確實依照「一般垃圾」、「資源回收物」、「廚餘」等類別進行分類，不僅能減少垃圾處理場的負荷量，經由回收的資源及廚餘都能再利用，投入產品生產及農業堆肥等領域。
 
-              <article>
-                <div class="Fb-post-article-left-X">
-                  <div class="Fb-post-article-left-C-T-X">
-                    <span>政策國際</span>&nbsp;‧&nbsp;<span>2024-12-25</span>
-                  </div>
-                  <h6 class="Fb-post-article-left-title-X">COP29終於達成氣候融資協議 峰會重點一次看</h6>
-                  <p>
-                    （中央社巴庫24日綜合外電報導）亞塞拜然首都巴庫舉行的聯合國氣候變化綱要公約第29次締約方會議（COP29）歷經2週的緊張協商，最終在期限過後2天達成氣候融資協議。路透社整理本次峰會的重點如下：
-                  </p>
-                  <div class="Fb-post-react-X">
-                    <i class="bi bi-hand-thumbs-up">100</i>
-                    <i class="bi bi-chat">100</i>
-                    <i class="bi bi-share"></i>
-                  </div>
-                </div>
-                <div class="Fb-post-article-right-X">
-                  <img src="../assets/images/Fb04.jpg" alt="" />
-                </div>
-              </article>
+              <strong>環保活動例子 3：自備環保餐具、環保袋</strong>
+            </p>
+            <img src="../assets/images/Fb03.jpg" alt="" />
+            <p>自備環保餐具、環保杯、環保袋，在外出用餐、消費時重複利用，是最直接能減少塑膠用品使用量的方式。</p>
+            <!-- <div class="Fb-Atricle-quote-X">
 
-              <article>
-                <div class="Fb-post-article-left-X">
-                  <div class="Fb-post-article-left-C-T-X">
-                    <span>生態危機</span>&nbsp;‧&nbsp;<span>2024-12-25</span>
-                  </div>
-                  <h6 class="Fb-post-article-left-title-X">太平洋高壓西進擴大 台灣面臨極端高溫及乾旱</h6>
-                  <p>
-                    （中央社記者張雄風台北28日電）氣象署今天表示，統計過去70年，太平洋高壓系統逐漸西進擴大，近10年甚至已經涵蓋到中國華南沿岸，足見全球暖化的影響；台灣未來將面臨更為頻繁的極端高溫，及乾旱事件所帶來的氣候風險。
-                  </p>
-                  <div class="Fb-post-react-X">
-                    <i class="bi bi-hand-thumbs-up">100</i>
-                    <i class="bi bi-chat">100</i>
-                    <i class="bi bi-share"></i>
-                  </div>
+                        </div> -->
+          </div>
+          <!-- 留言區 -->
+          <div class="Fb-message-X">
+            <div class="Fb-message-select-X">
+              <span>全部留言</span>
+              <div class="Fb-message-selectBox-X">
+                <select id="" name="">
+                  <option value="最新" selected>最新</option>
+                  <option value="最舊">最舊</option>
+                </select>
+              </div>
+            </div>
+            <!-- 查看更多 -->
+            <div class="Fb-message-section-X">
+              <div class="Fb-message-section-seeMore-X">
+                <i class="bi bi-chat-left-dots"></i>
+                <p>查看更多先前的留言</p>
+              </div>
+            </div>
+            <!-- 其他用戶的留言 -->
+            <div class="Fb-message-section-X">
+              <img src="../assets/images/Fb06.jpg" alt="" />
+              <div class="Fb-message-area-X">
+                <div class="Fb-message-self-X">
+                  <span class="Fb-message-self-name-X">骯髒丹</span>
+                  <span class="Fb-message-self-time-X">2024-12-19&nbsp;&nbsp;&nbsp;17:10</span>
                 </div>
-                <div class="Fb-post-article-right-X">
-                  <img src="../assets/images/Fb14.jpg" alt="" />
+                <div class="Fb-message-content-other-X">
+                  <span>
+                    環保行動多樣，從日常小事做起，讓我們一起守護地球！環保行動多樣，從日常小事做起，讓我們一起守護地球！
+                  </span>
+                  <span>檢舉</span>
                 </div>
-              </article>
-            </section>
+              </div>
+            </div>
+            <div class="Fb-message-section-X">
+              <img src="../assets/images/Fb07.jpg" alt="" />
+              <div class="Fb-message-area-X">
+                <div class="Fb-message-self-X">
+                  <span class="Fb-message-self-name-X">蟹堡秘方</span>
+                  <span class="Fb-message-self-time-X">2024-12-19&nbsp;&nbsp;&nbsp;17:10</span>
+                </div>
+                <div class="Fb-message-content-other-X">
+                  <span>這篇文章很棒！提醒我們環保從生活中的小事做起，實用具體的建議讓人更容易採取行動！</span>
+                  <span>檢舉</span>
+                </div>
+              </div>
+            </div>
+            <!-- 自己的留言區 -->
+            <div class="Fb-message-section-X">
+              <img src="../assets/images/Fb05.jpg" alt="" />
+              <div class="Fb-message-area-X">
+                <div class="Fb-message-self-X">尖頭拉瑞</div>
+                <div class="Fb-message-content-X">
+                  <textarea id="" name="" placeholder="請輸入您的留言"></textarea>
+                </div>
+                <button>送出留言</button>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -224,3 +205,5 @@
 <script>
 export default {};
 </script>
+
+<style lang="scss" scoped></style>

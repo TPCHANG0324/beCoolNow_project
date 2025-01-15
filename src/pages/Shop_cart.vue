@@ -73,7 +73,7 @@
                     <div class="Sp-cart-addon-wrapper-X">
                         <div class="Sp-cart-addon-item-X">
                             <a href="#" target="_blank" class="Sp-cart-addon-item-img">
-                                <img src="./image/Sp08-2.jpg" alt="">
+                                <img src="../assets/images/Sp08-2.jpg" alt="">
                             </a>
                             <div class="Sp-cart-addon-item-content">
                                 <div class="Sp-cart-addon-item-info">
@@ -85,7 +85,7 @@
                         </div>
                         <div class="Sp-cart-addon-item-X">
                             <a href="#" target="_blank" class="Sp-cart-addon-item-img">
-                                <img src="./image/Sp09-2.jpg" alt="">
+                                <img src="../assets/images/Sp09-2.jpg" alt="">
                             </a>
                             <div class="Sp-cart-addon-item-content">
                                 <div class="Sp-cart-addon-item-info">
@@ -97,7 +97,7 @@
                         </div>
                         <div class="Sp-cart-addon-item-X">
                             <a href="#" target="_blank" class="Sp-cart-addon-item-img">
-                                <img src="./image/Sp04.jpg" alt="">
+                                <img src="../assets/images/Sp04.jpg" alt="">
                             </a>
                             <div class="Sp-cart-addon-item-content">
                                 <div class="Sp-cart-addon-item-info">
@@ -109,7 +109,7 @@
                         </div>
                         <div class="Sp-cart-addon-item-X">
                             <a href="#" target="_blank" class="Sp-cart-addon-item-img">
-                                <img src="./image/Sp11-2.jpg" alt="">
+                                <img src="../assets/images/Sp11-2.jpg" alt="">
                             </a>
                             <div class="Sp-cart-addon-item-content">
                                 <div class="Sp-cart-addon-item-info">
@@ -177,7 +177,7 @@
                 <!-- 出貨提醒 -->
                 <section class="Sp-shopping-reminder-X">
                     <div class="Sp-shopping-reminder-header">出貨提醒</div>
-                    <div class="Sp-shopping-reminder-body">感謝您支持我們的環保商品！ 以下是您的訂單與出貨注意事項：
+                    <div class="Sp-shopping-reminder-body">感謝您支持我們的環保商品！以下是您的訂單與出貨注意事項：
                         📦 出貨時間：
                         涼城即時環保市集皆為客製化生產，製作期需2-3週。
                         訂單成立後，我們將立即安排生產。若提前完成品檢，我們會儘速出貨。

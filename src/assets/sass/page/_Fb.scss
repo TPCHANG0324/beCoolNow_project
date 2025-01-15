@@ -1,50 +1,62 @@
 /* ----- 社群中心 ----- */
-main{  //因為不知道要不要拿 main 當最外框+設置底色，所以新增了一個 Fb-X
+main {
+    //因為不知道要不要拿 main 當最外框+設置底色，所以新增了一個 Fb-X
     width: 100%;
 }
-.Fb-X{
+
+.Fb-X {
     width: 100%;
     background-color: $Light_Green;
-    .Fb-wrapper-X{
+
+    .Fb-wrapper-X {
         max-width: 1200px;
         margin: 0 auto;
         display: flex;
         gap: 3%;
+
         /* 文章 */
-        .Fb-post-X{
+        .Fb-post-X {
             width: 70%;
             flex-grow: 1;
             flex-shrink: 0;
-            .Fb-post-category-container-X{
+
+            .Fb-post-category-container-X {
                 display: flex;
                 border-bottom: 1px solid $Green_2;
                 align-items: center;
                 margin: 20px 0;
                 padding: 10px;
                 justify-content: space-between;
-                .Fb-post-category-X{
+
+                .Fb-post-category-X {
                     display: flex;
                     color: $Green_2;
                     align-items: center;
                     box-sizing: border-box;
-                    li{
+
+                    li {
                         padding: 16px;
                         cursor: pointer;
-                        &:nth-of-type(1){
+
+                        &:nth-of-type(1) {
                             padding-left: 0;
                         }
-                        &:last-child{
+
+                        &:last-child {
                             padding-right: 0;
                         }
                     }
-                    li.Fb-post-category-X-active{
+
+                    li.Fb-post-category-X-active {
                         font-weight: bold;
                     }
-                    
+
                 }
-                .Fb-post-write-X{
+
+                .Fb-post-write-X {
                     padding: 0;
-                    a{
+
+                    a {
                         display: block;
                         padding: 12px 36px;
                         background-color: $Yellow_1;
@@ -53,11 +65,12 @@ main{  //因為不知道要不要拿 main 當最外框+設置底色，所以新�
                     }
                 }
             }
-            
-            .Fb-post-article-X{
-                .Fb-post-article-top-X{
+
+            .Fb-post-article-X {
+                .Fb-post-article-top-X {
                     width: 100%;
-                    .Fb-post-article-banner-X{
+
+                    .Fb-post-article-banner-X {
                         width: 100%;
                         margin-bottom: 32px;
                         height: 248px;
@@ -66,8 +79,9 @@ main{  //因為不知道要不要拿 main 當最外框+設置底色，所以新�
                         background-repeat: no-repeat;
                     }
                 }
-                section{
-                    article{
+
+                section {
+                    article {
                         display: flex;
                         gap: 16px;
                         cursor: pointer;
@@ -77,18 +91,21 @@ main{  //因為不知道要不要拿 main 當最外框+設置底色，所以新�
                         box-sizing: border-box;
                         padding: 1rem;
                         margin-bottom: 20px;
+
                         // &:nth-child(even){
                         //     background-color: #fff;
                         // }
-                        .Fb-post-article-left-X{
+                        .Fb-post-article-left-X {
                             flex-basis: 80%;
                             flex-grow: 1;
                             flex-shrink: 0;
-                            .Fb-post-article-left-C-T-X{
+
+                            .Fb-post-article-left-C-T-X {
                                 @include PC_h6($Green_2);
                                 margin-bottom: 14px;
                             }
-                            .Fb-post-article-left-title-X{
+
+                            .Fb-post-article-left-title-X {
                                 @include PC_h5($Green_2);
                                 font-weight: 500;
                                 margin-right: 20px;
@@ -99,7 +116,8 @@ main{  //因為不知道要不要拿 main 當最外框+設置底色，所以新�
                                 -webkit-line-clamp: 1;
                                 text-overflow: ellipsis;
                             }
-                            p{
+
+                            p {
                                 line-height: 1.5;
                                 text-align: justify;
                                 margin-top: 10px;
@@ -110,17 +128,20 @@ main{  //因為不知道要不要拿 main 當最外框+設置底色，所以新�
                                 -webkit-line-clamp: 2;
                                 text-overflow: ellipsis;
                             }
-                            .Fb-post-react-X{
-                                i:not(:last-child){
+
+                            .Fb-post-react-X {
+                                i:not(:last-child) {
                                     margin-right: 12px;
                                 }
                             }
                         }
-                        .Fb-post-article-right-X{
+
+                        .Fb-post-article-right-X {
                             flex-grow: 0;
                             flex-shrink: 1;
                             flex-basis: 20%;
-                            img{
+
+                            img {
                                 width: 100%;
                                 height: 100%;
                                 object-fit: cover;
@@ -130,36 +151,43 @@ main{  //因為不知道要不要拿 main 當最外框+設置底色，所以新�
                 }
             }
         }
-        .Fb-news-X{
+
+        .Fb-news-X {
             width: 25%;
             flex-grow: 1;
             flex-shrink: 0;
-            .Fb-news-header-X{
+
+            .Fb-news-header-X {
                 padding: 1rem;
                 margin: 20px 0;
                 background-color: $Green_1;
                 color: $Ivory_white;
             }
-            .Fb-news-body-X{
-                article{
+
+            .Fb-news-body-X {
+                article {
                     margin-bottom: 20px;
                     display: flex;
                     gap: 5%;
                     color: $Green_2;
                     cursor: pointer;
-                    img{
+
+                    img {
                         width: 40%;
                         height: 40%;
                         aspect-ratio: 1;
                         object-fit: cover;
                     }
-                    .Fb-news-body-container-X{
+
+                    .Fb-news-body-container-X {
                         flex-grow: 1;
                         width: 55%;
-                        .Fb-news-body-container-time-X{
+
+                        .Fb-news-body-container-time-X {
                             margin-bottom: 4px;
                         }
-                        .Fb-news-body-container-title-X{
+
+                        .Fb-news-body-container-title-X {
                             @include PC_h5($Green_2);
                             font-weight: 500;
                             line-height: 1.2;
@@ -170,7 +198,8 @@ main{  //因為不知道要不要拿 main 當最外框+設置底色，所以新�
                             text-overflow: ellipsis;
                             margin-bottom: 10px;
                         }
-                        .Fb-news-body-container-content-X{
+
+                        .Fb-news-body-container-content-X {
                             line-height: 1.2;
                             display: -webkit-box;
                             -webkit-box-orient: vertical;
@@ -193,6 +222,7 @@ main{  //因為不知道要不要拿 main 當最外框+設置底色，所以新�
     color: $Green_1;
     background-color: $Ivory_white;
     padding: 2rem;
+
     .Fb-Atricle-title-X {
         font-size: PC_h3($Green_1);
         font-weight: 700;
@@ -361,7 +391,8 @@ main{  //因為不知道要不要拿 main 當最外框+設置底色，所以新�
                     width: 100%;
                     height: 100px;
                     padding: 10px;
-                    &::placeholder{
+
+                    &::placeholder {
                         color: rgba(0, 0, 0, 0.3);
                     }
                 }
@@ -408,8 +439,10 @@ main{  //因為不知道要不要拿 main 當最外框+設置底色，所以新�
     width: 100%;
     // height: 800px;
     position: relative;
+
     // filter: blur(3px);
     .FbW-overlay-X {
+
         // width: 100%;
         // height: 100%;
         // position: absolute;
@@ -422,32 +455,37 @@ main{  //因為不知道要不要拿 main 當最外框+設置底色，所以新�
             max-width: 792px;
             margin: 0 auto;
             color: $Ivory_white;
+
             // background-color: skyblue;
             /* 標題 */
-            .FbW-title-X{
-                .FbW-postTilte{
+            .FbW-title-X {
+                .FbW-postTilte {
                     position: relative;
                     display: flex;
                     align-items: center;
                     box-sizing: border-box;
-                    label{
+
+                    label {
                         display: flex;
                         align-items: center;
+
                         // text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.25);
                         // -webkit-text-stroke-width: 0.5;
                         // -webkit-text-stroke-color: var(--Primary-Colors-5b774a, #5B774A);
-                        span{
-                            &:first-child{
+                        span {
+                            &:first-child {
                                 font-size: 32px;
                                 font-weight: 500;
                             }
-                            &:last-child{
+
+                            &:last-child {
                                 font-size: 14px;
                                 font-weight: normal;
                                 margin-left: 20px;
-                            } 
-                        } 
+                            }
+                        }
                     }
+
                     select {
                         margin-left: auto;
                         font-size: 14px;
@@ -465,14 +503,14 @@ main{  //因為不知道要不要拿 main 當最外框+設置底色，所以新�
                         -moz-appearance: none;
                         /* 隱藏箭頭 */
                         appearance: none;
-        
+
                         /* 隱藏箭頭 */
                         option {
                             background-color: #fff;
                             color: $Green_1;
                         }
                     }
-        
+
                     &::after {
                         content: '\25BC';
                         /* 使用不同的箭頭符號 */
@@ -484,10 +522,11 @@ main{  //因為不知道要不要拿 main 當最外框+設置底色，所以新�
                         pointer-events: none;
                         color: white;
                         font-size: 12px;
-        
+
                     }
                 }
-                input{
+
+                input {
                     display: block;
                     outline: none;
                     color: $Green_1;
@@ -499,29 +538,34 @@ main{  //因為不知道要不要拿 main 當最外框+設置底色，所以新�
                     height: 40px;
                     width: 100%;
                     background-color: $Ivory_white;
-                    &::placeholder{
+
+                    &::placeholder {
                         color: rgba(0, 0, 0, 0.3);
                     }
                 }
             }
+
             /* 內文 */
-            .FbW-content-X{
-                label{
+            .FbW-content-X {
+                label {
                     display: flex;
                     align-items: center;
-                    span{
-                        &:first-child{
+
+                    span {
+                        &:first-child {
                             font-size: 32px;
                             font-weight: 500;
                         }
-                        &:last-child{
+
+                        &:last-child {
                             font-size: 14px;
                             font-weight: normal;
                             margin-left: 20px;
                         }
                     }
                 }
-                .FbW-translate-X{
+
+                .FbW-translate-X {
                     border: 2px solid $Green_1;
                     border-radius: 5px 5px 0 0;
                     margin-top: 16px;
@@ -532,13 +576,15 @@ main{  //因為不知道要不要拿 main 當最外框+設置底色，所以新�
                     display: flex;
                     align-items: center;
                     gap: 24px;
-                    a{
+
+                    a {
                         cursor: pointer;
                         font-size: 20px;
                         color: rgba(0, 0, 0, 0.3);
                     }
                 }
-                textarea{
+
+                textarea {
                     outline: none;
                     color: $Green_1;
                     border: 2px solid $Green_1;
@@ -549,13 +595,15 @@ main{  //因為不知道要不要拿 main 當最外框+設置底色，所以新�
                     height: 200px;
                     width: 100%;
                     background-color: $Ivory_white;
-                    &::placeholder{
+
+                    &::placeholder {
                         color: rgba(0, 0, 0, 0.3);
                     }
                 }
             }
+
             /* 預覽圖 */
-            .FbW-picture-X{
+            .FbW-picture-X {
                 padding: 1rem;
                 border: 2px solid $Green_1;
                 border-radius: 5px;
@@ -563,27 +611,32 @@ main{  //因為不知道要不要拿 main 當最外框+設置底色，所以新�
                 width: 100%;
                 background-color: $Ivory_white;
                 box-sizing: border-box;
-                div{
+
+                div {
                     display: flex;
                     align-items: center;
-                    input#FbW-picChoose-X{
+
+                    input#FbW-picChoose-X {
                         transform: scale(1.5);
                         cursor: pointer;
                     }
-                    label{
+
+                    label {
                         margin-left: 20px;
                         color: $Green_1;
                         font-size: 14px;
                         cursor: pointer;
                     }
                 }
-                .FbW-picture-slider-X{
+
+                .FbW-picture-slider-X {
                     border: 1px solid $Green_1;
                     width: 200px;
                     height: 120px;
                     margin: 1.5rem 0;
                     overflow: hidden;
-                    img{
+
+                    img {
                         width: 100%;
                         height: 100%;
                         object-fit: cover;
@@ -591,7 +644,8 @@ main{  //因為不知道要不要拿 main 當最外框+設置底色，所以新�
                 }
             }
         }
-        button{
+
+        button {
             display: block;
             margin: 10px auto;
             padding: 10px 28px;

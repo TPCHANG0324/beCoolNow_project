@@ -4,7 +4,6 @@
 
   <!-- 環保市集_商品頁面_商品購買 -->
   <section class="Sp_productChoice_H">
-
     <!-- 麵包屑導航 -->
     <nav class="breadCrumb">
       <ol>
@@ -18,12 +17,12 @@
     <section class="Sp_productChoice_top_H">
       <figure>
         <ul>
-          <li><img src="../assets/images/Sp15.jpg" alt=""></li>
-          <li><img src="../assets/images/Sp16.jpg" alt=""></li>
-          <li><img src="../assets/images/Sp17.jpg" alt=""></li>
-          <li><img src="../assets/images/Sp18.jpg" alt=""></li>
+          <li><img src="../assets/images/Sp15.jpg" alt="" /></li>
+          <li><img src="../assets/images/Sp16.jpg" alt="" /></li>
+          <li><img src="../assets/images/Sp17.jpg" alt="" /></li>
+          <li><img src="../assets/images/Sp18.jpg" alt="" /></li>
         </ul>
-        <div><img src="../assets/images/Sp15.jpg" alt=""></div>
+        <div><img src="../assets/images/Sp15.jpg" alt="" /></div>
       </figure>
 
       <aside class="Sp_productChoice_info_H">
@@ -38,7 +37,6 @@
             <li>輕巧好攜帶</li>
             <li>質感必備</li>
           </ul>
-
         </section>
 
         <section>
@@ -52,18 +50,14 @@
           </div>
 
           <div class="Sp_productChoice_inputGroup_H">
-            <input type="text" class="input">
+            <input type="text" class="input" />
           </div>
 
           <div class="Sp_productChoice_buyNow_H">
             <button type="button">加入購物車</button>
             <button type="button">立即購買</button>
           </div>
-
         </section>
-
-
-
       </aside>
     </section>
   </section>
@@ -72,27 +66,29 @@
   <section class="Sp_productChoice_details_H">
     <article class="Sp_productChoice_detailsBlock1_H">
       <h3>商品詳情</h3>
-      <p>這款再生材質環保馬克杯，選用回收寶特瓶 (rPET)
-        及天然纖維製成，耐用且輕盈，適合日常使用。杯身設計簡約時尚，防漏耐熱，無毒無味，符合食品級安全標準。每使用一次，即為地球減少一份負擔，讓你的飲品更添環保意識，喝出綠色生活態度。</p>
+      <p>
+        這款再生材質環保馬克杯，選用回收寶特瓶 (rPET)
+        及天然纖維製成，耐用且輕盈，適合日常使用。杯身設計簡約時尚，防漏耐熱，無毒無味，符合食品級安全標準。每使用一次，即為地球減少一份負擔，讓你的飲品更添環保意識，喝出綠色生活態度。
+      </p>
     </article>
     <figure>
-      <img src="../assets/images/Sp20.jpg" alt="">
+      <img src="../assets/images/Sp20.jpg" alt="" />
     </figure>
 
     <article class="Sp_productChoice_detailsBlock2_H">
-      <img src="../assets/images/Sp21.jpg" alt="">
+      <img src="../assets/images/Sp21.jpg" alt="" />
       <div>
         <h3>規格</h3>
         <p>成份：回收寶特瓶(rPET)及天然纖維製成<br />產地：台灣</p>
       </div>
     </article>
     <figure>
-      <img src="../assets/images/Sp22.jpg" alt="">
+      <img src="../assets/images/Sp22.jpg" alt="" />
     </figure>
     <article class="Sp_productChoice_detailsBlock3_H">
-      <img src="../assets/images/Sp23.jpg" alt="">
+      <img src="../assets/images/Sp23.jpg" alt="" />
       <div>
-        <p>常見尺寸(容量): </p>
+        <p>常見尺寸(容量):</p>
         <ol>
           <li>小型: 200ml (7 oz)</li>
           <li>中型: 350ml (12 oz)</li>
@@ -105,41 +101,39 @@
 
   <!-- 環保市集_商品頁面_相關商品 -->
   <section class="Sp_productChoice_related_H">
-
     <h3>相關商品</h3>
     <ol>
       <li>
         <a href="">
-          <img src="../assets/images/Sp04.jpg" alt="">
+          <img src="../assets/images/Sp04.jpg" alt="" />
           <p>環保吸管3</p>
         </a>
       </li>
       <li>
         <a href="">
-          <img src="../assets/images/Sp11.jpg" alt="">
+          <img src="../assets/images/Sp11.jpg" alt="" />
           <p>環保筷子1</p>
         </a>
       </li>
       <li>
         <a href="">
-          <img src="../assets/images/Sp09.jpg" alt="">
+          <img src="../assets/images/Sp09.jpg" alt="" />
           <p>環保杯子2</p>
         </a>
       </li>
       <li>
         <a href="">
-          <img src="../assets/images/Sp06.jpg" alt="">
+          <img src="../assets/images/Sp06.jpg" alt="" />
           <p>環保袋子2</p>
         </a>
       </li>
       <li>
         <a href="">
-          <img src="../assets/images/Sp08.jpg" alt="">
+          <img src="../assets/images/Sp08.jpg" alt="" />
           <p>環保杯子1</p>
         </a>
       </li>
     </ol>
-
   </section>
 
   <!-- 環保市集_商品頁面_頁尾 -->
@@ -147,7 +141,5 @@
 </template>
 
 <script>
-export default {
-
-}
+export default {};
 </script>

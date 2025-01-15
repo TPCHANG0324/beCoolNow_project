@@ -1,0 +1,470 @@
+/* ----- 環保市集 - 購物車 ----- */
+.Sp-X {
+  width: 100%;
+  background-color: $Light_Green;
+  color: $Green_1;
+
+  .Sp-wrapper-X {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    box-sizing: border-box;
+
+    /* 流程顯示 */
+    .Sp-checkout-nav-X {
+      text-align: center;
+      margin-top: 30px;
+
+      /* 每一個圓圈 */
+      .Sp-step-X {
+        display: inline-block;
+        vertical-align: top;
+        width: 240px;
+        max-width: 33%;
+        margin-left: -2px;
+        margin-right: -2px;
+        color: black;
+
+        &.active .Sp-badge-X::after {
+          background-color: $Yellow_1;
+        }
+
+        &:first-child .Sp-badge-X::before {
+          width: 50%;
+          left: 50%;
+        }
+
+        &:last-child .Sp-badge-X::before {
+          width: 50%;
+          right: 50%;
+        }
+
+        span {
+          display: block;
+          padding: 2px 5px;
+          color: $Green_1;
+        }
+
+        span.Sp-badge-X {
+          position: relative;
+          background-color: transparent;
+          height: 50px;
+          line-height: 50px;
+          padding: 0;
+          color: $Green_2;
+          text-align: center;
+          white-space: nowrap;
+
+          &::before {
+            content: " ";
+            background-color: $Ivory_white;
+            height: 2px;
+            width: 100%;
+            position: absolute;
+            left: 0;
+            top: 50%;
+            margin-top: -1px;
+            z-index: 0;
+            box-sizing: border-box;
+          }
+
+          &::after {
+            content: " ";
+            background-color: $Light_Yellow;
+            transform: translate(-50%, -50%);
+            border-radius: 15px;
+            height: 30px;
+            width: 30px;
+            left: 50%;
+            top: 50%;
+            position: absolute;
+            z-index: 0;
+            box-sizing: border-box;
+          }
+
+          .Sp-badge-text-X {
+            position: absolute;
+            width: 100%;
+            z-index: 1;
+            line-height: 50px;
+          }
+        }
+      }
+    }
+
+    /* 購物車 */
+    .Sp-shopping-cart-X {
+      box-shadow: 4px 4px 8px 0px rgba(0, 0, 0, 0.25);
+      background-color: $Ivory_white;
+
+      /* 表頭 */
+      .Sp-section-header {
+        font-size: 20px;
+        font-weight: 500;
+        padding: 10px 1rem;
+        background-color: $Light_Yellow;
+      }
+
+      /* 項目名稱 + 內容 */
+      .Sp-cart-items-wrapper-X {
+        .Sp-table-header-X {
+          padding: 1rem;
+          display: flex;
+
+          // border-bottom: 1px solid #ccc;
+          &::before {
+            display: table;
+            content: '';
+          }
+
+          &::after {
+            display: table;
+            content: '';
+            clear: both;
+          }
+
+          div {
+            position: relative;
+            min-height: 1px;
+            padding-right: 15px;
+            padding-left: 15px;
+
+            &:nth-of-type(1) {
+              padding-left: 0;
+              width: 25%;
+            }
+
+            &:nth-of-type(2) {
+              width: 16.66666667%;
+              text-align: center;
+            }
+
+            &:nth-of-type(3) {
+              width: 16.66666667%;
+              text-align: center;
+            }
+
+            &:nth-of-type(4) {
+              width: 16.66666667%;
+              text-align: center;
+            }
+
+            &:nth-of-type(5) {
+              width: 16.66666667%;
+              text-align: center;
+            }
+
+            &:nth-of-type(6) {
+              padding-right: 0;
+              width: 8.33333333%;
+              text-align: center;
+            }
+          }
+        }
+
+        .Sp-cart-item-X {
+          padding: 1rem;
+          display: flex;
+
+          div {
+            position: relative;
+            min-height: 1px;
+            padding-right: 15px;
+            padding-left: 15px;
+
+            &:nth-of-type(1) {
+              padding-left: 0;
+              width: 25%;
+              display: flex;
+
+              a {
+                display: block;
+                height: 50px;
+                width: 20%;
+                margin-right: 10px;
+                background-image: url('@/assets/images/Sp06.jpg');
+                background-size: contain;
+                background-repeat: no-repeat;
+                flex-shrink: 0;
+              }
+            }
+
+            &:nth-of-type(2) {
+              width: 16.66666667%;
+              text-align: center;
+            }
+
+            &:nth-of-type(3) {
+              width: 16.66666667%;
+              text-align: center;
+            }
+
+            &:nth-of-type(4) {
+              width: 16.66666667%;
+              text-align: center;
+
+              form {
+                border: 1px solid $Green_1;
+
+                .Sp-cart-input-group-X {
+                  position: static;
+                  min-height: 0;
+                  padding-right: 0;
+                  padding-left: 0;
+                  padding-left: 0;
+                  width: auto;
+
+                  span {
+                    padding: 10px;
+                    background-color: $Green_3;
+                    color: $Ivory_white;
+                    cursor: pointer;
+                  }
+
+                  input {
+                    flex-grow: 1;
+                    width: 50%;
+                    outline: none;
+                    border: 0px solid transparent;
+                    background-color: $Ivory_white;
+                    text-align: center;
+                    color: $Green_1;
+                  }
+
+                  input[type=number]::-webkit-outer-spin-button,
+                  input[type=number]::-webkit-inner-spin-button {
+                    -webkit-appearance: none;
+                    margin: 0;
+                  }
+                }
+              }
+            }
+
+            &:nth-of-type(5) {
+              width: 16.66666667%;
+              text-align: center;
+            }
+
+            &:nth-of-type(6) {
+              padding-right: 0;
+              width: 8.33333333%;
+              text-align: center;
+
+              i {
+                cursor: pointer;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    /* 精選商品 */
+    .Sp-shopping-cart-addon-X {
+      box-shadow: 4px 4px 8px 0px rgba(0, 0, 0, 0.25);
+      background-color: $Ivory_white;
+
+      /* 表頭 */
+      .Sp-section-header {
+        font-size: 20px;
+        font-weight: 500;
+        padding: 10px 1rem;
+        background-color: $Light_Yellow;
+      }
+
+      /* 項目內容 */
+      .Sp-cart-addon-wrapper-X {
+        padding: 1rem;
+        display: flex;
+        gap: 3%;
+        box-sizing: border-box;
+
+        .Sp-cart-addon-item-X {
+          width: 25%;
+          display: flex;
+          box-sizing: border-box;
+
+          .Sp-cart-addon-item-img {
+            width: 40%;
+
+            img {
+              display: block;
+              font-size: 0;
+              width: 100%;
+              aspect-ratio: 1;
+              object-fit: cover;
+            }
+          }
+
+          .Sp-cart-addon-item-content {
+            width: 40%;
+            margin: 0 5%;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            .Sp-cart-addon-item-info {
+              p {
+                line-height: 1.2;
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+                -webkit-line-clamp: 2;
+                text-overflow: ellipsis;
+              }
+
+              span {
+                display: block;
+                margin: 8px 0;
+              }
+            }
+
+            button {
+              cursor: pointer;
+              padding: 10px 28px;
+              outline: none;
+              border: 0px solid transparent;
+              border-radius: 30px;
+              color: $Ivory_white;
+              background-color: $Yellow_1;
+            }
+          }
+        }
+      }
+    }
+
+    /* 訂單：選擇付款方式 + 訂單資訊 */
+    .Sp-shopping-info-X {
+      display: flex;
+      gap: 28px;
+
+      // align-items: flex-start;
+      /* 選擇付款方式 */
+      .Sp-order-form-X {
+        width: 65%;
+        box-shadow: 4px 4px 8px 0px rgba(0, 0, 0, 0.25);
+        background-color: $Ivory_white;
+
+        .Sp-order-form-header {
+          font-size: 20px;
+          font-weight: 500;
+          padding: 10px 1rem;
+          background-color: $Light_Yellow;
+        }
+
+        .Sp-order-form-body {
+          padding: 1rem;
+          display: flex;
+          flex-direction: column;
+
+          label {}
+
+          select {
+            color: $Green_1;
+            box-sizing: border-box;
+            outline: none;
+            margin-top: 12px;
+            margin-bottom: 32px;
+            background-color: $Ivory_white;
+            height: 40px;
+            padding: 0 4px;
+          }
+        }
+      }
+
+      /* 訂單資訊 */
+      .Sp-order-summary-X {
+        width: 35%;
+        box-shadow: 4px 4px 8px 0px rgba(0, 0, 0, 0.25);
+        background-color: $Ivory_white;
+
+        .Sp-order-summary-header {
+          font-size: 20px;
+          font-weight: 500;
+          padding: 10px 1rem;
+          background-color: $Light_Yellow;
+        }
+
+        .Sp-order-summary-body {
+          padding: 1rem;
+
+          div {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+
+            form {
+              display: flex;
+              box-sizing: border-box;
+              width: 50%;
+              border: 1px solid $Green_1;
+
+              span {
+                padding: 10px;
+                background-color: $Green_3;
+                color: $Ivory_white;
+                cursor: pointer;
+              }
+
+              input {
+
+                flex-grow: 1;
+                width: 50%;
+                outline: none;
+                border: 0px solid transparent;
+                background-color: $Ivory_white;
+                text-align: center;
+                color: $Green_1;
+              }
+
+              input[type=number]::-webkit-outer-spin-button,
+              input[type=number]::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+                margin: 0;
+              }
+            }
+          }
+
+          a.Sp-checkout-Btn {
+            margin-top: 20px;
+            display: block;
+            text-align: center;
+            padding: 10px 28px;
+            outline: none;
+            border: 0px solid transparent;
+            border-radius: 30px;
+            color: #fffff0;
+            background-color: #d0ad44;
+          }
+        }
+      }
+
+
+
+    }
+
+    /* 出貨提醒 */
+    .Sp-shopping-reminder-X {
+      box-shadow: 4px 4px 8px 0px rgba(0, 0, 0, 0.25);
+      background-color: $Ivory_white;
+      margin-bottom: 30px;
+
+      .Sp-shopping-reminder-header {
+        font-size: 20px;
+        font-weight: 500;
+        padding: 10px 1rem;
+        background-color: $Light_Yellow;
+      }
+
+      .Sp-shopping-reminder-body {
+        padding: 1rem;
+        white-space: pre-wrap;
+        line-height: 2;
+      }
+    }
+
+  }
+}
