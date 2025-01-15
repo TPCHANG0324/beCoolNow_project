@@ -1,3 +1,4 @@
+<!-- 已經 RWD 820/ 430 完成 -->
 <template>
 <div class="aboutus_top_R">
         <div class="aboutus_toptitle_R">

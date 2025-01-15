@@ -11,7 +11,7 @@ const routes = [
 
   },
   {
-    path: '/Ic', component: () => import('@/pages/Information.vue'),
+    path: '/information', component: () => import('@/pages/Information.vue'),
     meta: {
       title: '島嶼危機',
       // requiredLogin: false
@@ -19,6 +19,7 @@ const routes = [
   },
   {
     path: '/Ac', component: () => import('@/pages/Activity.vue'),
+    path: '/about', component: () => import('@/pages/About.vue'),
     meta: {
       title: '永續行動',
       // requiredLogin: false
@@ -26,6 +27,7 @@ const routes = [
   },
   {
     path: '/social', component: () => import('@/pages/Social.vue'),
+    path: '/social', component: () => import('@/pages/social.vue'),
     meta: {
       title: '社群中心',
       // requiredLogin: true
@@ -35,6 +37,25 @@ const routes = [
     path: '/About', component: () => import('@/pages/About.vue'),
     meta: {
       title: '關於我們',
+    path: '/loginPage/', component: () => import('@/pages/loginPage.vue'),
+    meta: {
+      title: '前後台登入',
+      // requiredLogin: true
+    }
+  },
+
+  {
+    path: '/pay1/', component: () => import('@/pages/pay1.vue'),
+    meta: {
+      title: '捐款頁面1',
+      // requiredLogin: true
+    }
+  },
+
+  {
+    path: '/pay2/', component: () => import('@/pages/pay2.vue'),
+    meta: {
+      title: '捐款頁面2',
       // requiredLogin: true
     }
   },
@@ -49,6 +70,17 @@ const routes = [
     path: '/shop_finish', component: () => import('@/pages/Shop_finish.vue'),
     meta: {
       title: '市集結束',
+    path: '/social_write', component: () => import('@/pages/Social_write.vue'),
+    meta: {
+      title: '寫文章',
+      // requiredLogin: true
+    }
+  },
+
+  {
+    path: '/popup', component: () => import('@/pages/popup.vue'),
+    meta: {
+      title: '前台彈窗',
       // requiredLogin: true
     }
   },
@@ -67,7 +99,7 @@ const routes = [
   //   }
   // },
   {
-    path: '/shop/', component: () => import('@/pages/Shop.vue'),
+    path: '/shop', component: () => import('@/pages/Shop.vue'),
     meta: {
       title: '環保市集',
       // requiredLogin: true
@@ -80,13 +112,20 @@ const routes = [
       // requiredLogin: true
     }
   },
-  // {
-  //   path: '/Mb/', component: () => import('@/pages/Mb.vue'),
-  //   meta: {
-  //     title: '會員中心',
-  //     requiredLogin: true
-  //   }
-  // },
+  {
+    path: '/shop_cart', component: () => import('@/pages/Shop_cart.vue'),
+    meta: {
+      title: '環保市集',
+      // requiredLogin: true
+    }
+  },
+  {
+    path: '/member', component: () => import('@/pages/Member.vue'),
+    meta: {
+      title: '會員中心',
+      // requiredLogin: true
+    }
+  },
   {
     path: '/test/', component: () => import('@/pages/test.vue'),
     meta: {
@@ -147,6 +186,13 @@ const routes = [
     path: '/MmB_member/', component: () => import('@/pages/BackStagePages/MmB_member.vue'),
     meta: {
       title: '會員管理',
+      // requiredLogin: true
+    }
+  },
+  {
+    path: '/Support/', component: () => import('@/pages/Support.vue'),
+    meta: {
+      title: '支持我們',
       // requiredLogin: true
     }
   },

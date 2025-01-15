@@ -17,7 +17,6 @@
 @import 'layout/footer';
 @import 'layout/nav';
 @import 'layout/popup';
-
 @import 'page/_Ic.scss';
 
 // page
@@ -29,11 +28,20 @@
 @import 'page/Fb';
 @import 'page/IcB';
 @import 'page/MmB';
+<<<<<<< HEAD
 @import 'page/about';
 @import 'page/shop_checkout';
 @import 'page/shopfinish';
 
+=======
+@import'page/loginpage';
+@import'page/pay1';
+@import'page/pay2';
+@import'page/Mb';
+@import'page/popup';
+>>>>>>> 4bf02963cb095b0becb0ae36ecf7f79ee0fd169b
 
+@import 'page/Support';
 
 
 * {

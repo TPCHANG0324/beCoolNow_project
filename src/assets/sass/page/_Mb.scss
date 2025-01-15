@@ -1,0 +1,437 @@
+// RWD 820px 和 430px 已經切完
+
+
+.wrapperpr{
+    background: url('@/assets/images/mb-bg.png') no-repeat center center;
+    // background-size: cover;
+    // padding: 20px;
+    // border-radius: 15px;
+    // display: flex;
+    // justify-content: space-between;
+    // align-items: flex-start;
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+    
+}
+
+.profile-title{
+    color: var(--second-Colors-fffff0, #FFFFF0);
+    text-align: center;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    -webkit-text-stroke-width: 0.5;
+    -webkit-text-stroke-color: var(--Primary-Colors-5b774a, #5B774A);
+    font-family: "DM Sans";
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 140%; /* 67.2px */
+    padding-bottom: 80px;
+    padding-top: 80px;
+}
+
+
+
+.profile_top{
+    display: flex;
+    margin: 0 auto;
+    justify-content: space-between;
+    width: 80%;
+}
+
+.profile_bottom{
+    display: column;
+}
+
+
+.profile-container-special_left {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.profile-container-special_right {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.profile-header-special {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.profile-pic-special {
+    width: 173px;
+    height: 173px;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    margin-bottom: 30px;
+}
+
+.profile-greeting-special {
+    color: var(--Gray-System-545454, #545454);
+    text-align: center;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    border-radius: 20px;
+    background: var(--second-Colors-fffff0, #FFFFF0);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    padding: 20px;
+}
+
+.profile-info-special {
+    margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.profile-field {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.label_mb {
+    color: var(--second-Colors-fffff0, #FFFFF0);
+    text-align: center;
+    font-family: "DM Sans";
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    padding-right: 10px;
+    text-shadow: #545454 1px 1px 1px;
+}
+
+.input_2 {
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    width: 300px;
+}
+
+.button_mb {
+    padding: 10px 20px;
+    background: #D4A017;
+    border: none;
+    border-radius: 30px;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+
+    &:hover {
+        background: #B8860B;
+    }
+}
+
+.profile-stats-special  {
+    padding: 10px;
+    background: rgba(51, 51, 51, 0.60);
+    border-radius: 20px;
+    text-align: center;
+    margin-top: 10px;
+    display: inline-flex;
+padding: 23px 19.207px 22px 19px;
+justify-content: center;
+align-items: center;
+// margin-left: 200px;
+color: var(--second-Colors-fffff0, #FFFFF0);
+text-align: center;
+font-family: "DM Sans";
+font-size: 24px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+margin: 0 auto;
+margin-left: 200px;
+}
+
+// .purchase-record-special {
+   
+// }
+.btn2_btn {
+    display: flex;
+    // justify-content: space-between;
+    margin-left: 80px;
+    border: none;
+}
+.purchase-record-special {
+    padding: 40px;
+    .purchase-record-btn11, .purchase-record-btn12{ 
+        color: var(--second-Colors-fffff0, #FFFFF0);
+        font-family: "DM Sans";
+        font-size: 32px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        padding-left: 40px;
+        // margin-left: 90px;
+        // padding-left: 10px;
+        // text-shadow: #545454 1px 1px 1px;
+        margin-top: 40px;
+        margin-bottom: 40px;
+        background-color: initial;
+        display: inline-block;
+        text-shadow: #545454 1px 1px 1px;
+        border: none;
+
+        &:hover {
+            text-decoration: underline 5px;
+        }
+    }
+
+    .table_mb {
+        background: #e6eccc;
+        width: 100%;
+        border-collapse: collapse;
+        padding: 10px;
+        // border-radius: 10px;
+        text-align: center;
+        margin-top: 80px;
+        width: 1194px;
+        margin: 0 auto;
+  
+
+        th {
+            background-color: $Ivory_white;
+            // border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+         td {
+            // border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .delivered-special {
+            color: green;
+        }
+
+        p {
+            font-size: 20px;
+        }
+
+        .order-detail-btn {
+            padding: 8px 12px;
+            background: #D4A017;
+            border: none;
+            border-radius: 30px;
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+
+            &:hover {
+                background: #B8860B;
+            }
+        }
+    }
+}
+
+// 平板樣式 (小於 820px)
+@media (max-width: 820px) {
+    .wrapperpr {
+        background: url('@/assets/images/mb-bg.png') no-repeat center top;
+        background-size: cover; // 改用 cover 確保在移動設備上更好的覆蓋
+        width: 100%;
+        min-height: calc(100vh - 80px);
+        padding: 20px;
+        position: relative;
+        // top: 80px; // 保持與 header 的對齊
+        margin: 0;
+        overflow-x: hidden; // 防止橫向滾動
+    
+      }
+    
+      .profile_top {
+        flex-direction: column;
+        width: 100%;
+      }
+    
+      .profile-container-special_left,
+      .profile-container-special_right {
+        width: 100%;
+        margin-bottom: 30px;
+      }
+    
+      .profile-header-special {
+        order: 1;
+        margin-bottom: 20px;
+      }
+    
+      .profile-greeting-special {
+        order: 2;
+        width: 80%;
+        margin: 0 auto;
+      }
+    
+      .profile-container-special_right {
+        order: 3;
+        align-items: center;
+        
+        .profile-info-special {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+    
+        .profile-field {
+          flex-direction: row; // 改為水平排列
+          justify-content: center; // 水平置中
+          width: 100%;
+          gap: 15px; // 調整間距
+          
+          input {
+            width: auto; // 移除100%寬度
+            max-width: 300px;
+          }
+        }
+      }
+
+      .profile-stats-special {
+        order: 4;
+        margin: 20px auto;
+        width: 80%;
+        display: flex;
+        justify-content: center;
+        margin: 0 auto;
+    }
+
+   .purchase-record-special table{
+        // border-collapse: collapse;
+        border-spacing: 0;
+        background: #e6eccc;
+        // width: 100%;
+        // border-collapse: collapse;
+        /* padding: 10px; */
+        border-radius: 10px;
+        text-align: center;
+        margin-top: 80px;
+        width: 58px;
+        margin: 0 auto;
+        padding: 0px;
+    }
+
+    
+    // table {
+    //     border-collapse: collapse;
+    //     border-spacing: 0;
+    // }
+    
+      .profile-stats-special {
+        order: 4;
+        margin: 20px auto;
+        width: 90%;
+        display: flex;
+        justify-content: center;
+        margin-left: 0;
+      }
+    
+      .purchase-record-special {
+        order: 5;
+        padding: 20px;
+        width: 100%;
+    
+        .btn2_btn {
+          margin-left: 0;
+          justify-content: center;
+          flex-direction: row; // 改為水平排列
+          align-items: center;
+          gap: 20px; // 增加按鈕之間的間距
+         
+        }
+    
+        
+    
+        .table_mb {
+          width: 100%;
+          margin: 0px;
+          overflow-x: auto;
+          display: block;
+          
+          th, td {
+            min-width: 120px;
+          }
+        }
+      }
+      .purchase-record-btn11,
+      .purchase-record-btn12 {
+        padding-left: 0;
+        margin: 10px 0;
+        font-size: 24x;
+        border: none;
+        margin-left: 0px;
+      }
+      // 調整標題大小以適應小螢幕
+      .profile-title {
+        font-size: 36px;
+        padding: 40px 0;
+      }
+
+      .purchase-record-special table {
+        width: 97%;
+        margin: 0px;
+        overflow-x: auto;
+        display: block;
+    }
+    }
+
+// 手機樣式 (小於 430px)
+@media (max-width: 430px) {
+
+    .profile-stats-special {
+        padding: 20px;
+        background: rgba(51, 51, 51, 0.60);
+        border-radius: 20px;
+        color: var(--second-Colors-fffff0, #FFFFF0);
+        font-family: "DM Sans", sans-serif;
+        font-size: 16px;
+        font-weight: 700;
+        line-height: normal;
+
+        // ✅ 讓文字水平置中對齊
+        display: flex;
+        justify-content: center; // 水平置中對齊
+        align-items: center;     // 垂直置中對齊
+        text-align: center;      // 確保多行文本也置中
+        flex-direction: column;  // ✅ 如果需要多行內容也能垂直居中
+        gap: 10px;               // ✅ 增加文字之間的間距
+        margin: 0 auto;          // ✅ 讓整個元素在畫面中置中
+    }
+
+    .purchase-record-special .purchase-record-btn11, .purchase-record-special .purchase-record-btn12.purchase-record-btn12 {
+      color: var(--second-Colors-fffff0, #FFFFF0);
+      font-family: "DM Sans";
+      font-size: 24px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+      padding-left: 40px;
+      margin-top: 40px;
+      margin-bottom: 40px;
+      background-color: initial;
+      display: inline-block;
+      text-shadow: #545454 1px 1px 1px;
+      border: none;
+  }
+
+
+$footer_layout: 430px;
+
+}
+

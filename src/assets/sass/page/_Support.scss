@@ -1,0 +1,190 @@
+body {
+    font-family: 'DM Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5dc;
+
+    .Support_banner_S{
+        position: relative;
+        height: 360px;
+        background-image: url('@/assets/images/Au07.jpg');;
+        background-size: cover;
+        background-position: center center;
+        
+        
+        // overflow: hidden;
+        div{
+            height: 360px;
+            border: 2px solid;
+
+            img{
+                // z-index: 1;
+                object-fit: cover;
+                width: 100%;
+            };
+
+            };
+        h1{
+            @include PC_h1($Ivory_white);
+            z-index: 2;
+            position: absolute;
+            top: 25%;
+            left: 25%;
+            // transform: translate(-50%, -50%);
+            text-align: center;
+
+            @include max_820{ 
+                font-size:$h3;
+                border: 2px solid red;
+            }
+            
+            
+        }
+    }
+
+    .Support_box_S{
+        text-align: center;
+        max-width: 1200px;
+        margin: 0 auto;
+        
+
+        p{
+            @include PC_h3($Green_2);
+            margin: 0 auto;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            font-weight: bold;
+
+        }
+        .donate_choise_S{
+            display: flex;
+            justify-content: center;
+
+            .donate_type_month{
+                width: 300px;
+                height: 60px;
+                font-size: 24px;
+                background-color: $Ivory_white;
+                color: $Green_2;
+                // border: 1 px solid $Green_1;
+                outline: none;
+                font-weight: bold;
+                
+                // &.active{
+                //     background-color: $Green_2;
+                //     color: $Ivory_white;
+                // }
+
+            }
+
+            .donate_type_once{
+                width: 300px;
+                height: 60px;
+                font-size: $h3;
+                background-color: $Green_2;
+                color: $Ivory_white;
+                // border: 1 px solid $Green_1;
+                outline: none;
+                font-weight: bold;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+            
+                &:hover{
+                    background-color: $Green_1;
+                }
+            }
+            
+        }
+        .donate_amount_S{
+            margin-top: 40px;
+            display: inline-flex;
+            align-items: center;
+            gap: 35px;
+            // padding: 11px 44px 7px 44px;
+
+            .amount{
+                width: 160px;
+                height: 80px;
+                font-size: $h3;
+                background-color: $Ivory_white;
+                color: $Green_2;
+                font-weight: bold;
+                border-radius: 20px;
+
+            }
+
+            .amount.active{
+                background-color: $Green_2;
+                color: $Ivory_white;
+            }
+        }
+
+        .custom_amount_S{
+            margin-top: 40px;
+
+            span{
+                margin-right: 16px;
+                color:$Green_2;
+                font-size: $h3;
+                font-weight: bold;
+            }
+            .custom_amount_input{
+                width: 418px;
+                height: 36px;
+                border: none;
+                padding: 9px 15px;
+                align-items: center;
+            }
+        }
+
+     
+
+        .payment_section_S{
+            margin-top: 25px;
+            // border: 2px solid red;
+            
+            .payment_content{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: $h4;
+                font-weight: bold;
+                gap: 30px;
+            
+                span{
+                    margin-left: 10px; 
+                }
+                .marker{
+                    color: red;
+                }
+                .ecpay{
+                    padding-top: 15px;
+                }
+                .ecpay2{
+                    font-size: $h7;
+                }
+            }
+
+            .payment_step_S{
+                margin-top: 64px;
+                margin-bottom: 40px;
+
+                .next_step{
+                    width: 240px;
+                    height: 52px;
+                    background-color: $Yellow_1;
+                    color: $Ivory_white;
+                    border-radius: 30px;
+                    border: none;
+                    font-weight: bold;
+                }
+            }
+
+            
+        }
+
+
+
+        
+    }
+}
