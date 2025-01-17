@@ -22,9 +22,11 @@
               <tr>
                 <td class="IcB_number_H">1</td>
                 <td class="IcB_name_H">蟹老闆</td>
-                <td class="IcB_content_H">你好！我是小明，我最喜歡在公園裡跑來跑去，也喜歡去海邊玩沙子。媽媽說，我們要愛護你，不能亂丟垃圾，也不能浪費水。</td>
+                <td class="IcB_content_H">
+                  你好！我是小明，我最喜歡在公園裡跑來跑去，也喜歡去海邊玩沙子。媽媽說，我們要愛護你，不能亂丟垃圾，也不能浪費水。
+                </td>
                 <td class="IcB_time_H">2025-01-11</td>
-                <td><button class="IcB_editBtn_H">編輯</button></td>
+                <td><button class="IcB_viewBtn_H">查看</button></td>
                 <td>
                   <button class="IcB_deleteBtn_H">
                     <i class="fa-solid fa-trash-can"></i>
@@ -36,7 +38,7 @@
                 <td class="IcB_name_H">派大星</td>
                 <td class="IcB_content_H">xxxxxxxx</td>
                 <td class="IcB_time_H">2025-01-11</td>
-                <td><button class="IcB_editBtn_H">編輯</button></td>
+                <td><button class="IcB_viewBtn_H">查看</button></td>
                 <td>
                   <button class="IcB_deleteBtn_H">
                     <i class="fa-solid fa-trash-can"></i>
@@ -48,7 +50,7 @@
                 <td class="IcB_name_H">海綿寶寶</td>
                 <td class="IcB_content_H">xxxxxxxx</td>
                 <td class="IcB_time_H">2025-01-11</td>
-                <td><button class="IcB_editBtn_H">編輯</button></td>
+                <td><button class="IcB_viewBtn_H">查看</button></td>
                 <td>
                   <button class="IcB_deleteBtn_H">
                     <i class="fa-solid fa-trash-can"></i>
@@ -62,10 +64,23 @@
       <BackStagePaginator></BackStagePaginator>
     </div>
   </div>
+
+  <!-- 地球信件 刪除 -->
+  <BackStageConfirmPopup class="AcB_DeletePopup_H">
+    <span></span>
+    <div>
+      <h3>確定將此留言刪除嗎?</h3>
+      <div>
+        <button>取消</button>
+        <button>確定</button>
+      </div>
+    </div>
+  </BackStageConfirmPopup>
 </template>
 
 <script>
 import BackStageSidebar from '@/components/items/BackStageItems/BackStageSidebar.vue';
 import backStagePaginator from '@/components/items/BackStageItems/BackStagePaginator.vue';
 import BackStageHeader from '@/components/layout/BackStageLayout/BackStageHeader.vue';
+import BackStageConfirmPopup from '@/components/layout/BackStageLayout/BackStageConfirmPopup.vue';
 </script>

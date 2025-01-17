@@ -1,4 +1,4 @@
-// 已經 RWD : 820px / 430px 
+// 已經 RWD : 820px / 430px
 
 .hidden {
     opacity: 1;
@@ -16,18 +16,20 @@
     background: #ffcc00;
     cursor: pointer;
 }
+
 .btnclose:hover {
     background: #e6b800;
 }
 
 
-.learn_more, .collapse_section {
+.learn_more,
+.collapse_section {
     text-align: center;
     margin-top: 20px;
 }
 
- /* 控制展開動畫效果 */
- .expandable {
+/* 控制展開動畫效果 */
+.expandable {
     max-height: 0;
     opacity: 0;
     visibility: hidden;
@@ -39,7 +41,7 @@
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
-    max-height: 5000px; 
+    max-height: 5000px;
     transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out, max-height 1s ease-in-out;
 }
 
@@ -60,7 +62,7 @@
         position: absolute;
         top: 0;
         left: 0;
-        width:100%; // 覆蓋整個視窗高度
+        width: 100%; // 覆蓋整個視窗高度
         object-fit: cover; // 保持圖片比例並填滿整個容器
         z-index: 1; // 確保圖片在底層
         // padding-top: 80px;
@@ -69,7 +71,7 @@
     .hero-text {
         z-index: 2; // 讓文字顯示在圖片上方
         text-align: center;
-        color:$Ivory_white;
+        color: $Ivory_white;
 
         h1 {
             @include PC_h1($Ivory_white);
@@ -86,7 +88,7 @@
 }
 
 
-.Ac_h3{
+.Ac_h3 {
     text-align: center;
     font-size: 36px;
     // line-height: 40px;
@@ -97,10 +99,10 @@
     // margin-bottom: 40px;
     // margin-top: 20px;
     padding: 10px;
-    flex:1 0 auto;
+    flex: 1 0 auto;
 }
 
-.daily_card{
+.daily_card {
     display: grid;
     grid-template-columns: repeat(3, 1fr); // 保持一列三張
     gap: 4rem; // 卡片之間的間距
@@ -132,7 +134,7 @@
 
 
 
-.AcB_card  .darkGreen_card {
+.AcB_card .darkGreen_card {
     background-color: $Green_1;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -149,25 +151,26 @@
 
 
 
-    .AcB_card_2 {
-        
-        background-color: $Green_2;
-        border-radius: 10px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        padding: 20px;
-        text-align: center;
-        justify-content: center;
-        width: 100%; // 使用100%讓卡片跟隨grid自動調整
-        max-width: 350px; // 每張卡片的最大寬度，讓三張卡片平均分布
-        }
+.AcB_card_2 {
 
-  
-.darkGreen_card, .AcB_card img {
+    background-color: $Green_2;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    justify-content: center;
+    width: 100%; // 使用100%讓卡片跟隨grid自動調整
+    max-width: 350px; // 每張卡片的最大寬度，讓三張卡片平均分布
+}
+
+
+.darkGreen_card,
+.AcB_card img {
     max-width: 100%;
     // border-radius: 5px;
     margin-bottom: 15px;
-  }
-  
+}
+
 //   h4 {
 //     color: $Ivory_white;
 //     font-size: $h3;
@@ -185,12 +188,12 @@
     margin: 20px auto;
 }
 
-  article {
+article {
     color: $Ivory_white;
     font-size: $h6;
     line-height: $line_height_140;
     margin-bottom: 20px;
-  }
+}
 
 //   .btn.btn-AC_done_btn {
   
@@ -224,16 +227,16 @@
     cursor: not-allowed;
     opacity: 0.7;
 }
-  
-  .learn_more {
+
+.learn_more {
     text-align: center;
     margin-top: 12px;
     font-size: $h6;
     font-weight: $font_weight_Bold;
 
-    a { 
+    a {
         // text-decoration: none; // 移除預設底線
-        color: $Green_2;   // 設定預設連結顏色
+        color: $Green_2; // 設定預設連結顏色
         transition: color 0.3s ease-in-out; // 添加平滑過渡效果
 
         &:hover {
@@ -244,24 +247,24 @@
 }
 
 .dashed-line {
-    border: none;              // 移除預設邊框
-    border-bottom: 4px dashed #bebebe;  // 灰色虛線
-    margin-bottom: 40px ;            // 上下間距
+    border: none; // 移除預設邊框
+    border-bottom: 4px dashed #bebebe; // 灰色虛線
+    margin-bottom: 40px; // 上下間距
     margin-top: 40px;
-    width: 100%;  
-    opacity: 0.6;             // 讓線條充滿寬度
+    width: 100%;
+    opacity: 0.6; // 讓線條充滿寬度
 }
 
 // 主要信件容器
 .letter-container {
-    
+
     // max-width: 200px;
     margin: 0 auto;
     // padding: 1rem;
     // background-color:#FFFFDE;
     // height:100vh;
     border-radius: 20px;
-    
+
 }
 
 .mac-window {
@@ -348,14 +351,15 @@
 }
 
 // 信件卡片樣式
-.letter{
+.letter {
     background-color: #FFFFDE;
     border-radius: 0px 0px 20px 20px;
     display: flex;
     justify-content: start;
     flex-direction: column;
 }
-.letter_place1{
+
+.letter_place1 {
     max-width: 1200px;
     height: auto;
     margin: 0 auto;
@@ -369,7 +373,7 @@
     // border: 1px solid red;
 }
 
-.letter_place{
+.letter_place {
     display: flex;
 }
 
@@ -382,7 +386,7 @@
 }
 
 .letter-card {
-   padding: 20px;
+    padding: 20px;
     // background-color:#FFFFDE;
     margin-bottom: 1rem;
     // border-left: 5px solid #6d8f5f;
@@ -395,10 +399,10 @@
     // display: none;
     // background-color: #fcf8f2 ;
     background-color: $Ivory_white;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 
-    
-    p{
+
+    p {
         font-size: 1.1rem;
         color: $Gray_1;
         text-align: left;
@@ -407,17 +411,17 @@
         padding: 1.5rem;
         border-radius: 15px;
         background-color: $Ivory_white;
-        
+
         max-width: 1200px;
         margin-left: 40px;
         // margin-right: 40px;
-    
+
     }
-    
-   .signature{
+
+    .signature {
         font-size: 1.1rem;
         color: $Gray_1;
-        text-align: right;   
+        text-align: right;
     }
 
 
@@ -464,7 +468,7 @@
         z-index: 1;
         filter: brightness(0.7);
         border-radius: 0 0 20px 20px;
-        
+
     }
 }
 
@@ -487,7 +491,7 @@
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    align-items: flex-start;  // 讓標籤與輸入欄對齊
+    align-items: flex-start; // 讓標籤與輸入欄對齊
 }
 
 
@@ -508,17 +512,20 @@
         text-align: center;
     }
 
-    input, textarea {
+    input,
+    textarea {
         flex: 1;
         padding: 10px;
         // border-radius: 8px;
         border: 1px solid $Gray_3;
-        background-color:$Ivory_white;
+        background-color: $Ivory_white;
+
         &:focus {
             outline: $Yellow_1 2px solid;
         }
     }
-    .captcha{
+
+    .captcha {
         :focus {
             outline: $Yellow_1 2px solid;
         }
@@ -528,12 +535,14 @@
         height: 120px;
     }
 }
- .message1{
+
+.message1 {
     background-color: $Green_2;
     padding: 1rem;
     color: $Ivory_white;
 }
-.message{
+
+.message {
     background-color: $Green_2;
     padding: 1rem;
     color: $Ivory_white;
@@ -578,7 +587,7 @@
     border: none;
     border-radius: 30px;
     background-color: $Yellow_1;
-    color:$Ivory_white;
+    color: $Ivory_white;
     font-size: 18px;
     font-weight: bold;
     cursor: pointer;
@@ -624,7 +633,7 @@
             padding: 12px 24px;
             border: none;
             border-radius: 30px;
-            
+
             background-color: $Yellow_1;
             color: white;
             font-size: 1.2rem;
@@ -643,6 +652,7 @@
     .image-content {
         max-width: 40%;
         margin-left: 32px;
+
         img {
             width: 100%;
             border-radius: 20px;
@@ -651,28 +661,28 @@
     }
 }
 
-.popup{
-  width: 300px;
-  height: 300px;
-  position: fixed;
-  left: 2000px;
- background-color:transparent;
- z-index: 9999;
- opacity: 0;
-//  background-color: #545454;
+.popup {
+    width: 300px;
+    height: 300px;
+    position: fixed;
+    left: 2000px;
+    background-color: transparent;
+    z-index: 9999;
+    opacity: 0;
+    //  background-color: #545454;
 }
 
 
 .Ac_active {
     position: fixed;
-  top: 30%;
-  left:50%;
- transform:translate(-50%,-50%);
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     opacity: 1;
     // visibility: visible !important;
     // transform: scale(1);
     z-index: 9999;
-    
+
 }
 
 // 平板樣式 (小於 820px)
@@ -685,33 +695,34 @@
         color: #fffff0;
         -webkit-text-stroke: 0.5px #5b774a;
         padding-top: 0px;
-}
-.Ac_h3{
-    text-align: center;
-    font-size: 30px;
-    // line-height: 40px;
-    font-weight: $font_weight_Bold;
-    font-family: $font_family;
-    color: $Green_2;
-    // margin-top: 5px;
-    // margin-bottom: 40px;
-    // margin-top: 20px;
-    // padding: 10px;
-    flex:1 0 auto;
-}
+    }
+
+    .Ac_h3 {
+        text-align: center;
+        font-size: 30px;
+        // line-height: 40px;
+        font-weight: $font_weight_Bold;
+        font-family: $font_family;
+        color: $Green_2;
+        // margin-top: 5px;
+        // margin-bottom: 40px;
+        // margin-top: 20px;
+        // padding: 10px;
+        flex: 1 0 auto;
+    }
 
 
 
-.daily_card{
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); // 保持一列兩張
-    gap: 4rem; // 卡片之間的間距
-    justify-content: center; // 整個容器水平置中
-    align-items: start; // 卡片內容頂對齊
-    padding: 2rem;
-    max-width: 1200px; // 限制最大寬度，讓內容居中更明顯
-    margin: 0 auto; // 將整個 `.daily_card` 容器置中
-}
+    .daily_card {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); // 保持一列兩張
+        gap: 4rem; // 卡片之間的間距
+        justify-content: center; // 整個容器水平置中
+        align-items: start; // 卡片內容頂對齊
+        padding: 2rem;
+        max-width: 1200px; // 限制最大寬度，讓內容居中更明顯
+        margin: 0 auto; // 將整個 `.daily_card` 容器置中
+    }
 }
 
 // 手機樣式 (小於 430px)
@@ -728,6 +739,7 @@
         align-items: center;
         margin-bottom: 0px;
     }
+
     .hero-section .hero-text h1 {
         font-size: 2rem;
         // line-height: 140%;
@@ -736,7 +748,7 @@
         color: #fffff0;
         -webkit-text-stroke: 0.5px #5b774a;
         padding-top: 0px;
-}
+    }
 
 
 .hero-section .hero-text h2 {
@@ -762,141 +774,159 @@
     flex:1 0 auto;
 }
 
-.daily_card{
-    display: grid;
-    grid-template-columns: repeat(1, 1fr); // 保持一列1張
-    gap: 4rem; // 卡片之間的間距
-    justify-content: center; // 整個容器水平置中
-    align-items: start; // 卡片內容頂對齊
-    padding: 2rem;
-    max-width: 1200px; // 限制最大寬度，讓內容居中更明顯
-    margin: 0 auto; // 將整個 `.daily_card` 容器置中
-}
+    .Ac_h3 {
+        text-align: center;
+        font-size: 30px;
+        // line-height: 40px;
+        font-weight: $font_weight_Bold;
+        font-family: $font_family;
+        color: $Green_2;
+        // margin-top: 5px;
+        // margin-bottom: 40px;
+        // margin-top: 20px;
+        // padding: 10px;
+        flex: 1 0 auto;
+    }
 
-.mac-window {
-    max-width: 400px;
-    margin: 0px auto;
-    border-radius: 15px 15px 0 0; // 圓角設計
-    background: $Green_2;
-    height: 40px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    position: relative;
-    display: flex;
-    align-items: center;
-    padding: 0 1rem;
-    margin: 0 auto;
-}
-.stats-bar {
-    background-color: #747474;
-    color: #fffff0;
-    padding: 1rem;
-    text-align: center;
-    font-size: 1.2rem;
-    margin-bottom: 2rem;
-    max-width: 400px;
-    margin: 0 auto;}
+    .daily_card {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr); // 保持一列1張
+        gap: 4rem; // 卡片之間的間距
+        justify-content: center; // 整個容器水平置中
+        align-items: start; // 卡片內容頂對齊
+        padding: 2rem;
+        max-width: 1200px; // 限制最大寬度，讓內容居中更明顯
+        margin: 0 auto; // 將整個 `.daily_card` 容器置中
+    }
 
-.letter {
-    max-width: 400px;
-    background-color: #FFFFDE;
-    border-radius: 0px 0px 20px 20px;
-    display: flex;
-    justify-content: start;
-    flex-direction: column;
-    margin: 0 auto;
-}
+    .mac-window {
+        max-width: 400px;
+        margin: 0px auto;
+        border-radius: 15px 15px 0 0; // 圓角設計
+        background: $Green_2;
+        height: 40px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        position: relative;
+        display: flex;
+        align-items: center;
+        padding: 0 1rem;
+        margin: 0 auto;
+    }
 
-.letter-form-container {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 2;
-    padding: 200px;
-    max-width: 400px;
-    height: 500px;
-    // width: 100%;
-    text-align: center;
-    // margin: 0 auto;
-}
+    .stats-bar {
+        background-color: #747474;
+        color: #fffff0;
+        padding: 1rem;
+        text-align: center;
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
+        max-width: 400px;
+        margin: 0 auto;
+    }
 
-// .background-container .background-image {
-// display: none;
-// }
+    .letter {
+        max-width: 400px;
+        background-color: #FFFFDE;
+        border-radius: 0px 0px 20px 20px;
+        display: flex;
+        justify-content: start;
+        flex-direction: column;
+        margin: 0 auto;
+    }
 
-.letter_place1 {
-    max-width: 400px;
-    height: auto;
-    margin: 0 auto;
-    padding: 1rem;
-    background-color: #FFFFDE;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    display: flex;
-    align-items: center;
-}
+    .letter-form-container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 2;
+        padding: 200px;
+        max-width: 400px;
+        height: 500px;
+        // width: 100%;
+        text-align: center;
+        // margin: 0 auto;
+    }
 
- // 背景容器
- .background-container {
-    height: auto;
-    max-width: 100%;
-    border-radius: 0; // 移除邊角圓弧
-    padding: 10px;
-    
-    .background-image {
-        width: 100%;  // 圖片全寬顯示
-        height: 600px;
+    // .background-container .background-image {
+    // display: none;
+    // }
+
+    .letter_place1 {
+        max-width: 400px;
+        height: auto;
+        margin: 0 auto;
+        padding: 1rem;
+        background-color: #FFFFDE;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        display: flex;
+        align-items: center;
+    }
+
+    // 背景容器
+    .background-container {
+        height: auto;
+        max-width: 100%;
         border-radius: 0; // 移除邊角圓弧
-        width: 400px;
-        margin-left: 15px;
-    }
-}
+        padding: 10px;
 
-// 信件表單容器
-.letter-form-container {
-    position: relative;
-    top: auto;
-    left: auto;
-    transform: none;
-    padding: 10px;
-    max-width: 100%;
-    text-align: center;
-}
-
-// 表單設計
-.letter-form {
-    flex-direction: column;
-    gap: 1rem; // 縮小間距
-    padding: 10px;
-    align-items: stretch; // 讓輸入欄全寬
-}
-
-// 表單輸入欄樣式
-.form-group {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
-
-    label {
-        min-width: auto; // 取消固定寬度
-        width: 100%;
-        text-align: left;
-        padding: 0.5rem;
+        .background-image {
+            width: 100%; // 圖片全寬顯示
+            height: 600px;
+            border-radius: 0; // 移除邊角圓弧
+            width: 400px;
+            margin-left: 15px;
+        }
     }
 
-    input, textarea {
-        width: 100%;
-        border-radius: 5px;
-        padding: 8px;
+    // 信件表單容器
+    .letter-form-container {
+        position: relative;
+        top: auto;
+        left: auto;
+        transform: none;
+        padding: 10px;
+        max-width: 100%;
+        text-align: center;
     }
 
-    textarea {
-        height: 100px;
+    // 表單設計
+    .letter-form {
+        flex-direction: column;
+        gap: 1rem; // 縮小間距
+        padding: 10px;
+        align-items: stretch; // 讓輸入欄全寬
     }
-}
- // 驗證碼區塊：讓按鈕水平並排
+
+    // 表單輸入欄樣式
+    .form-group {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+
+        label {
+            min-width: auto; // 取消固定寬度
+            width: 100%;
+            text-align: left;
+            padding: 0.5rem;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            border-radius: 5px;
+            padding: 8px;
+        }
+
+        textarea {
+            height: 100px;
+        }
+    }
+
+    // 驗證碼區塊：讓按鈕水平並排
     .captcha-group {
         display: flex;
-        flex-direction: row;  // 水平排列
+        flex-direction: row; // 水平排列
         flex-wrap: wrap; // 允許換行
         align-items: center;
         justify-content: space-between;
@@ -945,158 +975,160 @@
         max-width: 430px;
         margin-left: 0px;
     }
-// 驗證碼區塊
- // 驗證碼區塊：讓按鈕水平並排
- .captcha-group {
-    display: flex;
-    flex-direction: row;  // 水平排列
-    flex-wrap: wrap; // 允許換行
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
 
-    // 驗證碼輸入框
-    input {
-        flex: 1;
-        min-width: 100px;
-    }
+    // 驗證碼區塊
+    // 驗證碼區塊：讓按鈕水平並排
+    .captcha-group {
+        display: flex;
+        flex-direction: row; // 水平排列
+        flex-wrap: wrap; // 允許換行
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
 
-    // 驗證碼文字碼
-    .captcha-code {
-        padding: 10px;
-        font-weight: bold;
-        background-color: #f5f5f5;
-        border-radius: 5px;
-        flex-shrink: 0; // 不縮小文字碼
-    }
-
-    // 按鈕移到右側
-    .refresh-captcha {
-        padding: 10px;
-        border: none;
-        border-radius: 30px;
-        background-color: #d8ba5b;
-        cursor: pointer;
-        font-size: 16px;
-        flex-shrink: 0; // 固定大小
-        white-space: nowrap; // 防止按鈕文字換行
-
-        &:hover {
-            background-color: darken(#d8ba5b, 10%);
+        // 驗證碼輸入框
+        input {
+            flex: 1;
+            min-width: 100px;
         }
-    }
-}
 
-.form-group label {
-    color: var(--second-Colors-fffff0, #FFFFF0);
-    text-align: center;
-    font-family: "DM Sans";
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-    padding-right: 10px;
-    text-shadow: #545454 1px 1px 1px;
-}
-
-.captcha-group{
-    padding-bottom: 30px;
-    .message1{
-        font-size: 18px;
-    }
-    .refresh-captcha{
-        margin: 0 auto;
-    }
-}
-
-
-// 送出按鈕
-.submit-btn {
-    width: 100%;
-    padding: 12px;
-    font-size: 16px;
-    border-radius: 20px;
-}
-
-.dashed-line {
-    border: none;
-    border-bottom: 4px dashed #bebebe;
-    margin-bottom: 10px;
-    margin-top: 10px;
-    width: 100%;
-    opacity: 0.6;
-}
-
-.carbon-reduction-card {
-    display: flex;
-    flex-direction: column;  // ✅ 垂直排列
-    align-items: center;
-    padding: 20px;
-    border-radius: 20px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    max-width: 100%; // ✅ 讓卡片適應小螢幕
-    text-align: center;
-    gap: 20px; // ✅ 增加元素之間的間隔
-
-    // ✅ 將圖片移到最上方
-    .image-content {
-        order: 1; // 將圖片放到最上方
-        width: 100%; 
-        max-width: 100%;
-        margin: 0;
-        img {
-            width: 100%;
-            border-radius: 20px;
-        }
-    }
-
-    // ✅ 文字內容置中
-    .text-content {
-        order: 2;  // 將文字置於中間
-        color: white;
-        max-width: 100%;
-        text-align: center;
-
-        h1 {
-            font-size: 24px;
+        // 驗證碼文字碼
+        .captcha-code {
+            padding: 10px;
             font-weight: bold;
-            line-height: 1.4;
+            background-color: #f5f5f5;
+            border-radius: 5px;
+            flex-shrink: 0; // 不縮小文字碼
         }
 
-        p {
+        // 按鈕移到右側
+        .refresh-captcha {
+            padding: 10px;
+            border: none;
+            border-radius: 30px;
+            background-color: #d8ba5b;
+            cursor: pointer;
+            font-size: 16px;
+            flex-shrink: 0; // 固定大小
+            white-space: nowrap; // 防止按鈕文字換行
+
+            &:hover {
+                background-color: darken(#d8ba5b, 10%);
+            }
+        }
+    }
+
+    .form-group label {
+        color: var(--second-Colors-fffff0, #FFFFF0);
+        text-align: center;
+        font-family: "DM Sans";
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        padding-right: 10px;
+        text-shadow: #545454 1px 1px 1px;
+    }
+
+    .captcha-group {
+        padding-bottom: 30px;
+
+        .message1 {
             font-size: 18px;
-            line-height: 1.6;
-            margin: 10px 0;
+        }
+
+        .refresh-captcha {
+            margin: 0 auto;
         }
     }
 
-    // ✅ 按鈕置於最下方並全寬
-    .learn-more-button {
-        order: 3;  // 將按鈕置於最下方
-        padding: 12px 24px;
+
+    // 送出按鈕
+    .submit-btn {
+        width: 100%;
+        padding: 12px;
+        font-size: 16px;
+        border-radius: 20px;
+    }
+
+    .dashed-line {
         border: none;
-        border-radius: 30px;
-        background-color: $Yellow_1;
-        color: white;
-        font-size: 1rem;
-        font-weight: bold;
-        cursor: pointer;
-        width: 50%;  // ✅ 讓按鈕全寬
-        margin: 0 ;  // ✅ 清除原本的 margin
-        transition: background-color 0.3s;
-        margin-right: 20px;
+        border-bottom: 4px dashed #bebebe;
+        margin-bottom: 10px;
+        margin-top: 10px;
+        width: 100%;
+        opacity: 0.6;
+    }
 
-        &:hover {
-            background-color: darken($Yellow_1, 10%);
+    .carbon-reduction-card {
+        display: flex;
+        flex-direction: column; // ✅ 垂直排列
+        align-items: center;
+        padding: 20px;
+        border-radius: 20px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        max-width: 100%; // ✅ 讓卡片適應小螢幕
+        text-align: center;
+        gap: 20px; // ✅ 增加元素之間的間隔
+
+        // ✅ 將圖片移到最上方
+        .image-content {
+            order: 1; // 將圖片放到最上方
+            width: 100%;
+            max-width: 100%;
+            margin: 0;
+
+            img {
+                width: 100%;
+                border-radius: 20px;
+            }
+        }
+
+        // ✅ 文字內容置中
+        .text-content {
+            order: 2; // 將文字置於中間
+            color: white;
+            max-width: 100%;
+            text-align: center;
+
+            h1 {
+                font-size: 24px;
+                font-weight: bold;
+                line-height: 1.4;
+            }
+
+            p {
+                font-size: 18px;
+                line-height: 1.6;
+                margin: 10px 0;
+            }
+        }
+
+        // ✅ 按鈕置於最下方並全寬
+        .learn-more-button {
+            order: 3; // 將按鈕置於最下方
+            padding: 12px 24px;
+            border: none;
+            border-radius: 30px;
+            background-color: $Yellow_1;
+            color: white;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            width: 50%; // ✅ 讓按鈕全寬
+            margin: 0; // ✅ 清除原本的 margin
+            transition: background-color 0.3s;
+            margin-right: 20px;
+
+            &:hover {
+                background-color: darken($Yellow_1, 10%);
+            }
         }
     }
+
+
+
+
+    $footer_layout: 430px;
+
 }
-
-
-
-
-$footer_layout: 430px;
-
-}
-
-    

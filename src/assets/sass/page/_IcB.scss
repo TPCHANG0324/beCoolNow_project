@@ -1,35 +1,3 @@
-.backStage_header {
-  // border: 2px solid red;
-  background-color: $bgc_color;
-  width: 100%;
-  position: static;
-
-  div {
-    display: flex;
-    align-items: center;
-    max-width: $body_layout;
-    margin: 0 auto;
-    padding: 24px;
-
-    h2 {
-      @include PC_h2($Gray_1);
-      font-size: 40px;
-      margin-left: 40px;
-    }
-
-    img {
-      width: 140px;
-    }
-
-    svg {
-      margin-left: auto;
-    }
-
-  }
-
-
-}
-
 .backStage_bgc {
   background-color: $Green_4;
   width: 100%;
@@ -115,6 +83,7 @@
 
               th:nth-of-type(2) {
                 padding-left: 52px;
+                text-align: left;
               }
 
               .IcB_content_H {
@@ -208,6 +177,7 @@
 
                 .IcB_deleteBtn_H {
                   border: none;
+                  cursor: pointer;
                 }
 
               }
@@ -312,6 +282,7 @@
 
                 .IcB_deleteBtn_H {
                   border: none;
+                  cursor: pointer
                 }
               }
             }

@@ -1,0 +1,627 @@
+// 確認彈窗
+.backStageConfirmPopup_H {
+  width: 600px;
+  height: 240px;
+  border: 1px solid $Gray_1;
+  background-color: $bgc_color;
+  border-radius: $pic_radius_20px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  span {
+    display: block;
+    height: 60px;
+    width: 100%;
+    background-color: $Green_4;
+    border-radius: 20px 20px 0 0;
+  }
+
+  div {
+    text-align: center;
+    margin-top: 32px;
+
+    h3 {
+      @include PC_h3($Gray_1);
+      font-weight: bold;
+    }
+
+    div {
+      display: flex;
+      gap: 60px;
+      justify-content: center;
+
+      button {
+        @include btn_style($btn_radius_30px, 16%, 44px);
+        padding: 0;
+      }
+    }
+
+  }
+}
+
+// 置頂
+.CB_goTopForum_H {
+  // display: none;
+}
+
+// 下架
+.CB_goOffForum_H {
+  display: none;
+}
+
+// 小彈窗
+
+.BackStageSmallPopup {
+  width: 800px;
+  height: 400px;
+  border: 1px solid $Gray_1;
+  background-color: $bgc_color;
+  border-radius: $pic_radius_20px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  span {
+    display: block;
+    height: 60px;
+    width: 100%;
+    background-color: $Green_4;
+    border-radius: 20px 20px 0 0;
+    @include PC_h3($Gray_1);
+    line-height: 60px;
+    font-weight: bold;
+    padding-left: 16px;
+  }
+
+  div {
+    display: flex;
+
+
+    .IcB_addMain_H {
+      display: flex;
+      flex-direction: column;
+      // border: 1px solid red;
+      width: 50%;
+      padding: 32px 36px 0 36px;
+
+      label {
+        width: 100%;
+      }
+
+      input {
+        margin-top: 4px;
+      }
+    }
+
+    figure {
+      // border: 1px solid red;
+      width: 50%;
+      padding: 32px 36px 0 36px;
+
+
+      label {
+        margin-left: 60px;
+      }
+
+      input {
+        width: 180px;
+        border: 1px solid $Gray_3;
+        margin-left: 16px;
+        cursor: pointer;
+
+        &::-webkit-file-upload-button {
+          color: $Ivory_white;
+          background: $Green_1;
+          border: 1px solid $Gray_3;
+          padding: 5px 10px;
+          cursor: pointer;
+        }
+      }
+
+      .preview {
+        width: 236px;
+        height: 120px;
+        border: 1.5px solid $Gray_3;
+        text-align: center;
+        display: block;
+        margin-left: 64px;
+        margin-top: 20px;
+
+        p {
+          @include PC_h6($Gray_1);
+          line-height: 120px;
+          font-weight: bold;
+
+        }
+      }
+    }
+  }
+
+  div {
+    display: flex;
+    justify-content: center;
+
+    label {
+      @include PC_h6($Gray_1);
+      font-weight: bold;
+      margin-bottom: 12px;
+    }
+
+    button {
+      @include btn_style($btn_radius_30px, 16%, 44px);
+      padding: 0;
+      margin: 0 20px;
+    }
+
+    textarea {
+      height: 60px;
+      width: 100%;
+      background-color: $Ivory_white;
+      border-radius: 5px;
+      border: 0.5px solid #bebebe;
+      resize: none;
+      @include PC_h4($Gray_1);
+      padding-left: 16px;
+      padding-top: 4px;
+      margin-top: 4px;
+
+      &:focus {
+        @include PC_h4($Gray_1);
+        padding-left: 16px;
+        outline: 2px solid $Yellow_1;
+        padding-top: 4px;
+      }
+
+      &::placeholder {
+        @include PC_h4($Gray_1);
+      }
+    }
+  }
+
+}
+
+// 大彈窗
+
+.BackStageBigPopup {
+  width: 800px;
+  height: auto;
+  border: 1px solid $Gray_1;
+  background-color: $bgc_color;
+  border-radius: $pic_radius_20px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  span {
+    display: block;
+    height: 60px;
+    width: 100%;
+    background-color: $Green_4;
+    border-radius: 20px 20px 0 0;
+    @include PC_h3($Gray_1);
+    line-height: 60px;
+    font-weight: bold;
+    padding-left: 16px;
+  }
+
+  section {
+    display: flex;
+    // border: 1px solid red;
+    justify-content: center;
+
+    .SpB_leftBlockPopup_H {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      // border: 1px solid red;
+      width: 40%;
+      padding: 32px 60px 0 60px;
+      @include PC_h6($Gray_1);
+      line-height: 140%;
+      font-weight: bold;
+      margin-bottom: 0;
+
+      div {
+        margin: 10px 0;
+        display: flex;
+
+        input {
+          width: 60%;
+          // height: auto;
+          padding: 0 16px;
+          height: auto;
+        }
+      }
+    }
+
+    .SpB_rightBlockPopup_H {
+
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      // border: 1px solid red;
+      width: 40%;
+      padding: 32px 60px 0 60px;
+      @include PC_h6($Gray_1);
+      line-height: 140%;
+      font-weight: bold;
+      margin-bottom: 0;
+
+      div {
+        margin: 10px 0;
+
+        select {
+          background-color: $Ivory_white;
+          @include PC_h6($Gray_1);
+          font-weight: bold;
+          border-radius: 5px;
+          padding: 0px 4px;
+          border: .5px solid $Gray_3;
+
+          &:focus {
+            outline: 2px solid $Yellow_1;
+          }
+        }
+      }
+
+      figure {
+        // border: 1px solid red;
+        margin: 10px 0;
+
+        input {
+          width: 180px;
+          border: 1px solid $Gray_3;
+          margin-left: 16px;
+          cursor: pointer;
+
+          &::-webkit-file-upload-button {
+            color: $Ivory_white;
+            background: $Green_1;
+            border: 1px solid $Gray_3;
+            padding: 5px 10px;
+            cursor: pointer;
+          }
+        }
+
+        .preview {
+          width: 236px;
+          height: 120px;
+          border: 1.5px solid $Gray_3;
+          text-align: center;
+          display: block;
+          margin-left: 14px;
+          margin-top: 20px;
+
+          p {
+            @include PC_h6($Gray_1);
+            line-height: 120px;
+            font-weight: bold;
+
+          }
+        }
+      }
+    }
+
+  }
+
+  div:last-of-type {
+    display: flex;
+    justify-content: center;
+
+    button {
+      @include btn_style($btn_radius_30px, 16%, 44px);
+      padding: 0;
+      margin: 10px 20px 20px 20px;
+    }
+  }
+
+}
+
+//-------------------------------------------//
+//---------------- 島嶼危機 ------------------//
+
+.IcB_addPopup_H {
+  // display: none;
+
+  .UploadPic {
+    color: $Gray_3;
+    font-weight: bold;
+  }
+}
+
+.IcB_editPopup_H {
+  display: none;
+
+  .UploadPic {
+    color: $Gray_3;
+    font-weight: bold;
+  }
+}
+
+.IcB_articleDeletePopup_H {
+  display: none;
+}
+
+//-------------------------------------------//
+//---------------- 教育影片 ------------------//
+
+.IcB_eduAddPopup_H {
+
+  // display: none;
+
+  .UploadPic {
+    color: $Gray_3;
+    font-weight: bold;
+  }
+
+  >div:last-of-type {
+    margin-top: 40px;
+  }
+}
+
+.IcB_eduEditPopup_H {
+  display: none;
+
+  .UploadPic {
+    color: $Gray_3;
+    font-weight: bold;
+  }
+
+  >div:last-of-type {
+    margin-top: 40px;
+  }
+}
+
+.IcB_eduDeletePopup_H {
+  display: none;
+}
+
+//-------------------------------------------//
+//---------------- 互動問答 ------------------//
+
+.IcB_qAndaDeletePopup_H {
+  display: none;
+}
+
+.IcB_addQAndAPopup_H {
+  // display: none;
+
+  .UploadPic {
+    color: $Gray_3;
+    font-weight: bold;
+  }
+}
+
+.IcB_editQAndAPopup_H {
+  display: none;
+
+  .UploadPic {
+    color: $Gray_3;
+    font-weight: bold;
+  }
+}
+
+.IcB_answer_H {
+  margin: 20px 0 8px 0;
+  display: flex;
+  column-gap: 40px;
+
+  input {
+    width: 160px;
+  }
+}
+
+//-------------------------------------------//
+//---------------- 訊息管理 ------------------//
+
+.AuB_messageDelete_H {
+  // display: none;
+}
+
+//-------------------------------------------//
+//---------------- 商品庫存 ------------------//
+
+.SpB_addProduct_H {
+  display: none;
+}
+
+.SpB_editProduct_H {
+  // display: none;
+}
+
+//-------------------------------------------//
+//---------------- 訂單管理 ------------------//
+
+.SpB_editViewOrder_H {
+  // display: none;
+
+  .SpB_scrollDiv_H {
+    @include PC_h6($Gray_1);
+    line-height: 140%;
+    font-weight: bold;
+    padding: 20px 60px 0 60px;
+    height: 440px;
+    /* 固定高度，讓內容溢出後滾動 */
+    overflow-y: scroll;
+    /* 垂直滾動 */
+
+    .SpB_orderNum_H {
+      display: flex;
+      // border: 1px solid red;
+      @include PC_h6($Gray_1);
+      line-height: 140%;
+      font-weight: bold;
+    }
+
+    .SpB_status_H {
+      border: 1px solid $Gray_1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 80px;
+      height: 80px;
+
+      div {
+        display: flex;
+        // border: 1px solid red;
+        @include PC_h6($Gray_1);
+        line-height: 140%;
+
+
+        p {
+          @include PC_h6($Gray_1);
+          line-height: 140%;
+          font-weight: bold;
+        }
+
+        select {
+          background-color: $Ivory_white;
+          @include PC_h6($Gray_1);
+          font-weight: bold;
+          border-radius: 5px;
+          padding: 0px 4px;
+          border: .5px solid $Gray_3;
+
+          &:focus {
+            outline: 2px solid $Yellow_1;
+          }
+        }
+      }
+
+    }
+
+    .SpB_buyInfo_H {
+      display: flex;
+      align-items: flex-start;
+      padding: 20px;
+      border: 1px solid $Gray_1;
+      gap: 12px;
+      background-color: $Ivory_white;
+
+      >div {
+        @include PC_h6($Gray_1);
+        line-height: 140%;
+        font-weight: bold;
+        width: 100%;
+        padding-right: 4px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        gap: 8px;
+
+        div {
+          display: flex;
+          justify-content: flex-start;
+        }
+      }
+
+
+    }
+
+    .SpB_orderTable_H {
+      border: 1px solid $Gray_1;
+      padding: 20px;
+
+      h6 {
+        @include PC_h6($Gray_1);
+        font-weight: bold;
+        margin-bottom: 12px;
+      }
+
+      table {
+        width: 100%;
+        @include PC_h6($Gray_1);
+        font-weight: bold;
+        text-align: center;
+
+        thead {
+          background-color: $Green_4;
+        }
+
+        tbody {
+          background-color: $Ivory_white;
+
+          tr {
+            td {
+              padding: 4px 0;
+            }
+          }
+        }
+      }
+    }
+
+    .SpB_total_H {
+      // border: 1px solid brown;
+      width: 30%;
+      margin-left: auto;
+      @include PC_h6($Gray_1);
+      line-height: 140%;
+      font-weight: bold;
+
+      div {
+        display: flex;
+        justify-content: space-between;
+        margin: 4px 0;
+      }
+    }
+  }
+}
+
+//-------------------------------------------//
+//---------------- 會員管理 ------------------//
+
+.MmB_EditView_H {
+  section {
+    display: flex;
+    gap: 60px;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 100px 20px 100px;
+
+    article:first-of-type {
+      width: 60%;
+      // border: 1px solid red;
+      margin-bottom: 0;
+
+      div {
+        justify-content: flex-start;
+        @include PC_h6($Gray_1);
+        font-weight: bold;
+        margin: 20px 0;
+      }
+    }
+
+    article:last-of-type {
+      width: 40%;
+      // border: 1px solid red;
+      margin-bottom: 0;
+
+      div {
+        justify-content: flex-start;
+        @include PC_h6($Gray_1);
+        font-weight: bold;
+        margin: 20px 0;
+
+        select {
+          background-color: $Ivory_white;
+          @include PC_h6($Gray_1);
+          font-weight: bold;
+          border-radius: 5px;
+          padding: 0px 4px;
+          border: .5px solid $Gray_3;
+
+          &:focus {
+            outline: 2px solid $Yellow_1;
+          }
+        }
+      }
+    }
+  }
+}
+
+//-------------------------------------------//

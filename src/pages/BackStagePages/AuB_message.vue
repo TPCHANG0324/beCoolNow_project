@@ -6,7 +6,7 @@
         <h3>訊息管理</h3>
         <!-- <h3>會員管理</h3> -->
         <div class="MmB_searchBar_H">
-          <input class="input" type="text" name="" id="" placeholder="搜尋E-mail">
+          <input id="" class="input" type="text" name="" placeholder="搜尋E-mail" />
           <i class="fa-solid fa-magnifying-glass"></i>
         </div>
       </div>
@@ -73,10 +73,21 @@
       <BackStagePaginator></BackStagePaginator>
     </div>
   </div>
+  <BackStageConfirmPopup class="AuB_messageDelete_H">
+    <span></span>
+    <div>
+      <h3>確定將此訊息刪除嗎?</h3>
+      <div>
+        <button>取消</button>
+        <button>確定</button>
+      </div>
+    </div>
+  </BackStageConfirmPopup>
 </template>
 
 <script>
 import BackStageSidebar from '@/components/items/BackStageItems/BackStageSidebar.vue';
 import backStagePaginator from '@/components/items/BackStageItems/BackStagePaginator.vue';
 import BackStageHeader from '@/components/layout/BackStageLayout/BackStageHeader.vue';
+import BackStageConfirmPopup from '@/components/layout/BackStageLayout/BackStageConfirmPopup.vue';
 </script>

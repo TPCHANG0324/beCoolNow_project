@@ -53,10 +53,82 @@
       <BackStagePaginator></BackStagePaginator>
     </div>
   </div>
+
+  <!-- 互動問答 新增 -->
+  <BackStageSmallPopup class="IcB_addQAndAPopup_H">
+    <span>
+      <p>互動問答&nbsp;新增</p>
+    </span>
+    <div>
+      <div class="IcB_addMain_H">
+        <label for="IcB_question_H">題目描述:<br /><textarea id="IcB_question_H" name="IcB_question_H"></textarea>
+        </label>
+      </div>
+      <figure>
+        <label for="UploadPic">圖片:</label>
+        <input id="UploadPic" class="UploadPic" type="file" accept="image/*, image/svg+xml" />
+        <div class="preview">
+          <p>圖片預覽</p>
+        </div>
+      </figure>
+    </div>
+    <div class="IcB_answer_H">
+      <label for="IcB_answerA_H">A選項: <input id="IcB_answerA_H" class="input" type="text" /></label>
+      <label for="IcB_answerB_H">B選項: <input id="IcB_answerB_H" class="input" type="text" /></label>
+      <label for="IcB_answerC_H">C選項: <input id="IcB_answerC_H" class="input" type="text" /></label>
+    </div>
+    <div>
+      <button>取消</button>
+      <button>儲存</button>
+    </div>
+  </BackStageSmallPopup>
+
+  <!-- 互動問答 編輯 -->
+  <BackStageSmallPopup class="IcB_editQAndAPopup_H">
+    <span>
+      <p>互動問答&nbsp;編輯</p>
+    </span>
+    <div>
+      <div class="IcB_addMain_H">
+        <label for="IcB_question_H">題目描述:<br /><textarea id="IcB_question_H" name="IcB_question_H"></textarea>
+        </label>
+      </div>
+      <figure>
+        <label for="UploadPic">圖片:</label>
+        <input id="UploadPic" class="UploadPic" type="file" accept="image/*, image/svg+xml" />
+        <div class="preview">
+          <p>圖片預覽</p>
+        </div>
+      </figure>
+    </div>
+    <div class="IcB_answer_H">
+      <label for="IcB_answerA_H">A選項: <input id="IcB_answerA_H" class="input" type="text" /></label>
+      <label for="IcB_answerB_H">B選項: <input id="IcB_answerB_H" class="input" type="text" /></label>
+      <label for="IcB_answerC_H">C選項: <input id="IcB_answerC_H" class="input" type="text" /></label>
+    </div>
+    <div>
+      <button>取消</button>
+      <button>儲存</button>
+    </div>
+  </BackStageSmallPopup>
+
+  <!-- 互動問答 刪除 -->
+  <BackStageConfirmPopup class="IcB_qAndaDeletePopup_H">
+    <span></span>
+    <div>
+      <h3>確定將此題目刪除嗎?</h3>
+      <div>
+        <button>取消</button>
+        <button>確定</button>
+      </div>
+    </div>
+  </BackStageConfirmPopup>
 </template>
 
 <script>
 import BackStageSidebar from '@/components/items/BackStageItems/BackStageSidebar.vue';
 import backStagePaginator from '@/components/items/BackStageItems/BackStagePaginator.vue';
 import BackStageHeader from '@/components/layout/BackStageLayout/BackStageHeader.vue';
+import BackStageSmallPopup from '@/components/layout/BackStageLayout/BackStageSmallPopup.vue';
+import BackStageConfirmPopup from '@/components/layout/BackStageLayout/BackStageConfirmPopup.vue';
 </script>

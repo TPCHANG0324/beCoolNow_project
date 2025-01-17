@@ -7,6 +7,7 @@
     <button>互動問答管理</button>
     <button>地球信件管理</button>
     <button>討論板管理</button>
+    <button>留言板管理</button>
     <button>遊戲互動管理</button>
     <button>訊息管理</button>
     <button>商品庫存管理</button>
