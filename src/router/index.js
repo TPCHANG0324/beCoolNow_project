@@ -107,13 +107,6 @@ const routes = [
   //     requiredLogin: true
   //   }
   // },
-  // {
-  //   path: '/Au/', component: () => import('@/pages/Au.vue'),
-  //   meta: {
-  //     title: '關於我們',
-  //     requiredLogin: false
-  //   }
-  // },
   {
     path: '/shop', component: () => import('@/pages/Shop.vue'),
     meta: {
@@ -131,7 +124,7 @@ const routes = [
   {
     path: '/shop_cart', component: () => import('@/pages/Shop_cart.vue'),
     meta: {
-      title: '環保市集',
+      title: '環保市集_購物車',
       // requiredLogin: true
     }
   },

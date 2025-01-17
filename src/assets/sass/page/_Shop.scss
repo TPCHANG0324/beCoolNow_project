@@ -36,7 +36,7 @@
         .fliter_section_S {
             width: 20%;
             border-radius: 20px;
-            background: #FFF;
+            background: $Ivory_white;
             box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
             padding: 28px 20px;
             box-sizing: border-box;
@@ -81,45 +81,75 @@
             /* 新舊 + 價格篩選 */
             .store_title_S {
                 display: flex;
-                justify-content: end;
+                justify-content: space-between;
                 padding: 40px 0;
                 position: relative;
-
-                select {
-                    cursor: pointer;
-                    outline: none;
-                    border: 0px solid transparent;
-                    padding: 10px 28px;
-                    padding-left: 20px;
-                    padding-right: 32px;
-                    border-radius: 30px;
-                    color: $Ivory_white;
-                    background-color: $Yellow_1;
-                    -webkit-appearance: none;
-                    /* 隱藏箭頭 */
-                    -moz-appearance: none;
-                    /* 隱藏箭頭 */
-                    appearance: none;
-
-                    /* 隱藏箭頭 */
-                    option {
-                        background-color: #fff;
-                        color: $Green_1;
-                    }
+                align-items: center;
+                .Sp_spend_category{
+                    font-weight: $font_weight_Bold;
+                    font-size: $h3;
                 }
-
-                &::after {
-                    content: '\25BC';
-                    /* 使用不同的箭頭符號 */
-                    display: block;
-                    position: absolute;
-                    top: 50%;
-                    right: 15px;
-                    transform: translateY(-50%);
-                    pointer-events: none;
-                    color: white;
-                    font-size: 12px;
-
+                .select-box{
+                    position: relative;
+                    // background-color: #fff;
+                    padding: 1px 0;
+                    select {
+                        display: block;
+                        cursor: pointer;
+                        outline: none;
+                        border: 0px solid transparent;
+                        padding: 10px 28px;
+                        padding-left: 20px;
+                        padding-right: 32px;
+                        border-radius: 30px;
+                        color: $Green_2;
+                        background-color: $Light_Green;
+                        -webkit-appearance: none;
+                        /* 隱藏箭頭 */
+                        -moz-appearance: none;
+                        /* 隱藏箭頭 */
+                        appearance: none;
+                        position: relative;
+                        &::before{
+                            content: '111';
+                            display: block;
+                            width: 100%;
+                            height: 5px;
+                            position: absolute;
+                            bottom: 0;
+                            right: 0;
+                            background-color: $Green_1;
+                        }
+                        /* 隱藏箭頭 */
+                        option {
+                            background-color: #fff;
+                            color: $Green_1;
+                        }
+                    }
+                    &::before{
+                        display: block;
+                        content: '';
+                        width: 90%;
+                        height: 1px;
+                        background-color: $Green_1;
+                        position: absolute;
+                        bottom: 0;
+                        right: 4%;
+                        
+                    }
+                    &::after {
+                        content: '\25BC';
+                        /* 使用不同的箭頭符號 */
+                        display: block;
+                        position: absolute;
+                        top: 50%;
+                        right: 15px;
+                        transform: translateY(-50%);
+                        pointer-events: none;
+                        color: $Green_2;
+                        font-size: 12px;
+    
+                    }
                 }
 
 
@@ -341,7 +371,9 @@
                 .Sp-table-header-X {
                     padding: 1rem;
                     display: flex;
-
+                    @include max_1024(){
+                        display: none;
+                    }
                     // border-bottom: 1px solid #ccc;
                     &::before {
                         display: table;
@@ -396,44 +428,76 @@
                 .Sp-cart-item-X {
                     padding: 1rem;
                     display: flex;
-
+                    @include max_1024(){
+                        flex-wrap: wrap;
+                        position: relative;
+                    }
                     div {
                         position: relative;
                         min-height: 1px;
                         padding-right: 15px;
                         padding-left: 15px;
+                        @include max_1024(){
+                            padding-left: 0;
+                            padding-right: 0;
+                        }
 
                         &:nth-of-type(1) {
                             padding-left: 0;
                             width: 25%;
                             display: flex;
+                            @include max_1024(){
+                                width: 100%;
+                            }
 
                             a {
                                 display: block;
                                 height: 50px;
                                 width: 20%;
                                 margin-right: 10px;
-                                background-image: url('../image/Sp06.jpg');
+                                // background-image: url('src/assets/images/Sp06.jpg');
                                 background-size: contain;
                                 background-repeat: no-repeat;
                                 flex-shrink: 0;
+                                @include max_1024(){
+                                    width: 50px;
+                                }
                             }
                         }
 
                         &:nth-of-type(2) {
                             width: 16.66666667%;
                             text-align: center;
+                            @include max_1024(){
+                                width: auto;
+                                position: absolute;
+                                left: 4.75rem;
+                                top: 3rem;
+
+                            }
                         }
 
                         &:nth-of-type(3) {
                             width: 16.66666667%;
                             text-align: center;
+                            @include max_1024(){
+                                width: auto;
+                                position: absolute;
+                                top: 4rem;
+                                right: 1rem;
+                            }
                         }
 
                         &:nth-of-type(4) {
                             width: 16.66666667%;
                             text-align: center;
-
+                            @include max_1024(){
+                                margin-top: 1.5rem;
+                                width: 192px;
+                            }
+                            @include max_540(){
+                               width: 160px;
+                            }
                             form {
                                 border: 1px solid $Green_1;
 
@@ -460,6 +524,9 @@
                                         background-color: $Ivory_white;
                                         text-align: center;
                                         color: $Green_1;
+                                        @include max_1024(){
+                                           width: 100%;
+                                        }
                                     }
 
                                     input[type=number]::-webkit-outer-spin-button,
@@ -474,13 +541,24 @@
                         &:nth-of-type(5) {
                             width: 16.66666667%;
                             text-align: center;
+                            @include max_1024(){
+                                width: auto;
+                                position: absolute;
+                                bottom: 1.5rem;
+                                right: 1rem;
+                            }
                         }
 
                         &:nth-of-type(6) {
                             padding-right: 0;
                             width: 8.33333333%;
                             text-align: center;
-
+                            @include max_1024(){
+                                width: auto;
+                                position: absolute;
+                                top: 1rem;
+                                right: 1rem;
+                            }
                             i {
                                 cursor: pointer;
                             }
@@ -507,13 +585,25 @@
             .Sp-cart-addon-wrapper-X {
                 padding: 1rem;
                 display: flex;
-                gap: 3%;
+                // gap: 20px;
                 box-sizing: border-box;
+                overflow: hidden;
+
+                overflow-x: auto; // 允許水平方向的滾動
+                scroll-behavior: smooth; // 添加平滑滾動效果
+                padding: 10px 0; // 上下內邊距
+                // &::-webkit-scrollbar {
+                //     display: none; // 隱藏滾動條
+                // }
+
 
                 .Sp-cart-addon-item-X {
-                    width: 25%;
+                    // width: 25%;
+                    width: calc((1200px - 64px) / 4);
                     display: flex;
                     box-sizing: border-box;
+                    flex-shrink: 0;
+                    margin-left: 16px;
 
                     .Sp-cart-addon-item-img {
                         width: 40%;
@@ -521,7 +611,7 @@
                         img {
                             display: block;
                             font-size: 0;
-                            width: 100%;
+                            max-width: 100%;
                             aspect-ratio: 1;
                             object-fit: cover;
                         }
@@ -570,6 +660,9 @@
         .Sp-shopping-info-X {
             display: flex;
             gap: 28px;
+            @include max_912(){
+                flex-direction: column;
+            }
 
             // align-items: flex-start;
             /* 選擇付款方式 */
@@ -577,7 +670,9 @@
                 width: 65%;
                 box-shadow: 4px 4px 8px 0px rgba(0, 0, 0, 0.25);
                 background-color: $Ivory_white;
-
+                @include max_912(){
+                    width: 100%;
+                }
                 .Sp-order-form-header {
                     font-size: 20px;
                     font-weight: 500;
@@ -610,7 +705,9 @@
                 width: 35%;
                 box-shadow: 4px 4px 8px 0px rgba(0, 0, 0, 0.25);
                 background-color: $Ivory_white;
-
+                @include max_912(){
+                    width: 100%;
+                }
                 .Sp-order-summary-header {
                     font-size: 20px;
                     font-weight: 500;
@@ -629,7 +726,7 @@
                         form {
                             display: flex;
                             box-sizing: border-box;
-                            width: 50%;
+                            width: 190px;
                             border: 1px solid $Green_1;
 
                             span {

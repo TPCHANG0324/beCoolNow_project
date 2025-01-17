@@ -13,6 +13,7 @@
                 <!-- 左：價格選擇 -->
                 <div class="fliter_section_S">
                     <ul>
+                        <li><a href="#">全部商品</a></li>
                         <li><a href="#">NT$100~$200</a></li>
                         <li><a href="#">NT$200~$300</a></li>
                         <li><a href="#">NT$300~$400</a></li>
@@ -24,13 +25,17 @@
                 <div class="Sp_container_S">
                     <!-- 新舊 + 價格篩選 -->
                     <div class="store_title_S">
-                        <select name="" id="">
-                            <option value="默認排序"selected>默認排序</option>
-                            <option value="上架時間：由新至舊">上架時間：由新至舊</option>
-                            <option value="上架時間：由舊至舊">上架時間：由舊至舊</option>
-                            <option value="價格：由高至低">價格：由高至低</option>
-                            <option value="價格：由低至高">價格：由低至高</option>
-                        </select>
+                        <!-- 顯示的類別 -->
+                        <p class="Sp_spend_category">全部商品</p>
+                        <div class="select-box">
+                            <select name="" id="">
+                                <option value="默認排序"selected>默認排序</option>
+                                <option value="上架時間：由新至舊">上架時間：由新至舊</option>
+                                <option value="上架時間：由舊至舊">上架時間：由舊至舊</option>
+                                <option value="價格：由高至低">價格：由高至低</option>
+                                <option value="價格：由低至高">價格：由低至高</option>
+                            </select>
+                        </div>
                     </div>
                     <!-- 商品列表 -->
                     <div class="Sp-product_S">
