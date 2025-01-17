@@ -1,29 +1,41 @@
-
 //---------------------------- 按鈕 class ------------------------------//
 // btn_style(圓角, 寬度, 高度)
 
-.btn{
+.btn {
     @include btn_style(5px, 100%, 48px);
+
+    @include max_1024 {
+        font-size: $h5;
+        height: 44px;
+        width: 45%;
+        line-height: 12px;
+    }
+
+    @include max_768 {
+        font-size: $h4;
+        height: 40px;
+        width: 40%;
+    }
 
     // 永續行動, 我也完成+1 按鈕
     &-Ac_done_btn {
-            height: 48px;
-            margin-top: 20px;
-            font-size: $h6;
-            transition: background-color 0.3s;
-            background-color: $init;
-            padding: 16px 24px;
-            width: 60%;
-            @include border($Ivory_white);
-    
-            &:hover {
-                background-color: darken($Green_1, 10%);
-                color: $Ivory_white;
-            }
+        height: 48px;
+        margin-top: 20px;
+        font-size: $h6;
+        transition: background-color 0.3s;
+        background-color: $init;
+        padding: 16px 24px;
+        width: 60%;
+        @include border($Ivory_white);
+
+        &:hover {
+            background-color: darken($Green_1, 10%);
+            color: $Ivory_white;
         }
+    }
 
     // RWD 購物車按鈕
-    &-SpB_addCart{
+    &-SpB_addCart {
         color: $Ivory_white;
         background-color: $init;
         @include border($Ivory_white);
