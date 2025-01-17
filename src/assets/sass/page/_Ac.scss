@@ -141,6 +141,10 @@
     justify-content: center;
     width: 100%; // 使用100%讓卡片跟隨grid自動調整
     max-width: 350px; // 每張卡片的最大寬度，讓三張卡片平均分布
+
+    // .btn.btn-Ac_done_btn{
+    //     background-color: $Green_2;
+    // }
     }
 
 
@@ -188,21 +192,32 @@
     margin-bottom: 20px;
   }
 
-  .btn-AC_done_btn {
-    background-color: initial;
-    color: $Ivory_white;
-    padding: 10px 20px;
-    border-radius: 5px;
-    border:.5px solid $Ivory_white;
-    font-size: $h6;
-    font-weight: $font_weight_Bold;
-    cursor: pointer;
-    transition: background-color 0.3s;
+//   .btn.btn-AC_done_btn {
+  
+// }
+    .btn.btn-Ac_done_btn {
+        background-color: initial;
+        color: $Ivory_white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        border:.5px solid $Ivory_white;
+        font-size: $h6;
+        font-weight: $font_weight_Bold;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        // display: none;
+     
+        &:hover {
+          background-color: $Green_3;
+          color: $Ivory_white;
+          border: 1px solid $Ivory_white !important;
+        }
+    }
 
-    // &:hover {
-    // }
-  }
-
+//   btn btn-Ac_done_btn
+// body{
+//     display: none;
+// }
   // 禁用按鈕樣式
 .btn-Ac_done_btn.disabled {
     background: #9e9e9e;
@@ -419,11 +434,13 @@
     margin-left: 20px;
 }
 
-.name{
+.name_Ac{
     background-color: $Ivory_white;
     margin-left: 100px;
     text-align: right;
 }
+
+
 
 // 讓背景圖片填滿整個區域
 .background-container {
@@ -720,6 +737,7 @@
         -webkit-text-stroke: 0.5px #5b774a;
         padding-top: 0px;
 }
+
 
 .hero-section .hero-text h2 {
     font-size: 2rem;
