@@ -9,7 +9,7 @@
           <div class="Fb-post-category-container-X">
             <ul class="Fb-post-category-X">
               <div class="Fb-post-category-box">
-                <select name="" id="" class="active">
+                <select id="" name="" class="active">
                   <option value="全部文章">全部文章</option>
                   <option value="氣候科學">氣候科學</option>
                   <option value="生態危機">生態危機</option>
@@ -50,7 +50,9 @@
                   </div>
                 </div>
                 <div class="Fb-post-article-right-X">
-                  <img src="https://picsum.photos/200" alt="">
+                  <img src="../assets/images/Fb10.jpg" alt="" />
+
+                  <!-- <img src="https://picsum.photos/200" alt="" /> -->
                 </div>
               </article>
 
@@ -59,8 +61,7 @@
                   <div class="Fb-post-article-left-C-T-X">
                     <span>政策國際</span>&nbsp;‧&nbsp;<span>2024-12-25</span>
                   </div>
-                  <h6 class="Fb-post-article-left-title-X">調查：助低收者因應極端氣候 8成6支持政府釋資源
-                  </h6>
+                  <h6 class="Fb-post-article-left-title-X">調查：助低收者因應極端氣候 8成6支持政府釋資源</h6>
                   <p>
                     台大風險中心舉辦「2024台灣公正轉型調查發布」記者會，針對淨零排放、氣候變遷雙主軸，對全國18歲以上民眾，在17日到25日使用室內電話、行動電話2種電話訪問調查，有效樣本1102份，以95%信賴度估計，抽樣誤差在正、負2.95個百分點之內。
                   </p>
@@ -81,7 +82,8 @@
                     <span>生態危機</span>&nbsp;‧&nbsp;<span>2024-12-25</span>
                   </div>
                   <h6 class="Fb-post-article-left-title-X">北極氣候暖化 耶誕老人故鄉不下雪引擔憂</h6>
-                  <p>（中央社芬蘭羅文尼米26日綜合外電報導）隨著耶誕節的腳步日漸接近，耶誕老人的工作進入緊鑼密鼓的忙碌階段。但是氣候暖化導致他位在北極圈的老家下雪量不足，就連耶誕老人都十分擔心。
+                  <p>
+                    （中央社芬蘭羅文尼米26日綜合外電報導）隨著耶誕節的腳步日漸接近，耶誕老人的工作進入緊鑼密鼓的忙碌階段。但是氣候暖化導致他位在北極圈的老家下雪量不足，就連耶誕老人都十分擔心。
                   </p>
                   <div class="Fb-post-react-X">
                     <i class="bi bi-hand-thumbs-up">100</i>
@@ -90,7 +92,9 @@
                   </div>
                 </div>
                 <div class="Fb-post-article-right-X">
-                  <img src="https://fakeimg.pl/300/" alt="">
+                  <img src="../assets/images/Fb11.jpg" alt="" />
+
+                  <!-- <img src="https://fakeimg.pl/300/" alt="" /> -->
                 </div>
               </article>
 
@@ -100,7 +104,8 @@
                     <span>政策國際</span>&nbsp;‧&nbsp;<span>2024-12-25</span>
                   </div>
                   <h6 class="Fb-post-article-left-title-X">COP29終於達成氣候融資協議 峰會重點一次看</h6>
-                  <p>（中央社巴庫24日綜合外電報導）亞塞拜然首都巴庫舉行的聯合國氣候變化綱要公約第29次締約方會議（COP29）歷經2週的緊張協商，最終在期限過後2天達成氣候融資協議。路透社整理本次峰會的重點如下：
+                  <p>
+                    （中央社巴庫24日綜合外電報導）亞塞拜然首都巴庫舉行的聯合國氣候變化綱要公約第29次締約方會議（COP29）歷經2週的緊張協商，最終在期限過後2天達成氣候融資協議。路透社整理本次峰會的重點如下：
                   </p>
                   <div class="Fb-post-react-X">
                     <i class="bi bi-hand-thumbs-up">100</i>
@@ -109,7 +114,9 @@
                   </div>
                 </div>
                 <div class="Fb-post-article-right-X">
-                  <img src="https://fakeimg.pl/300/" alt="">
+                  <img src="../assets/images/Fb04.jpg" alt="" />
+
+                  <!-- <img src="https://fakeimg.pl/300/" alt="" /> -->
                 </div>
               </article>
 
@@ -129,10 +136,11 @@
                   </div>
                 </div>
                 <div class="Fb-post-article-right-X">
-                  <img src="https://fakeimg.pl/300/" alt="">
+                  <img src="../assets/images/Fb14.jpg" alt="" />
+
+                  <!-- <img src="https://fakeimg.pl/300/" alt="" /> -->
                 </div>
               </article>
-
             </section>
           </div>
 
@@ -140,7 +148,7 @@
           <div class="Fb-news-article-X">
             <article>
               <div class="new-left-X">
-                <img src="https://picsum.photos/200" alt="">
+                <img src="https://picsum.photos/200" alt="" />
               </div>
               <div class="new-right-X">
                 <span class="new-time-X">新聞&nbsp;‧&nbsp;2024-12-25</span>
@@ -150,40 +158,47 @@
                 </p>
               </div>
             </article>
-
-
           </div>
         </div>
 
-
         <!-- 新聞 -->
         <div class="Fb-news-X">
-          <div class="Fb-news-header-X">
-            熱門新聞
-          </div>
+          <div class="Fb-news-header-X">熱門新聞</div>
           <!-- 新聞的主要內容 -->
           <div class="Fb-news-body-X">
             <article>
-              <img src="https://fakeimg.pl/300/" alt="">
+              <img src="../assets/images/Fb15.jpg" alt="" />
+
+              <!-- <img src="https://fakeimg.pl/300/" alt="" /> -->
+
               <div class="Fb-news-body-container-X">
                 <div class="Fb-news-body-container-time-X">2024-12-7</div>
-                <div class="Fb-news-body-container-title-X">循環署公告訂定手機回收規定，透過延伸生產者責任協助民眾回收廢舊手機！</div>
+                <div class="Fb-news-body-container-title-X">
+                  循環署公告訂定手機回收規定，透過延伸生產者責任協助民眾回收廢舊手機！
+                </div>
                 <div class="Fb-news-body-container-content-X">
                   環境部資源循環署公告手機回收規定，要求手機製造、輸入及販賣業者負起回收的責任，讓手機能回收後能再循環，期盼業者提出手機租賃或維修等循環服務，公告將於明(2025)年1月1日實施
                 </div>
               </div>
             </article>
             <article>
-              <img src="https://fakeimg.pl/300/" alt="">
+              <img src="../assets/images/Fb16.jpg" alt="" />
+
+              <!-- <img src="https://fakeimg.pl/300/" alt="" /> -->
+
               <div class="Fb-news-body-container-X">
                 <div class="Fb-news-body-container-time-X">2024-12-7</div>
                 <div class="Fb-news-body-container-title-X">從源頭減少垃圾：如何做好資源回收</div>
                 <div class="Fb-news-body-container-content-X">
-                  解決垃圾問題，首先以減量觀念出發，做到分類回收，最後才是垃圾處理。我們在生活中從減量開始做起，只要稍加用心即可做到。</div>
+                  解決垃圾問題，首先以減量觀念出發，做到分類回收，最後才是垃圾處理。我們在生活中從減量開始做起，只要稍加用心即可做到。
+                </div>
               </div>
             </article>
             <article>
-              <img src="https://fakeimg.pl/300/" alt="">
+              <img src="../assets/images/Fb17.jpg" alt="" />
+
+              <!-- <img src="https://fakeimg.pl/300/" alt="" /> -->
+
               <div class="Fb-news-body-container-X">
                 <div class="Fb-news-body-container-time-X">2024-12-7</div>
                 <div class="Fb-news-body-container-title-X">何謂無痕山林？無痕山林7準則，登山時也友善環境</div>
@@ -193,7 +208,10 @@
               </div>
             </article>
             <article>
-              <img src="https://fakeimg.pl/300/" alt="">
+              <img src="../assets/images/Fb18.jpg" alt="" />
+
+              <!-- <img src="https://fakeimg.pl/300/" alt="" /> -->
+
               <div class="Fb-news-body-container-X">
                 <div class="Fb-news-body-container-time-X">2024-12-7</div>
                 <div class="Fb-news-body-container-title-X">環保飲食不只少吃肉，這樣吃素減碳更有效！</div>
@@ -203,26 +221,38 @@
               </div>
             </article>
             <article>
-              <img src="https://fakeimg.pl/300/" alt="">
+              <img src="../assets/images/Fb15.jpg" alt="" />
+
+              <!-- <img src="https://fakeimg.pl/300/" alt="" /> -->
+
               <div class="Fb-news-body-container-X">
                 <div class="Fb-news-body-container-time-X">2024-12-7</div>
-                <div class="Fb-news-body-container-title-X">循環署公告訂定手機回收規定，透過延伸生產者責任協助民眾回收廢舊手機！</div>
+                <div class="Fb-news-body-container-title-X">
+                  循環署公告訂定手機回收規定，透過延伸生產者責任協助民眾回收廢舊手機！
+                </div>
                 <div class="Fb-news-body-container-content-X">
                   環境部資源循環署公告手機回收規定，要求手機製造、輸入及販賣業者負起回收的責任，讓手機能回收後能再循環，期盼業者提出手機租賃或維修等循環服務，公告將於明(2025)年1月1日實施
                 </div>
               </div>
             </article>
             <article>
-              <img src="https://fakeimg.pl/300/" alt="">
+              <img src="../assets/images/Fb16.jpg" alt="" />
+
+              <!-- <img src="https://fakeimg.pl/300/" alt="" /> -->
+
               <div class="Fb-news-body-container-X">
                 <div class="Fb-news-body-container-time-X">2024-12-7</div>
                 <div class="Fb-news-body-container-title-X">從源頭減少垃圾：如何做好資源回收</div>
                 <div class="Fb-news-body-container-content-X">
-                  解決垃圾問題，首先以減量觀念出發，做到分類回收，最後才是垃圾處理。我們在生活中從減量開始做起，只要稍加用心即可做到。</div>
+                  解決垃圾問題，首先以減量觀念出發，做到分類回收，最後才是垃圾處理。我們在生活中從減量開始做起，只要稍加用心即可做到。
+                </div>
               </div>
             </article>
             <article>
-              <img src="https://fakeimg.pl/300/" alt="">
+              <img src="../assets/images/Fb17.jpg" alt="" />
+
+              <!-- <img src="https://fakeimg.pl/300/" alt="" /> -->
+
               <div class="Fb-news-body-container-X">
                 <div class="Fb-news-body-container-time-X">2024-12-7</div>
                 <div class="Fb-news-body-container-title-X">何謂無痕山林？無痕山林7準則，登山時也友善環境</div>
@@ -232,7 +262,10 @@
               </div>
             </article>
             <article>
-              <img src="https://fakeimg.pl/300/" alt="">
+              <img src="../assets/images/Fb18.jpg" alt="" />
+
+              <!-- <img src="https://fakeimg.pl/300/" alt="" /> -->
+
               <div class="Fb-news-body-container-X">
                 <div class="Fb-news-body-container-time-X">2024-12-7</div>
                 <div class="Fb-news-body-container-title-X">環保飲食不只少吃肉，這樣吃素減碳更有效！</div>
@@ -241,23 +274,13 @@
                 </div>
               </div>
             </article>
-
-
-
           </div>
         </div>
       </div>
     </div>
   </main>
-
-
-
-
-
 </template>
 
 <script>
-export default {
-
-}
+export default {};
 </script>

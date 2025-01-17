@@ -21,6 +21,7 @@
   .Ic_wrapper_R {
     max-width: 1200px;
     margin: 0 auto;
+    padding-top: 80px;
 
     .Ic_banner_R {
       color: #fff;
@@ -32,10 +33,12 @@
 
       .Ic_title_R {
         padding-top: 100px;
+        @include PC_h1($Ivory_white);
         font-size: 64px;
       }
 
       .Ic_title2_R {
+        @include PC_h1($Ivory_white);
         font-size: 64px;
         padding-bottom: 192px;
       }

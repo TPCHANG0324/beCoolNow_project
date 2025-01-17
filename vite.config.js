@@ -11,7 +11,8 @@ export default ({ mode }) => {
   const { VITE_PORT, VITE_BASE_URL } = loadEnv(mode, process.cwd());
 
   return defineConfig({
-    base: VITE_BASE_URL,
+    //base: VITE_BASE_URL,
+    base: '/beCoolNow_project/',
     plugins: [
       vue(),
       AutoImport({

@@ -17,17 +17,25 @@
 @import 'layout/footer';
 @import 'layout/nav';
 @import 'layout/popup';
-@import 'page/_Ic.scss';
+@import 'layout/BackStageLayout/backStage_Header';
+@import 'layout/BackStageLayout/backStage_Popup';
 
 // page
 @import 'page/index';
 @import 'page/Ac';
+@import 'page/Ic';
 @import 'page/Fp';
 @import 'page/Shop';
 @import 'page/Sp_product';
+<<<<<<< HEAD
 @import 'page/Social';
+=======
+@import 'page/shop_cart';
+@import 'page/Fb';
+>>>>>>> 8303eafaae09b59caddfc25d4132c14b1825fa8b
 @import 'page/IcB';
 @import 'page/MmB';
+@import 'page/CB';
 @import 'page/about';
 @import 'page/shop_checkout';
 @import 'page/shopfinish';
@@ -35,6 +43,7 @@
 @import'page/loginpage';
 @import'page/pay1';
 @import'page/pay2';
+@import'page/CtB';
 @import'page/Mb';
 @import'page/popup';
 

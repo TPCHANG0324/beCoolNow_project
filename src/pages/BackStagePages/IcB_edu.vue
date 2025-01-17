@@ -53,11 +53,66 @@
       <BackStagePaginator></BackStagePaginator>
     </div>
   </div>
+  <BackStageSmallPopup class="IcB_eduAddPopup_H">
+    <span>
+      <p>教育影片&nbsp;新增</p>
+    </span>
+    <div>
+      <div class="IcB_addMain_H">
+        <label for="IcB_addTopic_H">影片標題: <input id="IcB_addTopic_H" class="input" type="text" /></label>
+        <label for="IcB_addUrl_H">影片鏈結: <input id="IcB_addUrl_H" class="input" type="text" /></label>
+      </div>
+      <figure>
+        <label for="UploadPic">封面:</label>
+        <input id="UploadPic" class="UploadPic" type="file" accept="image/*, image/svg+xml" />
+        <div class="preview">
+          <p>圖片預覽</p>
+        </div>
+      </figure>
+    </div>
+    <div class="IcB_btn_H">
+      <button>取消</button>
+      <button>儲存</button>
+    </div>
+  </BackStageSmallPopup>
+  <BackStageSmallPopup class="IcB_eduEditPopup_H">
+    <span>
+      <p>教育影片&nbsp;編輯</p>
+    </span>
+    <div>
+      <div class="IcB_addMain_H">
+        <label for="IcB_addTopic_H">影片標題: <input id="IcB_addTopic_H" class="input" type="text" /></label>
+        <label for="IcB_addUrl_H">影片鏈結: <input id="IcB_addUrl_H" class="input" type="text" /></label>
+      </div>
+      <figure>
+        <label for="UploadPic">封面:</label>
+        <input id="UploadPic" class="UploadPic" type="file" accept="image/*, image/svg+xml" />
+        <div class="preview">
+          <p>圖片預覽</p>
+        </div>
+      </figure>
+    </div>
+    <div class="IcB_btn_H">
+      <button>取消</button>
+      <button>儲存</button>
+    </div>
+  </BackStageSmallPopup>
+  <BackStageConfirmPopup class="IcB_eduDeletePopup_H">
+    <span></span>
+    <div>
+      <h3>確定將此影片刪除嗎?</h3>
+      <div>
+        <button>取消</button>
+        <button>確定</button>
+      </div>
+    </div>
+  </BackStageConfirmPopup>
 </template>
 
 <script>
 import BackStageSidebar from '@/components/items/BackStageItems/BackStageSidebar.vue';
 import backStagePaginator from '@/components/items/BackStageItems/BackStagePaginator.vue';
 import BackStageHeader from '@/components/layout/BackStageLayout/BackStageHeader.vue';
-
+import BackStageSmallPopup from '@/components/layout/BackStageLayout/BackStageSmallPopup.vue';
+import BackStageConfirmPopup from '@/components/layout/BackStageLayout/BackStageConfirmPopup.vue';
 </script>
