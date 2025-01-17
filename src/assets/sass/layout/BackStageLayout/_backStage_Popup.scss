@@ -186,7 +186,7 @@
 // 大彈窗
 
 .BackStageBigPopup {
-  width: 1000px;
+  width: 800px;
   height: auto;
   border: 1px solid $Gray_1;
   background-color: $bgc_color;
@@ -220,7 +220,8 @@
       // border: 1px solid red;
       width: 40%;
       padding: 32px 60px 0 60px;
-      @include PC_h3($Gray_1);
+      @include PC_h6($Gray_1);
+      line-height: 140%;
       font-weight: bold;
       margin-bottom: 0;
 
@@ -230,6 +231,9 @@
 
         input {
           width: 60%;
+          // height: auto;
+          padding: 0 16px;
+          height: auto;
         }
       }
     }
@@ -242,7 +246,8 @@
       // border: 1px solid red;
       width: 40%;
       padding: 32px 60px 0 60px;
-      @include PC_h3($Gray_1);
+      @include PC_h6($Gray_1);
+      line-height: 140%;
       font-weight: bold;
       margin-bottom: 0;
 
@@ -288,7 +293,7 @@
           border: 1.5px solid $Gray_3;
           text-align: center;
           display: block;
-          margin-left: 40px;
+          margin-left: 14px;
           margin-top: 20px;
 
           p {
@@ -426,6 +431,145 @@
 
 .SpB_editProduct_H {
   // display: none;
+}
+
+//-------------------------------------------//
+//---------------- 訂單管理 ------------------//
+
+.SpB_editViewOrder_H {
+  // display: none;
+
+  .SpB_scrollDiv_H {
+    @include PC_h6($Gray_1);
+    line-height: 140%;
+    font-weight: bold;
+    padding: 20px 60px 0 60px;
+    height: 440px;
+    /* 固定高度，讓內容溢出後滾動 */
+    overflow-y: scroll;
+    /* 垂直滾動 */
+
+    .SpB_orderNum_H {
+      display: flex;
+      // border: 1px solid red;
+      @include PC_h6($Gray_1);
+      line-height: 140%;
+      font-weight: bold;
+    }
+
+    .SpB_status_H {
+      border: 1px solid $Gray_1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 80px;
+      height: 80px;
+
+      div {
+        display: flex;
+        // border: 1px solid red;
+        @include PC_h6($Gray_1);
+        line-height: 140%;
+
+
+        p {
+          @include PC_h6($Gray_1);
+          line-height: 140%;
+          font-weight: bold;
+        }
+
+        select {
+          background-color: $Ivory_white;
+          @include PC_h6($Gray_1);
+          font-weight: bold;
+          border-radius: 5px;
+          padding: 0px 4px;
+          border: .5px solid $Gray_3;
+
+          &:focus {
+            outline: 2px solid $Yellow_1;
+          }
+        }
+      }
+
+    }
+
+    .SpB_buyInfo_H {
+      display: flex;
+      align-items: flex-start;
+      padding: 20px;
+      border: 1px solid $Gray_1;
+      gap: 12px;
+      background-color: $Ivory_white;
+
+      >div {
+        @include PC_h6($Gray_1);
+        line-height: 140%;
+        font-weight: bold;
+        width: 100%;
+        padding-right: 4px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        gap: 8px;
+
+        div {
+          display: flex;
+          justify-content: flex-start;
+        }
+      }
+
+
+    }
+
+    .SpB_orderTable_H {
+      border: 1px solid $Gray_1;
+      padding: 20px;
+
+      h6 {
+        @include PC_h6($Gray_1);
+        font-weight: bold;
+        margin-bottom: 12px;
+      }
+
+      table {
+        width: 100%;
+        @include PC_h6($Gray_1);
+        font-weight: bold;
+        text-align: center;
+
+        thead {
+          background-color: $Green_4;
+        }
+
+        tbody {
+          background-color: $Ivory_white;
+
+          tr {
+            td {
+              padding: 4px 0;
+            }
+          }
+        }
+      }
+    }
+
+    .SpB_total_H {
+      // border: 1px solid brown;
+      width: 30%;
+      margin-left: auto;
+      @include PC_h6($Gray_1);
+      line-height: 140%;
+      font-weight: bold;
+
+      div {
+        display: flex;
+        justify-content: space-between;
+        margin: 4px 0;
+      }
+    }
+  }
 }
 
 //-------------------------------------------//

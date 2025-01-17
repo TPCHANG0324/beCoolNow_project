@@ -81,36 +81,47 @@ $footer_layout: 1200px !default;
 //     }
 // }
 
-footer{
-    .footer{
+footer {
+    .footer {
         width: 100%;
         background-color: $Green_1;
-        .footer-wrapper{
+
+        .footer-wrapper {
             max-width: 1200px;
             padding: 0 24px;
             box-sizing: border-box;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
-            .logo-a{
+
+            @include max_1100 {
+                display: none;
+            }
+
+            .logo-a {
                 width: 133px;
                 margin: 24px 0;
-                img{
+
+                img {
                     width: 100%;
                 }
             }
-            ul{
+
+            ul {
                 display: flex;
                 margin-top: 40px;
-                li{
+
+                li {
                     margin-left: 44px;
                     display: flex;
                     flex-direction: column;
-                    a{
+
+                    a {
                         color: $Ivory_white;
                         margin-bottom: 12px;
                         font-size: 14px;
-                        &:nth-of-type(1){
+
+                        &:nth-of-type(1) {
                             font-weight: bold;
                             @include PC_h6($Ivory_white);
                         }
@@ -119,25 +130,50 @@ footer{
             }
         }
     }
-    
-    .copyright{
+
+    .copyright {
         width: 100%;
         background-color: $Ivory_white;
-        .copyright-wrapper{
+
+        @include max_1100 {
+            background-color: $Green_1;
+        }
+
+        .copyright-wrapper {
             max-width: 1200px;
             margin: 0 auto;
             padding: 28px 0;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            p{
-                color: $Gray_1;
+
+            @include max_1100 {
+                justify-content: center;
+                height: 90px;
+                padding: 28px 3vw;
+                border: 1px solid;
             }
-            ul{
+
+            p {
+                color: $Gray_1;
+
+                @include max_1100 {
+                    color: $Ivory_white;
+                    line-height: 140%;
+                }
+            }
+
+            ul {
                 display: flex;
-                li{
+
+                @include max_1100 {
+                    display: none;
+                }
+
+                li {
                     font-size: 0;
-                    a{
+
+                    a {
                         color: $Gray_1;
                         margin-left: 20px;
                         display: block;
