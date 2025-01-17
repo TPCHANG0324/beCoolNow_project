@@ -34,7 +34,9 @@
                   <p>Change doesn't happen overnight, but saving our one and only home—Earth—remains an urgent priority.</p>
                   <h3>一人之力固然有限，請您立即伸出援手<br>讓我們集聚人之力，推動共同期盼的改變！</h3>
                   <p>One person's power may be limited, but your immediate support can make a difference. Let us unite our strength to drive the change we all hope for!</p>
-                  <button class="btn">支持我們</button>
+                  <a href="#">
+                    <button class="btn">支持我們</button>
+                  </a>
                 </div>
               </div>
               <div class="about_bottom_R">
@@ -58,7 +60,9 @@
                     <textarea class="input"rows="4"></textarea>
                   </div>
                 </div>
-                <button class="btn">送出</button>
+                <a href="#">
+                    <button class="btn">送出</button>
+                </a>
               </div>
               
               <div class="aboutus_lowest_R">
