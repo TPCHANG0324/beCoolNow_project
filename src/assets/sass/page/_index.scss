@@ -15,7 +15,7 @@
 //-------------------------- 首頁_主視覺Banner區塊 ---------------------------------//
 
 .Fp_Banner_H {
-    background-image: url('@/assets/images/Fp01.jpg');
+    background-image: url('@/assets/images/Fp01-1.png');
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
@@ -29,8 +29,10 @@
         display: flex;
 
         @include max_912 {
+
             flex-direction: column-reverse;
-            width: 50%;
+            width: 60%;
+
         }
 
         @include max_600 {
@@ -48,7 +50,7 @@
             @include max_912 {
                 margin-top: 100px;
                 width: 100%;
-                margin-left: 20px;
+                margin-left: 0px;
             }
 
             @include max_820 {
@@ -100,12 +102,13 @@
             }
 
             @include max_912 {
-                width: 70%;
-                margin: 0 70px;
+                width: 50%;
+                margin: 0 130px;
             }
 
             @include max_820 {
                 margin-top: 60px;
+                margin: 60px 110px;
             }
 
             @include max_600 {
@@ -127,20 +130,21 @@
                 }
 
                 @include max_912 {
-                    margin-left: 40px;
+                    margin-left: 0px;
+
                 }
 
-                @include max_820 {
-                    margin-left: 20px;
-                }
+                // @include max_820 {
+                //     margin-left: 0px;
+                // }
 
                 @include max_768 {
                     font-size: $h2;
                 }
 
-                @include max_430 {
-                    margin-left: 40px;
-                }
+                // @include max_430 {
+                //     margin-left: 40px;
+                // }
 
             }
 
