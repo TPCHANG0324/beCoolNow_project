@@ -680,7 +680,7 @@ export default {
   data() {
     return {
       treeTimeline: null,
-      animationInitialized: false
+      animationInitialized: false,
     };
   },
 
@@ -693,7 +693,7 @@ export default {
     });
   },
 
-  beforeDestroy() {
+  beforeUnmount() {
     // 組件銷毀前清理動畫
     if (this.treeTimeline) {
       this.stopAndReset();
@@ -707,7 +707,6 @@ export default {
         console.error('GSAP libraries not loaded properly');
         return;
       }
-      
 
       try {
         this.stopAndReset();
@@ -722,124 +721,179 @@ export default {
 
     setup() {
       console.log('Setting up initial states');
-      
+
       // 初始設置
-      TweenMax.set("#shadow", {
+      TweenMax.set('#shadow', {
         scale: 0,
-        transformOrigin: "15px 8px"
+        transformOrigin: '15px 8px',
       });
-      TweenMax.set("#tree", {
+      TweenMax.set('#tree', {
         scale: 0,
-        transformOrigin: "154px bottom"
+        transformOrigin: '154px bottom',
       });
-      TweenMax.set("#leaf-rb", {
+      TweenMax.set('#leaf-rb', {
         scale: 0,
-        rotation: "-60cw",
+        rotation: '-60cw',
         y: -15,
-        transformOrigin: "left bottom"
+        transformOrigin: 'left bottom',
       });
-      TweenMax.set("#leaf-rm", {
+      TweenMax.set('#leaf-rm', {
         scale: 0,
-        rotation: "-50cw",
+        rotation: '-50cw',
         y: 30,
-        transformOrigin: "left bottom"
+        transformOrigin: 'left bottom',
       });
-      TweenMax.set("#leaf-lb", {
+      TweenMax.set('#leaf-lb', {
         scale: 0,
-        rotation: "60cw",
+        rotation: '60cw',
         y: -80,
-        transformOrigin: "right bottom"
+        transformOrigin: 'right bottom',
       });
-      TweenMax.set("#leaf-lm", {
+      TweenMax.set('#leaf-lm', {
         scale: 0,
-        rotation: "40cw",
+        rotation: '40cw',
         y: -90,
-        transformOrigin: "right bottom"
+        transformOrigin: 'right bottom',
       });
-      TweenMax.set("#leaf-top", {
+      TweenMax.set('#leaf-top', {
         scale: 0,
-        transformOrigin: "center bottom"
+        transformOrigin: 'center bottom',
       });
-      TweenMax.set("#leaf-rb g", {
+      TweenMax.set('#leaf-rb g', {
         scale: 0,
-        transformOrigin: "left 60px"
+        transformOrigin: 'left 60px',
       });
-      TweenMax.set("#leaf-rm g", {
+      TweenMax.set('#leaf-rm g', {
         scale: 0,
-        transformOrigin: "22px 140px"
+        transformOrigin: '22px 140px',
       });
-      TweenMax.set("#leaf-lb g", {
+      TweenMax.set('#leaf-lb g', {
         scale: 0,
-        transformOrigin: "right 56px"
+        transformOrigin: 'right 56px',
       });
-      TweenMax.set("#leaf-lm g", {
+      TweenMax.set('#leaf-lm g', {
         scale: 0,
-        transformOrigin: "106px bottom"
+        transformOrigin: '106px bottom',
       });
     },
 
     animate() {
       console.log('Starting animation sequence');
-      
+
       const tl = new TimelineMax({
         delay: 0.42,
         repeat: -1,
         repeatDelay: 2,
         yoyo: true,
         onStart: () => console.log('Animation started'),
-        onRepeat: () => console.log('Animation cycle completed')
+        onRepeat: () => console.log('Animation cycle completed'),
       });
 
-      tl.to("#shadow", 2, {
-        scale: 1
-      }, 0)
-      .to("#tree", 2, {
-        scale: 1
-      }, 0)
-      .to("#leaf-rb", 2, {
-        scale: 1,
-        rotation: "0cw",
-        y: 0,
-        delay: 0.35
-      }, 0)
-      .to("#leaf-rm", 2, {
-        scale: 1,
-        rotation: "0cw",
-        y: 0,
-        delay: 0.35
-      }, 0)
-      .to("#leaf-lb", 2, {
-        scale: 1,
-        rotation: "0cw",
-        y: 0,
-        delay: 0.35
-      }, 0)
-      .to("#leaf-lm", 2, {
-        scale: 1,
-        rotation: "0cw",
-        y: 0,
-        delay: 0.35
-      }, 0)
-      .to("#leaf-top", 2.5, {
-        scale: 1,
-        delay: 0.35
-      }, 0)
-      .to("#leaf-lb g", 2.25, {
-        scale: 1,
-        delay: 0.5
-      }, 0)
-      .to("#leaf-lm g", 2.25, {
-        scale: 1,
-        delay: 0.6
-      }, 0)
-      .to("#leaf-rb g", 2.25, {
-        scale: 1,
-        delay: 0.5
-      }, 0)
-      .to("#leaf-rm g", 2.25, {
-        scale: 1,
-        delay: 0.6
-      }, 0);
+      tl.to(
+        '#shadow',
+        2,
+        {
+          scale: 1,
+        },
+        0,
+      )
+        .to(
+          '#tree',
+          2,
+          {
+            scale: 1,
+          },
+          0,
+        )
+        .to(
+          '#leaf-rb',
+          2,
+          {
+            scale: 1,
+            rotation: '0cw',
+            y: 0,
+            delay: 0.35,
+          },
+          0,
+        )
+        .to(
+          '#leaf-rm',
+          2,
+          {
+            scale: 1,
+            rotation: '0cw',
+            y: 0,
+            delay: 0.35,
+          },
+          0,
+        )
+        .to(
+          '#leaf-lb',
+          2,
+          {
+            scale: 1,
+            rotation: '0cw',
+            y: 0,
+            delay: 0.35,
+          },
+          0,
+        )
+        .to(
+          '#leaf-lm',
+          2,
+          {
+            scale: 1,
+            rotation: '0cw',
+            y: 0,
+            delay: 0.35,
+          },
+          0,
+        )
+        .to(
+          '#leaf-top',
+          2.5,
+          {
+            scale: 1,
+            delay: 0.35,
+          },
+          0,
+        )
+        .to(
+          '#leaf-lb g',
+          2.25,
+          {
+            scale: 1,
+            delay: 0.5,
+          },
+          0,
+        )
+        .to(
+          '#leaf-lm g',
+          2.25,
+          {
+            scale: 1,
+            delay: 0.6,
+          },
+          0,
+        )
+        .to(
+          '#leaf-rb g',
+          2.25,
+          {
+            scale: 1,
+            delay: 0.5,
+          },
+          0,
+        )
+        .to(
+          '#leaf-rm g',
+          2.25,
+          {
+            scale: 1,
+            delay: 0.6,
+          },
+          0,
+        );
 
       this.treeTimeline = tl;
       return tl;
@@ -848,15 +902,24 @@ export default {
     stopAndReset() {
       console.log('Stopping and resetting animation');
       TweenMax.killAll(false, true, false);
-      
+
       const elements = [
-        "#tree", "#shadow", "#leaf-top", "#leaf-rb", 
-        "#leaf-rm", "#leaf-lb", "#leaf-lm", "#leaf-top", 
-        "#leaf-rb g", "#leaf-rm g", "#leaf-lb g", "#leaf-lm g"
+        '#tree',
+        '#shadow',
+        '#leaf-top',
+        '#leaf-rb',
+        '#leaf-rm',
+        '#leaf-lb',
+        '#leaf-lm',
+        '#leaf-top',
+        '#leaf-rb g',
+        '#leaf-rm g',
+        '#leaf-lb g',
+        '#leaf-lm g',
       ];
-      
-      elements.forEach(selector => {
-        TweenMax.set(selector, { clearProps: "all" });
+
+      elements.forEach((selector) => {
+        TweenMax.set(selector, { clearProps: 'all' });
       });
     },
 
@@ -869,55 +932,55 @@ export default {
 
     initializeNativeJS() {
       // DOM 元素選擇
-      const learnMoreButton = document.getElementById("learnMoreBtn");
-      const collapseButton = document.getElementById("collapseBtn");
-      const extraCardsSection = document.getElementById("extraCards");
-      const collapseSection = document.querySelector(".collapse_section");
-      const tree_buttons = document.querySelectorAll(".btn-Ac_done_btn");
+      const learnMoreButton = document.getElementById('learnMoreBtn');
+      const collapseButton = document.getElementById('collapseBtn');
+      const extraCardsSection = document.getElementById('extraCards');
+      const collapseSection = document.querySelector('.collapse_section');
+      const tree_buttons = document.querySelectorAll('.btn-Ac_done_btn');
       const popup = document.querySelector('.popup');
 
       // 展開按鈕事件
-      learnMoreButton?.addEventListener("click", (event) => {
+      learnMoreButton?.addEventListener('click', (event) => {
         event.preventDefault();
-        extraCardsSection.classList.add("expanded");
-        extraCardsSection.style.maxHeight = extraCardsSection.scrollHeight + "px";
-        learnMoreButton.classList.add("hidden");
-        collapseSection.classList.remove("hidden");
+        extraCardsSection.classList.add('expanded');
+        extraCardsSection.style.maxHeight = extraCardsSection.scrollHeight + 'px';
+        learnMoreButton.classList.add('hidden');
+        collapseSection.classList.remove('hidden');
       });
 
       // 收合按鈕事件
-      collapseButton?.addEventListener("click", (event) => {
+      collapseButton?.addEventListener('click', (event) => {
         event.preventDefault();
-        extraCardsSection.classList.remove("expanded");
-        extraCardsSection.style.maxHeight = "0px";
-        learnMoreButton.classList.remove("hidden");
-        collapseSection.classList.add("hidden");
+        extraCardsSection.classList.remove('expanded');
+        extraCardsSection.style.maxHeight = '0px';
+        learnMoreButton.classList.remove('hidden');
+        collapseSection.classList.add('hidden');
       });
 
       // 樹按鈕事件
-      tree_buttons.forEach(button => {
-        button.addEventListener("click", () => {
+      tree_buttons.forEach((button) => {
+        button.addEventListener('click', () => {
           if (button.disabled) return;
 
           // 更新計數
-          const card = button.closest(".AcB_card");
-          const countElement = card.querySelector(".action-count");
+          const card = button.closest('.AcB_card');
+          const countElement = card.querySelector('.action-count');
           let currentCount = parseInt(countElement.textContent);
           countElement.textContent = ++currentCount;
 
           // 更新按鈕狀態
-          button.textContent = "感謝你的響應！";
+          button.textContent = '感謝你的響應！';
           button.disabled = true;
-          button.classList.add("disabled");
+          button.classList.add('disabled');
 
           // 顯示 popup
-          popup.classList.add("Ac_active");
-          
+          popup.classList.add('Ac_active');
+
           // 設置 popup 淡出效果
           setTimeout(() => {
-            popup.classList.add("fade-out");
+            popup.classList.add('fade-out');
             setTimeout(() => {
-              popup.classList.remove("Ac_active", "fade-out");
+              popup.classList.remove('Ac_active', 'fade-out');
             }, 7000);
           }, 500);
 
@@ -925,7 +988,7 @@ export default {
           this.playAgain();
         });
       });
-    }
-  }
+    },
+  },
 };
 </script>

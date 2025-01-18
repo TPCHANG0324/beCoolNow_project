@@ -32,7 +32,8 @@
           <!-- ✅ 修正 checkbox 與文字的排列 -->
           <div class="bcn-checkbox-container_1">
             <input id="agree" type="checkbox" name="agree" />
-            <label for="agree" class="agree1">我已詳細閱讀並同意
+            <label for="agree" class="agree1"
+              >我已詳細閱讀並同意
               <!-- ✅ 添加 href 以及 target="_blank" 讓連結能夠導外並開新分頁 -->
               <a href="#" class="privite" target="_blank" rel="noopener noreferrer">隱私權政策</a>
             </label>
@@ -43,8 +44,8 @@
       </form>
     </div>
     <a href="./pay1/" class="bc-prev-step-button2">
-        <span class="bc-prev-step-icon2">❮</span>
-        <span class="bc-prev-step-text2">上一步</span>
+      <span class="bc-prev-step-icon2">❮</span>
+      <span class="bc-prev-step-text2">上一步</span>
     </a>
 </div>
 <MainFooter></MainFooter>
