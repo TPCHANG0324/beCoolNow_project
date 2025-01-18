@@ -1,7 +1,7 @@
 /* ----- 環保市集 - 全商品瀏覽 ----- */
 .Sp-X {
     .Sp-banner {
-        background-image: url('https://picsum.photos/2000/3000.jpg');
+        background-image: url('@/assets/images/Sp01-2.jpg');
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center center;
@@ -32,6 +32,10 @@
         gap: 40px;
         align-items: flex-start;
         position: relative;
+
+        @include max_820() {
+            margin: 0 3vw;
+        }
         /* 左：價格選擇 */
         .fliter_section_S {
             width: 20%;
@@ -52,11 +56,12 @@
                 display: flex;
                 flex-direction: column;
                 gap: 20px;
-
+            
                 li {
                     padding: 16px 20px;
                     border-radius: 20px;
                     font-weight: 500;
+
 
                     &:nth-of-type(1) {
                         background-color: $Green_1;
@@ -70,60 +75,202 @@
                         display: block;
                         color: $Gray_1;
                         white-space: nowrap;
+                        
                     }
+                   
                 }
             }
+            @include max_820(){
+                display: none;
+            }
+        }
+        .fliter_section820_S {
+            display: none;
+            justify-content: end;
+            padding: 40px 0;
+            position: relative;
+
+            select {
+                cursor: pointer;
+                outline: none;
+                border: 0px solid transparent;
+                padding: 10px 28px;
+                padding-left: 20px;
+                padding-right: 32px;
+                border-radius: 30px;
+                color: $Ivory_white;
+                background-color: $Yellow_1;
+                -webkit-appearance: none;
+                /* 隱藏箭頭 */
+                -moz-appearance: none;
+                /* 隱藏箭頭 */
+                appearance: none;
+
+                /* 隱藏箭頭 */
+                option {
+                    background-color: #fff;
+                    color: $Green_1;
+                }
+            }
+
+            &::after {
+                content: '\25BC';
+                /* 使用不同的箭頭符號 */
+                display: block;
+                position: absolute;
+                top: 50%;
+                right: 15px;
+                transform: translateY(-50%);
+                pointer-events: none;
+                color: white;
+                font-size: 12px;
+
+            }
+            @include max_820(){
+                display: flex;
+                justify-content: flex-start;
+            }
+
         }
 
         /* 右：上篩選 + 下商品列表 */
         .Sp_container_S {
             width: 80%;
+
+            @include max_430() {
+                width: 100%;
+                margin: 0 auto;
+            }
             /* 新舊 + 價格篩選 */
             .store_title_S {
                 display: flex;
-                justify-content: end;
+                justify-content: space-between;
                 padding: 40px 0;
                 position: relative;
+                align-items: center;
+                .Sp_spend_category{
+                    font-weight: $font_weight_Bold;
+                    font-size: $h3;
 
-                select {
-                    cursor: pointer;
-                    outline: none;
-                    border: 0px solid transparent;
-                    padding: 10px 28px;
-                    padding-left: 20px;
-                    padding-right: 32px;
-                    border-radius: 30px;
-                    color: $Ivory_white;
-                    background-color: $Yellow_1;
-                    -webkit-appearance: none;
-                    /* 隱藏箭頭 */
-                    -moz-appearance: none;
-                    /* 隱藏箭頭 */
-                    appearance: none;
-
-                    /* 隱藏箭頭 */
-                    option {
-                        background-color: #fff;
-                        color: $Green_1;
+                    @include max_820(){
+                        display: none;
                     }
                 }
-
-                &::after {
-                    content: '\25BC';
-                    /* 使用不同的箭頭符號 */
-                    display: block;
-                    position: absolute;
-                    top: 50%;
-                    right: 15px;
-                    transform: translateY(-50%);
-                    pointer-events: none;
-                    color: white;
-                    font-size: 12px;
-
+                .select-box{
+                    position: relative;
+                    // background-color: #fff;
+                    padding: 1px 0;
+                    select {
+                        display: block;
+                        cursor: pointer;
+                        outline: none;
+                        border: 0px solid transparent;
+                        padding: 10px 28px;
+                        padding-left: 20px;
+                        padding-right: 32px;
+                        border-radius: 30px;
+                        color: $Green_2;
+                        background-color: $Light_Green;
+                        -webkit-appearance: none;
+                        /* 隱藏箭頭 */
+                        -moz-appearance: none;
+                        /* 隱藏箭頭 */
+                        appearance: none;
+                        position: relative;
+                        &::before{
+                            content: '111';
+                            display: block;
+                            width: 100%;
+                            height: 5px;
+                            position: absolute;
+                            bottom: 0;
+                            right: 0;
+                            background-color: $Green_1;
+                        }
+                        /* 隱藏箭頭 */
+                        option {
+                            background-color: #fff;
+                            color: $Green_1;
+                        }
+                    }
+                    &::before{
+                        display: block;
+                        content: '';
+                        width: 90%;
+                        height: 1px;
+                        background-color: $Green_1;
+                        position: absolute;
+                        bottom: 0;
+                        right: 4%;
+                        
+                    }
+                    &::after {
+                        content: '\25BC';
+                        /* 使用不同的箭頭符號 */
+                        display: block;
+                        position: absolute;
+                        top: 50%;
+                        right: 15px;
+                        transform: translateY(-50%);
+                        pointer-events: none;
+                        color: $Green_2;
+                        font-size: 12px;
+    
+                    }
                 }
 
 
             }
+            // /* 新舊 + 價格篩選 */
+            // .store_title_S {
+            //     display: flex;
+            //     justify-content: end;
+            //     padding: 40px 0;
+            //     position: relative;
+
+            //     @include max_430() {
+            //         margin-right: 60px;
+            //     }
+
+            //     select {
+            //         cursor: pointer;
+            //         outline: none;
+            //         border: 0px solid transparent;
+            //         padding: 10px 28px;
+            //         padding-left: 20px;
+            //         padding-right: 32px;
+            //         border-radius: 30px;
+            //         color: $Ivory_white;
+            //         background-color: $Yellow_1;
+            //         -webkit-appearance: none;
+            //         /* 隱藏箭頭 */
+            //         -moz-appearance: none;
+            //         /* 隱藏箭頭 */
+            //         appearance: none;
+
+            //         /* 隱藏箭頭 */
+            //         option {
+            //             background-color: #fff;
+            //             color: $Green_1;
+            //         }
+            //     }
+
+            //     &::after {
+            //         content: '\25BC';
+            //         /* 使用不同的箭頭符號 */
+            //         display: block;
+            //         position: absolute;
+            //         top: 50%;
+            //         right: 15px;
+            //         transform: translateY(-50%);
+            //         pointer-events: none;
+            //         color: white;
+            //         font-size: 12px;
+
+            //     }
+
+
+            // }
             /* 商品列表 */
             .Sp-product_S {
                 margin-bottom: 40px;
@@ -162,6 +309,10 @@
                                 transform: translate(-50%, 0);
                                 background-color: #d0ad44;
                                 opacity: 0;
+
+                                @include max_430(){
+                                    display: none;
+                                }
                             }
                             &:hover p{
                                 opacity: 1;
@@ -179,10 +330,29 @@
                         }
                     }
                 }
+                @include max_430(){
+                    margin: 0 auto;
+                   
+
+                    ul.product-grid_S{
+                        gap:20px;
+                        
+
+                        li.product-card_S{
+                            width: calc((100% - 40px) / 2)
+                           
+                        }
+                    }
+
+                }
             }
             /* 頁數選擇器 */
             .Sp-pages-X{
                 margin-top: 60px;
+
+                @include max_430(){
+                    margin-bottom: 40px;
+                }
                 ul{
                     display: flex;
                     justify-content: center;
@@ -235,10 +405,14 @@
         margin: 0 auto;
         display: flex;
         flex-direction: column;
-        gap: 28px;
+        gap: 40px;
         box-sizing: border-box;
         @include max_1200(){
             margin: 0 3vw;
+        }
+
+        @include max_430(){
+            display: block;
         }
 
         /* 流程顯示 */
@@ -418,6 +592,7 @@
                                 background-repeat: no-repeat;
                                 flex-shrink: 0;
                             }
+
                         }
 
                         &:nth-of-type(2) {

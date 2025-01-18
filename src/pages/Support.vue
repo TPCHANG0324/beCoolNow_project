@@ -33,11 +33,11 @@
                 </label>
                 
                 <label class="linepay">
-                    <input type="radio" class="payment_method" value="Line Pay行動支付" check>
+                    <input type="radio" class="payment_method" value="Line Pay行動支付" v-model="payment_method">
                     <span>Line Pay行動支付</span>
                 </label>
                 <label class="ecpay">
-                    <input type="radio" class="payment_method" value="綠界金流服務(信用卡)" check>
+                    <input type="radio" class="payment_method" value="綠界金流服務(信用卡)" v-model="payment_method">
                     <span class="ecpay1">綠界金流服務(信用卡)</span>
                     <br>
                     <span class="ecpay2">(信用卡才能進行定期捐款)</span>
@@ -45,23 +45,38 @@
             </div>
 
             <div class="payment_step_S">
-                <button class="next_step">下一步</button>
+                <button class="next_step" @click="handleNextStep">下一步</button>
               
             </div>
-            
-            <div class="">
-                    
+                <!-- 顯示選中的付款方式 -->
+            <div>           
+                <p>您選擇的付款方式是：{{ payment_method }}</p>
+      
             </div>
-
         </div>
-        
 
     </div>
+        
+
 </template>
 
 <script>
     export default {
-        
-    }
+        data() {
+            return {
+                payment_method: "", // 用於儲存選中的付款方式
+            };
+        },
+        methods: {
+            handleNextStep() {
+            if (this.payment_method) {
+                alert(`您選擇的付款方式是：${this.payment_method}`);
+                // 進一步邏輯處理
+            } else {
+                alert("請選擇付款方式！");
+            }
+            },
+        },
+    };
 </script>
 
