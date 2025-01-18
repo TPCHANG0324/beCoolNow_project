@@ -1,12 +1,12 @@
 <template>
+  <!-- 環保市集 - 全商品瀏覽，縮寫Sp - 功能 - 代號X -->
+  <main>
+    <div class="Sp-X">
+      <!-- 最上方BN -->
+      <div class="Sp-banner">
+        <h1>環保市集</h1>
+      </div>
 
-    <!-- 環保市集 - 全商品瀏覽，縮寫Sp - 功能 - 代號X -->
-    <main>
-        <div class="Sp-X">
-            <!-- 最上方BN -->
-            <div class="Sp-banner">
-                <h1>環保市集</h1>
-            </div>
 
             <!-- 中間內容 -->
             <div class="Sp-wrapper-S">
@@ -41,7 +41,6 @@
                                 <option value="NT$400~$500">NT$400~$500</option>
                                 <option value="NT$500 以上">NT$500 以上</option>        
                             </select>
-
                         </div>
                         
                         <div class="select-box">
@@ -53,22 +52,8 @@
                                 <option value="價格：由低至高">價格：由低至高</option>
                             </select>
                         </div>
-                    </div>
-                    
-
-                        <!-- <div class="fliter_section820_S">
-                            <select name="" id="">
-                               <option value="全部商品"selected>全部商品</option>  
-                                <option value="NT$100~$200">NT$100~$200</option>
-                                <option value="NT$200~$300">NT$200~$300</option>
-                                <option value="NT$300~$400">NT$300~$400</option>
-                                <option value="NT$400~$500">NT$400~$500</option>
-                                <option value="NT$500 以上">NT$500 以上</option>        
-                            </select>
-
-                        </div> -->
+                    </div> 
                            
-                
                     <!-- 商品列表 -->
                     <div class="Sp-product_S">
                         <!-- 商品區 -->
@@ -208,16 +193,78 @@
                         </div>
                     </div>
                 </div>
-
-
             </div>
-        </div>
-    </main>
 
+        <!-- 商品區 -->
+        <!-- <ul class="product-grid_S">
+          <li class="product-card_S">
+            <div class="product-box_S">
+              <a href="#">
+                <img src="https://picsum.photos/400/600.jpg" alt="環保吸管1" class="product-img" />
+              </a>
+              <p class="shop-add-to-cart-X">加入購物車</p>
+            </div>
+            <a href="#" class="product-card-name-X">環保吸管1</a>
+            <p>價格：NT$150</p>
+          </li>
+          <li class="product-card_S">
+            <div class="product-box_S">
+              <a href="#">
+                <img src="https://picsum.photos/400/600.jpg" alt="環保吸管1" class="product-img" />
+              </a>
+              <p class="shop-add-to-cart-X">加入購物車</p>
+            </div>
+            <a href="#" class="product-card-name-X">環保吸管1</a>
+            <p>價格：NT$150</p>
+          </li>
+          <li class="product-card_S">
+            <div class="product-box_S">
+              <a href="#">
+                <img src="https://picsum.photos/400/600.jpg" alt="環保吸管1" class="product-img" />
+              </a>
+              <p class="shop-add-to-cart-X">加入購物車</p>
+            </div>
+            <a href="#" class="product-card-name-X">環保吸管1</a>
+            <p>價格：NT$150</p>
+          </li>
+          <li class="product-card_S">
+            <div class="product-box_S">
+              <a href="#">
+                <img src="https://picsum.photos/400/600.jpg" alt="環保吸管1" class="product-img" />
+              </a>
+              <p class="shop-add-to-cart-X">加入購物車</p>
+            </div>
+            <a href="#" class="product-card-name-X">環保吸管1</a>
+            <p>價格：NT$150</p>
+          </li>
+          <li class="product-card_S">
+            <div class="product-box_S">
+              <a href="#">
+                <img src="https://picsum.photos/400/600.jpg" alt="環保吸管1" class="product-img" />
+              </a>
+              <p class="shop-add-to-cart-X">加入購物車</p>
+            </div>
+            <a href="#" class="product-card-name-X">環保吸管1</a>
+            <p>價格：NT$150</p>
+          </li>
+        </ul> -->
+        <!-- 頁數選擇器 -->
+        <!-- <div class="Sp-pages-X">
+          <ul>
+            <li class="Sp-pages-prev"><i class="bi bi-caret-left-fill"></i></li>
+            <li class="current"><span>1</span></li>
+            <li><span>2</span></li>
+            <li><span>3</span></li>
+            <li><span>4</span></li>
+            <li><span>5</span></li>
+            <li class="Sp-pages-next"><i class="bi bi-caret-right-fill"></i></li>
+          </ul>
+        </div>
+      </div>-->
+    </div>  
+  </main>
 </template>
 
 <script>
-export default {
-
-}
+export default {};
 </script>

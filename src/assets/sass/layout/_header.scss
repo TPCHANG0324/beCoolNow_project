@@ -9,6 +9,11 @@ $header_layout: 1200px !default;
     top: 0;
     z-index: 999;
     background-color: rgba(255, 255, 240, .8);
+    padding: 0 3vw;
+
+    @include max_1100 {
+        display: none;
+    }
 
     .header-wrapper {
         padding: 15px 0;
@@ -40,6 +45,9 @@ $header_layout: 1200px !default;
                         @include PC_h4($Gray_1);
                         font-weight: bold;
 
+                        &:hover {
+                            color: $Yellow_1;
+                        }
 
                         // .bi-person-circle {
                         //     margin-left: 13px;
@@ -48,6 +56,150 @@ $header_layout: 1200px !default;
                 }
             }
         }
+    }
+
+}
+
+
+.mobile_header {
+    padding: 0 3vw;
+    display: flex;
+    justify-content: space-between;
+    background-color: rgba(255, 255, 240, .8);
+    position: fixed;
+    margin: 0 auto;
+    width: 100%;
+    display: none;
+
+    @include max_1100 {
+        display: flex;
+    }
+
+
+    .logo {
+        width: 140px;
+        display: flex;
+        align-items: center;
+
+        img {
+            width: 100%;
+        }
+    }
+
+    div {
+        display: flex;
+
+        ul {
+            // border: 1px solid red;
+            display: flex;
+            align-items: center;
+            font-size: 32px;
+            margin-right: 16px;
+            gap: 28px;
+
+            a {
+                color: $Gray_1;
+
+                &:hover {
+                    color: $Yellow_1;
+                }
+            }
+        }
+
+        //--------- 漢堡線 ----------//
+        .ham {
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+            transition: transform 400ms;
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .hamRotate.active {
+            transform: rotate(45deg);
+        }
+
+        .hamRotate180.active {
+            transform: rotate(180deg);
+        }
+
+        .line {
+            fill: none;
+            transition: stroke-dasharray 400ms, stroke-dashoffset 400ms;
+            stroke: $Gray_1;
+            stroke-width: 5.5;
+            stroke-linecap: round;
+        }
+
+        .ham8 .top {
+            stroke-dasharray: 40 160;
+        }
+
+        .ham8 .middle {
+            stroke-dasharray: 40 142;
+            transform-origin: 50%;
+            transition: transform 400ms;
+        }
+
+        .ham8 .bottom {
+            stroke-dasharray: 40 85;
+            transform-origin: 50%;
+            transition: transform 400ms, stroke-dashoffset 400ms;
+        }
+
+        .ham8.active .top {
+            stroke-dashoffset: -64px;
+            stroke: $Yellow_1;
+        }
+
+        .ham8.active .middle {
+            //stroke-dashoffset: -20px;
+            transform: rotate(90deg);
+            stroke: $Yellow_1;
+        }
+
+        .ham8.active .bottom {
+            stroke-dashoffset: -64px;
+            stroke: $Yellow_1;
+        }
+    }
+}
+
+.mobile_nav {
+    border: 2px solid red;
+    position: absolute;
+    width: 100%;
+    margin-top: 80px;
+    z-index: 500;
+
+
+    ul {
+        background-color: rgba(255, 255, 240, .8);
+        text-align: center;
+        height: calc(100vh - 80px);
+
+        li {
+            border: 1px solid brown;
+            height: 10%;
+
+            a {
+                display: flex;
+                border: 1px solid red;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                height: 100%;
+                @include PC_h3($Gray_1);
+                font-weight: bold;
+
+                &:hover {
+                    background-color: $Yellow_1;
+                }
+            }
+        }
+
     }
 
 }

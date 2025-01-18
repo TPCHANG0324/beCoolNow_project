@@ -303,7 +303,6 @@ function animate() {
 
   return tl;
 }
-
 // function stopAndReset() {
 //   TweenMax.killAll(false, true, false);
 //   TweenMax.set("#tree", { clearProps: "all" });

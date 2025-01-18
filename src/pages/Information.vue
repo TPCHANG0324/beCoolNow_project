@@ -1,6 +1,6 @@
 <template>
   <header class="Ic_header_R">
-    <div style="height: 80px; border: 1px solid red">123</div>
+    <MainHeader></MainHeader>
     <div class="Ic_wrapper_R">
       <div class="Ic_banner_R">
         <h1 class="Ic_title_R">全球暖化下的臺灣</h1>
@@ -144,8 +144,11 @@
       </div>
     </section>
   </div>
+  <MainFooter></MainFooter>
 </template>
 
 <script>
+import MainHeader from '@/components/layout/MainHeader.vue';
+import MainFooter from '@/components/layout/MainFooter.vue';
 export default {};
 </script>

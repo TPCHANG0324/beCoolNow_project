@@ -9,7 +9,7 @@
           <div class="Fb-post-category-container-X">
             <ul class="Fb-post-category-X">
               <div class="Fb-post-category-box">
-                <select name="" id="" class="active">
+                <select id="" name="" class="active">
                   <option value="全部文章">全部文章</option>
                   <option value="氣候科學">氣候科學</option>
                   <option value="生態危機">生態危機</option>
@@ -50,11 +50,9 @@
                   </div>
                 </div>
                 <div class="Fb-post-article-right-X">
-<<<<<<< HEAD
                   <img src="../assets/images/Fb10.jpg" alt="" />
-=======
-                  <img src="https://picsum.photos/200" alt="">
->>>>>>> 29482163883a380007f9bac66b999d10b5922e9d
+
+                  <!-- <img src="https://picsum.photos/200" alt="" /> -->
                 </div>
               </article>
 
@@ -63,8 +61,7 @@
                   <div class="Fb-post-article-left-C-T-X">
                     <span>政策國際</span>&nbsp;‧&nbsp;<span>2024-12-25</span>
                   </div>
-                  <h6 class="Fb-post-article-left-title-X">調查：助低收者因應極端氣候 8成6支持政府釋資源
-                  </h6>
+                  <h6 class="Fb-post-article-left-title-X">調查：助低收者因應極端氣候 8成6支持政府釋資源</h6>
                   <p>
                     台大風險中心舉辦「2024台灣公正轉型調查發布」記者會，針對淨零排放、氣候變遷雙主軸，對全國18歲以上民眾，在17日到25日使用室內電話、行動電話2種電話訪問調查，有效樣本1102份，以95%信賴度估計，抽樣誤差在正、負2.95個百分點之內。
                   </p>
@@ -75,13 +72,8 @@
                   </div>
                 </div>
                 <!-- <div class="Fb-post-article-right-X">
-<<<<<<< HEAD
-                                <img src="../assets/images/Fb10.jpg" alt="">
-                            </div> -->
-=======
                   <img src="https://picsum.photos/200" alt="">
                 </div> -->
->>>>>>> 29482163883a380007f9bac66b999d10b5922e9d
               </article>
 
               <article>
@@ -100,11 +92,9 @@
                   </div>
                 </div>
                 <div class="Fb-post-article-right-X">
-<<<<<<< HEAD
                   <img src="../assets/images/Fb11.jpg" alt="" />
-=======
-                  <img src="https://fakeimg.pl/300/" alt="">
->>>>>>> 29482163883a380007f9bac66b999d10b5922e9d
+
+                  <!-- <img src="https://fakeimg.pl/300/" alt="" /> -->
                 </div>
               </article>
 
@@ -124,11 +114,9 @@
                   </div>
                 </div>
                 <div class="Fb-post-article-right-X">
-<<<<<<< HEAD
                   <img src="../assets/images/Fb04.jpg" alt="" />
-=======
-                  <img src="https://fakeimg.pl/300/" alt="">
->>>>>>> 29482163883a380007f9bac66b999d10b5922e9d
+
+                  <!-- <img src="https://fakeimg.pl/300/" alt="" /> -->
                 </div>
               </article>
 
@@ -148,11 +136,9 @@
                   </div>
                 </div>
                 <div class="Fb-post-article-right-X">
-<<<<<<< HEAD
                   <img src="../assets/images/Fb14.jpg" alt="" />
-=======
-                  <img src="https://fakeimg.pl/300/" alt="">
->>>>>>> 29482163883a380007f9bac66b999d10b5922e9d
+
+                  <!-- <img src="https://fakeimg.pl/300/" alt="" /> -->
                 </div>
               </article>
             </section>
@@ -162,7 +148,7 @@
           <div class="Fb-news-article-X">
             <article>
               <div class="new-left-X">
-                <img src="https://picsum.photos/200" alt="">
+                <img src="https://picsum.photos/200" alt="" />
               </div>
               <div class="new-right-X">
                 <span class="new-time-X">新聞&nbsp;‧&nbsp;2024-12-25</span>
@@ -172,8 +158,6 @@
                 </p>
               </div>
             </article>
-
-
           </div>
         </div>
 
@@ -183,11 +167,10 @@
           <!-- 新聞的主要內容 -->
           <div class="Fb-news-body-X">
             <article>
-<<<<<<< HEAD
               <img src="../assets/images/Fb15.jpg" alt="" />
-=======
-              <img src="https://fakeimg.pl/300/" alt="">
->>>>>>> 29482163883a380007f9bac66b999d10b5922e9d
+
+              <!-- <img src="https://fakeimg.pl/300/" alt="" /> -->
+
               <div class="Fb-news-body-container-X">
                 <div class="Fb-news-body-container-time-X">2024-12-7</div>
                 <div class="Fb-news-body-container-title-X">
@@ -199,11 +182,10 @@
               </div>
             </article>
             <article>
-<<<<<<< HEAD
               <img src="../assets/images/Fb16.jpg" alt="" />
-=======
-              <img src="https://fakeimg.pl/300/" alt="">
->>>>>>> 29482163883a380007f9bac66b999d10b5922e9d
+
+              <!-- <img src="https://fakeimg.pl/300/" alt="" /> -->
+
               <div class="Fb-news-body-container-X">
                 <div class="Fb-news-body-container-time-X">2024-12-7</div>
                 <div class="Fb-news-body-container-title-X">從源頭減少垃圾：如何做好資源回收</div>
@@ -213,11 +195,10 @@
               </div>
             </article>
             <article>
-<<<<<<< HEAD
               <img src="../assets/images/Fb17.jpg" alt="" />
-=======
-              <img src="https://fakeimg.pl/300/" alt="">
->>>>>>> 29482163883a380007f9bac66b999d10b5922e9d
+
+              <!-- <img src="https://fakeimg.pl/300/" alt="" /> -->
+
               <div class="Fb-news-body-container-X">
                 <div class="Fb-news-body-container-time-X">2024-12-7</div>
                 <div class="Fb-news-body-container-title-X">何謂無痕山林？無痕山林7準則，登山時也友善環境</div>
@@ -227,11 +208,10 @@
               </div>
             </article>
             <article>
-<<<<<<< HEAD
               <img src="../assets/images/Fb18.jpg" alt="" />
-=======
-              <img src="https://fakeimg.pl/300/" alt="">
->>>>>>> 29482163883a380007f9bac66b999d10b5922e9d
+
+              <!-- <img src="https://fakeimg.pl/300/" alt="" /> -->
+
               <div class="Fb-news-body-container-X">
                 <div class="Fb-news-body-container-time-X">2024-12-7</div>
                 <div class="Fb-news-body-container-title-X">環保飲食不只少吃肉，這樣吃素減碳更有效！</div>
@@ -241,11 +221,10 @@
               </div>
             </article>
             <article>
-<<<<<<< HEAD
               <img src="../assets/images/Fb15.jpg" alt="" />
-=======
-              <img src="https://fakeimg.pl/300/" alt="">
->>>>>>> 29482163883a380007f9bac66b999d10b5922e9d
+
+              <!-- <img src="https://fakeimg.pl/300/" alt="" /> -->
+
               <div class="Fb-news-body-container-X">
                 <div class="Fb-news-body-container-time-X">2024-12-7</div>
                 <div class="Fb-news-body-container-title-X">
@@ -257,11 +236,10 @@
               </div>
             </article>
             <article>
-<<<<<<< HEAD
               <img src="../assets/images/Fb16.jpg" alt="" />
-=======
-              <img src="https://fakeimg.pl/300/" alt="">
->>>>>>> 29482163883a380007f9bac66b999d10b5922e9d
+
+              <!-- <img src="https://fakeimg.pl/300/" alt="" /> -->
+
               <div class="Fb-news-body-container-X">
                 <div class="Fb-news-body-container-time-X">2024-12-7</div>
                 <div class="Fb-news-body-container-title-X">從源頭減少垃圾：如何做好資源回收</div>
@@ -271,11 +249,10 @@
               </div>
             </article>
             <article>
-<<<<<<< HEAD
               <img src="../assets/images/Fb17.jpg" alt="" />
-=======
-              <img src="https://fakeimg.pl/300/" alt="">
->>>>>>> 29482163883a380007f9bac66b999d10b5922e9d
+
+              <!-- <img src="https://fakeimg.pl/300/" alt="" /> -->
+
               <div class="Fb-news-body-container-X">
                 <div class="Fb-news-body-container-time-X">2024-12-7</div>
                 <div class="Fb-news-body-container-title-X">何謂無痕山林？無痕山林7準則，登山時也友善環境</div>
@@ -285,11 +262,10 @@
               </div>
             </article>
             <article>
-<<<<<<< HEAD
               <img src="../assets/images/Fb18.jpg" alt="" />
-=======
-              <img src="https://fakeimg.pl/300/" alt="">
->>>>>>> 29482163883a380007f9bac66b999d10b5922e9d
+
+              <!-- <img src="https://fakeimg.pl/300/" alt="" /> -->
+
               <div class="Fb-news-body-container-X">
                 <div class="Fb-news-body-container-time-X">2024-12-7</div>
                 <div class="Fb-news-body-container-title-X">環保飲食不只少吃肉，這樣吃素減碳更有效！</div>
@@ -303,14 +279,6 @@
       </div>
     </div>
   </main>
-<<<<<<< HEAD
-=======
-
-
-
-
-
->>>>>>> 29482163883a380007f9bac66b999d10b5922e9d
 </template>
 
 <script>

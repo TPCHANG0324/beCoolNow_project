@@ -1,4 +1,5 @@
 <template>
+    <MainHeader />
     <!-- 環保市集 - 購物車，縮寫Sp - 功能 - 代號X -->
     <main>
         <div class="Sp-X">
@@ -26,8 +27,6 @@
                         </span>
                         <span>購買完成</span>
                     </div>
-
-
                 </div>
                 <!-- 購物車 -->
                 <section class="Sp-shopping-cart-X">
@@ -43,26 +42,29 @@
                             <div>小計</div>
                             <div></div>
                         </div>
-                        <div class="Sp-cart-item-X">
+
+                        <div class="Sp-cart-item-X" v-for="(buy, index) in buys" :key="buy.id">
                             <div class="Sp-cart-item-info-X">
-                                <a href="#" target="_blank"></a>
-                                <span>愛護地球環保袋
+                                <a href="#" target="_blank" :style="{ backgroundImage: `url(${buy.image})` }"></a>
+                                <span>{{ buy.name }}
                                 </span>
                             </div>
-                            <div>不織布</div>
-                            <div>NT$ 290</div>
+                            <div>{{ buy.size }}</div>
+                            <div>NT$ {{ buy.price }}</div>
                             <div>
                                 <form action="">
                                     <div class="Sp-cart-input-group-X">
-                                        <span><i class="bi bi-dash"></i></span>
-                                        <input type="number" value="1" step="1" min="0">
-                                        <span><i class="bi bi-plus"></i></span>
+                                        <span @click="minusItem(index)"><i class="bi bi-dash"></i></span>
+                                        <input @input="reviseItem(index, buy.num)" type="number" v-model="buy.num"
+                                            step="1" min="0">
+                                        <span @click="addItem(index)"><i class="bi bi-plus"></i></span>
                                     </div>
                                 </form>
                             </div>
-                            <div>NT$ 2900</div>
-                            <div><i class="bi bi-trash3-fill"></i></div>
+                            <div>NT$ {{ buy.price * buy.num }}</div>
+                            <div @click="deleteItem"><i class="bi bi-trash3-fill"></i></div>
                         </div>
+
                     </div>
                 </section>
                 <!-- 精選商品 -->
@@ -71,52 +73,16 @@
                     <div class="Sp-section-header">精選商品</div>
                     <!-- 項目內容 -->
                     <div class="Sp-cart-addon-wrapper-X">
-                        <div class="Sp-cart-addon-item-X">
+                        <div class="Sp-cart-addon-item-X" v-for="(item, index) in items" :key="item.id">
                             <a href="#" target="_blank" class="Sp-cart-addon-item-img">
-                                <img src="../assets/images/Sp08-2.jpg" alt="">
+                                <img :src="item.image" alt="">
                             </a>
                             <div class="Sp-cart-addon-item-content">
                                 <div class="Sp-cart-addon-item-info">
-                                    <p>愛護地球環保杯</p>
-                                    <span>NT$ 150</span>
+                                    <p>{{ item.name }}</p>
+                                    <span>NT$ {{ item.price }}</span>
                                 </div>
-                                <button>加入購物車</button>
-                            </div>
-                        </div>
-                        <div class="Sp-cart-addon-item-X">
-                            <a href="#" target="_blank" class="Sp-cart-addon-item-img">
-                                <img src="../assets/images/Sp09-2.jpg" alt="">
-                            </a>
-                            <div class="Sp-cart-addon-item-content">
-                                <div class="Sp-cart-addon-item-info">
-                                    <p>愛護地球環保杯2</p>
-                                    <span>NT$ 180</span>
-                                </div>
-                                <button>加入購物車</button>
-                            </div>
-                        </div>
-                        <div class="Sp-cart-addon-item-X">
-                            <a href="#" target="_blank" class="Sp-cart-addon-item-img">
-                                <img src="../assets/images/Sp04.jpg" alt="">
-                            </a>
-                            <div class="Sp-cart-addon-item-content">
-                                <div class="Sp-cart-addon-item-info">
-                                    <p>設計款 - 愛護地球環保吸管</p>
-                                    <span>NT$ 80</span>
-                                </div>
-                                <button>加入購物車</button>
-                            </div>
-                        </div>
-                        <div class="Sp-cart-addon-item-X">
-                            <a href="#" target="_blank" class="Sp-cart-addon-item-img">
-                                <img src="../assets/images/Sp11-2.jpg" alt="">
-                            </a>
-                            <div class="Sp-cart-addon-item-content">
-                                <div class="Sp-cart-addon-item-info">
-                                    <p>愛護地球環保筷</p>
-                                    <span>NT$ 80</span>
-                                </div>
-                                <button>加入購物車</button>
+                                <button @click="addToCart(index)">加入購物車</button>
                             </div>
                         </div>
                     </div>
@@ -130,10 +96,12 @@
                             <label for="">送貨方式</label>
                             <select name="" id="">
                                 <option value="新竹物流宅配">新竹物流宅配</option>
+                                <option value="台灣離島郵寄">台灣離島郵寄</option>
                             </select>
                             <label for="">付款方式</label>
                             <select name="" id="">
                                 <option value="信用卡 (Visa/Master/JCB)">信用卡 (Visa/Master/JCB)</option>
+                                <option value="Line Pay">Line Pay</option>
                             </select>
                         </div>
                     </section>
@@ -143,7 +111,7 @@
                         <div class="Sp-order-summary-body">
                             <div class="Sp-order-summary-body-subtotal">
                                 <span>小計：</span>
-                                <span>NT$ 2900</span>
+                                <span>NT$ {{ substotal }}</span>
                             </div>
                             <div class="Sp-order-summary-body-delivery">
                                 <span>運費：</span>
@@ -151,24 +119,25 @@
                             </div>
                             <div class="Sp-order-summary-body-points">
                                 <span>目前可用點數：</span>
-                                <span>250</span>
+                                <!-- <span>250</span> -->
+                                <span>{{ points }}</span>
                             </div>
                             <div class="Sp-order-summary-body-coupon">
                                 <label for="">本次使用點數：</label>
                                 <form action="">
-                                    <span><i class="bi bi-dash"></i></span>
-                                    <input type="number" value="100" step="100" min="0">
-                                    <span><i class="bi bi-plus"></i></span>
+                                    <span @click="minusPoints"><i class="bi bi-dash"></i></span>
+                                    <input type="number" :value="usePoints" step="100" min="0">
+                                    <span @click="addPoints"><i class="bi bi-plus"></i></span>
                                 </form>
                             </div>
                             <div class="Sp-order-summary-body-discount">
                                 <span>折抵金額：</span>
-                                <span>- NT$ 1</span>
+                                <span>- NT$ {{ discount }}</span>
                             </div>
                             <hr>
                             <div class="Sp-order-summary-body-amount">
                                 <span>合計：</span>
-                                <span>NT$ 2999</span>
+                                <span>NT$ {{ total }}</span>
                             </div>
                             <a href="#" class="Sp-checkout-Btn">前往結帳</a>
                         </div>
@@ -177,7 +146,6 @@
                 <!-- 出貨提醒 -->
                 <section class="Sp-shopping-reminder-X">
                     <div class="Sp-shopping-reminder-header">出貨提醒</div>
-<<<<<<< HEAD
                     <div class="Sp-shopping-reminder-body">感謝您支持我們的環保商品！以下是您的訂單與出貨注意事項：
                         📦 出貨時間：
                         涼城即時環保市集皆為客製化生產，製作期需2-3週。
@@ -196,7 +164,6 @@
                         💳 付款方式：
                         本店支援 LINE Pay 結帳，歡迎使用！
                         如有任何問題，歡迎隨時與我們聯繫！🌱 選擇再生材質，與我們一起為地球減少負擔。</div>
-=======
                     <div class="Sp-shopping-reminder-body">
                         <p>感謝您支持我們的環保商品！以下是您的訂單與出貨注意事項：</p>
                         <p>📦 出貨時間：</p>
@@ -216,21 +183,158 @@
                         <p>💳 付款方式：</p>
                         <p>本店支援 LINE Pay 結帳，歡迎使用！</p>
                         <p>如有任何問題，歡迎隨時與我們聯繫！🌱 選擇再生材質，與我們一起為地球減少負擔。</p>
-                        </div>
->>>>>>> 29482163883a380007f9bac66b999d10b5922e9d
+                    </div>
                 </section>
 
             </div>
         </div>
 
-
+        <p>{{ counterStore.count }}</p>
+        <button @click="counterStore.accumulate">測試按鈕</button>
     </main>
+    <MainFooter />
 </template>
 
-<script>
-export default {
+<script setup>
+import MainFooter from '@/components/layout/MainFooter.vue';
+import MainHeader from '@/components/layout/MainHeader.vue';
+import { useCounterStore } from '@/store/cart'
+import { ref, computed } from 'vue';
+
+const counterStore = ref(useCounterStore());
+
+
+
+
+//購買商品 //從資料庫取得?
+const buys = ref([
+    { id: 1, image: 'src/assets/images/Sp06.jpg', name: '愛護地球環保袋', price: 290, size: '不織布', num: 1 },
+    { id: 1, image: 'src/assets/images/Sp06.jpg', name: '愛護地球環保袋', price: 290, size: '不織布', num: 1 },
+])
+
+//精選商品
+const items = ref([
+    { id: 1, image: 'src/assets/images/Sp08.jpg', name: '愛護地球環保杯', price: 150, size: '無', num: 1 },
+    { id: 2, image: 'src/assets/images/Sp09.jpg', name: '愛護地球環保杯2', price: 180, size: '無', num: 1 },
+    { id: 3, image: 'src/assets/images/Sp04.jpg', name: '設計款 - 愛護地球環保吸管', price: 80, size: '無', num: 1 },
+    { id: 4, image: 'src/assets/images/Sp11.jpg', name: '愛護地球環保筷', price: 80, size: '無', num: 1 },
+]);
+
+//商品加減&刪除按鈕
+const addItem = (index) => {
+    buys.value[index].num++;
+}
+
+const minusItem = (index) => {
+    if (buys.value[index].num <= 1) {
+        let d = confirm('是否要刪除這個商品？')
+        if (d) {
+            buys.value.splice(index, 1)
+        }
+    }
+    if (buys.value[index].num > 1) {
+        buys.value[index].num--;
+    }
+}
+
+const deleteItem = (index) => {
+    let d = confirm('是否要刪除這個商品？')
+    if (d) {
+        buys.value.splice(index, 1)
+    }
+}
+
+//商品數量的輸入框
+const reviseItem = (index, newNum) => {
+    if (newNum < 0) {
+        alert('商品數量不可為負！');
+        buys.value[index].num = 1
+        return
+    } else if (newNum === 0) {
+        let d = confirm('是否要刪除這個商品？')
+        if (d) {
+            buys.value.splice(index, 1)
+        }else{
+            buys.value[index].num = 1
+        }
+    } else {
+        buys.value[index].num = newNum
+    }
+}
+
+//精選商品加入購物車
+const addToCart = (index) => {
+    buys.value.push({
+        id: buys.value.length - 1,
+        image: items.value[index].image,
+        name: items.value[index].name,
+        price: items.value[index].price,
+        size: items.value[index].size,
+        num: items.value[index].num,
+    })
+}
+
+//還沒加運費跟點數的小計 (運費上面那項)
+const substotal = computed(() => {
+    return buys.value.reduce((sum, item) => {
+        return sum + item.price * item.num;
+    }, 0)
+})
+
+
+//使用者點數：100 點折抵 1 元  
+const points = ref(1000); //正式應該從資料庫取得
+const usePoints = ref(0);
+
+//點數增減
+const minusPoints = () => {
+    if (usePoints.value <= 0) {
+        return
+    } else {
+        usePoints.value -= 100;
+        points.value += 100;
+    }
+}
+
+const addPoints = () => {
+    if (points.value <= 0) {
+        return
+    } else {
+        usePoints.value += 100;
+        points.value -= 100;
+    }
 
 }
+
+//計算點數折抵
+const discount = computed(() => {
+    return usePoints.value / 100;
+})
+
+//計算合計金額
+const total = computed(() => {
+    return substotal.value + 100 - discount.value;
+})
+
+
+
+
+// 用於滑動的邏輯
+const startX = ref(0);
+const scrollLeft = ref(0);
+
+const onTouchStart = (e) => {
+    startX.value = e.touches[0].clientX; // 紀錄開始觸摸位置
+    scrollLeft.value = e.currentTarget.scrollLeft; // 紀錄當前的滾動位置
+};
+
+const onTouchMove = (e) => {
+    const x = e.touches[0].clientX; // 紀錄當前觸摸位置
+    const walk = (x - startX.value) * 2; // 計算滑動距離，乘以 2 以增加滑動速度
+    e.currentTarget.scrollLeft = scrollLeft.value - walk; // 更新滾動位置
+};
+
+
 </script>
 
 <style lang="scss" scoped></style>

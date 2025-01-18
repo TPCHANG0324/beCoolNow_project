@@ -301,3 +301,262 @@
 
 }
 
+// 平板樣式 (小於 820px)
+@media screen and (max-width: 820px) {
+  .si_content_R {
+    padding: 0 20px;
+  }
+
+  .si_bottomsection_R .si_order2_R .Si-ordernotes-R .si_ordernotes_body textarea {
+    width: 46rem;
+    height: 5rem;
+    padding: 10px;
+}
+
+.si_bottomsection_R .si_order2_R .Si-payment-R .si_payment_body {
+  padding: 1rem;
+  display: flex
+;
+  flex-direction: column;
+  gap: 10px;
+  margin-left: 100px;
+}
+
+  // 訂單摘要區塊
+  .si_ordersummary_R {
+    .si_orderdetails_R {
+      .si_orderbottom1_R,
+      .si_orderbottom2_R {
+        flex-direction: column;
+        gap: 10px;
+        
+        .item1, .item2, .item3, .item4, .item5,
+        .middle_item1, .middle_item2, .middle_item3, .middle_item4, .middle_item5 {
+          width: 100%;
+          text-align: left;
+        }
+      }
+
+      .si_orderbottom3_R {
+        width: 100%;
+        margin: 0;
+        padding: 20px;
+      }
+    }
+  }
+
+  // 底部區塊
+  .si_bottomsection_R {
+    // 第一個訂單區塊
+    .si_order1_R {
+      flex-direction: column;
+      gap: 20px;
+
+      .Si_customerinfo_R,
+      .Si_deliveryinfo_R {
+        .Si_customerinfo_body,
+        .Si_deliveryinfo_body {
+          input {
+            width: 100%;
+          }
+
+          .si_phonenumber_R {
+            input {
+              width: 100%;
+            }
+          }
+        }
+      }
+    }
+
+    // 第二個訂單區塊
+    .si_order2_R {
+      flex-direction: column;
+      gap: 20px;
+
+      .Si-ordernotes-R,
+      .Si-payment-R {
+        textarea, 
+        input {
+          width: 100%;
+        }
+      }
+    }
+
+    // 第三個訂單區塊
+    .si_order3_R {
+      flex-direction: column;
+      gap: 20px;
+
+      .si_return_R {
+        order: 2;
+      }
+
+      .si_reciptout_R {
+        order: 1;
+        
+        .Si_recipt_R {
+          .si_recipt_body {
+            select {
+              width: 100%;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// 手機樣式 (小於 430px)
+// 手機 RWD
+@media screen and (max-width: 430px) {
+  .si_content_R {
+    padding: 0 15px;
+  }
+
+  // 麵包屑導航
+  .breadcrumb {
+    padding-top: 30px;
+    font-size: 14px;
+  }
+
+  .si_bottomsection_R .si_order2_R .Si-payment-R .si_payment_body{
+    padding: 1rem;
+    display: flex
+;
+    flex-direction: column;
+    gap: 10px;
+    width: 40rem;
+    // margin-left: 100px;
+    margin-left: 0px;
+  }
+
+  
+  .si_bottomsection_R .si_order2_R .Si-payment-R .si_payment_body input {
+    width: 22rem;
+    height: 2rem;
+    padding: 10px;
+}
+
+.si_bottomsection_R .si_order1_R .Si_deliveryinfo_R .si_address select {
+  width: 100%;
+}
+
+.si_bottomsection_R .si_order2_R .Si-ordernotes-R .si_ordernotes_body textarea {
+  width: 22.5rem;
+  height: 5rem;
+  padding: 10px;
+}
+
+  // 訂單摘要區塊
+  .si_ordersummary_R {
+    margin-bottom: 20px;
+    border-radius: 10px;
+
+    .si_orderhead_R {
+      padding: 15px;
+      h2 {
+        font-size: 24px;
+      }
+      p {
+        font-size: 18px;
+      }
+    }
+
+    .si_orderdetails_R {
+      .si_orderbottom1_R,
+      .si_orderbottom2_R {
+        padding: 10px;
+        font-size: 14px;
+      }
+
+      .si_orderbottom3_R {
+        padding: 15px;
+        font-size: 14px;
+      }
+    }
+  }
+
+  // 底部區塊
+  .si_bottomsection_R {
+    .si_order1_R,
+    .si_order2_R,
+    .si_order3_R {
+      gap: 15px;
+    }
+
+    // 所有區塊標題
+    .Si_customerinfo_header,
+    .Si_deliveryinfo_header,
+    .Si_ordernotes_header,
+    .si_payment_header,
+    .si_recipt_header {
+      font-size: 16px;
+      padding: 8px 12px;
+    }
+
+    // 所有區塊內容
+    .Si_customerinfo_body,
+    .Si_deliveryinfo_body,
+    .si_ordernotes_body,
+    .si_payment_body,
+    .si_recipt_body {
+      padding: 12px;
+      gap: 8px;
+      font-size: 14px;
+
+      input, 
+      select,
+      textarea {
+        height: 2.5rem;
+        padding: 8px;
+        font-size: 14px;
+      }
+    }
+
+    // 地址選擇區塊
+    .si_address {
+      .si_aselect {
+        flex-direction: column;
+        gap: 8px;
+        
+        select {
+          width: 100%;
+        }
+      }
+    }
+
+    // 電話號碼區塊
+    .si_phonenumber_R {
+      flex-direction: column;
+      gap: 8px;
+      border: none;
+
+      select,
+      input {
+        width: 100%;
+        border: 1px solid gray;
+      }
+    }
+
+    // 按鈕樣式
+    .btn {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      text-align: center;
+    }
+
+    // 返回按鈕
+    .si_return_R {
+      width: 100%;
+      text-align: center;
+      margin-top: 10px;
+
+      a {
+        font-size: 14px;
+      }
+    }
+  }
+}
+
