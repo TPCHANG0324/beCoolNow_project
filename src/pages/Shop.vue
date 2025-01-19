@@ -1,4 +1,5 @@
 <template>
+    <!-- <MainHeader></MainHeader> -->
   <!-- 環保市集 - 全商品瀏覽，縮寫Sp - 功能 - 代號X -->
   <main>
     <div class="Sp-X">
@@ -65,8 +66,12 @@
                                     </a>
                                     <p class="shop-add-to-cart-X">加入購物車</p>
                                 </div>
-                                <a href="#" class="product-card-name-X">環保吸管1</a>
-                                <p>價格：NT$150</p>
+                                <a href="#" class="product-card-name-X">環保吸管1
+                                    <p>價格：NT$150</p>
+                                    <div class="shop-addcart-S">
+                                        <i class="fa-solid fa-cart-shopping"></i>
+                                    </div>
+                                </a>
                             </li>
                             <li class="product-card_S">
                                 <div class="product-box_S">
@@ -263,8 +268,13 @@
       </div>-->
     </div>  
   </main>
+  <MainFooter></MainFooter>
 </template>
 
 <script>
+// import MainHeader from '@/components/layout/MainHeader.vue';
+import MainFooter from '@/components/layout/MainFooter.vue';
+
+
 export default {};
 </script>
