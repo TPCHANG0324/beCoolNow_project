@@ -1,12 +1,14 @@
 <!-- 已經 RWD 820/ 430 完成 -->
 
 <template>
-  <div class="bcn-donation-container1">
-    <div class="bcn-top-place1">
-      <div class="bcn-donation-header1">
-        <p>您選擇了 <strong>每月捐款 新臺幣 1000元</strong></p>
-      </div>
-      <!-- <div class="bcn-donation-button11">
+  <MainHeader></MainHeader>
+    <div class="bcn-donation-container1">
+        <div class="bcn-top-place1">
+        <div class="bcn-donation-header1">
+            <p>您選擇了 <strong>每月捐款 新臺幣 1000元</strong></p>
+           
+        </div>
+        <!-- <div class="bcn-donation-button11">
         <button class="donation-button11">重新選擇捐款</button>
     </div> -->
     </div>
@@ -45,10 +47,14 @@
       <span class="bc-prev-step-icon2">❮</span>
       <span class="bc-prev-step-text2">上一步</span>
     </a>
-  </div>
+</div>
+<MainFooter></MainFooter>
 </template>
 
 <script>
+import MainHeader from '@/components/layout/MainHeader.vue';
+import MainFooter from '@/components/layout/MainFooter.vue';
+
 export default {};
 </script>
 

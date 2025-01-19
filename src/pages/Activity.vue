@@ -1,5 +1,6 @@
 <!-- 已經 RWD 820/ 430 完成 -->
 <template>
+  <MainHeader></MainHeader>
     <div class=" wrapper">
          <div class="hero-section">
              <img src="../assets/images/Ac01-1.png" alt="banner">
@@ -8,7 +9,7 @@
                  <h2>改變，讓奇蹟發生</h2>
              </div>
          </div>
-         <h3 class="Ac_h3">21 日減碳環保活動</h3 class="Ac_h3">
+         <h3 class="Ac_h3">21 日減碳環保活動</h3>
          <!-- 卡片容器 -->
          <div class="daily_card">
              <!-- 卡片範例 1 -->
@@ -227,7 +228,7 @@
  
                  <h3 class="Ac_h3">
                      Day 3 向身邊一棵樹說謝謝
-                 </h3 class="Ac_h3">
+                 </h3>
                  <article>
                      今天抽空走到身邊最近的樹旁，謝謝他吸收二氧化碳、釋放氧氣，也感謝他滋養著以樹為家的植物、動物，豐富了「高空生態系」。
                  </article>
@@ -244,7 +245,7 @@
                  <h3 class="Ac_h3">
                      Day 4 前往離你最近的公園，
                      完成一次「無痕」散步
-                 </h3 class="Ac_h3">
+                 </h3>
                  <article>
                      無痕精神，來自無痕山林的概念。前往離你最近的公園，試試看、只留下回憶與足跡，不留下垃圾。
                  </article>
@@ -262,7 +263,7 @@
  
                  <h3 class="Ac_h3">
                      Day 5 退訂一份電子報
-                 </h3 class="Ac_h3">
+                 </h3>
                  <article>
                      你「取消訂閱」信箱中超過一個月沒打開的電子報！花 10 秒取消一份天天發送的電子報，每年就能減少 109.5g 數位碳排放。
                  </article>
@@ -279,7 +280,7 @@
  
                  <h3 class="Ac_h3">
                      Day 6 打消一個購買念頭
-                 </h3 class="Ac_h3">
+                 </h3>
                  <article>
                      花一分鐘列出最近想買的東西，試著從清單中劃掉一項，決定不買它了！如果不知道要如何刪去，來參考這三個小練習。
                  </article>
@@ -299,7 +300,7 @@
  
                      <h3 class="Ac_h3">
                          Day 7 出門前，把餐具、環保杯、購物袋放進包包
-                     </h3 class="Ac_h3">
+                     </h3>
                      <article>
                          養成運動習慣的第一步，是帶運動衣出門；要擁抱更環保、減少廢棄的永續生活，現在把「餐具、環保杯、購物袋」放進包包。
                      </article>
@@ -315,7 +316,7 @@
  
                      <h3 class="Ac_h3">
                          Day 8 和 AI 聊聊 ─ 給「台灣第一個生成式 AI 永續機器人」一個問題
-                     </h3 class="Ac_h3">
+                     </h3>
                      <article>
                          加入「小綠行動中」，並試著輸入一個關於永續的問題。透過生成式 AI 永續機器人，隨時隨地，即時獲得永續的解答和靈感。
                      </article>
@@ -331,7 +332,7 @@
  
                      <h3 class="Ac_h3">
                          Day 9 練習一次：關於洗手的減法
-                     </h3 class="Ac_h3">
+                     </h3>
                      <article>
                          世界衛生組織：「覆蓋雙手表面」的泡沫量已足夠，用太多洗手乳不僅無益、還會耗費更多水。今天試試以平常一半的量來洗手。
                      </article>
@@ -348,7 +349,7 @@
  
                      <h3 class="Ac_h3">
                          Day 10 猜猜看，哪一個是「負碳」國家？
-                     </h3 class="Ac_h3">
+                     </h3>
                      <article>
                          是冰島、不丹，還是紐西蘭？這個國家生產充足的潔淨能源，更以憲法規定國土的森林覆蓋率不低於 60%，成為全球少數的負碳國。
                      </article>
@@ -366,7 +367,7 @@
  
                      <h3 class="Ac_h3">
                          Day 11 憑直覺比比看，洗髮與保養的「碳排放」高低
-                     </h3 class="Ac_h3">
+                     </h3>
                      <article>
                          每天，我們在洗沐和保養的過程中都會產生碳排放。根據自己的「碳直覺」，比比看洗髮和保養的「碳排放」。
                      </article>
@@ -383,7 +384,7 @@
  
                      <h3 class="Ac_h3">
                          Day 12 下一餐，蔬食
-                     </h3 class="Ac_h3">
+                     </h3>
                      <article>
                          搜尋附近的美味蔬食，下一餐就去吃！美國環境工作小組估算，一餐不吃肉就能減少 760g 碳排、約為開車四公里所產生的碳排。
                      </article>
@@ -399,7 +400,7 @@
  
                      <h3 class="Ac_h3">
                          Day 13 投給你最喜歡的台灣特有種一票
-                     </h3 class="Ac_h3">
+                     </h3>
                      <article>
                          台灣森林覆蓋率超過一半，孕育著豐富的生態和特有種，包括台灣黑熊、台灣山椒魚、紅檜、台灣百合等。
                      </article>
@@ -418,7 +419,7 @@
  
                      <h3 class="Ac_h3">
                          Day 14 找出身邊用最久的物品
-                     </h3 class="Ac_h3">
+                     </h3>
                      <article>
                          花十秒鐘，找出今天身邊陪你最久的物品！也歡迎你拍張照分享你和它的故事，「用久一點」就是為環境做的一件好事。
                      </article>
@@ -435,7 +436,7 @@
  
                      <h3 class="Ac_h3">
                          Day 15 解決碗中最後一粒米
-                     </h3 class="Ac_h3">
+                     </h3>
                      <article>
                          下一餐，把飯菜都吃光！以台灣為例，平均每人每年產生約 22.2 公斤剩食，每餐飯都能以「完食」對地球好一次。
                      </article>
@@ -451,7 +452,7 @@
  
                      <h3 class="Ac_h3">
                          Day 16 自我檢測你的發票雲端等級
-                     </h3 class="Ac_h3">
+                     </h3>
                      <article>
                          以三個分級檢測 (A) 發票都記得存載具 (B) 有載具 App (C) 沒聽過載具，你是哪種？
                      </article>
@@ -469,7 +470,7 @@
  
                      <h3 class="Ac_h3">
                          Day 17 完成一次百分百垃圾分類
-                     </h3 class="Ac_h3">
+                     </h3>
                      <article>
                          買網購、叫外送、喝一瓶罐裝飲料...你會將廢棄物一視同仁嗎？今天嘗試辨識一個可回收的廢棄物，從一般垃圾丟至回收區吧！
                      </article>
@@ -486,7 +487,7 @@
  
                      <h3 class="Ac_h3">
                          Day 18 挑戰：下一餐，少一件垃圾
-                     </h3 class="Ac_h3">
+                     </h3>
                      <article>
                          少一雙免洗筷、少一個塑膠湯匙、或是少一張衛生紙，挑戰讓下一餐少一件垃圾，也許，比想像中還容易！
                      </article>
@@ -502,7 +503,7 @@
  
                      <h3 class="Ac_h3">
                          Day 19 丟掉 3 個冰箱裡不要的東西
-                     </h3 class="Ac_h3">
+                     </h3>
                      <article>
                          維持冰箱最佳表現小訣竅：丟棄那些以為還會拿來吃，但已是陳年食材、醬料。多一些空氣循環，少一些能源消耗與碳排。
                      </article>
@@ -521,7 +522,7 @@
  
                      <h3 class="Ac_h3">
                          Day 20 從衣櫃裡，找出「最熟悉的陌生衣」
-                     </h3 class="Ac_h3">
+                     </h3>
                      <article>
                          找出深埋在衣櫃中那件「最熟悉的陌生衣」，讓你很喜歡卻忘記穿的它，重回日常穿搭！或是，二手與回收，也能賦予它新生命。
  
@@ -540,7 +541,7 @@
  
                      <h3 class="Ac_h3">
                          Day 21 找到離你最近的「循環杯」
-                     </h3 class="Ac_h3">
+                     </h3>
                      <article>
                          喝飲料、外帶咖啡，不一定要自備環保杯也能降低一次性垃圾？搜尋看看，離你最近的「循環杯」在哪裡？
                      </article>
@@ -562,7 +563,7 @@
      <!-- 信件標題 -->
  
  
-     <h3 class="Ac_h3"><br>給地球的一封信</h3 class="Ac_h3">
+     <h3 class="Ac_h3"><br>給地球的一封信</h3>
  
  
      <!-- 信件展示區 -->
@@ -666,15 +667,20 @@
              <img src="../assets/images/acfinial.png" alt="煙囪排放煙霧的圖片">
          </div>
      </div>
+
+     <MainFooter></MainFooter>
  
  </template>
 
  <script>
+import MainHeader from '@/components/layout/MainHeader.vue';
+import MainFooter from '@/components/layout/MainFooter.vue';
+
 export default {
   data() {
     return {
       treeTimeline: null,
-      animationInitialized: false
+      animationInitialized: false,
     };
   },
 
@@ -687,7 +693,7 @@ export default {
     });
   },
 
-  beforeDestroy() {
+  beforeUnmount() {
     // 組件銷毀前清理動畫
     if (this.treeTimeline) {
       this.stopAndReset();
@@ -701,7 +707,6 @@ export default {
         console.error('GSAP libraries not loaded properly');
         return;
       }
-      
 
       try {
         this.stopAndReset();
@@ -716,124 +721,179 @@ export default {
 
     setup() {
       console.log('Setting up initial states');
-      
+
       // 初始設置
-      TweenMax.set("#shadow", {
+      TweenMax.set('#shadow', {
         scale: 0,
-        transformOrigin: "15px 8px"
+        transformOrigin: '15px 8px',
       });
-      TweenMax.set("#tree", {
+      TweenMax.set('#tree', {
         scale: 0,
-        transformOrigin: "154px bottom"
+        transformOrigin: '154px bottom',
       });
-      TweenMax.set("#leaf-rb", {
+      TweenMax.set('#leaf-rb', {
         scale: 0,
-        rotation: "-60cw",
+        rotation: '-60cw',
         y: -15,
-        transformOrigin: "left bottom"
+        transformOrigin: 'left bottom',
       });
-      TweenMax.set("#leaf-rm", {
+      TweenMax.set('#leaf-rm', {
         scale: 0,
-        rotation: "-50cw",
+        rotation: '-50cw',
         y: 30,
-        transformOrigin: "left bottom"
+        transformOrigin: 'left bottom',
       });
-      TweenMax.set("#leaf-lb", {
+      TweenMax.set('#leaf-lb', {
         scale: 0,
-        rotation: "60cw",
+        rotation: '60cw',
         y: -80,
-        transformOrigin: "right bottom"
+        transformOrigin: 'right bottom',
       });
-      TweenMax.set("#leaf-lm", {
+      TweenMax.set('#leaf-lm', {
         scale: 0,
-        rotation: "40cw",
+        rotation: '40cw',
         y: -90,
-        transformOrigin: "right bottom"
+        transformOrigin: 'right bottom',
       });
-      TweenMax.set("#leaf-top", {
+      TweenMax.set('#leaf-top', {
         scale: 0,
-        transformOrigin: "center bottom"
+        transformOrigin: 'center bottom',
       });
-      TweenMax.set("#leaf-rb g", {
+      TweenMax.set('#leaf-rb g', {
         scale: 0,
-        transformOrigin: "left 60px"
+        transformOrigin: 'left 60px',
       });
-      TweenMax.set("#leaf-rm g", {
+      TweenMax.set('#leaf-rm g', {
         scale: 0,
-        transformOrigin: "22px 140px"
+        transformOrigin: '22px 140px',
       });
-      TweenMax.set("#leaf-lb g", {
+      TweenMax.set('#leaf-lb g', {
         scale: 0,
-        transformOrigin: "right 56px"
+        transformOrigin: 'right 56px',
       });
-      TweenMax.set("#leaf-lm g", {
+      TweenMax.set('#leaf-lm g', {
         scale: 0,
-        transformOrigin: "106px bottom"
+        transformOrigin: '106px bottom',
       });
     },
 
     animate() {
       console.log('Starting animation sequence');
-      
+
       const tl = new TimelineMax({
         delay: 0.42,
         repeat: -1,
         repeatDelay: 2,
         yoyo: true,
         onStart: () => console.log('Animation started'),
-        onRepeat: () => console.log('Animation cycle completed')
+        onRepeat: () => console.log('Animation cycle completed'),
       });
 
-      tl.to("#shadow", 2, {
-        scale: 1
-      }, 0)
-      .to("#tree", 2, {
-        scale: 1
-      }, 0)
-      .to("#leaf-rb", 2, {
-        scale: 1,
-        rotation: "0cw",
-        y: 0,
-        delay: 0.35
-      }, 0)
-      .to("#leaf-rm", 2, {
-        scale: 1,
-        rotation: "0cw",
-        y: 0,
-        delay: 0.35
-      }, 0)
-      .to("#leaf-lb", 2, {
-        scale: 1,
-        rotation: "0cw",
-        y: 0,
-        delay: 0.35
-      }, 0)
-      .to("#leaf-lm", 2, {
-        scale: 1,
-        rotation: "0cw",
-        y: 0,
-        delay: 0.35
-      }, 0)
-      .to("#leaf-top", 2.5, {
-        scale: 1,
-        delay: 0.35
-      }, 0)
-      .to("#leaf-lb g", 2.25, {
-        scale: 1,
-        delay: 0.5
-      }, 0)
-      .to("#leaf-lm g", 2.25, {
-        scale: 1,
-        delay: 0.6
-      }, 0)
-      .to("#leaf-rb g", 2.25, {
-        scale: 1,
-        delay: 0.5
-      }, 0)
-      .to("#leaf-rm g", 2.25, {
-        scale: 1,
-        delay: 0.6
-      }, 0);
+      tl.to(
+        '#shadow',
+        2,
+        {
+          scale: 1,
+        },
+        0,
+      )
+        .to(
+          '#tree',
+          2,
+          {
+            scale: 1,
+          },
+          0,
+        )
+        .to(
+          '#leaf-rb',
+          2,
+          {
+            scale: 1,
+            rotation: '0cw',
+            y: 0,
+            delay: 0.35,
+          },
+          0,
+        )
+        .to(
+          '#leaf-rm',
+          2,
+          {
+            scale: 1,
+            rotation: '0cw',
+            y: 0,
+            delay: 0.35,
+          },
+          0,
+        )
+        .to(
+          '#leaf-lb',
+          2,
+          {
+            scale: 1,
+            rotation: '0cw',
+            y: 0,
+            delay: 0.35,
+          },
+          0,
+        )
+        .to(
+          '#leaf-lm',
+          2,
+          {
+            scale: 1,
+            rotation: '0cw',
+            y: 0,
+            delay: 0.35,
+          },
+          0,
+        )
+        .to(
+          '#leaf-top',
+          2.5,
+          {
+            scale: 1,
+            delay: 0.35,
+          },
+          0,
+        )
+        .to(
+          '#leaf-lb g',
+          2.25,
+          {
+            scale: 1,
+            delay: 0.5,
+          },
+          0,
+        )
+        .to(
+          '#leaf-lm g',
+          2.25,
+          {
+            scale: 1,
+            delay: 0.6,
+          },
+          0,
+        )
+        .to(
+          '#leaf-rb g',
+          2.25,
+          {
+            scale: 1,
+            delay: 0.5,
+          },
+          0,
+        )
+        .to(
+          '#leaf-rm g',
+          2.25,
+          {
+            scale: 1,
+            delay: 0.6,
+          },
+          0,
+        );
 
       this.treeTimeline = tl;
       return tl;
@@ -842,15 +902,24 @@ export default {
     stopAndReset() {
       console.log('Stopping and resetting animation');
       TweenMax.killAll(false, true, false);
-      
+
       const elements = [
-        "#tree", "#shadow", "#leaf-top", "#leaf-rb", 
-        "#leaf-rm", "#leaf-lb", "#leaf-lm", "#leaf-top", 
-        "#leaf-rb g", "#leaf-rm g", "#leaf-lb g", "#leaf-lm g"
+        '#tree',
+        '#shadow',
+        '#leaf-top',
+        '#leaf-rb',
+        '#leaf-rm',
+        '#leaf-lb',
+        '#leaf-lm',
+        '#leaf-top',
+        '#leaf-rb g',
+        '#leaf-rm g',
+        '#leaf-lb g',
+        '#leaf-lm g',
       ];
-      
-      elements.forEach(selector => {
-        TweenMax.set(selector, { clearProps: "all" });
+
+      elements.forEach((selector) => {
+        TweenMax.set(selector, { clearProps: 'all' });
       });
     },
 
@@ -863,55 +932,55 @@ export default {
 
     initializeNativeJS() {
       // DOM 元素選擇
-      const learnMoreButton = document.getElementById("learnMoreBtn");
-      const collapseButton = document.getElementById("collapseBtn");
-      const extraCardsSection = document.getElementById("extraCards");
-      const collapseSection = document.querySelector(".collapse_section");
-      const tree_buttons = document.querySelectorAll(".btn-Ac_done_btn");
+      const learnMoreButton = document.getElementById('learnMoreBtn');
+      const collapseButton = document.getElementById('collapseBtn');
+      const extraCardsSection = document.getElementById('extraCards');
+      const collapseSection = document.querySelector('.collapse_section');
+      const tree_buttons = document.querySelectorAll('.btn-Ac_done_btn');
       const popup = document.querySelector('.popup');
 
       // 展開按鈕事件
-      learnMoreButton?.addEventListener("click", (event) => {
+      learnMoreButton?.addEventListener('click', (event) => {
         event.preventDefault();
-        extraCardsSection.classList.add("expanded");
-        extraCardsSection.style.maxHeight = extraCardsSection.scrollHeight + "px";
-        learnMoreButton.classList.add("hidden");
-        collapseSection.classList.remove("hidden");
+        extraCardsSection.classList.add('expanded');
+        extraCardsSection.style.maxHeight = extraCardsSection.scrollHeight + 'px';
+        learnMoreButton.classList.add('hidden');
+        collapseSection.classList.remove('hidden');
       });
 
       // 收合按鈕事件
-      collapseButton?.addEventListener("click", (event) => {
+      collapseButton?.addEventListener('click', (event) => {
         event.preventDefault();
-        extraCardsSection.classList.remove("expanded");
-        extraCardsSection.style.maxHeight = "0px";
-        learnMoreButton.classList.remove("hidden");
-        collapseSection.classList.add("hidden");
+        extraCardsSection.classList.remove('expanded');
+        extraCardsSection.style.maxHeight = '0px';
+        learnMoreButton.classList.remove('hidden');
+        collapseSection.classList.add('hidden');
       });
 
       // 樹按鈕事件
-      tree_buttons.forEach(button => {
-        button.addEventListener("click", () => {
+      tree_buttons.forEach((button) => {
+        button.addEventListener('click', () => {
           if (button.disabled) return;
 
           // 更新計數
-          const card = button.closest(".AcB_card");
-          const countElement = card.querySelector(".action-count");
+          const card = button.closest('.AcB_card');
+          const countElement = card.querySelector('.action-count');
           let currentCount = parseInt(countElement.textContent);
           countElement.textContent = ++currentCount;
 
           // 更新按鈕狀態
-          button.textContent = "感謝你的響應！";
+          button.textContent = '感謝你的響應！';
           button.disabled = true;
-          button.classList.add("disabled");
+          button.classList.add('disabled');
 
           // 顯示 popup
-          popup.classList.add("Ac_active");
-          
+          popup.classList.add('Ac_active');
+
           // 設置 popup 淡出效果
           setTimeout(() => {
-            popup.classList.add("fade-out");
+            popup.classList.add('fade-out');
             setTimeout(() => {
-              popup.classList.remove("Ac_active", "fade-out");
+              popup.classList.remove('Ac_active', 'fade-out');
             }, 7000);
           }, 500);
 
@@ -919,7 +988,7 @@ export default {
           this.playAgain();
         });
       });
-    }
-  }
+    },
+  },
 };
 </script>
