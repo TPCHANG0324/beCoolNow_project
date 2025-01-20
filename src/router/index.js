@@ -50,14 +50,6 @@ const routes = [
     },
   },
   {
-    path: '/loginPage/',
-    component: () => import('@/pages/loginPage.vue'),
-    meta: {
-      title: '社群中心',
-      // requiredLogin: true
-    },
-  },
-  {
     path: '/shop_checkout',
     component: () => import('@/pages/Shop_checkout.vue'),
     meta: {
@@ -95,13 +87,14 @@ const routes = [
       // requiredLogin: true
     },
   },
-  // {
-  //   path: '/Ct/', component: () => import('@/pages/Ct.vue'),
-  //   meta: {
-  //     title: '綠境方城市',
-  //     requiredLogin: true
-  //   }
-  // },
+  {
+    path: '/city/',
+    component: () => import('@/pages/City.vue'),
+    meta: {
+      title: '綠境方城市',
+      // requiredLogin: true,
+    },
+  },
   {
     path: '/pay1/',
     component: () => import('@/pages/pay1.vue'),
@@ -278,6 +271,12 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL), // vite 設定檔中的 base: /tid103/g1/
   routes: routes,
+  // history: createWebHashHistory(),
+  // routes: routes,
+  scrollBehavior(to, from, savedPosition) {
+    // return desired position
+    return { top: 0 };
+  },
 });
 
 router.beforeEach(async (to, from, next) => {

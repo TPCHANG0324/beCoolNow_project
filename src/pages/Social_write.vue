@@ -1,6 +1,6 @@
 <template>
-  <!-- 撰寫文章，縮寫FbW - 功能 - 代號X -->
   <main>
+    <!-- 撰寫文章，縮寫FbW - 功能 - 代號X -->
     <div class="FbW-X">
       <!-- 發文區 -->
       <form action="" class="FbW-wrapper-X">

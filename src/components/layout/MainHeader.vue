@@ -3,25 +3,26 @@
   <header class="layout_header">
     <div class="header-wrapper">
       <div class="logo">
-        <a href="#">
+        <router-link to="/">
           <img src="../../assets/images/headerlogo.png" alt="logo" />
-        </a>
+        </router-link>
       </div>
       <nav class="nav-large">
         <ul>
-          <li><a href="#">島嶼危機</a></li>
-          <li><a href="#">永續行動</a></li>
-          <li><a href="#">社群中心</a></li>
-          <li><a href="#">綠境方城市</a></li>
-          <li><a href="#">關於我們</a></li>
+          <li><router-link to="/information">島嶼危機</router-link></li>
+          <li><router-link to="/activity">永續行動</router-link></li>
+          <li><router-link to="/social">社群中心</router-link></li>
+          <li><router-link to="/city">綠境方城市</router-link></li>
+          <li><router-link to="/About">關於我們</router-link></li>
           <li><a href="#">好站連結</a></li>
+          <li><router-link to="/shop">環保市集</router-link></li>
         </ul>
         <ul>
           <li>
-            <a href="#"><i class="bi bi-handbag"></i></a>
+            <router-link to="/shop_cart"><i class="bi bi-handbag"></i></router-link>
           </li>
           <li>
-            <a href="#"><i class="bi bi-person-circle"></i></a>
+            <router-link to="/member"><i class="bi bi-person-circle"></i></router-link>
           </li>
         </ul>
       </nav>
@@ -29,17 +30,17 @@
   </header>
   <header class="mobile_header">
     <div class="logo">
-      <a href="#">
+      <router-link to="/">
         <img src="../../assets/images/headerlogo.png" alt="logo" />
-      </a>
+      </router-link>
     </div>
     <div>
       <ul>
         <li>
-          <a href="#"><i class="bi bi-handbag"></i></a>
+          <router-link to="/shop"><i class="bi bi-handbag"></i></router-link>
         </li>
         <li>
-          <a href="#"><i class="bi bi-person-circle"></i></a>
+          <router-link to="/member"><i class="bi bi-person-circle"></i></router-link>
         </li>
       </ul>
       <!-- 漢堡線 -->
@@ -66,18 +67,20 @@
   <!-- 子選單 -->
   <nav class="mobile_nav" :class="{ open: isMenuOpen }">
     <ul>
-      <li><a href="#">島嶼危機</a></li>
-      <li><a href="#">永續行動</a></li>
-      <li><a href="#">社群中心</a></li>
-      <li><a href="#">綠境方城市</a></li>
-      <li><a href="#">關於我們</a></li>
+      <li><router-link to="/information">島嶼危機</router-link></li>
+      <li><router-link to="/activity">永續行動</router-link></li>
+      <li><router-link to="/social">社群中心</router-link></li>
+      <li><router-link to="/city">綠境方城市</router-link></li>
+      <li><router-link to="/About">關於我們</router-link></li>
       <li><a href="#">好站連結</a></li>
+      <li><router-link to="/shop">環保市集</router-link></li>
     </ul>
   </nav>
 </template>
 
 <script>
 import { ref } from 'vue';
+import { RouterLink } from 'vue-router';
 export default {
   name: 'MainHeader',
   setup() {

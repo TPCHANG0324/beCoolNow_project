@@ -1,6 +1,6 @@
 <template>
-  <!-- 環保市集 - 全商品瀏覽，縮寫Sp - 功能 - 代號X -->
   <main>
+    <!-- 環保市集 - 全商品瀏覽，縮寫Sp - 功能 - 代號X -->
     <div class="Sp-X">
       <!-- 最上方BN -->
       <div class="Sp-banner">
