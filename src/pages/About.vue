@@ -1,4 +1,5 @@
 <template>
+  <MainHeader></MainHeader>
   <div class="aboutus_top_R">
     <div class="aboutus_toptitle_R">
       <h1>關於我們</h1>
@@ -38,23 +39,22 @@
       </div>
     </div>
     <div class="about_bottom_R">
-      <h2>聯絡我們</h2>
-      <h2>Contact</h2>
+      <!-- <h2>聯絡我們</h2>
+      <h2>Contact</h2> -->
       <div class="aboutus_input_R">
-        <div class="form-group">
+        <!-- <div class="form-group">
           <p>姓名:</p>
           <input class="input" type="text" />
-        </div>
-<<<<<<< HEAD
+        </div> -->
         <div class="wrapper">
-            <div class="aboutus_top2_R">
+            <!-- <div class="aboutus_top2_R">
                 <h2>我們的理念</h2>
                 <p>全球暖化是全人類的共同挑戰，對臺灣而言更是迫在眉睫。極端氣候頻發、海平面上升、生態失衡，
                     正威脅我們的安全與未來，面對這場氣候危機，臺灣雖然渺小
                     但我們擁有創新與行動的力量，需要你我一起關注!
                 </p>
-            </div>
-            <div class="aboutus_top3_R">
+            </div> -->
+            <!-- <div class="aboutus_top3_R">
                 <div class="aboutus_top3pic_R">
                     <img src="../assets/images/Au02.jpeg" alt="">
                 </div>
@@ -67,8 +67,8 @@
                         讓我們攜手行動，為地球的明天發聲！
                     </p>
                 </div>
-            </div>
-            <div class="aboutus_middle_R">
+            </div> -->
+            <!-- <div class="aboutus_middle_R">
                 <div class="about_middlecard_R">
                   <h3>改變並非一夕之間，拯救唯一的地球家園仍刻不容緩</h3>
                   <p>Change doesn't happen overnight, but saving our one and only home—Earth—remains an urgent priority.</p>
@@ -78,7 +78,7 @@
                     <button class="btn">支持我們</button>
                   </a>
                 </div>
-              </div>
+              </div> -->
               <div class="about_bottom_R">
                 <h2>聯絡我們</h2>
                 <h2>Contact</h2>
@@ -105,8 +105,8 @@
                 </a>
               </div>
               
-              <div class="aboutus_lowest_R">
-                <h3>響應環保好夥伴</h3>
+              <!-- <div class="aboutus_lowest_R"> -->
+                <!-- <h3>響應環保好夥伴</h3>
                 <ul class="aboutus_marquee_R">
                   <li>
                     <div class="icon-text-wrapper">
@@ -133,24 +133,19 @@
                     </div>
                   </li>
                 </ul>
-              </div>
+              </div> -->
               
-=======
-        <div class="form-group">
-          <p>* mail:</p>
-          <input class="input" type="email" />
->>>>>>> dev
         </div>
-        <div class="form-group">
+        <!-- <div class="form-group">
           <p>手機:</p>
           <input class="input" type="text" />
         </div>
         <div class="form-group">
           <p>* 您的建議:</p>
           <textarea class="input" rows="4"></textarea>
-        </div>
+        </div> -->
       </div>
-      <button class="btn">送出</button>
+      <!-- <button class="btn">送出</button> -->
     </div>
 
     <div class="aboutus_lowest_R">
@@ -183,6 +178,18 @@
       </ul>
     </div>
   </div>
+  <MainFooter></MainFooter>
 </template>
 
-<script></script>
+<script>
+import MainHeader from "@/components/layout/MainHeader.vue";
+import MainFooter from "@/components/layout/MainFooter.vue";
+
+export default {
+  name: "MainPage",
+  components: {
+    MainHeader,
+    MainFooter,
+  },
+};
+</script>

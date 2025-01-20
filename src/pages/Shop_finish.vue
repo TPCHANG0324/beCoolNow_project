@@ -1,4 +1,5 @@
 <template>
+  <MainHeader></MainHeader>
 <div class="fs_wrapper_R">
         <img src="../assets/images/Sp25.jpg" alt="">
         <div class="fs_overlay_R">
@@ -7,8 +8,10 @@
           <button class="btn">立即創建</button>
         </div>
       </div>
+      <MainFooter class="SF_footer"></MainFooter>
 </template>
 
 <script>
-
+import MainHeader from '@/components/layout/MainHeader.vue';
+import MainFooter from '@/components/layout/MainFooter.vue';
 </script>
