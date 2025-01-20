@@ -1,18 +1,21 @@
-.member-login-container {
+.member-login-container_2 {
     // display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    // background-color: #E6Eccc;
+    background-color: #E6Eccc;
     padding: 20px;
     position: fixed;
-    top: 65%;
+    top: 60%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: 500;
 }
 
-.member-login-card {
+// .member-login-title_2{
+//     font-weight: ;
+// }
+
+.member-login-card_2 {
     background: #FFFFF0;
     border-radius: 20px;
     padding: 40px;
@@ -21,14 +24,14 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.member-login-logo {
+.member-login-logo_2 {
     display: block;
     width: 180px;
     height: auto;
     margin: 0 auto 20px;
 }
 
-.member-login-title {
+.member-login-title_2 {
     text-align: center;
     font-size: 40px;
     color: #545454;
@@ -37,8 +40,8 @@
     font-weight: 700;
 }
 
-.member-login-form {
-    .member-login-input-group {
+.member-login-form_2 {
+    .member-login-input-group_2 {
         margin-bottom: 20px;
 
         label {
@@ -68,7 +71,7 @@
     }
 }
 
-.member-login-submit-btn {
+.member-login-submit-btn_2 {
     width: 280px;
     padding: 12px;
     background-color: #D0AD44;
@@ -79,24 +82,26 @@
     cursor: pointer;
     margin-top: 10px;
     transition: background-color 0.3s ease;
-    // margin-left: 20px;
+    gap: 40px;
+
+   
 
     &:hover {
         background-color: darken(#D4A548, 10%);
     }
 }
 
-.member-login-links {
+.member-login-links_2 {
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
     font-size: 14px;
+    // margin-left: 40px;
 
     a {
         color: #666666;
         text-decoration: none;
         transition: color 0.3s ease;
-        margin: 0 auto;
 
         &:hover {
             color: #D4A548;
@@ -104,53 +109,76 @@
     }
 }
 
-.password-input-wrapper {
+.password-input-wrapper{
     position: relative;
     width: 100%;
-
+  
     input {
-        width: 100%;
-        padding: 12px;
-        padding-right: 40px;
-        border: 0.5px solid #747474;
-        border-radius: 9px;
-        font-size: 14px;
-
-        &::placeholder {
-            color: #747474;
-        }
-
-        &:focus {
-            outline: none;
-            border-color: #D0AD44;
-            border: 2px solid #D0AD44;
-        }
+      width: 100%;
+      padding: 12px;
+      padding-right: 40px; // 為眼睛圖標留空間
+      border: 0.5px solid #747474;
+      border-radius: 9px;
+      font-size: 14px;
+      
+      &:focus {
+        outline: none;
+        border-color: #D0AD44;
+        border: 2px solid #D0AD44;
+      }
+    }
     }
 
-    .toggle-password {
-        position: absolute;
-        right: 10px;
-        top: 50%;
-        transform: translateY(-50%);
-        background: none;
-        border: none;
-        cursor: pointer;
-        padding: 5px;
-        font-size: 16px;
 
-        &:hover {
-            opacity: 0.8;
-        }
-
-        &:focus {
-            outline: none;
-        }
-    }
+.member-login-input-group_2_btn{
+    display: flex;
+    // margin-right: 20px;
+    justify-content: space-between;
+    margin-top: 30px;
+    gap: 20px;
 }
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+
+    &:hover {
+      opacity: 1;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+// 添加錯誤訊息的樣式
+.error-message {
+    color: #ff4444;
+    font-size: 12px;
+    margin-top: 4px;
+    display: block;
+  }
+  
+  // 添加錯誤狀態的輸入框樣式
+  .member-login-input-group {
+    input.error {
+      border-color: #ff4444;
+    }
+  }
 
 // 手機樣式 (小於 430px)
 @media (max-width: 430px) {
-    .member-login-container {
+    .member-login-container_2 {
         background-image: url('@/assets/images/memberlogin_mb.png');
         background-size: cover;
         background-position: center center;
@@ -158,29 +186,30 @@
         backdrop-filter: blur(20px);
         opacity: 0.85;
         
-        .member-login-card {
+        .member-login-card_2 {
             background:initial; // 加入半透明效果
             padding: 30px 20px;
             margin: 0 15px;
             box-shadow: none;
         }
         
-        .member-login-logo {
+        .member-login-logo_2 {
             width: 140px; // 縮小 logo
         }
         
-        .member-login-title {
+        .member-login-title_2 {
             font-size: 32px; // 縮小標題
             margin-bottom: 20px;
             // text-shadow: 0 4px 6px rgba(249, 249, 249, 1);
+            color: #FFFFF0;
         }
         
-        .member-login-submit-btn {
+        .member-login-submit-btn_2 {
             width: 100%; // 按鈕寬度改為 100%
             margin-left: 0; // 移除左邊距
         }
         
-        .member-login-input-group {
+        .member-login-input-group_2 {
             input {
                 font-size: 13px; // 縮小輸入框字體
                 background-color: #FFFFF0;
@@ -200,7 +229,7 @@
             transition: color 0.3s ease;
         }
     }
-    .member-login-container .member-login-links a  {
+    .member-login-container_2 .member-login-links a  {
         display: flex;
         justify-content: space-between;
         margin-top: 20px;

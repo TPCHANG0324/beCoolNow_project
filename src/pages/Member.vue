@@ -1,5 +1,3 @@
-<!-- 已經 RWD 820/ 430 完成 -->
-
 <template>
   <div>
     <MainHeader></MainHeader>
@@ -42,6 +40,7 @@
           </div>
         </div>
       </div>
+
       <div class="profile_bottom">
         <div class="profile-stats-special">
           <p>小寵物經驗值: <strong>200</strong> | 累積地球幣: <strong>300</strong></p>
@@ -49,10 +48,13 @@
 
         <div class="purchase-record-special">
           <div class="btn2_btn">
-            <button class="purchase-record-btn11">購買紀錄</button>
-            <button class="purchase-record-btn12">個人紀錄</button>
+            <!-- 添加按鈕事件 -->
+            <button class="purchase-record-btn11" @click="showSection('purchase')">購買紀錄</button>
+            <button class="purchase-record-btn12" @click="showSection('profile')">個人紀錄</button>
           </div>
-          <table class="table_mb">
+
+          <!-- 購買紀錄表格 -->
+          <table v-if="activeSection === 'purchase'" class="table_mb">
             <thead>
               <tr>
                 <th>日期</th>
@@ -72,6 +74,8 @@
                 <td class="delivered-special">已送達</td>
                 <td><button class="order-detail-btn">訂單詳情</button></td>
               </tr>
+            </tbody>
+            <tbody>
               <tr>
                 <td>2024/12/25</td>
                 <td>環保吸管</td>
@@ -80,6 +84,8 @@
                 <td class="delivered-special">已送達</td>
                 <td><button class="order-detail-btn">訂單詳情</button></td>
               </tr>
+            </tbody>
+            <tbody>
               <tr>
                 <td>2024/12/25</td>
                 <td>環保吸管</td>
@@ -88,6 +94,8 @@
                 <td class="delivered-special">已送達</td>
                 <td><button class="order-detail-btn">訂單詳情</button></td>
               </tr>
+            </tbody>
+            <tbody>
               <tr>
                 <td>2024/12/25</td>
                 <td>環保吸管</td>
@@ -96,6 +104,8 @@
                 <td class="delivered-special">已送達</td>
                 <td><button class="order-detail-btn">訂單詳情</button></td>
               </tr>
+            </tbody>
+            <tbody>
               <tr>
                 <td>2024/12/25</td>
                 <td>環保吸管</td>
@@ -104,6 +114,18 @@
                 <td class="delivered-special">已送達</td>
                 <td><button class="order-detail-btn">訂單詳情</button></td>
               </tr>
+            </tbody>
+            <tbody>
+              <tr>
+                <td>2024/12/25</td>
+                <td>環保吸管</td>
+                <td>300</td>
+                <td>環保市集</td>
+                <td class="delivered-special">已送達</td>
+                <td><button class="order-detail-btn">訂單詳情</button></td>
+              </tr>
+            </tbody>
+            <tbody>
               <tr>
                 <td>2024/12/25</td>
                 <td>環保吸管</td>
@@ -114,9 +136,15 @@
               </tr>
             </tbody>
           </table>
+
+          <!-- 個人紀錄內容 -->
+          <div v-if="activeSection === 'profile'" class="personal-record">
+            <p>這裡是個人紀錄的內容，根據需求自行設計。</p>
+          </div>
         </div>
       </div>
     </div>
+
     <MainFooter class="footer_member"></MainFooter>
   </div>
 </template>
@@ -124,7 +152,22 @@
 <script>
 import MainHeader from '@/components/layout/MainHeader.vue';
 import MainFooter from '@/components/layout/MainFooter.vue';
-export default {};
-</script>
 
-<style lang="scss" scoped></style>
+export default {
+  components: {
+    MainHeader,
+    MainFooter,
+  },
+  data() {
+    return {
+      activeSection: 'purchase', // 默認顯示購買紀錄
+    };
+  },
+  methods: {
+    // 切換顯示區域
+    showSection(section) {
+      this.activeSection = section;
+    },
+  },
+};
+</script>
