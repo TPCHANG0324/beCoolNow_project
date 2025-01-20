@@ -95,6 +95,15 @@ const routes = [
       // requiredLogin: true
     },
   },
+
+  {
+    path: '/popupnewmember',
+    component: () => import('@/pages/popupnewmember.vue'),
+    meta: {
+      title: '前台彈窗新會員註冊',
+      // requiredLogin: true
+    },
+  },
   // {
   //   path: '/Ct/', component: () => import('@/pages/Ct.vue'),
   //   meta: {
@@ -161,6 +170,14 @@ const routes = [
   {
     path: '/loginPage/',
     component: () => import('@/pages/loginPage.vue'),
+    meta: {
+      title: '前後台登入',
+      // requiredLogin: true
+    },
+  },
+  {
+    path: '/loginPopupChange/',
+    component: () => import('@/pages/loginPopupChange.vue'),
     meta: {
       title: '前後台登入',
       // requiredLogin: true
