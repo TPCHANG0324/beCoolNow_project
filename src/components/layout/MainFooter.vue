@@ -4,28 +4,28 @@
   <footer class="layout_footer">
     <div class="footer">
       <div class="footer-wrapper">
-        <a href="#" class="logo-a"><img src="../../assets/images/footerlogo.png" alt="" /></a>
+        <router-link to="/" class="logo-a"><img src="../../assets/images/footerlogo.png" alt="" /></router-link>
         <ul>
           <li>
-            <a href="#">島嶼危機</a>
-            <a href="#">臺灣的響應</a>
+            <router-link to="/information">島嶼危機</router-link>
+            <!-- <a href="#">臺灣的響應</a>
             <a href="#">教育推廣</a>
-            <a href="#">機智問答</a>
+            <a href="#">機智問答</a> -->
           </li>
           <li>
-            <a href="#">永續行動</a>
-            <a href="#">給地球的一封信</a>
-            <a href="#">今日減碳行動</a>
+            <router-link to="/activity">永續行動</router-link>
+            <!-- <a href="#">給地球的一封信</a>
+            <a href="#">今日減碳行動</a> -->
           </li>
-          <li><a href="#">社群中心</a></li>
-          <li><a href="#">綠境方程式</a></li>
+          <li><router-link to="/social">社群中心</router-link></li>
+          <li><router-link to="/city">綠境方程式</router-link></li>
           <li>
-            <a href="#">關於我們</a>
-            <a href="#">聯絡我們</a>
+            <router-link to="/About">關於我們</router-link>
+            <!-- <a href="#">聯絡我們</a> -->
           </li>
           <li><a href="#">好站連結</a></li>
-          <li><a href="#">環保市集</a></li>
-          <li><a href="#">會員中心</a></li>
+          <li><router-link to="/shop">環保市集</router-link></li>
+          <li><router-link to="/member">會員中心</router-link></li>
         </ul>
       </div>
     </div>

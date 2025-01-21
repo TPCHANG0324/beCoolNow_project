@@ -32,7 +32,8 @@
         gap: 40px;
         align-items: flex-start;
         position: relative;
-
+        @include max_1200(){
+        }
         @include max_820() {
             margin: 0 3vw;
         }

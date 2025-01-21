@@ -24,6 +24,7 @@ main {
             width: 70%;
             flex-grow: 1;
             flex-shrink: 0;
+            position: relative;
 
             .Fb-post-category-container-X {
                 display: flex;
@@ -32,6 +33,11 @@ main {
                 margin: 20px 0;
                 padding: 10px;
                 justify-content: space-between;
+                /* 如果要固定的話再放 */
+                // background-color: $Light_Green;
+                // position: sticky;
+                // left: 0;
+                // top: 0;
 
                 ul.Fb-post-category-X {
                     display: flex;
@@ -143,6 +149,12 @@ main {
             }
 
             .Fb-post-article-X {
+                @include max_1024(){
+                    display: none;
+                    &.active{
+                        display: block;
+                    }
+                }
                 .Fb-post-article-top-X {
                     width: 100%;
 
@@ -276,6 +288,7 @@ main {
                                 font-size: 0;
                                 max-width: 100%;
                                 object-fit: cover;
+                                aspect-ratio: 1;
                             }
                         }
                     }
@@ -288,18 +301,22 @@ main {
                 display: none;
 
                 @include max_1024() {
-                    display: block;
+                    display: none;
+                    &.active{
+                        display: block;
+                    }
                 }
 
                 article {
-                    color: $Green_2;
-                    display: flex;
-                    gap: 16px;
-                    padding: 1rem;
-                    margin-bottom: 20px;
-                    box-sizing: border-box;
-                    background-color: $Ivory_white;
-
+                    a{
+                        color: $Green_2;
+                        display: flex;
+                        gap: 16px;
+                        padding: 1rem;
+                        margin-bottom: 20px;
+                        box-sizing: border-box;
+                        background-color: $Ivory_white;
+                    }
                     .new-left-X {
                         flex-basis: calc((100% - 16px) * 0.2);
 
@@ -307,6 +324,8 @@ main {
                             display: block;
                             font-size: 0;
                             width: 100%;
+                            object-fit: cover;
+                            aspect-ratio: 1;
                         }
 
                         @include max_768() {
@@ -391,12 +410,12 @@ main {
 
             .Fb-news-body-X {
                 article {
-                    margin-bottom: 20px;
-                    display: flex;
-                    gap: 5%;
-                    color: $Green_2;
-                    cursor: pointer;
-
+                    a{
+                        margin-bottom: 20px;
+                        display: flex;
+                        gap: 5%;
+                        color: $Green_2;
+                    }
                     img {
                         width: 40%;
                         height: 40%;
@@ -442,6 +461,7 @@ main {
                             }
                         }
                     }
+                    
                 }
             }
 
@@ -515,8 +535,8 @@ main {
     }
 
     p {
-        white-space: pre-wrap;
         line-height: 2;
+        text-align: justify;
 
         @include max_540() {
             line-height: 1.5;
@@ -1114,5 +1134,42 @@ main {
         // left: 0;
         // background-color: rgba(0, 0, 0, 0.3);
         /* 發文區的 form */
+    }
+}
+
+
+/* 頁數選擇器 */
+.Sp-pages-X{
+    margin: 20px 0;
+    ul{
+        display: flex;
+        justify-content: center;
+        li{
+            cursor: pointer;
+            padding: 1.4rem;
+            border: 1px solid $Green_3;
+            position: relative;
+            border-right: 0;
+            background-color: $Ivory_white;
+            span{
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+            i{
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+            &:last-child{
+                border-right: 1px solid $Green_3;
+            }
+            &.current{
+                background-color: $Green_1;
+                color: $Ivory_white;
+            }
+        }
     }
 }

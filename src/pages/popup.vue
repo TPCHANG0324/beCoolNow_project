@@ -10,40 +10,30 @@
       <form class="member-login-form" @submit.prevent="handleSubmit">
         <div class="member-login-input-group">
           <label for="account">帳號</label>
-          <input 
-            id="account" 
-            type="email" 
-            v-model="formData.email"
-            placeholder="請輸入電子郵件" 
-            required 
-          />
+          <input id="account" v-model="formData.email" type="email" placeholder="請輸入電子郵件" required />
         </div>
 
         <div class="member-login-input-group">
           <label for="password">密碼</label>
           <div class="password-input-wrapper">
-    <input 
-      id="password" 
-      :type="passwordVisible ? 'text' : 'password'"
-      v-model="formData.password"
-      placeholder="須包含英文字母大小寫與數字" 
-      required
-       @blur="validatePasswordFormat(formData.password)"
-    />
-    <button 
-      type="button" 
-      class="toggle-password"
-      @click="togglePasswordVisibility"
-    >
-      {{ passwordVisible ? '🙉' : '🙈' }}
-    </button>
-  </div>
-  <span class="error-message" v-if="formErrors.password">{{ formErrors.password }}</span>
-</div>
- <button type="submit" class="member-login-submit-btn">登入</button>
+            <input
+              id="password"
+              v-model="formData.password"
+              :type="passwordVisible ? 'text' : 'password'"
+              placeholder="須包含英文字母大小寫與數字"
+              required
+              @blur="validatePasswordFormat(formData.password)"
+            />
+            <button type="button" class="toggle-password" @click="togglePasswordVisibility">
+              {{ passwordVisible ? '🙉' : '🙈' }}
+            </button>
+          </div>
+          <span v-if="formErrors.password" class="error-message">{{ formErrors.password }}</span>
+        </div>
+        <button type="submit" class="member-login-submit-btn">登入</button>
 
         <div class="member-login-links">
-           <a href="#" class="member-login-register" @click.prevent="$emit('switch')">還不是會員嗎？新會員註冊</a>
+          <a href="#" class="member-login-register" @click.prevent="$emit('switch')">還不是會員嗎？新會員註冊</a>
           <!-- <a href="#" class="member-login-forgot">忘記密碼?</a> -->
         </div>
       </form>
@@ -58,95 +48,95 @@ export default {
     return {
       formData: {
         email: '',
-        password: ''
+        password: '',
       },
       passwordVisible: false,
       formErrors: {
         email: '',
-        password: ''
-      }
-    }
+        password: '',
+      },
+    };
   },
   watch: {
     // 監聽密碼變化，即時驗證
     'formData.password'(newValue) {
-      this.validatePasswordFormat(newValue)
+      this.validatePasswordFormat(newValue);
     },
     // 監聽 email 變化，即時驗證
     'formData.email'(newValue) {
-      this.validateEmailFormat(newValue)
-    }
+      this.validateEmailFormat(newValue);
+    },
   },
   methods: {
     methods: {
-    showNewMemberPopup() {
-      // 隱藏登入彈窗
-      document.querySelector('.member_login').style.display = 'none';
-      
-      // 顯示註冊彈窗
-      document.querySelector('.popupnewmember').style.display = 'block';
-    }
-  },
+      showNewMemberPopup() {
+        // 隱藏登入彈窗
+        document.querySelector('.member_login').style.display = 'none';
+
+        // 顯示註冊彈窗
+        document.querySelector('.popupnewmember').style.display = 'block';
+      },
+    },
     togglePasswordVisibility() {
-      this.passwordVisible = !this.passwordVisible
+      this.passwordVisible = !this.passwordVisible;
     },
     validatePasswordFormat(password) {
-      const hasUpperCase = /[A-Z]/.test(password)
-      const hasLowerCase = /[a-z]/.test(password)
-      const hasNumber = /[0-9]/.test(password)
-      
+      const hasUpperCase = /[A-Z]/.test(password);
+      const hasLowerCase = /[a-z]/.test(password);
+      const hasNumber = /[0-9]/.test(password);
+
       if (!password) {
-        this.formErrors.password = '請輸入密碼'
+        this.formErrors.password = '請輸入密碼';
       } else if (!hasUpperCase || !hasLowerCase || !hasNumber) {
-        this.formErrors.password = '密碼必須包含大寫字母、小寫字母和數字'
+        this.formErrors.password = '密碼必須包含大寫字母、小寫字母和數字';
       } else {
-        this.formErrors.password = ''
+        this.formErrors.password = '';
       }
-      return hasUpperCase && hasLowerCase && hasNumber
+      return hasUpperCase && hasLowerCase && hasNumber;
     },
     validateEmailFormat(email) {
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!email) {
-        this.formErrors.email = '請輸入電子郵件'
+        this.formErrors.email = '請輸入電子郵件';
       } else if (!emailRegex.test(email)) {
-        this.formErrors.email = '請輸入有效的電子郵件地址'
+        this.formErrors.email = '請輸入有效的電子郵件地址';
       } else {
-        this.formErrors.email = ''
+        this.formErrors.email = '';
       }
-      return emailRegex.test(email)
+      return emailRegex.test(email);
     },
     handleSubmit() {
-  // 先執行驗證
-  this.validateEmailFormat(this.formData.email)
-  this.validatePasswordFormat(this.formData.password)
-  
-  // 檢查是否有錯誤訊息
-  if (this.formErrors.email || this.formErrors.password) {
-    // 如果有錯誤，不提交表單
-    return
-  }
+      // 先執行驗證
+      this.validateEmailFormat(this.formData.email);
+      this.validatePasswordFormat(this.formData.password);
 
-  // 如果密碼驗證不通過
-  if (!this.validatePasswordFormat(this.formData.password)) {
-    this.formErrors.password = '密碼必須包含大寫字母、小寫字母和數字'
-    return
-  }
+      // 檢查是否有錯誤訊息
+      if (this.formErrors.email || this.formErrors.password) {
+        // 如果有錯誤，不提交表單
+        return;
+      }
 
-  // 如果所有驗證都通過
-  alert('登入成功!歡迎光臨涼城即時')
-  this.resetForm()
-},
+      // 如果密碼驗證不通過
+      if (!this.validatePasswordFormat(this.formData.password)) {
+        this.formErrors.password = '密碼必須包含大寫字母、小寫字母和數字';
+        return;
+      }
+
+      // 如果所有驗證都通過
+      alert('登入成功!歡迎光臨涼城即時');
+      this.resetForm();
+    },
     resetForm() {
       this.formData = {
         email: '',
-        password: ''
-      }
-      this.passwordVisible = false
+        password: '',
+      };
+      this.passwordVisible = false;
       this.formErrors = {
         email: '',
-        password: ''
-      }
-    }
-  }
-}
+        password: '',
+      };
+    },
+  },
+};
 </script>

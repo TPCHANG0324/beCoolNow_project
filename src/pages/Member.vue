@@ -1,6 +1,7 @@
 <template>
+  <div>
     <MainHeader></MainHeader>
-  
+
     <div class="wrapperpr">
       <h1 class="profile-title">會員資訊</h1>
       <div class="profile_top">
@@ -10,7 +11,7 @@
             <h1 class="profile-greeting-special">{{ userData.name }} 您好！</h1>
           </div>
         </div>
-  
+
         <div class="profile-container-special_right">
           <div class="profile-info-special">
             <div class="profile-field">
@@ -99,21 +100,21 @@
           </div>
         </div>
       </div>
-  
+
       <div class="profile_bottom">
         <div class="profile-stats-special">
           <p>小寵物經驗值: <strong>200</strong> | 累積地球幣: <strong>300</strong></p>
         </div>
-  
+
         <div class="purchase-record-special">
           <div class="btn2_btn">
             <!-- 添加按鈕事件 -->
             <button class="purchase-record-btn11" @click="showSection('purchase')">購買紀錄</button>
             <button class="purchase-record-btn12" @click="showSection('profile')">個人紀錄</button>
           </div>
-  
+
           <!-- 購買紀錄表格 -->
-          <table class="table_mb" v-if="activeSection === 'purchase'">
+          <table v-if="activeSection === 'purchase'" class="table_mb">
             <thead>
               <tr>
                 <th>日期</th>
@@ -195,7 +196,7 @@
               </tr>
             </tbody>
           </table>
-  
+
           <!-- 個人紀錄內容 -->
           <table v-if="activeSection === 'profile'" class="personal-record">
             <thead>
@@ -244,11 +245,12 @@
         </div>
       </div>
     </div>
-  
+
     <MainFooter class="footer_member"></MainFooter>
-  </template>
-  
-  <script>
+  </div>
+</template>
+
+<script>
 import MainHeader from '@/components/layout/MainHeader.vue';
 import MainFooter from '@/components/layout/MainFooter.vue';
 

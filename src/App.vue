@@ -4,22 +4,35 @@ import { RouterLink, RouterView } from 'vue-router';
 </script>
 
 <template>
-  <header>
-    <!-- <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" /> -->
+  <!-- <transition name="fade">
+    <router-view  />
+  </transition> -->
 
-    <!-- <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/"></RouterLink>
-        <RouterLink to="/Ac.vue"></RouterLink>
-      </nav>
-    </div> -->
-  </header>
-
-  <RouterView />
+  <router-view v-slot="{ Component }">
+    <transition name="fade">
+      <component :is="Component" :key="$route.fullPath" />
+    </transition>
+  </router-view>
 </template>
 
 <style lang="scss">
 @import './assets/sass/style.scss';
+.fade-leave-active {
+  transition: opacity 0.4s ease;
+  position: absolute;
+}
+
+.fade-leave-to {
+  opacity: 0;
+  position: absolute;
+}
+
+.fade-enter-from {
+  opacity: 0;
+  position: absolute;
+}
+
+.fade-enter-active {
+  transition: opacity 0.4s 0.4s ease;
+}
 </style>
