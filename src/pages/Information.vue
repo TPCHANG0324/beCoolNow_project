@@ -1,13 +1,14 @@
 <template>
-  <header class="Ic_header_R">
-    <MainHeader></MainHeader>
-    <div class="Ic_wrapper_R">
-      <div class="Ic_banner_R">
-        <h1 class="Ic_title_R">全球暖化下的臺灣</h1>
-        <h1 class="Ic_title2_R">Global warming in Taiwan</h1>
+  <div>
+    <header class="Ic_header_R">
+      <MainHeader></MainHeader>
+      <div class="Ic_wrapper_R">
+        <div class="Ic_banner_R">
+          <h1 class="Ic_title_R">全球暖化下的臺灣</h1>
+          <h1 class="Ic_title2_R">Global warming in Taiwan</h1>
+        </div>
       </div>
-    </div>
-  </header>
+    </header>
 
   <div class="Ic_wrapper_R">
     <section class="Ic_icon-section_R">
@@ -169,7 +170,7 @@
       </div>
     </section>
   </div>
-  <MainFooter></MainFooter>
+</div>
 </template>
 
 <script>
