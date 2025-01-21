@@ -57,6 +57,7 @@
     justify-content: center;
     align-items: center;
     margin-bottom: 100px;
+    z-index: -1;
 
     img {
         position: absolute;
@@ -76,7 +77,7 @@
         h1 {
             @include PC_h1($Ivory_white);
             @include h1_stroke;
-            padding-top: 80px
+            padding-top: 160px
         }
 
         h2 {
@@ -465,7 +466,7 @@ article {
         width: 1200px;
         // height: 100%;
         object-fit: cover;
-        z-index: 1;
+        z-index: -1;
         filter: brightness(0.7);
         border-radius: 0 0 20px 20px;
 

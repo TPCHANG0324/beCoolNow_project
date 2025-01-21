@@ -1,6 +1,7 @@
 <!-- 已經 RWD 820/ 430 完成 -->
 
 <template>
+  <MainHeader></MainHeader>
   <div class="bcn-donation-container">
     <div class="bcn-top-place">
       <div class="bcn-donation-header">
@@ -41,9 +42,13 @@
       <span class="bc-prev-step-text">上一步</span>
     </a>
   </div>
+  <MainFooter></MainFooter>
 </template>
 
 <script>
+import MainHeader from '@/components/layout/MainHeader.vue';
+import MainFooter from '@/components/layout/MainFooter.vue';
+
 export default {};
 </script>
 

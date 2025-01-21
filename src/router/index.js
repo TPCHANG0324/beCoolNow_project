@@ -102,13 +102,6 @@ const routes = [
   //     requiredLogin: true
   //   }
   // },
-  // {
-  //   path: '/Au/', component: () => import('@/pages/Au.vue'),
-  //   meta: {
-  //     title: '關於我們',
-  //     requiredLogin: false
-  //   }
-  // },
   {
     path: '/pay1/',
     component: () => import('@/pages/pay1.vue'),
@@ -137,7 +130,7 @@ const routes = [
     path: '/shop_product/',
     component: () => import('@/pages/Shop_product.vue'),
     meta: {
-      title: '環保市集-商品頁',
+      title: '環保市集_商品頁',
       // requiredLogin: true
     },
   },
@@ -145,7 +138,7 @@ const routes = [
     path: '/shop_cart',
     component: () => import('@/pages/Shop_cart.vue'),
     meta: {
-      title: '環保市集-購物車',
+      title: '環保市集_購物車',
       // requiredLogin: true
     },
   },

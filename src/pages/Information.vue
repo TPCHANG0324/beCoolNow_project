@@ -47,24 +47,32 @@
       </div>
     </section>
 
-    <div class="Ic_ball_R">
-      <div class="donut-container">
-        <button class="rotate-button left" @click="rotate(-90)">◀</button>
-        <h2 class="donut-title">該如何緩解全球暖化呢</h2>
-        <!-- 可旋轉區塊 -->
-        <div class="rotatable-donut" :style="{ transform: `rotate(${rotation}deg)` }">
-          <div v-for="(section, index) in sections" :key="index" :class="['donut-section', `section-${index + 1}`]">
-            <div>
-              <h3 class="section-title">{{ section.title }}</h3>
-              <p class="section-text">{{ section.text }}</p>
-            </div>
-          </div>
+   <div class="Ic_ball_R">
+  <div class="donut-container">
+    <!-- 左旋按鈕 -->
+    <button class="rotate-button left" @click="rotate(-90)" v-show="!isMobile">◀</button>
+
+    <!-- DONUT -->
+    <h2 class="donut-title">該如何緩解全球暖化呢</h2>
+    <div class="rotatable-donut" :style="{ transform: !isMobile ? `rotate(${rotation}deg)` : '' }">
+      <div
+        v-for="(section, index) in sections"
+        :key="index"
+        :class="['donut-section', `section-${index + 1}`]"
+        :style="isMobile ? { clipPath: 'polygon(50% 50%, 100% 0%, 100% 100%)' } : {}"
+      >
+        <div>
+          <h3 class="section-title">{{ section.title }}</h3>
+          <p class="section-text">{{ section.text }}</p>
         </div>
-
-        <button class="rotate-button right" @click="rotate(90)">▶</button>
       </div>
-
     </div>
+
+    <!-- 右旋按鈕 -->
+    <button class="rotate-button right" @click="rotate(90)" v-show="!isMobile">▶</button>
+  </div>
+</div>
+
 
 
     <section class="Ic_conference-section_R">
@@ -88,19 +96,32 @@
 
     <section class="Ic_bottom_R">
       <h3>教育宣導</h3>
-
-      <swiper :slides-per-view="3" :space-between="40" navigation pagination class="custom-swiper">
-        <swiper-slide v-for="(slide, index) in slides" :key="index">
-          <div v-if="slide.type === 'youtube'" class="slide-video">
-            <iframe width="100%" height="315" :src="slide.src" title="YouTube Video" frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen @mouseover="disablePointerEvents" @mouseout="enablePointerEvents"></iframe>
-          </div>
-          <div v-else class="slide-image">
-            <img :src="slide.src" :alt="slide.title" />
-          </div>
-        </swiper-slide>
-      </swiper>
+      <swiper
+    :space-between="1"
+    navigation
+    class="custom-swiper"
+    :modules="modules"
+    :breakpoints="swiperBreakpoints"
+  >
+    <swiper-slide v-for="(slide, index) in slides" :key="index">
+      <div v-if="slide.type === 'youtube'" class="slide-video">
+        <iframe
+          width="100%"
+          height="315"
+          :src="slide.src"
+          title="YouTube Video"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+          @mouseover="disablePointerEvents"
+          @mouseout="enablePointerEvents"
+        ></iframe>
+      </div>
+      <div v-else class="slide-image">
+        <img :src="slide.src" :alt="slide.title" />
+      </div>
+    </swiper-slide>
+  </swiper>
     </section>
 
     <section class="ic_gamehead_R">
@@ -132,7 +153,7 @@
                   {{ letters[index] }}
                 </button>
               </div>
-              <p id="Ic_feedback_R">{{ feedback }}</p>
+              <p id="Ic_feedback_R" :class="[feedbackclass]">{{ feedback }}</p>
             </div>
           </div>
         </div>
@@ -154,6 +175,8 @@
 <script>
 import MainHeader from "@/components/layout/MainHeader.vue";
 import MainFooter from "@/components/layout/MainFooter.vue";
+import  { Navigation, Pagination } from "swiper/modules";
+
 import { Swiper, SwiperSlide } from "swiper/vue";
 import "swiper/swiper-bundle.css";
 import { ref } from "vue";
@@ -173,32 +196,32 @@ export default {
     const panelData = {
       "Thunderstorm Icon": {
         title: "雷雨",
-        image: "require('@/assets/images/thunder-rainy.png'),",
+        image: new URL('@/assets/images/annual_wet.jpg', import.meta.url).href,
         description: "地球暖化影響全球降雨模式，根據IPCC報告，全球平均氣溫每上升1°C，大氣中的水汽量將增加約7%，導致極端降雨事件增加。同時，全球乾旱區面積擴大，降雨量減少的地區如地中海和非洲部分地區，年降雨量下降10%以上。相反，熱帶地區因水循環加速，強降雨頻率增加30%。這種降雨分布的不均衡不僅影響糧食安全，還加劇洪水和乾旱等極端天氣的威脅，迫切需要全球共同努力減緩暖化進程。",
       },
       "Wave Icon": {
         title: "海浪",
-        image: "@/assets/images/thunder-rainy.png",
+        image: new URL('@/assets/images/slrtrend_tpx_2022 1.png', import.meta.url).href,
         description: "台灣沿岸測站數據顯示，海平面每年上升約3毫米，顯示全球暖化對沿岸地區的深遠影響。近50年來，海洋表面溫度上升約0.8°C，這種溫度變化不僅導致珊瑚白化現象增加，也改變了海洋生態系統，使得魚群遷徙路徑和生物多樣性面臨挑戰。此外，海岸侵蝕問題日益嚴重，例如雲林及台南地區的海岸線，每年平均退縮達1至2公尺，嚴重威脅沿岸農地、居民與基礎建設的安全。這些數據強調，氣候變遷對海洋與沿岸地區的影響日益加劇，若不積極採取減碳與防護措施，可能造成更大規模的環境與經濟損失。因此，台灣必須加強推廣綠色能源、減少碳排放，並提升沿岸地區的防災能力，確保未來的永續發展。",
       },
       "Typhoon Icon": {
         title: "颱風",
-        image: "@/assets/images/typhoon.jpg",
+        image: new URL('@/assets/images/typhoon.svg', import.meta.url).href,
         description: "極端天氣現象如颱風、暴雨和熱浪正因地球暖化而加劇。根據數據，全球平均氣溫已上升約1.1°C（相較於工業化前），每增加1°C，空氣可攜帶7%的更多水汽，導致降雨更為極端。此外，2020年全球因熱浪創下49°C以上的高溫記錄，颱風的風速和頻率也有所增加。例如，台灣地區的豪雨量近20年增幅約15%，導致水患風險顯著提高，影響生態與經濟穩定。",
       },
       "Tree Icon": {
         title: "樹木",
-        image: "@/assets/images/tree.jpg",
+        image: new URL('@/assets/images/w_1350 1.png', import.meta.url).href,
         description: "地球暖化對農業造成顯著影響，氣溫上升和極端天氣增加導致作物產量下降。據研究，全球小麥和玉米產量每升高1°C分別減少約6%和7%。此外，降雨模式改變導致乾旱頻率增加，影響水稻等需水量高的作物生長。台灣地區近20年乾旱次數上升25%，對農業灌溉造成壓力。病蟲害因暖化範圍擴大，據估計每年全球農業損失達約77億美元，威脅糧食安全與農業經濟發展。",
       },
       "Temperature Icon": {
         title: "氣溫",
-        image: "@/assets/images/temperature.jpg",
+        image: new URL('@/assets/images/_119312978_temp_rises_since_1850_2x640-nc.png 1.png', import.meta.url).href,
         description: "氣溫上升是地球暖化的直接結果，對環境和生態系統造成深遠影響。據聯合國報告，自1880年以來，全球平均氣溫已升高約1.1°C。每升高1°C，北極海冰面積減少約13%，對極地生態構成威脅。此外，熱浪頻率和強度增加，2022年全球熱浪導致歐洲超過2萬人死亡。同時，高溫促使海洋升溫，影響珊瑚礁生態，部分珊瑚礁白化率達50%以上，生物多樣性面臨危機。",
       },
       "CO2 Icon": {
         title: "二氧化碳",
-        image: "@/assets/images/co2.jpg",
+        image: new URL('@/assets/images/cccooo.svg', import.meta.url).href,
         description: "二氧化碳（CO₂）是地球暖化的主要驅動因素，自工業革命以來，大氣中CO₂濃度增加了超過50%，從280 ppm升至2022年的約420 ppm。這導致全球平均氣溫升高約1.1°C。CO₂增加使溫室效應加劇，導致極端天氣、海平面上升以及極地冰層融化。據統計，燃燒化石燃料每年排放約330億噸CO₂，為主要來源。高濃度CO₂還導致海洋酸化，影響海洋生態系統，如珊瑚礁白化和海洋生物多樣性減少。",
       },
     };
@@ -245,21 +268,21 @@ export default {
       {
         id: "Ic_cop29_R",
         title: "COP29氣候會議",
-        image: "/assets/images/Ic03.png",
+        image: new URL('@/assets/images/Ic03.png', import.meta.url).href,
         content:
           "COP29氣候會議將於2024年11月在阿塞拜疆首都巴庫舉行，匯聚全球領袖、科學家與環保人士，共同應對氣候挑戰。本次會議核心議題包括協助開發中國家應對氣候變化、更新國家自主貢獻（NDC）目標以及打擊漂綠行為。會議還將討論減少溫室氣體排放、推進綠色技術創新與能源轉型的重要策略。作為全球氣候行動的重要平台，COP29致力於促進各國合作，共同實現巴黎協定下的碳中和目標，維護地球的未來環境可持續性。",
       },
       {
         id: "Ic_twcae_R",
         title: "TWCAE 4th臺灣氣候行動高峰論壇",
-        image: "@/assets/images/iwwa_co2.png",
+        image: new URL('@/assets/images/ccccc.png', import.meta.url).href,
         content:
           "TWCAE 4th臺灣氣候行動高峰論壇於近期在台北舉行，吸引了國內外專家、學者及企業代表參與，共同討論台灣在國際氣候政策中的角色。論壇聚焦於「綠色經濟轉型」與「碳中和目標」的實現策略，強調能源轉型的重要性，並探討如何利用創新技術促進減碳效益。會議還分享了企業在減少碳排放和推動永續發展的成功案例，強調各界合作的重要性。論壇旨在提升台灣於全球氣候行動中的影響力，實現2050淨零碳排的目標，共建永續未來。",
       },
       {
         id: "Ic_law_R",
         title: "氣候變遷因應法",
-        image: "@/assets/images/Ic03.png",
+        image: new URL('@/assets/images/law2.png', import.meta.url).href,
         content:
           "氣候變遷因應法是台灣為應對氣候變遷挑戰的重要立法，目標在於實現2050淨零碳排。該法涵蓋碳定價機制、推廣可再生能源、支持低碳技術發展及強化防災能力，並要求各部門提出減碳計畫。此外，法案鼓勵企業參與減碳行動，推動產業轉型，同時提高公眾環保意識。氣候變遷因應法不僅是國家邁向永續發展的基石，也是台灣在全球氣候行動中扮演關鍵角色的展現。。",
       },
@@ -283,28 +306,28 @@ export default {
         correctIndex: 1,
       },
       {
-        question: "COP29 的主要議題之一是什麼",
+        question: "COP29 的主要議題之一是什麼?",
         options: ["A.\t協助開發中國應對氣候變化", "B.\t氣候變化對北極熊棲息地的影響", "C.\t太陽能技術的發展和補貼政策"],
         correctIndex: 0,
       },
       {
-        question: "TWCAE 4th 台灣氣候行動高峰論壇的主要目的是什麼？？",
+        question: "TWCAE 4th 台灣氣候行動高峰論壇的主要目的是什麼?",
         options: ["A.\t研究太陽能技術的最新進展", "B.\t討論全球石化能源的未來走向", "C.\t探討台灣如何在國際舞台上推動氣候政策"],
         correctIndex: 2,
       },
       {
-        question: "TWCAE 4th 提出的台灣碳中和目標的具體實現時間為何？",
+        question: "TWCAE 4th 提出的台灣碳中和目標的具體實現時間為何?",
         options: ["A.\t2030年", "B.\t2050年", "C.\t2100年"],
         correctIndex: 1,
       },
       {
-        question: "下列哪種能源是可再生能源？",
+        question: "下列哪種能源是可再生能源?",
         options: ["A.\t太陽能", "B.\t石油", "C.\t煤炭"],
         correctIndex: 0,
       },
       {
-        question: "哪種溫室氣體的全球暖化潛勢（GWP）最高？",
-        options: ["A.\t二氧化碳（CO₂）", "B.\t甲烷（CH₄）", "C.\t氟利昂（CFCs）"],
+        question: "哪種溫室氣體的全球暖化潛勢(GWP)最高?",
+        options: ["A.\t二氧化碳(CO₂)", "B.\t甲烷(CH₄)", "C.\t氟利昂(CFCs)"],
         correctIndex: 2,
       },
 
@@ -314,6 +337,7 @@ export default {
     const score = ref(0);
     const feedback = ref("");
     const letters = ["A", "B", "C"];
+    const feedbackclass = ref(""); // 新增變數儲存動畫 class
 
     const startGame = () => {
       currentScreen.value = "quiz";
@@ -323,23 +347,28 @@ export default {
     };
 
     const submitAnswer = (selectedIndex) => {
-      if (selectedIndex === currentQuestion.value.correctIndex) {
-        feedback.value = "答對！";
-        score.value++;
-      } else {
-        feedback.value = "答錯QQ";
+  feedbackclass.value = ""; // 重置動畫
+  
+  if (selectedIndex === currentQuestion.value.correctIndex) {
+    feedback.value = "答對！";
+    feedbackclass.value = "correct-animation";
+    score.value++;
+  } else {
+    feedback.value = "答錯QQ";
+    feedbackclass.value = "wrong-animation";
+  }
 
-      }
-      setTimeout(() => {
-        feedback.value = "";
-        if (currentQuestionIndex.value + 1 < questions.value.length) {
-          currentQuestionIndex.value++;
-          currentQuestion.value = questions.value[currentQuestionIndex.value];
-        } else {
-          currentScreen.value = "end";
-        }
-      }, 1000);
-    };
+  setTimeout(() => {
+    feedback.value = "";
+    feedbackclass.value = "";
+    if (currentQuestionIndex.value + 1 < questions.value.length) {
+      currentQuestionIndex.value++;
+      currentQuestion.value = questions.value[currentQuestionIndex.value];
+    } else {
+      currentScreen.value = "end";
+    }
+  }, 1000);
+};
 
     const restartGame = () => {
       currentScreen.value = "start";
@@ -347,7 +376,22 @@ export default {
 
 
     // Slideshow
-    const slides = ref([
+    // Swiper Breakpoints
+    const swiperBreakpoints = {
+      830: {
+        slidesPerView: 3, // 螢幕寬度 >= 830px
+        spaceBetween: 10,
+      },
+      810: {
+        slidesPerView: 2, // 螢幕寬度 >= 830px
+        spaceBetween: 10,
+      },
+      0: {
+        slidesPerView: 1, // 螢幕寬度 < 820px
+        spaceBetween: 10,
+      },
+    };
+    const slides = [
       {
         type: "youtube",
         src: "https://www.youtube.com/embed/gMsXhjsbo_g",
@@ -365,15 +409,15 @@ export default {
       },
       {
         type: "youtube",
-        src: "https://www.youtube.com/embed/qAu8OhWL8F4",
+        src: "https://www.youtube.com/embed/3n2qruJngMg?si=PHAZVKC_piBslp7A",
         title: "YouTube Video 3",
       },
       {
         type: "youtube",
-        src: "https://www.youtube.com/embed/qAu8OhWL8F4",
+        src: "https://www.youtube.com/embed/U1y6PWTA4Fw?si=pFhNJa5zxE32wHHu",
         title: "YouTube Video 3",
       },
-    ]);
+    ];
 
     // 動態管理 iframe 事件
     const disablePointerEvents = (event) => {
@@ -385,7 +429,9 @@ export default {
     };
 
     return {
+      modules: [Navigation, Pagination],
       slides,
+      swiperBreakpoints,
       disablePointerEvents,
       enablePointerEvents,
       tabs,

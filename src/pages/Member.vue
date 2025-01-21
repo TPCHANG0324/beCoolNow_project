@@ -2,6 +2,8 @@
 
 <template>
 
+    <MainHeader></MainHeader>
+
     <div class="wrapperpr">
         <h1 class="profile-title">
             會員資訊
@@ -118,9 +120,12 @@
             </div>
         </div>
     </div>
+    <MainFooter class="footer_member"></MainFooter>
 </template>
 
 <script>
+import MainHeader from '@/components/layout/MainHeader.vue';
+import MainFooter from '@/components/layout/MainFooter.vue';
 export default {
 
 }

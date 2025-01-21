@@ -1,191 +1,97 @@
-<style scoped>
-.donut-container {
-  position: relative;
-  width: 400px; /* 甜甜圈的大小 */
-  height: 400px;
-  margin: 50px auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.rotatable-donut {
-  position: relative;
-  width: 300px;
-  height: 300px;
-  border-radius: 50%;
-  background: conic-gradient(
-    transparent 0% 25%, /* 部分 1 */
-    transparent 25% 50%, /* 部分 2 */
-    transparent 50% 75%, /* 部分 3 */
-    transparent 75% 100% /* 部分 4 */
-  );
-  transform-origin: center;
-  overflow: hidden;
-  transition: transform 0.3s ease;
-}
-
-.donut-section {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.donut-section img {
-  width: 120%;
-  height: 120%;
-  object-fit: cover;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 0;
-}
-
-.section-text {
-  position: relative;
-  z-index: 1;
-  font-size: 16px;
-  font-weight: bold;
-  color: white;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-}
-
-.section-1 {
-  transform: rotate(0deg) translateY(-120px);
-}
-.section-2 {
-  transform: rotate(90deg) translateY(-120px);
-}
-.section-3 {
-  transform: rotate(180deg) translateY(-120px);
-}
-.section-4 {
-  transform: rotate(270deg) translateY(-120px);
-}
-
-.donut-center {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 100px;
-  height: 100px;
-  transform: translate(-50%, -50%);
-  background: #fff;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  font-size: 14px;
-  font-weight: bold;
-  color: #333;
-}
-
-.rotate-button {
-  width: 50px;
-  height: 50px;
-  background-color: #4caf50;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  font-size: 18px;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-.rotate-button:hover {
-  background-color: #45a049;
-}
-
-.rotate-button.left {
-  position: absolute;
-  left: -60px;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-.rotate-button.right {
-  position: absolute;
-  right: -60px;
-  top: 50%;
-  transform: translateY(-50%);
-}
-</style>
-
-
 <template>
-    <div class="donut-container">
-      <!-- 左按鈕 -->
-      <button class="rotate-button left" @click="rotate(-90)">◀</button>
-  
-      <!-- 甜甜圈 -->
-      <div
-        class="rotatable-donut"
-        :style="{ transform: `rotate(${rotation}deg)` }"
-      >
-        <!-- 各部分 -->
-        <div
-          v-for="(section, index) in sections"
-          :key="index"
-          :class="['donut-section', `section-${index + 1}`]"
-        >
-          <img :src="section.image" alt="Section Image" />
-          <p class="section-text">{{ section.text }}</p>
-        </div>
-  
-        <!-- 中心文字 -->
-        <div class="donut-center">
-          <p>甜甜圈文字</p>
-        </div>
-      </div>
-  
-      <!-- 右按鈕 -->
-      <button class="rotate-button right" @click="rotate(90)">▶</button>
-    </div>
-  </template>
+  <div ref="container" class="canvas-container"></div>
+</template>
 
 <script>
-import { ref } from "vue";
+import * as THREE from "three";
 
 export default {
-  name: "DonutChart",
-  setup() {
-    const rotation = ref(0); // 初始旋轉角度
-    const sections = ref([
-      {
-        text: "部分 1 的文字",
-        image: "../assets/images/AC_Day14.png",
-      },
-      {
-        text: "部分 2 的文字",
-        image: "@/assets/images/section2.jpg",
-      },
-      {
-        text: "部分 3 的文字",
-        image: "@/assets/images/section3.jpg",
-      },
-      {
-        text: "部分 4 的文字",
-        image: "@/assets/images/section4.jpg",
-      },
-    ]);
-
-    const rotate = (angle) => {
-      rotation.value += angle;
-    };
-
+  name: "EarthScroll",
+  data() {
     return {
-      rotation,
-      sections,
-      rotate,
+      rotationSpeed: 0.005, // 控制旋轉速度
+      currentRotation: 0,  // 當前的旋轉角度
     };
+  },
+  mounted() {
+    this.initScene();
+    this.addEarth();
+    this.startAnimation();
+    window.addEventListener("wheel", this.onScroll);
+  },
+  beforeDestroy() {
+    window.removeEventListener("wheel", this.onScroll);
+  },
+  methods: {
+    // 初始化 Three.js 場景
+    initScene() {
+      const container = this.$refs.container;
+
+      this.scene = new THREE.Scene();
+
+      this.camera = new THREE.PerspectiveCamera(
+        75,
+        container.offsetWidth / container.offsetHeight,
+        0.1,
+        1000
+      );
+      this.camera.position.z = 3;
+
+      this.renderer = new THREE.WebGLRenderer({ antialias: true });
+      this.renderer.setSize(container.offsetWidth, container.offsetHeight);
+      container.appendChild(this.renderer.domElement);
+
+      const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+      this.scene.add(ambientLight);
+
+      const pointLight = new THREE.PointLight(0xffffff, 1);
+      pointLight.position.set(5, 5, 5);
+      this.scene.add(pointLight);
+    },
+    // 添加地球
+    addEarth() {
+      const textureLoader = new THREE.TextureLoader();
+      const earthTexture = textureLoader.load(
+        new URL('@/assets/images/Fp08.png', import.meta.url).href,
+        () => console.log("Earth texture loaded."),
+        undefined,
+        (error) => console.error("Error loading Earth texture:", error)
+      );
+
+      const geometry = new THREE.SphereGeometry(1, 32, 32);
+      const material = new THREE.MeshStandardMaterial({ map: earthTexture });
+
+      this.earth = new THREE.Mesh(geometry, material);
+      this.scene.add(this.earth);
+    },
+    // 動畫循環
+    startAnimation() {
+      const animate = () => {
+        requestAnimationFrame(animate);
+
+        // 更新地球旋轉
+        if (this.earth) {
+          this.earth.rotation.y = this.currentRotation;
+        }
+
+        this.renderer.render(this.scene, this.camera);
+      };
+      animate();
+    },
+    // 滾輪滾動事件
+    onScroll(event) {
+      const delta = event.deltaY; // 滾輪滾動的方向和距離
+      this.currentRotation += delta * this.rotationSpeed; // 根據滾輪距離改變旋轉角度
+    },
   },
 };
 </script>
 
-  
+<style>
+.canvas-container {
+  width: 100%;
+  height: 500px;
+  background-color: black; /* 黑色背景避免透明問題 */
+  overflow: hidden; /* 防止出現滾動條 */
+}
+</style>

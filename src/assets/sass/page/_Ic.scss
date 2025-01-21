@@ -100,6 +100,9 @@
   overflow: hidden;
   transition: right 0.4s ease; // 滑动动画
   z-index: 1000;
+  @include max_820{
+    width: 100%;
+  }
 }
 
 .slide-panel.active {
@@ -112,14 +115,26 @@
   background-color: rgba(0, 0, 0, 1);
   img{
     display: block;
-    border: 1px solid red;
+    // border: 1px solid red;
+    object-fit: contain;
     width: 100%;
-    height: 300px;
+    height: 400px;
+    @include max_820{
+
+    }
   }
   p {
     @include PC_h1($Ivory_white);
     font-size: 1rem;
     margin-top: 30px;
+    @include max_820{
+      font-size: 24px;
+      padding: 0 32px;
+    }
+    @include max_430{
+      font-size: 18px;
+      margin: 0;
+    }
   }
 
   .close-panel {
@@ -131,6 +146,9 @@
     font-size: 18px;
     color: $Ivory_white;
     cursor: pointer;
+    @include max_820{
+      font-size: 32px;
+    }
   }
 
   #panelText {
@@ -142,7 +160,9 @@
 
 
 .Ic_ball_R {
-
+  @include max_820{
+    transform: translateX(-88%);
+  }
   .donut-container {
     position: relative;
     width: 1000px; // 甜甜圈的大小
@@ -154,7 +174,12 @@
     background-size: cover;
     background-position: center;
     @include max_820{
-      
+      width: 1400px;
+      height: 1400px;
+    }
+    @include max_430{
+      width: 750px;
+      height: 750px;
     }
 
     .donut-title {
@@ -174,7 +199,8 @@
       transform-origin: center;
       transition: transform 0.3s ease;
       @include max_820{
-        // width: 20%;
+        background-image: url('@/assets/images/ic_b1s.png');
+        display: block;
       }
       .donut-section {
         position: absolute;
@@ -185,7 +211,9 @@
         justify-content: center;
         align-items: center;
         text-align: center;
-
+        @include max_820{
+          width: 86%;
+        }
         div {
           position: absolute;
           top: 58%;
@@ -194,12 +222,22 @@
           background-color: rgba(255, 255, 240, 0.8);
           color: $Green_1;
           border-radius: 8px;
-
+          @include max_820{
+            top: 68%;
+            right: 2%;
+          } @include max_430{
+            width: 240px;
+          }
           .section-title {
             padding: 10px;
             font-size: 24px;
             font-weight: bold;
-            // color: white;
+            @include max_820{
+              font-size: 30px;
+            }
+            @include max_430{
+              font-size: 22px;
+            }
           }
 
           .section-text {
@@ -207,9 +245,15 @@
             font-size: 20px;
             font-weight: bold;
             line-height: 140%;
-            // color: white;/
-            // text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
             padding: 10px;
+            @include max_820{
+              // width: 200px;
+              font-size: 24px;
+            }
+            @include max_430{
+              width: 100%;
+              font-size: 12px;
+            }
           }
         }
       }
@@ -217,18 +261,31 @@
       // 區塊定位和旋轉角度
       .section-1 {
         transform: rotate(0deg) translateY(-50%);
+      
       }
 
       .section-2 {
         transform: rotate(90deg) translateY(-50%);
+        @include max_820{
+          transform: rotate(90deg) translate(-5% ,-56%);
+  
+          }
       }
 
       .section-3 {
         transform: rotate(180deg) translateY(-50%);
+        @include max_820{
+          transform: rotate(180deg) translate(-17% ,-53%);
+  
+          }
       }
 
       .section-4 {
         transform: rotate(270deg) translateY(-50%);
+        @include max_820{
+          transform: rotate(270deg) translate(-9% ,-44%);
+  
+          }
       }
     }
 
@@ -247,6 +304,11 @@
       color: #333;
       background: white;
       border-radius: 50%;
+      @include max_820{
+        width: 60px;
+        height: 60px;
+        font-size: 12px;
+      }
     }
 
     .rotate-button {
@@ -259,9 +321,13 @@
       font-size: 18px;
       cursor: pointer;
       transition: background-color 0.2s ease;
-
       &:hover {
         background-color: $Green_1;
+        @include max_820{
+          &:hover{
+          background-color: $Yellow_1;
+          }
+        }
       }
 
       &.left {
@@ -269,6 +335,9 @@
         left: -100px;
         top: 50%;
         transform: translateY(-50%);
+        @include max_820{
+          display: none;
+        }
       }
 
       &.right {
@@ -276,6 +345,19 @@
         right: -100px;
         top: 50%;
         transform: translateY(-50%);
+        @include max_820{
+          width: 100px;
+          height: 100px;
+          right: 60px;
+          top: 8%;
+          font-size: 32px;
+        }
+        @include max_430{
+          width: 50px;
+          height: 50px;
+          font-size: 20px;
+          right: 0;
+        }
       }
     }
   }
@@ -296,24 +378,6 @@
   /* 44.8px */
 }
 
-// .Ic_conference-tabs_R {
-//   padding-top: 100px;
-//   text-align: center;
-
-//   h3 {
-//     font-size: 24px;
-//     font-weight: bold;
-//   }
-
-//   .Ic_tab-active_R {
-//     font-size: 20px;
-//     background-color: transparent;
-//     padding-right: 50px;
-//     padding-top: 24px;
-//     cursor: pointer;
-//   }
-// }
-
 .Ic_conference-section_R {
   p {
     width: 61%;
@@ -321,6 +385,12 @@
     margin-top: 20px;
     font-size: 20px;
     line-height: 1.5;
+    @include max_820{
+      width: 80%;
+    }
+    @include max_430{
+      font-size: 18px;
+    }
   }
 
   h3 {
@@ -336,14 +406,20 @@
     justify-content: center;
     gap: 50px;
     margin-bottom: 20px;
+    @include max_430{
+      gap: 25px;
+      padding: 0 10px;
+    }
 
     .Ic_tab-button_R {
       margin-top: 30px;
       padding: 10px 15px;
       cursor: pointer;
+      border: none;
+      box-shadow: 1px 1px 4px 0px rgba(84, 84, 84, 0.5);
       background-color: transparent;
       border-radius: 5px;
-      transition: background-color 0.3s;
+      // transition: background-color 0.3s;
 
       &.active {
         background-color: $Yellow_1;
@@ -361,11 +437,14 @@
       }
 
       img {
-        border: 1px solid red;
+        // border: 1px solid red;
         display: block;
         width: 100%;
         height: 316px;
         margin-bottom: 10px;
+        @include max_430{
+          height: auto;
+        }
       }
     }
   }
@@ -406,8 +485,13 @@
     width: 100%;
     border: none;
     border-radius: 5px;
-    /* 可选：圆角 */
+    @include max_820{
+      width: 90%; 
+      padding-left: 30px;
+    }
   }
+
+  
   .swiper-button-prev,
 .swiper-button-next {
   z-index: 10; /* 確保導航按鈕在其他元素之上 */
@@ -459,6 +543,7 @@
 
   h3 {
     @include PC_h3($Green_2);
+    margin-top: 0;
     text-align: center;
     font-weight: bold;
     padding-top: 100px;
@@ -480,6 +565,9 @@
     border-radius: 10px;
     text-align: center;
     color: #2E4E3F;
+    @include max_430{
+    width: 340px;
+    }
   }
 }
 
@@ -501,22 +589,30 @@
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: rgba(255, 255, 240, 0.8);
-    padding: 50px;
+    padding: 30px 100px;
     border-radius: 10px;
     text-align: center;
     color: #2E4E3F;
 
     h3 {
       @include PC_h3($Green_2);
+      margin-top: 0;
       text-align: center;
       font-weight: bold;
       padding-top: 100px;
       padding: 0;
+
+      @include max_430{
+      width: 200px;
+      }
     }
 
     button {
       @include btn_style(5px, 100%, 48px);
       margin-top: 10%;
+      @include max-820{
+        width: 88%;
+      }
     }
   }
 }
@@ -554,6 +650,10 @@
         color: #2E4E3F;
         font-size: 24px;
         font-weight: bold;
+        @include max_430{
+        font-size: 20px;
+        width: 250px;
+        }
       }
 
       .Ic_game-options_R {
@@ -565,6 +665,9 @@
 
         p {
           font-size: 20px;
+          @include max_430{
+          font-size: 16px;  
+          }
         }
 
         // .progress_R
@@ -588,5 +691,42 @@
       font-weight: bold;
     }
   }
+  /* 答對動畫 */
+  #Ic_feedback_R.correct-animation {
+    animation: correctFlash 1s ease-in-out;
+  }
+
+@keyframes correctFlash {
+  0% {
+    background-color: #a8e6cf;
+    transform: scale(1);
+  }
+  50% {
+    background-color: #56c596;
+    transform: scale(1.1);
+  }
+  100% {
+    background-color: #a8e6cf;
+    transform: scale(1);
+  }
+}
+
+/* 答錯動畫 */
+#Ic_feedback_R.wrong-animation {
+  animation: wrongShake 1s ease-in-out;
+}
+
+@keyframes wrongShake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-10px);
+  }
+  75% {
+    transform: translateX(10px);
+  }
+}
+
 
 }
