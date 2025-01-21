@@ -33,7 +33,7 @@ body {
             text-align: center;
 
             @include max_820{ 
-                font-size: $h2;
+                font-size: 3rem;
                 top:50%;
             }
 
@@ -178,11 +178,10 @@ body {
             .payment_section_S{
                 margin-top: 25px;
                 
-                
                 .payment_content{
                     display: flex;
                     justify-content: center;
-                    align-items: center;
+                    align-items: flex-start;
                     font-size: $h4;
                     font-weight: bold;
                     gap: 30px;
@@ -190,6 +189,7 @@ body {
                     @include max_430{ 
                         display: flex;
                         flex-direction: column;
+                        align-items: stretch;
                         font-size: 1.2 rem;
                         margin-top: 45px;
 
@@ -223,6 +223,13 @@ body {
                         border-radius: 30px;
                         border: none;
                         font-weight: bold;
+                        font-size: $h5;
+
+                        @include max_430{
+                            width: 160px;
+                            height: 40px;
+                            
+                        }
                     }
                 }
 

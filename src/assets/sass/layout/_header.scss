@@ -9,6 +9,7 @@ $header_layout: 1200px !default;
     top: 0;
     z-index: 999;
     background-color: rgba(255, 255, 240, .8);
+    backdrop-filter: blur(1px);
     padding: 0 3vw;
 
     @include max_1100 {
@@ -167,39 +168,55 @@ $header_layout: 1200px !default;
     }
 }
 
-.mobile_nav {
-    border: 2px solid red;
-    position: absolute;
-    width: 100%;
-    margin-top: 80px;
-    z-index: 500;
 
+.mobile_nav {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    /* 子選單初始位置：隱藏在畫面外 */
+    height: 100vh;
+    width: 100%;
+    /* 子選單寬度 */
+    // background-color: rgba(255, 255, 240, .8);
+    background: linear-gradient(to bottom, rgba(255, 255, 240, .8), rgba(37, 103, 165, 1));
+    transition: transform 0.3s ease-in-out;
+    /* 平滑滑動效果 */
+    z-index: 1000;
+    margin-top: 80px;
+    overflow-y: auto;
+
+    /* 當 open class 被添加時，滑入畫面 */
+    &.open {
+        transform: translateX(-100%);
+        right: -100%;
+    }
 
     ul {
-        background-color: rgba(255, 255, 240, .8);
-        text-align: center;
-        height: calc(100vh - 80px);
+        list-style: none;
+        margin: 0;
+        height: 100%;
 
         li {
-            border: 1px solid brown;
-            height: 10%;
+            // border: 1px solid red;
+            text-align: center;
 
             a {
-                display: flex;
-                border: 1px solid red;
-                justify-content: center;
-                align-items: center;
+                transition: color 0.4s ease;
+                display: block;
                 width: 100%;
                 height: 100%;
                 @include PC_h3($Gray_1);
+                line-height: 60px;
                 font-weight: bold;
+                text-shadow: $text_shadow;
+                // -webkit-text-stroke: 0.2px rgba($color: $Ivory_white, $alpha: .8);
 
                 &:hover {
-                    background-color: $Yellow_1;
+                    color: $Ivory_white;
+                    // background-color: $Yellow_1;
+                    background-color: rgba($color: $Yellow_1, $alpha: .8);
                 }
             }
         }
-
     }
-
 }

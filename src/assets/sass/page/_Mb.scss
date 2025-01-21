@@ -12,6 +12,8 @@
     width: 100%;
     height: auto;
     margin: 0 auto;
+    // padding-top: 180px;
+    z-index: -1;
     
 }
 
@@ -27,7 +29,7 @@
     font-weight: 700;
     line-height: 140%; /* 67.2px */
     padding-bottom: 80px;
-    padding-top: 80px;
+    padding-top: 160px;
 }
 
 
@@ -242,6 +244,12 @@ margin-left: 200px;
     }
 }
 
+.footer_member{
+  .footer{
+    margin-top: 0;
+  }
+}
+
 // 平板樣式 (小於 820px)
 @media (max-width: 820px) {
     .wrapperpr {
@@ -252,7 +260,7 @@ margin-left: 200px;
         padding: 20px;
         position: relative;
         // top: 80px; // 保持與 header 的對齊
-        margin: 0;
+        padding-top: 80px;
         overflow-x: hidden; // 防止橫向滾動
     
       }

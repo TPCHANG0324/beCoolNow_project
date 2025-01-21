@@ -3,47 +3,54 @@
   <header class="layout_header">
     <div class="header-wrapper">
       <div class="logo">
-        <a href="#">
+        <router-link to="/">
           <img src="../../assets/images/headerlogo.png" alt="logo" />
-        </a>
+        </router-link>
       </div>
       <nav class="nav-large">
         <ul>
-          <li><a href="#">島嶼危機</a></li>
-          <li><a href="#">永續行動</a></li>
-          <li><a href="#">社群中心</a></li>
-          <li><a href="#">綠境方城市</a></li>
-          <li><a href="#">關於我們</a></li>
+          <li><router-link to="/information">島嶼危機</router-link></li>
+          <li><router-link to="/activity">永續行動</router-link></li>
+          <li><router-link to="/social">社群中心</router-link></li>
+          <li><router-link to="/city">綠境方城市</router-link></li>
+          <li><router-link to="/About">關於我們</router-link></li>
           <li><a href="#">好站連結</a></li>
+          <li><router-link to="/shop">環保市集</router-link></li>
         </ul>
         <ul>
           <li>
-            <a href="#"><i class="bi bi-handbag"></i></a>
+            <router-link to="/shop_cart"><i class="bi bi-handbag"></i></router-link>
           </li>
           <li>
-            <a href="#"><i class="bi bi-person-circle"></i></a>
+            <router-link to="/member"><i class="bi bi-person-circle"></i></router-link>
           </li>
         </ul>
       </nav>
     </div>
   </header>
-
   <header class="mobile_header">
     <div class="logo">
-      <a href="#">
+      <router-link to="/">
         <img src="../../assets/images/headerlogo.png" alt="logo" />
-      </a>
+      </router-link>
     </div>
     <div>
       <ul>
         <li>
-          <a href="#"><i class="bi bi-handbag"></i></a>
+          <router-link to="/shop"><i class="bi bi-handbag"></i></router-link>
         </li>
         <li>
-          <a href="#"><i class="bi bi-person-circle"></i></a>
+          <router-link to="/member"><i class="bi bi-person-circle"></i></router-link>
         </li>
       </ul>
-      <svg class="ham hamRotate ham8" viewBox="0 0 100 100" width="80" onclick="this.classList.toggle('active')">
+      <!-- 漢堡線 -->
+      <svg
+        class="ham hamRotate ham8"
+        viewBox="0 0 100 100"
+        width="80"
+        :class="{ active: isMenuOpen }"
+        @click="toggleMenu"
+      >
         <path
           class="line top"
           d="m 30,33 h 40 c 3.722839,0 7.5,3.126468 7.5,8.578427 0,5.451959 -2.727029,8.421573 -7.5,8.421573 h -20"
@@ -57,20 +64,37 @@
     </div>
   </header>
 
-  <nav class="mobile_nav">
+  <!-- 子選單 -->
+  <nav class="mobile_nav" :class="{ open: isMenuOpen }">
     <ul>
-      <li><a href="#">島嶼危機</a></li>
-      <li><a href="#">永續行動</a></li>
-      <li><a href="#">社群中心</a></li>
-      <li><a href="#">綠境方城市</a></li>
-      <li><a href="#">關於我們</a></li>
+      <li><router-link to="/information">島嶼危機</router-link></li>
+      <li><router-link to="/activity">永續行動</router-link></li>
+      <li><router-link to="/social">社群中心</router-link></li>
+      <li><router-link to="/city">綠境方城市</router-link></li>
+      <li><router-link to="/About">關於我們</router-link></li>
       <li><a href="#">好站連結</a></li>
+      <li><router-link to="/shop">環保市集</router-link></li>
     </ul>
   </nav>
 </template>
 
 <script>
+import { ref } from 'vue';
+import { RouterLink } from 'vue-router';
 export default {
   name: 'MainHeader',
+  setup() {
+    const isMenuOpen = ref(false);
+
+    const toggleMenu = () => {
+      isMenuOpen.value = !isMenuOpen.value;
+      // console.log('Menu toggled:', isMenuOpen.value);
+    };
+
+    return {
+      isMenuOpen,
+      toggleMenu,
+    };
+  },
 };
 </script>
