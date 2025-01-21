@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <!-- <div> -->
     <MainHeader></MainHeader>
 
     <div class="wrapperpr">
@@ -93,27 +93,35 @@
             </template>
 
             <template v-else>
-              <span class="input_2">{{ userData.email }}</span>
+                <span class="input_2 email-display">{{ formatEmail(userData.email) }}</span>
+              <!-- <span class="input_2">{{ userData.email }}</span> -->
               <button class="button_mb" @click="editField('email')">修改</button>
             </template>
             </div>
           </div>
         </div>
       </div>
-
       <div class="profile_bottom">
-        <div class="profile-stats-special">
-          <p>小寵物經驗值: <strong>200</strong> | 累積地球幣: <strong>300</strong></p>
-        </div>
-
+        
         <div class="purchase-record-special">
           <div class="btn2_btn">
+            <div class="btn2_btn_top">
             <!-- 添加按鈕事件 -->
             <button class="purchase-record-btn11" @click="showSection('purchase')">購買紀錄</button>
             <button class="purchase-record-btn12" @click="showSection('profile')">個人紀錄</button>
+        </div>
+            <div class="bt2_btn_bottom">
+            <div class="profile-stats-special">
+          <p>小寵物經驗值: <strong>200</strong> | 累積地球幣: <strong>300</strong></p>
+        </div>
+        </div>
+
+            
           </div>
+         
 
           <!-- 購買紀錄表格 -->
+          <div class="table-container_mb">
           <table v-if="activeSection === 'purchase'" class="table_mb">
             <thead>
               <tr>
@@ -198,6 +206,7 @@
           </table>
 
           <!-- 個人紀錄內容 -->
+          <div class="table-container_mb">
           <table v-if="activeSection === 'profile'" class="personal-record">
             <thead>
               <tr>
@@ -245,9 +254,11 @@
         </div>
       </div>
     </div>
-
+     
     <MainFooter class="footer_member"></MainFooter>
   </div>
+  </div>
+  <!-- </div> -->
 </template>
 
 <script>
@@ -322,6 +333,8 @@ export default {
         this.validationErrors.phone = '';
         return true;
       }
+
+
       if (field === 'email') {
         if (!this.tempData.email) {
           this.validationErrors.email = '請輸入電子郵件';
@@ -338,6 +351,11 @@ export default {
       return true; // 其他欄位不需驗證
     },
 
+    formatEmail(email) {
+      // 每 30 個字元加入一個換行符號
+      return email.replace(/(.{30})/g, '$1\n');
+    },
+
     saveField(field) {
       // 驗證欄位
       if (!this.validateField(field)) {
@@ -345,10 +363,16 @@ export default {
       }
 
       if (this.tempData[field].trim()) {
-        this.userData[field] = this.tempData[field].trim();
+        // 儲存前先進行格式化
+        if (field === 'email') {
+          this.userData[field] = this.tempData[field].trim();
+        } else {
+          this.userData[field] = this.tempData[field].trim();
+        }
         this.editStates[field] = false;
         this.tempData[field] = '';
         this.validationErrors[field] = '';
+
       }
     }
   }
