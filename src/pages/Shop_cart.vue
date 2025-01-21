@@ -1,5 +1,5 @@
 <template>
-    <MainHeader />
+    <!-- <MainHeader /> -->
     <!-- 環保市集 - 購物車，縮寫Sp - 功能 - 代號X -->
     <main>
         <div class="Sp-X">

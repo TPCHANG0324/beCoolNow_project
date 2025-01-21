@@ -23,6 +23,8 @@
         <!-- 右：上篩選 + 下商品列表  -->
         <div class="Sp_container_S">
           <!-- 新舊 + 價格篩選 -->
+
+          
           <div class="store_title_S">
             <!-- 顯示的類別 -->
             <p class="Sp_spend_category">全部商品</p>
@@ -36,6 +38,10 @@
               </select>
             </div>
           </div>
+
+
+
+
           <!-- 商品列表 -->
           <div class="Sp-product_S">
             <!-- 商品區 -->
@@ -107,87 +113,6 @@
         </div>
 
 
-      </div>
-    </div>
-    <!-- 右：上篩選 + 下商品列表  -->
-    <div class="Sp_container_S">
-      <!-- 新舊 + 價格篩選 -->
-      <div class="store_title_S">
-        <select id="" name="">
-          <option value="默認排序" selected>默認排序</option>
-          <option value="上架時間：由新至舊">上架時間：由新至舊</option>
-          <option value="上架時間：由舊至舊">上架時間：由舊至舊</option>
-          <option value="價格：由高至低">價格：由高至低</option>
-          <option value="價格：由低至高">價格：由低至高</option>
-        </select>
-      </div>
-      <!-- 商品列表 -->
-      <div class="Sp-product_S">
-        <!-- 商品區 -->
-        <ul class="product-grid_S">
-          <li class="product-card_S">
-            <div class="product-box_S">
-              <a href="#">
-                <img src="https://picsum.photos/400/600.jpg" alt="環保吸管1" class="product-img" />
-              </a>
-              <p class="shop-add-to-cart-X">加入購物車</p>
-            </div>
-            <a href="#" class="product-card-name-X">環保吸管1</a>
-            <p>價格：NT$150</p>
-          </li>
-          <li class="product-card_S">
-            <div class="product-box_S">
-              <a href="#">
-                <img src="https://picsum.photos/400/600.jpg" alt="環保吸管1" class="product-img" />
-              </a>
-              <p class="shop-add-to-cart-X">加入購物車</p>
-            </div>
-            <a href="#" class="product-card-name-X">環保吸管1</a>
-            <p>價格：NT$150</p>
-          </li>
-          <li class="product-card_S">
-            <div class="product-box_S">
-              <a href="#">
-                <img src="https://picsum.photos/400/600.jpg" alt="環保吸管1" class="product-img" />
-              </a>
-              <p class="shop-add-to-cart-X">加入購物車</p>
-            </div>
-            <a href="#" class="product-card-name-X">環保吸管1</a>
-            <p>價格：NT$150</p>
-          </li>
-          <li class="product-card_S">
-            <div class="product-box_S">
-              <a href="#">
-                <img src="https://picsum.photos/400/600.jpg" alt="環保吸管1" class="product-img" />
-              </a>
-              <p class="shop-add-to-cart-X">加入購物車</p>
-            </div>
-            <a href="#" class="product-card-name-X">環保吸管1</a>
-            <p>價格：NT$150</p>
-          </li>
-          <li class="product-card_S">
-            <div class="product-box_S">
-              <a href="#">
-                <img src="https://picsum.photos/400/600.jpg" alt="環保吸管1" class="product-img" />
-              </a>
-              <p class="shop-add-to-cart-X">加入購物車</p>
-            </div>
-            <a href="#" class="product-card-name-X">環保吸管1</a>
-            <p>價格：NT$150</p>
-          </li>
-        </ul>
-        <!-- 頁數選擇器 -->
-        <div class="Sp-pages-X">
-          <ul>
-            <li class="Sp-pages-prev"><i class="bi bi-caret-left-fill"></i></li>
-            <li class="current"><span>1</span></li>
-            <li><span>2</span></li>
-            <li><span>3</span></li>
-            <li><span>4</span></li>
-            <li><span>5</span></li>
-            <li class="Sp-pages-next"><i class="bi bi-caret-right-fill"></i></li>
-          </ul>
-        </div>
       </div>
     </div>
   </main>
