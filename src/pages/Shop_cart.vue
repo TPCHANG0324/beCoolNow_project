@@ -1,6 +1,6 @@
 <template>
   <div>
-    <!-- <MainHeader /> -->
+    <MainHeader />
     <!-- 環保市集 - 購物車，縮寫Sp - 功能 - 代號X -->
     <main>
       <div class="Sp-X">
@@ -137,7 +137,7 @@
                   <span>合計：</span>
                   <span>NT$ {{ total }}</span>
                 </div>
-                <a href="#" class="Sp-checkout-Btn">前往結帳</a>
+                <RouterLink to="/shop_checkout" class="Sp-checkout-Btn">前往結帳</RouterLink>
               </div>
             </section>
           </section>

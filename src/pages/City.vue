@@ -1,5 +1,7 @@
 <template>
-  <div id="game-container"></div>
+  <div id="game-container">
+    <MainHeader></MainHeader>
+  </div>
 </template>
 
 <script>
@@ -190,5 +192,9 @@ export default {
 #game-container {
   width: 100%;
   height: 100%;
+  /* margin-top: 80px; */
+  header {
+    position: static;
+  }
 }
 </style>

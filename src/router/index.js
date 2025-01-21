@@ -3,7 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 // path → component
 const routes = [
   {
-    path: '/',
+    path: '/Home',
     component: () => import('@/pages/Home.vue'),
     meta: {
       title: '首頁',
@@ -105,6 +105,14 @@ const routes = [
     },
   },
   {
+    path: '/support/',
+    component: () => import('@/pages/Support.vue'),
+    meta: {
+      title: '支持我們',
+      // requiredLogin: true
+    },
+  },
+  {
     path: '/pay1/',
     component: () => import('@/pages/pay1.vue'),
     meta: {
@@ -161,7 +169,7 @@ const routes = [
     },
   },
   {
-    path: '/loginPage/',
+    path: '/',
     component: () => import('@/pages/loginPage.vue'),
     meta: {
       title: '前後台登入',
@@ -172,7 +180,7 @@ const routes = [
     path: '/loginPopupChange/',
     component: () => import('@/pages/loginPopupChange.vue'),
     meta: {
-      title: '前後台登入',
+      title: '登入彈窗切換',
       // requiredLogin: true
     },
   },
@@ -271,14 +279,6 @@ const routes = [
     component: () => import('@/components/layout/BackStageLayout/BackStageSmallPopup.vue'),
     meta: {
       title: '後臺-確認彈窗',
-      // requiredLogin: true
-    },
-  },
-  {
-    path: '/Support/',
-    component: () => import('@/pages/Support.vue'),
-    meta: {
-      title: '支持我們',
       // requiredLogin: true
     },
   },

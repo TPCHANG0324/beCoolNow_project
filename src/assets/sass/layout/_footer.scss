@@ -99,8 +99,9 @@ footer {
             }
 
             .logo-a {
-                width: 133px;
+                width: 220px;
                 margin: 24px 0;
+                // border: 1px solid red;
 
                 img {
                     width: 100%;
@@ -125,6 +126,7 @@ footer {
                             font-weight: bold;
                             @include PC_h6($Ivory_white);
                         }
+
                     }
                 }
             }

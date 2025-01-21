@@ -1,5 +1,6 @@
 <template>
   <div>
+    <MainHeader></MainHeader>
     <div class="Support_banner_S">
       <!-- <div>
             <img src="../assets/images/Au07.jpg" alt="">
@@ -43,19 +44,21 @@
         </div>
 
         <div class="payment_step_S">
-          <button class="next_step" @click="handleNextStep">下一步</button>
+          <router-link to="/pay1"><button class="next_step" @click="handleNextStep">下一步</button></router-link>
         </div>
         <!-- 顯示選中的付款方式 -->
-        <div>
+        <!-- <div>
           <p>您選擇的付款方式是：{{ payment_method }}</p>
-        </div>
+        </div> -->
       </div>
     </div>
+    <MainFooter></MainFooter>
   </div>
 </template>
 
 <script>
 export default {
+  name: 'support',
   data() {
     return {
       payment_method: '', // 用於儲存選中的付款方式
@@ -73,3 +76,5 @@ export default {
   },
 };
 </script>
+
+<style></style>

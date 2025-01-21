@@ -1,4 +1,5 @@
 <template>
+  <MainHeader></MainHeader>
   <div class="si_container_R">
     <div class="si_content_R">
       <nav class="breadcrumb">
@@ -29,7 +30,7 @@
           <div class="si_orderbottom2_R">
             <div class="middle_item1">
               <a href="">
-                <img src="#" style="width: 50px" />
+                <img src="../assets/images/Sp13.jpg" style="width: 50px" />
                 <label for="">環保筷子</label>
               </a>
             </div>
@@ -151,7 +152,7 @@
 
         <div class="si_order3_R">
           <div class="si_return_R">
-            <a href="#">返回購物車</a>
+            <RouterLink to="/Shop_cart">返回購物車</RouterLink>
           </div>
           <!-- 第三部分 -->
           <div class="si_reciptout_R">
@@ -168,12 +169,15 @@
                 </select>
               </div>
             </section>
-            <div class="btn">提交訂單</div>
+            <RouterLink to="/shop_finish" class="si_submit_R btn">提交訂單</RouterLink>
           </div>
         </div>
       </div>
     </div>
+    <MainFooter></MainFooter>
   </div>
 </template>
 
-<script></script>
+<script>
+import { RouterLink } from 'vue-router';
+</script>

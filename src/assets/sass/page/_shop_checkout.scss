@@ -1,81 +1,97 @@
-
-.si_content_R{
+.si_content_R {
   max-width: 1200px;
   margin: 0 auto;
+  margin-top: 80px;
 }
 
 
-.breadcrumb{
+.breadcrumb {
   display: flex;
   gap: 2px;
   text-decoration: none;
   padding-top: 61px;
-  a{
-      color: #000;
-      cursor: pointer;
+
+  a {
+    color: #000;
+    cursor: pointer;
   }
-  a:hover{
-      color: rgb(54, 54, 224)
+
+  a:hover {
+    color: rgb(54, 54, 224)
   }
 }
 
-.si_ordersummary_R{
+.si_ordersummary_R {
   cursor: pointer;
   border: 1px solid gray;
   margin-bottom: 40px;
   box-shadow: 4px 4px 8px 0px rgba(0, 0, 0, 0.25);
   background-color: $Ivory_white;
   border-radius: 20px;
-  .si_orderhead_R{
+
+  .si_orderhead_R {
     // border: 1px solid gray;
     text-align: center;
     padding: 24px;
-    h2{
+
+    h2 {
       font-size: 32px;
       font-weight: bold;
     }
-    p{
+
+    p {
       font-size: 32px;
     }
   }
 
-  .si_orderdetails_R{
+  .si_orderdetails_R {
+
     // border: 3px solid purple;
-    .si_orderbottom1_R{
+    .si_orderbottom1_R {
       border: 1px solid gray;
       display: flex;
       padding: 15px;
-      .item1{
+
+      .item1 {
         width: 33.33333333%;
       }
-      .item2{
+
+      .item2 {
         width: 20.666667%;
       }
-      .item3{
+
+      .item3 {
         width: 20.666667%;
       }
-      .item4{
+
+      .item4 {
         width: 18.666667%;
       }
     }
-    .si_orderbottom2_R{
+
+    .si_orderbottom2_R {
       border: 1px solid gray;
       display: flex;
       padding: 15px;
-      .middle_item1{
+
+      .middle_item1 {
         width: 33.33333333%;
       }
-      .middle_item2{
+
+      .middle_item2 {
         width: 20.666667%;
       }
-      .middle_item3{
+
+      .middle_item3 {
         width: 21.666667%;
       }
-      .middle_item4{
+
+      .middle_item4 {
         width: 17.666667%;
       }
     }
-    .si_orderbottom3_R{
+
+    .si_orderbottom3_R {
       // display: none;
       display: flex;
       flex-direction: column;
@@ -84,20 +100,24 @@
       width: 35%;
       margin-left: auto;
       margin-right: 25px;
-      .bottom3_1{
+
+      .bottom3_1 {
         display: flex;
         justify-content: space-between;
       }
-      .bottom3_2{
+
+      .bottom3_2 {
         display: flex;
         justify-content: space-between;
       }
-      .bottom3_3{
+
+      .bottom3_3 {
         display: flex;
         justify-content: space-between;
       }
     }
-    .si_orderbottom_R{
+
+    .si_orderbottom_R {
       text-align: center;
       border-top: 1px solid gray;
     }
@@ -105,108 +125,127 @@
 }
 
 
-.si_bottomsection_R{
+.si_bottomsection_R {
+
   // order 1
-  .si_order1_R{
+  .si_order1_R {
     display: flex;
     justify-content: space-between;
+
     // gap: 30px;
-    .Si_customerinfo_R{
+    .Si_customerinfo_R {
       border: 1px solid gray;
       box-shadow: 4px 4px 8px 0px rgba(0, 0, 0, 0.25);
       background-color: $Ivory_white;
-      .Si_customerinfo_header{
+
+      .Si_customerinfo_header {
         font-size: 20px;
         font-weight: 500;
         padding: 10px 1rem;
         background-color: $Light_Yellow;
       }
-      .Si_customerinfo_body{
+
+      .Si_customerinfo_body {
         padding: 1rem;
         display: flex;
         flex-direction: column;
         gap: 10px;
-        label{
 
-        }
-        input{
+        label {}
+
+        input {
           width: 34rem;
           height: 2rem;
           padding: 10px;
         }
-        .si_phonenumber_R{
+
+        .si_phonenumber_R {
           display: flex;
           border: 1px solid gray;
-          select{
+
+          select {
             height: 2rem;
             border: none;
             border-right: 1px solid gray;
           }
-          input{
+
+          input {
             border: none;
             width: 448px;
             padding: 10px;
           }
         }
-        #sex_R{
+
+        #sex_R {
           padding: 6px 12px;
-          select{
+
+          select {
             width: 47px;
           }
         }
       }
     }
-    .Si_deliveryinfo_R{
+
+    .Si_deliveryinfo_R {
       border: 1px solid gray;
       box-shadow: 4px 4px 8px 0px rgba(0, 0, 0, 0.25);
       background-color: $Ivory_white;
-      .Si_deliveryinfo_header{
+
+      .Si_deliveryinfo_header {
         font-size: 20px;
         font-weight: 500;
         padding: 10px 1rem;
         background-color: $Light_Yellow;
       }
-      .Si_deliveryinfo_body{
+
+      .Si_deliveryinfo_body {
         padding: 1rem;
         display: flex;
         flex-direction: column;
         gap: 10px;
-        label{
 
-        }
-        input{
+        label {}
+
+        input {
           width: 34rem;
           height: 2rem;
           padding: 10px;
         }
-        #si_check{
+
+        #si_check {
           width: auto;
           height: auto;
         }
-        .si_phonenumber_R{
+
+        .si_phonenumber_R {
           display: flex;
           border: 1px solid gray;
-          select{
+
+          select {
             height: 2rem;
             border: none;
             border-right: 1px solid gray;
           }
-          input{
+
+          input {
             border: none;
             width: 448px;
             padding: 10px;
           }
         }
       }
-      .si_address{
+
+      .si_address {
         display: flex;
         flex-direction: column;
         gap: 10px;
-        .si_aselect{
+
+        .si_aselect {
           display: flex;
           gap: 5px;
         }
-        select{
+
+        select {
           width: 50%;
         }
       }
@@ -215,24 +254,28 @@
 
 
   // order 2
-  .si_order2_R{
+  .si_order2_R {
     display: flex;
     justify-content: space-between;
     // gap: 30px;
     margin-top: 23px;
-    .Si-ordernotes-R{
+
+    .Si-ordernotes-R {
       border: 1px solid gray;
       box-shadow: 4px 4px 8px 0px rgba(0, 0, 0, 0.25);
       background-color: $Ivory_white;
-      .Si_ordernotes_header{
+
+      .Si_ordernotes_header {
         font-size: 20px;
         font-weight: 500;
         padding: 10px 1rem;
         background-color: $Light_Yellow;
       }
-      .si_ordernotes_body{
+
+      .si_ordernotes_body {
         padding: 1rem;
-        textarea{
+
+        textarea {
           width: 34rem;
           height: 5rem;
           padding: 10px;
@@ -240,22 +283,25 @@
       }
     }
 
-    .Si-payment-R{
+    .Si-payment-R {
       border: 1px solid gray;
       box-shadow: 4px 4px 8px 0px rgba(0, 0, 0, 0.25);
       background-color: $Ivory_white;
-      .si_payment_header{
+
+      .si_payment_header {
         font-size: 20px;
         font-weight: 500;
         padding: 10px 1rem;
         background-color: $Light_Yellow;
       }
-      .si_payment_body{
+
+      .si_payment_body {
         padding: 1rem;
         display: flex;
         flex-direction: column;
         gap: 10px;
-        input{
+
+        input {
           width: 34rem;
           height: 2rem;
           padding: 10px;
@@ -264,37 +310,49 @@
 
     }
   }
-  
-  .si_order3_R{
+
+  .si_order3_R {
     margin: 20px 0;
     display: flex;
     justify-content: space-between;
-    .si_return_R{
+
+    .si_return_R {
       display: flex;
       align-items: flex-end;
     }
-    .Si_recipt_R{
+
+    .Si_recipt_R {
       border: 1px solid gray;
       box-shadow: 4px 4px 8px 0px rgba(0, 0, 0, 0.25);
       background-color: $Ivory_white;
-      .si_recipt_header{
+
+      .si_recipt_header {
         font-size: 20px;
         font-weight: 500;
         padding: 10px 1rem;
         background-color: $Light_Yellow;
       }
-      .si_recipt_body{
+
+      .si_recipt_body {
         padding: 1rem;
         display: flex;
         flex-direction: column;
         gap: 10px;
-        select{
+
+        select {
           height: 2rem;
           width: 34rem;
         }
       }
+
+
     }
-    .btn{
+
+    .si_submit_R {
+      display: block;
+    }
+
+    .btn {
       margin-top: 20px;
     }
   }
@@ -311,27 +369,35 @@
     width: 46rem;
     height: 5rem;
     padding: 10px;
-}
+  }
 
-.si_bottomsection_R .si_order2_R .Si-payment-R .si_payment_body {
-  padding: 1rem;
-  display: flex
-;
-  flex-direction: column;
-  gap: 10px;
-  margin-left: 100px;
-}
+  .si_bottomsection_R .si_order2_R .Si-payment-R .si_payment_body {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-left: 100px;
+  }
 
   // 訂單摘要區塊
   .si_ordersummary_R {
     .si_orderdetails_R {
+
       .si_orderbottom1_R,
       .si_orderbottom2_R {
         flex-direction: column;
         gap: 10px;
-        
-        .item1, .item2, .item3, .item4, .item5,
-        .middle_item1, .middle_item2, .middle_item3, .middle_item4, .middle_item5 {
+
+        .item1,
+        .item2,
+        .item3,
+        .item4,
+        .item5,
+        .middle_item1,
+        .middle_item2,
+        .middle_item3,
+        .middle_item4,
+        .middle_item5 {
           width: 100%;
           text-align: left;
         }
@@ -347,6 +413,7 @@
 
   // 底部區塊
   .si_bottomsection_R {
+
     // 第一個訂單區塊
     .si_order1_R {
       flex-direction: column;
@@ -354,6 +421,7 @@
 
       .Si_customerinfo_R,
       .Si_deliveryinfo_R {
+
         .Si_customerinfo_body,
         .Si_deliveryinfo_body {
           input {
@@ -376,7 +444,8 @@
 
       .Si-ordernotes-R,
       .Si-payment-R {
-        textarea, 
+
+        textarea,
         input {
           width: 100%;
         }
@@ -394,7 +463,7 @@
 
       .si_reciptout_R {
         order: 1;
-        
+
         .Si_recipt_R {
           .si_recipt_body {
             select {
@@ -420,10 +489,9 @@
     font-size: 14px;
   }
 
-  .si_bottomsection_R .si_order2_R .Si-payment-R .si_payment_body{
+  .si_bottomsection_R .si_order2_R .Si-payment-R .si_payment_body {
     padding: 1rem;
-    display: flex
-;
+    display: flex;
     flex-direction: column;
     gap: 10px;
     width: 40rem;
@@ -431,22 +499,22 @@
     margin-left: 0px;
   }
 
-  
+
   .si_bottomsection_R .si_order2_R .Si-payment-R .si_payment_body input {
     width: 22rem;
     height: 2rem;
     padding: 10px;
-}
+  }
 
-.si_bottomsection_R .si_order1_R .Si_deliveryinfo_R .si_address select {
-  width: 100%;
-}
+  .si_bottomsection_R .si_order1_R .Si_deliveryinfo_R .si_address select {
+    width: 100%;
+  }
 
-.si_bottomsection_R .si_order2_R .Si-ordernotes-R .si_ordernotes_body textarea {
-  width: 22.5rem;
-  height: 5rem;
-  padding: 10px;
-}
+  .si_bottomsection_R .si_order2_R .Si-ordernotes-R .si_ordernotes_body textarea {
+    width: 22.5rem;
+    height: 5rem;
+    padding: 10px;
+  }
 
   // 訂單摘要區塊
   .si_ordersummary_R {
@@ -455,15 +523,18 @@
 
     .si_orderhead_R {
       padding: 15px;
+
       h2 {
         font-size: 24px;
       }
+
       p {
         font-size: 18px;
       }
     }
 
     .si_orderdetails_R {
+
       .si_orderbottom1_R,
       .si_orderbottom2_R {
         padding: 10px;
@@ -479,6 +550,7 @@
 
   // 底部區塊
   .si_bottomsection_R {
+
     .si_order1_R,
     .si_order2_R,
     .si_order3_R {
@@ -505,7 +577,7 @@
       gap: 8px;
       font-size: 14px;
 
-      input, 
+      input,
       select,
       textarea {
         height: 2.5rem;
@@ -519,7 +591,7 @@
       .si_aselect {
         flex-direction: column;
         gap: 8px;
-        
+
         select {
           width: 100%;
         }
@@ -559,4 +631,3 @@
     }
   }
 }
-
