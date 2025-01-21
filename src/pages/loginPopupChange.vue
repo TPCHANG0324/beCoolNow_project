@@ -15,15 +15,16 @@
   import PopupNewMember from './popup.vue'
   
   export default {
+    name: 'loginPopupChange',
     components: { MemberLogin, PopupNewMember },
     data() {
       return {
-        currentPopup: 'login', // 默認顯示登入彈窗
+        currentPopup: 'register', // 默認顯示登入彈窗
       }
     },
     methods: {
       showNewMemberPopup() {
-        console.log('SSSS');
+        // console.log('SSSS');
         
         this.currentPopup = 'register'
       },
@@ -32,11 +33,16 @@
        * 顯示登入彈窗
        */
       showLoginPopup() {
-        console.log('SSSSSS');
+        // console.log('SSSSSS');
 
         this.currentPopup = 'login'
       },
     }
   }
   </script>
-  
+
+<style>
+  .popup-container{
+    display: none;
+  }
+</style>

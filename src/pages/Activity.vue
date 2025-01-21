@@ -456,7 +456,7 @@
     </div>
   </div>
   <member_login class="member_login"></member_login>
-  <popupnewmember class="popupnewmember"></popupnewmember>
+  <loginPopupChange></loginPopupChange>
   <MainFooter></MainFooter>
 </template>
 
@@ -471,6 +471,10 @@ import member_login from '../pages/popup.vue';
 import popupnewmember from '../pages/popupnewmember.vue';
 import treeanimation from '@/components/treeanimation.vue';
 import { RouterLink } from 'vue-router'; 
+import loginPopupChange from '@/pages/loginPopupChange.vue';
+
+
+
 
 // 定義響應式數據
 const letters = ref(JSON.parse(localStorage.getItem('letters')) || []);
@@ -710,63 +714,6 @@ onMounted(() => {
   generateCaptcha(); // 生成初始驗證碼
 });
 
-// 動畫和交互邏輯
-// const treeTimeline = ref(null);
-// const initializeAnimation = () => {
-//   if (typeof TweenMax === 'undefined' || typeof TimelineMax === 'undefined') {
-//     console.error('GSAP libraries not loaded properly');
-//     return;
-//   }
-
-//   try {
-//     stopAndReset();
-//     setupAnimation();
-//     playAnimation();
-//     console.log('Animation initialized successfully');
-//   } catch (error) {
-//     console.error('Error initializing animation:', error);
-//   }
-// };
-
-// const setupAnimation = () => {
-//   console.log('Setting up animation');
-
-//   TweenMax.set('#shadow', { scale: 0, transformOrigin: '15px 8px' });
-//   TweenMax.set('#tree', { scale: 0, transformOrigin: '154px bottom' });
-//   TweenMax.set('#leaf-rb', { scale: 0, rotation: -60, y: -15, transformOrigin: 'left bottom' });
-//   TweenMax.set('#leaf-rm', { scale: 0, rotation: -50, y: 30, transformOrigin: 'left bottom' });
-//   TweenMax.set('#leaf-lb', { scale: 0, rotation: 60, y: -80, transformOrigin: 'right bottom' });
-//   TweenMax.set('#leaf-lm', { scale: 0, rotation: 40, y: -90, transformOrigin: 'right bottom' });
-//   TweenMax.set('#leaf-top', { scale: 0, transformOrigin: 'center bottom' });
-// };
-
-// const playAnimation = () => {
-//   console.log('Starting animation');
-//   treeTimeline.value = new TimelineMax({
-//     delay: 0.42,
-//     repeat: 1,
-//     // repeatDelay: 0,
-//     yoyo: true,
-//   });
-
-//   treeTimeline.value
-//     .to('#shadow', 2, { scale: 1 })
-//     .to('#tree', 2, { scale: 1 }, 0)
-//     .to('#leaf-rb', 2, { scale: 1, rotation: 0, y: 0 }, 0.35)
-//     .to('#leaf-rm', 2, { scale: 1, rotation: 0, y: 0 }, 0.4)
-//     .to('#leaf-lb', 2, { scale: 1, rotation: 0, y: 0 }, 0.45)
-//     .to('#leaf-lm', 2, { scale: 1, rotation: 0, y: 0 }, 0.5)
-//     .to('#leaf-top', 2.5, { scale: 1 }, 0.55);
-// };
-
-// const stopAndReset = () => {
-//   console.log('Stopping animation');
-//   TweenMax.killAll(false, true, false);
-
-//   ['#tree', '#shadow', '#leaf-top', '#leaf-rb', '#leaf-rm', '#leaf-lb', '#leaf-lm'].forEach((selector) => {
-//     TweenMax.set(selector, { clearProps: 'all' });
-//   });
-// };
 
 const initializeNativeJS = () => {
   const learnMoreButton = document.getElementById('learnMoreBtn');
@@ -792,32 +739,6 @@ const initializeNativeJS = () => {
 
   const treeButtons = document.querySelectorAll('.btn-Ac_done_btn');
   const popup = document.querySelector('.popup');
-
-
-  // treeButtons.forEach((button) => {
-  //   button.addEventListener('click', () => {
-  //     if (button.disabled) return;
-
-  //     const card = button.closest('.AcB_card');
-  //     const countElement = card.querySelector('.action-count');
-  //     let currentCount = parseInt(countElement.textContent);
-  //     countElement.textContent = ++currentCount;
-
-  //     button.textContent = '感謝你的響應！';
-  //     button.disabled = true;
-  //     button.classList.add('disabled');
-
-  //     popup.classList.add('Ac_active');
-  //     setTimeout(() => {
-  //       popup.classList.add('fade-out');
-  //       setTimeout(() => {
-  //         popup.classList.remove('Ac_active', 'fade-out');
-  //       }, 7000);
-  //     }, 500);
-
-  //     // playAnimation();
-  //   });
-  // });
 };
 
 const done = (key)=>{

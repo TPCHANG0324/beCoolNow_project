@@ -90,7 +90,14 @@
         </li>
       </ul>
     </div>
+    <loginPopupChange></loginPopupChange>
   </div>
 </template>
 
-<script></script>
+<script>
+import loginPopupChange from '@/pages/loginPopupChange.vue';
+export default{
+  components: { loginPopupChange },
+}
+</script>
+

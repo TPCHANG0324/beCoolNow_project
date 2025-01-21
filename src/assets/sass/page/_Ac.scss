@@ -765,6 +765,60 @@ article {
     margin-top: 1rem;
   }
 
+  .learn_more {
+    display: flex;
+    justify-content: center;
+    margin: 2rem 0;
+    
+    .learn-more-btn {
+      background: #4CAF50;
+      color: white;
+      padding: 12px 30px;
+      border: none;
+      border-radius: 25px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      
+      &:hover {
+        background: #45a049;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      }
+      
+      &:active {
+        transform: translateY(0);
+        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+      }
+    }
+  }
+  
+  // 收合按鈕樣式
+  .collapse_section {
+    display: flex;
+    justify-content: center;
+    margin: 2rem 0;
+    
+    .btnclose {
+      background: #666;
+      color: white;
+      padding: 12px 30px;
+      border: none;
+      border-radius: 25px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      
+      &:hover {
+        background: #555;
+        transform: translateY(-2px);
+      }
+    }
+  }
+
+  
+
 // 平板樣式 (小於 820px)
 @media (max-width: 820px) {
 
