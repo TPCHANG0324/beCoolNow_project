@@ -1,112 +1,114 @@
 <template>
-  <BackStageHeader></BackStageHeader>
-  <div class="backStage_bgc">
-    <div class="backStage_wrapper">
-      <h3>教育影片管理</h3>
-      <div class="wrapper">
-        <BackStageSidebar></BackStageSidebar>
-        <main class="IcB_table_H">
-          <table class="IcB_mainTable_H">
-            <thead>
-              <tr>
-                <th>編號</th>
-                <th>影片標題</th>
-                <th></th>
-                <th><button class="IcB_addBtn_H">新增</button></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="IcB_number_H">1</td>
-                <td class="IcB_title_H">COP29 臺灣參與氣候行動</td>
-                <td><button class="IcB_editBtn_H">編輯</button></td>
-                <td>
-                  <button class="IcB_deleteBtn_H">
-                    <i class="fa-solid fa-trash-can"></i>
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td class="IcB_number_H">2</td>
-                <td class="IcB_title_H">北極熊的吶喊</td>
-                <td><button class="IcB_editBtn_H">編輯</button></td>
-                <td>
-                  <button class="IcB_deleteBtn_H">
-                    <i class="fa-solid fa-trash-can"></i>
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td class="IcB_number_H">3</td>
-                <td class="IcB_title_H">二氧化碳令地球變暖背後的原理－BBC News 中文</td>
-                <td><button class="IcB_editBtn_H">編輯</button></td>
-                <td>
-                  <button class="IcB_deleteBtn_H">
-                    <i class="fa-solid fa-trash-can"></i>
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </main>
-      </div>
-      <BackStagePaginator></BackStagePaginator>
-    </div>
-  </div>
-  <BackStageSmallPopup class="IcB_eduAddPopup_H">
-    <span>
-      <p>教育影片&nbsp;新增</p>
-    </span>
-    <div>
-      <div class="IcB_addMain_H">
-        <label for="IcB_addTopic_H">影片標題: <input id="IcB_addTopic_H" class="input" type="text" /></label>
-        <label for="IcB_addUrl_H">影片鏈結: <input id="IcB_addUrl_H" class="input" type="text" /></label>
-      </div>
-      <figure>
-        <label for="UploadPic">封面:</label>
-        <input id="UploadPic" class="UploadPic" type="file" accept="image/*, image/svg+xml" />
-        <div class="preview">
-          <p>圖片預覽</p>
+  <div>
+    <BackStageHeader></BackStageHeader>
+    <div class="backStage_bgc">
+      <div class="backStage_wrapper">
+        <h3>教育影片管理</h3>
+        <div class="wrapper">
+          <BackStageSidebar></BackStageSidebar>
+          <main class="IcB_table_H">
+            <table class="IcB_mainTable_H">
+              <thead>
+                <tr>
+                  <th>編號</th>
+                  <th>影片標題</th>
+                  <th></th>
+                  <th><button class="IcB_addBtn_H">新增</button></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="IcB_number_H">1</td>
+                  <td class="IcB_title_H">COP29 臺灣參與氣候行動</td>
+                  <td><button class="IcB_editBtn_H">編輯</button></td>
+                  <td>
+                    <button class="IcB_deleteBtn_H">
+                      <i class="fa-solid fa-trash-can"></i>
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="IcB_number_H">2</td>
+                  <td class="IcB_title_H">北極熊的吶喊</td>
+                  <td><button class="IcB_editBtn_H">編輯</button></td>
+                  <td>
+                    <button class="IcB_deleteBtn_H">
+                      <i class="fa-solid fa-trash-can"></i>
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="IcB_number_H">3</td>
+                  <td class="IcB_title_H">二氧化碳令地球變暖背後的原理－BBC News 中文</td>
+                  <td><button class="IcB_editBtn_H">編輯</button></td>
+                  <td>
+                    <button class="IcB_deleteBtn_H">
+                      <i class="fa-solid fa-trash-can"></i>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </main>
         </div>
-      </figure>
-    </div>
-    <div class="IcB_btn_H">
-      <button>取消</button>
-      <button>儲存</button>
-    </div>
-  </BackStageSmallPopup>
-  <BackStageSmallPopup class="IcB_eduEditPopup_H">
-    <span>
-      <p>教育影片&nbsp;編輯</p>
-    </span>
-    <div>
-      <div class="IcB_addMain_H">
-        <label for="IcB_addTopic_H">影片標題: <input id="IcB_addTopic_H" class="input" type="text" /></label>
-        <label for="IcB_addUrl_H">影片鏈結: <input id="IcB_addUrl_H" class="input" type="text" /></label>
+        <BackStagePaginator></BackStagePaginator>
       </div>
-      <figure>
-        <label for="UploadPic">封面:</label>
-        <input id="UploadPic" class="UploadPic" type="file" accept="image/*, image/svg+xml" />
-        <div class="preview">
-          <p>圖片預覽</p>
-        </div>
-      </figure>
     </div>
-    <div class="IcB_btn_H">
-      <button>取消</button>
-      <button>儲存</button>
-    </div>
-  </BackStageSmallPopup>
-  <BackStageConfirmPopup class="IcB_eduDeletePopup_H">
-    <span></span>
-    <div>
-      <h3>確定將此影片刪除嗎?</h3>
+    <BackStageSmallPopup class="IcB_eduAddPopup_H">
+      <span>
+        <p>教育影片&nbsp;新增</p>
+      </span>
       <div>
-        <button>取消</button>
-        <button>確定</button>
+        <div class="IcB_addMain_H">
+          <label for="IcB_addTopic_H">影片標題: <input id="IcB_addTopic_H" class="input" type="text" /></label>
+          <label for="IcB_addUrl_H">影片鏈結: <input id="IcB_addUrl_H" class="input" type="text" /></label>
+        </div>
+        <figure>
+          <label for="UploadPic">封面:</label>
+          <input id="UploadPic" class="UploadPic" type="file" accept="image/*, image/svg+xml" />
+          <div class="preview">
+            <p>圖片預覽</p>
+          </div>
+        </figure>
       </div>
-    </div>
-  </BackStageConfirmPopup>
+      <div class="IcB_btn_H">
+        <button>取消</button>
+        <button>儲存</button>
+      </div>
+    </BackStageSmallPopup>
+    <BackStageSmallPopup class="IcB_eduEditPopup_H">
+      <span>
+        <p>教育影片&nbsp;編輯</p>
+      </span>
+      <div>
+        <div class="IcB_addMain_H">
+          <label for="IcB_addTopic_H">影片標題: <input id="IcB_addTopic_H" class="input" type="text" /></label>
+          <label for="IcB_addUrl_H">影片鏈結: <input id="IcB_addUrl_H" class="input" type="text" /></label>
+        </div>
+        <figure>
+          <label for="UploadPic">封面:</label>
+          <input id="UploadPic" class="UploadPic" type="file" accept="image/*, image/svg+xml" />
+          <div class="preview">
+            <p>圖片預覽</p>
+          </div>
+        </figure>
+      </div>
+      <div class="IcB_btn_H">
+        <button>取消</button>
+        <button>儲存</button>
+      </div>
+    </BackStageSmallPopup>
+    <BackStageConfirmPopup class="IcB_eduDeletePopup_H">
+      <span></span>
+      <div>
+        <h3>確定將此影片刪除嗎?</h3>
+        <div>
+          <button>取消</button>
+          <button>確定</button>
+        </div>
+      </div>
+    </BackStageConfirmPopup>
+  </div>
 </template>
 
 <script>

@@ -4,7 +4,7 @@
   <footer class="layout_footer">
     <div class="footer">
       <div class="footer-wrapper">
-        <router-link to="/" class="logo-a"><img src="../../assets/images/footerlogo.png" alt="" /></router-link>
+        <router-link to="/Home" class="logo-a"><img src="../../assets/images/logo_color2.svg" alt="" /></router-link>
         <ul>
           <li>
             <router-link to="/information">島嶼危機</router-link>
