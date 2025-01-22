@@ -16,7 +16,9 @@ body {
         // div {
         //     height: 360px;
         //     border: 2px solid;
-
+        @include max_820{
+            margin-top: 0;
+        }
         img {
             object-fit: cover;
             width: 100%;

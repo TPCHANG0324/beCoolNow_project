@@ -169,7 +169,16 @@ const routes = [
     },
   },
   {
-    path: '/',
+    path: '/tests/',
+    component: () => import('@/pages/tests.vue'),
+    meta: {
+      title: '測試動畫',
+      // requiredLogin: true
+    },
+  },
+  {
+    path: '/loginPage/',
+
     component: () => import('@/pages/loginPage.vue'),
     meta: {
       title: '前後台登入',

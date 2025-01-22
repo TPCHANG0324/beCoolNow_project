@@ -54,9 +54,13 @@
     </div>
     <MainFooter></MainFooter>
   </div>
+  <MainFooter></MainFooter>
 </template>
 
 <script>
+  import MainHeader from '@/components/layout/MainHeader.vue';
+  import MainFooter from '@/components/layout/MainFooter.vue';
+
 export default {
   name: 'support',
   data() {
@@ -64,16 +68,16 @@ export default {
       payment_method: '', // 用於儲存選中的付款方式
     };
   },
-  methods: {
-    handleNextStep() {
-      if (this.payment_method) {
-        alert(`您選擇的付款方式是：${this.payment_method}`);
-        // 進一步邏輯處理
-      } else {
-        alert('請選擇付款方式！');
-      }
-    },
-  },
+  // methods: {
+  //   handleNextStep() {
+  //     if (this.payment_method) {
+  //       alert(`您選擇的付款方式是：${this.payment_method}`);
+  //       // 進一步邏輯處理
+  //     } else {
+  //       alert('請選擇付款方式！');
+  //     }
+  //   },
+  // },
 };
 </script>
 
