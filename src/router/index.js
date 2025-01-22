@@ -3,7 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 // path → component
 const routes = [
   {
-    path: '/Home/',
+    path: '/',
     component: () => import('@/pages/Home.vue'),
     meta: {
       title: '首頁',
@@ -169,7 +169,7 @@ const routes = [
     },
   },
   {
-    path: '/',
+    path: '/loginPage/',
     component: () => import('@/pages/loginPage.vue'),
     meta: {
       title: '前後台登入',
@@ -177,7 +177,7 @@ const routes = [
     },
   },
   {
-    path: '/loginPopupChange/',
+    path: '/loginPopupChange',
     component: () => import('@/pages/loginPopupChange.vue'),
     meta: {
       title: '登入彈窗切換',

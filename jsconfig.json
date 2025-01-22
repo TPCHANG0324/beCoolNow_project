@@ -19,9 +19,9 @@
         "./mock/*"
       ]
     },
-    "types": [
-      "element-plus/global"
-    ]
+    // "types": [
+    //   "element-plus/global"
+    // ]
   },
   "include": [
     "mock/*.js",

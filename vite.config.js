@@ -12,7 +12,7 @@ export default ({ mode }) => {
 
   return defineConfig({
     //base: VITE_BASE_URL,
-    base: '/beCoolNow_project/',
+    base: '/test_proj/',
     plugins: [
       vue(),
       AutoImport({
@@ -80,32 +80,32 @@ export default ({ mode }) => {
         clientFiles: ['./index.html', './src/{views,components}/*'],
       },
     },
-    build: {
-      // 设置最终构建的浏览器兼容目标
-      target: 'es2015',
-      // 构建后是否生成 source map 文件
-      sourcemap: false,
-      //  chunk 大小警告的限制（以 kbs 为单位）
-      chunkSizeWarningLimit: 2000,
-      // 启用/禁用 gzip 压缩大小报告
-      reportCompressedSize: false,
-      // 自定义底层的 Rollup 打包配置
-      rollupOptions: {
-        output: {
-          // 指定 chunks 的入口文件模式
-          entryFileNames: 'static/js/[name]-[hash].js',
-          // 对代码分割中产生的 chunk 自定义命名
-          chunkFileNames: 'static/js/[name]-[hash].js',
-          // 自定义构建结果中的静态资源名称
-          assetFileNames: 'static/[ext]/[name]-[hash].[ext]',
-          // 压缩 Rollup 产生的额外代码
-          compact: true,
-          // 创建自定义的公共 chunk
-          manualChunks: {
-            vue: ['vue', 'vue-router', 'pinia'],
-          },
-        },
-      },
-    },
+    // build: {
+    //   // 设置最终构建的浏览器兼容目标
+    //   target: 'es2015',
+    //   // 构建后是否生成 source map 文件
+    //   sourcemap: false,
+    //   //  chunk 大小警告的限制（以 kbs 为单位）
+    //   chunkSizeWarningLimit: 2000,
+    //   // 启用/禁用 gzip 压缩大小报告
+    //   reportCompressedSize: false,
+    // 自定义底层的 Rollup 打包配置
+    // rollupOptions: {
+    //   output: {
+    //     // 指定 chunks 的入口文件模式
+    //     entryFileNames: 'static/js/[name]-[hash].js',
+    //     // 对代码分割中产生的 chunk 自定义命名
+    //     chunkFileNames: 'static/js/[name]-[hash].js',
+    //     // 自定义构建结果中的静态资源名称
+    //     assetFileNames: 'static/[ext]/[name]-[hash].[ext]',
+    //     // 压缩 Rollup 产生的额外代码
+    //     compact: true,
+    //     // 创建自定义的公共 chunk
+    //     manualChunks: {
+    //       vue: ['vue', 'vue-router', 'pinia'],
+    //     },
+    //   },
+    // },
+    // },
   });
 };
