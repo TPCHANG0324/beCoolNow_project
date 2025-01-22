@@ -12,7 +12,7 @@ export default ({ mode }) => {
 
   return defineConfig({
     //base: VITE_BASE_URL,
-    base: '/beCoolNow_project/',
+    base: '/test_proj/',
     plugins: [
       vue(),
       AutoImport({
