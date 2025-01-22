@@ -159,6 +159,14 @@ const routes = [
     },
   },
   {
+    path: '/tests/',
+    component: () => import('@/pages/tests.vue'),
+    meta: {
+      title: '測試動畫',
+      // requiredLogin: true
+    },
+  },
+  {
     path: '/loginPage/',
     component: () => import('@/pages/loginPage.vue'),
     meta: {

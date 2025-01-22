@@ -137,7 +137,7 @@
         .Sp_container_S {
             width: 80%;
 
-            @include max_430() {
+            @include max_820() {
                 width: 100%;
                 margin: 0 auto;
             }
@@ -154,6 +154,7 @@
                     
                     @include max_820(){
                         display: none;
+                        margin-top: 80px;
                     }
                 }
                 .select-box{
@@ -328,6 +329,26 @@
                             padding-top: 12px;
                             padding-bottom: 30px;
                         }
+                        .shop-add-to-cart-btn_S{
+                            display: none;
+                            justify-content: center;
+                            align-items: center;
+                            width: 116px;
+                            height: 28px;
+                            margin: 0 auto;
+                            margin-bottom: 15px;
+                            background-color: transparent;
+                            border: 2px solid white;
+                            border-radius: 8px;
+                            color: white;
+                            font-size: 16px;
+                            cursor: pointer;
+                            transition: all 0.3s ease-in-out;
+                            
+                            @include max_820(){
+                                display: flex;
+                            }
+                        }
                     }
                 }
                 @include max_430(){
@@ -358,7 +379,7 @@
                     justify-content: center;
                     li{
                         cursor: pointer;
-                        padding: 1.6rem;
+                        padding: 1.4rem;
                         border: 1px solid $Green_3;
                         position: relative;
                         border-right: 0;
