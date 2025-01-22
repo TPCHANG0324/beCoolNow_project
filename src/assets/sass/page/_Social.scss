@@ -476,7 +476,7 @@ main {
     color: $Green_1;
     background-color: $Ivory_white;
     padding: 2rem;
-
+    margin-top: 20px;
     .Fb-Atricle-title-X {
         font-size: PC_h3($Green_1);
         font-weight: 700;
@@ -521,16 +521,16 @@ main {
                 margin-right: 20px;
                 margin-left: auto;
 
-                @include max_540() {
-                    margin-right: 0;
-                }
+                // @include max_540() {
+                //     margin-right: 0;
+                // }
             }
 
-            &.bi-share {
-                @include max_768() {
-                    display: none;
-                }
-            }
+            // &.bi-share {
+            //     @include max_768() {
+            //         display: none;
+            //     }
+            // }
         }
     }
 
@@ -573,11 +573,11 @@ main {
 
     .Fb-ms-other {
         .Fb-message-section-X {
-            @include max_768() {
-                &:last-child {
-                    border-bottom: 0;
-                }
-            }
+            // @include max_768() {
+            //     &:last-child {
+            //         border-bottom: 0;
+            //     }
+            // }
 
             @include max_540() {
                 font-size: 14px;
@@ -586,9 +586,9 @@ main {
     }
 
     /* 再調整 */
-    @include max_768() {
-        margin-bottom: 80px;
-    }
+    // @include max_768() {
+    //     margin-bottom: 80px;
+    // }
 
     .Fb-message-select-X {
         padding: 10px;
@@ -646,9 +646,9 @@ main {
         &.self {
             border-bottom: 0;
 
-            @include max_768 {
-                display: none;
-            }
+            // @include max_768 {
+            //     display: none;
+            // }
         }
 
         padding: 20px 10px;
@@ -930,7 +930,7 @@ main {
                             margin-left: 20px;
 
                             @include max_540() {
-                                margin-left: 10px;
+                                margin-left: 5px;
                             }
                         }
                     }
@@ -1171,5 +1171,11 @@ main {
                 color: $Ivory_white;
             }
         }
+    }
+}
+
+.removeMT{
+    .footer{
+        margin-top: 0;
     }
 }

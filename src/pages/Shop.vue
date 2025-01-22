@@ -49,8 +49,6 @@
               </select>
             </div>
           </div>
-
-          <<<<<<< HEAD=======>>>>>>> 40d2a824f26d7b4008f559140fc80e08865da6e1
             <!-- 商品列表 -->
             <div class="Sp-product_S">
               <!-- 商品區 -->

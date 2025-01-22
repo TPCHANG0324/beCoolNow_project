@@ -400,7 +400,6 @@
     width: 100%;
     background-color: $Light_Green;
     color: $Green_1;
-
     .Sp-wrapper-X {
         max-width: 1200px;
         margin: 0 auto;
@@ -413,7 +412,7 @@
         }
 
         @include max_430(){
-            display: block;
+            display: flex;
         }
 
         /* 流程顯示 */
