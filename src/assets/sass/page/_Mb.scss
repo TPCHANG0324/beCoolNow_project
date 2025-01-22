@@ -113,6 +113,11 @@
     align-items: flex-start;
 }
 
+// .profile-container-special_right .profile-field input {
+//   width: auto;
+//   max-width: 300px;
+// }
+
 .profile-field {
     display: flex;
     align-items: center;
@@ -141,15 +146,29 @@
     text-shadow: #545454 1px 1px 1px;
     font-weight: 700;
     font-size: 20px;
+  
 
     &.input_editing {
       color: #000000;
       text-shadow: none;
+      border: 2px solid #B8860B;
   }
+
+  &:focus{
+    outline: none; // 去除默認 outline，讓效果更乾淨
+    border: 2px solid #B8860B;
+
+  }
+
+  
 }
 
 .input_editing {
   width: 300px;
+
+  &:focus {
+    border: 2px solid #B8860B;
+  }
 }
 
 .button_mb {
