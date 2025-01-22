@@ -104,6 +104,18 @@
     }
 }
 
+.member-login-container_2 {
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    /* background-color: #E6Eccc; */
+    padding: 20px;
+    position: fixed;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
 .password-input-wrapper {
     position: relative;
     width: 100%;

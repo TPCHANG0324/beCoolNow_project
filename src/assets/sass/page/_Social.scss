@@ -8,6 +8,11 @@ main {
 .Fb-X {
     width: 100%;
     background-color: $Light_Green;
+    margin-top: 80px;
+
+    @include max_1100{
+        margin-top: 0;
+    }
 
     .Fb-wrapper-X {
         max-width: 1200px;
@@ -25,6 +30,9 @@ main {
             flex-grow: 1;
             flex-shrink: 0;
             position: relative;
+            @include max_1100{
+                margin-top: 80px;
+            }
 
             .Fb-post-category-container-X {
                 display: flex;
@@ -397,6 +405,9 @@ main {
             flex-grow: 1;
             flex-shrink: 0;
 
+            @include max_1100{
+                margin-top: 80px;
+            }
             @include max_1024() {
                 display: none;
             }
@@ -886,6 +897,7 @@ main {
     background-attachment: fixed;
     width: 100%;
     position: relative;
+    margin-top: 80px;
 
     // filter: blur(3px);
     .FbW-wrapper-X {
@@ -893,7 +905,7 @@ main {
         max-width: 792px;
         margin: 0 auto;
         color: $Ivory_white;
-
+        
         // background-color: skyblue;
         @include max_820() {
             margin: 0 3vw;

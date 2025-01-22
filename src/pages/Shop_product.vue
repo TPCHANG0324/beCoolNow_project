@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <!-- 環保市集_商品頁面_主選單 -->
-    <header class="Fp_Header_H">選單</header>
+  <MainHeader></MainHeader>
+  <!-- 環保市集_商品頁面_主選單 -->
+  <!-- <header class="Fp_Header_H">選單</header> -->
 
     <!-- 環保市集_商品頁面_商品購買 -->
     <section class="Sp_productChoice_H">
@@ -43,16 +43,53 @@
           <section>
             <p>規格</p>
 
-            <div class="Sp_productChoice_btnGroup_H">
+            <!-- <div class="Sp_productChoice_btnGroup_H">
               <button type="button">200ml</button>
               <button type="button">350ml</button>
               <button type="button">500ml</button>
               <button type="button">750ml</button>
-            </div>
+            </div> -->
+            <div class="Sp_productChoice_btnGroup_H">
+            <select 
+                  v-model="selectedSize" 
+                  @change="selectSize"
+                  class="form-select"
+                >
+                <option value="" disabled>請選擇容量</option>
+                  <option 
+                    v-for="(size, index) in sizes" 
+                    :key="index" 
+                    :value="size"
+                  >
+                  {{ size }}
+                </option>
+            </select>
+          </div>
 
-            <div class="Sp_productChoice_inputGroup_H">
+            <!-- <div class="Sp_productChoice_inputGroup_H">
               <input type="text" class="input" />
-            </div>
+            </div> -->
+            <div class="Sp_productChoice_inputGroup_H">
+                <!-- 數量調整 -->
+              <div class="quantity-input-group">
+                <!-- 減少按鈕 -->
+                <button class="btn-minus" @click="decrement">-</button>
+    
+                <!-- 數量輸入框 -->
+                <input 
+                  type="number" 
+                  v-model="quantity" 
+                  @input="handleInput" 
+                  min="0" 
+                  class="quantity-input"
+                />
+                
+                <!-- 增加按鈕 -->
+                <button class="btn-plus" @click="increment">+</button>
+              </div>
+              <!-- <p>數量: {{ quantity }}</p> -->
+          </div>
+
 
             <div class="Sp_productChoice_buyNow_H">
               <button type="button">加入購物車</button>
@@ -75,7 +112,6 @@
       <figure>
         <img src="../assets/images/Sp20.jpg" alt="" />
       </figure>
-
       <article class="Sp_productChoice_detailsBlock2_H">
         <img src="../assets/images/Sp21.jpg" alt="" />
         <div>
@@ -101,7 +137,7 @@
     </section>
 
     <!-- 環保市集_商品頁面_相關商品 -->
-    <section class="Sp_productChoice_related_H">
+    <!-- <section class="Sp_productChoice_related_H">
       <h3>相關商品</h3>
       <ol>
         <li>
@@ -135,13 +171,96 @@
           </a>
         </li>
       </ol>
-    </section>
+    </section> -->
+ 
+      
+    
 
-    <!-- 環保市集_商品頁面_頁尾 -->
-    <footer class="Fp_Footer_H">頁尾</footer>
-  </div>
+  <!-- 環保市集_商品頁面_相關商品 -->
+  <section class="Sp_productChoice_related_H">
+    <h3>相關商品</h3>
+    <ol>
+      <li>
+        <a href="">
+          <img src="../assets/images/Sp04.jpg" alt="" />
+          <p>環保吸管3</p>
+        </a>
+      </li>
+      <li>
+        <a href="">
+          <img src="../assets/images/Sp11.jpg" alt="" />
+          <p>環保筷子1</p>
+        </a>
+      </li>
+      <li>
+        <a href="">
+          <img src="../assets/images/Sp09.jpg" alt="" />
+          <p>環保杯子2</p>
+        </a>
+      </li>
+      <li>
+        <a href="">
+          <img src="../assets/images/Sp06.jpg" alt="" />
+          <p>環保袋子2</p>
+        </a>
+      </li>
+      <li>
+        <a href="">
+          <img src="../assets/images/Sp08.jpg" alt="" />
+          <p>環保杯子1</p>
+        </a>
+      </li>
+    </ol>
+  </section>
+
+  <!-- 環保市集_商品頁面_頁尾 -->
+  <!-- <footer class="Fp_Footer_H">頁尾</footer> -->
+  <MainFooter></MainFooter>
 </template>
 
 <script>
-export default {};
+import MainHeader from '@/components/layout/MainHeader.vue';
+import MainFooter from '@/components/layout/MainFooter.vue';
+// import { Swiper, SwiperSlide } from 'swiper/vue';
+// import { Navigation, Pagination } from 'swiper';
+
+
+export default {
+  name: "ProductChoiceButtonGroup",
+  name: 'SizeSelector',
+  data() {
+    return {
+
+      sizes: ['200ml', '350ml', '500ml', '750ml'], // 按鈕選項
+      selectedSize:'', // 當前選中的按鈕
+
+      quantity: 1, // 初始化數量
+
+    };
+  },
+  methods: {
+    selectSize(size) {
+      this.selectedsizes = size // 設定選中的按鈕
+      // console.log('選擇的容量:', this.selectedSize)
+      this.$emit('size-selected', size)
+    },
+    increment() {
+      this.quantity++;
+    },
+    // 減少數量，不能小於 0
+    decrement() {
+      if (this.quantity > 0) {
+        this.quantity--;
+      }
+    },
+    // // 手動輸入時的檢查
+    // handleInput(event) {
+    //   const value = parseInt(event.target.value, 10);
+    //   this.quantity = isNaN(value) || value < 0 ? 0 : value;
+      
+    // },
+  },
+};
+
+
 </script>

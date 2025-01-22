@@ -1,5 +1,6 @@
 <template>
   <div>
+    <MainHeader></MainHeader>
     <div class="aboutus_top_R">
       <div class="aboutus_toptitle_R">
         <h1>關於我們</h1>
@@ -92,6 +93,7 @@
         </ul>
       </div>
     </div>
+    <MainFooter></MainFooter>
   </div>
 </template>
 

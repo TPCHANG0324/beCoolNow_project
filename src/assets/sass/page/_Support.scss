@@ -4,26 +4,30 @@ body {
     padding: 0;
     background-color: #f5f5dc;
 
-    .Support_banner_S{
+    .Support_banner_S {
         position: relative;
         height: 360px;
         background-image: url('@/assets/images/Au07.jpg');
         // background-image: url('/assets/images/Au07.jpg');
         background-size: cover;
         background-position: center center;
-       
-            // div {
-            //     height: 360px;
-            //     border: 2px solid;
-        
-                img {
-                    object-fit: cover;
-                    width: 100%;
-                }
-            // }
-        
+        margin-top: 80px;
 
-        h1{
+        // div {
+        //     height: 360px;
+        //     border: 2px solid;
+        @include max_820{
+            margin-top: 0;
+        }
+        img {
+            object-fit: cover;
+            width: 100%;
+        }
+
+        // }
+
+
+        h1 {
             @include PC_h1($Ivory_white);
             z-index: 2;
             position: absolute;
@@ -32,213 +36,215 @@ body {
             // transform: translate(-50%, -50%);
             text-align: center;
 
-            @include max_820{ 
+            @include max_820 {
                 font-size: 3rem;
-                top:50%;
+                top: 50%;
             }
 
-            @include max_430{ 
+            @include max_430 {
                 font-size: $h3;
                 // top:65%;
                 // left:20%;
             }
-                        
+
         }
     }
-        .Support_box_S{
-            text-align: center;
-            max-width: 1200px;
-            margin: 0 auto;
-            
 
-            p{
-                @include PC_h3($Green_2);
-                margin: 0 auto;
-                margin-top: 20px;
-                margin-bottom: 20px;
+    .Support_box_S {
+        text-align: center;
+        max-width: 1200px;
+        margin: 0 auto;
+
+
+        p {
+            @include PC_h3($Green_2);
+            margin: 0 auto;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            font-weight: bold;
+
+            @include max_430 {
+                font-size: $h6;
+            }
+
+        }
+
+        .donate_choise_S {
+            display: flex;
+            justify-content: center;
+
+            .donate_type_month {
+                width: 300px;
+                height: 60px;
+                font-size: 24px;
+                background-color: $Ivory_white;
+                color: $Green_2;
+                // border: 1 px solid $Green_1;
+                outline: none;
                 font-weight: bold;
 
-                @include max_430{ 
-                    font-size: $h6;
+                @include max_540 {
+                    width: 200px;
+                    // height: 40px;
+                    font-size: $h5;
                 }
 
             }
-                .donate_choise_S{
-                    display: flex;
-                    justify-content: center;
 
-                    .donate_type_month{
-                        width: 300px;
-                        height: 60px;
-                        font-size: 24px;
-                        background-color: $Ivory_white;
-                        color: $Green_2;
-                        // border: 1 px solid $Green_1;
-                        outline: none;
-                        font-weight: bold;
-                       
-                        @include max_540{ 
-                            width: 200px;
-                            // height: 40px;
-                            font-size: $h5;
-                        }
+            .donate_type_once {
+                width: 300px;
+                height: 60px;
+                font-size: $h3;
+                background-color: $Green_2;
+                color: $Ivory_white;
+                // border: 1 px solid $Green_1;
+                outline: none;
+                font-weight: bold;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
 
-                    }
-
-                    .donate_type_once{
-                        width: 300px;
-                        height: 60px;
-                        font-size: $h3;
-                        background-color: $Green_2;
-                        color: $Ivory_white;
-                        // border: 1 px solid $Green_1;
-                        outline: none;
-                        font-weight: bold;
-                        cursor: pointer;
-                        transition: background-color 0.3s ease;
-                    
-                        &:hover{
-                            background-color: $Green_1;
-                        }
-
-                        @include max_540{ 
-                            width: 200px;
-                            // height: 40px;
-                            font-size: $h5;
-                        }
-                    }
-                    
-                }
-            .donate_amount_S{
-                margin-top: 40px;
-                display: inline-flex;
-                align-items: center;
-                gap: 35px;
-                // padding: 11px 44px 7px 44px;
-                @include max_430{
-                    gap:16px;
+                &:hover {
+                    background-color: $Green_1;
                 }
 
-                .amount{
-                    width: 160px;
-                    height: 80px;
-                    font-size: $h3;
-                    background-color: $Ivory_white;
-                    color: $Green_2;
-                    font-weight: bold;
-                    border-radius: 20px;
+                @include max_540 {
+                    width: 200px;
+                    // height: 40px;
+                    font-size: $h5;
+                }
+            }
 
-                   @include max_540{
+        }
+
+        .donate_amount_S {
+            margin-top: 40px;
+            display: inline-flex;
+            align-items: center;
+            gap: 35px;
+
+            // padding: 11px 44px 7px 44px;
+            @include max_430 {
+                gap: 16px;
+            }
+
+            .amount {
+                width: 160px;
+                height: 80px;
+                font-size: $h3;
+                background-color: $Ivory_white;
+                color: $Green_2;
+                font-weight: bold;
+                border-radius: 20px;
+
+                @include max_540 {
                     width: 130px;
                     height: 60px;
                     font-size: $h4;
-                    }
+                }
 
-                    @include max_430{
+                @include max_430 {
                     width: 110px;
                     height: 60px;
-                    
-                  
-                    }
-                }
 
-                .amount.active{
-                    background-color: $Green_2;
-                    color: $Ivory_white;
+
                 }
             }
 
-            .custom_amount_S{
-                margin-top: 40px;
-
-                span{
-                    margin-right: 16px;
-                    color:$Green_2;
-                    font-size: $h3;
-                    font-weight: bold;
-
-                    @include max_540{ 
-                        font-size: $h4;
-                    }
-                }
-                .custom_amount_input{
-                    width: 418px;
-                    height: 36px;
-                    border: none;
-                    padding: 9px 15px;
-                    align-items: center;
-
-                    @include max_540{ 
-                        width: 160px;
-                        height: 24x;
-                    }
-                }
+            .amount.active {
+                background-color: $Green_2;
+                color: $Ivory_white;
             }
+        }
 
-            .payment_section_S{
-                margin-top: 25px;
-                
-                .payment_content{
-                    display: flex;
-                    justify-content: center;
-                    align-items: flex-start;
+        .custom_amount_S {
+            margin-top: 40px;
+
+            span {
+                margin-right: 16px;
+                color: $Green_2;
+                font-size: $h3;
+                font-weight: bold;
+
+                @include max_540 {
                     font-size: $h4;
-                    font-weight: bold;
-                    gap: 30px;
-
-                    @include max_430{ 
-                        display: flex;
-                        flex-direction: column;
-                        align-items: stretch;
-                        font-size: 1.2 rem;
-                        margin-top: 45px;
-
-                    }
-                
-                    span{
-                        margin-left: 10px; 
-                    }
-                    .marker{
-                        color: red;
-                    }
-                    .ecpay{
-                        margin-left: 30px;
-
-                        
-                    }
-                    .ecpay2{
-                        font-size: $h7;
-                    }
                 }
-
-                .payment_step_S{
-                    margin-top: 64px;
-                    margin-bottom: 40px;
-
-                    .next_step{
-                        width: 240px;
-                        height: 52px;
-                        background-color: $Yellow_1;
-                        color: $Ivory_white;
-                        border-radius: 30px;
-                        border: none;
-                        font-weight: bold;
-                        font-size: $h5;
-
-                        @include max_430{
-                            width: 160px;
-                            height: 40px;
-                            
-                        }
-                    }
-                }
-
             }
-        }    
- }
+
+            .custom_amount_input {
+                width: 418px;
+                height: 36px;
+                border: none;
+                padding: 9px 15px;
+                align-items: center;
+
+                @include max_540 {
+                    width: 160px;
+                    height: 24x;
+                }
+            }
+        }
+
+        .payment_section_S {
+            margin-top: 25px;
+
+            .payment_content {
+                display: flex;
+                justify-content: center;
+                align-items: flex-start;
+                font-size: $h4;
+                font-weight: bold;
+                gap: 30px;
+
+                @include max_430 {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: stretch;
+                    font-size: 1.2 rem;
+                    margin-top: 45px;
+
+                }
+
+                span {
+                    margin-left: 10px;
+                }
+
+                .marker {
+                    color: red;
+                }
+
+                .ecpay {
+                    margin-left: 30px;
 
 
+                }
 
+                .ecpay2 {
+                    font-size: $h7;
+                }
+            }
 
-          
-    
+            .payment_step_S {
+                margin-top: 64px;
+                margin-bottom: 40px;
+
+                .next_step {
+                    width: 240px;
+                    height: 52px;
+                    background-color: $Yellow_1;
+                    color: $Ivory_white;
+                    border-radius: 30px;
+                    border: none;
+                    font-weight: bold;
+                    font-size: $h5;
+
+                    @include max_430 {
+                        width: 160px;
+                        height: 40px;
+
+                    }
+                }
+            }
+
+        }
+    }
+}

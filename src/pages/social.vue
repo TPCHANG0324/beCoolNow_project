@@ -1,6 +1,6 @@
 <template>
-  <MainHeader />
   <main>
+    <MainHeader />
     <!-- 社群中心，縮寫Fb - 功能 - 代號X -->
     <div class="Fb-X">
       <div class="Fb-wrapper-X">
@@ -76,8 +76,8 @@
         </div>
       </div>
     </div>
+    <MainFooter />
   </main>
-  <MainFooter />
 </template>
 
 <script setup>

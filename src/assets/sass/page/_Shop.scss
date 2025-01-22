@@ -32,11 +32,13 @@
         gap: 40px;
         align-items: flex-start;
         position: relative;
-        @include max_1200(){
-        }
+
+        @include max_1200() {}
+
         @include max_820() {
             margin: 0 3vw;
         }
+
         /* 左：價格選擇 */
         .fliter_section_S {
             width: 20%;
@@ -57,7 +59,7 @@
                 display: flex;
                 flex-direction: column;
                 gap: 20px;
-            
+
                 li {
                     padding: 16px 20px;
                     border-radius: 20px;
@@ -76,15 +78,17 @@
                         display: block;
                         color: $Gray_1;
                         white-space: nowrap;
-                        
+
                     }
-                   
+
                 }
             }
-            @include max_820(){
+
+            @include max_820() {
                 display: none;
             }
         }
+
         .fliter_section820_S {
             display: none;
             justify-content: end;
@@ -127,7 +131,8 @@
                 font-size: 12px;
 
             }
-            @include max_820(){
+
+            @include max_820() {
                 display: flex;
                 justify-content: flex-start;
             }
@@ -138,10 +143,11 @@
         .Sp_container_S {
             width: 80%;
 
-            @include max_430() {
+            @include max_820() {
                 width: 100%;
                 margin: 0 auto;
             }
+
             /* 新舊 + 價格篩選 */
             .store_title_S {
                 display: flex;
@@ -149,18 +155,22 @@
                 padding: 40px 0;
                 position: relative;
                 align-items: center;
-                .Sp_spend_category{
+
+                .Sp_spend_category {
                     font-weight: $font_weight_Bold;
                     font-size: $h3;
-                    
-                    @include max_820(){
+
+                    @include max_820() {
                         display: none;
+                        margin-top: 80px;
                     }
                 }
-                .select-box{
+
+                .select-box {
                     position: relative;
                     // background-color: #fff;
                     padding: 1px 0;
+
                     select {
                         display: block;
                         cursor: pointer;
@@ -178,7 +188,8 @@
                         /* 隱藏箭頭 */
                         appearance: none;
                         position: relative;
-                        &::before{
+
+                        &::before {
                             content: '111';
                             display: block;
                             width: 100%;
@@ -188,13 +199,15 @@
                             right: 0;
                             background-color: $Green_1;
                         }
+
                         /* 隱藏箭頭 */
                         option {
                             background-color: #fff;
                             color: $Green_1;
                         }
                     }
-                    &::before{
+
+                    &::before {
                         display: block;
                         content: '';
                         width: 90%;
@@ -203,8 +216,9 @@
                         position: absolute;
                         bottom: 0;
                         right: 4%;
-                        
+
                     }
+
                     &::after {
                         content: '\25BC';
                         /* 使用不同的箭頭符號 */
@@ -216,12 +230,13 @@
                         pointer-events: none;
                         color: $Green_2;
                         font-size: 12px;
-    
+
                     }
                 }
 
 
             }
+
             // /* 新舊 + 價格篩選 */
             // .store_title_S {
             //     display: flex;
@@ -275,30 +290,36 @@
             /* 商品列表 */
             .Sp-product_S {
                 margin-bottom: 40px;
-                ul.product-grid_S{
+
+                ul.product-grid_S {
                     display: flex;
                     gap: 40px;
                     flex-wrap: wrap;
-                    li.product-card_S{
+
+                    li.product-card_S {
                         width: calc((100% - 80px) / 3);
                         color: $Ivory_white;
                         background-color: $Green_1;
                         text-align: center;
-                        .product-box_S{
+
+                        .product-box_S {
                             position: relative;
                             box-sizing: border-box;
                             overflow: hidden;
                             transition: all .3s ease-in;
-                            a{
+
+                            a {
                                 display: block;
                                 font-size: 0;
-                                img{
+
+                                img {
                                     width: 100%;
                                     aspect-ratio: 1;
                                     object-fit: cover;
-                                } 
+                                }
                             }
-                            p.shop-add-to-cart-X{
+
+                            p.shop-add-to-cart-X {
                                 cursor: pointer;
                                 box-sizing: border-box;
                                 border-radius: 30px;
@@ -311,79 +332,110 @@
                                 background-color: #d0ad44;
                                 opacity: 0;
 
-                                @include max_430(){
+                                @include max_430() {
                                     display: none;
                                 }
                             }
-                            &:hover p{
+
+                            &:hover p {
                                 opacity: 1;
                             }
                         }
-                        a.product-card-name-X{
+
+                        a.product-card-name-X {
                             color: $Ivory_white;
                             display: block;
                             padding-top: 24px;
                             font-size: 20px;
                         }
-                        p{
+
+                        p {
                             padding-top: 12px;
                             padding-bottom: 30px;
                         }
+                        .shop-add-to-cart-btn_S{
+                            display: none;
+                            justify-content: center;
+                            align-items: center;
+                            width: 116px;
+                            height: 28px;
+                            margin: 0 auto;
+                            margin-bottom: 15px;
+                            background-color: transparent;
+                            border: 2px solid white;
+                            border-radius: 8px;
+                            color: white;
+                            font-size: 16px;
+                            cursor: pointer;
+                            transition: all 0.3s ease-in-out;
+                            
+                            @include max_820(){
+                                display: flex;
+                            }
+                        }
                     }
                 }
-                @include max_430(){
+
+                @include max_430() {
                     margin: 0 auto;
-                   
 
-                    ul.product-grid_S{
-                        gap:20px;
-                        
 
-                        li.product-card_S{
+                    ul.product-grid_S {
+                        gap: 20px;
+
+
+                        li.product-card_S {
                             width: calc((100% - 40px) / 2)
-                           
                         }
                     }
 
                 }
             }
+
             /* 頁數選擇器 */
-            .Sp-pages-X{
+            .Sp-pages-X {
                 margin-top: 60px;
 
-                @include max_430(){
+                @include max_430() {
                     margin-bottom: 40px;
                 }
-                ul{
+
+                ul {
                     display: flex;
                     justify-content: center;
-                    li{
+
+                    li {
                         cursor: pointer;
-                        padding: 1.6rem;
+                        padding: 1.4rem;
                         border: 1px solid $Green_3;
                         position: relative;
                         border-right: 0;
                         background-color: $Ivory_white;
-                        span{
+
+                        span {
                             position: absolute;
                             top: 50%;
                             left: 50%;
                             transform: translate(-50%, -50%);
                         }
-                        i{
+
+                        i {
                             position: absolute;
                             top: 50%;
                             left: 50%;
                             transform: translate(-50%, -50%);
                         }
-                        &:last-child{
+
+                        &:last-child {
                             border-right: 1px solid $Green_3;
                         }
-                        &.current{
+
+                        &.current {
                             background-color: $Green_1;
                             color: $Ivory_white;
                         }
-                        &.Sp-pages-prev{
+
+                        &.Sp-pages-prev {
                             display: none;
                         }
                     }
@@ -407,9 +459,11 @@
         flex-direction: column;
         gap: 40px;
         box-sizing: border-box;
-        @include max_1200(){
+
+        @include max_1200() {
             margin: 0 3vw;
         }
+
 
         @include max_430(){
             display: flex;
@@ -515,9 +569,11 @@
                 .Sp-table-header-X {
                     padding: 1rem;
                     display: flex;
-                    @include max_1024(){
+
+                    @include max_1024() {
                         display: none;
                     }
+
                     // border-bottom: 1px solid #ccc;
                     &::before {
                         display: table;
@@ -572,16 +628,19 @@
                 .Sp-cart-item-X {
                     padding: 1rem;
                     display: flex;
-                    @include max_1024(){
+
+                    @include max_1024() {
                         flex-wrap: wrap;
                         position: relative;
                     }
+
                     div {
                         position: relative;
                         min-height: 1px;
                         padding-right: 15px;
                         padding-left: 15px;
-                        @include max_1024(){
+
+                        @include max_1024() {
                             padding-left: 0;
                             padding-right: 0;
                         }
@@ -590,7 +649,8 @@
                             padding-left: 0;
                             width: 25%;
                             display: flex;
-                            @include max_1024(){
+
+                            @include max_1024() {
                                 width: 100%;
                             }
 
@@ -603,7 +663,8 @@
                                 background-size: contain;
                                 background-repeat: no-repeat;
                                 flex-shrink: 0;
-                                @include max_1024(){
+
+                                @include max_1024() {
                                     width: 50px;
                                 }
                             }
@@ -613,7 +674,8 @@
                         &:nth-of-type(2) {
                             width: 16.66666667%;
                             text-align: center;
-                            @include max_1024(){
+
+                            @include max_1024() {
                                 width: auto;
                                 position: absolute;
                                 left: 4.75rem;
@@ -625,7 +687,8 @@
                         &:nth-of-type(3) {
                             width: 16.66666667%;
                             text-align: center;
-                            @include max_1024(){
+
+                            @include max_1024() {
                                 width: auto;
                                 position: absolute;
                                 top: 4rem;
@@ -636,13 +699,16 @@
                         &:nth-of-type(4) {
                             width: 16.66666667%;
                             text-align: center;
-                            @include max_1024(){
+
+                            @include max_1024() {
                                 margin-top: 1.5rem;
                                 width: 192px;
                             }
-                            @include max_540(){
-                               width: 160px;
+
+                            @include max_540() {
+                                width: 160px;
                             }
+
                             form {
                                 border: 1px solid $Green_1;
 
@@ -669,8 +735,9 @@
                                         background-color: $Ivory_white;
                                         text-align: center;
                                         color: $Green_1;
-                                        @include max_1024(){
-                                           width: 100%;
+
+                                        @include max_1024() {
+                                            width: 100%;
                                         }
                                     }
 
@@ -686,7 +753,8 @@
                         &:nth-of-type(5) {
                             width: 16.66666667%;
                             text-align: center;
-                            @include max_1024(){
+
+                            @include max_1024() {
                                 width: auto;
                                 position: absolute;
                                 bottom: 1.5rem;
@@ -698,12 +766,14 @@
                             padding-right: 0;
                             width: 8.33333333%;
                             text-align: center;
-                            @include max_1024(){
+
+                            @include max_1024() {
                                 width: auto;
                                 position: absolute;
                                 top: 1rem;
                                 right: 1rem;
                             }
+
                             i {
                                 cursor: pointer;
                             }
@@ -805,7 +875,8 @@
         .Sp-shopping-info-X {
             display: flex;
             gap: 28px;
-            @include max_912(){
+
+            @include max_912() {
                 flex-direction: column;
             }
 
@@ -815,9 +886,11 @@
                 width: 65%;
                 box-shadow: 4px 4px 8px 0px rgba(0, 0, 0, 0.25);
                 background-color: $Ivory_white;
-                @include max_912(){
+
+                @include max_912() {
                     width: 100%;
                 }
+
                 .Sp-order-form-header {
                     font-size: 20px;
                     font-weight: 500;
@@ -850,9 +923,11 @@
                 width: 35%;
                 box-shadow: 4px 4px 8px 0px rgba(0, 0, 0, 0.25);
                 background-color: $Ivory_white;
-                @include max_912(){
+
+                @include max_912() {
                     width: 100%;
                 }
+
                 .Sp-order-summary-header {
                     font-size: 20px;
                     font-weight: 500;
