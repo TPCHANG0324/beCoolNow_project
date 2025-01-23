@@ -524,6 +524,67 @@
     }
 
 
+    // table {
+    //     border-collapse: collapse;
+    //     border-spacing: 0;
+    // }
+
+    .profile-stats-special {
+      order: 4;
+      margin: 20px auto;
+      width: 120%;
+      display: flex;
+      justify-content: center;
+      margin-left: 0;
+    }
+
+    .purchase-record-special {
+      order: 5;
+      padding: 20px;
+      width: 100%;
+
+      .btn2_btn {
+        margin-left: 0;
+        justify-content: center;
+        flex-direction: row; // 改為水平排列
+        align-items: center;
+        gap: 20px; // 增加按鈕之間的間距
+
+        .btn2_btn_top {
+          display: flex;
+        }
+      }
+
+
+
+      .table_mb {
+        width: 100%;
+        margin: 0px;
+        overflow-x: auto;
+        display: block;
+
+        th,
+        td {
+          min-width: 120px;
+        }
+      }
+    }
+
+    // .purchase-record-btn11,
+    // .purchase-record-btn12 {
+    //   padding-left: 0;
+    //   margin: 10px 0;
+    //   // font-size: 24x;
+    //   border: none;
+    //   margin-left: 0px;
+    //   font-size: 16px;
+    // }
+    // 調整標題大小以適應小螢幕
+    .profile-title {
+      font-size: 36px;
+      padding: 40px 0;
+    }
+
 
     .table_mb {
       width: 100%;

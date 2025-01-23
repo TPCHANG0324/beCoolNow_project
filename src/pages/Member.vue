@@ -279,6 +279,7 @@ export default {
     editField(field) {
       this.tempData[field] = this.userData[field];
       this.editStates[field] = true;
+/*************  ✨ Codeium Command 🌟  *************/
       this.validationErrors[field] = '';
     },
     validateField(field) {
@@ -329,6 +330,7 @@ export default {
       try {
         const response = await fetch('/api/user-profile');
         const data = await response.json();
+
         this.userData = data;
         localStorage.setItem('userData', JSON.stringify(data));
       } catch (error) {

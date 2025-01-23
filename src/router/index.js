@@ -33,6 +33,16 @@ const routes = [
       title: '社群中心',
       // requiredLogin: true
     },
+    // children:[
+    //   {
+    //     path:'',
+    //     component: () => import('@/pages/Social_news.vue'),
+    //   },
+    //   {
+    //     path: 'article', // 'article/:id'
+    //     component:  () => import('@/pages/Social_article.vue'),
+    //   },
+    // ]
   },
   {
     path: '/social_article/',
@@ -73,7 +83,7 @@ const routes = [
     },
   },
   // {
-  //   path: '/social_news/',
+  //   path: '/social_news',
   //   component: () => import('@/pages/Social_news.vue'),
   //   meta: {
   //     title: '新聞',

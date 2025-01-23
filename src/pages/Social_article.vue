@@ -1,4 +1,5 @@
 <template>
+  <MainHeader />
   <!-- 單一文章頁面，縮寫Fb - 功能 - 代號X -->
   <main>
     <div class="Fb-X">
@@ -6,7 +7,7 @@
         <!-- 文章 -->
         <div class="Fb-post-X">
           <!-- 文章分類 -->
-          <div class="Fb-post-category-container-X">
+          <!-- <div class="Fb-post-category-container-X">
             <ul class="Fb-post-category-X">
               <div class="Fb-post-category-box">
                 <select id="" name="" class="active">
@@ -21,11 +22,12 @@
               <li class="active">全部文章</li>
               <li>氣候科學</li>
               <li>生態危機</li>
-              <li>生態危機</li>
+              <li>綠色生活</li>
               <li>政策國際</li>
             </ul>
             <div class="Fb-post-write-X"><a href="#">寫文章</a></div>
-          </div>
+          </div> -->
+
           <!-- 單一文章區 -->
           <div class="Fb-Atricle-X">
             <div class="Fb-Atricle-title-X">10 個愛護地球的舉動，讓你親身響應環保理念！</div>
@@ -116,6 +118,8 @@
               </div>
             </div>
           </div>
+
+          
         </div>
 
         <!-- 新聞 -->
@@ -123,132 +127,20 @@
           <div class="Fb-news-header-X">熱門新聞</div>
           <!-- 新聞的主要內容 -->
           <div class="Fb-news-body-X">
-            <article>
-              <img src="https://picsum.photos/id/102/300/300" alt="" />
-              <div class="Fb-news-body-container-X">
-                <div class="Fb-news-body-container-time-X">2024-12-7</div>
-                <div class="Fb-news-body-container-title-X">
-                  循環署公告訂定手機回收規定，透過延伸生產者責任協助民眾回收廢舊手機！
-                </div>
-                <div class="Fb-news-body-container-content-X">
-                  環境部資源循環署公告手機回收規定，要求手機製造、輸入及販賣業者負起回收的責任，讓手機能回收後能再循環，期盼業者提出手機租賃或維修等循環服務，公告將於明(2025)年1月1日實施
-                </div>
-              </div>
-            </article>
-            <article>
-              <img src="https://picsum.photos/id/103/300/300" alt="" />
-              <div class="Fb-news-body-container-X">
-                <div class="Fb-news-body-container-time-X">2024-12-7</div>
-                <div class="Fb-news-body-container-title-X">從源頭減少垃圾：如何做好資源回收</div>
-                <div class="Fb-news-body-container-content-X">
-                  解決垃圾問題，首先以減量觀念出發，做到分類回收，最後才是垃圾處理。我們在生活中從減量開始做起，只要稍加用心即可做到。
-                </div>
-              </div>
-            </article>
-            <article>
-              <img src="https://picsum.photos/id/104/300/300" alt="" />
-              <div class="Fb-news-body-container-X">
-                <div class="Fb-news-body-container-time-X">2024-12-7</div>
-                <div class="Fb-news-body-container-title-X">何謂無痕山林？無痕山林7準則，登山時也友善環境</div>
-                <div class="Fb-news-body-container-content-X">
-                  近年戶外活動盛行，如露營、登山和健行等，都是親近大自然的好方法，不過同時也延伸出許多環境汙染問題，而台灣早在15年前，便開始推動「無痕山林運動」，希望民眾在從事山林活動時，減少對大自然的衝擊。
-                </div>
-              </div>
-            </article>
-            <article>
-              <img src="https://picsum.photos/id/112/300/300" alt="" />
-              <div class="Fb-news-body-container-X">
-                <div class="Fb-news-body-container-time-X">2024-12-7</div>
-                <div class="Fb-news-body-container-title-X">環保飲食不只少吃肉，這樣吃素減碳更有效！</div>
-                <div class="Fb-news-body-container-content-X">
-                  邀請您支持綠色和平蔬食專案，加入「出一張嘴，用吃改變世界」活動，也向身旁親友推廣「少肉多蔬」的理念，透過改變飲食習慣，以植物性食材取代肉類，同時照顧自己與地球的健康，減緩氣候變遷，用蔬食拯救您我共同的地球家園。
-                </div>
-              </div>
-            </article>
-            <article>
-              <img src="https://picsum.photos/id/106/300/300" alt="" />
-              <div class="Fb-news-body-container-X">
-                <div class="Fb-news-body-container-time-X">2024-12-7</div>
-                <div class="Fb-news-body-container-title-X">
-                  循環署公告訂定手機回收規定，透過延伸生產者責任協助民眾回收廢舊手機！
-                </div>
-                <div class="Fb-news-body-container-content-X">
-                  環境部資源循環署公告手機回收規定，要求手機製造、輸入及販賣業者負起回收的責任，讓手機能回收後能再循環，期盼業者提出手機租賃或維修等循環服務，公告將於明(2025)年1月1日實施
-                </div>
-              </div>
-            </article>
-            <article>
-              <img src="https://picsum.photos/id/107/300/300" alt="" />
-              <div class="Fb-news-body-container-X">
-                <div class="Fb-news-body-container-time-X">2024-12-7</div>
-                <div class="Fb-news-body-container-title-X">從源頭減少垃圾：如何做好資源回收</div>
-                <div class="Fb-news-body-container-content-X">
-                  解決垃圾問題，首先以減量觀念出發，做到分類回收，最後才是垃圾處理。我們在生活中從減量開始做起，只要稍加用心即可做到。
-                </div>
-              </div>
-            </article>
-            <article>
-              <img src="https://picsum.photos/id/108/300/300" alt="" />
-              <div class="Fb-news-body-container-X">
-                <div class="Fb-news-body-container-time-X">2024-12-7</div>
-                <div class="Fb-news-body-container-title-X">何謂無痕山林？無痕山林7準則，登山時也友善環境</div>
-                <div class="Fb-news-body-container-content-X">
-                  近年戶外活動盛行，如露營、登山和健行等，都是親近大自然的好方法，不過同時也延伸出許多環境汙染問題，而台灣早在15年前，便開始推動「無痕山林運動」，希望民眾在從事山林活動時，減少對大自然的衝擊。
-                </div>
-              </div>
-            </article>
-            <article>
-              <img src="https://picsum.photos/id/111/300/300" alt="" />
-              <div class="Fb-news-body-container-X">
-                <div class="Fb-news-body-container-time-X">2024-12-7</div>
-                <div class="Fb-news-body-container-title-X">環保飲食不只少吃肉，這樣吃素減碳更有效！</div>
-                <div class="Fb-news-body-container-content-X">
-                  邀請您支持綠色和平蔬食專案，加入「出一張嘴，用吃改變世界」活動，也向身旁親友推廣「少肉多蔬」的理念，透過改變飲食習慣，以植物性食材取代肉類，同時照顧自己與地球的健康，減緩氣候變遷，用蔬食拯救您我共同的地球家園。
-                </div>
-              </div>
-            </article>
+            <NewsApi :isPC="true" />
           </div>
         </div>
       </div>
     </div>
   </main>
 
-  <!-- RWD 時出現的置底評論區塊 -->
-  <div class="Fb-rwd-message-X">
-    <!-- 分享 -->
-    <div class="Fb-rwd-share-X">
-      <i class="bi bi-share"></i>
-      <span>分享</span>
-    </div>
-    <!-- 評論 -->
-    <div class="Fb-rwd-comment-X">
-      <i class="bi bi-chat"></i>
-      <span>評論</span>
-    </div>
-    <!-- 按讚 -->
-    <div class="Fb-rwd-good-X">
-      <i class="bi bi-hand-thumbs-up"></i>
-      <span>按讚</span>
-    </div>
-  </div>
-
-  <!-- 點擊評論按鈕才會出現的遮罩+框 -->
-  <div class="Fb-comment-cover-X">
-    <!-- 這是遮罩 -->
-    <div class="m-box">
-      <!-- 這是框 -->
-      <img src="https://picsum.photos/id/240/200/300" alt="" />
-      <div class="inner-box">
-        <div class="m-name">尖頭拉瑞</div>
-        <textarea id="" name="" placeholder="請輸入您的留言"></textarea>
-        <button>送出留言</button>
-      </div>
-    </div>
-  </div>
+  <MainFooter class="removeMT" />
 </template>
 
-<script>
-export default {};
+<script setup>
+import MainFooter from '@/components/layout/MainFooter.vue';
+import MainHeader from '@/components/layout/MainHeader.vue';
+import NewsApi from '@/components/newsApi.vue';
 </script>
 
 

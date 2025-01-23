@@ -1,8 +1,8 @@
 <template>
+
+  <!-- <MainHeader /> -->
+  <!-- 環保市集 - 購物車，縮寫Sp - 功能 - 代號X -->
   <main>
-    <!-- <MainHeader /> -->
-    <!-- 環保市集 - 購物車，縮寫Sp - 功能 - 代號X -->
-    <MainHeader></MainHeader>
     <div class="Sp-X">
       <div class="Sp-wrapper-X">
         <!-- 流程顯示 -->
@@ -44,10 +44,11 @@
               <div></div>
             </div>
 
-            <div v-for="(buy, index) in buys" :key="buy.id" class="Sp-cart-item-X">
+            <div class="Sp-cart-item-X" v-for="(buy, index) in buys" :key="buy.id">
               <div class="Sp-cart-item-info-X">
                 <a href="#" target="_blank" :style="{ backgroundImage: `url(${buy.image})` }"></a>
-                <span>{{ buy.name }} </span>
+                <span>{{ buy.name }}
+                </span>
               </div>
               <div>{{ buy.size }}</div>
               <div>NT$ {{ buy.price }}</div>
@@ -55,7 +56,8 @@
                 <form action="">
                   <div class="Sp-cart-input-group-X">
                     <span @click="minusItem(index)"><i class="bi bi-dash"></i></span>
-                    <input v-model="buy.num" type="number" step="1" min="0" @input="reviseItem(index, buy.num)" />
+                    <input @input="reviseItem(index, buy.num)" @blur="blurItem(index, buy.num)" type="number"
+                      v-model="buy.num" step="1" min="0">
                     <span @click="addItem(index)"><i class="bi bi-plus"></i></span>
                   </div>
                 </form>
@@ -63,6 +65,7 @@
               <div>NT$ {{ buy.price * buy.num }}</div>
               <div @click="deleteItem"><i class="bi bi-trash3-fill"></i></div>
             </div>
+
           </div>
         </section>
         <!-- 精選商品 -->
@@ -71,9 +74,9 @@
           <div class="Sp-section-header">精選商品</div>
           <!-- 項目內容 -->
           <div class="Sp-cart-addon-wrapper-X">
-            <div v-for="(item, index) in items" :key="item.id" class="Sp-cart-addon-item-X">
+            <div class="Sp-cart-addon-item-X" v-for="(item, index) in items" :key="item.id">
               <a href="#" target="_blank" class="Sp-cart-addon-item-img">
-                <img :src="item.image" alt="" />
+                <img :src="item.image" alt="">
               </a>
               <div class="Sp-cart-addon-item-content">
                 <div class="Sp-cart-addon-item-info">
@@ -92,14 +95,12 @@
             <div class="Sp-order-form-header">選擇送貨及付款方式</div>
             <div class="Sp-order-form-body">
               <label for="">送貨方式</label>
-              <select id="" name="">
-                <option value="新竹物流宅配">新竹物流宅配</option>
-                <option value="台灣離島郵寄">台灣離島郵寄</option>
+              <select name="" id="" v-model="selectedDelivery" @change="updateDeliveryCost">
+                <option :value="item" v-for="(item, index) in deliver" :key="index">{{ item }}</option>
               </select>
               <label for="">付款方式</label>
-              <select id="" name="">
-                <option value="信用卡 (Visa/Master/JCB)">信用卡 (Visa/Master/JCB)</option>
-                <option value="Line Pay">Line Pay</option>
+              <select name="" id="">
+                <option :value="index" v-for="(item, index) in pay" :key="index">{{ item }}</option>
               </select>
             </div>
           </section>
@@ -113,7 +114,7 @@
               </div>
               <div class="Sp-order-summary-body-delivery">
                 <span>運費：</span>
-                <span>NT$ 100</span>
+                <span>NT$ {{ deliverCost }}</span>
               </div>
               <div class="Sp-order-summary-body-points">
                 <span>目前可用點數：</span>
@@ -124,7 +125,7 @@
                 <label for="">本次使用點數：</label>
                 <form action="">
                   <span @click="minusPoints"><i class="bi bi-dash"></i></span>
-                  <input type="number" :value="usePoints" step="100" min="0" />
+                  <input @change="revisePoints" @blur="blurPoints" type="number" v-model="usePoints" step="100" min="0">
                   <span @click="addPoints"><i class="bi bi-plus"></i></span>
                 </form>
               </div>
@@ -132,58 +133,47 @@
                 <span>折抵金額：</span>
                 <span>- NT$ {{ discount }}</span>
               </div>
-              <hr />
+              <hr>
               <div class="Sp-order-summary-body-amount">
                 <span>合計：</span>
                 <span>NT$ {{ total }}</span>
               </div>
-              <RouterLink to="/shop_checkout" class="Sp-checkout-Btn">前往結帳</RouterLink>
+              <router-link to="/shop_checkout" class="Sp-checkout-Btn">前往結帳</router-link>
             </div>
           </section>
         </section>
         <!-- 出貨提醒 -->
         <section class="Sp-shopping-reminder-X">
           <div class="Sp-shopping-reminder-header">出貨提醒</div>
-          <div class="Sp-shopping-reminder-body">
-            感謝您支持我們的環保商品！以下是您的訂單與出貨注意事項： 📦 出貨時間：
-            涼城即時環保市集皆為客製化生產，製作期需2-3週。
-            訂單成立後，我們將立即安排生產。若提前完成品檢，我們會儘速出貨。
-            若您選購了其他現貨商品，建議您與預購商品分開結帳，以便現貨能提前寄出。 📬 取貨注意事項：
-            若您選擇便利商店取貨，請確保「收件人姓名」與身分證一致，以免影響取件流程。 🔍 尺寸與材質說明：
-            杯子容量：350ml / 500ml / 750ml 材質：100%再生寶特瓶纖維 (rPET) + 天然纖維 耐熱程度：80°C（請避免直接加熱）
-            ❗ 特殊說明： 再生環保馬克杯為特殊客製化商品，非商品瑕疵，恕不接受退換貨。
-            若您有尺寸或其他需求疑慮，請於下單前確認商品規格。 如需重新訂製，需再等待2-3週生產期。 💳 付款方式：
-            本店支援 LINE Pay 結帳，歡迎使用！ 如有任何問題，歡迎隨時與我們聯繫！🌱
-            選擇再生材質，與我們一起為地球減少負擔。
-          </div>
-          <div class="Sp-shopping-reminder-body">
-            <p>感謝您支持我們的環保商品！以下是您的訂單與出貨注意事項：</p>
-            <p>📦 出貨時間：</p>
-            <p>涼城即時環保市集皆為客製化生產，製作期需2-3週。</p>
-            <p>訂單成立後，我們將立即安排生產。若提前完成品檢，我們會儘速出貨。</p>
-            <p>若您選購了其他現貨商品，建議您與預購商品分開結帳，以便現貨能提前寄出。</p>
-            <p>📬 取貨注意事項：</p>
-            <p>若您選擇便利商店取貨，請確保「收件人姓名」與身分證一致，以免影響取件流程。</p>
-            <p>🔍 尺寸與材質說明：</p>
-            <p>杯子容量：350ml / 500ml / 750ml</p>
-            <p>材質：100%再生寶特瓶纖維 (rPET) + 天然纖維</p>
-            <p>耐熱程度：80°C（請避免直接加熱）</p>
-            <p>❗ 特殊說明：</p>
-            <p>再生環保馬克杯為特殊客製化商品，非商品瑕疵，恕不接受退換貨。</p>
-            <p>若您有尺寸或其他需求疑慮，請於下單前確認商品規格。</p>
-            <p>如需重新訂製，需再等待2-3週生產期。</p>
-            <p>💳 付款方式：</p>
-            <p>本店支援 LINE Pay 結帳，歡迎使用！</p>
-            <p>如有任何問題，歡迎隨時與我們聯繫！🌱 選擇再生材質，與我們一起為地球減少負擔。</p>
-          </div>
+          <div class="Sp-shopping-reminder-body">感謝您支持我們的環保商品！以下是您的訂單與出貨注意事項：<br>
+            📦 出貨時間：<br>
+            涼城即時環保市集皆為客製化生產，製作期需2-3週。<br>
+            訂單成立後，我們將立即安排生產。若提前完成品檢，我們會儘速出貨。<br>
+            若您選購了其他現貨商品，建議您與預購商品分開結帳，以便現貨能提前寄出。<br>
+            📬 取貨注意事項：<br>
+            若您選擇便利商店取貨，請確保「收件人姓名」與身分證一致，以免影響取件流程。<br>
+            🔍 尺寸與材質說明：<br>
+            杯子容量：350ml / 500ml / 750ml<br>
+            材質：100%再生寶特瓶纖維 (rPET) + 天然纖維<br>
+            耐熱程度：80°C（請避免直接加熱）<br>
+            ❗ 特殊說明：<br>
+            再生環保馬克杯為特殊客製化商品，非商品瑕疵，恕不接受退換貨。<br>
+            若您有尺寸或其他需求疑慮，請於下單前確認商品規格。<br>
+            如需重新訂製，需再等待2-3週生產期。<br>
+            💳 付款方式：<br>
+            本店支援 LINE Pay 結帳，歡迎使用！<br>
+            如有任何問題，歡迎隨時與我們聯繫！🌱 選擇再生材質，與我們一起為地球減少負擔。</div>
         </section>
+
       </div>
     </div>
 
-    <p>{{ counterStore.count }}</p>
-    <button @click="counterStore.accumulate">測試按鈕</button>
-    <MainFooter />
+    <!-- <p>{{ counterStore.count }}</p>
+    <button @click="counterStore.accumulate">測試按鈕</button> -->
   </main>
+
+  <MainFooter class="removeMT" />
+
 </template>
 
 <script setup>
@@ -215,9 +205,9 @@ const addItem = (index) => {
 
 const minusItem = (index) => {
   if (buys.value[index].num <= 1) {
-    const d = confirm('是否要刪除這個商品？');
+    let d = confirm('是否要刪除這個商品？')
     if (d) {
-      buys.value.splice(index, 1);
+      buys.value.splice(index, 1)
     }
   }
   if (buys.value[index].num > 1) {
@@ -228,7 +218,7 @@ const minusItem = (index) => {
 const deleteItem = (index) => {
   const d = confirm('是否要刪除這個商品？');
   if (d) {
-    buys.value.splice(index, 1);
+    buys.value.splice(index, 1)
   }
 };
 
@@ -236,17 +226,23 @@ const deleteItem = (index) => {
 const reviseItem = (index, newNum) => {
   if (newNum < 0) {
     alert('商品數量不可為負！');
-    buys.value[index].num = 1;
-    return;
+    buys.value[index].num = 1
+    return
   } else if (newNum === 0) {
-    const d = confirm('是否要刪除這個商品？');
+    let d = confirm('是否要刪除這個商品？')
     if (d) {
-      buys.value.splice(index, 1);
+      buys.value.splice(index, 1)
     } else {
-      buys.value[index].num = 1;
+      buys.value[index].num = 1
     }
   } else {
-    buys.value[index].num = newNum;
+    buys.value[index].num = newNum
+  }
+}
+
+const blurItem = (index, num) => {
+  if (!num) {
+    buys.value[index].num = 1
   }
 };
 
@@ -259,15 +255,15 @@ const addToCart = (index) => {
     price: items.value[index].price,
     size: items.value[index].size,
     num: items.value[index].num,
-  });
-};
+  })
+}
 
 //還沒加運費跟點數的小計 (運費上面那項)
 const substotal = computed(() => {
   return buys.value.reduce((sum, item) => {
     return sum + item.price * item.num;
-  }, 0);
-});
+  }, 0)
+})
 
 //使用者點數：100 點折抵 1 元
 const points = ref(1000); //正式應該從資料庫取得
@@ -276,7 +272,7 @@ const usePoints = ref(0);
 //點數增減
 const minusPoints = () => {
   if (usePoints.value <= 0) {
-    return;
+    return
   } else {
     usePoints.value -= 100;
     points.value += 100;
@@ -285,22 +281,62 @@ const minusPoints = () => {
 
 const addPoints = () => {
   if (points.value <= 0) {
-    return;
+    return
   } else {
     usePoints.value += 100;
     points.value -= 100;
   }
-};
+}
+
+//點數的輸入框
+const revisePoints = () => {
+  if (usePoints.value < 0) {
+    alert('點數不能為負值，已自動改為0！');
+    usePoints.value = 0;
+  }
+  else if (usePoints.value % 100 !== 0) {
+    alert('請以 100 為單位進行輸入！');
+    usePoints.value = Math.round(usePoints.value / 100) * 100; // 向上或向下取整至最近的 100
+  }
+}
+
+const blurPoints = () => {
+  if (usePoints.value === '' || usePoints.value === null) {
+    usePoints.value = 0;
+  }
+}
+
+
 
 //計算點數折抵
 const discount = computed(() => {
   return usePoints.value / 100;
 });
 
+//送貨方式
+const deliver = ref(['新竹物流宅配', '台灣離島郵寄'])
+const selectedDelivery = ref(deliver.value[0]);
+const deliverCost = ref(100);
+
+const updateDeliveryCost = () => {
+  if (selectedDelivery.value === '新竹物流宅配') {
+    deliverCost.value = 100;
+  } else if (selectedDelivery.value === '台灣離島郵寄') {
+    deliverCost.value = 80;
+  }
+};
+
+//付款方式
+const pay = ref(['信用卡 (Visa/Master/JCB)', 'Line Pay'])
+
+
 //計算合計金額
 const total = computed(() => {
-  return substotal.value + 100 - discount.value;
-});
+  return substotal.value + deliverCost.value - discount.value;
+})
+
+
+
 
 // 用於滑動的邏輯
 const startX = ref(0);

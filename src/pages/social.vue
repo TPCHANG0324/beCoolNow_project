@@ -1,13 +1,13 @@
 <template>
   <main>
-    <MainHeader></MainHeader>
+    <MainHeader />
     <!-- 社群中心，縮寫Fb - 功能 - 代號X -->
     <div class="Fb-X">
       <div class="Fb-wrapper-X">
         <!-- 文章 -->
         <div class="Fb-post-X">
           <!-- 文章分類 -->
-          <div ref="top" class="Fb-post-category-container-X">
+          <div class="Fb-post-category-container-X">
             <ul class="Fb-post-category-X">
               <div class="Fb-post-category-box">
                 <select id="" v-model="activeItem" name="" :class="{ active: !RWDnews }" @change="changeCategory">
@@ -26,6 +26,10 @@
             </ul>
             <div class="Fb-post-write-X"><RouterLink to="/social_write">寫文章</RouterLink></div>
           </div>
+
+          <!-- :articles="articles" -->
+          <!-- <router-view :key="$route.path" :activeItem="activeItem" :datas="datas"   @category-changed="changeCategory" /> -->
+
           <!-- 文章區 -->
           <div class="Fb-post-article-X" :class="{ active: !RWDnews }">
             <!-- 置頂區：放廣告或站上的精華文章 -->
@@ -34,7 +38,8 @@
             </div>
             <!-- po 文顯示區 -->
             <section>
-              <article v-for="(data, index) in datas" :key="index">
+              <!-- @click="goToArticle(data.id)" -->
+              <article v-for="(data, index) in datas" :key="index" @click="goToArticle(index)">
                 <div class="Fb-post-article-left-X">
                   <div class="Fb-post-article-left-C-T-X">
                     <span>{{ data.category }}</span
@@ -66,19 +71,9 @@
 
           <!-- RWD 的時候才會出現的新聞區 -->
           <div class="Fb-news-article-X" :class="{ active: RWDnews }">
-            <article v-for="(item, index) in news" :key="index">
-              <a :href="item.url" target="_blank">
-                <div class="new-left-X">
-                  <img :src="item.urlToImage" alt="" />
-                </div>
-                <div class="new-right-X">
-                  <span class="new-time-X">新聞&nbsp;‧&nbsp;{{ item.publishedAt.split('T')[0] }}</span>
-                  <h6 class="new-title-X">{{ item.title }}</h6>
-                  <p>{{ item.description }}</p>
-                </div>
-              </a>
-            </article>
+            <NewsApi :isPC="false" />
           </div>
+
         </div>
 
         <!-- 新聞 -->
@@ -86,27 +81,22 @@
           <div class="Fb-news-header-X">熱門新聞</div>
           <!-- 新聞的主要內容 -->
           <div class="Fb-news-body-X">
-            <article v-for="(item, index) in news" :key="index">
-              <a :href="item.url" target="_blank">
-                <img :src="item.urlToImage" alt="" />
-                <div class="Fb-news-body-container-X">
-                  <div class="Fb-news-body-container-time-X">{{ item.publishedAt.split('T')[0] }}</div>
-                  <div class="Fb-news-body-container-title-X">{{ item.title }}</div>
-                  <div class="Fb-news-body-container-content-X">{{ item.description }}</div>
-                </div>
-              </a>
-            </article>
+            <NewsApi :isPC="true" />
           </div>
         </div>
       </div>
     </div>
-    <MainFooter></MainFooter>
+    <MainFooter />
   </main>
 </template>
 
 <script setup>
 import { ref, computed } from 'vue';
+import { useRouter } from 'vue-router';
+import MainFooter from '@/components/layout/MainFooter.vue';
+import MainHeader from '@/components/layout/MainHeader.vue';
 import Paginator from '@/components/paginator.vue';
+import NewsApi from '@/components/newsApi.vue';
 
 //文章的類別
 const category = ref(['全部文章', '氣候科學', '生態危機', '綠色生活', '政策國際']);
@@ -141,8 +131,6 @@ const totalItemCount = computed(() => {
   return Math.ceil(filterArticles.value.length / 5);
 });
 
-//設置改頁面的時候要滾動到的地方
-const top = ref(null);
 
 // 監聽 activeItem 的變化
 watch(activeItem, (newValue) => {
@@ -152,7 +140,10 @@ watch(activeItem, (newValue) => {
 //當改變頁面的時候，就更新當前的頁碼
 const handlePageChange = (newPage) => {
   currentPage.value = newPage;
-  top.value.scrollIntoView({ behavior: 'smooth' });
+  window.scrollTo({
+    top: 0, // 滾動到頂部
+    behavior: 'smooth', // 平滑滾動
+  });
 };
 
 //類別的篩選
@@ -171,59 +162,14 @@ const datas = computed(() => {
   const start = (currentPage.value - 1) * 5;
   const to = currentPage.value * 5;
   return filterArticles.value.slice(start, to);
-});
+})
 
-//今天的日期
-const today = ref(new Date());
-//取到的新聞陣列
-const news = ref([]);
+const router = useRouter();
 
-//格式化日期
-const getDate = (date) => {
-  const year = date.getFullYear();
-  const month = date.getMonth() < 9 ? '0' + String(date.getMonth() + 1) : String(date.getMonth() + 1);
-  const day = date.getDate() < 10 ? '0' + String(date.getDate()) : String(date.getDate());
-  return `${year}-${month}-${day}`;
-};
-
-//請求 NEWS API 的資料
-const getNEWS = () => {
-  //設定
-
-  const q = `全球%氣候`; //關鍵字
-  const apiKey = `c37e23185827432d8fd46365f1de40be`;
-  const keyWords = ['氣候變遷', '暖化', '綠能', '回收', '汙染', '永續', '能源政策', '環保']; //求到的資料再用關鍵字去篩選
-  const regex = new RegExp(keyWords.join('|'));
-
-  //取得 30 天前 ~ 今天的日期  的格式化字串
-  const AgoDate = new Date(today.value);
-  AgoDate.setDate(today.value.getDate() - 30);
-  const from = getDate(AgoDate);
-  const to = getDate(today.value);
-
-  const newURL = `https://newsapi.org/v2/everything?q=${q}
-  &from=${from}&to=${to}&sortBy=popularity&apiKey=${apiKey}`;
-  fetch(newURL)
-    .then((res) => res.json())
-    .then((data) => {
-      console.log(data)
-      news.value = [...data.articles];
-      news.value.reverse();
-      // console.log(news.value)
-      news.value = news.value.filter((item) => {
-        //篩選關鍵字 && 有圖的
-        return regex.test(item.description) && item.urlToImage;
-      });
-      // console.log(news.value)
-      news.value = news.value.slice(0, 8);
-      news.value.reverse();
-    });
-};
-
-//掛載完畢後串新聞
-onMounted(() => {
-  getNEWS();
-});
+const goToArticle = () => {
+  // router.push(`/social/article/${articleId}`);
+  router.push('/social_article');
+}
 
 //--------------------------------------------------
 
@@ -349,7 +295,9 @@ const articles = ref([
     chat: 100,
     image: '',
   },
-]);
+])
+
+
 </script>
 
 
