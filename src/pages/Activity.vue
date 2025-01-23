@@ -451,17 +451,14 @@
 import { ref, onMounted, watch, nextTick } from 'vue';
 import MainHeader from '@/components/layout/MainHeader.vue';
 import MainFooter from '@/components/layout/MainFooter.vue';
-import defaultAvatar from '../assets/images/defaultavatar.jpeg';
-import xiaoming from '../assets/images/Ac08.jpg';
-import earthMan from '../assets/images/newAC.png';
+import defaultAvatar from '@/assets/images/defaultavatar.jpeg';
+import xiaoming from '@/assets/images/Ac08.jpg';
+import earthMan from '@/assets/images/newAC.png';
 import member_login from '../pages/popup.vue';
 import popupnewmember from '../pages/popupnewmember.vue';
 import treeanimation from '@/components/treeanimation.vue';
-import { RouterLink } from 'vue-router'; 
+import { RouterLink } from 'vue-router';
 import loginPopupChange from '@/pages/loginPopupChange.vue';
-
-
-
 
 // 定義響應式數據
 const letters = ref(JSON.parse(localStorage.getItem('letters')) || []);
@@ -603,6 +600,9 @@ const currentCaptcha = ref();
 const letterCardWidth = ref(0);
 const cardLimit = ref(6);
 const treePopup = ref(null);
+// const xiaoming = new URL('@/assets/images/Ac08.jpg', import.meta.url).href;
+// const earthMan = new URL('@/assets/images/newAC.png', import.meta.url).href;
+// const defaultAvatar = new URL('@/assets/images/defaultavatar.jpeg', import.meta.url).href;
 
 // 監聽 letters 變化，保存到 localStorage
 watch(
@@ -701,7 +701,6 @@ onMounted(() => {
   initializeLetterCardWidth();
   generateCaptcha(); // 生成初始驗證碼
 });
-
 
 const initializeNativeJS = () => {
   const learnMoreButton = document.getElementById('learnMoreBtn');

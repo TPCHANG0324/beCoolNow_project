@@ -47,12 +47,7 @@
 
         <button type="submit">送出文章</button>
       </form>
-
-      
     </div>
-    
-
-    
   </main>
 </template>
 

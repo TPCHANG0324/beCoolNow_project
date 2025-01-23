@@ -4,28 +4,28 @@
   <footer class="layout_footer">
     <div class="footer">
       <div class="footer-wrapper">
-        <router-link to="/Home" class="logo-a"><img src="../../assets/images/logo_color2.svg" alt="" /></router-link>
+        <RouterLink to="/loginPage/" class="logo-a"><img src="../../assets/images/logo_color2.svg" alt="" /></RouterLink>
         <ul>
           <li>
-            <router-link to="/information">島嶼危機</router-link>
+            <RouterLink to="/information">島嶼危機</RouterLink>
             <!-- <a href="#">臺灣的響應</a>
             <a href="#">教育推廣</a>
             <a href="#">機智問答</a> -->
           </li>
           <li>
-            <router-link to="/activity">永續行動</router-link>
+            <RouterLink to="/activity">永續行動</RouterLink>
             <!-- <a href="#">給地球的一封信</a>
             <a href="#">今日減碳行動</a> -->
           </li>
-          <li><router-link to="/social">社群中心</router-link></li>
-          <li><router-link to="/city">綠境方程式</router-link></li>
+          <li><RouterLink to="/social">社群中心</RouterLink></li>
+          <li><RouterLink to="/city">綠境方程式</RouterLink></li>
           <li>
-            <router-link to="/About">關於我們</router-link>
+            <RouterLink to="/About">關於我們</RouterLink>
             <!-- <a href="#">聯絡我們</a> -->
           </li>
           <li><a href="#">好站連結</a></li>
-          <li><router-link to="/shop">環保市集</router-link></li>
-          <li><router-link to="/member">會員中心</router-link></li>
+          <li><RouterLink to="/shop">環保市集</RouterLink></li>
+          <li><RouterLink to="/member">會員中心</RouterLink></li>
         </ul>
       </div>
     </div>
@@ -82,6 +82,7 @@
 </template>
 
 <script>
+import { RouterLink } from 'vue-router';
 export default {
   name: 'MainFooter',
 };

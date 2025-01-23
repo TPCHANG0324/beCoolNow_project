@@ -24,7 +24,7 @@
               <li>生態危機</li>
               <li>政策國際</li>
             </ul>
-            <div class="Fb-post-write-X"><a href="#">寫文章</a></div>
+            <div class="Fb-post-write-X"><RouterLink to="/social_write">寫文章</RouterLink></div>
           </div>
 
           <!-- RWD 的時候才會出現的新聞區 -->
