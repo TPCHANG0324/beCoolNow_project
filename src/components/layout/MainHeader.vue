@@ -3,7 +3,7 @@
   <header class="layout_header">
     <div class="header-wrapper">
       <div class="logo">
-        <router-link to="/Home">
+        <router-link to="/">
           <img src="../../assets/images/headerlogo.png" alt="logo" />
         </router-link>
       </div>
