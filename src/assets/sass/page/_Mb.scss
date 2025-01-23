@@ -43,6 +43,9 @@
 
 .profile_bottom{
     display: column;
+    .btn2_btn_top{
+      display: flex;
+    }
 }
 
 
@@ -502,6 +505,9 @@ text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
           align-items: center;
           gap: 20px; // 增加按鈕之間的間距
          
+          .btn2_btn_top{
+            display: flex;
+          }
         }
     
         
