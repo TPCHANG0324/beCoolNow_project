@@ -1,4 +1,7 @@
 //------------------------------- 首頁_主選單 --------------------------------------//
+.Fp_homeWrapper_H {
+    overflow: hidden;
+}
 
 .Fp_Header_H {
     width: 100%;
@@ -40,6 +43,13 @@
         }
 
         // border: 1px solid yellow;
+
+
+        article h1 {
+            font-size: 5rem;
+        }
+
+
 
         article:first-of-type {
             margin-bottom: 0;
@@ -174,7 +184,7 @@
 //---------------------------------------------------------------------------------//
 //------------------------------ 首頁_災害Banner區塊 -------------------------------//
 
-.Fp_disaster_H {
+.Fp_disasterIce_H {
     background: linear-gradient(to right, rgba(0, 0, 0, .3), rgba(0, 0, 0, 0)), url('@/assets/images//Fp07.png');
     // background-image: url('@/assets/images/Fp07.png');
     height: 100vh;
@@ -182,10 +192,84 @@
     background-size: cover;
     width: 100%;
     background-repeat: no-repeat;
-    overflow: hidden;
-    // border: 2px solid red;
     padding: 0 3vw;
+    margin-bottom: 0;
+    margin-top: 5%;
+    padding-top: 240px;
 
+    @include max_912 {
+        padding-top: 500px;
+    }
+
+    @include max_430 {
+        padding-top: 360px;
+    }
+}
+
+.Fp_disasterFire_H {
+    background: linear-gradient(to left, rgba(0, 0, 0, .3), rgba(0, 0, 0, 0)), url('@/assets/images/Fp13.jpg');
+    // background-image: url('@/assets/images/Fp07.png');
+    height: 100vh;
+    background-position: center center;
+    background-size: cover;
+    width: 100%;
+    background-repeat: no-repeat;
+
+    padding: 0 3vw;
+    margin-bottom: 0;
+    padding-top: 240px;
+
+    @include max_912 {
+        padding-top: 500px;
+    }
+
+    @include max_430 {
+        padding-top: 360px;
+    }
+}
+
+.Fp_disasterTyphoon_H {
+    background: linear-gradient(to right, rgba(0, 0, 0, .3), rgba(0, 0, 0, 0)), url('@/assets/images/Fp15.jpg');
+    // background-image: url('@/assets/images/Fp07.png');
+    height: 100vh;
+    background-position: center center;
+    background-size: cover;
+    width: 100%;
+    background-repeat: no-repeat;
+
+    padding: 0 3vw;
+    margin-bottom: 0;
+    padding-top: 240px;
+
+    @include max_912 {
+        padding-top: 500px;
+    }
+
+    @include max_430 {
+        padding-top: 360px;
+    }
+}
+
+.Fp_disasterRain_H {
+    background: linear-gradient(to left, rgba(0, 0, 0, .3), rgba(0, 0, 0, 0)), url('@/assets/images/Fp18.jpg');
+    // background-image: url('@/assets/images/Fp07.png');
+    height: 100vh;
+    background-position: center center;
+    background-size: cover;
+    width: 100%;
+    background-repeat: no-repeat;
+
+    padding: 0 3vw;
+    margin-bottom: 0;
+    padding-top: 240px;
+
+    @include max_912 {
+        padding-top: 500px;
+    }
+
+    @include max_430 {
+        padding-top: 360px;
+    }
 }
 
 //---------------------------------------------------------------------------------//
@@ -194,15 +278,89 @@
 .Fp_textContent_H {
     // border: 2px solid red;
     width: 38%;
-    margin: 24% auto auto 8%;
+    margin: 0 auto auto 8%;
 
     @include max_912 {
-        margin: 280px auto;
+        margin: 0 auto;
         width: 60%;
     }
 
     @include max_430 {
-        margin-top: 200px
+        margin-top: 0px
+    }
+
+    h1 {
+        @include PC_h1($Ivory_white);
+        text-align: center;
+        text-shadow: $text_shadow;
+
+        @include max_1024 {
+            font-size: $h2;
+        }
+
+        @include max_768 {
+            font-size: 40px;
+        }
+    }
+
+    h2 {
+        @include PC_h1($Gray_1);
+        text-align: center;
+        text-shadow: $text_shadow;
+        font-size: 48px;
+        margin-bottom: 20px;
+
+        @include max_1024 {
+            font-size: 40px;
+        }
+
+        @include max_912 {
+            margin-bottom: 12px;
+        }
+
+    }
+
+    p {
+        margin-top: 20px;
+        @include PC_h3($Ivory_white);
+        text-shadow: $text_shadow;
+
+        @include max_1024 {
+            font-size: $h4;
+            margin-top: 0;
+        }
+
+        @include max_768 {
+            font-size: $h5;
+        }
+    }
+
+    span {
+        margin-top: 20px;
+        @include PC_h3($Gray_1);
+        text-shadow: $text_shadow;
+
+        @include max_1024 {
+            font-size: $h4;
+        }
+
+        @include max_768 {
+            font-size: $h5;
+        }
+    }
+}
+
+.Fp_textContentRight_H {
+    margin: 0 8% auto auto;
+    width: 38%;
+
+    @include max_912 {
+        margin: 0 auto;
+        width: 60%;
+    }
+
+    @include max_430 {
+        margin-top: 0
     }
 
     h1 {
@@ -363,6 +521,7 @@
     height: 100vh;
     background-size: cover;
     background-position: center center;
+    padding-top: 120px;
 
     @include max_912 {
         background: linear-gradient(to bottom, rgba(0, 0, 0, .3), rgba(0, 0, 0, 0)), url('@/assets/images/Fp02.1.jpg');
@@ -375,11 +534,16 @@
         max-width: $body_layout;
         margin: 0 auto;
         display: flex;
-        margin-top: 10%;
+        // margin-top: 10%;
         justify-content: center;
 
         @include max_912 {
             display: block;
+            margin-top: 160px;
+        }
+
+        @include max_430 {
+            margin-top: 100px;
         }
 
         article {
@@ -394,16 +558,18 @@
             }
 
             @include max_912 {
-                margin: 120px auto 20px auto;
+                margin: 0 auto 20px auto;
                 width: 80%;
             }
         }
 
         #carbonData,
         #iceData {
-            border: 4px solid $Yellow_1;
+            // border: 4px solid $Yellow_1;
             width: 57%;
             // margin-right: 18px;
+            opacity: .8;
+            border-radius: 10px;
 
             @include max_912 {
                 display: block;
@@ -438,7 +604,7 @@
     height: 100vh;
     background-size: cover;
     background-position: center center;
-
+    padding-top: 120px;
 
     @include max_912 {
         background: linear-gradient(to bottom, rgba(0, 0, 0, .3), rgba(0, 0, 0, 0)), url('@/assets/images/FP03.jpeg');
@@ -452,11 +618,17 @@
         margin: 0 auto;
         display: flex;
         flex-direction: row-reverse;
-        margin-top: 10%;
+        // margin-top: 10%;
         justify-content: center;
+        // margin-top: 120px;
 
         @include max_912 {
             display: block;
+            margin-top: 160px;
+        }
+
+        @include max_430 {
+            margin-top: 100px;
         }
 
         article {
@@ -471,15 +643,17 @@
             }
 
             @include max_912 {
-                margin: 120px auto 20px auto;
+                margin: 0 auto 20px auto;
                 width: 80%;
             }
         }
 
         #tempData,
         #seaLevelData {
-            border: 4px solid $Yellow_1;
+            // border: 4px solid $Yellow_1;
             width: 57%;
+            opacity: .8;
+            border-radius: 10px;
 
             // margin-left: 18px;
             @include max_912 {
@@ -515,6 +689,12 @@
     text-align: center;
     @include PC_h1($Yellow_1);
     line-height: 268px;
+}
+
+.Fp_indexFooter_H {
+    .footer {
+        margin-top: 0;
+    }
 }
 
 //---------------------------------------------------------------------------------//

@@ -1,7 +1,6 @@
-<!-- 已經 RWD 820/ 430 完成 -->
-
 <template>
   <div>
+    <!-- 已經 RWD 820/ 430 完成 -->
     <MainHeader></MainHeader>
     <div class="bcn-donation-container1">
       <div class="bcn-top-place1">
@@ -39,13 +38,15 @@
               </label>
             </div>
 
-            <button type="submit" class="bcn-btn-primary_1">下一步 信用卡填寫</button>
+            <router-link to="/pay2"
+              ><button type="submit" class="bcn-btn-primary_1">下一步 信用卡填寫</button></router-link
+            >
           </div>
         </form>
       </div>
       <a href="./pay1/" class="bc-prev-step-button2">
         <span class="bc-prev-step-icon2">❮</span>
-        <span class="bc-prev-step-text2">上一步</span>
+        <router-link to="/support"><span class="bc-prev-step-text2">上一步</span></router-link>
       </a>
     </div>
     <MainFooter></MainFooter>
@@ -56,7 +57,7 @@
 import MainHeader from '@/components/layout/MainHeader.vue';
 import MainFooter from '@/components/layout/MainFooter.vue';
 
-export default {};
+export default {
+  name: 'pay1',
+};
 </script>
-
-<style lang="scss" scoped></style>

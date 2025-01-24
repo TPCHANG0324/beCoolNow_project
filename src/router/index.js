@@ -11,7 +11,7 @@ const routes = [
     },
   },
   {
-    path: '/information',
+    path: '/information/',
     component: () => import('@/pages/Information.vue'),
     meta: {
       title: '島嶼危機',
@@ -19,7 +19,7 @@ const routes = [
     },
   },
   {
-    path: '/activity',
+    path: '/activity/',
     component: () => import('@/pages/Activity.vue'),
     meta: {
       title: '永續行動',
@@ -27,7 +27,7 @@ const routes = [
     },
   },
   {
-    path: '/social',
+    path: '/social/',
     component: () => import('@/pages/social.vue'),
     meta: {
       title: '社群中心',
@@ -35,7 +35,7 @@ const routes = [
     },
   },
   {
-    path: '/social_article',
+    path: '/social_article/',
     component: () => import('@/pages/Social_article.vue'),
     meta: {
       title: '社群中心_文章',
@@ -43,14 +43,14 @@ const routes = [
     },
   },
   {
-    path: '/About',
+    path: '/About/',
     component: () => import('@/pages/About.vue'),
     meta: {
       title: '關於我們',
     },
   },
   {
-    path: '/shop_checkout',
+    path: '/shop_checkout/',
     component: () => import('@/pages/Shop_checkout.vue'),
     meta: {
       title: '市集結帳',
@@ -58,14 +58,14 @@ const routes = [
     },
   },
   {
-    path: '/shop_finish',
+    path: '/shop_finish/',
     component: () => import('@/pages/Shop_finish.vue'),
     meta: {
       title: '市集結束',
     },
   },
   {
-    path: '/social_write',
+    path: '/social_write/',
     component: () => import('@/pages/Social_write.vue'),
     meta: {
       title: '寫文章',
@@ -73,14 +73,14 @@ const routes = [
     },
   },
   {
-    path: '/social_news',
+    path: '/social_news/',
     component: () => import('@/pages/Social_news.vue'),
     meta: {
       title: '新聞',
     },
   },
   {
-    path: '/popup',
+    path: '/popup/',
     component: () => import('@/pages/popup.vue'),
     meta: {
       title: '前台彈窗',
@@ -97,10 +97,18 @@ const routes = [
   },
 
   {
-    path: '/popupnewmember',
+    path: '/popupnewmember/',
     component: () => import('@/pages/popupnewmember.vue'),
     meta: {
       title: '前台彈窗新會員註冊',
+      // requiredLogin: true
+    },
+  },
+  {
+    path: '/support/',
+    component: () => import('@/pages/Support.vue'),
+    meta: {
+      title: '支持我們',
       // requiredLogin: true
     },
   },
@@ -121,7 +129,7 @@ const routes = [
     },
   },
   {
-    path: '/shop',
+    path: '/shop/',
     component: () => import('@/pages/Shop.vue'),
     meta: {
       title: '環保市集',
@@ -137,7 +145,7 @@ const routes = [
     },
   },
   {
-    path: '/shop_cart',
+    path: '/shop_cart/',
     component: () => import('@/pages/Shop_cart.vue'),
     meta: {
       title: '環保市集_購物車',
@@ -145,7 +153,7 @@ const routes = [
     },
   },
   {
-    path: '/member',
+    path: '/member/',
     component: () => import('@/pages/Member.vue'),
     meta: {
       title: '會員中心',
@@ -161,7 +169,16 @@ const routes = [
     },
   },
   {
+    path: '/tests/',
+    component: () => import('@/pages/tests.vue'),
+    meta: {
+      title: '測試動畫',
+      // requiredLogin: true
+    },
+  },
+  {
     path: '/loginPage/',
+
     component: () => import('@/pages/loginPage.vue'),
     meta: {
       title: '前後台登入',
@@ -172,7 +189,7 @@ const routes = [
     path: '/loginPopupChange/',
     component: () => import('@/pages/loginPopupChange.vue'),
     meta: {
-      title: '前後台登入',
+      title: '登入彈窗切換',
       // requiredLogin: true
     },
   },
@@ -271,14 +288,6 @@ const routes = [
     component: () => import('@/components/layout/BackStageLayout/BackStageSmallPopup.vue'),
     meta: {
       title: '後臺-確認彈窗',
-      // requiredLogin: true
-    },
-  },
-  {
-    path: '/Support/',
-    component: () => import('@/pages/Support.vue'),
-    meta: {
-      title: '支持我們',
       // requiredLogin: true
     },
   },

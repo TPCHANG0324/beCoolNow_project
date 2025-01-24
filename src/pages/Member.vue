@@ -133,74 +133,74 @@
                 <th>訂單詳情</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody v-for="order in purchaseRecords" :key="order.orderId">
               <tr>
-                <td>2024/12/25</td>
-                <td>環保吸管</td>
-                <td>300</td>
-                <td>環保市集</td>
-                <td class="delivered-special">已送達</td>
-                <td><button class="order-detail-btn">訂單詳情</button></td>
+                <td>{{ order.date }}</td>
+                <td>{{ order.productName }}</td>
+                 <td>{{ order.price }}</td>
+                    <td>{{ order.source }}</td>
+                <td class="delivered-special">{{ order.status }}</td>
+                <td><button class="order-detail-btn" @click="showOrderDetail(order)">訂單詳情</button></td>
               </tr>
             </tbody>
-            <tbody>
+            <tbody v-for="order in purchaseRecords" :key="order.orderId">
               <tr>
-                <td>2024/12/25</td>
-                <td>環保吸管</td>
-                <td>300</td>
-                <td>環保市集</td>
-                <td class="delivered-special">已送達</td>
-                <td><button class="order-detail-btn">訂單詳情</button></td>
+                <td>{{ order.date }}</td>
+                <td>{{ order.productName }}</td>
+                 <td>{{ order.price }}</td>
+                    <td>{{ order.source }}</td>
+                <td class="delivered-special">{{ order.status }}</td>
+                <td><button class="order-detail-btn" @click="showOrderDetail(order)">訂單詳情</button></td>
               </tr>
             </tbody>
-            <tbody>
+            <tbody v-for="order in purchaseRecords" :key="order.orderId">
               <tr>
-                <td>2024/12/25</td>
-                <td>環保吸管</td>
-                <td>300</td>
-                <td>環保市集</td>
-                <td class="delivered-special">已送達</td>
-                <td><button class="order-detail-btn">訂單詳情</button></td>
+                <td>{{ order.date }}</td>
+                <td>{{ order.productName }}</td>
+                 <td>{{ order.price }}</td>
+                    <td>{{ order.source }}</td>
+                <td class="delivered-special">{{ order.status }}</td>
+                <td><button class="order-detail-btn" @click="showOrderDetail(order)">訂單詳情</button></td>
               </tr>
             </tbody>
-            <tbody>
+            <tbody v-for="order in purchaseRecords" :key="order.orderId">
               <tr>
-                <td>2024/12/25</td>
-                <td>環保吸管</td>
-                <td>300</td>
-                <td>環保市集</td>
-                <td class="delivered-special">已送達</td>
-                <td><button class="order-detail-btn">訂單詳情</button></td>
+                <td>{{ order.date }}</td>
+                <td>{{ order.productName }}</td>
+                 <td>{{ order.price }}</td>
+                    <td>{{ order.source }}</td>
+                <td class="delivered-special">{{ order.status }}</td>
+                <td><button class="order-detail-btn" @click="showOrderDetail(order)">訂單詳情</button></td>
               </tr>
             </tbody>
-            <tbody>
+            <tbody v-for="order in purchaseRecords" :key="order.orderId">
               <tr>
-                <td>2024/12/25</td>
-                <td>環保吸管</td>
-                <td>300</td>
-                <td>環保市集</td>
-                <td class="delivered-special">已送達</td>
-                <td><button class="order-detail-btn">訂單詳情</button></td>
+                <td>{{ order.date }}</td>
+                <td>{{ order.productName }}</td>
+                 <td>{{ order.price }}</td>
+                    <td>{{ order.source }}</td>
+                <td class="delivered-special">{{ order.status }}</td>
+                <td><button class="order-detail-btn" @click="showOrderDetail(order)">訂單詳情</button></td>
               </tr>
             </tbody>
-            <tbody>
+            <tbody v-for="order in purchaseRecords" :key="order.orderId">
               <tr>
-                <td>2024/12/25</td>
-                <td>環保吸管</td>
-                <td>300</td>
-                <td>環保市集</td>
-                <td class="delivered-special">已送達</td>
-                <td><button class="order-detail-btn">訂單詳情</button></td>
+                <td>{{ order.date }}</td>
+                <td>{{ order.productName }}</td>
+                 <td>{{ order.price }}</td>
+                    <td>{{ order.source }}</td>
+                <td class="delivered-special">{{ order.status }}</td>
+                <td><button class="order-detail-btn" @click="showOrderDetail(order)">訂單詳情</button></td>
               </tr>
             </tbody>
-            <tbody>
+            <tbody v-for="order in purchaseRecords" :key="order.orderId">
               <tr>
-                <td>2024/12/25</td>
-                <td>環保吸管</td>
-                <td>300</td>
-                <td>環保市集</td>
-                <td class="delivered-special">已送達</td>
-                <td><button class="order-detail-btn">訂單詳情</button></td>
+                <td>{{ order.date }}</td>
+                <td>{{ order.productName }}</td>
+                 <td>{{ order.price }}</td>
+                    <td>{{ order.source }}</td>
+                <td class="delivered-special">{{ order.status }}</td>
+                <td><button class="order-detail-btn" @click="showOrderDetail(order)">訂單詳情</button></td>
               </tr>
             </tbody>
           </table>
@@ -254,6 +254,12 @@
         </div>
       </div>
     </div>
+
+    <OrderDetailPopup 
+  :is-visible="showOrderPopup"
+  :order="selectedOrder"
+  @close="closeOrderPopup"
+/>
      
     <MainFooter class="footer_member"></MainFooter>
   </div>
@@ -264,23 +270,28 @@
 <script>
 import MainHeader from '@/components/layout/MainHeader.vue';
 import MainFooter from '@/components/layout/MainFooter.vue';
+import popUpdetailshop from '@/pages/popUpdetailshop.vue';
 
 export default {
   components: {
     MainHeader,
     MainFooter,
+    OrderDetailPopup: popUpdetailshop
   },
 
   data() {
     return {
       activeSection: 'purchase',
       // 使用者資料
-      userData: {
+      // 從 localStorage 讀取使用者資料，如果沒有則使用預設值
+      userData: JSON.parse(localStorage.getItem('userData')) || {
         name: '大中天',
         password: '********', // 實際上不應該儲存明文密碼
         phone: '0912345678',
         email: 'example@email.com'
       },
+
+      
 
       // 暫存編輯中的資料
       tempData: {
@@ -299,13 +310,39 @@ export default {
       // 新增驗證錯誤物件
       validationErrors: {
         phone: '',
-        email: ''}
+        email: ''},
+
+        showOrderPopup: false,
+      selectedOrder: null,
+      purchaseRecords: [
+        {
+          orderId: "ORD001",
+          date: "2024/12/25",
+          productName: "環保吸管",
+          price: 300,
+          quantity: 1,
+          status: "已送達",
+          address: "台北市大安區復興南路一段390號2樓",
+          source: "環保市集"
+        }
+        // ... 其他訂單資料
+      ]
     };
   },
   methods: {
+
+    showOrderDetail(order) {
+      this.selectedOrder = order;
+      this.showOrderPopup = true;
+    },
     // 切換顯示區域
     showSection(section) {
       this.activeSection = section;
+    },
+
+    closeOrderPopup() {
+      this.showOrderPopup = false;
+      this.selectedOrder = null;
     },
     // 開始編輯欄位
     editField(field) {
@@ -317,6 +354,8 @@ export default {
         this.validationErrors[field] = '';
       }
     },
+
+
 
     validateField(field) {
       if (field === 'phone') {
@@ -357,25 +396,31 @@ export default {
     },
 
     saveField(field) {
-      // 驗證欄位
       if (!this.validateField(field)) {
         return;
       }
 
       if (this.tempData[field].trim()) {
-        // 儲存前先進行格式化
-        if (field === 'email') {
-          this.userData[field] = this.tempData[field].trim();
-        } else {
-          this.userData[field] = this.tempData[field].trim();
-        }
+        this.userData[field] = this.tempData[field].trim();
+        localStorage.setItem('userData', JSON.stringify(this.userData));
         this.editStates[field] = false;
         this.tempData[field] = '';
         this.validationErrors[field] = '';
-
+      }
+    },
+  
+// 可選：在組件創建時從後端獲取資料
+    async fetchUserData() {
+      try {
+        const response = await fetch('/api/user-profile');
+        const data = await response.json();
+        this.userData = data;
+        localStorage.setItem('userData', JSON.stringify(data));
+      } catch (error) {
+        console.error('Error fetching user data:', error);
       }
     }
-  }
-};
+  },
+}
    
 </script>
