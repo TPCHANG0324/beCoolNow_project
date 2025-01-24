@@ -407,7 +407,7 @@ export default {
       const maxResults = 6;
       const q  = `氣候變遷`;
       const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${q}&key=${apiKey}&type=video&maxResults=${maxResults}`;
-      
+
       try {
         const response = await fetch(url);
         const data = await response.json();
