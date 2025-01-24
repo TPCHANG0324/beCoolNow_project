@@ -405,9 +405,9 @@ export default {
     const fetchYoutubeVideos =  async (query) => {
       const apiKey = 'AIzaSyCZvTGvYRkTDOAbAeN5FA8QQEybsEQSixk';
       const maxResults = 6;
+
       const q  = `氣候變遷 全球暖化`;
       const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${q}&key=${apiKey}&type=video&safeSearch=strict&video&maxResults=${maxResults}`;
-      
       try {
         const response = await fetch(url);
         const data = await response.json();
