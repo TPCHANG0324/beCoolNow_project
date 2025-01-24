@@ -1,5 +1,6 @@
 <template>
-  <div id="game-container">
+  <!-- <div style="border: 2px solid red">my test</div> -->
+  <div id="game-container" ref="gamecontainer">
     <MainHeader></MainHeader>
   </div>
 </template>
@@ -11,6 +12,7 @@ import city_background from '@/assets/images/city/city_background.png';
 
 export default {
   setup() {
+    const gamecontainer = ref(null);
     // Initialize Phaser game instance on component mount
     onMounted(() => {
       const config = {
@@ -24,6 +26,7 @@ export default {
             debug: false,
           },
         },
+        parent: gamecontainer.value,
         scene: {
           preload: preload,
           create: create,
@@ -38,7 +41,7 @@ export default {
 
       const game = new Phaser.Game(config);
       game.sound.mute = true;
-      let score = 0;
+      const score = 0;
       let scoreText;
 
       function preload() {
@@ -183,7 +186,9 @@ export default {
       }
     });
 
-    return {};
+    return {
+      gamecontainer,
+    };
   },
 };
 </script>

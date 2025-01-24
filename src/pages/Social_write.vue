@@ -1,4 +1,5 @@
 <template>
+  <MainHeader />
   <main>
     <!-- 撰寫文章，縮寫FbW - 功能 - 代號X -->
     <div class="FbW-X">
@@ -47,15 +48,12 @@
 
         <button type="submit">送出文章</button>
       </form>
-
-      
     </div>
-    
-
-    
   </main>
+  <MainFooter class="removeMT" />
 </template>
 
-<script>
-export default {};
+<script setup>
+import MainFooter from '@/components/layout/MainFooter.vue';
+import MainHeader from '@/components/layout/MainHeader.vue';
 </script>

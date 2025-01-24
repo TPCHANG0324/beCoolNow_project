@@ -68,15 +68,15 @@ export default {
     },
   },
   methods: {
-    methods: {
-      showNewMemberPopup() {
-        // 隱藏登入彈窗
-        document.querySelector('.member_login').style.display = 'none';
+    // methods: {
+    showNewMemberPopup() {
+      // 隱藏登入彈窗
+      document.querySelector('.member_login').style.display = 'none';
 
-        // 顯示註冊彈窗
-        document.querySelector('.popupnewmember').style.display = 'block';
-      },
+      // 顯示註冊彈窗
+      document.querySelector('.popupnewmember').style.display = 'block';
     },
+    // },
     togglePasswordVisibility() {
       this.passwordVisible = !this.passwordVisible;
     },

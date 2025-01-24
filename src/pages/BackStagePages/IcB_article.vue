@@ -130,4 +130,13 @@ import backStagePaginator from '@/components/items/BackStageItems/BackStagePagin
 import BackStageHeader from '@/components/layout/BackStageLayout/BackStageHeader.vue';
 import BackStageSmallPopup from '@/components/layout/BackStageLayout/BackStageSmallPopup.vue';
 import BackStageConfirmPopup from '@/components/layout/BackStageLayout/BackStageConfirmPopup.vue';
+export default {
+  components: {
+    BackStageSidebar,
+    backStagePaginator,
+    BackStageHeader,
+    BackStageSmallPopup,
+    BackStageConfirmPopup,
+  }
+}
 </script>

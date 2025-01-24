@@ -284,7 +284,7 @@
 </template>
 
 <script setup>
-        
+
 const treeTimeline = ref(null)
 const initializeAnimation = () => {
   if (typeof TweenMax === 'undefined' || typeof TimelineMax === 'undefined') {
@@ -348,6 +348,3 @@ onMounted(() => {
 });
 </script>
 
-<style lang="scss" scoped>
-
-</style>

@@ -196,4 +196,3 @@ import BackStageHeader from '@/components/layout/BackStageLayout/BackStageHeader
 import BackStageBigPopup from '@/components/layout/BackStageLayout/BackStageBigPopup.vue';
 </script>
 
-<style lang="scss" scoped></style>
