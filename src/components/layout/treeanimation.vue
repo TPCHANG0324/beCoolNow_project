@@ -282,16 +282,16 @@
          </div>
          <!-- 樹的動畫 -->
  </template>
- 
+
  <script setup>
-         
+
  const treeTimeline = ref(null)
  const initializeAnimation = () => {
    if (typeof TweenMax === 'undefined' || typeof TimelineMax === 'undefined') {
      console.error('GSAP libraries not loaded properly');
      return;
    }
- 
+
    try {
      stopAndReset();
      setupAnimation();
@@ -301,10 +301,10 @@
      console.error('Error initializing animation:', error);
    }
  };
- 
+
  const setupAnimation = () => {
    console.log('Setting up animation');
- 
+
    TweenMax.set('#shadow', { scale: 0, transformOrigin: '15px 8px' });
    TweenMax.set('#tree', { scale: 0, transformOrigin: '154px bottom' });
    TweenMax.set('#leaf-rb', { scale: 0, rotation: -60, y: -15, transformOrigin: 'left bottom' });
@@ -313,7 +313,7 @@
    TweenMax.set('#leaf-lm', { scale: 0, rotation: 40, y: -90, transformOrigin: 'right bottom' });
    TweenMax.set('#leaf-top', { scale: 0, transformOrigin: 'center bottom' });
  };
- 
+
  const playAnimation = () => {
    console.log('Starting animation');
    treeTimeline.value = new TimelineMax({
@@ -322,7 +322,7 @@
      // repeatDelay: 0,
      // yoyo: true,
    });
- 
+
    treeTimeline.value
      .to('#shadow', 2, { scale: 1 })
      .to('#tree', 2, { scale: 1 }, 0)
@@ -333,21 +333,18 @@
      .to('#leaf-top', 2.5, { scale: 1 }, 0.55)
      .to('#animation', 0.3, { opacity: 0 })
  };
- 
+
  const stopAndReset = () => {
    console.log('Stopping animation');
    TweenMax.killAll(false, true, false);
- 
+
    ['#tree', '#shadow', '#leaf-top', '#leaf-rb', '#leaf-rm', '#leaf-lb', '#leaf-lm'].forEach((selector) => {
      TweenMax.set(selector, { clearProps: 'all' });
    });
  };
- 
+
  onMounted(() => {
    initializeAnimation();
  });
  </script>
- 
- <style lang="scss" scoped>
- 
- </style>
+

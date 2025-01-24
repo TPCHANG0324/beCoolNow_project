@@ -143,4 +143,4 @@ import MainHeader from '@/components/layout/MainHeader.vue';
 import NewsApi from '@/components/newsApi.vue';
 </script>
 
-<style lang="scss" scoped></style>
+

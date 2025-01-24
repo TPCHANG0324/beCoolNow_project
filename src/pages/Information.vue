@@ -97,30 +97,38 @@
         </div>
       </section>
 
+      <!-- 教育影片 -->
       <section class="Ic_bottom_R">
-        <h3>教育宣導</h3>
-        <swiper :space-between="1" navigation class="custom-swiper" :modules="modules" :breakpoints="swiperBreakpoints">
-          <swiper-slide v-for="(slide, index) in slides" :key="index">
-            <div v-if="slide.type === 'youtube'" class="slide-video">
-              <iframe
-                width="100%"
-                height="315"
-                :src="slide.src"
-                title="YouTube Video"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen
-                @mouseover="disablePointerEvents"
-                @mouseout="enablePointerEvents"
-              ></iframe>
-            </div>
-            <div v-else class="slide-image">
-              <img :src="slide.src" :alt="slide.title" />
-            </div>
-          </swiper-slide>
-        </swiper>
-      </section>
+  <h3>教育宣導</h3>
+  <swiper
+    :space-between="10"
+    navigation
+    pagination
+    class="custom-swiper"
+    :modules="modules"
+    :breakpoints="swiperBreakpoints"
+  >
+    <swiper-slide v-for="(slide, index) in slides" :key="index">
+      <div v-if="slide.type === 'youtube'" class="slide-video">
+        <iframe
+          width="100%"
+          height="315"
+          :src="slide.src"
+          :title="slide.title"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      </div>
+      <div v-else class="slide-image">
+        <img :src="slide.src" :alt="slide.title" />
+      </div>
+    </swiper-slide>
+  </swiper>
+</section>
 
+
+      <!-- 問答遊戲 -->
       <section class="ic_gamehead_R">
         <h3>暖化問答</h3>
         <!-- 開始畫面 -->
@@ -178,10 +186,9 @@
 import MainHeader from '@/components/layout/MainHeader.vue';
 import MainFooter from '@/components/layout/MainFooter.vue';
 import { Navigation, Pagination } from 'swiper/modules';
-
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import 'swiper/swiper-bundle.css';
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 
 export default {
   name: 'MainPage',
@@ -386,63 +393,53 @@ export default {
 
     // Slideshow
     // Swiper Breakpoints
+    const modules = [Navigation, Pagination];
+    const slides = ref([]);
     const swiperBreakpoints = {
-      830: {
-        slidesPerView: 3, // 螢幕寬度 >= 830px
-        spaceBetween: 10,
-      },
-      810: {
-        slidesPerView: 2, // 螢幕寬度 >= 830px
-        spaceBetween: 10,
-      },
-      0: {
-        slidesPerView: 1, // 螢幕寬度 < 820px
-        spaceBetween: 10,
-      },
-    };
-    const slides = [
-      {
-        type: 'youtube',
-        src: 'https://www.youtube.com/embed/gMsXhjsbo_g',
-        title: 'YouTube Video 1',
-      },
-      {
-        type: 'youtube',
-        src: 'https://www.youtube.com/embed/9u7CDV3j5-Q?si=8Mxht9IotlriVOBk',
-        title: 'YouTube Video 2',
-      },
-      {
-        type: 'youtube',
-        src: 'https://www.youtube.com/embed/qAu8OhWL8F4',
-        title: 'YouTube Video 3',
-      },
-      {
-        type: 'youtube',
-        src: 'https://www.youtube.com/embed/3n2qruJngMg?si=PHAZVKC_piBslp7A',
-        title: 'YouTube Video 3',
-      },
-      {
-        type: 'youtube',
-        src: 'https://www.youtube.com/embed/U1y6PWTA4Fw?si=pFhNJa5zxE32wHHu',
-        title: 'YouTube Video 3',
-      },
-    ];
-
-    // 動態管理 iframe 事件
-    const disablePointerEvents = (event) => {
-      event.target.style.pointerEvents = 'none';
+      830: { slidesPerView: 3, spaceBetween: 10 },
+      810: { slidesPerView: 2, spaceBetween: 10 },
+      0: { slidesPerView: 1, spaceBetween: 10 },
     };
 
-    const enablePointerEvents = (event) => {
-      event.target.style.pointerEvents = 'auto';
+    // Fetch
+    const fetchYoutubeVideos =  async (query) => {
+      const apiKey = 'AIzaSyCZvTGvYRkTDOAbAeN5FA8QQEybsEQSixk';
+      const maxResults = 6;
+
+      const q  = `氣候變遷 全球暖化`;
+      const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${q}&key=${apiKey}&type=video&safeSearch=strict&video&maxResults=${maxResults}`;
+      try {
+        const response = await fetch(url);
+        const data = await response.json();
+        console.log(data)
+
+        // 解析 YouTube 資料
+        slides.value = data.items.map((item) => ({
+          type: 'youtube',
+          src: `https://www.youtube.com/embed/${item.id.videoId}`,
+          title: item.snippet.title,
+        }));
+      } catch (error) {
+        console.error('YouTube API 加載失敗:', error);
+        slides.value = [
+          {
+            type: 'error',
+            title: '影片加載失敗，請稍後再試',
+            src: '',
+          },
+        ];
+      }
     };
+
+    // Mounted Hook
+    onMounted(() => {
+      fetchYoutubeVideos('教育宣導'); // 初次載入
+    });
 
     return {
       modules: [Navigation, Pagination],
       slides,
       swiperBreakpoints,
-      disablePointerEvents,
-      enablePointerEvents,
       tabs,
       activeTab,
       setActiveTab,

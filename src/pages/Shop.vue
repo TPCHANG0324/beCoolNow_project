@@ -1,7 +1,7 @@
 <template>
-  <MainHeader></MainHeader>
-  <!-- 環保市集 - 全商品瀏覽，縮寫Sp - 功能 - 代號X -->
   <main>
+    <MainHeader></MainHeader>
+    <!-- 環保市集 - 全商品瀏覽，縮寫Sp - 功能 - 代號X -->
     <div class="Sp-X">
       <!-- 最上方BN -->
       <div class="Sp-banner">
@@ -56,9 +56,9 @@
             <ul class="product-grid_S">
               <li class="product-card_S">
                 <div class="product-box_S">
-                  <a href="#">
+                  <RouterLink to="/shop_product">
                     <img src="@/assets/images/Sp02.jpg" alt="環保吸管1" class="product-img" />
-                  </a>
+                  </RouterLink>
                   <p class="shop-add-to-cart-X">加入購物車</p>
                 </div>
                 <a href="#" class="product-card-name-X">環保吸管1</a>
@@ -258,8 +258,8 @@
           </div>
         </div>-->
     <!-- </div> -->
+    <MainFooter></MainFooter>
   </main>
-  <MainFooter></MainFooter>
 </template>
 
 <script setup>

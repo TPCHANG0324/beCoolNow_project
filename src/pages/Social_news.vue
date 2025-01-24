@@ -46,11 +46,11 @@ import NewsApi from '@/components/newsApi.vue';
 import { useRouter } from 'vue-router';
 
 
-const props = defineProps({  
-  datas: Array, // 接收父組件傳遞的文章數據  
-  activeItem: Number, // 接收選擇的類別標識  
+const props = defineProps({
+  datas: Array, // 接收父組件傳遞的文章數據
+  activeItem: Number, // 接收選擇的類別標識
   // articles: Array,
-}); 
+});
 
 
 
@@ -67,8 +67,8 @@ const clickCategory = (index) => {
   activeItem.value = index
   RWDnews.value = false
   // currentPage.value = 1;
-  // console.log('Current Page:', currentPage.value);  
-  // console.log('Total Item Count:', totalItemCount.value); 
+  // console.log('Current Page:', currentPage.value);
+  // console.log('Total Item Count:', totalItemCount.value);
 }
 
 //當 select 改變的時候
@@ -76,7 +76,7 @@ const changeCategory = () => {
   RWDnews.value = false
 }
 
-//點擊 p 的時候 
+//點擊 p 的時候
 const clickNews = () => {
   RWDnews.value = true
 };
@@ -90,7 +90,7 @@ const totalItemCount = computed(() => {
 })
 
 
-// 監聽 activeItem 的變化  
+// 監聽 activeItem 的變化
 // watch(activeItem, (newValue) => {
 //   currentPage.value = 1;
 // });
@@ -105,7 +105,7 @@ const handlePageChange = (newPage) => {
 };
 
 
-//類別的篩選 
+//類別的篩選
 const filterArticles = computed(() => {
   return articles.value.filter((item) => {
     if (activeItem.value === 0) {

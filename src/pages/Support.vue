@@ -54,12 +54,11 @@
     </div>
     <MainFooter></MainFooter>
   </div>
-  <MainFooter></MainFooter>
 </template>
 
 <script>
-  import MainHeader from '@/components/layout/MainHeader.vue';
-  import MainFooter from '@/components/layout/MainFooter.vue';
+import MainHeader from '@/components/layout/MainHeader.vue';
+import MainFooter from '@/components/layout/MainFooter.vue';
 
 export default {
   name: 'support',

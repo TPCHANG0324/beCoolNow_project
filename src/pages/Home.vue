@@ -8,7 +8,7 @@
       <header>
         <article>
           <h2>一場悄悄上演的浩劫<br />地球正在發生改變</h2>
-          <router-link to="/activity" class="btn">立刻行動</router-link>
+          <RouterLink to="/activity" class="btn">立刻行動</RouterLink>
         </article>
         <article>
           <h1>全球</h1>
@@ -107,7 +107,7 @@
             自19世紀工業革命以來，全球氣溫持續上升，已增約1.1°C。這主要由於溫室氣體排放增加，尤其是二氧化碳、甲烷等氣體。氣溫上升加劇了極端天氣事件、冰川融化和海平面上升，對生態環境、農業及人類生活造成廣泛影響。
           </p>
         </article>
-        <img id="tempData" src="../assets/images/Fp09_CO2.png" alt="CO2 Data" />
+        <img id="tempData" src="../assets/images/Fp10_GlobalTemp.png" alt="CO2 Data" />
         <!-- <canvas id="tempData"></canvas> -->
       </div>
     </section>
@@ -121,7 +121,7 @@
             極地冰層快速融化，尤其在北極和南極地區。北極冰蓋面積逐年減少，南極冰架崩解速度加快。這些變化不僅加速海平面上升，還對當地生態系統和全球氣候循環造成影響，進一步加劇全球暖化的影響。
           </p>
         </article>
-        <img id="iceData" src="../assets/images/Fp09_CO2.png" alt="CO2 Data" />
+        <img id="iceData" src="../assets/images/Fp11_LandIceAntarctica.png" alt="CO2 Data" />
         <!-- <canvas id="iceData"></canvas> -->
       </div>
     </section>
@@ -135,11 +135,11 @@
             冰層融化導致海平面上升，預計到2100年，海平面將上升0.3到1米，對低窪沿海地區和島嶼國家構成嚴重威脅。海平面上升可能引發洪水、土地喪失和生態系統崩潰，影響數百萬人的生活。
           </p>
         </article>
-        <img id="seaLevelData" src="../assets/images/Fp09_CO2.png" alt="CO2 Data" />
+        <img id="seaLevelData" src="../assets/images/Fp12_SeaLevel.png" alt="CO2 Data" />
         <!-- <canvas id="seaLevelData"></canvas> -->
       </div>
     </section>
-
+    <RouterLink to="/bcool">後台</RouterLink>
     <!-- 首頁_頁尾 -->
     <!-- <footer class="Fp_Footer_H">頁尾</footer> -->
     <MainFooter class="Fp_indexFooter_H"></MainFooter>

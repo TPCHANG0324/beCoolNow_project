@@ -197,7 +197,7 @@
 <script setup>
 import MainFooter from '@/components/layout/MainFooter.vue';
 import MainHeader from '@/components/layout/MainHeader.vue';
-import { useCounterStore } from '@/store/cart'
+import { useCounterStore } from '@/store/cart';
 import { ref, computed } from 'vue';
 
 //---------------------測試用：註冊
@@ -323,7 +323,7 @@ const items = ref([
 //商品加減&刪除按鈕
 const addItem = (index) => {
   buys.value[index].num++;
-}
+};
 
 const minusItem = (index) => {
   if (buys.value[index].num <= 1) {
@@ -335,14 +335,14 @@ const minusItem = (index) => {
   if (buys.value[index].num > 1) {
     buys.value[index].num--;
   }
-}
+};
 
 const deleteItem = (index) => {
-  let d = confirm('是否要刪除這個商品？')
+  const d = confirm('是否要刪除這個商品？');
   if (d) {
     buys.value.splice(index, 1)
   }
-}
+};
 
 //商品數量的輸入框
 const reviseItem = (index, newNum) => {
@@ -366,7 +366,7 @@ const blurItem = (index, num) => {
   if (!num) {
     buys.value[index].num = 1
   }
-}
+};
 
 //精選商品加入購物車
 const addToCart = (index) => {
@@ -387,8 +387,7 @@ const substotal = computed(() => {
   }, 0)
 })
 
-
-//使用者點數：100 點折抵 1 元  
+//使用者點數：100 點折抵 1 元
 const points = ref(1000); //正式應該從資料庫取得
 const usePoints = ref(0);
 
@@ -400,7 +399,7 @@ const minusPoints = () => {
     usePoints.value -= 100;
     points.value += 100;
   }
-}
+};
 
 const addPoints = () => {
   if (points.value <= 0) {
@@ -419,7 +418,7 @@ const revisePoints = () => {
   }
   else if (usePoints.value % 100 !== 0) {
     alert('請以 100 為單位進行輸入！');
-    usePoints.value = Math.round(usePoints.value / 100) * 100; // 向上或向下取整至最近的 100  
+    usePoints.value = Math.round(usePoints.value / 100) * 100; // 向上或向下取整至最近的 100
   }
 }
 
@@ -434,7 +433,7 @@ const blurPoints = () => {
 //計算點數折抵
 const discount = computed(() => {
   return usePoints.value / 100;
-})
+});
 
 //送貨方式
 const deliver = ref(['新竹物流宅配', '台灣離島郵寄'])
@@ -475,9 +474,6 @@ const onTouchMove = (e) => {
   const walk = (x - startX.value) * 2; // 計算滑動距離，乘以 2 以增加滑動速度
   e.currentTarget.scrollLeft = scrollLeft.value - walk; // 更新滾動位置
 };
-
-
 </script>
 
 
-<style lang="scss" scoped></style>

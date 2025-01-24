@@ -21,26 +21,26 @@ import { ref, watch } from 'vue';
 const emit = defineEmits(['page-changed']);
 
 const props = defineProps({
-    totalPages: { //總共幾頁 
+    totalPages: { //總共幾頁
         type: Number,
         required: true
-    }, 
+    },
     currentPage: { //目前的頁數
-        type: Number,  
-        required: true  
+        type: Number,
+        required: true
     }
 });
 
-// 監聽 currentPage 的變化  
-watch(() => props.currentPage, (newPage) => {  
-    currentPage.value = newPage; // 更新 local currentPage  
-});  
+// 監聽 currentPage 的變化
+watch(() => props.currentPage, (newPage) => {
+    currentPage.value = newPage; // 更新 local currentPage
+});
 
 //一開始的頁數
 // const currentPage = ref(1);
 const currentPage = ref(props.currentPage)
 
-//切換到指定頁  
+//切換到指定頁
 const goToPage = (page) => {
     if (page !== currentPage.value) {
         currentPage.value = page;
@@ -49,20 +49,20 @@ const goToPage = (page) => {
     }
 };
 
-//監聽 totalPages 更新  
+//監聽 totalPages 更新
 watch(
     () => props.totalPages,
     (newTotal) => currentPage.value = newTotal
 );
 
-//上一頁  
+//上一頁
 const prevPage = () => {
     if (currentPage.value > 1) {
         goToPage(currentPage.value - 1);
     }
 };
 
-//下一頁  
+//下一頁
 const nextPage = () => {
     if (currentPage.value < props.totalPages) {
         goToPage(currentPage.value + 1);
@@ -73,4 +73,3 @@ const nextPage = () => {
 
 </script>
 
-<style lang="scss" scoped></style>

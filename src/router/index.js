@@ -37,11 +37,11 @@ const routes = [
     //   {
     //     path:'',
     //     component: () => import('@/pages/Social_news.vue'),
-    //   },  
-    //   {  
-    //     path: 'article', // 'article/:id'  
-    //     component:  () => import('@/pages/Social_article.vue'), 
-    //   },  
+    //   },
+    //   {
+    //     path: 'article', // 'article/:id'
+    //     component:  () => import('@/pages/Social_article.vue'),
+    //   },
     // ]
   },
   {
@@ -105,7 +105,6 @@ const routes = [
       // requiredLogin: true,
     },
   },
-
   {
     path: '/popupnewmember/',
     component: () => import('@/pages/popupnewmember.vue'),
@@ -188,7 +187,6 @@ const routes = [
   },
   {
     path: '/loginPage/',
-
     component: () => import('@/pages/loginPage.vue'),
     meta: {
       title: '前後台登入',
@@ -196,7 +194,7 @@ const routes = [
     },
   },
   {
-    path: '/loginPopupChange/',
+    path: '/loginPopupChange',
     component: () => import('@/pages/loginPopupChange.vue'),
     meta: {
       title: '登入彈窗切換',
@@ -320,6 +318,7 @@ router.beforeEach(async (to, from, next) => {
   //console.log(to);   // 連到目前的網址的物件資料
   //console.log(from); // 從哪個網址連過來的物件資料
 
+
   if (to.meta.requiredLogin) {
     // ======= 以下要取得使用者目前的登入狀態，會是 bool == //
     // 取得是否已登入，可能是從 localStorage 抓資料或從後端判斷。
@@ -343,6 +342,7 @@ router.beforeEach(async (to, from, next) => {
     document.title = to.meta.title;
     next();
   }
+
 });
 // 匯出 router
 export default router;
