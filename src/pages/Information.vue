@@ -15,22 +15,22 @@
         <!-- 圖標列表 -->
         <div class="icon-list">
           <button @click="openPanel('Thunderstorm Icon')">
-            <img src="@/assets/images/thunder-rainy.png" alt="Thunderstorm Icon" />
+            <font-awesome-icon :icon="['fas', 'cloud-bolt']" class="hover-icon_Info"/>
           </button>
           <button @click="openPanel('Wave Icon')">
-            <img src="@/assets/images/streamline_tidal-wave-solid.png" alt="Wave Icon" />
+            <font-awesome-icon :icon="['fas', 'water']"  class="hover-icon_Info"/>
           </button>
           <button @click="openPanel('Typhoon Icon')">
-            <img src="@/assets/images/mingcute_typhoon-fill.png" alt="Typhoon Icon" />
+            <font-awesome-icon :icon="['fas', 'hurricane']" class="hover-icon_Info"/>
           </button>
           <button @click="openPanel('Tree Icon')">
-            <img src="@/assets/images/mynaui_tree-solid.png" alt="Tree Icon" />
+            <font-awesome-icon :icon="['fas', 'tree']" class="hover-icon_Info" />
           </button>
           <button @click="openPanel('Temperature Icon')">
-            <img src="@/assets/images/fa_thermometer-2.png" alt="Temperature Icon" />
+            <font-awesome-icon :icon="['fas', 'temperature-arrow-up']" class="hover-icon_Info"/>
           </button>
           <button @click="openPanel('CO2 Icon')">
-            <img src="@/assets/images/iwwa_co2.png" alt="CO2 Icon" />
+            <font-awesome-icon :icon="['fas', 'head-side-mask']" class="hover-icon_Info" />
           </button>
         </div>
 
@@ -188,7 +188,24 @@ import MainFooter from '@/components/layout/MainFooter.vue';
 import { Navigation, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import 'swiper/swiper-bundle.css';
-import { ref, onMounted } from 'vue';
+import { ref } from 'vue';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faCloudBolt } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import { faWater } from '@fortawesome/free-solid-svg-icons';
+import { faHurricane } from '@fortawesome/free-solid-svg-icons'; // 匯入 hurricane 圖示
+import { faTree } from '@fortawesome/free-solid-svg-icons'; // 匯入 tree 圖示
+import { faTemperatureArrowUp } from '@fortawesome/free-solid-svg-icons'; // 匯入圖示
+import { faHeadSideMask } from '@fortawesome/free-solid-svg-icons'; // 匯入 head-side-mask 圖示
+
+
+
+library.add(faCloudBolt);
+library.add(faWater);
+library.add(faHurricane);
+library.add(faTree);
+library.add(faTemperatureArrowUp);
+library.add(faHeadSideMask);
 
 export default {
   name: 'MainPage',
@@ -197,6 +214,7 @@ export default {
     MainFooter,
     Swiper,
     SwiperSlide,
+    FontAwesomeIcon,
   },
   setup() {
     // Panel Logic
@@ -207,37 +225,37 @@ export default {
         title: '雷雨',
         image: new URL('@/assets/images/annual_wet.jpg', import.meta.url).href,
         description:
-          '地球暖化影響全球降雨模式，根據IPCC報告，全球平均氣溫每上升1°C，大氣中的水汽量將增加約7%，導致極端降雨事件增加。同時，全球乾旱區面積擴大，降雨量減少的地區如地中海和非洲部分地區，年降雨量下降10%以上。相反，熱帶地區因水循環加速，強降雨頻率增加30%。這種降雨分布的不均衡不僅影響糧食安全，還加劇洪水和乾旱等極端天氣的威脅，迫切需要全球共同努力減緩暖化進程。',
+          '地球暖化影響全球降雨模式，根據 IPCC 報告，全球平均氣溫每上升 1°C ，大氣中的水汽量將增加約 7%，導致極端降雨事件增加。同時，全球乾旱區面積擴大，降雨量減少的地區如地中海和非洲部分地區，年降雨量下降 10% 以上。相反，熱帶地區因水循環加速，強降雨頻率增加 30%。這種降雨分布的不均衡不僅影響糧食安全，還加劇洪水和乾旱等極端天氣的威脅，迫切需要全球共同努力減緩暖化進程。',
       },
       'Wave Icon': {
         title: '海浪',
         image: new URL('@/assets/images/slrtrend_tpx_2022 1.png', import.meta.url).href,
         description:
-          '台灣沿岸測站數據顯示，海平面每年上升約3毫米，顯示全球暖化對沿岸地區的深遠影響。近50年來，海洋表面溫度上升約0.8°C，這種溫度變化不僅導致珊瑚白化現象增加，也改變了海洋生態系統，使得魚群遷徙路徑和生物多樣性面臨挑戰。此外，海岸侵蝕問題日益嚴重，例如雲林及台南地區的海岸線，每年平均退縮達1至2公尺，嚴重威脅沿岸農地、居民與基礎建設的安全。這些數據強調，氣候變遷對海洋與沿岸地區的影響日益加劇，若不積極採取減碳與防護措施，可能造成更大規模的環境與經濟損失。因此，台灣必須加強推廣綠色能源、減少碳排放，並提升沿岸地區的防災能力，確保未來的永續發展。',
+          '台灣沿岸測站數據顯示，海平面每年上升約 3 毫米，顯示全球暖化對沿岸地區的深遠影響。近 50 年來，海洋表面溫度上升約 0.8°C，這種溫度變化不僅導致珊瑚白化現象增加，也改變了海洋生態系統，使得魚群遷徙路徑和生物多樣性面臨挑戰。此外，海岸侵蝕問題日益嚴重，例如雲林及台南地區的海岸線，每年平均退縮達1至2公尺，嚴重威脅沿岸農地、居民與基礎建設的安全。這些數據強調，氣候變遷對海洋與沿岸地區的影響日益加劇，若不積極採取減碳與防護措施，可能造成更大規模的環境與經濟損失。因此，台灣必須加強推廣綠色能源、減少碳排放，並提升沿岸地區的防災能力，確保未來的永續發展。',
       },
       'Typhoon Icon': {
         title: '颱風',
         image: new URL('@/assets/images/typhoon.svg', import.meta.url).href,
         description:
-          '極端天氣現象如颱風、暴雨和熱浪正因地球暖化而加劇。根據數據，全球平均氣溫已上升約1.1°C（相較於工業化前），每增加1°C，空氣可攜帶7%的更多水汽，導致降雨更為極端。此外，2020年全球因熱浪創下49°C以上的高溫記錄，颱風的風速和頻率也有所增加。例如，台灣地區的豪雨量近20年增幅約15%，導致水患風險顯著提高，影響生態與經濟穩定。',
+          '極端天氣現象如颱風、暴雨和熱浪正因地球暖化而加劇。根據數據，全球平均氣溫已上升約 1.1°C（相較於工業化前），每增加 1°C，空氣可攜帶7%的更多水汽，導致降雨更為極端。此外，2020 年全球因熱浪創下 49°C 以上的高溫記錄，颱風的風速和頻率也有所增加。例如，台灣地區的豪雨量近 20 年增幅約 15%，導致水患風險顯著提高，影響生態與經濟穩定。',
       },
       'Tree Icon': {
         title: '樹木',
         image: new URL('@/assets/images/w_1350 1.png', import.meta.url).href,
         description:
-          '地球暖化對農業造成顯著影響，氣溫上升和極端天氣增加導致作物產量下降。據研究，全球小麥和玉米產量每升高1°C分別減少約6%和7%。此外，降雨模式改變導致乾旱頻率增加，影響水稻等需水量高的作物生長。台灣地區近20年乾旱次數上升25%，對農業灌溉造成壓力。病蟲害因暖化範圍擴大，據估計每年全球農業損失達約77億美元，威脅糧食安全與農業經濟發展。',
+          '地球暖化對農業造成顯著影響，氣溫上升和極端天氣增加導致作物產量下降。據研究，全球小麥和玉米產量每升高 1°C 分別減少約 6% 和 7%。此外，降雨模式改變導致乾旱頻率增加，影響水稻等需水量高的作物生長。台灣地區近 20 年乾旱次數上升 25%，對農業灌溉造成壓力。病蟲害因暖化範圍擴大，據估計每年全球農業損失達約 77 億美元，威脅糧食安全與農業經濟發展。',
       },
       'Temperature Icon': {
         title: '氣溫',
         image: new URL('@/assets/images/_119312978_temp_rises_since_1850_2x640-nc.png 1.png', import.meta.url).href,
         description:
-          '氣溫上升是地球暖化的直接結果，對環境和生態系統造成深遠影響。據聯合國報告，自1880年以來，全球平均氣溫已升高約1.1°C。每升高1°C，北極海冰面積減少約13%，對極地生態構成威脅。此外，熱浪頻率和強度增加，2022年全球熱浪導致歐洲超過2萬人死亡。同時，高溫促使海洋升溫，影響珊瑚礁生態，部分珊瑚礁白化率達50%以上，生物多樣性面臨危機。',
+          '氣溫上升是地球暖化的直接結果，對環境和生態系統造成深遠影響。據聯合國報告，自 1880 年以來，全球平均氣溫已升高約 1.1°C。每升高 1°C，北極海冰面積減少約 13%，對極地生態構成威脅。此外，熱浪頻率和強度增加，2022 年全球熱浪導致歐洲超過 2 萬人死亡。同時，高溫促使海洋升溫，影響珊瑚礁生態，部分珊瑚礁白化率達 50% 以上，生物多樣性面臨危機。',
       },
       'CO2 Icon': {
         title: '二氧化碳',
         image: new URL('@/assets/images/cccooo.svg', import.meta.url).href,
         description:
-          '二氧化碳（CO₂）是地球暖化的主要驅動因素，自工業革命以來，大氣中CO₂濃度增加了超過50%，從280 ppm升至2022年的約420 ppm。這導致全球平均氣溫升高約1.1°C。CO₂增加使溫室效應加劇，導致極端天氣、海平面上升以及極地冰層融化。據統計，燃燒化石燃料每年排放約330億噸CO₂，為主要來源。高濃度CO₂還導致海洋酸化，影響海洋生態系統，如珊瑚礁白化和海洋生物多樣性減少。',
+          '二氧化碳（CO₂）是地球暖化的主要驅動因素，自工業革命以來，大氣中CO₂濃度增加了超過 50%，從 280 ppm 升至 2022 年的約 420 ppm。這導致全球平均氣溫升高約 1.1°C。CO₂ 增加使溫室效應加劇，導致極端天氣、海平面上升以及極地冰層融化。據統計，燃燒化石燃料每年排放約 330 億噸 CO₂，為主要來源。高濃度 CO₂ 還導致海洋酸化，影響海洋生態系統，如珊瑚礁白化和海洋生物多樣性減少。',
       },
     };
 
@@ -281,24 +299,24 @@ export default {
     const tabs = ref([
       {
         id: 'Ic_cop29_R',
-        title: 'COP29氣候會議',
+        title: 'COP29 氣候會議',
         image: new URL('@/assets/images/Ic03.png', import.meta.url).href,
         content:
-          'COP29氣候會議將於2024年11月在阿塞拜疆首都巴庫舉行，匯聚全球領袖、科學家與環保人士，共同應對氣候挑戰。本次會議核心議題包括協助開發中國家應對氣候變化、更新國家自主貢獻（NDC）目標以及打擊漂綠行為。會議還將討論減少溫室氣體排放、推進綠色技術創新與能源轉型的重要策略。作為全球氣候行動的重要平台，COP29致力於促進各國合作，共同實現巴黎協定下的碳中和目標，維護地球的未來環境可持續性。',
+          'COP29 氣候會議將於 2024 年 11 月在阿塞拜疆首都巴庫舉行，匯聚全球領袖、科學家與環保人士，共同應對氣候挑戰。本次會議核心議題包括協助開發中國家應對氣候變化、更新國家自主貢獻（NDC）目標以及打擊漂綠行為。會議還將討論減少溫室氣體排放、推進綠色技術創新與能源轉型的重要策略。作為全球氣候行動的重要平台，COP29 致力於促進各國合作，共同實現巴黎協定下的碳中和目標，維護地球的未來環境可持續性。',
       },
       {
         id: 'Ic_twcae_R',
-        title: 'TWCAE 4th臺灣氣候行動高峰論壇',
+        title: 'TWCAE 4th 臺灣氣候行動高峰論壇',
         image: new URL('@/assets/images/ccccc.png', import.meta.url).href,
         content:
-          'TWCAE 4th臺灣氣候行動高峰論壇於近期在台北舉行，吸引了國內外專家、學者及企業代表參與，共同討論台灣在國際氣候政策中的角色。論壇聚焦於「綠色經濟轉型」與「碳中和目標」的實現策略，強調能源轉型的重要性，並探討如何利用創新技術促進減碳效益。會議還分享了企業在減少碳排放和推動永續發展的成功案例，強調各界合作的重要性。論壇旨在提升台灣於全球氣候行動中的影響力，實現2050淨零碳排的目標，共建永續未來。',
+          'TWCAE 4th 臺灣氣候行動高峰論壇於近期在台北舉行，吸引了國內外專家、學者及企業代表參與，共同討論台灣在國際氣候政策中的角色。論壇聚焦於「綠色經濟轉型」與「碳中和目標」的實現策略，強調能源轉型的重要性，並探討如何利用創新技術促進減碳效益。會議還分享了企業在減少碳排放和推動永續發展的成功案例，強調各界合作的重要性。論壇旨在提升台灣於全球氣候行動中的影響力，實現 2050 淨零碳排的目標，共建永續未來。',
       },
       {
         id: 'Ic_law_R',
         title: '氣候變遷因應法',
         image: new URL('@/assets/images/law2.png', import.meta.url).href,
         content:
-          '氣候變遷因應法是台灣為應對氣候變遷挑戰的重要立法，目標在於實現2050淨零碳排。該法涵蓋碳定價機制、推廣可再生能源、支持低碳技術發展及強化防災能力，並要求各部門提出減碳計畫。此外，法案鼓勵企業參與減碳行動，推動產業轉型，同時提高公眾環保意識。氣候變遷因應法不僅是國家邁向永續發展的基石，也是台灣在全球氣候行動中扮演關鍵角色的展現。。',
+          '氣候變遷因應法是台灣為應對氣候變遷挑戰的重要立法，目標在於實現 2050 淨零碳排。該法涵蓋碳定價機制、推廣可再生能源、支持低碳技術發展及強化防災能力，並要求各部門提出減碳計畫。此外，法案鼓勵企業參與減碳行動，推動產業轉型，同時提高公眾環保意識。氣候變遷因應法不僅是國家邁向永續發展的基石，也是台灣在全球氣候行動中扮演關鍵角色的展現。。',
       },
     ]);
 
