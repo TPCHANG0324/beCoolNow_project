@@ -42,8 +42,13 @@
 </template>
 
 <script>
+import { useRouter } from 'vue-router';
 export default {
   name: 'member_login',
+  setup() {
+    const router = useRouter();
+    return { router };
+  },
   data() {
     return {
       formData: {
@@ -124,7 +129,17 @@ export default {
 
       // 如果所有驗證都通過
       alert('登入成功!歡迎光臨涼城即時');
-      this.resetForm();
+        // 儲存登入狀態和用戶信息到 localStorage
+    localStorage.setItem('isLoggedIn', 'true');
+    localStorage.setItem('userEmail', this.formData.email);
+      
+    this.resetForm();
+
+      // 導航到會員頁面
+      this.$router.push('/member');
+      this.$emit('close');
+       // 如果你想要關閉 popup
+      
     },
     resetForm() {
       this.formData = {
@@ -135,8 +150,9 @@ export default {
       this.formErrors = {
         email: '',
         password: '',
-      };
+      }
     },
   },
 };
+
 </script>

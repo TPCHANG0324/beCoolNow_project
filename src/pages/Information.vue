@@ -142,8 +142,8 @@
         <!-- 問答畫面 -->
         <div v-if="currentScreen === 'quiz'" class="quiz-screen">
           <div class="Ic_game_R">
-            <div class="Ic_game-content_R">
-              <div class="Ic_game-question_R">
+            <div class="Ic_game-content_R" >
+              <div class="Ic_game-question_R" :class="{ 'shake': feedback === '答錯QQ'  }">
                 <!-- 顯示進度 -->
                 <p class="progress_R">第 {{ currentQuestionIndex + 1 }} 題，共 {{ questions.length }} 題</p>
                 <h4>{{ currentQuestion.question }}</h4>
@@ -373,6 +373,8 @@ export default {
     const feedback = ref('');
     const letters = ['A', 'B', 'C'];
     const feedbackclass = ref(''); // 新增變數儲存動畫 class
+    const isShaking = ref(false); // 新增控制晃動的狀態
+    const isSubmit = ref(false)
 
     const startGame = () => {
       currentScreen.value = 'quiz';
@@ -381,27 +383,45 @@ export default {
       currentQuestion.value = questions.value[currentQuestionIndex.value];
     };
 
+
     const submitAnswer = (selectedIndex) => {
+      if(isSubmit.value === true) return
+      isSubmit.value = true
       feedbackclass.value = ''; // 重置動畫
+      // isShaking.value = false; // 重置晃動狀態
+      console.log(isShaking.value);
+
 
       if (selectedIndex === currentQuestion.value.correctIndex) {
-        feedback.value = '答對！';
+        feedback.value = 'YA答對！';
         feedbackclass.value = 'correct-animation';
         score.value++;
+        console.log(isShaking.value);
+
       } else {
         feedback.value = '答錯QQ';
         feedbackclass.value = 'wrong-animation';
+        isShaking.value = true; // 觸發晃動動畫
+        console.log(isShaking.value,
+          'FALSE'
+        );
+        
       }
 
       setTimeout(() => {
         feedback.value = '';
         feedbackclass.value = '';
+        isShaking.value = false; // 停止晃動
+        console.log(isShaking.value);
+
         if (currentQuestionIndex.value + 1 < questions.value.length) {
           currentQuestionIndex.value++;
           currentQuestion.value = questions.value[currentQuestionIndex.value];
         } else {
           currentScreen.value = 'end';
         }
+         isSubmit.value = false
+
       }, 1000);
     };
 

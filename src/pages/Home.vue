@@ -4,6 +4,7 @@
     <!-- <header class="Fp_Header_H">選單</header> -->
     <MainHeader></MainHeader>
     <!-- 首頁_主視覺Banner區塊 -->
+
     <section ref="bannerRef" class="Fp_Banner_H">
       <header>
         <article>
@@ -147,7 +148,6 @@
 </template>
 
 <script>
-import MainHeader from '@/components/layout/MainHeader.vue';
 import MainFooter from '@/components/layout/MainFooter.vue';
 import { RouterLink } from 'vue-router';
 import { gsap } from 'gsap';

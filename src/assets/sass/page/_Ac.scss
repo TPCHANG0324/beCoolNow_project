@@ -26,6 +26,7 @@
 .collapse_section {
     text-align: center;
     margin-top: 20px;
+    cursor: pointer;
 }
 
 /* 控制展開動畫效果 */
@@ -316,23 +317,7 @@ article {
     filter: brightness(90%);
 }
 
-// // 統計條
-// .stats-bar {
-//     background-color: #a1a4a1;
-//     color: white;
-//     padding: 1rem;
-//     // border-radius: 10px;
-//     text-align: center;
-//     font-size: 1.2rem;
-//     margin-bottom: 2rem;
-// }
-// $primary-color: #6d8f5f;
-// $secondary-color: #eef4e5;
-// $card-bg: #fcf8f2;
-// $stats-bg: #a1c181;
-// $text-color: #333;
-// 信件卡片樣式
-// 主要信件容器
+
 .letter-container {
     max-width: 1200px;
     // margin: 2rem auto;
@@ -825,9 +810,9 @@ article {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
-    max-height: 600px; /* 預設高度 */
-    overflow: hidden;
-    transition: max-height 0.5s ease-in-out;
+    // max-height: 600px; /* 預設高度 */
+    // overflow: hidden;
+    // transition: max-height 0.5s ease-in-out;
   }
   
   .daily_card[data-expanded="true"] {
