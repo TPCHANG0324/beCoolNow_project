@@ -11,7 +11,7 @@
         </a>
     </article>
 
-     <!-- 手機版的新聞欄 -->
+    <!-- 手機版的新聞欄 -->
     <article v-for="(item, index) in news" :key="index" v-if="!isPC">
         <a :href="item.url" target="_blank">
             <div class="new-left-X">
@@ -68,16 +68,21 @@ const getNEWS = () => {
     fetch(newURL)
         .then(res => res.json())
         .then(data => {
-            news.value = [...data.articles]
-            news.value.reverse()
-            // console.log(news.value)
-            news.value = news.value.filter(item => {  //篩選關鍵字 && 有圖的
-                return regex.test(item.description) && item.urlToImage
-            })
-            // console.log(news.value)
-            news.value = news.value.slice(0, 8)
-            news.value.reverse()
-
+            if (data.articles && Array.isArray(data.articles)) {
+                news.value = [...data.articles];
+                news.value.reverse();
+                // console.log(news.value)
+                news.value = news.value.filter(item => { //篩選關鍵字 && 有圖的
+                    return regex.test(item.description) && item.urlToImage;
+                });
+                // console.log(news.value)
+                news.value = news.value.slice(0, 8).reverse();
+            } else {
+                console.error('data 的 articles 數據不存在:', data);
+            }
+        })
+        .catch(err => {
+            console.log('請求錯誤：'+ err)
         })
 }
 

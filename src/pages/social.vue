@@ -132,10 +132,10 @@ const totalItemCount = computed(() => {
 });
 
 
-// 監聽 activeItem 的變化
-watch(activeItem, (newValue) => {
-  currentPage.value = 1;
-});
+// 監聽 activeItem 的變化  
+// watch(activeItem, (newValue) => {
+//   currentPage.value = 1;
+// });
 
 //當改變頁面的時候，就更新當前的頁碼
 const handlePageChange = (newPage) => {
@@ -173,6 +173,7 @@ const goToArticle = () => {
 
 //--------------------------------------------------
 
+//new URL('@/assets/images/Fb10.jpg', import.meta.url).href
 //假設這是資料庫中所有文章的資料
 const articles = ref([
   {
@@ -183,7 +184,7 @@ const articles = ref([
       '（中央社東京25日綜合外電報導）日本氣象廳今天公布天氣總結指出，日本今年1月到11月的平均氣溫較1991年到2020年平均氣溫升高攝氏1.64度，比2023年的升高1.29度還多，預料將連續兩年創統計史新高紀錄。',
     handup: 100,
     chat: 100,
-    image: 'src/assets/images/Fb10.jpg',
+    image: new URL('@/assets/images/Fb10.jpg', import.meta.url).href
   },
   {
     category: '政策國際',
@@ -203,7 +204,7 @@ const articles = ref([
       '（中央社芬蘭羅文尼米26日綜合外電報導）隨著耶誕節的腳步日漸接近，耶誕老人的工作進入緊鑼密鼓的忙碌階段。但是氣候暖化導致他位在北極圈的老家下雪量不足，就連耶誕老人都十分擔心。',
     handup: 100,
     chat: 100,
-    image: 'src/assets/images/Fb11.jpg',
+    image: new URL('@/assets/images/Fb11.jpg', import.meta.url).href
   },
   {
     category: '政策國際',
@@ -213,7 +214,7 @@ const articles = ref([
       '（中央社巴庫24日綜合外電報導）亞塞拜然首都巴庫舉行的聯合國氣候變化綱要公約第29次締約方會議（COP29）歷經2週的緊張協商，最終在期限過後2天達成氣候融資協議。路透社整理本次峰會的重點如下：',
     handup: 100,
     chat: 100,
-    image: 'src/assets/images/Fb04.jpg',
+    image: new URL('@/assets/images/Fb04.jpg', import.meta.url).href
   },
   {
     category: '生態危機',
@@ -223,7 +224,7 @@ const articles = ref([
       '（中央社記者張雄風台北28日電）氣象署今天表示，統計過去70年，太平洋高壓系統逐漸西進擴大，近10年甚至已經涵蓋到中國華南沿岸，足見全球暖化的影響；台灣未來將面臨更為頻繁的極端高溫，及乾旱事件所帶來的氣候風險。',
     handup: 100,
     chat: 100,
-    image: 'src/assets/images/Fb14.jpg',
+    image: new URL('@/assets/images/Fb14.jpg', import.meta.url).href
   },
   {
     category: '綠色生活',
@@ -243,7 +244,7 @@ const articles = ref([
       '（中央社東京25日綜合外電報導）日本氣象廳今天公布天氣總結指出，日本今年1月到11月的平均氣溫較1991年到2020年平均氣溫升高攝氏1.64度，比2023年的升高1.29度還多，預料將連續兩年創統計史新高紀錄。',
     handup: 100,
     chat: 100,
-    image: 'src/assets/images/Fb10.jpg',
+    image: new URL('@/assets/images/Fb10.jpg', import.meta.url).href
   },
   {
     category: '政策國際',
@@ -263,7 +264,7 @@ const articles = ref([
       '（中央社芬蘭羅文尼米26日綜合外電報導）隨著耶誕節的腳步日漸接近，耶誕老人的工作進入緊鑼密鼓的忙碌階段。但是氣候暖化導致他位在北極圈的老家下雪量不足，就連耶誕老人都十分擔心。',
     handup: 100,
     chat: 100,
-    image: 'src/assets/images/Fb11.jpg',
+    image: new URL('@/assets/images/Fb11.jpg', import.meta.url).href
   },
   {
     category: '政策國際',
@@ -273,7 +274,7 @@ const articles = ref([
       '（中央社巴庫24日綜合外電報導）亞塞拜然首都巴庫舉行的聯合國氣候變化綱要公約第29次締約方會議（COP29）歷經2週的緊張協商，最終在期限過後2天達成氣候融資協議。路透社整理本次峰會的重點如下：',
     handup: 100,
     chat: 100,
-    image: 'src/assets/images/Fb04.jpg',
+    image: new URL('@/assets/images/Fb04.jpg', import.meta.url).href
   },
   {
     category: '生態危機',
@@ -283,7 +284,7 @@ const articles = ref([
       '（中央社記者張雄風台北28日電）氣象署今天表示，統計過去70年，太平洋高壓系統逐漸西進擴大，近10年甚至已經涵蓋到中國華南沿岸，足見全球暖化的影響；台灣未來將面臨更為頻繁的極端高溫，及乾旱事件所帶來的氣候風險。',
     handup: 100,
     chat: 100,
-    image: 'src/assets/images/Fb14.jpg',
+    image: new URL('@/assets/images/Fb14.jpg', import.meta.url).href
   },
   {
     category: '綠色生活',

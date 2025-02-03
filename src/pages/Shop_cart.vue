@@ -170,6 +170,24 @@
 
     <!-- <p>{{ counterStore.count }}</p>
     <button @click="counterStore.accumulate">測試按鈕</button> -->
+
+    <!-- 測試用：註冊 -->
+    <form action="" @submit.prevent="register">
+      帳號：<input type="text" name="account" v-model="account1">
+      密碼：<input type="password" name="password" v-model="password1">
+      <input type="submit" value="註冊">
+    </form>
+    <!-- 測試用：登入 -->
+    <form action="" @submit.prevent="login">
+      帳號：<input type="text" name="account" v-model="account2">
+      密碼：<input type="password" name="password" v-model="password2">
+      <input type="submit" value="登入">
+    </form>
+
+    <!-- <div :editor="editor" @ready="onReady" @change="onChange">
+      <ckeditor v-model="editorData" :editor="editor" @ready="onReady" @change="onChange"></ckeditor>
+    </div> -->
+
   </main>
 
   <MainFooter class="removeMT" />
@@ -182,20 +200,124 @@ import MainHeader from '@/components/layout/MainHeader.vue';
 import { useCounterStore } from '@/store/cart';
 import { ref, computed } from 'vue';
 
+//---------------------測試用：註冊
+
+const account1 = ref(null)
+const password1 = ref(null)
+
+const register = async () => {
+  if (!account1.value || !password1.value) {
+    alert("帳號或密碼不可為空！");
+    return;
+  }
+  const url = `/beCoolNow_project/php/register.php`;
+  try {
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        account: account1.value,
+        password: password1.value
+      })
+    })
+    const data = await res.json()
+    console.log(data) //註冊完之後看一下成功與否
+
+    if (data.success) {
+      console.log("註冊成功！");
+    } else {
+      console.log(`註冊失敗：${data.error}`);
+    }
+
+  } catch (e) {
+    console.log(`請求出現錯誤：${error.message}`);
+  }
+}
+
+//---------------------測試用：登入
+
+const account2 = ref(null)
+const password2 = ref(null)
+
+const login = async () => {
+  if (!account2.value || !password2.value) {
+    alert("帳號或密碼不可為空！");
+    return;
+  }
+  const url = `/beCoolNow_project/php/login.php`;
+  try {
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        account: account2.value,
+        password: password2.value
+      })
+    })
+
+    const data = await res.json();
+    console.log(data); //看一下登入結果
+
+    if (data.success) {
+      console.log(data.message, data)
+    }
+  } catch (e) {
+    console.log(`請求出現錯誤：${e}`);
+  }
+}
+//---------------------
+
+// import { CKEditor } from '@ckeditor/ckeditor5-vue';  
+// import ClassicEditor from '@ckeditor/ckeditor5-build-classic'; 
+
+// const editor = ClassicEditor; // 使用已导入的 ClassicEditor  
+// const editorData = ref('<p>初始内容</p>'); // 使用 ref 创建响应式的数据  
+
+// // 编辑器准备就绪的处理函数  
+// const onReady = (editorInstance) => {  
+//   console.log('编辑器准备好了!', editorInstance);  
+// };  
+
+// // 处理编辑器数据更改  
+// const onChange = ({ editor }) => {  
+//   const data = editor.getData();  
+//   editorData.value = data; // 更新响应式数据  
+// }; 
+
+//---------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 const counterStore = ref(useCounterStore());
+//new URL('@/assets/images/Sp08.jpg', import.meta.url).href
 
 //購買商品 //從資料庫取得?
 const buys = ref([
-  { id: 1, image: 'src/assets/images/Sp06.jpg', name: '愛護地球環保袋', price: 290, size: '不織布', num: 1 },
-  { id: 1, image: 'src/assets/images/Sp06.jpg', name: '愛護地球環保袋', price: 290, size: '不織布', num: 1 },
-]);
+  { id: 1, image: new URL('@/assets/images/Sp06.jpg', import.meta.url).href, name: '愛護地球環保袋', price: 290, size: '不織布', num: 1 },
+  { id: 1, image: new URL('@/assets/images/Sp06.jpg', import.meta.url).href, name: '愛護地球環保袋', price: 290, size: '不織布', num: 1 },
+])
 
 //精選商品
 const items = ref([
-  { id: 1, image: 'src/assets/images/Sp08.jpg', name: '愛護地球環保杯', price: 150, size: '無', num: 1 },
-  { id: 2, image: 'src/assets/images/Sp09.jpg', name: '愛護地球環保杯2', price: 180, size: '無', num: 1 },
-  { id: 3, image: 'src/assets/images/Sp04.jpg', name: '設計款 - 愛護地球環保吸管', price: 80, size: '無', num: 1 },
-  { id: 4, image: 'src/assets/images/Sp11.jpg', name: '愛護地球環保筷', price: 80, size: '無', num: 1 },
+  { id: 1, image: new URL('@/assets/images/Sp08.jpg', import.meta.url).href, name: '愛護地球環保杯', price: 150, size: '無', num: 1 },
+  { id: 2, image: new URL('@/assets/images/Sp09.jpg', import.meta.url).href, name: '愛護地球環保杯2', price: 180, size: '無', num: 1 },
+  { id: 3, image: new URL('@/assets/images/Sp04.jpg', import.meta.url).href, name: '設計款 - 愛護地球環保吸管', price: 80, size: '無', num: 1 },
+  { id: 4, image: new URL('@/assets/images/Sp11.jpg', import.meta.url).href, name: '愛護地球環保筷', price: 80, size: '無', num: 1 },
 ]);
 
 //商品加減&刪除按鈕
