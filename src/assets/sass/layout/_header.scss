@@ -17,6 +17,7 @@ $header_layout: 1200px !default;
     }
 
     .header-wrapper {
+
         padding: 15px 0;
         max-width: 1200px;
         margin: 0 auto;
@@ -50,6 +51,19 @@ $header_layout: 1200px !default;
                             color: $Yellow_1;
                         }
 
+                        .bi-person-circle {
+                            &:hover {
+                                color: $Yellow_1;
+                                cursor: pointer;
+                            }
+                            
+                        }
+
+                        /* 添加登入狀態的樣式 */
+.bi-person-circle.logged-in {
+  color: #4CAF50; /* 綠色 */
+}
+
                         // .bi-person-circle {
                         //     margin-left: 13px;
                         // }
@@ -60,6 +74,7 @@ $header_layout: 1200px !default;
     }
 
 }
+
 
 
 .mobile_header {

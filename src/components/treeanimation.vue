@@ -324,13 +324,13 @@ const playAnimation = () => {
   });
 
   treeTimeline.value
-    .to('#shadow', 2, { scale: 1 })
-    .to('#tree', 2, { scale: 1 }, 0)
-    .to('#leaf-rb', 2, { scale: 1, rotation: 0, y: 0 }, 0.35)
-    .to('#leaf-rm', 2, { scale: 1, rotation: 0, y: 0 }, 0.4)
-    .to('#leaf-lb', 2, { scale: 1, rotation: 0, y: 0 }, 0.45)
-    .to('#leaf-lm', 2, { scale: 1, rotation: 0, y: 0 }, 0.5)
-    .to('#leaf-top', 2.5, { scale: 1 }, 0.55)
+    .to('#shadow', 1, { scale: 1 })
+    .to('#tree', 1, { scale: 1 }, 0)
+    .to('#leaf-rb', 1, { scale: 1, rotation: 0, y: 0 }, 0.35)
+    .to('#leaf-rm', 1, { scale: 1, rotation: 0, y: 0 }, 0.4)
+    .to('#leaf-lb', 1, { scale: 1, rotation: 0, y: 0 }, 0.45)
+    .to('#leaf-lm', 1, { scale: 1, rotation: 0, y: 0 }, 0.5)
+    .to('#leaf-top', 1.5, { scale: 1 }, 0.55)
     .to('#animation', 0.3, { opacity: 0 })
 };
 

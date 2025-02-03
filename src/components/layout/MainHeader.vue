@@ -22,11 +22,18 @@
             <router-link to="/shop_cart"><i class="bi bi-handbag"></i></router-link>
           </li>
           <li>
-            <router-link to="/member"><i class="bi bi-person-circle"></i></router-link>
-          </li>
+  <a v-if="!isLoggedIn" @click="toggleLoginPopup">
+    <i class="bi bi-person-circle" :class="{ 'logged-in': isLoggedIn }"></i>
+  </a>
+  <a v-else @click="confirmLogout">
+    <i class="bi bi-person-circle" :class="{ 'logged-in': isLoggedIn }"></i>
+  </a>
+</li>
         </ul>
       </nav>
     </div>
+    <!-- 使用 v-show 來控制彈窗的顯示與隱藏 -->
+   
   </header>
   <header class="mobile_header">
     <div class="logo">
@@ -76,24 +83,88 @@
       <li><router-link to="/shop">環保市集</router-link></li>
     </ul>
   </nav>
+  <!-- <loginPopupChange v-if="isloginPopup"></loginPopupChange> -->
+     <!-- 添加遮罩層 -->
+  <div 
+    class="overlay_popup" 
+    v-show="isloginPopup" 
+    @click="closeLoginPopup"
+  ></div>
+  <loginPopupChange v-show="isloginPopup" @close="closeLoginPopup"></loginPopupChange>
+
 </template>
 
 <script>
-import { ref } from 'vue';
-import { RouterLink } from 'vue-router';
+import { ref, onMounted } from 'vue';
+import { RouterLink, useRouter } from 'vue-router';
+import loginPopupChange from '@/pages/loginPopupChange.vue';
+// import { ref, onMounted } from 'vue';
+// import { RouterLink, useRouter } from 'vue-router'; // 添加 useRouter
+// import loginPopupChange from '@/pages/loginPopupChange.vue';
+
 export default {
   name: 'MainHeader',
+  components:{loginPopupChange},
   setup() {
+    const router = useRouter(); // 初始化 router
     const isMenuOpen = ref(false);
+    const isloginPopup = ref(false);
+    const isLoggedIn = ref(false);
 
+     // 檢查登入狀態
+     const checkLoginStatus = () => {
+      const loginStatus = localStorage.getItem('isLoggedIn');
+      isLoggedIn.value = loginStatus === 'true';
+    };
+
+    // 在組件掛載時檢查登入狀態
+    onMounted(() => {
+      checkLoginStatus();
+    });
+
+    const toggleLoginPopup = () => {
+      // 只有在未登入狀態下才顯示登入彈窗
+      if (!isLoggedIn.value) {
+        isloginPopup.value = !isloginPopup.value;
+      }
+    };
+
+
+    const closeLoginPopup = () => {
+      isloginPopup.value = false;
+    };
+  
     const toggleMenu = () => {
       isMenuOpen.value = !isMenuOpen.value;
       // console.log('Menu toggled:', isMenuOpen.value);
     };
 
+     // 新增確認登出方法
+     const confirmLogout = () => {
+      const confirmed = window.confirm('確定要登出?');
+      if (confirmed) {
+        // 執行登出操作
+        localStorage.removeItem('isLoggedIn');
+        localStorage.removeItem('userEmail');
+        isLoggedIn.value = false;
+        router.push('/');
+      }
+    };
+
+    const handleLogout = () => {
+  localStorage.removeItem('isLoggedIn');
+  localStorage.removeItem('userEmail');
+  router.push('/');
+};
+
     return {
       isMenuOpen,
+      isloginPopup,
+      isLoggedIn,
+      toggleLoginPopup,
       toggleMenu,
+      closeLoginPopup,
+      confirmLogout,
     };
   },
 };

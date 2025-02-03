@@ -1,4 +1,5 @@
 <script setup>
+// import MainHeader from '@/components/layout/MainHeader.vue';
 import { RouterLink, RouterView } from 'vue-router';
 // import HelloWorld from './components/HelloWorld.vue';
 </script>
@@ -7,7 +8,7 @@ import { RouterLink, RouterView } from 'vue-router';
   <!-- <transition name="fade">
     <router-view />
   </transition> -->
-
+  <!-- <MainHeader></MainHeader> -->
   <router-view v-slot="{ Component }">
     <transition name="fade">
       <component :is="Component" :key="$route.fullPath" />
