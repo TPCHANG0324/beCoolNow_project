@@ -3,60 +3,94 @@
   <div class="si_container_R">
     <div class="si_content_R">
       <nav class="breadcrumb">
-        <a href="#">首頁</a>
-        <p>/</p>
-        <a href="#">購物車</a>
+        <div class="si_bread_r">
+          <a href="#">首頁</a>
+          <p>/</p>
+          <a href="#">購物車</a>
+        </div>
+        <!-- 流程顯示 -->
+        <div class="Sp-checkout-nav-X">
+          <!-- 每一個圓圈 -->
+          <div class="Sp-step-X active">
+            <span class="Sp-badge-X">
+              <div class="Sp-badge-text-X">1</div>
+            </span>
+            <span>購物車</span>
+          </div>
+
+          <div class="Sp-step-X">
+            <span class="Sp-badge-X">
+              <div class="Sp-badge-text-X">2</div>
+            </span>
+            <span>填寫資料</span>
+          </div>
+
+          <div class="Sp-step-X">
+            <span class="Sp-badge-X">
+              <div class="Sp-badge-text-X">3</div>
+            </span>
+            <span>購買完成</span>
+          </div>
+        </div>
       </nav>
-      <!-- 步驟進度條 -->
-      <!-- div... -->
       <!-- 合計 -->
       <div class="si_ordersummary_R">
+        <!-- 頭部區域 -->
         <div class="si_orderhead_R">
           <h2>合計:NT$600</h2>
-          <p class="toggle-details">
+          <!-- 點擊 p.toggle-details 切換明細顯示/隱藏 -->
+          <p class="toggle-details" @click="toggleDetails">
             購物車(1件)
-            <i class="fa-solid fa-angle-down"></i>
+            <!-- 依據是否展開來切換 icon -->
+            <i :class="[`fa-solid`, isOpen ? 'fa-angle-up' : 'fa-angle-down']"></i>
           </p>
         </div>
-        <div class="si_orderdetails_R">
-          <!-- 商品資料 -->
-          <div class="si_orderbottom1_R">
-            <div class="item1">商品資料</div>
-            <div class="item2">優惠</div>
-            <div class="item3">單件價格</div>
-            <div class="item4">數量</div>
-            <div class="item5">小計</div>
-          </div>
-          <div class="si_orderbottom2_R">
-            <div class="middle_item1">
-              <a href="">
-                <img src="../assets/images/Sp13.jpg" style="width: 50px" />
-                <label for="">環保筷子</label>
-              </a>
+
+        <!-- 明細區域 -->
+        <transition name="slide-fade">
+          <div v-if="isOpen" class="si_orderdetails_R">
+            <!-- 商品資料 -->
+            <div class="si_orderbottom1_R">
+              <div class="item1">商品資料</div>
+              <div class="item2">優惠</div>
+              <div class="item3">單件價格</div>
+              <div class="item4">數量</div>
+              <div class="item5">小計</div>
             </div>
-            <div class="middle_item2">暫定優惠</div>
-            <div class="middle_item3">NT$500</div>
-            <div class="middle_item4">1</div>
-            <div class="middle_item5">NT$500</div>
-          </div>
-          <div class="si_orderbottom3_R">
-            <div class="bottom3_1">
-              <span class="pull-left">小計:</span>
-              <span class="pull-right">NT$500</span>
+
+            <div class="si_orderbottom2_R">
+              <div class="middle_item1">
+                <a href="#">
+                  <img src="../assets/images/Sp13.jpg" style="width: 50px" />
+                  <label>環保筷子</label>
+                </a>
+              </div>
+              <div class="middle_item2">暫定優惠</div>
+              <div class="middle_item3">NT$500</div>
+              <div class="middle_item4">1</div>
+              <div class="middle_item5">NT$500</div>
             </div>
-            <div class="bottom3_2">
-              <span class="pull-left">運費:</span>
-              <span class="pull-right">NT$80</span>
+
+            <div class="si_orderbottom3_R">
+              <div class="bottom3_1">
+                <span class="pull-left">小計:</span>
+                <span class="pull-right">NT$500</span>
+              </div>
+              <div class="bottom3_2">
+                <span class="pull-left">運費:</span>
+                <span class="pull-right">NT$80</span>
+              </div>
+              <div class="bottom3_3">
+                <span class="pull-left">合計:</span>
+                <span class="pull-right">NT$580</span>
+              </div>
             </div>
-            <div class="bottom3_3">
-              <span class="pull-left">合計:</span>
-              <span class="pull-right">NT$580</span>
-            </div>
+
+            <!-- <div class="si_orderbottom_R">
+              <i class="fa-solid fa-angle-down"></i>
+            </div> -->
           </div>
-          <div class="si_orderbottom_R">
-            <i class="fa-solid fa-angle-down"></i>
-          </div>
-        </div>
+        </transition>
       </div>
       <!-- 下方 -->
       <div class="si_bottomsection_R">
@@ -111,19 +145,27 @@
                   <input type="text" class="input" />
                 </div>
               </div>
-              <div class="si_address">
-                <label for="">地址</label>
-                <p>送貨地點:台灣</p>
-                <div class="si_aselect">
-                  <select id="" name="">
-                    <option value="台北市">台北市</option>
-                  </select>
-                  <select id="" name="">
-                    <option value="大安區">大安區</option>
-                  </select>
-                </div>
-                <div class="address2">
-                  <input type="text" placeholder="地址" class="input" />
+              <div id="app">
+                <div class="si_address">
+                  <label for="">地址</label>
+                  <p>送貨地點:台灣</p>
+                  <div class="si_aselect">
+                    <!-- 城市選擇 -->
+                    <select v-model="selectedCity">
+                      <option v-for="city in cities" :value="city.name" :key="city.name">
+                        {{ city.name }}
+                      </option>
+                    </select>
+                    <!-- 區域選擇 -->
+                    <select>
+                      <option v-for="district in selectedDistricts" :value="district" :key="district">
+                        {{ district }}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="address2">
+                    <input type="text" placeholder="地址" class="input" />
+                  </div>
                 </div>
               </div>
             </div>
@@ -178,6 +220,38 @@
   </div>
 </template>
 
-<script>
-import { RouterLink } from 'vue-router';
+<script setup>
+import { ref, computed } from 'vue'
+import { RouterLink } from 'vue-router'
+
+// -- 加入「展開/收合」邏輯 --
+const isOpen = ref(false)
+function toggleDetails() {
+  isOpen.value = !isOpen.value
+}
+
+// 定義城市和區域的資料
+const cities = [
+  {
+    name: '台北市',
+    districts: ['大安區', '信義區', '中正區', '中山區']
+  },
+  {
+    name: '新北市',
+    districts: ['板橋區', '中和區', '永和區', '新店區']
+  },
+  {
+    name: '台中市',
+    districts: ['西屯區', '北屯區', '南屯區', '中區']
+  }
+]
+
+// 當前選擇的城市
+const selectedCity = ref('台北市')
+
+// 根據選擇的城市，動態計算區域
+const selectedDistricts = computed(() => {
+  const city = cities.find(city => city.name === selectedCity.value)
+  return city ? city.districts : []
+})
 </script>
