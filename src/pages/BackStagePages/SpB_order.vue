@@ -80,6 +80,7 @@
     <BackStageBigPopup class="SpB_editViewOrder_H">
       <span>
         <p>訂單資訊&nbsp;編輯與查看</p>
+        <i class="fa-solid fa-x"></i>
       </span>
       <div class="SpB_scrollDiv_H">
         <article class="SpB_orderNum_H">
