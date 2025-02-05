@@ -1,4 +1,4 @@
-p// @mixin bgimage($list){
+// @mixin bgimage($list){
 //     @each $k in $list{
 //         .img-#{$k}{
 //             background-image: url('@/assets/images/#{$k}.png');
@@ -10,6 +10,7 @@ p// @mixin bgimage($list){
 // }
 
 // @include bgimage(thunder-rainy)
+
 
 .Ic_header_R {
   background-image: url('@/assets/images/Ic_b.png');
@@ -64,8 +65,8 @@ p// @mixin bgimage($list){
     cursor: pointer;
 
     img {
-      width: 200px;
-      height: 200px;
+      width: 100px;
+      height: 100px;
     }
   }
 }
@@ -92,11 +93,20 @@ p// @mixin bgimage($list){
 .hover-icon_Info{
   font-size: 200px;
   transition: transform 0.3s ease, color 0.3s ease; /* 增加平滑過渡效果 */
-  color: #666464;
+  color: #747474;
+  // margin-left: 40px;
 }
 .hover-icon_Info:hover{
   transform: scale(1.1); /* 放大到 1.5 倍 */
   color: #6b8961; /* 改變圖示顏色 */
+}
+
+.fa-temperature-arrow-up {
+  padding-left: 40px;
+}
+.fa .fa-tree{
+  padding-left: 140px;
+
 }
 
 
@@ -135,6 +145,8 @@ p// @mixin bgimage($list){
 
     @include max_820 {}
   }
+
+  
 
   p {
     @include PC_h1($Ivory_white);

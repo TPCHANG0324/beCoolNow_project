@@ -15,7 +15,7 @@ $header_layout: 1200px !default;
     @include max_1100 {
         display: none;
     }
-
+    
     .header-wrapper {
 
         padding: 15px 0;
@@ -25,6 +25,7 @@ $header_layout: 1200px !default;
         align-items: center;
         justify-content: space-between;
 
+        
         .logo {
             width: 140px;
 
@@ -44,6 +45,7 @@ $header_layout: 1200px !default;
                     margin-left: 20px;
 
                     a {
+                        
                         @include PC_h4($Gray_1);
                         font-weight: bold;
 
@@ -51,6 +53,7 @@ $header_layout: 1200px !default;
                             color: $Yellow_1;
                         }
 
+                     
                         .bi-person-circle {
                             &:hover {
                                 color: $Yellow_1;
@@ -74,6 +77,16 @@ $header_layout: 1200px !default;
     }
 
 }
+
+  
+//   .bi-person-circle {
+//     color: gray;
+//     transition: color 0.3s;
+//   }
+  
+//   .bi-person-circle.logged-in {
+//     color: green;
+//   }
 
 
 

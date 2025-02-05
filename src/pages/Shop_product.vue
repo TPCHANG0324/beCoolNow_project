@@ -6,13 +6,7 @@
   <!-- 環保市集_商品頁面_商品購買 -->
   <section class="Sp_productChoice_H">
     <!-- 麵包屑導航 -->
-    <nav class="breadCrumb">
-      <ol>
-        <li><a href="#">首頁</a></li>
-        &nbsp;&gt;&nbsp;
-        <li>NT$100~$200</li>
-      </ol>
-    </nav>
+    <BreadcrumbNavigation :price-range="currentPriceRange" />
 
     <!-- 選擇規格及數量 -->
     <section class="Sp_productChoice_top_H">
@@ -43,12 +37,6 @@
         <section>
           <p>規格</p>
 
-          <!-- <div class="Sp_productChoice_btnGroup_H">
-              <button type="button">200ml</button>
-              <button type="button">350ml</button>
-              <button type="button">500ml</button>
-              <button type="button">750ml</button>
-            </div> -->
           <div class="Sp_productChoice_btnGroup_H">
             <select v-model="selectedSize" class="form-select" @change="selectSize">
               <option value="" disabled>請選擇容量</option>
@@ -121,42 +109,6 @@
     </article>
   </section>
 
-  <!-- 環保市集_商品頁面_相關商品 -->
-  <!-- <section class="Sp_productChoice_related_H">
-      <h3>相關商品</h3>
-      <ol>
-        <li>
-          <a href="">
-            <img src="../assets/images/Sp04.jpg" alt="" />
-            <p>環保吸管3</p>
-          </a>
-        </li>
-        <li>
-          <a href="">
-            <img src="../assets/images/Sp11.jpg" alt="" />
-            <p>環保筷子1</p>
-          </a>
-        </li>
-        <li>
-          <a href="">
-            <img src="../assets/images/Sp09.jpg" alt="" />
-            <p>環保杯子2</p>
-          </a>
-        </li>
-        <li>
-          <a href="">
-            <img src="../assets/images/Sp06.jpg" alt="" />
-            <p>環保袋子2</p>
-          </a>
-        </li>
-        <li>
-          <a href="">
-            <img src="../assets/images/Sp08.jpg" alt="" />
-            <p>環保杯子1</p>
-          </a>
-        </li>
-      </ol>
-    </section> -->
 
   <!-- 環保市集_商品頁面_相關商品 -->
   <section class="Sp_productChoice_related_H">
@@ -205,17 +157,34 @@ import MainHeader from '@/components/layout/MainHeader.vue';
 import MainFooter from '@/components/layout/MainFooter.vue';
 // import { Swiper, SwiperSlide } from 'swiper/vue';
 // import { Navigation, Pagination } from 'swiper';
+import BreadcrumbNavigation from '@/components/BreadcrumbNavigation.vue'
+import { PRICE_RANGES } from '@/store/priceRanges.js'
 
 export default {
+  
   name: 'ProductChoiceButtonGroup',
   name: 'SizeSelector',
+  components: {
+    BreadcrumbNavigation
+  },
   data() {
     return {
+      productPrice:299,
       sizes: ['200ml', '350ml', '500ml', '750ml'], // 按鈕選項
       selectedSize: '', // 當前選中的按鈕
 
       quantity: 1, // 初始化數量
+      // currentPriceRange: PRICE_RANGES[0].value // 新增價格區間
     };
+  },
+  computed: {
+    currentPriceRange() {
+      // 根據商品價格找到對應區間
+      const range = PRICE_RANGES.find(
+        range => this.productPrice > range.min && this.productPrice <= range.max
+      );
+      return range ? range.value : 'NT$300以上';
+    },
   },
   methods: {
     selectSize(size) {
@@ -232,12 +201,11 @@ export default {
         this.quantity--;
       }
     },
-    // // 手動輸入時的檢查
-    // handleInput(event) {
-    //   const value = parseInt(event.target.value, 10);
-    //   this.quantity = isNaN(value) || value < 0 ? 0 : value;
-
-    // },
+   // 可以新增更新價格區間的方法
+   updatePriceRange(priceRange) {
+      this.currentPriceRange = priceRange;}
   },
 };
+
+
 </script>

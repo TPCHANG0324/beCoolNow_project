@@ -202,7 +202,7 @@ export default {
     quantity: 1,
     status: "已出貨",
     address: "新北市板橋區文化路二段",
-    source: "綠色商店"
+    source: "環保市集"
   },
   {
     orderId: "ORD003",
@@ -212,7 +212,7 @@ export default {
     quantity: 1,
     status: "已送達",
     address: "台中市西屯區逢甲路",
-    source: "永續生活"
+    source: "環保市集"
   },
   {
     orderId: "ORD004",
@@ -222,7 +222,7 @@ export default {
     quantity: 2,
     status: "處理中",
     address: "高雄市鳳山區",
-    source: "環保聯盟"
+    source: "環保市集"
   },
   {
     orderId: "ORD005",
@@ -232,7 +232,7 @@ export default {
     quantity: 1,
     status: "已送達",
     address: "台南市東區",
-    source: "綠色生活"
+    source: "環保市集"
   },
   {
     orderId: "ORD006",
@@ -252,7 +252,7 @@ export default {
     quantity: 1,
     status: "已出貨",
     address: "新北市板橋區文化路二段",
-    source: "綠色商店"
+    source: "環保市集"
   }
       ],
       personalRecords: [

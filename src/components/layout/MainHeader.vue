@@ -91,7 +91,19 @@
     @click="closeLoginPopup"
   ></div>
   <loginPopupChange v-show="isloginPopup" @close="closeLoginPopup"></loginPopupChange>
-
+  <!-- <div v-if="showLogoutConfirm" class="custom-modal">
+  <div class="modal-content">
+    <h3 style="color: red; font-size: 22px;">🚨 是否確定登出？</h3>
+    <p>
+      <span style="color: green; font-weight: bold;">✅ 點選確認</span>：登出後返回首頁<br>
+      <span style="color: blue; font-weight: bold;">❌ 點選取消</span>：返回會員頁面
+    </p>
+    <div class="modal-buttons">
+      <button @click="handleConfirmLogout" class="confirm-btn">確認登出</button>
+      <button @click="handleCancelLogout" class="cancel-btn">取消</button>
+    </div>
+  </div>
+</div> -->
 </template>
 
 <script>
@@ -110,7 +122,9 @@ export default {
     const isMenuOpen = ref(false);
     const isloginPopup = ref(false);
     const isLoggedIn = ref(false);
+    const showLogoutConfirm = ref(false);
 
+  
      // 檢查登入狀態
      const checkLoginStatus = () => {
       const loginStatus = localStorage.getItem('isLoggedIn');
@@ -141,14 +155,17 @@ export default {
 
      // 新增確認登出方法
      const confirmLogout = () => {
-      const confirmed = window.confirm('確定要登出?');
+      const confirmed = window.confirm('🚨是否確定登出？\n點選確定💔，登出後返回首頁\n點選取消❤️，返回會員頁面');
       if (confirmed) {
         // 執行登出操作
         localStorage.removeItem('isLoggedIn');
         localStorage.removeItem('userEmail');
         isLoggedIn.value = false;
         router.push('/');
-      }
+      }else {
+    // 若點選取消，導向 member 頁面
+    router.push('/member');
+  }
     };
 
     const handleLogout = () => {

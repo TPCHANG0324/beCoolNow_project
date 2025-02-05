@@ -77,14 +77,16 @@
 
         h1 {
             @include PC_h1($Ivory_white);
-            @include h1_stroke;
-            padding-top: 160px
+            // @include h1_stroke;
+            padding-top: 160px;
+            text-shadow: $text_shadow;
         }
 
         h2 {
             @include PC_h2($Ivory_white);
-            @include h1_stroke;
+            // @include h1_stroke;
             padding-bottom: 80px;
+            text-shadow: $text_shadow;
         }
     }
 }
