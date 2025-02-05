@@ -12,6 +12,8 @@
     </div>
     <h3 class="Ac_h3">21 日減碳環保活動</h3>
     <!-- 卡片容器 -->
+     {{ cardLimit
+ }}
     <div class="daily_card" data-expanded="false">
       <!-- 卡片範例 1 -->
       <div
@@ -40,7 +42,7 @@
   </div>
 
   <div v-if="cardLimit !== cardData.length" id="learnMoreBtn" class="learn_more">
-    <RouterLink @click.prevent="expandCards">Learn More</RouterLink>
+    <a @click.prevent="expandCards">Learn More</a>
   </div>
 
   <div v-else class="collapse_section">
@@ -140,14 +142,15 @@
 import { ref, onMounted, watch, nextTick } from 'vue';
 import MainHeader from '@/components/layout/MainHeader.vue';
 import MainFooter from '@/components/layout/MainFooter.vue';
-import defaultAvatar from '@/assets/images/defaultavatar.jpeg';
-import xiaoming from '@/assets/images/Ac08.jpg';
-import earthMan from '@/assets/images/newAC.png';
+// import defaultAvatar from '@/assets/images/defaultavatar.jpeg';
+// import xiaoming from '@/assets/images/Ac08.jpg';
+// import earthMan from '@/assets/images/newAC.png';
 import member_login from '../pages/popup.vue';
 import popupnewmember from '../pages/popupnewmember.vue';
 import treeanimation from '@/components/treeanimation.vue';
 import { RouterLink } from 'vue-router';
 import loginPopupChange from '@/pages/loginPopupChange.vue';
+// import Ac02 from '@/assets/images/Ac02.jpg'
 
 // 定義響應式數據
 const letters = ref(JSON.parse(localStorage.getItem('letters')) || []);
@@ -290,29 +293,33 @@ JSON.parse(localStorage.getItem('cardData')) || [
 const currentCaptcha = ref();
 const letterCardWidth = ref(0);
 const cardLimit = ref(6);
+const isClicked = ref(false);
 const treePopup = ref(null);
-// const xiaoming = new URL('@/assets/images/Ac08.jpg', import.meta.url).href;
-// const earthMan = new URL('@/assets/images/newAC.png', import.meta.url).href;
-// const defaultAvatar = new URL('@/assets/images/defaultavatar.jpeg', import.meta.url).href;
+const xiaoming = new URL('@/assets/images/Ac08.jpg', import.meta.url).href;
+const earthMan = new URL('@/assets/images/newAC.png', import.meta.url).href;
+const defaultAvatar = new URL('@/assets/images/defaultavatar.jpeg', import.meta.url).href;
 
 const expandCards = () => {
+
   cardLimit.value = cardData.value.length;
-  nextTick(() => {
-    const dailyCard = document.querySelector('.daily_card');
-    if (dailyCard) {
-      dailyCard.setAttribute('data-expanded', 'true');
-    }
-  });
+  // nextTick(() => {
+  //   const dailyCard = document.querySelector('.daily_card');
+  //   if (dailyCard) {
+  //     dailyCard.setAttribute('data-expanded', 'true');
+  //   }
+  // });
 };
 
+
 const collapseCards = () => {
+  
   cardLimit.value = 6;
-  nextTick(() => {
-    const dailyCard = document.querySelector('.daily_card');
-    if (dailyCard) {
-      dailyCard.setAttribute('data-expanded', 'false');
-    }
-  });
+  // nextTick(() => {
+  //   const dailyCard = document.querySelector('.daily_card');
+  //   if (dailyCard) {
+  //     dailyCard.setAttribute('data-expanded', 'false');
+  //   }
+  // });
 };
 
 
@@ -331,6 +338,8 @@ watch(totalLetters, (newTotal) => {
   localStorage.setItem('totalLetters', newTotal.toString());
 });
 const done = (key) => {
+  if(treePopup.value) return
+  // isClicked.value = true
   // 遞增 action 計數
   cardData.value[key].action += 1;
   
@@ -342,7 +351,7 @@ const done = (key) => {
 
   setTimeout(() => {
     treePopup.value = null;
-  }, 4000);
+  }, 3000);
 };
 
 // 監聽 cardData 變化並儲存到 localStorage

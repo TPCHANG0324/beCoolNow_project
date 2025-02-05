@@ -1,4 +1,4 @@
-// @mixin bgimage($list){
+p// @mixin bgimage($list){
 //     @each $k in $list{
 //         .img-#{$k}{
 //             background-image: url('@/assets/images/#{$k}.png');
@@ -89,6 +89,17 @@
   opacity: 1;
 }
 
+.hover-icon_Info{
+  font-size: 200px;
+  transition: transform 0.3s ease, color 0.3s ease; /* 增加平滑過渡效果 */
+  color: #666464;
+}
+.hover-icon_Info:hover{
+  transform: scale(1.1); /* 放大到 1.5 倍 */
+  color: #6b8961; /* 改變圖示顏色 */
+}
+
+
 .slide-panel {
   position: fixed;
   top: 0;
@@ -129,6 +140,8 @@
     @include PC_h1($Ivory_white);
     font-size: 1rem;
     margin-top: 30px;
+    line-height: 180%;
+    letter-spacing: 1px;
 
     @include max_820 {
       font-size: 24px;
@@ -262,7 +275,7 @@
             width: 400px;
             font-size: 20px;
             font-weight: bold;
-            line-height: 140%;
+            line-height: 180%;
             padding: 10px;
 
             @include max_820 {
@@ -413,7 +426,8 @@
     margin: 0 auto;
     margin-top: 20px;
     font-size: 20px;
-    line-height: 1.5;
+    line-height: 2.0;
+    letter-spacing: normal;
 
     @include max_820 {
       width: 80%;
@@ -682,6 +696,12 @@
       border-radius: 10px;
       text-align: center;
       color: #2E4E3F;
+      // transition: transform 0.1s ease-in-out;
+      &.shake {
+        animation: shakeAnimation 0.5s ease-in-out;
+      }
+    }
+  }
 
       h4 {
         color: #2E4E3F;
@@ -725,54 +745,54 @@
     }
 
     #Ic_feedback_R {
-      margin-top: 20px;
-      font-size: 16px;
-      font-weight: bold;
+      // margin-top: 20px;
+      // font-size: 16px;
+      // font-weight: bold;
+      // text-align: center;
+  margin-top: 1rem;
+  font-weight: bold;
+  font-size: 1.2rem;
+  min-height: 2rem;
     }
-  }
+  
 
   /* 答對動畫 */
   #Ic_feedback_R.correct-animation {
     animation: correctFlash 1s ease-in-out;
+    animation: correctAnimation 0.5s ease-in-out;
+  color: #4CAF50;
   }
 
-  @keyframes correctFlash {
-    0% {
-      background-color: #a8e6cf;
-      transform: scale(1);
-    }
-
-    50% {
-      background-color: #56c596;
-      transform: scale(1.1);
-    }
-
-    100% {
-      background-color: #a8e6cf;
-      transform: scale(1);
-    }
+  @keyframes correctAnimation {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
   }
 
   /* 答錯動畫 */
   #Ic_feedback_R.wrong-animation {
     animation: wrongShake 1s ease-in-out;
+    animation: wrongAnimation 0.5s ease-in-out;
+    color: #f44336;
   }
 
-  @keyframes wrongShake {
-
-    0%,
-    100% {
-      transform: translateX(0);
-    }
-
-    25% {
-      transform: translateX(-10px);
-    }
-
-    75% {
-      transform: translateX(10px);
-    }
+  @keyframes wrongAnimation {
+    0% { transform: scale(1); }
+    25% { transform: scale(0.95); }
+    50% { transform: scale(1.05); }
+    75% { transform: scale(0.95); }
+    100% { transform: scale(1); }
+  } 
+  
+  /* 晃动动画 */
+  @keyframes shakeAnimation {
+    0% { transform: translate(-50%, -50%); }
+    25% { transform: translate(-60%, -50%); }
+    50% { transform: translate(-40%, -50%); }
+    75% { transform: translate(-55%, -50%); }
+    100% { transform: translate(-50%, -50%); }
   }
+  .shake {
+    animation: shakeAnimation 0.5s ease-in-out !important;
+  }  
 
-
-}
