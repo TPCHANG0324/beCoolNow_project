@@ -189,14 +189,14 @@ import { Navigation, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import 'swiper/swiper-bundle.css';
 import { ref } from 'vue';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faCloudBolt } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import { faWater } from '@fortawesome/free-solid-svg-icons';
-import { faHurricane } from '@fortawesome/free-solid-svg-icons'; // 匯入 hurricane 圖示
-import { faTree } from '@fortawesome/free-solid-svg-icons'; // 匯入 tree 圖示
-import { faTemperatureArrowUp } from '@fortawesome/free-solid-svg-icons'; // 匯入圖示
-import { faHeadSideMask } from '@fortawesome/free-solid-svg-icons'; // 匯入 head-side-mask 圖示
+// import { library } from '@fortawesome/fontawesome-svg-core';
+// import { faCloudBolt } from '@fortawesome/free-solid-svg-icons';
+// import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+// import { faWater } from '@fortawesome/free-solid-svg-icons';
+// import { faHurricane } from '@fortawesome/free-solid-svg-icons'; // 匯入 hurricane 圖示
+// import { faTree } from '@fortawesome/free-solid-svg-icons'; // 匯入 tree 圖示
+// import { faTemperatureArrowUp } from '@fortawesome/free-solid-svg-icons'; // 匯入圖示
+// import { faHeadSideMask } from '@fortawesome/free-solid-svg-icons'; // 匯入 head-side-mask 圖示
 
 
 
