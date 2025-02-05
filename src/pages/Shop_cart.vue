@@ -1,6 +1,6 @@
 <template>
 
-  <!-- <MainHeader /> -->
+  <MainHeader />
   <!-- 環保市集 - 購物車，縮寫Sp - 功能 - 代號X -->
   <main>
     <div class="Sp-X">
@@ -168,8 +168,11 @@
       </div>
     </div>
 
-    <!-- <p>{{ counterStore.count }}</p>
-    <button @click="counterStore.accumulate">測試按鈕</button> -->
+    <!-- <p>{{ counterStore.count }}</p> -->
+    <!-- <button @click="counterStore.accumulate">測試按鈕</button> -->
+
+    <button @click="testBtn">測試按鈕</button>
+
 
     <!-- 測試用：註冊 -->
     <form action="" @submit.prevent="register">
@@ -183,11 +186,6 @@
       密碼：<input type="password" name="password" v-model="password2">
       <input type="submit" value="登入">
     </form>
-
-    <!-- <div :editor="editor" @ready="onReady" @change="onChange">
-      <ckeditor v-model="editorData" :editor="editor" @ready="onReady" @change="onChange"></ckeditor>
-    </div> -->
-
   </main>
 
   <MainFooter class="removeMT" />
@@ -199,6 +197,15 @@ import MainFooter from '@/components/layout/MainFooter.vue';
 import MainHeader from '@/components/layout/MainHeader.vue';
 import { useCounterStore } from '@/store/cart';
 import { ref, computed } from 'vue';
+//---------------------測試按鈕
+
+const testBtn = async () => {
+  const res = await fetch('/tid103/g1/php/test.php')
+  const data = await res.json()
+  console.log(data)
+}
+
+
 
 //---------------------測試用：註冊
 
@@ -210,7 +217,7 @@ const register = async () => {
     alert("帳號或密碼不可為空！");
     return;
   }
-  const url = `/beCoolNow_project/php/register.php`;
+  const url = `/tid103/g1/php/register.php`;
   try {
     const res = await fetch(url, {
       method: 'POST',
@@ -246,7 +253,7 @@ const login = async () => {
     alert("帳號或密碼不可為空！");
     return;
   }
-  const url = `/beCoolNow_project/php/login.php`;
+  const url = `/tid103/g1/php/login.php`;
   try {
     const res = await fetch(url, {
       method: 'POST',
@@ -475,5 +482,3 @@ const onTouchMove = (e) => {
   e.currentTarget.scrollLeft = scrollLeft.value - walk; // 更新滾動位置
 };
 </script>
-
-

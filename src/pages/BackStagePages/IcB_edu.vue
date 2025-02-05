@@ -57,6 +57,7 @@
     <BackStageSmallPopup class="IcB_eduAddPopup_H">
       <span>
         <p>教育影片&nbsp;新增</p>
+        <i class="fa-solid fa-x"></i>
       </span>
       <div>
         <div class="IcB_addMain_H">
@@ -79,6 +80,7 @@
     <BackStageSmallPopup class="IcB_eduEditPopup_H">
       <span>
         <p>教育影片&nbsp;編輯</p>
+        <i class="fa-solid fa-x" @click="closePopup"></i>
       </span>
       <div>
         <div class="IcB_addMain_H">

@@ -65,7 +65,8 @@
   transform: translate(-50%, -50%);
 
   span {
-    display: block;
+    display: flex;
+    justify-content: space-between;
     height: 60px;
     width: 100%;
     background-color: $Green_4;
@@ -74,6 +75,16 @@
     line-height: 60px;
     font-weight: bold;
     padding-left: 16px;
+    p{
+      display: inline-block;
+    }
+    .fa-solid{
+      display: flex;
+      justify-content: end;
+      margin-right: 20px;
+      line-height: 60px;
+      cursor: pointer;
+    }
   }
 
   div {
@@ -197,7 +208,8 @@
   transform: translate(-50%, -50%);
 
   span {
-    display: block;
+    display: flex;
+    justify-content: space-between;
     height: 60px;
     width: 100%;
     background-color: $Green_4;
@@ -206,6 +218,16 @@
     line-height: 60px;
     font-weight: bold;
     padding-left: 16px;
+    p{
+      display: inline-block;
+    }
+    .fa-solid{
+      display: flex;
+      justify-content: end;
+      margin-right: 20px;
+      line-height: 60px;
+      cursor: pointer;
+    }
   }
 
   section {
@@ -334,7 +356,7 @@
 }
 
 .IcB_editPopup_H {
-  display: none;
+  // display: none;
 
   .UploadPic {
     color: $Gray_3;
@@ -343,7 +365,7 @@
 }
 
 .IcB_articleDeletePopup_H {
-  display: none;
+  // display: none;
 }
 
 //-------------------------------------------//
@@ -351,7 +373,7 @@
 
 .IcB_eduAddPopup_H {
 
-  // display: none;
+  display: none;
 
   .UploadPic {
     color: $Gray_3;
@@ -364,7 +386,7 @@
 }
 
 .IcB_eduEditPopup_H {
-  display: none;
+  // display: none;
 
   .UploadPic {
     color: $Gray_3;
@@ -623,5 +645,14 @@
     }
   }
 }
-
+  /* 淡入淡出 */
+  .fade-enter-active,
+  .fade-leave-active {
+    transition: opacity 0.3s ease;
+  }
+  
+  .fade-enter-from,
+  .fade-leave-to {
+    opacity: 0;
+  }
 //-------------------------------------------//

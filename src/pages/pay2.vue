@@ -34,7 +34,7 @@
                 <label for="agree">我已詳細閱讀並同意隱私權政策</label>
             </div> -->
           </div>
-          <button type="submit" class="bcn-btn-primary">立即以 信用卡 捐款</button>
+          <button type="submit" class="bcn-btn-primary" @click="sendEmail">立即以 信用卡 捐款</button>
         </form>
       </div>
       <a href="./pay1/" class="bc-prev-step-button">
@@ -46,11 +46,36 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import MainHeader from '@/components/layout/MainHeader.vue';
 import MainFooter from '@/components/layout/MainFooter.vue';
+import emailjs from '@emailjs/browser';
+// export default {
+//   name: 'pay2',
+// };
 
-export default {
-  name: 'pay2',
-};
+
+const email = `sunny.h.ho@gmail.com`;
+const sendEmail = async () => {
+  try {
+    const response = await emailjs.send(
+      'service_2p5x0aa', // 替換成你的 Service ID
+      'template_xc5rnqm', // 替換成你的 Template ID (捐款感謝信的 Template ID)
+      {
+        to_name: 'test name', // 使用者姓名
+        site_name: '涼城即時', // 你的網站名稱
+        donation_date: new Date(), // 捐款日期
+        donation_amount: 100, // 捐款金額
+        to_email: email,
+        // to_email: donationData.userEmail, // 收件人信箱
+      },
+    );
+    console.log('SUCCESS!', response.status,)
+  } catch (e) {
+    console.log(e)
+  }
+}
+
+
+
 </script>

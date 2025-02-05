@@ -1,3 +1,5 @@
+// import { name } from 'dayjs/locale/zh-cn';
+import { name } from 'dayjs/locale/zh-cn';
 import { createRouter, createWebHistory } from 'vue-router';
 
 // path → component
@@ -27,12 +29,26 @@ const routes = [
     },
   },
   {
-    path: '/social/',
+    path: '/social',
+    name: 'social',
     component: () => import('@/pages/social.vue'),
     meta: {
       title: '社群中心',
       // requiredLogin: true
     },
+    children: [
+      {
+        path: 'article/:id',
+        name: 'article-detail',
+        component: () => import('@/pages/Social_article.vue'),
+        meta: {
+          // title: '文章詳情',
+          title: null,
+          dynamicTitle: true
+        },
+        props: true
+      }
+    ]
     // children:[
     //   {
     //     path:'',
@@ -44,14 +60,14 @@ const routes = [
     //   },
     // ]
   },
-  {
-    path: '/social_article/',
-    component: () => import('@/pages/Social_article.vue'),
-    meta: {
-      title: '社群中心_文章',
-      // requiredLogin: true
-    },
-  },
+  // {
+  //   path: '/social_article/',
+  //   component: () => import('@/pages/Social_article.vue'),
+  //   meta: {
+  //     title: '社群中心_文章',
+  //     // requiredLogin: true
+  //   },
+  // },
   {
     path: '/About/',
     component: () => import('@/pages/About.vue'),
@@ -344,5 +360,12 @@ router.beforeEach(async (to, from, next) => {
   }
 
 });
+
+router.afterEach((to, from) => {
+  //設置社群中心 - 文章詳情 頁面的 title
+  if (to.meta.title && !to.meta.dynamicTitle) {
+    document.title = to.meta.title
+  }
+})
 // 匯出 router
 export default router;

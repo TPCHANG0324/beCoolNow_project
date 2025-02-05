@@ -80,6 +80,7 @@
     <BackStageSmallPopup class="MmB_EditView_H">
       <span>
         <p>編輯與查看</p>
+        <i class="fa-solid fa-x"></i>
       </span>
       <section>
         <article>

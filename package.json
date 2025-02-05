@@ -31,7 +31,8 @@
   "dependencies": {
     "@chenfengyuan/vue-carousel": "^2.0.0",
     "@ckeditor/ckeditor5-build-classic": "^44.1.0",
-    "@ckeditor/ckeditor5-vue": "^4.0.1",
+    "@ckeditor/ckeditor5-vue": "^7.3.0",
+    "@emailjs/browser": "^4.4.1",
     "@fortawesome/fontawesome-svg-core": "^6.7.2",
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
     "@fortawesome/vue-fontawesome": "^3.0.8",

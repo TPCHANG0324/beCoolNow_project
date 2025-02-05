@@ -59,6 +59,7 @@
     <BackStageSmallPopup class="IcB_addQAndAPopup_H">
       <span>
         <p>互動問答&nbsp;新增</p>
+        <i class="fa-solid fa-x"></i>
       </span>
       <div>
         <div class="IcB_addMain_H">
@@ -89,6 +90,7 @@
     <BackStageSmallPopup class="IcB_editQAndAPopup_H">
       <span>
         <p>互動問答&nbsp;編輯</p>
+        <i class="fa-solid fa-x" @click="closePopup"></i>
       </span>
       <div>
         <div class="IcB_addMain_H">

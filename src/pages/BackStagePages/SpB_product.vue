@@ -80,6 +80,7 @@
     <BackStageBigPopup class="SpB_addProduct_H">
       <span>
         <p>商品資訊&nbsp;新增</p>
+        <i class="fa-solid fa-x" @click="closePopup"></i>
       </span>
       <section>
         <article class="SpB_leftBlockPopup_H">
@@ -130,6 +131,7 @@
     <BackStageBigPopup class="SpB_editProduct_H">
       <span>
         <p>商品資訊&nbsp;編輯與查看</p>
+        <i class="fa-solid fa-x"></i>
       </span>
       <section>
         <article class="SpB_leftBlockPopup_H">
