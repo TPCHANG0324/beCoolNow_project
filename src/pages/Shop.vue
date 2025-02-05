@@ -13,10 +13,10 @@
         <!-- 左：價格選擇 -->
         <div class="fliter_section_S">
           <ul>
-            <li><a href="#">NT$100~$200</a></li>
-            <li><a href="#">NT$200~$300</a></li>
-            <li><a href="#">NT$300~$400</a></li>
-            <li><a href="#">NT$400~$500</a></li>
+            <li><a href="#">NT$100~$199</a></li>
+            <li><a href="#">NT$200~$299</a></li>
+            <li><a href="#">NT$300~$399</a></li>
+            <li><a href="#">NT$400~$499</a></li>
             <li><a href="#">NT$500 以上</a></li>
           </ul>
         </div>
