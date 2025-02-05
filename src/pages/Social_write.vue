@@ -49,6 +49,12 @@
         <button type="submit">送出文章</button>
       </form>
     </div>
+
+    <!-- 測試留言板套件 -->
+    <!-- <div>  
+        <ckeditor v-model="data" :editor="editor"></ckeditor>  
+    </div>  -->
+
   </main>
   <MainFooter class="removeMT" />
 </template>
@@ -56,4 +62,9 @@
 <script setup>
 import MainFooter from '@/components/layout/MainFooter.vue';
 import MainHeader from '@/components/layout/MainHeader.vue';
+
+// 測試留言板套件
+// const data = ref('<p>这里是 CKEditor 示例内容</p>'); // 初始化内容  
+// const editor = ClassicEditor; // 使用 ClassicEditor 
+
 </script>
