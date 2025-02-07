@@ -6,6 +6,8 @@ body {
     background-color: #f5f5dc;
 }
 
+
+
 .bcn-donation-container {
     display: flex;
     flex-direction: column;
@@ -37,6 +39,9 @@ body {
         &:hover {
             background-color: #d6e3b5;
         }
+
+
+      
     
         // 左側箭頭樣式
         .bc-prev-step-icon {
@@ -44,6 +49,8 @@ body {
             margin-right: 10px;
             color: #4a4a4a;
         }
+
+       
     
     
     
@@ -110,6 +117,13 @@ body {
     // margin-bottom: 40px;
     // padding: 50px;
     height: 500px;
+
+    // .error-message {
+    //     color: #dc3545;
+    //     font-size: 0.875rem;
+    //     margin-top: 0.25rem;
+    //     display: block;
+    //   }
     .bcn-btn-primary {
         background: #d8ba5b;
         border: none;
@@ -156,11 +170,16 @@ body {
         font-size: 14px;
         font-weight: 400;
         display: block;
-        margin-bottom: 5px;
+        // margin-bottom: 5px;
         text-shadow: none;
         text-align: left;
         // padding-left: 98px;
         // padding-right: 97px;
+    }
+
+    .input-group {
+        position: relative;
+        margin-bottom: 20px;  // 給予合適的底部間距
     }
 
     .bcn-input-text {
@@ -168,17 +187,26 @@ body {
         padding: 12px;
         border: 0.5px solid #bebebe;
         border-radius: 5px;
-        margin-bottom: 15px;
         box-sizing: border-box;
-        // margin: 0 auto;
-        // align-items: center;
-        &:focus{
+        margin-bottom: 0;  // 移除輸入框的底部間距，由 input-group 控制
+        
+        &:focus {
             border: 2px solid #d8ba5b;
             outline: none;
         }
         
         
     }
+
+    .error-message {
+        color: #dc3545;
+        font-size: 0.7rem;
+        display: block;
+        position: absolute;
+        top: 100%;  // 改為相對於輸入框底部定位
+        left: 0;    // 從左側開始
+        margin-top: 4px;  // 與輸入框保持一些間距
+      }
     // .btn-input-text:nth-child(1){
     //     margin-top: 46.56px;
     // }

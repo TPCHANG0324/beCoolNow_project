@@ -2,6 +2,11 @@
   <div>
     <MainHeader></MainHeader>
     <header class="Ic_header_R">
+
+       <!-- MP4 影片背景 -->
+       <video autoplay muted loop class="Ic_video_bg_R">
+        <source src="@/assets/videos/101 taipei new.mp4" type="video/mp4" />
+      </video>
       <div class="Ic_wrapper_R">
         <div class="Ic_banner_R">
           <h1 class="Ic_title_R">全球暖化下的臺灣</h1>

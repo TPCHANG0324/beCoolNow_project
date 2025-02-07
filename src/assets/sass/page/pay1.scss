@@ -61,6 +61,107 @@ body {
         
 }
 
+.privacy-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 1001;
+    }
+  
+    .modal-content {
+      position: relative;
+      background: white;
+      width: 90%;
+      max-width: 800px;
+      max-height: 80vh;
+      overflow-y: auto;
+      z-index: 1002;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  
+      .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+        border-bottom: 1px solid #eee;
+  
+        h2 {
+          margin: 0 auto;
+          color: #5b774a;
+          font-size: 24px;
+          font-weight: 800;
+        }
+  
+        .close-button {
+          background: none;
+          border: none;
+          font-size: 40px;
+          cursor: pointer;
+          color: #666;
+          padding: 0;
+          width: 30px;
+          height: 30px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+  
+          &:hover {
+            color: #000;
+          }
+        }
+      }
+  
+      .modal-body {
+        padding: 20px;
+        color: #545454;
+  
+        h3 {
+          color: #5b774a;
+          margin-bottom: 20px;
+          font-size: 20px;
+        }
+  
+        h4 {
+          color: #d8ba5b;
+          margin-top: 20px;
+          margin-bottom: 10px;
+          font-weight: 800;
+        }
+  
+        ol {
+          margin-left: 20px;
+          margin-bottom: 15px;
+        }
+  
+        li {
+          margin-bottom: 5px;
+          color: #545454;
+        }
+  
+        p {
+          margin-bottom: 15px;
+          line-height: 1.6;
+        }
+      }
+    }
+  }
+  
+
 .bcn-donation-header1 {
     text-align: center;
     padding: 10px;
@@ -88,27 +189,7 @@ body {
     margin-top: 100px;
 }
 
-// .bcn-donation-button11 .donation-button11 {
-//     background-color: #D0AD44;  // 金黃色
-//     color: white;               // 白色文字
-//     border: none;               // 無邊框
-//     border-radius: 30px;        // 圓角設計
-//     padding: 10px 20px;         // 內邊距
-//     font-size: 16px;            // 字體大小
-//     font-weight: bold;          // 粗體字
-//     cursor: pointer;            // 滑鼠游標指標
-//     box-shadow: 0 2px 5px rgba(0,0,0,0.2);  // 陰影效果
-//     transition: background-color 0.3s ease; // 動態效果
-//     margin-left: 57px;
 
-//     &:hover {
-//         background-color: darken(#D0AD44, 10%); // 滑鼠懸停時顏色變深
-//     }
-
-//     &:active {
-//         background-color: darken(#D0AD44, 20%); // 點擊時顏色更深
-//     }
-// }
 
 .bcn-form-title_1 {
     display: flex;
@@ -157,6 +238,36 @@ body {
         // padding-left: 98px;
         // padding-right: 97px;
     }
+    .input-group {
+        position: relative;
+        margin-bottom: 30px; // 增加間距來容納錯誤訊息
+        
+        .bcn-input-text_1 {
+          width: 100%;
+          padding: 12px;
+          border: 0.5px solid #bebebe;
+          border-radius: 5px;
+          margin-bottom: 0; // 移除原有的 margin-bottom
+          box-sizing: border-box;
+          
+          &:focus {
+            border: 2px solid #d8ba5b;
+            outline: none;
+          }
+        }
+      }
+
+      .error-message_pay1 {
+        color: #dc3545;
+        font-size: 0.7rem;
+        display: block;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        margin-top: 4px;
+      }
+    
+    
 
     .bcn-input-text_1 {
         width: 100%;
@@ -186,7 +297,7 @@ body {
         width: 20px;
         height: 20px;
         margin-right: 10px;
-    
+        cursor: pointer;
     }
 
     .agree1 {
@@ -250,6 +361,26 @@ body {
 
 // 手機樣式 (小於 430px)
 @media (max-width: 430px) {
+    .privacy-modal .modal-content {
+        width: 95%;
+        margin: 10px;
+        
+        .modal-body {
+          padding: 15px;
+        }
+      }
+
+    .bcn-donation-form_1 {
+        .input-group {
+          margin-bottom: 35px; // 可能需要在手機版增加更多間距
+          
+          .bcn-input-text_1 {
+            width: 80%; // 保持原有的響應式寬度
+          }
+
+        }
+
+        }
     .bcn-top-place1 {
         display: flex;
         margin-top: 40px;

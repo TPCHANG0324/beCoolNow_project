@@ -5,6 +5,9 @@
     <div class="Sp-X">
       <!-- 最上方BN -->
       <div class="Sp-banner">
+  <video autoplay muted loop playsinline>
+    <source src="@/assets/videos/recycle_shop.mp4" type="video/mp4">
+  </video>
         <h1>環保市集</h1>
       </div>
 
