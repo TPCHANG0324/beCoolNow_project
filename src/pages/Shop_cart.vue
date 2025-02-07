@@ -1,6 +1,11 @@
 <template>
+<<<<<<< HEAD
 
   <MainHeader />
+=======
+    <MainHeader></MainHeader>
+  <!-- <MainHeader /> -->
+>>>>>>> sunny
   <!-- 環保市集 - 購物車，縮寫Sp - 功能 - 代號X -->
   <main>
     <div class="Sp-X">
@@ -138,7 +143,7 @@
                 <span>合計：</span>
                 <span>NT$ {{ total }}</span>
               </div>
-              <router-link to="/shop_checkout" class="Sp-checkout-Btn">前往結帳</router-link>
+              <RouterLink to="/shop_checkout" class="Sp-checkout-Btn">前往結帳</RouterLink>
             </div>
           </section>
         </section>
@@ -187,9 +192,13 @@
       <input type="submit" value="登入"><ol><li>test</li><li>test1</li></ol>
     </form>
   </main>
+<<<<<<< HEAD
 
   <MainFooter class="removeMT" />
 
+=======
+  <MainFooter></MainFooter>
+>>>>>>> sunny
 </template>
 
 <script setup>
@@ -278,22 +287,22 @@ const login = async () => {
 }
 //---------------------
 
-// import { CKEditor } from '@ckeditor/ckeditor5-vue';  
-// import ClassicEditor from '@ckeditor/ckeditor5-build-classic'; 
+// import { CKEditor } from '@ckeditor/ckeditor5-vue';
+// import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
-// const editor = ClassicEditor; // 使用已导入的 ClassicEditor  
-// const editorData = ref('<p>初始内容</p>'); // 使用 ref 创建响应式的数据  
+// const editor = ClassicEditor; // 使用已导入的 ClassicEditor
+// const editorData = ref('<p>初始内容</p>'); // 使用 ref 创建响应式的数据
 
-// // 编辑器准备就绪的处理函数  
-// const onReady = (editorInstance) => {  
-//   console.log('编辑器准备好了!', editorInstance);  
-// };  
+// // 编辑器准备就绪的处理函数
+// const onReady = (editorInstance) => {
+//   console.log('编辑器准备好了!', editorInstance);
+// };
 
-// // 处理编辑器数据更改  
-// const onChange = ({ editor }) => {  
-//   const data = editor.getData();  
-//   editorData.value = data; // 更新响应式数据  
-// }; 
+// // 处理编辑器数据更改
+// const onChange = ({ editor }) => {
+//   const data = editor.getData();
+//   editorData.value = data; // 更新响应式数据
+// };
 
 //---------------------
 

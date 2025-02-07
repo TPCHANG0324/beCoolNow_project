@@ -112,12 +112,16 @@ export default {
       // 檢查是否有錯誤訊息
       if (this.formErrors.email || this.formErrors.password) {
         // 如果有錯誤，不提交表單
-        return;
+        alert('驗證失敗：\n' + 
+          (this.formErrors.email ? this.formErrors.email + '\n' : '') +
+          (this.formErrors.password ? this.formErrors.password : ''));
+    return;
       }
 
       // 如果密碼驗證不通過
       if (!this.validatePasswordFormat(this.formData.password)) {
         this.formErrors.password = '密碼必須包含大寫字母、小寫字母和數字';
+        alert(this.formErrors.password);
         return;
       }
 

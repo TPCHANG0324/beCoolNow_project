@@ -11,8 +11,8 @@ import axios from 'axios';
 // import 'tdesign-vue-next/es/style/index.css';
 
 //留言板套件使用
-// import CKEditor from '@ckeditor/ckeditor5-vue';  
-// import ClassicEditor from '@ckeditor/ckeditor5-build-classic'; 
+// import CKEditor from '@ckeditor/ckeditor5-vue';
+// import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 // import { CKEditor } from '@ckeditor/ckeditor5-vue';
 
 //郵件套件

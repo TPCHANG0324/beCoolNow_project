@@ -2,6 +2,11 @@
   <div>
     <MainHeader></MainHeader>
     <header class="Ic_header_R">
+
+       <!-- MP4 影片背景 -->
+       <video autoplay muted loop class="Ic_video_bg_R">
+        <source src="@/assets/videos/101 taipei new.mp4" type="video/mp4" />
+      </video>
       <div class="Ic_wrapper_R">
         <div class="Ic_banner_R">
           <h1 class="Ic_title_R">全球暖化下的臺灣</h1>
@@ -189,14 +194,14 @@ import { Navigation, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import 'swiper/swiper-bundle.css';
 import { ref } from 'vue';
-// import { library } from '@fortawesome/fontawesome-svg-core';
-// import { faCloudBolt } from '@fortawesome/free-solid-svg-icons';
-// import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-// import { faWater } from '@fortawesome/free-solid-svg-icons';
-// import { faHurricane } from '@fortawesome/free-solid-svg-icons'; // 匯入 hurricane 圖示
-// import { faTree } from '@fortawesome/free-solid-svg-icons'; // 匯入 tree 圖示
-// import { faTemperatureArrowUp } from '@fortawesome/free-solid-svg-icons'; // 匯入圖示
-// import { faHeadSideMask } from '@fortawesome/free-solid-svg-icons'; // 匯入 head-side-mask 圖示
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faCloudBolt } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import { faWater } from '@fortawesome/free-solid-svg-icons';
+import { faHurricane } from '@fortawesome/free-solid-svg-icons'; // 匯入 hurricane 圖示
+import { faTree } from '@fortawesome/free-solid-svg-icons'; // 匯入 tree 圖示
+import { faTemperatureArrowUp } from '@fortawesome/free-solid-svg-icons'; // 匯入圖示
+import { faHeadSideMask } from '@fortawesome/free-solid-svg-icons'; // 匯入 head-side-mask 圖示
 
 
 
@@ -405,7 +410,7 @@ export default {
         console.log(isShaking.value,
           'FALSE'
         );
-        
+
       }
 
       setTimeout(() => {

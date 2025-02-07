@@ -4,7 +4,9 @@
   <treeanimation v-if="treePopup !== null"></treeanimation>
   <div class="wrapper">
     <div class="hero-section">
-      <img src="../assets/images/activity2.png" alt="banner" />
+      <video autoplay muted loop playsinline class="banner-video">
+        <source src="../assets/videos/leafgrowing.mp4" type="video/mp4">
+      </video>
       <div class="hero-text">
         <h1>「綠色行動，從今天開始」</h1>
         <h2>改變，讓奇蹟發生</h2>
@@ -342,10 +344,10 @@ const done = (key) => {
   // isClicked.value = true
   // 遞增 action 計數
   cardData.value[key].action += 1;
-  
+
   // 儲存到 localStorage
   localStorage.setItem('cardData', JSON.stringify(cardData.value));
-  
+
   // 設定彈出視窗
   treePopup.value = key;
 
@@ -400,6 +402,9 @@ const handleSubmit = async (e) => {
   letters.value.unshift(newLetter);
   totalLetters.value++;
   formData.value = { name: '', message: '', captcha: '' };
+
+  alert('✅信件已成功提交！'); // 加入這行
+
   generateCaptcha();
 
   await nextTick();

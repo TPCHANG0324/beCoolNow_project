@@ -22,6 +22,15 @@ const routes = [
       // requiredLogin: false
     },
   },
+
+  {
+    path: '/donatefinish/',
+    component: () => import('@/pages/Donatefinish.vue'),
+    meta: {
+      title: '感謝捐款',
+      // requiredLogin: false
+    },
+  },
   {
     path: '/activity/',
     component: () => import('@/pages/Activity.vue'),
@@ -212,7 +221,15 @@ const routes = [
     },
   },
   {
-    path: '/loginPopupChange',
+    path: '/loginPagePC/',
+    component: () => import('@/pages/loginPagePC.vue'),
+    meta: {
+      title: '前後台登入',
+      // requiredLogin: true
+    },
+  },
+  {
+    path: '/loginPopupChange/',
     component: () => import('@/pages/loginPopupChange.vue'),
     meta: {
       title: '登入彈窗切換',
@@ -220,92 +237,20 @@ const routes = [
     },
   },
   {
-    path: '/IcB_article/',
-    component: () => import('@/pages/BackStagePages/IcB_article.vue'),
-    meta: {
-      title: '島嶼文章管理',
-      // requiredLogin: true
-    },
-  },
-  {
-    path: '/IcB_edu/',
-    component: () => import('@/pages/BackStagePages/IcB_edu.vue'),
-    meta: {
-      title: '教育影片管理',
-      // requiredLogin: true
-    },
-  },
-  {
-    path: '/IcB_q&a/',
-    component: () => import('@/pages/BackStagePages/IcB_q&a.vue'),
-    meta: {
-      title: '互動問答管理',
-      // requiredLogin: true
-    },
-  },
-  {
-    path: '/AcB_earthMail/',
-    component: () => import('@/pages/BackStagePages/AcB_earthMail.vue'),
-    meta: {
-      title: '地球信件管理',
-      // requiredLogin: true
-    },
-  },
-  {
-    path: '/CB_forumBoard/',
-    component: () => import('@/pages/BackStagePages/CB_forumBoard.vue'),
-    meta: {
-      title: '討論板管理',
-      // requiredLogin: true
-    },
-  },
-  {
-    path: '/CB_messageBoard/',
-    component: () => import('@/pages/BackStagePages/CB_messageBoard.vue'),
-    meta: {
-      title: '留言板管理',
-      // requiredLogin: true
-    },
-  },
-  {
-    path: '/CtB_cityGame/',
-    component: () => import('@/pages/BackStagePages/CtB_cityGame.vue'),
-    meta: {
-      title: '遊戲互動管理',
-      // requiredLogin: true
-    },
-  },
-  {
-    path: '/AuB_message/',
-    component: () => import('@/pages/BackStagePages/AuB_message.vue'),
-    meta: {
-      title: '訊息管理',
-      // requiredLogin: true
-    },
-  },
-  {
-    path: '/SpB_product/',
-    component: () => import('@/pages/BackStagePages/SpB_product.vue'),
-    meta: {
-      title: '商品庫存管理',
-      // requiredLogin: true
-    },
-  },
-  {
-    path: '/SpB_order/',
-    component: () => import('@/pages/BackStagePages/SpB_order.vue'),
-    meta: {
-      title: '訂單管理',
-      // requiredLogin: true
-    },
-  },
-  {
-    path: '/MmB_member/',
-    component: () => import('@/pages/BackStagePages/MmB_member.vue'),
-    meta: {
-      title: '會員管理',
-      // requiredLogin: true
-    },
+    path: '/BackStagePages',
+    children: [
+      { path: '', component: () => import('@/pages/BackStagePages/IcB_article.vue'), meta:{title:'島嶼文章管理'} },
+      { path: 'IcB_edu', component: () => import('@/pages/BackStagePages/IcB_edu.vue'), meta:{title:'教育影片管理'} },
+      { path: 'IcB_q&a', component: () => import('@/pages/BackStagePages/IcB_q&a.vue'), meta:{title:'互動問答管理'} },
+      { path: 'AcB_earthMail', component: () => import('@/pages/BackStagePages/AcB_earthMail.vue'), meta:{title:'地球信件管理'} },
+      { path: 'CB_forumBoard', component: () => import('@/pages/BackStagePages/CB_forumBoard.vue'), meta:{title:'討論板管理'} },
+      { path: 'CB_messageBoard', component: () => import('@/pages/BackStagePages/CB_messageBoard.vue'), meta:{title:'留言板管理'} },
+      { path: 'CtB_cityGame', component: () => import('@/pages/BackStagePages/CtB_cityGame.vue'), meta:{title:'遊戲互動管理'} },
+      { path: 'AuB_message', component: () => import('@/pages/BackStagePages/AuB_message.vue'), meta:{title:'訊息管理'} },
+      { path: 'SpB_product', component: () => import('@/pages/BackStagePages/SpB_product.vue'), meta:{title:'商品庫存管理'} },
+      { path: 'SpB_order', component: () => import('@/pages/BackStagePages/SpB_order.vue'), meta:{title:'訂單管理'} },
+      { path: 'MmB_member', component: () => import('@/pages/BackStagePages/MmB_member.vue'), meta:{title:'會員管理'} },
+    ],
   },
 
   //----------------------------- 彈窗畫面
@@ -314,6 +259,30 @@ const routes = [
     component: () => import('@/components/layout/BackStageLayout/BackStageSmallPopup.vue'),
     meta: {
       title: '後臺-確認彈窗',
+      // requiredLogin: true
+    },
+  },
+  // {
+  //   path: '/MainHeader/',
+  //   component: () => import('@/components/layout/MainHeader.vue'),
+  //   meta: {
+  //     title: 'Header',
+  //     // requiredLogin: true
+  //   },
+  // },
+  {
+    path: '/ckeditor/',
+    component: () => import('@/components/items/ckeditor.vue'),
+    meta: {
+      title: 'ckeditor',
+      // requiredLogin: true
+    },
+  },
+  {
+    path: '/loading/',
+    component: () => import('@/components/items/loading.vue'),
+    meta: {
+      title: 'loading',
       // requiredLogin: true
     },
   },

@@ -7,11 +7,22 @@ body {
     .Support_banner_S {
         position: relative;
         height: 360px;
-        background-image: url('@/assets/images/Au07.jpg');
-        // background-image: url('/assets/images/Au07.jpg');
-        background-size: cover;
-        background-position: center center;
         margin-top: 80px;
+        overflow: hidden; // 確保影片不會溢出容器
+        .background-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+            z-index: 0;
+        }    
+
+        
 
         // div {
         //     height: 360px;
@@ -55,6 +66,47 @@ body {
         max-width: 1200px;
         margin: 0 auto;
 
+        .donate_choise_S {
+            .donate_type_month,
+            .donate_type_once {
+                cursor: pointer; // 確保兩個按鈕都可以點擊
+                transition: background-color 0.3s ease;
+
+                &.active {
+                    background-color: $Green_2 !important; // 使用 !important 覆蓋其他樣式
+                    color: $Ivory_white !important;
+                  }
+
+                //   &:hover {
+                //     background-color: $Green_2;
+                //     color: $Ivory_white;
+                //   }
+              }
+            // 移除可能造成衝突的樣式
+    .donate_type_month.active,
+    .donate_type_once.active {
+      background-color: $Green_2 !important;
+      color: $Ivory_white !important;
+    }
+        }
+          
+
+          .donate_amount_S {
+            .amount {
+              cursor: pointer;
+              transition: background-color 0.3s ease;
+              
+              &.active {
+                background-color: $Green_2 !important;
+                color: $Ivory_white !important;
+              }
+        
+            //   &:hover {
+            //     background-color: $Green_2;
+            //     color: $Ivory_white;
+            //   }
+            }
+          }
 
         p {
             @include PC_h3($Green_2);
@@ -72,6 +124,8 @@ body {
         .donate_choise_S {
             display: flex;
             justify-content: center;
+
+            
 
             .donate_type_month {
                 width: 300px;
@@ -91,6 +145,7 @@ body {
 
             }
 
+           
             .donate_type_once {
                 width: 300px;
                 height: 60px;
@@ -103,9 +158,9 @@ body {
                 cursor: pointer;
                 transition: background-color 0.3s ease;
 
-                &:hover {
-                    background-color: $Green_1;
-                }
+                // &:hover {
+                //     background-color: $Green_1;
+                // }
 
                 @include max_540 {
                     width: 200px;
@@ -116,11 +171,24 @@ body {
 
         }
 
+        .donate_choise_S .donate_type_month.active,
+        .donate_choise_S .donate_type_once {
+            background-color: $Ivory_white;
+            color: #545454;
+            cursor: pointer;
+
+            // &:hover {
+            //     background-color: $Green_2;
+            //     color: $Ivory_white;
+            // }
+        }
+
         .donate_amount_S {
             margin-top: 40px;
             display: inline-flex;
             align-items: center;
             gap: 35px;
+            
 
             // padding: 11px 44px 7px 44px;
             @include max_430 {
@@ -135,6 +203,12 @@ body {
                 color: $Green_2;
                 font-weight: bold;
                 border-radius: 20px;
+                cursor: pointer;
+
+                // &:hover {
+                //     background-color: $Green_2;
+                //     color: $Ivory_white;
+                // }
 
                 @include max_540 {
                     width: 130px;
@@ -150,10 +224,10 @@ body {
                 }
             }
 
-            .amount.active {
-                background-color: $Green_2;
-                color: $Ivory_white;
-            }
+            // .amount.active {
+            //     background-color: $Green_2;
+            //     color: $Ivory_white;
+            // }
         }
 
         .custom_amount_S {
@@ -177,6 +251,12 @@ body {
                 padding: 9px 15px;
                 align-items: center;
 
+                &:focus{
+                    outline: none;
+                    border: 2px solid #e6b800;
+                   
+                }
+
                 @include max_540 {
                     width: 160px;
                     height: 24x;
@@ -185,7 +265,7 @@ body {
         }
 
         .payment_section_S {
-            margin-top: 25px;
+            margin-top: 40px;
 
             .payment_content {
                 display: flex;
@@ -194,6 +274,59 @@ body {
                 font-size: $h4;
                 font-weight: bold;
                 gap: 30px;
+
+                .ecpay {
+                    display: flex;
+                    align-items: flex-start; // 改為 flex-start 確保radio按鈕與第一行文字對齊
+                    gap: 10px; // radio 按鈕和文字的間距
+                   
+                    
+                    .ecpay-text-wrapper {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 4px; // 兩行文字之間的間距
+                    }
+
+                    .ecpay1 {
+                        display: block;
+                    }
+        
+                    .ecpay2 {
+                        display: block;
+                        font-size: $h7;
+                    }
+
+                }
+            }
+        }
+
+                // 新增這些樣式
+        label {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            gap: 10px;  // 控制 radio 按鈕和文字的間距
+            
+            &.disabled {
+                opacity: 0.5;
+                cursor: not-allowed;
+                
+                input {
+                    cursor: not-allowed;
+                }
+                
+                span {
+                    cursor: not-allowed;
+                }
+            }
+        }
+        .linepay, .ecpay {
+            display: flex;
+            align-items: center;
+        }
+
+        
+              
 
                 @include max_430 {
                     display: flex;
@@ -205,22 +338,15 @@ body {
                 }
 
                 span {
-                    margin-left: 10px;
+                    // margin-left: 10px;
+                    cursor: pointer;
                 }
 
                 .marker {
                     color: red;
                 }
 
-                .ecpay {
-                    margin-left: 30px;
 
-
-                }
-
-                .ecpay2 {
-                    font-size: $h7;
-                }
             }
 
             .payment_step_S {
@@ -236,6 +362,11 @@ body {
                     border: none;
                     font-weight: bold;
                     font-size: $h5;
+                    cursor: pointer;
+
+                    &:hover {
+                        background: darken(#d8ba5b, 10%);
+                    }
 
                     @include max_430 {
                         width: 160px;
@@ -246,5 +377,3 @@ body {
             }
 
         }
-    }
-}
