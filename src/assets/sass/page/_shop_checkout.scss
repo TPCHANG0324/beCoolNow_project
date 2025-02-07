@@ -2,6 +2,7 @@
   max-width: 1200px;
   margin: 0 auto;
   margin-top: 80px;
+<<<<<<< HEAD
   .Sp-checkout-nav-X {
     text-align: center;
     margin-bottom: 30px;
@@ -84,9 +85,17 @@
       }
     }
   }
+=======
+  gap: 28px;
+>>>>>>> sunny
 }
 
+  /* 流程顯示 */
+  .Sp-checkout-nav-X {
+    text-align: center;
+    margin-top: 120px;
 
+<<<<<<< HEAD
 .breadcrumb {
   display: flex;
   align-items: center; /* 垂直置中 */
@@ -107,6 +116,103 @@
   }
 
 }
+=======
+    /* 每一個圓圈 */
+    .Sp-step-X {
+      display: inline-block;
+      vertical-align: top;
+      width: 240px;
+      max-width: 33%;
+      margin-left: -2px;
+      margin-right: -2px;
+      color: black;
+
+      &.active .Sp-badge-X::after {
+        background-color: $Yellow_1!important;
+      }
+
+      &:first-child .Sp-badge-X::before {
+        width: 50%;
+        left: 50%;
+      }
+
+      &:last-child .Sp-badge-X::before {
+        width: 50%;
+        right: 50%;
+      }
+
+      span {
+        display: block;
+        padding: 2px 5px;
+        color: $Green_1;
+      }
+
+      span.Sp-badge-X {
+        position: relative;
+        background-color: transparent;
+        height: 50px;
+        line-height: 50px;
+        padding: 0;
+        color: $Green_2;
+        text-align: center;
+        white-space: nowrap;
+
+        &::before {
+          content: " ";
+          background-color: $Ivory_white;
+          height: 2px;
+          width: 100%;
+          position: absolute;
+          left: 0;
+          top: 50%;
+          margin-top: -1px;
+          z-index: 0;
+          box-sizing: border-box;
+        }
+
+        &::after {
+          content: " ";
+          background-color: $Light_Yellow;
+          transform: translate(-50%, -50%);
+          border-radius: 15px;
+          height: 30px;
+          width: 30px;
+          left: 50%;
+          top: 50%;
+          position: absolute;
+          z-index: 0;
+          box-sizing: border-box;
+        }
+
+        .Sp-badge-text-X {
+          position: absolute;
+          width: 100%;
+          z-index: 1;
+          line-height: 50px;
+        }
+      }
+    }
+  }
+
+
+// .breadcrumb {
+  
+//   // display: flex;
+//   // gap: 2px;
+//   // text-decoration: none;
+//   // padding-top: 61px;
+
+//   // a {
+//   //   color: #000;
+//   //   cursor: pointer;
+//   // }
+
+//   // a:hover {
+//   //   color: rgb(54, 54, 224)
+//   // }
+// }
+
+>>>>>>> sunny
 
 .si_ordersummary_R {
   cursor: pointer;
@@ -334,7 +440,11 @@
 
         select {
           width: 50%;
+<<<<<<< HEAD
           padding: 6px;
+=======
+          height: 2rem;
+>>>>>>> sunny
         }
       }
     }
@@ -596,6 +706,7 @@
 
   .si_bottomsection_R .si_order1_R .Si_deliveryinfo_R .si_address select {
     width: 100%;
+    
   }
 
   .si_bottomsection_R .si_order2_R .Si-ordernotes-R .si_ordernotes_body textarea {
