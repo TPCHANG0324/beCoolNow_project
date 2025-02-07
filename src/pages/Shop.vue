@@ -8,7 +8,10 @@
   <video autoplay muted loop playsinline>
     <source src="@/assets/videos/recycle_shop.mp4" type="video/mp4">
   </video>
-        <h1>環保市集</h1>
+        <h1>環保市集
+          <br /> Eco-Friendly Shop
+        </h1>
+        
       </div>
 
       <!-- 中間內容 -->

@@ -81,6 +81,7 @@
             // @include h1_stroke;
             padding-top: 160px;
             text-shadow: $text_shadow;
+            font-family: "DM Sans";
         }
 
         h2 {
@@ -88,6 +89,7 @@
             // @include h1_stroke;
             padding-bottom: 80px;
             text-shadow: $text_shadow;
+            font-family: "DM Sans";
         }
     }
 }
@@ -106,6 +108,7 @@
     padding: 10px;
     flex: 1 0 auto;
     margin-bottom: 40px;
+    font-family: "DM Sans";
 }
 
 .daily_card {
@@ -117,6 +120,7 @@
     padding: 2rem;
     max-width: 1200px; // 限制最大寬度，讓內容居中更明顯
     margin: 0 auto; // 將整個 `.daily_card` 容器置中
+    font-family: "DM Sans";
 }
 
 
@@ -149,9 +153,17 @@
     justify-content: center;
     width: 100%; // 使用100%讓卡片跟隨grid自動調整
     max-width: 350px; // 每張卡片的最大寬度，讓三張卡片平均分布
-
+    font-family: "DM Sans";
     // .btn.btn-Ac_done_btn{
     //     background-color: $Green_2;
+    // }
+
+    // .span.action-count{
+    //     font-size: 40px;
+    //     font-weight: $font_weight_Bold;
+    //     color: $Ivory_white;
+    //     margin-bottom: 20px;
+    //     font-family: "DM Sans";
     // }
     }
 
@@ -167,6 +179,7 @@
     justify-content: center;
     width: 100%; // 使用100%讓卡片跟隨grid自動調整
     max-width: 350px; // 每張卡片的最大寬度，讓三張卡片平均分布
+    font-family: "DM Sans";
 }
 
 
@@ -199,6 +212,7 @@ article {
     font-size: $h6;
     line-height: $line_height_140;
     margin-bottom: 20px;
+    font-family: "DM Sans";
 }
 
 //   .btn.btn-AC_done_btn {
@@ -215,6 +229,7 @@ article {
         cursor: pointer;
         transition: background-color 0.3s;
         // display: none;
+        font-family: "DM Sans";
      
         &:hover {
           background-color: $Green_3;
@@ -239,6 +254,8 @@ article {
     margin-top: 12px;
     font-size: $h6;
     font-weight: $font_weight_Bold;
+    cursor: pointer;
+    font-family: "DM Sans";
 
     a {
         // text-decoration: none; // 移除預設底線

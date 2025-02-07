@@ -47,11 +47,13 @@
       .Ic_title_R {
         padding-top: 100px;
         @include PC_h1($Ivory_white);
+        font-family: "DM Sans";
       }
 
       .Ic_title2_R {
         @include PC_h1($Ivory_white);
         padding-bottom: 192px;
+        font-family: "DM Sans";
       }
     }
   }
@@ -89,7 +91,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.1); // 半透明背景
+  background: rgba(0, 0, 0, 0.5); // 半透明背景
   backdrop-filter: blur(1px); // 模糊效果
   z-index: 999; // 确保在内容层之上
   visibility: hidden;
@@ -147,6 +149,7 @@
   padding: 20px;
   position: relative;
   background-color: rgba(0, 0, 0, 1);
+  font-family: "DM Sans";
 
   img {
     display: block;
@@ -166,6 +169,7 @@
     margin-top: 30px;
     line-height: 180%;
     letter-spacing: 1px;
+    font-family: "DM Sans";
 
     @include max_820 {
       font-size: 24px;
@@ -184,9 +188,14 @@
     left: 10px;
     background: none;
     border: none;
-    font-size: 18px;
+    font-size: 20px;
     color: $Ivory_white;
     cursor: pointer;
+    font-family: "DM Sans";
+
+    &:hover {
+      color: $Yellow_1;
+    }
 
     @include max_820 {
       font-size: 32px;
@@ -452,6 +461,7 @@
     font-size: 20px;
     line-height: 2.0;
     letter-spacing: normal;
+    font-family: "DM Sans";
 
     @include max_820 {
       width: 80%;
@@ -490,6 +500,7 @@
       background-color: transparent;
       border-radius: 5px;
       // transition: background-color 0.3s;
+      font-family: "DM Sans";
 
       &.active {
         background-color: $Yellow_1;
@@ -530,6 +541,7 @@
     font-weight: bold;
     padding-top: 100px;
     padding-bottom: 24px;
+    font-family: "DM Sans";
   }
 
   /* Swiper 容器占满宽度 */
@@ -626,6 +638,7 @@
   button {
     @include btn_style(5px, 70%, 48px);
     margin-top: 10px;
+    font-family: "DM Sans";
   }
 
   .ic_gamebg_R {
@@ -712,14 +725,14 @@
 
     .Ic_game-question_R {
       position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background-color: rgba(255, 255, 240, 0.8);
-      padding: 25px 60px;
-      border-radius: 10px;
-      text-align: center;
-      color: #2E4E3F;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 255, 240, 0.8);
+  padding: 25px 60px;
+  border-radius: 10px;
+  text-align: center;
+  color: #2E4E3F;
       // transition: transform 0.1s ease-in-out;
       &.shake {
         animation: shakeAnimation 0.5s ease-in-out;
@@ -762,9 +775,11 @@
       display: flex;
       justify-content: center;
       gap: 20px;
+      font-family: "DM Sans";
 
       button {
         @include btn_style(5px, 70%, 48px);
+        font-family: "DM Sans";
       }
     }
 
@@ -811,12 +826,10 @@
   /* 晃动动画 */
   @keyframes shakeAnimation {
     0% { transform: translate(-50%, -50%); }
-    25% { transform: translate(-60%, -50%); }
-    50% { transform: translate(-40%, -50%); }
-    75% { transform: translate(-55%, -50%); }
+    25% { transform: translate(-53%, -50%); }
+    50% { transform: translate(-47%, -50%); }
+    75% { transform: translate(-53%, -50%); }
     100% { transform: translate(-50%, -50%); }
   }
-  .shake {
-    animation: shakeAnimation 0.5s ease-in-out !important;
-  }  
+
 

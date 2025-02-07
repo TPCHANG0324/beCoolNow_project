@@ -159,6 +159,7 @@ export default {
       }
     };
 
+
     const closeLoginPopup = () => {
       isloginPopup.value = false;
     };

@@ -194,14 +194,14 @@ import { Navigation, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import 'swiper/swiper-bundle.css';
 import { ref } from 'vue';
-// import { library } from '@fortawesome/fontawesome-svg-core';
-// import { faCloudBolt } from '@fortawesome/free-solid-svg-icons';
-// import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-// import { faWater } from '@fortawesome/free-solid-svg-icons';
-// import { faHurricane } from '@fortawesome/free-solid-svg-icons'; // 匯入 hurricane 圖示
-// import { faTree } from '@fortawesome/free-solid-svg-icons'; // 匯入 tree 圖示
-// import { faTemperatureArrowUp } from '@fortawesome/free-solid-svg-icons'; // 匯入圖示
-// import { faHeadSideMask } from '@fortawesome/free-solid-svg-icons'; // 匯入 head-side-mask 圖示
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faCloudBolt } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import { faWater } from '@fortawesome/free-solid-svg-icons';
+import { faHurricane } from '@fortawesome/free-solid-svg-icons'; // 匯入 hurricane 圖示
+import { faTree } from '@fortawesome/free-solid-svg-icons'; // 匯入 tree 圖示
+import { faTemperatureArrowUp } from '@fortawesome/free-solid-svg-icons'; // 匯入圖示
+import { faHeadSideMask } from '@fortawesome/free-solid-svg-icons'; // 匯入 head-side-mask 圖示
 
 
 
@@ -321,7 +321,7 @@ export default {
         title: '氣候變遷因應法',
         image: new URL('@/assets/images/law2.png', import.meta.url).href,
         content:
-          '氣候變遷因應法是台灣為應對氣候變遷挑戰的重要立法，目標在於實現 2050 淨零碳排。該法涵蓋碳定價機制、推廣可再生能源、支持低碳技術發展及強化防災能力，並要求各部門提出減碳計畫。此外，法案鼓勵企業參與減碳行動，推動產業轉型，同時提高公眾環保意識。氣候變遷因應法不僅是國家邁向永續發展的基石，也是台灣在全球氣候行動中扮演關鍵角色的展現。。',
+          '氣候變遷因應法是台灣為應對氣候變遷挑戰的重要立法，目標在於實現 2050 淨零碳排。該法涵蓋碳定價機制、推廣可再生能源、支持低碳技術發展及強化防災能力，並要求各部門提出減碳計畫。此外，法案鼓勵企業參與減碳行動，推動產業轉型，同時提高公眾環保意識。氣候變遷因應法不僅是國家邁向永續發展的基石，也是台灣在全球氣候行動中扮演關鍵角色的展現。',
       },
     ]);
 
@@ -398,18 +398,19 @@ export default {
 
 
       if (selectedIndex === currentQuestion.value.correctIndex) {
-        feedback.value = 'YA答對！';
+        feedback.value = 'YA 答對！';
         feedbackclass.value = 'correct-animation';
         score.value++;
         console.log(isShaking.value);
 
       } else {
-        feedback.value = '答錯QQ';
+        feedback.value = '答錯 QQ';
         feedbackclass.value = 'wrong-animation';
-        isShaking.value = true; // 觸發晃動動畫
-        console.log(isShaking.value,
-          'FALSE'
-        );
+      // 強制重新觸發晃動動畫
+    const questionElement = document.querySelector('.Ic_game-question_R');
+    questionElement.classList.remove('shake');
+    void questionElement.offsetWidth; // 觸發重排
+    questionElement.classList.add('shake');
         
       }
 
