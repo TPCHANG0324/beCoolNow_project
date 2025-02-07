@@ -11,15 +11,19 @@ import router from './router';
 // import 'tdesign-vue-next/es/style/index.css';
 
 //留言板套件使用
-import CKEditor from '@ckeditor/ckeditor5-vue';  
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic'; 
+// import CKEditor from '@ckeditor/ckeditor5-vue';
+// import CKEditor from '@ckeditor/ckeditor5-vue';
+// import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+
 
 const app = createApp(App);
 const pinia = createPinia();
 
 app.use(pinia);
 app.use(router);
-app.use(CKEditor);
+// app.use(CKEditor);
+// app.use(ClassicEditor);
+
 
 //component
 

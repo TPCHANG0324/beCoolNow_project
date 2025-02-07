@@ -44,7 +44,7 @@
         </div>
 
         <div class="payment_step_S">
-          <router-link to="/pay1"><button class="next_step" @click="handleNextStep">下一步</button></router-link>
+          <RouterLink to="/pay1"><button class="next_step" @click="handleNextStep">下一步</button></RouterLink>
         </div>
         <!-- 顯示選中的付款方式 -->
         <!-- <div>

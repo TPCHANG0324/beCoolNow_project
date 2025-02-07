@@ -333,10 +333,10 @@ watch(totalLetters, (newTotal) => {
 const done = (key) => {
   // 遞增 action 計數
   cardData.value[key].action += 1;
-  
+
   // 儲存到 localStorage
   localStorage.setItem('cardData', JSON.stringify(cardData.value));
-  
+
   // 設定彈出視窗
   treePopup.value = key;
 

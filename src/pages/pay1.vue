@@ -38,15 +38,15 @@
               </label>
             </div>
 
-            <router-link to="/pay2"
-              ><button type="submit" class="bcn-btn-primary_1">下一步 信用卡填寫</button></router-link
+            <RouterLink to="/pay2"
+              ><button type="submit" class="bcn-btn-primary_1">下一步 信用卡填寫</button></RouterLink
             >
           </div>
         </form>
       </div>
       <a href="./pay1/" class="bc-prev-step-button2">
         <span class="bc-prev-step-icon2">❮</span>
-        <router-link to="/support"><span class="bc-prev-step-text2">上一步</span></router-link>
+        <RouterLink to="/support"><span class="bc-prev-step-text2">上一步</span></RouterLink>
       </a>
     </div>
     <MainFooter></MainFooter>

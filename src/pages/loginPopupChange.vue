@@ -26,7 +26,7 @@ export default {
     showNewMemberPopup() {
       // console.log('SSSS');
 
-      this.currentPopup = 'register';
+        this.currentPopup = 'register';
     },
 
     /**
@@ -35,14 +35,14 @@ export default {
     showLoginPopup() {
       // console.log('SSSSSS');
 
-      this.currentPopup = 'login';
+        this.currentPopup = 'login';
     },
   },
 };
 </script>
 
 <style>
-/* .popup-container {
+/*.popup-container {
   display: none;
-} */
+}*/
 </style>

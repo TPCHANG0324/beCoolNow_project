@@ -1,6 +1,5 @@
-<!-- 前臺 主要Footer -->
-
 <template>
+  <!-- 前臺 主要Footer -->
   <footer class="layout_footer">
     <div class="footer">
       <div class="footer-wrapper">

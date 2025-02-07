@@ -44,8 +44,8 @@
 
     .Sp_productChoice_top_H {
         display: flex;
-        align-items: center;        
-        
+        align-items: center;
+
         @include max_820 {
             display: block;
         }
@@ -62,7 +62,7 @@
                 max-width: 380px;
                 margin: 0 auto;
             }
-            
+
             ul {
                 margin-right: 24px;
                 display: flex;
@@ -197,7 +197,7 @@
                         border-radius: 5px;
                         overflow: hidden;
                       }
-                      
+
                       .quantity-input {
                         width: 100%; /* 輸入框占據整個可用空間 */
                         height: 36px;
@@ -207,12 +207,12 @@
                         padding: 0 40px; /* 留出左右按鈕的空間 */
                         box-sizing: border-box;
                       }
-                      
+
                       .quantity-input:focus {
                         border: none;
                         outline: none;
                       }
-                      
+
                       .btn-minus,
                       .btn-plus {
                         position: absolute;
@@ -228,23 +228,23 @@
                         justify-content: center;
                         user-select: none;
                       }
-                      
+
                       .btn-minus {
                         left: 0; /* 靠左 */
                       }
-                      
+
                       .btn-plus {
                         right: 0; /* 靠右 */
                       }
-                      
+
                       .btn-minus:hover,
                       .btn-plus:hover {
                         background-color: $Green_3;
                       }
-                   
+
                     // form {
                     //     border: 1px solid $Green_1;
-        
+
                     //     .Sp-cart-input-group-X {
                     //       position: static;
                     //       min-height: 0;
@@ -252,14 +252,14 @@
                     //       padding-left: 0;
                     //       padding-left: 0;
                     //       width: auto;
-        
+
                     //       span {
                     //         padding: 10px;
                     //         background-color: $Green_3;
                     //         color: $Ivory_white;
                     //         cursor: pointer;
                     //       }
-        
+
                     //       input {
                     //         flex-grow: 1;
                     //         width: 50%;
@@ -269,7 +269,7 @@
                     //         text-align: center;
                     //         color: $Green_1;
                     //       }
-        
+
                     //       input[type=number]::-webkit-outer-spin-button,
                     //       input[type=number]::-webkit-inner-spin-button {
                     //         -webkit-appearance: none;
@@ -466,7 +466,7 @@
 
                 // @include max_820 {
                 //     @include PC_h6($Green_1);
-                   
+
                 // }
             }
 
@@ -512,7 +512,7 @@
         @include max_820 {
         display: grid;
         grid-template-columns: repeat(2, 1fr); /* 自適應列數 */
-        row-gap: 40px; 
+        row-gap: 40px;
         margin: 0 100px;
         gap:0;
         }
@@ -520,10 +520,10 @@
         @include max_430 {
         margin: 0 3vw;
         grid-template-columns: repeat(2, 1fr); /* 每行顯示兩個商品 */
-        
+
         }
 
-       
+
         li {
             display: flex;
             flex-direction: column;
@@ -576,7 +576,7 @@
 
                     @include max_430 {
                         margin-top: 20px;
-                        
+
                     }
 
                 }

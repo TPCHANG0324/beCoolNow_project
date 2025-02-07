@@ -65,9 +65,6 @@
         <div class="IcB_addMain_H">
           <label for="IcB_addTopic_H">文章標題: <input id="IcB_addTopic_H" class="input" type="text" /></label>
           <label for="IcB_addUrl_H">外部鏈結: <input id="IcB_addUrl_H" class="input" type="text" /></label>
-          <label for="IcB_addContent_H"
-            >內容描述:<br /><textarea id="IcB_addContent_H" name="IcB_addContent_H"></textarea>
-          </label>
         </div>
         <figure>
           <label for="UploadPic">圖片:</label>
@@ -77,6 +74,9 @@
           </div>
         </figure>
       </div>
+      <label for="IcB_addContent_H" class="IcB_addContent_H "
+            >內容描述:<br /><textarea id="IcB_addContent_H" name="IcB_addContent_H"></textarea>
+      </label>
       <div>
         <button>取消</button>
         <button>儲存</button>
@@ -90,11 +90,8 @@
       </span>
       <div>
         <div class="IcB_addMain_H">
-          <label for="IcB_addTopic_H">文章標題: <input id="IcB_addTopic_H" class="input" type="text" /></label>
-          <label for="IcB_addUrl_H">外部鏈結: <input id="IcB_addUrl_H" class="input" type="text" /></label>
-          <label for="IcB_addContent_H"
-            >內容描述:<br /><textarea id="IcB_addContent_H" name="IcB_addContent_H"></textarea>
-          </label>
+          <label for="IcB_editTopic_H">文章標題: <input id="IcB_editTopic_H" class="input" type="text" /></label>
+          <label for="IcB_editUrl_H">外部鏈結: <input id="IcB_editUrl_H" class="input" type="text" /></label>
         </div>
         <figure>
           <label for="UploadPic">圖片:</label>
@@ -104,6 +101,9 @@
           </div>
         </figure>
       </div>
+      <label for="IcB_editContent_H" class="IcB_addContent_H "
+            >內容描述:<br /><ckeditor id="ckeditor"><textarea id="IcB_editContent_H" name="IcB_addContent_H"></textarea></ckeditor>
+      </label>
       <div>
         <button>取消</button>
         <button>儲存</button>
@@ -121,22 +121,29 @@
         </div>
       </div>
     </BackStageConfirmPopup>
+      <!--  -->
+    <!-- <div class="main-container">
+      <div class="editor-container editor-container_classic-editor editor-container_include-block-toolbar" ref="editorContainerElement">
+        <div class="editor-container__editor">
+          <div ref="editorElement">
+            <ckeditor v-if="editor && config" :modelValue="config.initialData" :editor="editor" :config="config" />
+          </div>
+        </div>
+      </div>
+    </div> -->
+
   </div>
+
 </template>
 
-<script>
+<script setup>
+// import { computed, ref, onMounted } from 'vue';
 import BackStageSidebar from '@/components/items/BackStageItems/BackStageSidebar.vue';
 import backStagePaginator from '@/components/items/BackStageItems/BackStagePaginator.vue';
 import BackStageHeader from '@/components/layout/BackStageLayout/BackStageHeader.vue';
 import BackStageSmallPopup from '@/components/layout/BackStageLayout/BackStageSmallPopup.vue';
 import BackStageConfirmPopup from '@/components/layout/BackStageLayout/BackStageConfirmPopup.vue';
-export default {
-  components: {
-    BackStageSidebar,
-    backStagePaginator,
-    BackStageHeader,
-    BackStageSmallPopup,
-    BackStageConfirmPopup,
-  }
-}
+
+import ckeditor from '@/components/items/ckeditor.vue';
+
 </script>
