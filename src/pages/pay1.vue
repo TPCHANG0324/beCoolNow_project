@@ -17,11 +17,11 @@
         <div class="input-group">
           <!-- 移除 action 和 method，改用 @submit.prevent -->
           <label for="email" class="bcn-label1">* 電子郵件地址</label>
-      <input 
-        id="email" 
-        type="email" 
-        v-model="formData.email" 
-        required 
+      <input
+        id="email"
+        type="email"
+        v-model="formData.email"
+        required
         class="bcn-input-text_1"
         @blur="validateEmail"
       />
@@ -30,25 +30,25 @@
 
     <div class="input-group">
       <label for="name" class="bcn-label1">* 捐款人姓名</label>
-      <input 
-        id="name" 
-        type="text" 
-        v-model="formData.name" 
-        required 
+      <input
+        id="name"
+        type="text"
+        v-model="formData.name"
+        required
         class="bcn-input-text_1"
-        @blur="validateName" 
+        @blur="validateName"
       />
       <span v-if="errors.name" class="error-message_pay1">{{ errors.name }}</span>
     </div>
 
     <div class="input-group">
       <label for="phone" class="bcn-label1">電話號碼</label>
-      <input 
-        id="phone" 
-        type="tel" 
-        v-model="formData.phone" 
+      <input
+        id="phone"
+        type="tel"
+        v-model="formData.phone"
         required
-        placeholder="TW+886" 
+        placeholder="TW+886"
         class="bcn-input-text_1"
         @blur="validatePhone"
       />
@@ -59,11 +59,11 @@
 
             <!-- ✅ 修正 checkbox 與文字的排列 -->
             <div class="bcn-checkbox-container_1">
-              <input 
-                id="agree" 
-                type="checkbox" 
+              <input
+                id="agree"
+                type="checkbox"
                 v-model="formData.agree"
-                required 
+                required
               />
               <label for="agree" class="agree1"
                 >我已詳細閱讀並同意
@@ -81,7 +81,7 @@
     <div class="modal-body">
       <h3>捐款人資料保護政策</h3>
       <p style="font-weight: 700;">感謝您對涼城即時的支持。我們重視您的個人資料，並承諾依據以下原則保護您的隱私：</p>
-      
+
       <h4>1. 資料蒐集目的</h4>
       <p>我們收集您的個人資料僅用於：</p>
       <ol>
@@ -126,13 +126,13 @@
               </label>
             </div>
 <button type="submit" class="bcn-btn-primary_1">下一步 信用卡填寫</button>
-            
+
           </div>
           </form>
       </div>
       <a href="./pay1/" class="bc-prev-step-button2">
         <span class="bc-prev-step-icon2">❮</span>
-        <router-link to="/support"><span class="bc-prev-step-text2">上一步</span></router-link>
+        <RouterLink to="/support"><span class="bc-prev-step-text2">上一步</span></RouterLink>
       </a>
     </div>
     <MainFooter></MainFooter>
@@ -159,7 +159,7 @@ components: {
         name: '',
         phone: '',
         agree: false,
-        
+
       },
       errors: {
         email: '',
@@ -203,7 +203,7 @@ components: {
       }
       this.errors.email = '';
       return true;
-    },    
+    },
     validatePhone() {
       const phoneRegex = /^09\d{8}$/;
       if (!this.formData.phone.trim()) {

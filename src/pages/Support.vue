@@ -12,19 +12,19 @@
       <p>是的！我珍愛地球環境與生態 <br />我要與自然、社會共生共好，永續發展。</p>
 
       <div class="donate_choise_S">
-        <button 
+        <button
           :class="['donate_type_month', { active: donationType === 'monthly' }]"
           @click="setDonationType('monthly')"
         >每月捐款</button>
-        <button 
+        <button
           :class="['donate_type_once', { active: donationType === 'once' }]"
           @click="setDonationType('once')"
         >單次捐款</button>
       </div>
 
       <div class="donate_amount_S">
-        <button 
-          v-for="amount in amounts" 
+        <button
+          v-for="amount in amounts"
           :key="amount"
           :class="['amount', { active: selectedAmount === amount }]"
           @click="setAmount(amount)"
@@ -33,10 +33,10 @@
 
       <div class="custom_amount_S">
         <span>自訂金額</span>
-        <input 
-          type="text" 
-          placeholder="請輸入金額，以新台幣為單位" 
-          class="custom_amount_input" 
+        <input
+          type="text"
+          placeholder="請輸入金額，以新台幣為單位"
+          class="custom_amount_input"
           v-model="customAmount"
           @input="handleCustomAmountInput"
           @keypress="validateNumberInput"
@@ -53,10 +53,10 @@
     </div>
           <label class="linepay" :class="{ disabled: donationType === 'monthly' }">
 
-          <input 
-            v-model="payment_method" 
-            type="radio" 
-            class="payment_method" 
+          <input
+            v-model="payment_method"
+            type="radio"
+            class="payment_method"
             value="Line Pay行動支付"
             :disabled="donationType === 'monthly'"
             @change="handlePaymentMethodChange"
@@ -64,13 +64,13 @@
             <span>Line Pay行動支付</span>
 
             </label>
-          
+
           <label class="ecpay">
-            <input 
-            v-model="payment_method" 
-            type="radio" 
-            class="payment_method" 
-            value="綠界金流服務(信用卡)" 
+            <input
+            v-model="payment_method"
+            type="radio"
+            class="payment_method"
+            value="綠界金流服務(信用卡)"
             @change="handlePaymentMethodChange"
           />
           <div class="ecpay-text-wrapper">
@@ -81,8 +81,8 @@
         </div>
 
         <div class="payment_step_S">
-          <button 
-            class="next_step" 
+          <button
+            class="next_step"
             @click="handleNextStep"
             :disabled="!isFormValid"
           >下一步</button>
@@ -124,15 +124,15 @@ export default {
     isFormValid() {
       const hasValidAmount = this.customAmount || this.selectedAmount;
       const hasValidPayment = !!this.payment_method;
-      
+
       // 如果是每月捐款，檢查是否選擇信用卡
       if (this.donationType === 'monthly') {
         return hasValidAmount && this.payment_method === '綠界金流服務(信用卡)';
       }
-      
+
       return hasValidAmount && hasValidPayment;
     },
-    
+
     finalAmount() {
       return this.customAmount || this.selectedAmount;
     }
@@ -163,7 +163,7 @@ export default {
       }
     },
 
-    
+
   setAmount(amount) {
     if (!amount) {
       alert('請選擇捐款金額！');
@@ -175,15 +175,15 @@ export default {
   },
   handleCustomAmountInput(event) {
     let value = event.target.value.replace(/\D/g, ''); // 移除非數字字符
-      
+
     // 處理開頭為 0 的情況
     if (value.length > 0) {
       // 移除開頭的所有 0
       value = value.replace(/^0+/, '');
     }
-    
+
     this.customAmount = value;
-    
+
     // 如果有輸入任何值（不是空字串），就清除固定金額的選擇
     if (value !== '') {
       this.selectedAmount = null;
@@ -209,10 +209,10 @@ export default {
     event.preventDefault();
     const pastedText = (event.clipboardData || window.clipboardData).getData('text');
     let numericValue = pastedText.replace(/\D/g, ''); // 移除非數字
-    
+
     // 移除開頭的 0
     numericValue = numericValue.replace(/^0+/, '');
-    
+
     if (numericValue) {
       this.customAmount = numericValue;
       this.selectedAmount = null;
@@ -286,7 +286,7 @@ if (!this.donationType) {
             donationType: this.donationType,
             amount: this.finalAmount,
             paymentMethod: this.payment_method
-          
+
     }
   });
     }

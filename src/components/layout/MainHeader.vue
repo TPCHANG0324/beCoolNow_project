@@ -33,7 +33,7 @@
       </nav>
     </div>
     <!-- 使用 v-show 來控制彈窗的顯示與隱藏 -->
-   
+
   </header>
   <header class="mobile_header">
     <div class="logo">
@@ -85,13 +85,13 @@
   </nav>
   <!-- <loginPopupChange v-if="isloginPopup"></loginPopupChange> -->
      <!-- 添加遮罩層 -->
-  <div 
-    class="overlay_popup01" 
-     v-show="isLogoutPopupVisible" 
+  <div
+    class="overlay_popup01"
+     v-show="isLogoutPopupVisible"
   @click="closeLogoutPopup"
   ></div>
   <loginPopupChange v-show="isloginPopup" @close="closeLoginPopup"></loginPopupChange>
- 
+
 
 <!-- 登出彈窗 -->
 <div class="logout-popup01" v-show="isLogoutPopupVisible">
@@ -136,7 +136,7 @@ export default {
       isMenuOpen.value = !isMenuOpen.value;
     };
 
-    
+
 
     // 檢查登入狀態
     const checkLoginStatus = () => {
@@ -187,7 +187,7 @@ export default {
       router.push('/member');
     };
 
-    
+
 
     return {
       isMenuOpen,

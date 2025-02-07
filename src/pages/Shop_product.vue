@@ -161,7 +161,7 @@ import BreadcrumbNavigation from '@/components/BreadcrumbNavigation.vue'
 import { PRICE_RANGES } from '@/store/priceRanges.js'
 
 export default {
-  
+
   name: 'ProductChoiceButtonGroup',
   name: 'SizeSelector',
   components: {

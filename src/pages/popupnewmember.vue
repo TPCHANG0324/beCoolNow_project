@@ -79,7 +79,7 @@ export default {
       this.confirmPasswordVisible = !this.confirmPasswordVisible;
     },
     test() {
-      console.log('ssss');
+      // console.log('ssss');
 
       this.$emit('switch');
     },

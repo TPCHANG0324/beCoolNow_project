@@ -20,7 +20,7 @@ import { RouterLink, RouterView } from 'vue-router';
 <style lang="scss">
 @import './assets/sass/style.scss';
 .fade-leave-active {
-  transition: opacity 0.4s ease;
+  transition: opacity 0.3s ease;
   position: absolute;
 }
 
@@ -35,6 +35,6 @@ import { RouterLink, RouterView } from 'vue-router';
 }
 
 .fade-enter-active {
-  transition: opacity 0.4s 0.4s ease;
+  transition: opacity 0.3s 0.3s ease;
 }
 </style>

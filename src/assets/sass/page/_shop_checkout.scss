@@ -2,11 +2,13 @@
   max-width: 1200px;
   margin: 0 auto;
   margin-top: 80px;
+  gap: 28px;
+}
+
+  /* 流程顯示 */
   .Sp-checkout-nav-X {
     text-align: center;
-    margin-bottom: 30px;
-
-    margin-right: auto; /* 讓 Sp-checkout-nav-X 置中 */
+    margin-top: 120px;
 
     /* 每一個圓圈 */
     .Sp-step-X {
@@ -19,7 +21,7 @@
       color: black;
 
       &.active .Sp-badge-X::after {
-        background-color: $Yellow_1;
+        background-color: $Yellow_1!important;
       }
 
       &:first-child .Sp-badge-X::before {
@@ -84,29 +86,25 @@
       }
     }
   }
-}
 
 
-.breadcrumb {
-  display: flex;
-  align-items: center; /* 垂直置中 */
-  text-decoration: none;
-  padding-top: 61px;
+// .breadcrumb {
 
-  .si_bread_r{
-    display: flex;
-    margin-right: auto; /* 讓 si_bread_r 靠左邊 */
-    a {
-      color: #000;
-      cursor: pointer;
-    }
-  
-    a:hover {
-      color: rgb(54, 54, 224)
-    }
-  }
+//   // display: flex;
+//   // gap: 2px;
+//   // text-decoration: none;
+//   // padding-top: 61px;
 
-}
+//   // a {
+//   //   color: #000;
+//   //   cursor: pointer;
+//   // }
+
+//   // a:hover {
+//   //   color: rgb(54, 54, 224)
+//   // }
+// }
+
 
 .si_ordersummary_R {
   cursor: pointer;
@@ -334,7 +332,7 @@
 
         select {
           width: 50%;
-          padding: 6px;
+          height: 2rem;
         }
       }
     }
@@ -596,6 +594,7 @@
 
   .si_bottomsection_R .si_order1_R .Si_deliveryinfo_R .si_address select {
     width: 100%;
+
   }
 
   .si_bottomsection_R .si_order2_R .Si-ordernotes-R .si_ordernotes_body textarea {
