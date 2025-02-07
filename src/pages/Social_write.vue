@@ -1,6 +1,6 @@
 <template>
   <MainHeader />
-  <main>
+  <main v-if="isAuthenticated">
     <!-- 撰寫文章，縮寫FbW - 功能 - 代號X -->
     <div class="FbW-X">
       <!-- 發文區 -->
@@ -37,7 +37,7 @@
           </div>
           <textarea id="FbW-postContent-X" name="" placeholder="開始寫文章囉"></textarea>
         </div>
-
+        
         <!-- 預覽圖 -->
         <div class="FbW-picture-X">
           <div>
@@ -62,7 +62,14 @@
 <script setup>
 import MainFooter from '@/components/layout/MainFooter.vue';
 import MainHeader from '@/components/layout/MainHeader.vue';
+import { useAuth } from '@/utils/useAuth';
 
+//由這段判斷是否經過登入驗證，並且取得用戶的 email 作為資料的獲取渠道
+const { isAuthenticated, userEmail, checkAuth } = useAuth()
+
+onMounted(() => {
+  checkAuth()
+})
 // 測試留言板套件
 // const data = ref('<p>这里是 CKEditor 示例内容</p>'); // 初始化内容  
 // const editor = ClassicEditor; // 使用 ClassicEditor 

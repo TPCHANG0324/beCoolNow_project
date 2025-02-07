@@ -15,13 +15,13 @@
         <div class="profile-container-special_right">
           <div class="profile-info-special">
             <div class="profile-field">
-              <label for="name" class="label_mb">姓名</label>
+              <label for="name" class="label_mb">暱稱</label>
               <template v-if="editStates.name">
                 <input
                   type="text"
                   id="name"
                   v-model="tempData.name"
-                  placeholder="輸入您的姓名"
+                  placeholder="輸入您的暱稱"
                   class="input_2 input_editing"
                   @keyup.enter="saveField('name')"
                 />

@@ -5,19 +5,17 @@
     <div class="Fb-Atricle-X" v-if="article">
       <div class="Fb-Atricle-title-X">{{ article.title }}</div>
       <div class="Fb-Atricle-info-X">
-        <!-- new URL('@/assets/images/Sp08.jpg', import.meta.url).href -->
         <img :src="getAvatarSource()" alt="" />
-        <!-- <img :src="article.imagePath ? imagePath : 'https://picsum.photos/id/237/200/300'" alt="" /> -->
         <div class="Atricle-name-time-X">
-          <span>{{ article.account }}</span>
-          <span>{{ article.time.split(' ')[0] }}&nbsp;&nbsp;{{ article.time.split(' ')[1] }}</span>
+          <span style="font-weight: bold;">{{ article.account }}</span>
+          <span style="font-size: 12px;">{{ article.time.split(' ')[0] }}&nbsp;&nbsp;{{ article.time.split(' ')[1] }}</span>
         </div>
         <i class="bi" :class="handupActive ? 'bi-hand-thumbs-up' : 'bi-hand-thumbs-up-fill'" @click="handup">{{
           article.handup }}</i>
         <i class="bi bi-share"></i>
       </div>
       <p v-html="article.content"></p>
-      <img :src="article.image" alt="" v-if="article.image" />
+      <!-- <img :src="article.image" alt="" v-if="article.image" /> -->
     </div>
 
     <!-- 留言區 -->

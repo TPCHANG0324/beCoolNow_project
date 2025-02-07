@@ -184,7 +184,7 @@
     <form action="" @submit.prevent="login">
       帳號：<input type="text" name="account" v-model="account2">
       密碼：<input type="password" name="password" v-model="password2">
-      <input type="submit" value="登入">
+      <input type="submit" value="登入"><ol><li>test</li><li>test1</li></ol>
     </form>
   </main>
 

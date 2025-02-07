@@ -16,14 +16,8 @@
         <div class="member-login-input-group">
           <label for="password">密碼</label>
           <div class="password-input-wrapper">
-            <input
-              id="password"
-              v-model="formData.password"
-              :type="passwordVisible ? 'text' : 'password'"
-              placeholder="須包含英文字母大小寫與數字"
-              required
-              @blur="validatePasswordFormat(formData.password)"
-            />
+            <input id="password" v-model="formData.password" :type="passwordVisible ? 'text' : 'password'"
+              placeholder="須包含英文字母大小寫與數字" required @blur="validatePasswordFormat(formData.password)" />
             <button type="button" class="toggle-password" @click="togglePasswordVisibility">
               {{ passwordVisible ? '🙉' : '🙈' }}
             </button>
@@ -110,7 +104,7 @@ export default {
       }
       return emailRegex.test(email);
     },
-    handleSubmit() {
+    async handleSubmit() {
       // 先執行驗證
       this.validateEmailFormat(this.formData.email);
       this.validatePasswordFormat(this.formData.password);
@@ -128,18 +122,48 @@ export default {
       }
 
       // 如果所有驗證都通過
-      alert('登入成功!歡迎光臨涼城即時');
-        // 儲存登入狀態和用戶信息到 localStorage
-    localStorage.setItem('isLoggedIn', 'true');
-    localStorage.setItem('userEmail', this.formData.email);
-      
-    this.resetForm();
+      // alert('登入成功!歡迎光臨涼城即時');
+      // 儲存登入狀態和用戶信息到 localStorage
+      // localStorage.setItem('isLoggedIn', 'true');
+      // localStorage.setItem('userEmail', this.formData.email);
 
-      // 導航到會員頁面
-      this.$router.push('/member');
-      this.$emit('close');
-       // 如果你想要關閉 popup
-      
+      // this.resetForm();
+
+      // 導航到會員頁面  //成功登入才導
+      // this.$router.push('/member');
+      // this.$emit('close');
+      // 如果你想要關閉 popup
+
+      const url = `/tid103/g1/php/login.php`;
+      try {
+        const res = await fetch(url, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          credentials: 'include',
+          body: JSON.stringify({
+            email: this.formData.email,
+            password: this.formData.password
+          })
+        })
+
+        const data = await res.json();
+        if (data.success) {
+          localStorage.setItem('userEmail', data.email)
+          alert(`${data.message}歡迎光臨涼城即時！`);
+          const redirectPath = localStorage.getItem('redirectPath') || '/';
+          localStorage.removeItem('redirectPath');
+          this.$router.push(redirectPath);
+        } else {
+          alert(data.message);
+          this.resetForm();
+        }
+
+      } catch (err) {
+        console.log(`請求出現錯誤：${err.message}`);
+        alert(`請求出現錯誤：請洽工作人員詢問！`);
+      }
     },
     resetForm() {
       this.formData = {
