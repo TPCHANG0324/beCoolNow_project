@@ -8,7 +8,10 @@
   <video autoplay muted loop playsinline>
     <source src="@/assets/videos/recycle_shop.mp4" type="video/mp4">
   </video>
-        <h1>環保市集</h1>
+        <h1>環保市集
+          <br /> Eco-Friendly Shop
+        </h1>
+
       </div>
 
       <!-- 中間內容 -->
@@ -60,17 +63,12 @@
               <li class="product-card_S">
                 <div class="product-box_S">
                   <RouterLink to="/shop_product">
-<<<<<<< HEAD
                     <img src="@/assets/images/Sp02.jpg" alt="環保吸管1" class="product-img" />
-=======
-                    <img src="@/assets/images/Sp02.jpg" alt="再生環保杯" class="product-img" />
->>>>>>> sunny
                   </RouterLink>
                   <p class="shop-add-to-cart-X">加入購物車</p>
                 </div>
-                <RouterLink to="/shop_product" class="product-card-name-X">環保吸管1
-                  <p>價格：NT$150</p>
-                </RouterLink>
+                <a href="#" class="product-card-name-X">環保吸管1</a>
+                <p>價格：NT$150</p>
               </li>
               <li class="product-card_S">
                 <div class="product-box_S">
