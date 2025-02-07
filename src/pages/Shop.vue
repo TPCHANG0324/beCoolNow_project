@@ -56,13 +56,14 @@
             <ul class="product-grid_S">
               <li class="product-card_S">
                 <div class="product-box_S">
-                  <a href="#">
-                    <img src="@/assets/images/Sp02.jpg" alt="環保吸管1" class="product-img" />
-                  </a>
+                  <RouterLink to="/shop_product">
+                    <img src="@/assets/images/Sp02.jpg" alt="再生環保杯" class="product-img" />
+                  </RouterLink>
                   <p class="shop-add-to-cart-X">加入購物車</p>
                 </div>
-                <a href="#" class="product-card-name-X">環保吸管1</a>
-                <p>價格：NT$150</p>
+                <RouterLink to="/shop_product" class="product-card-name-X">環保吸管1
+                  <p>價格：NT$150</p>
+                </RouterLink>
               </li>
               <li class="product-card_S">
                 <div class="product-box_S">

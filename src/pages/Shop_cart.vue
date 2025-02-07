@@ -1,4 +1,5 @@
 <template>
+    <MainHeader></MainHeader>
   <!-- <MainHeader /> -->
   <!-- 環保市集 - 購物車，縮寫Sp - 功能 - 代號X -->
   <main>
@@ -192,7 +193,7 @@
       <p>{{ counterStore.count }}</p>
       <button @click="counterStore.accumulate">測試按鈕</button>
   </main>
-  <MainFooter />
+  <MainFooter></MainFooter>
 </template>
 
 <script setup>
