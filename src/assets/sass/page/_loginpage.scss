@@ -3,15 +3,19 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  height: 100vh;
-  background: url("@/assets/images/loginpagenew.png") no-repeat center center;
-  background-size: cover;
+  // height: 100vh;
+  // background: url("@/assets/images/loginpagenew.png") no-repeat center center;
+  // background-size: cover;
   font-family: "DM Sans", sans-serif;
   color: #ffffff;
   text-align: center;
+  gap: 15px;
+  width: 100%;
+
 
   a {
     display: block;
+
 
     &:visited {
       color: $Ivory_white;
@@ -26,13 +30,13 @@
     width: 170px;
     height: 161px;
     border-radius: 50%;
-    background-color: #d4a548;
+    background-color: rgb(212, 165, 72, .5);
     cursor: pointer;
     font-size: 48px;
     font-weight: bold;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    transition: #d4a548 0.3s ease;
-    margin-left: 240px;
+    transition: #d4a548 0.8s ease;
+    // margin-left: 240px;
     line-height: 161px;
 
     &:hover {
@@ -45,13 +49,13 @@
     height: 161px;
     // padding: 170px 170px;
     border-radius: 50%;
-    background-color: #d4a548;
+    background-color: rgb(212, 165, 72, .5);
     cursor: pointer;
     font-size: 48px;
     font-weight: bold;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    transition: #d4a548 0.3s ease;
-    margin-right: 240px;
+    transition: #d4a548 0.8s ease;
+    // margin-right: 240px;
     text-align: center;
     line-height: 161px;
 

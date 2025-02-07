@@ -11,8 +11,8 @@ import axios from 'axios';
 // import 'tdesign-vue-next/es/style/index.css';
 
 //留言板套件使用
-// import CKEditor from '@ckeditor/ckeditor5-vue';  
-// import ClassicEditor from '@ckeditor/ckeditor5-build-classic'; 
+// import CKEditor from '@ckeditor/ckeditor5-vue';
+// import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 // import { CKEditor } from '@ckeditor/ckeditor5-vue';
 
 //郵件套件
@@ -25,7 +25,7 @@ app.use(pinia);
 app.use(router);
 // app.use(CKEditor);
 // app.component('CKEditor', CKEditor);
-app.config.globalProperties.$axios = axios; 
+app.config.globalProperties.$axios = axios;
 emailjs.init('5-GBPJlIL-R8kd1sM'); //初始化
 
 //component

@@ -39,7 +39,7 @@
             One person's power may be limited, but your immediate support can make a difference. Let us unite our
             strength to drive the change we all hope for!
           </p>
-          <router-link to="/Support" class="btn">支持我們</router-link>
+          <RouterLink to="/Support" class="btn">支持我們</RouterLink>
         </div>
       </div>
       <div class="about_bottom_R">
@@ -104,7 +104,7 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { RouterLink } from 'vue-router';
 import { ref, computed } from 'vue';
 

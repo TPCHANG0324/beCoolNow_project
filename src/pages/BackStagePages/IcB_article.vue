@@ -67,9 +67,6 @@
         <div class="IcB_addMain_H">
           <label for="IcB_addTopic_H">文章標題: <input id="IcB_addTopic_H" class="input" type="text" /></label>
           <label for="IcB_addUrl_H">外部鏈結: <input id="IcB_addUrl_H" class="input" type="text" /></label>
-          <label for="IcB_addContent_H"
-            >內容描述:<br /><textarea id="IcB_addContent_H" name="IcB_addContent_H"></textarea>
-          </label>
         </div>
         <figure>
           <label for="UploadPic">圖片:</label>
@@ -79,6 +76,9 @@
           </div>
         </figure>
       </div>
+      <label for="IcB_addContent_H" class="IcB_addContent_H "
+            >內容描述:<br /><textarea id="IcB_addContent_H" name="IcB_addContent_H"></textarea>
+      </label>
       <div>
         <button @click="closePopup">取消</button>
         <button @click="saveArticle">儲存</button>
@@ -95,11 +95,8 @@
       </span>
       <div>
         <div class="IcB_addMain_H">
-          <label for="IcB_addTopic_H">文章標題: <input id="IcB_addTopic_H" class="input" type="text" /></label>
-          <label for="IcB_addUrl_H">外部鏈結: <input id="IcB_addUrl_H" class="input" type="text" /></label>
-          <label for="IcB_addContent_H"
-            >內容描述:<br /><textarea id="IcB_addContent_H" name="IcB_addContent_H"></textarea>
-          </label>
+          <label for="IcB_editTopic_H">文章標題: <input id="IcB_editTopic_H" class="input" type="text" /></label>
+          <label for="IcB_editUrl_H">外部鏈結: <input id="IcB_editUrl_H" class="input" type="text" /></label>
         </div>
         <figure>
           <label for="UploadPic">圖片:</label>
@@ -109,6 +106,9 @@
           </div>
         </figure>
       </div>
+      <label for="IcB_editContent_H" class="IcB_addContent_H "
+            >內容描述:<br /><ckeditor id="ckeditor"><textarea id="IcB_editContent_H" name="IcB_addContent_H"></textarea></ckeditor>
+      </label>
       <div>
         <button @click="closePopup">取消</button>
         <button @click="saveArticle">儲存</button>
@@ -130,6 +130,7 @@
     </BackStageConfirmPopup>
   </transition>
   </div>
+
 </template>
 
 <script>

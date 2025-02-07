@@ -90,10 +90,11 @@
         <article class="SpB_status_H">
           <div>
             <p>付款狀態:&nbsp;</p>
-            <select id="" name="">
+            <p>已付款</p>
+            <!-- <select id="" name="">
               <option value="">已付款</option>
               <option value="">異常</option>
-            </select>
+            </select> -->
           </div>
           <div>
             <p>訂單狀態:&nbsp;</p>

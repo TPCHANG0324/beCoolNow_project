@@ -93,7 +93,7 @@
       </div>
       <a href="./pay1/" class="bc-prev-step-button">
         <span class="bc-prev-step-icon">❮</span>
-        <router-link to="/pay1"><span class="bc-prev-step-text">上一步</span></router-link>
+        <RouterLink to="/pay1"><span class="bc-prev-step-text">上一步</span></RouterLink>
       </a>
     </div>
     <MainFooter></MainFooter>
