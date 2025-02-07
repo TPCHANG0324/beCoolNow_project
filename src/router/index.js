@@ -20,6 +20,15 @@ const routes = [
       // requiredLogin: false
     },
   },
+
+  {
+    path: '/donatefinish/',
+    component: () => import('@/pages/Donatefinish.vue'),
+    meta: {
+      title: '感謝捐款',
+      // requiredLogin: false
+    },
+  },
   {
     path: '/activity/',
     component: () => import('@/pages/Activity.vue'),
