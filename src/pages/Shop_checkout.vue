@@ -2,7 +2,6 @@
   <MainHeader></MainHeader>
   
   <div class="si_container_R">
-
     <div class="Sp-checkout-nav-X">
                   <!-- 每一個圓圈 -->
                   <div class="Sp-step-X">
@@ -27,39 +26,37 @@
                   </div>
               </div>
     <div class="si_content_R">
-<<<<<<< HEAD
-      <nav class="breadcrumb">
-        <div class="si_bread_r">
+      <!-- <nav class="breadcrumb"> -->
+        <!-- <div class="si_bread_r">
           <a href="#">首頁</a>
           <p>/</p>
           <a href="#">購物車</a>
-        </div>
+        </div> -->
         <!-- 流程顯示 -->
-        <div class="Sp-checkout-nav-X">
+        <!-- <div class="Sp-checkout-nav-X">
           <!-- 每一個圓圈 -->
-          <div class="Sp-step-X active">
+          <!-- <div class="Sp-step-X active">
             <span class="Sp-badge-X">
               <div class="Sp-badge-text-X">1</div>
             </span>
             <span>購物車</span>
-          </div>
+          </div> -->
 
-          <div class="Sp-step-X">
+          <!-- <div class="Sp-step-X">
             <span class="Sp-badge-X">
               <div class="Sp-badge-text-X">2</div>
             </span>
             <span>填寫資料</span>
-          </div>
+          </div> -->
 
-          <div class="Sp-step-X">
+          <!-- <div class="Sp-step-X">
             <span class="Sp-badge-X">
               <div class="Sp-badge-text-X">3</div>
             </span>
             <span>購買完成</span>
           </div>
         </div>
-      </nav>
-=======
+      </nav> -->
       <!-- <nav class="breadcrumb">
         <ol>
           <li><a href="#">首頁</a></li>
@@ -69,7 +66,6 @@
       </nav> -->
       <!-- 步驟進度條 -->
       <!-- div... -->
->>>>>>> sunny
       <!-- 合計 -->
       <div class="si_ordersummary_R">
         <!-- 頭部區域 -->
@@ -257,10 +253,11 @@
   </div>
 </template>
 
-<<<<<<< HEAD
 <script setup>
 import { ref, computed } from 'vue'
 import { RouterLink } from 'vue-router'
+import MainFooter from '@/components/layout/MainFooter.vue';
+import MainHeader from '@/components/layout/MainHeader.vue';
 
 // -- 加入「展開/收合」邏輯 --
 const isOpen = ref(false)
@@ -292,10 +289,5 @@ const selectedDistricts = computed(() => {
   const city = cities.find(city => city.name === selectedCity.value)
   return city ? city.districts : []
 })
-=======
-<script>
-import MainFooter from '@/components/layout/MainFooter.vue';
-import MainHeader from '@/components/layout/MainHeader.vue';
-import { RouterLink } from 'vue-router';
->>>>>>> sunny
+
 </script>

@@ -1,11 +1,6 @@
 <template>
-<<<<<<< HEAD
-
-  <MainHeader />
-=======
     <MainHeader></MainHeader>
   <!-- <MainHeader /> -->
->>>>>>> sunny
   <!-- 環保市集 - 購物車，縮寫Sp - 功能 - 代號X -->
   <main>
     <div class="Sp-X">
@@ -192,13 +187,8 @@
       <input type="submit" value="登入">
     </form>
   </main>
-<<<<<<< HEAD
-
-  <MainFooter class="removeMT" />
-
-=======
   <MainFooter></MainFooter>
->>>>>>> sunny
+
 </template>
 
 <script setup>

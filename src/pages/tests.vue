@@ -1,7 +1,4 @@
 <template>
-<<<<<<< HEAD
-  <div>
-=======
 
   <figure>
     <!-- 桌機版 (當螢幕 > 430px) -->
@@ -320,6 +317,6 @@ swiper-slide img {
   margin-left: 0 !important;
   margin-right: 0 !important;
   padding: 0 !important;
->>>>>>> sunny
+
 }
 </style>
