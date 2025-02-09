@@ -102,6 +102,7 @@
           <li>NT$100~$200</li>
         </ol>
       </div>
+    </article>
 
       <!-- 選擇規格及數量 -->
       <section class="Sp_productChoice_top_H">
