@@ -191,7 +191,11 @@
 
               <div class="Sp_productChoice_buyNow_H">
                 <button type="button" @click="addToCart">加入購物車</button>
-                <button type="button">立即購買</button>
+                <router-link to="/shop_cart" custom v-slot="{ navigate }">
+                  <button type="button" @click="navigate">
+                    立即購買
+                  </button>
+                </router-link>
               </div>
              
               <!-- 遮罩層 -->
@@ -203,7 +207,7 @@
               <div v-if="isCartPopupVisible" class="cart-popup">
                 <div class="cart-popup-content">
                   <h2>商品已加入購物車！</h2>
-                  <button @click="closeCartPopup">關閉</button>
+                  <button class="close-btn" @click="closeCartPopup">X</button>
                   <div class="cart-item">
                     <img :src="selectedImage" alt="商品圖片" class="cart-image"/>
                     <div class="cart-info">

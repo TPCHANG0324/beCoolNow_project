@@ -458,7 +458,13 @@
                     button {
                         @include btn_style($btn_radius_30px, 36%, 52px);
                         line-height: 20px;
+
                     }
+                    :deep(button) {
+                        @include btn_style($btn_radius_30px, 36%, 52px);
+                        line-height: 20px;
+                      }
+
 
                     
                 }
@@ -582,6 +588,10 @@
             margin-left: 40px;
             margin-top: 136px;
             width: 23%;
+
+            @include max_820 {
+                display: none;
+            }
 
             h3 {
                 @include PC_h3($Green_1);
@@ -800,16 +810,25 @@
     position: absolute;
     top: 10px;
     right: 10px;
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
     border: none;
-    background: none;
-    font-size: 24px;
-    cursor: pointer;
+    background-color: #f8f8f8;
+    border-radius: 50%;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 40px;
+    text-align: center;
     color: #666;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     
     &:hover {
-        color: #000;
+      background-color: #eaeaea;
+      color: #333;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transform: scale(1.05);
     }
 }
 
@@ -840,7 +859,9 @@
     }
   }
 
-
+  .cart-popup-content{
+    position: relative;
+  }
   
   /* 按鈕區 */
   .cart-popup-actions {

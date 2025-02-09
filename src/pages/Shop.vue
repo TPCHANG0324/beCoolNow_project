@@ -45,7 +45,7 @@
               </select>
             </div>
 
-            <div class="select-box">
+            <!-- <div class="select-box">
               <select id="" name="">
                 <option value="默認排序" selected>默認排序</option>
                 <option value="上架時間：由新至舊">上架時間：由新至舊</option>
@@ -53,14 +53,36 @@
                 <option value="價格：由高至低">價格：由高至低</option>
                 <option value="價格：由低至高">價格：由低至高</option>
               </select>
-            </div>
+            </div> -->
+              <div class="select-box">
+                <select v-model="selectedSort">
+                  <option 
+                    v-for="option in computedSortOptions" 
+                    :key="option.value" 
+                    :value="option.value">
+                    {{ option.label }}
+                  </option>
+                </select>
+              </div>
           </div>
 
           <!-- 商品列表 -->
           <div class="Sp-product_S">
             <!-- 商品區 -->
             <ul class="product-grid_S">
-              <li class="product-card_S">
+              <li class="product-card_S" v-for="product in productData">
+                <div class="product-box_S">
+                  <RouterLink to="/shop_product">
+                    <img :src="product.imageUrl" :alt="product.title" class="product-img" />
+                  </RouterLink>
+                  <p class="shop-add-to-cart-X">加入購物車</p>
+                </div>
+                <RouterLink to="/shop_product" class="product-card-name-X">{{ product.title }}
+                  <p>價格：NT${{ product.price }}</p>
+                </RouterLink>
+              </li>
+
+              <!-- <li class="product-card_S">
                 <div class="product-box_S">
                   <RouterLink to="/shop_product">
                     <img src="@/assets/images/Sp15.jpg" alt="再生環保杯" class="product-img" />
@@ -180,10 +202,13 @@
                 </div>
                 <a href="#" class="product-card-name-X">環保筷子3</a>
                 <p>價格：NT$320</p>
-              </li>
+              </li> -->
             </ul>
             <!-- 頁數選擇器 -->
-            <div class="Sp-pages-X">
+             
+            <Paginator :currentPage="currentP" :totalPages="totalItemCount" @page-changed="handlePageChange" />
+
+            <!-- <div class="Sp-pages-X">
               <ul>
                 <li class="Sp-pages-prev"><i class="bi bi-caret-left-fill"></i></li>
                 <li class="current"><span>1</span></li>
@@ -193,78 +218,11 @@
                 <li><span>5</span></li>
                 <li class="Sp-pages-next"><i class="bi bi-caret-right-fill"></i></li>
               </ul>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
     </div>
-    <!-- 商品區 -->
-    <!-- <ul class="product-grid_S">
-            <li class="product-card_S">
-              <div class="product-box_S">
-                <a href="#">
-                  <img src="https://picsum.photos/400/600.jpg" alt="環保吸管1" class="product-img" />
-                </a>
-                <p class="shop-add-to-cart-X">加入購物車</p>
-              </div>
-              <a href="#" class="product-card-name-X">環保吸管1</a>
-              <p>價格：NT$150</p>
-            </li>
-            <li class="product-card_S">
-              <div class="product-box_S">
-                <a href="#">
-                  <img src="https://picsum.photos/400/600.jpg" alt="環保吸管1" class="product-img" />
-                </a>
-                <p class="shop-add-to-cart-X">加入購物車</p>
-              </div>
-              <a href="#" class="product-card-name-X">環保吸管1</a>
-              <p>價格：NT$150</p>
-            </li>
-            <li class="product-card_S">
-              <div class="product-box_S">
-                <a href="#">
-                  <img src="https://picsum.photos/400/600.jpg" alt="環保吸管1" class="product-img" />
-                </a>
-                <p class="shop-add-to-cart-X">加入購物車</p>
-              </div>
-              <a href="#" class="product-card-name-X">環保吸管1</a>
-              <p>價格：NT$150</p>
-            </li>
-            <li class="product-card_S">
-              <div class="product-box_S">
-                <a href="#">
-                  <img src="https://picsum.photos/400/600.jpg" alt="環保吸管1" class="product-img" />
-                </a>
-                <p class="shop-add-to-cart-X">加入購物車</p>
-              </div>
-              <a href="#" class="product-card-name-X">環保吸管1</a>
-              <p>價格：NT$150</p>
-            </li>
-            <li class="product-card_S">
-              <div class="product-box_S">
-                <a href="#">
-                  <img src="https://picsum.photos/400/600.jpg" alt="環保吸管1" class="product-img" />
-                </a>
-                <p class="shop-add-to-cart-X">加入購物車</p>
-              </div>
-              <a href="#" class="product-card-name-X">環保吸管1</a>
-              <p>價格：NT$150</p>
-            </li>
-          </ul> -->
-    <!-- 頁數選擇器 -->
-    <!-- <div class="Sp-pages-X">
-            <ul>
-              <li class="Sp-pages-prev"><i class="bi bi-caret-left-fill"></i></li>
-              <li class="current"><span>1</span></li>
-              <li><span>2</span></li>
-              <li><span>3</span></li>
-              <li><span>4</span></li>
-              <li><span>5</span></li>
-              <li class="Sp-pages-next"><i class="bi bi-caret-right-fill"></i></li>
-            </ul>
-          </div>
-        </div>-->
-    <!-- </div> -->
     <MainFooter></MainFooter>
   </main>
 </template>
@@ -272,4 +230,199 @@
 <script setup>
 import MainHeader from '@/components/layout/MainHeader.vue';
 import MainFooter from '@/components/layout/MainFooter.vue';
+import Paginator from '@/components/paginator.vue';
+
+
+//計算頁數 //一頁12個商品
+const currentP = ref(1); //當前頁碼，預設 1
+
+const totalItemCount = computed(() => {
+  return Math.ceil(productData.value.length / 12);
+});
+
+//當翻頁的時候，就更新當前的頁碼
+const handlePageChange = (newPage) => {
+  currentP.value = newPage;
+  window.scrollTo({
+    top: 0, // 滾動到頂部
+    behavior: 'smooth', // 平滑滾動
+  });
+};
+
+const productData= ref([
+      {
+        title: '再生材質環保杯',
+        price: 299,
+        features: [
+          '重量僅有300g',
+          '輕巧好攜帶',
+          '質感必備'
+        ],
+        details: '這款再生材質環保馬克杯...（詳情文字）',
+        imageUrl: new URL("../../public/images/Sp15.jpg", import.meta.url).href,
+      },
+      {
+        title: '環保吸管1',
+        price: 160,
+        features: [
+          '食品級304不鏽鋼',
+          '含清潔刷',
+          '附絨布收納袋'
+        ],
+        details: '本產品採用頂級304不鏽鋼製成，無重金屬殘留，可重複使用，安全衛生。套組包含多種尺寸吸管，適合各種飲品使用，從珍珠奶茶到果汁皆適用。每一組都配有專用清潔刷和防刮絨布收納袋，攜帶方便，是您實踐環保生活的最佳選擇。',
+        imageUrl: new URL("../../public/images/Sp15.jpg", import.meta.url).href,
+      },
+      {
+        title: '環保吸管2',
+        price: 200,
+        features: [
+          '細吸管: 6mm口徑 (適合果汁、咖啡)',
+          '標準吸管: 8mm口徑 (適合一般飲品)',
+          '粗吸管: 12mm口徑 (適合珍珠奶茶)',
+          '彎管: 8mm口徑 (適合兒童使用)'
+        ],
+        details: '這款再生材質環保馬克杯...（詳情文字）',
+        imageUrl: new URL("../../public/images/Sp15.jpg", import.meta.url).href,
+      },
+      {
+        title: '環保袋子1',
+        price: 250,
+        features: [
+          '防水再生材質',
+          '可折疊收納',
+          '承重力強'
+        ],
+        details: '使用高品質再生環保布料製成，具有excellent防水效果和強大承重力。特殊摺疊設計讓您可輕鬆收納在包包中，隨時準備好購物使用。多種尺寸選擇適合不同場合，從日常採買到大型購物皆宜，為您的綠色生活加分。',
+        imageUrl: new URL("../../public/images/Sp15.jpg", import.meta.url).href,
+      },
+      {
+        title: '環保袋子2',
+        price: 500,
+        features: [
+          '小型: 容量15L (適合日常小購物)',
+          '中型: 容量25L (適合一般採買)',
+          '大型: 容量35L (適合大量購物)',
+          '超大型: 容量45L (適合大型賣場)'
+        ],
+        details: '這款再生材質環保馬克杯...（詳情文字）',
+        imageUrl: new URL("../../public/images/Sp15.jpg", import.meta.url).href,
+      },
+      {
+        title: '環保袋子3',
+        price: 395,
+        features: [
+          '重量僅有300g',
+          '輕巧好攜帶',
+          '質感必備'
+        ],
+        details: '這款再生材質環保馬克杯...（詳情文字）',
+        imageUrl: new URL("../../public/images/Sp15.jpg", import.meta.url).href,
+      },
+      {
+        title: '再生材質環保杯',
+        price: 299,
+        features: [
+          '重量僅有300g',
+          '輕巧好攜帶',
+          '質感必備'
+        ],
+        details: '這款再生材質環保馬克杯...（詳情文字）',
+        imageUrl: new URL("../../public/images/Sp15.jpg", import.meta.url).href,
+      },
+      {
+        title: '再生材質環保杯',
+        price: 299,
+        features: [
+          '重量僅有300g',
+          '輕巧好攜帶',
+          '質感必備'
+        ],
+        details: '這款再生材質環保馬克杯...（詳情文字）',
+        imageUrl: new URL("../../public/images/Sp15.jpg", import.meta.url).href,
+      },
+      {
+        title: '再生材質環保杯',
+        price: 299,
+        features: [
+          '重量僅有300g',
+          '輕巧好攜帶',
+          '質感必備'
+        ],
+        details: '這款再生材質環保馬克杯...（詳情文字）',
+        imageUrl: new URL("../../public/images/Sp15.jpg", import.meta.url).href,
+      },
+      {
+        title: '再生材質環保杯',
+        price: 299,
+        features: [
+          '重量僅有300g',
+          '輕巧好攜帶',
+          '質感必備'
+        ],
+        details: '這款再生材質環保馬克杯...（詳情文字）',
+        imageUrl: new URL("../../public/images/Sp15.jpg", import.meta.url).href,
+      },
+      {
+        title: '再生材質環保杯',
+        price: 299,
+        features: [
+          '重量僅有300g',
+          '輕巧好攜帶',
+          '質感必備'
+        ],
+        details: '這款再生材質環保馬克杯...（詳情文字）',
+        imageUrl: new URL("../../public/images/Sp15.jpg", import.meta.url).href,
+      },
+      {
+        title: '再生材質環保杯',
+        price: 299,
+        features: [
+          '重量僅有300g',
+          '輕巧好攜帶',
+          '質感必備'
+        ],
+        details: '這款再生材質環保馬克杯...（詳情文字）',
+        imageUrl: new URL("../../public/images/Sp15.jpg", import.meta.url).href,
+      },
+      {
+        title: '再生材質環保杯',
+        price: 299,
+        features: [
+          '重量僅有300g',
+          '輕巧好攜帶',
+          '質感必備'
+        ],
+        details: '這款再生材質環保馬克杯...（詳情文字）',
+        imageUrl: new URL("../../public/images/Sp15.jpg", import.meta.url).href,
+      },
+      {
+        title: '再生材質環保杯',
+        price: 299,
+        features: [
+          '重量僅有300g',
+          '輕巧好攜帶',
+          '質感必備'
+        ],
+        details: '這款再生材質環保馬克杯...（詳情文字）',
+        imageUrl: new URL("../../public/images/Sp15.jpg", import.meta.url).href,
+      },
+    ]);
+      const selectedSort = ref('默認排序');
+      const baseSortOptions = ref([
+          { value: '默認排序', label: '默認排序' },
+          { value: '上架時間：由新至舊', label: '上架時間：由新至舊' },
+          { value: '上架時間：由舊至新', label: '上架時間：由舊至新' },
+          { value: '價格：由高至低', label: '價格：由高至低' },
+          { value: '價格：由低至高', label: '價格：由低至高' },
+      ]);
+      const computedSortOptions = computed(() => {
+          return baseSortOptions.value.filter(option => option.value !== selectedSort.value);
+      });
+      //真正要渲染到頁面的文章資料
+      const datas = computed(() => {
+        const start = (currentP.value - 1) * 5;
+        const to = currentP.value * 5;
+        return filterArticles.value.slice(start, to);
+      });
+
 </script>
