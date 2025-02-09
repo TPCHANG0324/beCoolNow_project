@@ -1,6 +1,10 @@
 <template>
   <MainHeader />
-  <main v-if="isAuthenticated">
+  <div v-if="isLoading" class="loading-container">
+    <div class="loading-spinner"></div>
+    <div>正在載入畫面…</div>
+  </div>
+  <main v-else-if="isAuthenticated">
     <!-- 撰寫文章，縮寫FbW - 功能 - 代號X -->
     <div class="FbW-X">
       <!-- 發文區 -->
@@ -37,7 +41,7 @@
           </div>
           <textarea id="FbW-postContent-X" name="" placeholder="開始寫文章囉"></textarea>
         </div>
-        
+
         <!-- 預覽圖 -->
         <div class="FbW-picture-X">
           <div>
@@ -64,14 +68,52 @@ import MainFooter from '@/components/layout/MainFooter.vue';
 import MainHeader from '@/components/layout/MainHeader.vue';
 import { useAuth } from '@/utils/useAuth';
 
-//由這段判斷是否經過登入驗證，並且取得用戶的 email 作為資料的獲取渠道
-const { isAuthenticated, userEmail, checkAuth } = useAuth()
 
-onMounted(() => {
-  checkAuth()
+//由這段判斷是否經過登入驗證，並且取得用戶的 email 作為資料的獲取渠道
+const { isAuthenticated, userEmail, checkAuth, isLoading } = useAuth()
+
+onMounted(async () => {
+  try {
+    await checkAuth()
+  } finally {
+    isLoading.value = false
+  }
 })
+
+
+
 // 測試留言板套件
 // const data = ref('<p>这里是 CKEditor 示例内容</p>'); // 初始化内容  
 // const editor = ClassicEditor; // 使用 ClassicEditor 
 
 </script>
+
+<style scoped>
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.loading-spinner {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+</style>

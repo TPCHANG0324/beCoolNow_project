@@ -151,6 +151,7 @@
 import MainHeader from '@/components/layout/MainHeader.vue';
 import MainFooter from '@/components/layout/MainFooter.vue';
 import OrderDetailPopup from '@/pages/popUpdetailshop.vue';
+import { useAuth } from '@/utils/useAuth';
 
 export default {
   components: {
@@ -337,7 +338,7 @@ export default {
         console.error('Error fetching user data:', error);
       }
     }
-  }
+  },
 }
 
 

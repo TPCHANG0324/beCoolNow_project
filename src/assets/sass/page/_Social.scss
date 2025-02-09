@@ -527,9 +527,13 @@ main {
         }
 
         i {
+            font-style: normal;
             cursor: pointer;
+            span{
+                padding: 0 4px;
+            }
             &:not(:last-child) {
-                margin-right: 20px;
+                margin-right: 16px;
                 margin-left: auto;
 
                 // @include max_540() {

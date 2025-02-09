@@ -23,9 +23,9 @@
           </li>
           <li>
             <a v-if="!isLoggedIn" @click="toggleLoginPopup">
-              <i class="bi bi-person-circle" :class="{ 'logged-in': isLoggedIn }"></i>
+              <i class="bi bi-person-circle"></i>
             </a>
-            <a v-else @click="confirmLogout">
+            <a v-else @click="showLogoutPopup">
               <i class="bi bi-person-circle" :class="{ 'logged-in': isLoggedIn }"></i>
             </a>
           </li>
@@ -76,7 +76,7 @@
   </nav>
   <!-- <loginPopupChange v-if="isloginPopup"></loginPopupChange> -->
   <!-- 添加遮罩層 -->
-  <div class="overlay_popup01" v-show="isloginPopup" @click="closeLoginPopup"></div>
+  <div class="overlay_popup01" v-show="isLogoutPopupVisible" @click="closeLogoutPopup"></div>
   <loginPopupChange v-show="isloginPopup" @close="closeLoginPopup"></loginPopupChange>
 
 
@@ -94,7 +94,7 @@
 </template>
 
 <script>
-import { ref, onMounted, onUnmounted } from 'vue';
+import { ref, onMounted, onUnmounted, watch } from 'vue';
 import { RouterLink, useRouter } from 'vue-router';
 import { useAuth } from '@/utils/useAuth';
 import eventBus from '@/utils/eventBus';
@@ -104,15 +104,27 @@ export default {
   name: 'MainHeader',
   components: { loginPopupChange },
   setup() {
-
-    const router = useRouter(); // 初始化 router
-    const { isAuthenticated, userEmail, checkAuth } = useAuth();
-
+    const router = useRouter();
+    const { userEmail, checkAuth } = useAuth();
     const isMenuOpen = ref(false);
     const isloginPopup = ref(false);
     const isLoggedIn = ref(false);
     const isLogoutPopupVisible = ref(false);
 
+    // 新增這段
+    onMounted(() => {
+      checkLoginStatus();
+      // if (!localStorage.getItem('isLoggedIn')) {
+      //   localStorage.setItem('isLoggedIn', 'false');
+      // }
+      // 監聽 localStorage 變化
+      // window.addEventListener('storage', checkLoginStatus);
+    });
+
+    // 缺少 toggleMenu 方法
+    const toggleMenu = () => {
+      isMenuOpen.value = !isMenuOpen.value;
+    };
 
 
 
@@ -121,122 +133,86 @@ export default {
       // const loginStatus = localStorage.getItem('isLoggedIn');
       // isLoggedIn.value = loginStatus === 'true';
 
-      const isLogged = await checkAuth();
-      isLoggedIn.value = isLogged;
+      // const isLogged = await checkAuth();
+      // isLoggedIn.value = isLogged;
+      isLoggedIn.value = await checkAuth();
+    };
 
-      // 新增這段
-      //     onMounted(() => {
-      //       if (!localStorage.getItem('isLoggedIn')) {
-      //         localStorage.setItem('isLoggedIn', 'false');
-      //       }
-      //       checkLoginStatus();
-      //        // 監聽 localStorage 變化
-      //   window.addEventListener('storage', checkLoginStatus);
-      //     });
+    // onMounted(() => {
+    //   checkLoginStatus();
+    //   window.addEventListener('storage', checkLoginStatus); // 監聽 localStorage 變化
+    // });
 
-      // 缺少 toggleMenu 方法
-      const toggleMenu = () => {
-        isMenuOpen.value = !isMenuOpen.value;
-      };
+    // onUnmounted(() => {
+    //   window.removeEventListener('storage', checkLoginStatus);
+    // });
 
-
-
-      //     // 檢查登入狀態
-      //     const checkLoginStatus = () => {
-      //       const loginStatus = localStorage.getItem('isLoggedIn');
-      //       isLoggedIn.value = loginStatus === 'true';
-      //     };
-
-      onMounted(() => {
-        checkLoginStatus();
-        window.addEventListener('storage', checkLoginStatus); // 監聽 localStorage 變化
-      });
-
-      onUnmounted(() => {
-        window.removeEventListener('storage', checkLoginStatus);
-      });
-
-      const toggleLoginPopup = () => {
-        if (!isLoggedIn.value) {
-          isloginPopup.value = !isloginPopup.value;
-        }
-      };
-
-      const closeLoginPopup = () => {
-        isloginPopup.value = false;
-      };
-
-      onMounted(() => {
-        // 監聽事件
-        eventBus.on('show-login-popup', showLoginPopup);
-      });
-
-      onUnmounted(() => {
-        // 移除事件
-        eventBus.off('show-login-popup', showLoginPopup);
-      });
-
-      // const toggleMenu = () => {
-      //   isMenuOpen.value = !isMenuOpen.value;
-      //   // console.log('Menu toggled:', isMenuOpen.value);
-      // };
-
-      // 新增確認登出方法
-      const confirmLogout = () => {
-        // const confirmed = window.confirm('🚨是否確定登出？\n點選確定💔，登出後返回首頁\n點選取消❤️，返回會員頁面');
-        // if (confirmed) {
-        //   // 執行登出操作
-        //   // localStorage.removeItem('isLoggedIn');
-        //   // localStorage.removeItem('userEmail');
-        //   isLoggedIn.value = false;
-        //   router.push('/');
-        // } else {
-        //   // 若點選取消，導向 member 頁面
-        //   router.push('/member');
+    const toggleLoginPopup = () => {
+      if (!isLoggedIn.value) {
+        isloginPopup.value = !isloginPopup.value;
       }
+    };
 
-      const showLogoutPopup = () => { //登出
-        if (isLoggedIn.value) {
-          isLogoutPopupVisible.value = true;
-        }
-      };
+    const closeLoginPopup = () => {
+      isloginPopup.value = false;
+      checkLoginStatus();
+      if (localStorage.getItem('redirectPath')) {
+        localStorage.removeItem('redirectPath');
+      }
+    };
 
-      const closeLogoutPopup = () => { //點擊登出的彈窗關閉
+    const showLogoutPopup = () => {
+      if (isLoggedIn.value) {
+        isLogoutPopupVisible.value = true;
+      }
+    };
+
+    const closeLogoutPopup = () => { //詢問是否要登出的彈窗消失改為異步
+      return new Promise((resolve) => {
         isLogoutPopupVisible.value = false;
-      };
+        setTimeout(() => {
+          resolve();
+        }, 100)
+      })
+    };
 
-      const handleLogout = () => {
-        localStorage.removeItem('isLoggedIn');
-        localStorage.removeItem('userEmail');
+    const showLoginPopup = () => {
+      isloginPopup.value = true; // 顯示登入燈箱
+    };
 
-        router.push('/');
-      };
+    onMounted(() => {
+      // 監聽事件
+      eventBus.on('show-login-popup', showLoginPopup);
+    });
 
-      // const showLoginPopup = () => {
-      //   isloginPopup.value = true; // 顯示登入燈箱
-      // };
+    onUnmounted(() => {
+      // 移除事件
+      eventBus.off('show-login-popup', showLoginPopup);
+    });
 
-      // onMounted(() => {
-      //   // 監聽事件
-      //   eventBus.on('show-login-popup', showLoginPopup);
-      // });
 
-      // onUnmounted(() => {
-      //   // 移除事件
-      //   eventBus.off('show-login-popup', showLoginPopup);
-      // });
-
-      isLoggedIn.value = false;
-      closeLogoutPopup();
-      router.push('/');
+    //登出
+    const handleLogout = async () => {
+      try {
+        const res = await fetch(`/tid103/g1/php/logout.php`);
+        const data = await res.json();
+        // console.log(data);
+        if (data.success) {
+          isLoggedIn.value = false;
+          await closeLogoutPopup();
+          alert(`${data.message}`);
+          router.push('/'); //登出之後一律回到首頁
+        }
+      } catch (err) {
+        console.error('登出操作失敗', err);
+        alert('登出操作失敗，請洽工作人員詢問');
+      }
     };
 
     const goToMember = () => {
       closeLogoutPopup();
       router.push('/member');
     };
-
-
 
 
     return {
@@ -247,12 +223,11 @@ export default {
       toggleLoginPopup,
       toggleMenu,
       closeLoginPopup,
-      confirmLogout,
-      userEmail,
       showLogoutPopup,
       closeLogoutPopup,
       handleLogout,
-      goToMember
+      goToMember,
+      userEmail
     };
   }
 };

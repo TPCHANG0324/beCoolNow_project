@@ -39,10 +39,10 @@
 import { useRouter } from 'vue-router';
 export default {
   name: 'member_login',
-  setup() {
-    const router = useRouter();
-    return { router };
-  },
+  // setup() {
+  //   const router = useRouter();
+  //   return { router };
+  // },
   data() {
     return {
       formData: {
@@ -53,7 +53,7 @@ export default {
       formErrors: {
         email: '',
         password: '',
-      },
+      }
     };
   },
   watch: {
@@ -104,6 +104,9 @@ export default {
       }
       return emailRegex.test(email);
     },
+    closePopup() {  //關閉彈窗
+      this.$emit('close');
+    },
     async handleSubmit() {
       // 先執行驗證
       this.validateEmailFormat(this.formData.email);
@@ -112,10 +115,10 @@ export default {
       // 檢查是否有錯誤訊息
       if (this.formErrors.email || this.formErrors.password) {
         // 如果有錯誤，不提交表單
-        alert('驗證失敗：\n' + 
+        alert('驗證失敗：\n' +
           (this.formErrors.email ? this.formErrors.email + '\n' : '') +
           (this.formErrors.password ? this.formErrors.password : ''));
-    return;
+        return;
       }
 
       // 如果密碼驗證不通過
@@ -151,17 +154,22 @@ export default {
             password: this.formData.password
           })
         })
-
         const data = await res.json();
         if (data.success) {
-          localStorage.setItem('userEmail', data.email)
           alert(`${data.message}歡迎光臨涼城即時！`);
+          this.resetForm();
           const redirectPath = localStorage.getItem('redirectPath') || '/';
-          localStorage.removeItem('redirectPath');
+          this.closePopup();
           this.$router.push(redirectPath);
         } else {
-          alert(data.message);
-          this.resetForm();
+          if(data.message === '密碼錯誤，請查明後再試！'){
+            alert(data.message);
+            this.resetForm();
+          }else if(data.message === '查無此帳號密碼，請先註冊後再登入！'){
+            alert(data.message);
+            this.resetForm();
+            this.$emit('switch');
+          }
         }
 
       } catch (err) {

@@ -8,7 +8,7 @@ session_destroy();
 
 echo json_encode([
     "success" => true,
-    "message" => "已成功登出"
+    "message" => "登出成功！"
 ]);
 
 ?>
