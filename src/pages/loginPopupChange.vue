@@ -3,7 +3,7 @@
     <div class="overlay_member" @click="closePopup"></div>
     <div class="popup-container_member">
       <div v-if="currentPopup === 'login'">
-        <PopupLogin @switch="showNewMemberPopup" />
+        <PopupLogin @switch="showNewMemberPopup" @close="$emit('close')" />
       </div>
       <div v-if="currentPopup === 'register'">
         <PopupNewMember @switch="showLoginPopup" />

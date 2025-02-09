@@ -1,33 +1,34 @@
 <?php
-header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Origin: http://localhost');
 header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Content-Type');
 header('Content-Type: application/json; charset=utf-8');
 
 $login =  json_decode(file_get_contents("php://input"), true);
-$account = htmlspecialchars($login['account']); //防止注射攻擊
+$email = htmlspecialchars($login['email']); //防止注射攻擊
 $password = $login['password'];
 
 include('connect.php');
 
-$sql = "SELECT PWD FROM member WHERE Account = ?";  
+$sql = "SELECT password FROM G2_MEMBER WHERE email = ?";  
 $statement = $pdo->prepare($sql);  
-$statement->bindValue(1, $account);  
+$statement->bindValue(1, $email);  
 $statement->execute();  
 
 $data = $statement->fetch(PDO::FETCH_ASSOC);
 
 
 if ($data) {
-    $hashedPassword = $data['PWD'];
+    $hashedPassword = $data['password'];
     if(password_verify($password, $hashedPassword)){
         session_start();
         $_SESSION['login'] = true;
-        $_SESSION['acount'] = $account;
+        $_SESSION['email'] = $email;
         echo json_encode([
             "success" => true,
             "message" => "登入成功！",
             "sessionId" => session_id(),
+            "email" => $email
         ]);
     }else{
         echo json_encode([

@@ -5,19 +5,18 @@
     <div class="Fb-Atricle-X" v-if="article">
       <div class="Fb-Atricle-title-X">{{ article.title }}</div>
       <div class="Fb-Atricle-info-X">
-        <!-- new URL('@/assets/images/Sp08.jpg', import.meta.url).href -->
         <img :src="getAvatarSource()" alt="" />
-        <!-- <img :src="article.imagePath ? imagePath : 'https://picsum.photos/id/237/200/300'" alt="" /> -->
         <div class="Atricle-name-time-X">
-          <span>{{ article.account }}</span>
-          <span>{{ article.time.split(' ')[0] }}&nbsp;&nbsp;{{ article.time.split(' ')[1] }}</span>
+          <span style="font-weight: bold;">{{ article.account }}</span>
+          <span style="font-size: 12px;">{{ article.time.split(' ')[0] }}&nbsp;&nbsp;{{ article.time.split(' ')[1]
+            }}</span>
         </div>
-        <i class="bi" :class="handupActive ? 'bi-hand-thumbs-up' : 'bi-hand-thumbs-up-fill'" @click="handup">{{
-          article.handup }}</i>
+        <i class="bi" :class="handupActive ? 'bi-hand-thumbs-up' : 'bi-hand-thumbs-up-fill'" @click="handup"><span>{{
+          article.handup }}</span></i>
         <i class="bi bi-share"></i>
       </div>
       <p v-html="article.content"></p>
-      <img :src="article.image" alt="" v-if="article.image" />
+      <!-- <img :src="article.image" alt="" v-if="article.image" /> -->
     </div>
 
     <!-- 留言區 -->
@@ -70,13 +69,13 @@
       </ul>
       <!-- 自己的留言區 -->
       <div class="Fb-message-section-X self">
-        <img src="https://picsum.photos/id/240/200/300" alt="" />
+        <img :src="selfAvatar" alt="" />
         <div class="Fb-message-area-X">
-          <div class="Fb-message-self-X">尖頭拉瑞</div>
+          <div class="Fb-message-self-X">{{ selfName }}</div>
           <div class="Fb-message-content-X">
-            <textarea id="" name="" placeholder="請輸入您的留言"></textarea>
+            <textarea id="" name="" :placeholder="isAuthenticated ? '請輸入您的留言' : '請先登入再進行留言'"></textarea>
           </div>
-          <button>送出留言</button>
+          <button @click="sendMessage">送出留言</button>
         </div>
       </div>
     </div>
@@ -86,11 +85,14 @@
 </template>
 
 <script setup>
-import { ref, onMounted, watch } from 'vue'
-import { useRoute } from 'vue-router'
+import { ref, onMounted, watch } from 'vue';
+import { useRoute } from 'vue-router';
+import { useAuth } from '@/utils/useAuth';
 
 const route = useRoute();
 const article = ref(null);
+const selfAvatar = ref(null);
+const selfName = ref(null);
 
 //由 props 接收文章的 id
 const props = defineProps({
@@ -117,12 +119,12 @@ const fetchArticle = async () => {
   }
 };
 
-//是否使用預設大頭貼判斷
+//發文者是否使用預設大頭貼判斷
 const getAvatarSource = () => {
   return article.imagePath ? imagePath : new URL('@/assets/images/defaultavatar.jpeg', import.meta.url).href
 }
 
-//點讚
+//點讚：預設所有人都可以點讚
 const handupActive = ref(true);
 const handup = async () => {
   try {
@@ -151,13 +153,41 @@ const handup = async () => {
         delete likedArticles[props.id];
       }
       localStorage.setItem('likedArticles', JSON.stringify(likedArticles));
-      
+
     } else {
       console.error('更新讚數失敗:', data.message);
     }
   } catch (error) {
     console.error('點讚操作失敗:', error);
   }
+}
+
+//自己的留言區：需要大頭貼和暱稱
+const getAvatar = async () => {
+  try {
+    const res = await fetch(`/tid103/g1/php/getUserInfo.php`)
+    const data = await res.json()
+    if (data.success) {
+      selfAvatar.value = data.data.avatar || new URL('@/assets/images/defaultavatar.jpeg', import.meta.url).href
+      selfName.value = data.data.nickname
+    } else {
+      selfAvatar.value = `https://picsum.photos/id/240/200/300`
+      selfName.value = `訪客`
+    }
+  } catch (err) {
+    console.error(`取得個人資料失敗：${err}`)
+  }
+}
+
+//獲取是否登入狀態
+const { checkAuth, isAuthenticated } = useAuth()
+const checkLogin = async () => {
+  await checkAuth();
+}
+
+//輸入留言
+const sendMessage = () => {
+
 }
 
 onMounted(() => {
@@ -167,8 +197,9 @@ onMounted(() => {
   if (likedArticles[props.id]) {
     handupActive.value = false
   }
+  getAvatar();
+  checkLogin();
 })
-
 
 
 </script>

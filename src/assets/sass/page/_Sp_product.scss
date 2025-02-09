@@ -33,7 +33,7 @@
 
     .Sp_productChoice_top_H {
         display: flex;
-        align-items: center;
+        align-items: center; 
         justify-content: space-between;
 
         @include max_820{
@@ -43,24 +43,29 @@
     }
 
         figure{
+            @include max_820{
+                width: 100%;
+                display: block;
+            }
+
             @include max_430{
                 .main-image{
                 width: 100%;
-                max-width: 352px;
+                // max-width: 352px;
                 height: 316px;
                 }
-
+    
                 .main-image-swiper {
                     width: 100%;
                     position: relative; /* 讓 pagination 可以相對於這個區塊定位 */
                 }
-
+            
                 /* 讓 pagination (小圓點) 顯示在圖片下方 */
                 :deep(.swiper-pagination) {
                     bottom: 10px !important;
                     top: auto !important;
                 }
-
+            
                 /* 讓 navigation (左右箭頭) 顯示在圖片下方 */
                 :deep(.swiper-button-prev),
                 :deep(.swiper-button-next) {
@@ -82,39 +87,45 @@
                 // gap: 20px;
                 flex-direction: row-reverse;
                 width: 695px;
-
+                
 
                 @include max_820 {
                     width: 100%;
                     margin-bottom: 20px;
                 }
-
+    
                 @include max_430 {
                     display: block;
                     margin: 0 auto;
                 }
-
+    
               }
-
+              
               .main-image{
                 width: 100%;
                 max-width: 540px;
                 height: 540px;
                 overflow: hidden;
-
+                
                 img {
                     width: 100%;
                     height: 100%;
                     // padding: 20px;
                     object-fit: cover; /* 避免圖片變形 */
                     border-radius: $pic_radius_20px;
-                }
+
+                    @include max_430 {
+                        width: 80%;
+                        margin-left: 50px;
+                        
+                    }
+                } 
             }
         }
+        
 
-
-
-
+       
+        
           /* Swiper 小圖（垂直模式） */
         .thumbnail-swiper {
             height: 540px; /* 限制高度，讓 Swiper 出現滾動 */
@@ -125,17 +136,17 @@
                 display: none;
             }
         }
-
+        
         .thumbnail-slide {
             height: calc((540px - 30px) / 4) !important; /* 小圖高度 */
             /* margin-bottom: 10px;  */
         }
-
+        
         .thumbnail-swiper .swiper-slide {
             cursor: pointer;
-
+        
         }
-
+        
         .thumbnail-swiper .swiper-slide img {
             object-fit: cover;
             width: 100%;
@@ -145,20 +156,20 @@
             cursor: pointer;
             border-radius: 20px;
             transition: border-color 0.3s ease;
-
+        
         }
-
+        
         .thumbnail-swiper swiper-slide img:hover {
             border-color: #000;
-        }
-
+        }       
+        
             /* Swiper 樣式 */
             swiper {
                 width: 100%;
                 height: auto;
                 margin: auto;
             }
-
+            
             swiper-slide img {
                 width: 100%;
                 height: 316px;
@@ -169,7 +180,7 @@
                 margin-right: 0 !important;
                 padding: 0 !important;
               }
-
+  
             // @include max_820 {
             //     display: block;
             // }
@@ -185,9 +196,9 @@
             @include max_430 {
                 // max-width: 380px;
                 // margin: 0 auto;
-                display: block;
+                
             }
-
+            
             ul {
                 margin-right: 24px;
                 display: flex;
@@ -239,10 +250,10 @@
             width: 50%;
 
                 @include max_820 {
-                    width: 80%;
+                    width: 50%;
                     text-align: center;
                 }
-
+                
                 @include max_430 {
                     width: 75%;
                 }
@@ -258,6 +269,11 @@
                         font-size: 2rem;
                         margin: 40px 0 24px 0;
                         text-align: left;
+
+                        @include max_820 {
+                            text-align: center;
+                        }
+
                     }
 
                     span {
@@ -273,6 +289,12 @@
                         line-height: $line_height_140;
                         list-style: disc;
                         margin-left: 20px;
+
+                        @include max_820 {
+                            display: flex;
+                            flex-direction: flex-start;
+                            align-items: center;
+                        }
                     }
                 }
             }
@@ -284,6 +306,10 @@
                     @include PC_h4($Green_2);
                     line-height: $line_height_140;
                     margin-bottom: 12px;
+
+                    @include max_820 {
+                        text-align: left;
+                    }
                 }
 
                 .Sp_productChoice_btnGroup_H {
@@ -326,7 +352,7 @@
                         border-radius: 5px;
                         overflow: hidden;
                       }
-
+                      
                       .quantity-input {
                         width: 100%; /* 輸入框占據整個可用空間 */
                         height: 36px;
@@ -336,12 +362,12 @@
                         padding: 0 40px; /* 留出左右按鈕的空間 */
                         box-sizing: border-box;
                       }
-
-                      .quantity-input:focus {
-                        border: none;
-                        outline: none;
-                      }
-
+                      
+                    //   .quantity-input:focus {
+                    //     border: none;
+                    //     outline: none;
+                    //   }
+                      
                       .btn-minus,
                       .btn-plus {
                         position: absolute;
@@ -357,20 +383,19 @@
                         justify-content: center;
                         user-select: none;
                       }
-
+                      
                       .btn-minus {
                         left: 0; /* 靠左 */
                       }
-
+                      
                       .btn-plus {
                         right: 0; /* 靠右 */
                       }
-
+                      
                       .btn-minus:hover,
                       .btn-plus:hover {
                         background-color: $Green_3;
                       }
-
                 }
 
                 .Sp_productChoice_buyNow_H {
@@ -385,7 +410,7 @@
                         line-height: 20px;
                     }
 
-
+                    
                 }
 
             }
@@ -397,13 +422,13 @@
     width: 100%;
     margin-top: 40px;
 
-    &::before {
-        content: '';
-        display: block;
-        border-top: 4px dashed $Gray_3;
-        position: relative;
-        top: -42px;
-    }
+    // &::before {
+    //     content: '';
+    //     display: block;
+    //     border-top: 4px dashed $Gray_3;
+    //     position: relative;
+    //     top: -42px;
+    // }
 
     .Sp_productChoice_detailsBlock1_H {
         max-width: $body_layout;
@@ -458,7 +483,7 @@
             }
 
             @include max_430 {
-                margin: 0 3vw;
+                // margin: 0 3vw;
                 width: 100%;
                 height: 260px;
                 border-radius: $pic_radius_20px;
@@ -486,6 +511,10 @@
             width: 100%;
         }
 
+        @include max_430 {
+            display: block;
+        }
+
         img {
             object-fit: cover;
             width: 70%;
@@ -493,7 +522,6 @@
             border-radius: $pic_radius_20px;
 
             @include max_430 {
-                margin: 0 3vw;
                 width: 100%;
                 height: 260px;
             }
@@ -549,7 +577,6 @@
             object-position: center;
 
             @include max_430 {
-                margin: 0 3vw;
                 width: 100%;
                 height: 260px;
             }
@@ -574,10 +601,7 @@
                 list-style: disc;
                 padding-left: 24px;
 
-                // @include max_820 {
-                //     @include PC_h6($Green_1);
-
-                // }
+                  
             }
 
             li{
@@ -589,7 +613,7 @@
             }
         }
     }
-
+    
 }
 
 .Sp_productChoice_related_H {
@@ -623,7 +647,7 @@
         @include max_820 {
         display: grid;
         grid-template-columns: repeat(2, 1fr); /* 自適應列數 */
-        row-gap: 40px;
+        row-gap: 40px; 
         margin: 0 100px;
         gap:0;
         }
@@ -631,10 +655,10 @@
         @include max_430 {
         margin: 0 3vw;
         grid-template-columns: repeat(2, 1fr); /* 每行顯示兩個商品 */
-
+        
         }
 
-
+       
         li {
             display: flex;
             flex-direction: column;
@@ -687,7 +711,7 @@
 
                     @include max_430 {
                         margin-top: 20px;
-
+                        
                     }
 
                 }
@@ -720,8 +744,27 @@
     text-align: center;
     // border: 2px solid red;
   }
+  
+/* 關閉按鈕 */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+    border: none;
+    background: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #666;
+    
+    &:hover {
+        color: #000;
+    }
+}
 
-
+  
+  
   /* 商品內容 */
   .cart-item {
     display: flex;
@@ -729,14 +772,14 @@
     gap: 10px;
     margin-bottom: 15px;
   }
-
+  
   .cart-image {
     width: 100px;
-    height: 100px;
+    height: 100px;                        
     object-fit: cover;
     border-radius: 10px;
   }
-
+  
   .cart-info {
     flex: 1;
     text-align: left; /* 文字靠左對齊 */
@@ -748,14 +791,14 @@
   }
 
 
-
+  
   /* 按鈕區 */
   .cart-popup-actions {
     display: flex;
     justify-content: space-between;
     margin-top: 15px;
   }
-
+  
   /* 立即結帳按鈕 */
   .checkout-btn {
     background: #ff5a5f;
@@ -765,7 +808,7 @@
     border-radius: 5px;
     cursor: pointer;
   }
-
+  
   /* 繼續購物按鈕 */
   .continue-btn {
     background: #ddd;
@@ -775,12 +818,12 @@
     border-radius: 5px;
     cursor: pointer;
   }
-
+  
   /* 點擊遮罩區域關閉彈窗 */
   .cart-overlay {
     cursor: pointer;
   }
-
+  
   /* 點擊彈窗本體不關閉 */
   .cart-popup {
     cursor: default;
@@ -796,5 +839,3 @@
 //     @include PC_h1($Yellow_1);
 //     line-height: 268px;
 // }
-
-//---------------------------------------------------------------------------------//

@@ -16,13 +16,13 @@ $sql = "
         f.editDate AS time,
         f.handup,
         f.chat,
-        f.imageURL AS image,
+        f.coverImageURL AS coverImage,
         a.typeName AS category,
         m.account,
         m.imagePath
-    FROM ForumBoard f
-    JOIN ArticleType a ON f.articletype_ID = a.ID
-    JOIN Member m ON f.member_ID = m.ID
+    FROM G1_ForumBoard f
+    JOIN G1_ArticleType a ON f.articletype_ID = a.ID
+    JOIN G2_MEMBER m ON f.member_ID = m.ID
 ";
 
 //如果有指定文章 ID，則加入 WHERE 條件

@@ -5,8 +5,8 @@
 
       <form class="member-login-form_2" @submit.prevent="handleSubmit">
         <div class="member-login-input-group_2">
-          <label for="name">姓名</label>
-          <input id="name" v-model="formData.name" type="text" placeholder="請輸入姓名" />
+          <label for="name">暱稱</label>
+          <input id="name" v-model="formData.name" type="text" placeholder="請輸入暱稱" />
         </div>
 
         <div class="member-login-input-group_2">
@@ -17,12 +17,8 @@
         <div class="member-login-input-group_2">
           <label for="password">密碼</label>
           <div class="password-input-wrapper">
-            <input
-              id="password"
-              v-model="formData.password"
-              :type="passwordVisible ? 'text' : 'password'"
-              placeholder="須包含數字與英文字母大小寫"
-            />
+            <input id="password" v-model="formData.password" :type="passwordVisible ? 'text' : 'password'"
+              placeholder="須包含數字與英文字母大小寫" />
             <button type="button" class="toggle-password" @click="togglePasswordVisibility">
               <!-- 根據狀態顯示不同的眼睛圖示 -->
               {{ passwordVisible ? '🙉' : '🙈' }}
@@ -33,12 +29,8 @@
         <div class="member-login-input-group_2">
           <label for="confirmPassword">確認密碼</label>
           <div class="password-input-wrapper">
-            <input
-              id="confirmPassword"
-              v-model="formData.confirmPassword"
-              :type="confirmPasswordVisible ? 'text' : 'password'"
-              placeholder="請再確認一次密碼"
-            />
+            <input id="confirmPassword" v-model="formData.confirmPassword"
+              :type="confirmPasswordVisible ? 'text' : 'password'" placeholder="請再確認一次密碼" />
             <button type="button" class="toggle-password" @click="toggleConfirmPasswordVisibility">
               <!-- 根據狀態顯示不同的眼睛圖示 -->
               {{ confirmPasswordVisible ? '🙉' : '🙈' }}
@@ -56,6 +48,8 @@
 </template>
 
 <script>
+// import { name } from 'dayjs/locale/zh-cn';
+
 export default {
   name: 'popupnewmember',
   data() {
@@ -79,8 +73,6 @@ export default {
       this.confirmPasswordVisible = !this.confirmPasswordVisible;
     },
     test() {
-      // console.log('ssss');
-
       this.$emit('switch');
     },
     validatePassword(password) {
@@ -89,7 +81,7 @@ export default {
       const hasNumber = /[0-9]/.test(password);
       return hasUpperCase && hasLowerCase && hasNumber;
     },
-    handleSubmit() {
+    async handleSubmit() {
       if (!this.formData.name || !this.formData.email || !this.formData.password || !this.formData.confirmPassword) {
         alert('請填寫所有欄位！');
         return;
@@ -111,8 +103,36 @@ export default {
         return;
       }
 
-      alert('註冊成功!歡迎加入涼城即時');
-      this.resetForm();
+      
+
+      const url = `/tid103/g1/php/register.php`;
+      try {
+        const res = await fetch(url, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            account: this.formData.name,
+            email: this.formData.email,
+            password: this.formData.password,
+          })
+        });
+        const data = await res.json();
+        // console.log(data);
+
+        if (data.success) {
+          // console.log("註冊成功！");
+          alert('註冊成功！歡迎加入涼城即時！');
+          this.test();
+        } else {
+          // console.log(`註冊失敗：${data.error}`);
+          alert(`註冊失敗：${data.error}`);
+        }
+      } catch (err) {
+        console.log(`請求出現錯誤：${err.message}`);
+        alert(`請求出現錯誤：請洽工作人員詢問！`);
+      }
     },
     handleCancel() {
       this.resetForm();
@@ -131,4 +151,3 @@ export default {
   },
 };
 </script>
-

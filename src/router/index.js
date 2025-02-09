@@ -1,6 +1,8 @@
 // import { name } from 'dayjs/locale/zh-cn';
-import { name } from 'dayjs/locale/zh-cn';
 import { createRouter, createWebHistory } from 'vue-router';
+import eventBus from '@/utils/eventBus';
+import { useAuth } from '@/utils/useAuth';
+
 
 // path → component
 const routes = [
@@ -58,25 +60,7 @@ const routes = [
         props: true
       }
     ]
-    // children:[
-    //   {
-    //     path:'',
-    //     component: () => import('@/pages/Social_news.vue'),
-    //   },
-    //   {
-    //     path: 'article', // 'article/:id'
-    //     component:  () => import('@/pages/Social_article.vue'),
-    //   },
-    // ]
   },
-  // {
-  //   path: '/social_article/',
-  //   component: () => import('@/pages/Social_article.vue'),
-  //   meta: {
-  //     title: '社群中心_文章',
-  //     // requiredLogin: true
-  //   },
-  // },
   {
     path: '/About/',
     component: () => import('@/pages/About.vue'),
@@ -104,16 +88,9 @@ const routes = [
     component: () => import('@/pages/Social_write.vue'),
     meta: {
       title: '寫文章',
-      // requiredLogin: true
+      requiredLogin: true
     },
   },
-  // {
-  //   path: '/social_news',
-  //   component: () => import('@/pages/Social_news.vue'),
-  //   meta: {
-  //     title: '新聞',
-  //   },
-  // },
   {
     path: '/popup/',
     component: () => import('@/pages/popup.vue'),
@@ -191,7 +168,7 @@ const routes = [
     component: () => import('@/pages/Member.vue'),
     meta: {
       title: '會員中心',
-      // requiredLogin: true
+      requiredLogin: true
     },
   },
   {
@@ -303,25 +280,24 @@ router.beforeEach(async (to, from, next) => {
   //console.log(to);   // 連到目前的網址的物件資料
   //console.log(from); // 從哪個網址連過來的物件資料
 
+  const { checkAuth } = useAuth(); //檢查登入
+  if (to.matched.some(record => record.meta.requiredLogin)) {
 
-  if (to.meta.requiredLogin) {
-    // ======= 以下要取得使用者目前的登入狀態，會是 bool == //
-    // 取得是否已登入，可能是從 localStorage 抓資料或從後端判斷。
-    // let isAuthenticated = true;
-    const res = await fetch('https://notes.webmix.cc/login_test/login.php');
-    const data = await res.json();
-
-    console.log(data);
-
-    const isAuthenticated = data.login_status;
-    // ============================================== //
-
-    if (isAuthenticated) {
-      document.title = to.meta.title;
-      next();
-    } else {
-      // 未登入，就直接導回到首頁或其它頁面。
-      next('/');
+    try {
+      const isAuthenticated = await checkAuth();
+      if (!isAuthenticated) {
+        const askLogin = confirm('此頁面需要先登入再進行操作，請問是否繼續？');
+        if(askLogin){
+          localStorage.setItem('redirectPath', to.fullPath); //存儲原本要去的頁面
+          eventBus.emit('show-login-popup'); //跳出登入彈窗
+        }
+        next(false)
+      } else {
+        next()
+      }
+    } catch (err) {
+      console.error('檢查登入狀態失敗:', err);
+      next(false);
     }
   } else {
     document.title = to.meta.title;

@@ -25,7 +25,8 @@ app.use(pinia);
 app.use(router);
 // app.use(CKEditor);
 // app.component('CKEditor', CKEditor);
-app.config.globalProperties.$axios = axios;
+app.config.globalProperties.$eventBus = app; // 創建事件總線
+app.config.globalProperties.$axios = axios; 
 emailjs.init('5-GBPJlIL-R8kd1sM'); //初始化
 
 //component

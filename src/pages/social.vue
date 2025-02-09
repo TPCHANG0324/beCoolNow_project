@@ -37,22 +37,21 @@
             </div>
             <!-- po 文顯示區 -->
             <section>
-              <!-- @click="goToArticle(data.id)" -->
               <article v-for="(data, index) in datas" :key="index" @click="goToArticle(data.ID)">
                 <div class="Fb-post-article-left-X">
                   <div class="Fb-post-article-left-C-T-X">
                     <span>{{ data.category }}</span>&nbsp;‧&nbsp;<span>{{ data.time.split(' ')[0] }}</span>
                   </div>
                   <h6 class="Fb-post-article-left-title-X">{{ data.title }}</h6>
-                  <p>{{ data.content }}</p>
+                  <p v-html="data.content"></p>
                   <div class="Fb-post-react-X">
                     <i class="bi bi-hand-thumbs-up">{{ data.handup }}</i>
                     <i class="bi bi-chat">{{ data.chat }}</i>
                     <i class="bi bi-share"></i>
                   </div>
                 </div>
-                <div v-if="data.image" class="Fb-post-article-right-X">
-                  <img :src="data.image" alt="" />
+                <div v-if="data.coverImage" class="Fb-post-article-right-X">
+                  <img :src="getCoverImage(data.coverImage)" alt="" />
                 </div>
               </article>
             </section>
@@ -187,6 +186,11 @@ const fetchArticles = async () => {
     console.error("獲取文章時發生錯誤:", error);
   }
 };
+
+//封面圖(要再修改)
+const getCoverImage = (Image) => {
+  return Image ? new URL(Image, import.meta.url).href : new URL('@/assets/images/defaultavatar.jpeg', import.meta.url).href
+}
 
 onMounted(fetchArticles);
 
