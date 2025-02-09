@@ -19,8 +19,12 @@
         </ul>
         <ul>
           <li>
-            <router-link to="/shop_cart"><i class="bi bi-handbag"></i></router-link>
-          </li>
+        <router-link to="/shop_cart" class="cart-icon-wrapper">
+          <i class="bi bi-handbag"></i>
+          <!-- 添加購物車計數器 -->
+          <span v-if="cartCount > 0" class="cart-count">{{ cartCount }}</span>
+        </router-link>
+      </li>
           <li>
     <a v-if="!isLoggedIn" @click="toggleLoginPopup">
       <i class="bi bi-person-circle"></i>
@@ -33,7 +37,7 @@
       </nav>
     </div>
     <!-- 使用 v-show 來控制彈窗的顯示與隱藏 -->
-
+   
   </header>
   <header class="mobile_header">
     <div class="logo">
@@ -85,13 +89,13 @@
   </nav>
   <!-- <loginPopupChange v-if="isloginPopup"></loginPopupChange> -->
      <!-- 添加遮罩層 -->
-  <div
-    class="overlay_popup01"
-     v-show="isLogoutPopupVisible"
+  <div 
+    class="overlay_popup01" 
+     v-show="isLogoutPopupVisible" 
   @click="closeLogoutPopup"
   ></div>
   <loginPopupChange v-show="isloginPopup" @close="closeLoginPopup"></loginPopupChange>
-
+ 
 
 <!-- 登出彈窗 -->
 <div class="logout-popup01" v-show="isLogoutPopupVisible">
@@ -107,7 +111,7 @@
 </template>
 
 <script>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue';
 import { RouterLink, useRouter } from 'vue-router';
 import loginPopupChange from '@/pages/loginPopupChange.vue';
 
@@ -120,45 +124,33 @@ export default {
     const isloginPopup = ref(false);
     const isLoggedIn = ref(false);
     const isLogoutPopupVisible = ref(false);
+    const cartCount = ref(0);
 
-    // 新增這段
-    onMounted(() => {
-      if (!localStorage.getItem('isLoggedIn')) {
-        localStorage.setItem('isLoggedIn', 'false');
-      }
-      checkLoginStatus();
-       // 監聽 localStorage 變化
-  window.addEventListener('storage', checkLoginStatus);
-    });
-
-    // 缺少 toggleMenu 方法
     const toggleMenu = () => {
       isMenuOpen.value = !isMenuOpen.value;
     };
 
-
-
-    // 檢查登入狀態
     const checkLoginStatus = () => {
       const loginStatus = localStorage.getItem('isLoggedIn');
       isLoggedIn.value = loginStatus === 'true';
+      
+      // Update cart count based on login status
+      if (isLoggedIn.value) {
+        // If logged in, restore cart count from user-specific storage
+        const userEmail = localStorage.getItem('userEmail');
+        const userCartCount = localStorage.getItem(`cartCount_${userEmail}`);
+        cartCount.value = parseInt(userCartCount) || 0;
+      } else {
+        // If logged out, clear cart count
+        cartCount.value = 0;
+      }
     };
-
-    onMounted(() => {
-      checkLoginStatus();
-      window.addEventListener('storage', checkLoginStatus); // 監聽 localStorage 變化
-    });
-
-    onUnmounted(() => {
-  window.removeEventListener('storage', checkLoginStatus);
-});
 
     const toggleLoginPopup = () => {
       if (!isLoggedIn.value) {
         isloginPopup.value = !isloginPopup.value;
       }
     };
-
 
     const closeLoginPopup = () => {
       isloginPopup.value = false;
@@ -175,6 +167,17 @@ export default {
     };
 
     const handleLogout = () => {
+      // Store the current cart count for the user before logging out
+      const userEmail = localStorage.getItem('userEmail');
+      if (userEmail) {
+        localStorage.setItem(`cartCount_${userEmail}`, cartCount.value.toString());
+      }
+      
+      // Clear the displayed cart count
+      cartCount.value = 0;
+      localStorage.removeItem('cartCount');
+      
+      // Regular logout process
       localStorage.removeItem('isLoggedIn');
       localStorage.removeItem('userEmail');
       isLoggedIn.value = false;
@@ -187,13 +190,40 @@ export default {
       router.push('/member');
     };
 
+    // Update cart count handler
+    const handleCartCountUpdate = () => {
+      if (isLoggedIn.value) {
+        const userEmail = localStorage.getItem('userEmail');
+        const newCount = parseInt(localStorage.getItem('cartCount')) || 0;
+        cartCount.value = newCount;
+        // Save user-specific cart count
+        localStorage.setItem(`cartCount_${userEmail}`, newCount.toString());
+      }
+    };
 
+    onMounted(() => {
+      // Initialize login status
+      if (!localStorage.getItem('isLoggedIn')) {
+        localStorage.setItem('isLoggedIn', 'false');
+      }
+      checkLoginStatus();
+      
+      // Add event listeners
+      window.addEventListener('storage', checkLoginStatus);
+      window.addEventListener('updateCartCount', handleCartCountUpdate);
+    });
+
+    onUnmounted(() => {
+      window.removeEventListener('storage', checkLoginStatus);
+      window.removeEventListener('updateCartCount', handleCartCountUpdate);
+    });
 
     return {
       isMenuOpen,
       isloginPopup,
       isLoggedIn,
       isLogoutPopupVisible,
+      cartCount,
       toggleLoginPopup,
       toggleMenu,
       closeLoginPopup,
@@ -205,3 +235,27 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+/* 添加購物車計數器的樣式 */
+.cart-icon-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.cart-count {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: #d0ad44;
+  color: white;
+  border-radius: 50%;
+  min-width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  padding: 2px;
+}
+</style>

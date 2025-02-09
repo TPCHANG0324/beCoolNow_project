@@ -1,18 +1,4 @@
-//------------------------------- 首頁_主選單 --------------------------------------//
 
-// .Fp_Header_H {
-//     width: 100%;
-//     height: 80px;
-//     border: 1px solid blue;
-//     text-align: center;
-//     @include PC_h1($Yellow_1);
-//     line-height: 80px;
-//     position: fixed;
-//     z-index: 999;
-// }
-
-//---------------------------------------------------------------------------------//
-//--------------------------- 環保市集_商品選購頁面 ---------------------------------//
 
 .Sp_productChoice_H {
     max-width: $body_layout;
@@ -385,41 +371,6 @@
                         background-color: $Green_3;
                       }
 
-                    // form {
-                    //     border: 1px solid $Green_1;
-
-                    //     .Sp-cart-input-group-X {
-                    //       position: static;
-                    //       min-height: 0;
-                    //       padding-right: 0;
-                    //       padding-left: 0;
-                    //       padding-left: 0;
-                    //       width: auto;
-
-                    //       span {
-                    //         padding: 10px;
-                    //         background-color: $Green_3;
-                    //         color: $Ivory_white;
-                    //         cursor: pointer;
-                    //       }
-
-                    //       input {
-                    //         flex-grow: 1;
-                    //         width: 50%;
-                    //         outline: none;
-                    //         border: 0px solid transparent;
-                    //         background-color: $Ivory_white;
-                    //         text-align: center;
-                    //         color: $Green_1;
-                    //       }
-
-                    //       input[type=number]::-webkit-outer-spin-button,
-                    //       input[type=number]::-webkit-inner-spin-button {
-                    //         -webkit-appearance: none;
-                    //         margin: 0;
-                    //       }
-                    //     }
-                    //   }
                 }
 
                 .Sp_productChoice_buyNow_H {
