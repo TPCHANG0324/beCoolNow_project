@@ -3,6 +3,7 @@
   width: 100%;
   background-color: $Light_Green;
   color: $Green_1;
+  margin-top: 80px;
 
   .Sp-wrapper-X {
     max-width: 1200px;
@@ -11,13 +12,14 @@
     flex-direction: column;
     gap: 28px;
     box-sizing: border-box;
-    margin-top: 80px;
+    
 
 
     /* 流程顯示 */
     .Sp-checkout-nav-X {
       text-align: center;
-      margin-top: 30px;
+      margin-top: 110px;
+
 
       /* 每一個圓圈 */
       .Sp-step-X {

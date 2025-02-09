@@ -114,6 +114,16 @@ export default {
     const isLogoutPopupVisible = ref(false);
 
 
+    // 暫時
+    const toggleLoginPopup = ref(false);
+    const closeLoginPopup = ref(false);
+    const confirmLogout = ref(false);
+    const handleLogout = ref(false);
+    const showLogoutPopup = ref(false);
+    const toggleMenu = ref(false);
+    const closeLogoutPopup = ref(false);
+ 
+     
 
 
     // 檢查登入狀態
