@@ -563,11 +563,11 @@ export default {
 </script>
 <style lang="scss">
 // 新增必要的 SCSS 變量
-$Green_1: #304025;
-$Green_2: #5b774a;
-$Green_3: #7e9b75;
-$Yellow_1: #d0ad44;
-$Ivory_white: #f5f2e9;
+// $Green_1: #304025;
+// $Green_2: #5b774a;
+// $Green_3: #7e9b75;
+// $Yellow_1: #d0ad44;
+// $Ivory_white: #f5f2e9;
 
 .cart-overlay {
   position: fixed;
@@ -599,7 +599,7 @@ $Ivory_white: #f5f2e9;
     border: none;
     font-size: 1.5rem;
     cursor: pointer;
-    color: $Green_2;
+    color: #5b774a;
 
     &:hover {
       color: #d0ad44;
@@ -613,7 +613,7 @@ $Ivory_white: #f5f2e9;
     background-color: none;
 
     h3 {
-      color: $Green_2;
+      color: #5b774a;
       margin-bottom: 1.5rem;
       font-size: 1.2rem;
     }
@@ -636,12 +636,12 @@ $Ivory_white: #f5f2e9;
         }
 
         &.continue-shopping {
-          background-color: $Green_3;
+          background-color: #7e9b75;
           color: white;
         }
 
         &.view-cart {
-          background-color: $Yellow_1;
+          background-color: #d0ad44;
           color: white;
         }
       }
@@ -653,7 +653,7 @@ $Ivory_white: #f5f2e9;
 .quantity-input-group {
   display: flex;
   align-items: center;
-  border: 1px solid $Green_2;
+  border: 1px solid #5b774a;
   border-radius: 4px;
   overflow: hidden;
 
@@ -663,8 +663,8 @@ $Ivory_white: #f5f2e9;
     border: none;
     padding: 0.5rem;
     font-size: 1rem;
-    color: $Green_2;
-    background: $Ivory_white;
+    color: #5b774a;
+    background: #fffff0;
 
     &::-webkit-inner-spin-button,
     &::-webkit-outer-spin-button {
@@ -675,7 +675,7 @@ $Ivory_white: #f5f2e9;
 
   .btn-minus,
   .btn-plus {
-    background: $Green_3;
+    background: #7e9b75;
     color: white;
     border: none;
     padding: 0.5rem 1rem;
@@ -683,7 +683,7 @@ $Ivory_white: #f5f2e9;
     transition: background-color 0.3s ease;
 
     &:hover {
-      background: $Green_2;
+      background: #5b774a;
     }
   }
 }

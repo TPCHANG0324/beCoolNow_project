@@ -7,7 +7,7 @@
       <div class="profile_top">
         <div class="profile-container-special_left">
           <div class="profile-header-special">
-            <img src="../assets/images/mbhead.png" alt="會員頭像" class="profile-pic-special" />
+            <img :src="userAvatar" alt="會員頭像" class="profile-pic-special" />
             <h1 class="profile-greeting-special">{{ userData.name }} 您好！</h1>
           </div>
         </div>
@@ -15,48 +15,58 @@
         <div class="profile-container-special_right">
           <div class="profile-info-special">
             <div class="profile-field">
-              <label for="name" class="label_mb">暱稱</label>
-              <template v-if="editStates.name">
+              <label for="nickname" class="label_mb">暱稱</label>
+              <template v-if="editStates.nickname">
                 <input
                   type="text"
-                  id="name"
-                  v-model="tempData.name"
+                  id="nickname"
+                  v-model="tempData.nickname"
                   placeholder="輸入您的暱稱"
                   class="input_2 input_editing"
-                  @keyup.enter="saveField('name')"
+                  @keyup.enter="saveField('nickname')"
                 />
-                <button class="button_mb" @click="saveField('name')">儲存</button>
+                <button class="button_mb" @click="saveField('nickname')">儲存</button>
               </template>
               <template v-else>
-                <span class="input_2">{{ userData.name }}</span>
-                <button class="button_mb" @click="editField('name')">修改</button>
+                <span class="input_2">{{ userData.nickname }}</span>
+                <button class="button_mb" @click="editField('nickname')">修改</button>
               </template>
             </div>
 
             <div class="profile-field">
               <label for="phone" class="label_mb">手機</label>
-              <template v-if="editStates.phone">
+              <template v-if="!userData.phone || !isPhoneAdded">
                 <input
-                  type="text"
-                  id="phone"
-                  v-model="tempData.phone"
-                  placeholder="輸入您的手機"
-                  class="input_2 input_editing"
-                  @keyup.enter="saveField('phone')"
-                  :class="{ 'input-error': validationErrors.phone }"
-                />
-                <button class="button_mb" @click="saveField('phone')">儲存</button>
-                <span v-if="validationErrors.phone" class="error-message">{{ validationErrors.phone }}</span>
+        type="text"
+        id="phone"
+        v-model="tempData.phone"
+        placeholder="輸入您的手機"
+        class="input_2 input_editing"
+        @keyup.enter="savePhone"
+        :class="{ 'input-error': validationErrors.phone }"
+        :disabled="isPhoneAdded"
+      />
+      <button 
+        class="button_mb" 
+        @click="savePhone"
+      
+      >
+        新增
+      </button>
+      <span v-if="validationErrors.phone" class="error-message">{{ validationErrors.phone }}</span>
+
               </template>
-              <template v-else>
-                <span class="input_2">{{ userData.phone }}</span>
-                <button class="button_mb" @click="editField('phone')">修改</button>
-              </template>
+             <template v-else>
+      <span class="input_2">{{ userData.phone }}</span>
+      <button class="button_mb" disabled>已新增的手機號碼</button>
+    </template>
             </div>
 
             <div class="profile-field">
               <label for="email" class="label_mb">信箱</label>
-              <template v-if="editStates.email">
+              <span class="input_2 email-display">{{ formatEmail(userData.email) }}</span>
+              <button class="button_mb" disabled>已新增的信箱</button>
+              <!-- <template v-if="editStates.email">
                 <input
                   type="email"
                   id="email"
@@ -72,7 +82,7 @@
               <template v-else>
                 <span class="input_2 email-display">{{ formatEmail(userData.email) }}</span>
                 <button class="button_mb" @click="editField('email')">修改</button>
-              </template>
+              </template> -->
             </div>
           </div>
         </div>
@@ -87,7 +97,7 @@
             </div>
             <div class="bt2_btn_bottom">
               <div class="profile-stats-special">
-                <p>小寵物經驗值: <strong>200</strong> | 累積地球幣: <strong>300</strong></p>
+                <p>小寵物經驗值: <strong>{{ personalStats.experience }}</strong> | 累積地球幣: <strong>{{ personalStats.points }}</strong></p>
               </div>
             </div>
           </div>
@@ -147,55 +157,206 @@
   </div>
 </template>
 
-<script>
-import MainHeader from '@/components/layout/MainHeader.vue';
-import MainFooter from '@/components/layout/MainFooter.vue';
-import OrderDetailPopup from '@/pages/popUpdetailshop.vue';
-import { useAuth } from '@/utils/useAuth';
+<script setup>
+import { ref, onMounted } from 'vue'
+import MainHeader from '@/components/layout/MainHeader.vue'
+import MainFooter from '@/components/layout/MainFooter.vue'
+import OrderDetailPopup from '@/pages/popUpdetailshop.vue'
 
-export default {
-  components: {
-    MainHeader,
-    MainFooter,
-    OrderDetailPopup
-  },
+// 基本資料相關的 ref
+const userData = ref({
+  name: '',
+  nickname: '',
+  phone: '',
+  email: '',
+})
 
-  data() {
-    return {
-      activeSection: 'purchase',
-      userData: JSON.parse(localStorage.getItem('userData')) || {
-        name: '大中天',
-        phone: '0912345678',
-        email: 'example@email.com'
-      },
-      tempData: {
-        name: '',
-        phone: '',
-        email: ''
-      },
-      editStates: {
-        name: false,
-        phone: false,
-        email: false
-      },
-      validationErrors: {
-        phone: '',
-        email: ''
-      },
-      showOrderPopup: false,
-      selectedOrder: null,
-      purchaseRecords: [
+const userAvatar = ref(new URL('@/assets/images/defaultavatar.jpeg', import.meta.url).href)
+const tempData = ref({
+  nickname: '',
+  phone: '',
+  email: ''
+})
+const editStates = ref({
+  nickname: false,
+  phone: false,
+  email: false
+})
+const validationErrors = ref({
+  phone: '',
+  email: ''
+})
+
+
+
+// 訂單和個人記錄相關的 ref
+const activeSection = ref('purchase')
+const showOrderPopup = ref(false)
+const selectedOrder = ref(null)
+const isPhoneAdded = ref(false)
+const purchaseRecords = ref([])
+const personalRecords = ref([])
+const personalStats = ref({
+  experience: 200,
+  points: 300
+})
+
+// 驗證函數
+// 修改現有的驗證函數
+const validatePhone = () => {
+  if (!tempData.value.phone) {
+    validationErrors.value.phone = '請輸入手機號碼'
+    return false;
+  }
+  const phoneRegex = /^09\d{8}$/
+  if (!phoneRegex.test(tempData.value.phone)) {
+    validationErrors.value.phone = '請輸入正確的手機格式（09開頭共10碼）'
+    return false;
+  }
+  validationErrors.value.phone = ''
+  return true;
+}
+
+// 新增手機號碼的函數
+const savePhone = async () => {
+  if (!validatePhone()) return
+
+  // 先跳出確認視窗
+  const confirmAdd = confirm('手機號碼一旦新增無法修改，確定新增嗎？')
+  
+  if (confirmAdd) {
+    try {
+      const formData = new FormData()
+      formData.append('phone', tempData.value.phone.trim())
+      
+      const res = await fetch('/tid103/g1/php/updateUserInfo.php', {
+        method: 'POST',
+        body: formData,
+        credentials: 'include'
+      })
+      
+      const data = await res.json()
+      
+      if (data.success) {
+        userData.value.phone = tempData.value.phone.trim()
+        isPhoneAdded.value = true
+        localStorage.setItem('userPhone', userData.value.phone)
+        alert('手機號碼新增成功！')
+      } else {
+        alert(data.message || '新增失敗，請稍後再試')
+      }
+    } catch (err) {
+      console.error('錯誤詳情:', err)
+      alert('系統錯誤，請稍後再試')
+    }
+  } else {
+    // 用戶按下取消，清空輸入框並返回編輯狀態
+    tempData.value.phone = ''
+    validationErrors.value.phone = ''
+  }
+}
+
+
+  
+ // 完整的驗證函數
+const validateField = (field) => {
+  if (field === 'email') {
+    if (!tempData.value.email) {
+      validationErrors.value.email = '請輸入電子郵件'
+      return false
+    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!emailRegex.test(tempData.value.email)) {
+      validationErrors.value.email = '請輸入正確的電子郵件格式'
+      return false
+    }
+    validationErrors.value.email = ''
+    return true
+  }
+
+  if (field === 'phone') {
+    return validatePhone()
+  }
+
+  // 其他欄位的驗證邏輯（如果需要的話）
+  if (field === 'nickname') {
+    if (!tempData.value.nickname?.trim()) {
+      validationErrors.value.nickname = '請輸入暱稱'
+      return false
+    }
+    validationErrors.value.nickname = ''
+    return true
+  }
+
+  return true
+}
+
+// API 相關函數
+const getUserInfo = async () => {
+  try {
+    const res = await fetch('/tid103/g1/php/getUserInfo.php')
+    const data = await res.json()
+    
+    if (data.success) {
+      userData.value = {
+        ...userData.value,
+        ...data.data
+      }
+
+      // 只根據 API 返回的數據來判斷
+      if (userData.value.phone) {
+        isPhoneAdded.value = true
+      }
+
+      //  // 同時檢查 API 回傳資料與 localStorage 中的手機號碼
+      //  const storedPhone = localStorage.getItem('userPhone')
+      // if (userData.value.phone || storedPhone) {
+      //   userData.value.phone = userData.value.phone || storedPhone
+      //   isPhoneAdded.value = true
+      // }
+
+      // // 如果已有手機號碼，設置為已新增狀態
+      // if (userData.value.phone) {
+      //   isPhoneAdded.value = true
+      // }
+      userAvatar.value = data.data.avatar || new URL('@/assets/images/defaultavatar.jpeg', import.meta.url).href
+    } else {
+      console.error('獲取用戶資料失敗')
+    }
+  } catch (err) {
+    console.error(`獲取用戶資料錯誤：${err}`)
+    // 如果 API 失敗，使用本地存儲的資料作為備份
+    // const storedPhone = localStorage.getItem('userPhone')
+    // if (storedPhone) {
+    //   userData.value.phone = storedPhone
+    //   isPhoneAdded.value = true
+    //   }
+    }
+  }
+
+
+const getPurchaseRecords = async () => {
+  try {
+    const res = await fetch('/tid103/g1/php/getPurchaseRecords.php')
+    const data = await res.json()
+    if (data.success) {
+      purchaseRecords.value = data.data
+    }
+  } catch (err) {
+    console.error(`獲取購買記錄錯誤：${err}`)
+    // 使用範例資料作為備份
+    purchaseRecords.value = [
       {
-    orderId: "ORD001",
-    date: "2024/12/25",
-    productName: "環保吸管",
-    price: 300,
-    quantity: 1,
-    status: "已送達",
-    address: "台北市大安區復興南路一段390號2樓",
-    source: "環保市集"
-  },
-  {
+        orderId: "ORD001",
+        date: "2024/12/25",
+        productName: "環保吸管",
+        price: 300,
+        quantity: 1,
+        status: "已送達",
+        address: "台北市大安區復興南路一段390號2樓",
+        source: "環保市集"
+      },
+      {
     orderId: "ORD002",
     date: "2024/12/20",
     productName: "可重複使用水壺",
@@ -255,91 +416,96 @@ export default {
     address: "新北市板橋區文化路二段",
     source: "環保市集"
   }
-      ],
-      personalRecords: [
-        { date: "2024/12/25", points: 300, experience: 200 },
-        { date: "2024/12/25", points: 300, experience: 200 },
-        { date: "2024/12/25", points: 300, experience: 200 },
-        { date: "2024/12/25", points: 300, experience: 200 },
-        { date: "2024/12/25", points: 300, experience: 200 }
-      ]
-    };
-  },
-  methods: {
-    showOrderDetail(order) {
-      this.selectedOrder = order;
-      this.showOrderPopup = true;
-    },
-    showSection(section) {
-      this.activeSection = section;
-    },
-    closeOrderPopup() {
-      this.showOrderPopup = false;
-      this.selectedOrder = null;
-    },
-    editField(field) {
-      this.tempData[field] = this.userData[field];
-      this.editStates[field] = true;
-/*************  ✨ Codeium Command 🌟  *************/
-      this.validationErrors[field] = '';
-    },
-    validateField(field) {
-      if (field === 'phone') {
-        if (!this.tempData.phone) {
-          this.validationErrors.phone = '請輸入手機號碼';
-          return false;
-        }
-        const phoneRegex = /^09\d{8}$/;
-        if (!phoneRegex.test(this.tempData.phone)) {
-          this.validationErrors.phone = '請輸入正確的手機格式（09開頭共10碼）';
-          return false;
-        }
-        this.validationErrors.phone = '';
-        return true;
-      }
-      if (field === 'email') {
-        if (!this.tempData.email) {
-          this.validationErrors.email = '請輸入電子郵件';
-          return false;
-        }
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(this.tempData.email)) {
-          this.validationErrors.email = '請輸入正確的電子郵件格式';
-          return false;
-        }
-        this.validationErrors.email = '';
-        return true;
-      }
-      return true;
-    },
-    formatEmail(email) {
-      return email.replace(/(.{30})/g, '$1\n');
-    },
-    saveField(field) {
-      if (!this.validateField(field)) {
-        return;
-      }
-      if (this.tempData[field].trim()) {
-        this.userData[field] = this.tempData[field].trim();
-        localStorage.setItem('userData', JSON.stringify(this.userData));
-        this.editStates[field] = false;
-        this.tempData[field] = '';
-        this.validationErrors[field] = '';
-      }
-    },
-    async fetchUserData() {
-      try {
-        const response = await fetch('/api/user-profile');
-        const data = await response.json();
-
-        this.userData = data;
-        localStorage.setItem('userData', JSON.stringify(data));
-      } catch (error) {
-        console.error('Error fetching user data:', error);
-      }
-    }
-  },
+    ]
+  }
 }
 
+const getPersonalRecords = async () => {
+  try {
+    const res = await fetch('/tid103/g1/php/getPersonalRecords.php')
+    const data = await res.json()
+    if (data.success) {
+      personalRecords.value = data.data
+    }
+  } catch (err) {
+    console.error(`獲取個人記錄錯誤：${err}`)
+    // 使用範例資料作為備份
+    personalRecords.value = [
+      { date: "2024/12/25", points: 300, experience: 200 },
+      { date: "2024/12/25", points: 300, experience: 200 },
+      { date: "2024/12/25", points: 300, experience: 200 },
+      { date: "2024/12/25", points: 300, experience: 200 },
+      { date: "2024/12/25", points: 300, experience: 200 }
 
+    ]
+  }
+}
+
+const updateUserInfo = async (field, value) => {
+  try {
+    const formData = new FormData()
+    formData.append(field, value)
+    
+    const res = await fetch('/tid103/g1/php/updateUserInfo.php', {
+      method: 'POST',
+      body: formData
+    })
+    
+    const data = await res.json()
+    if (data.success) {
+      getUserInfo() // 重新獲取更新後的資料
+      localStorage.setItem('userData', JSON.stringify(userData.value)) // 更新本地存儲
+    } else {
+      console.error('更新用戶資料失敗')
+    }
+  } catch (err) {
+    console.error(`更新用戶資料錯誤：${err}`)
+  }
+}
+
+// UI 操作相關函數
+const editField = (field) => {
+  tempData.value[field] = userData.value[field]
+  editStates.value[field] = true
+  validationErrors.value[field] = ''
+}
+
+const saveField = async (field) => {
+  if (!validateField(field)) return
+  
+  if (tempData.value[field]?.trim()) {
+    await updateUserInfo(field, tempData.value[field].trim())
+    editStates.value[field] = false
+    tempData.value[field] = ''
+    validationErrors.value[field] = ''
+  }
+}
+
+const formatEmail = (email) => {
+  return email?.replace(/(.{30})/g, '$1\n') || ''
+}
+
+const showSection = (section) => {
+  activeSection.value = section
+}
+
+const showOrderDetail = (order) => {
+  selectedOrder.value = order
+  showOrderPopup.value = true
+}
+
+const closeOrderPopup = () => {
+  showOrderPopup.value = false
+  selectedOrder.value = null
+}
+
+// 生命週期鉤子
+onMounted(async () => {
+  await getUserInfo()
+  if (userData.value.phone) {
+    isPhoneAdded.value = true
+  }
+  await getPurchaseRecords()
+  await getPersonalRecords()
+})
 </script>
