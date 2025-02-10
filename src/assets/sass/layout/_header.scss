@@ -68,6 +68,27 @@ $header_layout: 1200px !default;
                             }
                           }
 
+                          
+                          .cart-icon {
+                            position: relative;
+                            
+                            .cart-count {
+                              position: absolute;
+                              top: -8px;
+                              right: -8px;
+                              background-color: $Yellow_1;
+                              color: white;
+                              border-radius: 50%;
+                              min-width: 18px;
+                              height: 18px;
+                              font-size: 12px;
+                              display: flex;
+                              align-items: center;
+                              justify-content: center;
+                              padding: 2px;
+                            }
+                          }
+
                         /* 添加登入狀態的樣式 */
 .bi-person-circle.logged-in {
   color: #4CAF50; /* 綠色 */

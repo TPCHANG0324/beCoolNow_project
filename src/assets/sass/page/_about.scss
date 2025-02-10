@@ -27,6 +27,7 @@
     justify-content: center;
     text-align: center;
     z-index: 2;
+    font-family: "DM Sans";
     h1 {
       @include PC_h1($Ivory_white);
       font-weight: bold;
@@ -34,6 +35,7 @@
       position: relative; // 確保標題正確定位
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); // 添加文字陰影增加可讀性
       z-index: 333;
+      font-family: "DM Sans";
     }
   }
 }
@@ -49,6 +51,7 @@
     @include PC_h2($Green_2);
     font-weight: bold;
     text-align: center;
+    font-family: "DM Sans";
   }
 
   p {
@@ -58,6 +61,7 @@
     padding: 0 180px;
     line-height: 140%;
     color: #545454;
+    font-family: "DM Sans";
   }
 }
 
@@ -92,6 +96,7 @@
       font-weight: bold;
       text-align: center;
       // margin-top: 20px;
+      font-family: "DM Sans";
     }
 
     p {
@@ -102,6 +107,7 @@
       font-weight: $font_weight_regular;
       line-height: 140%;
       color: #545454;
+      font-family: "DM Sans";
     }
   }
 }
@@ -131,6 +137,7 @@
       @include PC_h3($Gray_1);
       font-weight: bold;
       text-align: center;
+      font-family: "DM Sans";
     }
 
     p {
@@ -138,6 +145,7 @@
       color: #545454;
       width: 47%;
       margin: 0 auto;
+      font-family: "DM Sans";
     }
   }
 
@@ -157,6 +165,7 @@
     @include PC_h2($Green_2);
     font-weight: bold;
     text-align: center;
+    font-family: "DM Sans";
   }
 
   .aboutus_input_R {
@@ -192,6 +201,7 @@
     @include PC_h3($Green_2);
     font-weight: bold;
     text-align: center;
+    font-family: "DM Sans";
   }
 
   .aboutus_marquee_R {
@@ -219,6 +229,7 @@
         span {
           font-size: 20px;
           color: #000000;
+          font-family: "DM Sans";
         }
 
         img {

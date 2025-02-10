@@ -14,8 +14,7 @@
     </div>
     <h3 class="Ac_h3">21 日減碳環保活動</h3>
     <!-- 卡片容器 -->
-     {{ cardLimit
- }}
+
     <div class="daily_card" data-expanded="false">
       <!-- 卡片範例 1 -->
       <div
@@ -103,7 +102,7 @@
         <!-- 信件內容輸入框 -->
         <div class="form-group">
           <label for="message" class="message">信件內容：</label>
-          <textarea id="message" v-model="formData.message" placeholder="寫下你的信給地球吧！"></textarea>
+          <textarea id="message" v-model="formData.message" placeholder="寫下給地球的一封信吧！"></textarea>
         </div>
 
         <!-- 驗證碼區塊 -->
@@ -115,7 +114,7 @@
         </div>
 
         <!-- 送出按鈕 -->
-        <button type="submit" class="submit-btn">寫給地球的一封信</button>
+        <button type="submit" class="submit-btn">寫下給地球的一封信</button>
       </form>
     </div>
   </div>

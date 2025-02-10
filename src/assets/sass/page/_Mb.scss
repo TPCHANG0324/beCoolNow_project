@@ -81,7 +81,7 @@
 
 .profile-pic-special {
   width: 173px;
-  height: 173px;
+  height: 160px;
   border-radius: 50%;
   border: 3px solid #fff;
   margin-bottom: 20px;
@@ -307,7 +307,6 @@
       cursor: pointer;
       box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
       transition: all 0.3s ease;
-      padding-bottom: -70px;
 
 
       &:hover {
@@ -841,9 +840,9 @@
       }
     }
 
-    .order-detail-btn {
+    button.order-detail-btn {
       font-size: 12px;
-      padding: 6px 10px;
+      // padding-right:10px;
     }
 
     .email-display {

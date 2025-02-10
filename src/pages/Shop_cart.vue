@@ -1,7 +1,12 @@
 <template>
+<<<<<<< HEAD
+    <MainHeader></MainHeader>
+  <!-- <MainHeader /> -->
+=======
  <MainHeader />
+>>>>>>> 5627426129b017ae53ad9c55a44abe8c473f1997
   <!-- 環保市集 - 購物車，縮寫Sp - 功能 - 代號X -->
-  <main>
+  <main style="padding-top: 80px;"> <!-- 在 main 上添加 padding -->
     <div class="Sp-X">
       <div class="Sp-wrapper-X">
         <!-- 流程顯示 -->
@@ -161,14 +166,33 @@
             如需重新訂製，需再等待2-3週生產期。<br>
             💳 付款方式：<br>
             本店支援 LINE Pay 結帳，歡迎使用！<br>
-            如有任何問題，歡迎隨時與我們聯繫！🌱 選擇再生材質，與我們一起為地球減少負擔。</div>
+            如有任何問題，歡迎隨時與我們聯繫！<br>
+            🌱 選擇再生材質，與我們一起為地球減少負擔。</div>
         </section>
 
       </div>
     </div>
-  </main>
-  <MainFooter class="removeMT" />
 
+    <!-- <p>{{ counterStore.count }}</p> -->
+    <!-- <button @click="counterStore.accumulate">測試按鈕</button> -->
+
+    <!-- <button @click="testBtn">測試按鈕</button> -->
+
+
+    <!-- 測試用：註冊 -->
+    <!-- <form action="" @submit.prevent="register">
+      帳號：<input type="text" name="account" v-model="account1">
+      密碼：<input type="password" name="password" v-model="password1">
+      <input type="submit" value="註冊">
+    </form> -->
+    <!-- 測試用：登入 -->
+    <!-- <form action="" @submit.prevent="login">
+      帳號：<input type="text" name="account" v-model="account2">
+      密碼：<input type="password" name="password" v-model="password2">
+      <input type="submit" value="登入">
+    </form> -->
+  </main>
+  <MainFooter></MainFooter>
 </template>
 
 <script setup>
@@ -176,6 +200,85 @@ import MainFooter from '@/components/layout/MainFooter.vue';
 import MainHeader from '@/components/layout/MainHeader.vue';
 import { useCounterStore } from '@/store/cart';
 import { ref, computed } from 'vue';
+//---------------------測試按鈕
+
+// const testBtn = async () => {
+//   const res = await fetch('/tid103/g1/php/test.php')
+//   const data = await res.json()
+//   console.log(data)
+// }
+
+
+
+// //---------------------測試用：註冊
+
+// const account1 = ref(null)
+// const password1 = ref(null)
+
+// const register = async () => {
+//   if (!account1.value || !password1.value) {
+//     alert("帳號或密碼不可為空！");
+//     return;
+//   }
+//   const url = `/tid103/g1/php/register.php`;
+//   try {
+//     const res = await fetch(url, {
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/json'
+//       },
+//       body: JSON.stringify({
+//         account: account1.value,
+//         password: password1.value
+//       })
+//     })
+//     const data = await res.json()
+//     console.log(data) //註冊完之後看一下成功與否
+
+//     if (data.success) {
+//       console.log("註冊成功！");
+//     } else {
+//       console.log(`註冊失敗：${data.error}`);
+//     }
+
+//   } catch (e) {
+//     console.log(`請求出現錯誤：${error.message}`);
+//   }
+// }
+
+// //---------------------測試用：登入
+
+// const account2 = ref(null)
+// const password2 = ref(null)
+
+// const login = async () => {
+//   if (!account2.value || !password2.value) {
+//     alert("帳號或密碼不可為空！");
+//     return;
+//   }
+//   const url = `/tid103/g1/php/login.php`;
+//   try {
+//     const res = await fetch(url, {
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/json'
+//       },
+//       body: JSON.stringify({
+//         account: account2.value,
+//         password: password2.value
+//       })
+//     })
+
+//     const data = await res.json();
+//     console.log(data); //看一下登入結果
+
+//     if (data.success) {
+//       console.log(data.message, data)
+//     }
+//   } catch (e) {
+//     console.log(`請求出現錯誤：${e}`);
+//   }
+// }
 //---------------------
 
 // import { CKEditor } from '@ckeditor/ckeditor5-vue';  
