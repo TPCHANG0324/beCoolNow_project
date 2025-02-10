@@ -25,7 +25,7 @@
                   </div>
               </div>
     <div class="si_content_R">
-    
+
       <!-- <nav class="breadcrumb">
         <ol>
           <li><a href="#">首頁</a></li>
@@ -63,7 +63,7 @@
             <div class="si_orderbottom2_R">
               <div class="middle_item1">
                 <a href="#">
-                  <img src="../assets/images/Sp13.jpg" style="width: 50px" />
+                  <img :src="'/tid103/g1/images/Sp13.jpg'" style="width: 50px" />
                   <label>環保筷子</label>
                 </a>
               </div>

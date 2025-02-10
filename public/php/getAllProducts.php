@@ -7,7 +7,7 @@ header("Access-Control-Allow-Methods: GET");
 include('conn.php');
 
 try {
-
+// echo $_GET['id'];
     // 取得所有商品
     $sql = "SELECT
             ID,
