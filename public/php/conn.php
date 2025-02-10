@@ -1,9 +1,9 @@
 <?php
     //MySQL相關資訊
-       $db_host = "34.58.74.78";
+       $db_host = "localhost";
        $db_user = "root";
        $db_pass = "Touyhh9527!";
-       $db_select = "mydb";
+       $db_select = "g2";
 
        //建立資料庫連線物件
        $dsn = "mysql:host=".$db_host.";dbname=".$db_select.";charset=utf8";
