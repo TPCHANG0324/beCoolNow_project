@@ -284,7 +284,7 @@ export default {
     // 呼叫後端 API 取得文章管理資料
     const fetchConferenceArticles = async () => {
       try {
-        const response = await fetch('./php/IcB_fetchArticles.php'); // 請根據實際路徑調整
+        const response = await fetch('http://localhost/beCoolNow_project/public/php/IcB_fetchArticles.php'); // 請根據實際路徑調整
         const data = await response.json();
         // 假設回傳的 data 為陣列，每筆資料至少含有 id, title, image, content
         const transformedData = data.map(item => ({
