@@ -1,4 +1,4 @@
-p// @mixin bgimage($list){
+// @mixin bgimage($list){
 //     @each $k in $list{
 //         .img-#{$k}{
 //             background-image: url('@/assets/images/#{$k}.png');
@@ -428,6 +428,7 @@ p// @mixin bgimage($list){
     font-size: 20px;
     line-height: 2.0;
     letter-spacing: normal;
+    word-break: break-word;
 
     @include max_820 {
       width: 80%;

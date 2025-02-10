@@ -15,19 +15,19 @@
         <!-- 圖標列表 -->
         <div class="icon-list">
           <button @click="openPanel('Thunderstorm Icon')">
-            <font-awesome-icon :icon="['fas', 'cloud-bolt']" class="hover-icon_Info"/>
+            <font-awesome-icon :icon="['fas', 'cloud-bolt']" class="hover-icon_Info" />
           </button>
           <button @click="openPanel('Wave Icon')">
-            <font-awesome-icon :icon="['fas', 'water']"  class="hover-icon_Info"/>
+            <font-awesome-icon :icon="['fas', 'water']" class="hover-icon_Info" />
           </button>
           <button @click="openPanel('Typhoon Icon')">
-            <font-awesome-icon :icon="['fas', 'hurricane']" class="hover-icon_Info"/>
+            <font-awesome-icon :icon="['fas', 'hurricane']" class="hover-icon_Info" />
           </button>
           <button @click="openPanel('Tree Icon')">
             <font-awesome-icon :icon="['fas', 'tree']" class="hover-icon_Info" />
           </button>
           <button @click="openPanel('Temperature Icon')">
-            <font-awesome-icon :icon="['fas', 'temperature-arrow-up']" class="hover-icon_Info"/>
+            <font-awesome-icon :icon="['fas', 'temperature-arrow-up']" class="hover-icon_Info" />
           </button>
           <button @click="openPanel('CO2 Icon')">
             <font-awesome-icon :icon="['fas', 'head-side-mask']" class="hover-icon_Info" />
@@ -56,12 +56,8 @@
           <!-- DONUT -->
           <h2 class="donut-title">該如何緩解全球暖化呢</h2>
           <div class="rotatable-donut" :style="{ transform: !isMobile ? `rotate(${rotation}deg)` : '' }">
-            <div
-              v-for="(section, index) in sections"
-              :key="index"
-              :class="['donut-section', `section-${index + 1}`]"
-              :style="isMobile ? { clipPath: 'polygon(50% 50%, 100% 0%, 100% 100%)' } : {}"
-            >
+            <div v-for="(section, index) in sections" :key="index" :class="['donut-section', `section-${index + 1}`]"
+              :style="isMobile ? { clipPath: 'polygon(50% 50%, 100% 0%, 100% 100%)' } : {}">
               <div>
                 <h3 class="section-title">{{ section.title }}</h3>
                 <p class="section-text">{{ section.text }}</p>
@@ -73,24 +69,20 @@
           <button v-show="!isMobile" class="rotate-button right" @click="rotate(90)">▶</button>
         </div>
       </div>
-
+      <!-- 文章管理 -->
       <section class="Ic_conference-section_R">
         <h3>臺灣響應的國際會議</h3>
         <!-- Tabs 按鈕 -->
         <div class="Ic_conference-tabs_R">
-          <button
-            v-for="(tab, index) in tabs"
-            :key="index"
-            :class="['Ic_tab-button_R', { active: activeTab === tab.id }]"
-            @click="setActiveTab(tab.id)"
-          >
+          <button v-for="(tab, index) in tabs" :key="tab.id"
+            :class="['Ic_tab-button_R', { active: activeTab === tab.id }]" @click="setActiveTab(tab.id)">
             {{ tab.title }}
           </button>
         </div>
 
         <!-- 內文區塊 -->
         <div class="Ic_conference-content_R">
-          <div v-for="(tab, index) in tabs" :key="index" :class="['Ic_tab-content', { active: activeTab === tab.id }]">
+          <div v-for="(tab, index) in tabs" :key="tab.id" :class="['Ic_tab-content', { active: activeTab === tab.id }]">
             <img :src="tab.image" :alt="tab.title" />
             <p>{{ tab.content }}</p>
           </div>
@@ -99,33 +91,21 @@
 
       <!-- 教育影片 -->
       <section class="Ic_bottom_R">
-  <h3>教育宣導</h3>
-  <swiper
-    :space-between="10"
-    navigation
-    pagination
-    class="custom-swiper"
-    :modules="modules"
-    :breakpoints="swiperBreakpoints"
-  >
-    <swiper-slide v-for="(slide, index) in slides" :key="index">
-      <div v-if="slide.type === 'youtube'" class="slide-video">
-        <iframe
-          width="100%"
-          height="315"
-          :src="slide.src"
-          :title="slide.title"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-        ></iframe>
-      </div>
-      <div v-else class="slide-image">
-        <img :src="slide.src" :alt="slide.title" />
-      </div>
-    </swiper-slide>
-  </swiper>
-</section>
+        <h3>教育宣導</h3>
+        <swiper :space-between="10" navigation pagination class="custom-swiper" :modules="modules"
+          :breakpoints="swiperBreakpoints">
+          <swiper-slide v-for="(slide, index) in slides" :key="index">
+            <div v-if="slide.type === 'youtube'" class="slide-video">
+              <iframe width="100%" height="315" :src="slide.src" :title="slide.title" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+            </div>
+            <div v-else class="slide-image">
+              <img :src="slide.src" :alt="slide.title" />
+            </div>
+          </swiper-slide>
+        </swiper>
+      </section>
 
 
       <!-- 問答遊戲 -->
@@ -142,8 +122,8 @@
         <!-- 問答畫面 -->
         <div v-if="currentScreen === 'quiz'" class="quiz-screen">
           <div class="Ic_game_R">
-            <div class="Ic_game-content_R" >
-              <div class="Ic_game-question_R" :class="{ 'shake': feedback === '答錯QQ'  }">
+            <div class="Ic_game-content_R">
+              <div class="Ic_game-question_R" :class="{ 'shake': feedback === '答錯QQ' }">
                 <!-- 顯示進度 -->
                 <p class="progress_R">第 {{ currentQuestionIndex + 1 }} 題，共 {{ questions.length }} 題</p>
                 <h4>{{ currentQuestion.question }}</h4>
@@ -153,12 +133,8 @@
                   </p>
                 </div>
                 <div class="Ic_game-buttons_R">
-                  <button
-                    v-for="(option, index) in currentQuestion.options"
-                    :key="index"
-                    :data-correct="index === currentQuestion.correctIndex"
-                    @click="submitAnswer(index)"
-                  >
+                  <button v-for="(option, index) in currentQuestion.options" :key="index"
+                    :data-correct="index === currentQuestion.correctIndex" @click="submitAnswer(index)">
                     {{ letters[index] }}
                   </button>
                 </div>
@@ -183,12 +159,12 @@
 </template>
 
 <script>
+import { ref, onMounted } from 'vue';
 import MainHeader from '@/components/layout/MainHeader.vue';
 import MainFooter from '@/components/layout/MainFooter.vue';
 import { Navigation, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import 'swiper/swiper-bundle.css';
-import { ref } from 'vue';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faCloudBolt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
@@ -294,35 +270,45 @@ export default {
       rotation.value += angle;
     };
 
-    // Tabs 文章
-    const activeTab = ref('Ic_cop29_R');
-    const tabs = ref([
-      {
-        id: 'Ic_cop29_R',
-        title: 'COP29 氣候會議',
-        image: new URL('@/assets/images/Ic03.png', import.meta.url).href,
-        content:
-          'COP29 氣候會議將於 2024 年 11 月在阿塞拜疆首都巴庫舉行，匯聚全球領袖、科學家與環保人士，共同應對氣候挑戰。本次會議核心議題包括協助開發中國家應對氣候變化、更新國家自主貢獻（NDC）目標以及打擊漂綠行為。會議還將討論減少溫室氣體排放、推進綠色技術創新與能源轉型的重要策略。作為全球氣候行動的重要平台，COP29 致力於促進各國合作，共同實現巴黎協定下的碳中和目標，維護地球的未來環境可持續性。',
-      },
-      {
-        id: 'Ic_twcae_R',
-        title: 'TWCAE 4th 臺灣氣候行動高峰論壇',
-        image: new URL('@/assets/images/ccccc.png', import.meta.url).href,
-        content:
-          'TWCAE 4th 臺灣氣候行動高峰論壇於近期在台北舉行，吸引了國內外專家、學者及企業代表參與，共同討論台灣在國際氣候政策中的角色。論壇聚焦於「綠色經濟轉型」與「碳中和目標」的實現策略，強調能源轉型的重要性，並探討如何利用創新技術促進減碳效益。會議還分享了企業在減少碳排放和推動永續發展的成功案例，強調各界合作的重要性。論壇旨在提升台灣於全球氣候行動中的影響力，實現 2050 淨零碳排的目標，共建永續未來。',
-      },
-      {
-        id: 'Ic_law_R',
-        title: '氣候變遷因應法',
-        image: new URL('@/assets/images/law2.png', import.meta.url).href,
-        content:
-          '氣候變遷因應法是台灣為應對氣候變遷挑戰的重要立法，目標在於實現 2050 淨零碳排。該法涵蓋碳定價機制、推廣可再生能源、支持低碳技術發展及強化防災能力，並要求各部門提出減碳計畫。此外，法案鼓勵企業參與減碳行動，推動產業轉型，同時提高公眾環保意識。氣候變遷因應法不僅是國家邁向永續發展的基石，也是台灣在全球氣候行動中扮演關鍵角色的展現。。',
-      },
-    ]);
+    // --- 文章管理相關 ---
+    // 用來存放從後端撈取的會議文章資料
+    const tabs = ref([]);
+    // 用來記錄目前活躍的 tab ID
+    const activeTab = ref('');
 
+    // 呼叫後端 API 取得文章管理資料
+    const fetchConferenceArticles = async () => {
+      try {
+        const response = await fetch('./php/IcB_fetchArticles.php'); // 請根據實際路徑調整
+        const data = await response.json();
+        // 假設回傳的 data 為陣列，每筆資料至少含有 id, title, image, content
+        const transformedData = data.map(item => ({
+          id: item.ID,
+          title: item.mediaTitle,
+          image: item.mediaPic,
+          content: item.mediaContents,
+        }));
+        tabs.value = transformedData;
+        if (transformedData.length > 0) {
+          activeTab.value = transformedData[0].id;
+        }
+
+      } catch (error) {
+        console.error('取得會議文章失敗：', error);
+      }
+    };
+
+    // 設定活躍 tab
     const setActiveTab = (tabId) => {
       activeTab.value = tabId;
     };
+
+    // --- 其他區塊 (例如 Panel、Donut、問答等) 略過，保留原有邏輯 ---
+
+    // 當元件掛載時，呼叫 fetchConferenceArticles
+    onMounted(() => {
+      fetchConferenceArticles();
+    });
 
     // Quiz Game
     const currentScreen = ref('start');
@@ -385,7 +371,7 @@ export default {
 
 
     const submitAnswer = (selectedIndex) => {
-      if(isSubmit.value === true) return
+      if (isSubmit.value === true) return
       isSubmit.value = true
       feedbackclass.value = ''; // 重置動畫
       // isShaking.value = false; // 重置晃動狀態
@@ -405,7 +391,7 @@ export default {
         console.log(isShaking.value,
           'FALSE'
         );
-        
+
       }
 
       setTimeout(() => {
@@ -420,7 +406,7 @@ export default {
         } else {
           currentScreen.value = 'end';
         }
-         isSubmit.value = false
+        isSubmit.value = false
 
       }, 1000);
     };
@@ -440,10 +426,10 @@ export default {
     };
 
     // Fetch
-    const fetchYoutubeVideos =  async (query) => {
+    const fetchYoutubeVideos = async (query) => {
       const apiKey = 'AIzaSyCZvTGvYRkTDOAbAeN5FA8QQEybsEQSixk';
       const maxResults = 6;
-      const q  = `氣候變遷 全球暖化`;
+      const q = `氣候變遷 全球暖化`;
       const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${q}&key=${apiKey}&type=video&safeSearch=strict&video&maxResults=${maxResults}`;
       try {
         const response = await fetch(url);

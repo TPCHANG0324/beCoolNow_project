@@ -5,9 +5,8 @@
       <div class="backStage_wrapper">
         <div>
           <h3>會員管理</h3>
-          <!-- <h3>會員管理</h3> -->
           <div class="MmB_searchBar_H">
-            <input id="" class="input" type="text" name="" placeholder="搜尋會員編號" />
+            <input class="input" type="text" placeholder="搜尋會員編號" />
             <i class="fa-solid fa-magnifying-glass"></i>
           </div>
         </div>
@@ -24,7 +23,6 @@
                   <th class="MmB_pet_H">小寵物</th>
                   <th class="MmB_createDate_H">創建日期</th>
                   <th></th>
-                  <!-- <th><button class="IcB_addBtn_H">新增</button></th> -->
                 </tr>
               </thead>
               <tbody>
@@ -35,12 +33,8 @@
                   <td class="MmB_mail_H">tibame@gmail.com</td>
                   <td class="MmB_pet_H">氓阿狐</td>
                   <td class="MmB_createDate_H">2025-01-12</td>
-                  <td><button class="MmB_editBtn_H">編輯與查看</button></td>
-                  <!-- <td>
-                    <button class="IcB_deleteBtn_H">
-                      <i class="fa-solid fa-trash-can"></i>
-                    </button>
-                  </td> -->
+                  <!-- 這裡加上 @click 事件 -->
+                  <td><button class="MmB_editBtn_H" @click="openEditPopup">編輯與查看</button></td>
                 </tr>
                 <tr>
                   <td class="MmB_number_H">113122102</td>
@@ -49,12 +43,7 @@
                   <td class="MmB_mail_H">tibame@gmail.com</td>
                   <td class="MmB_pet_H">氓阿狐</td>
                   <td class="MmB_createDate_H">2025-01-12</td>
-                  <td><button class="MmB_editBtn_H">編輯與查看</button></td>
-                  <!-- <td>
-                    <button class="IcB_deleteBtn_H">
-                      <i class="fa-solid fa-trash-can"></i>
-                    </button>
-                  </td> -->
+                  <td><button class="MmB_editBtn_H" @click="openEditPopup">編輯與查看</button></td>
                 </tr>
                 <tr>
                   <td class="MmB_number_H">113122103</td>
@@ -63,12 +52,7 @@
                   <td class="MmB_mail_H">tibame@gmail.com</td>
                   <td class="MmB_pet_H">氓阿狐</td>
                   <td class="MmB_createDate_H">2025-01-12</td>
-                  <td><button class="MmB_editBtn_H">編輯與查看</button></td>
-                  <!-- <td>
-                    <button class="IcB_deleteBtn_H">
-                      <i class="fa-solid fa-trash-can"></i>
-                    </button>
-                  </td> -->
+                  <td><button class="MmB_editBtn_H" @click="openEditPopup">編輯與查看</button></td>
                 </tr>
               </tbody>
             </table>
@@ -77,10 +61,14 @@
         <BackStagePaginator></BackStagePaginator>
       </div>
     </div>
-    <BackStageSmallPopup class="MmB_EditView_H">
+
+    <!-- 用 v-if 控制小彈窗的顯示 -->
+     <transition name="fade">
+    <BackStageSmallPopup class="MmB_EditView_H" v-if="isEditPopupVisible">
       <span>
         <p>編輯與查看</p>
-        <i class="fa-solid fa-x"></i>
+        <!-- 關閉圖示也加上 @click 事件 -->
+        <i class="fa-solid fa-x" @click="closeEditPopup"></i>
       </span>
       <section>
         <article>
@@ -113,7 +101,7 @@
           </div>
           <div>
             <p>帳號狀態:&nbsp;</p>
-            <select id="" name="">
+            <select>
               <option value="normal">正常</option>
               <option value="suspend">停權</option>
             </select>
@@ -125,16 +113,58 @@
         </article>
       </section>
       <div>
-        <button>取消</button>
-        <button>儲存</button>
+        <button @click="closeEditPopup">取消</button>
+        <button @click="savePopup">儲存</button>
       </div>
     </BackStageSmallPopup>
+  </transition>
   </div>
 </template>
 
 <script>
+import { ref } from 'vue';
 import BackStageSidebar from '@/components/items/BackStageItems/BackStageSidebar.vue';
-import backStagePaginator from '@/components/items/BackStageItems/BackStagePaginator.vue';
+import BackStagePaginator from '@/components/items/BackStageItems/BackStagePaginator.vue';
 import BackStageHeader from '@/components/layout/BackStageLayout/BackStageHeader.vue';
 import BackStageSmallPopup from '@/components/layout/BackStageLayout/BackStageSmallPopup.vue';
+
+export default {
+  name: 'MemberManagement',
+  components: {
+    BackStageHeader,
+    BackStageSidebar,
+    BackStagePaginator,
+    BackStageSmallPopup,
+  },
+  setup() {
+    // 用來控制小彈窗的顯示 / 隱藏
+    const isEditPopupVisible = ref(false);
+
+    // 點「編輯與查看」時，打開彈窗
+    const openEditPopup = () => {
+      isEditPopupVisible.value = true;
+    };
+
+    // 點 X 或「取消」時，關閉彈窗
+    const closeEditPopup = () => {
+      isEditPopupVisible.value = false;
+    };
+
+    // 儲存時做一些操作，比如更新會員資料、呼叫 API 等
+    const savePopup = () => {
+      alert('會員資料已儲存 / 更新');
+      // 儲存完後關閉視窗
+      isEditPopupVisible.value = false;
+    };
+
+    return {
+      // 資料
+      isEditPopupVisible,
+      // 方法
+      openEditPopup,
+      closeEditPopup,
+      savePopup,
+    };
+  },
+};
 </script>

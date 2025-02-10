@@ -3,11 +3,11 @@
   <div class="si_container_R">
     <div class="si_content_R">
       <nav class="breadcrumb">
-        <div class="si_bread_r">
+        <!-- <div class="si_bread_r">
           <a href="#">首頁</a>
           <p>/</p>
           <a href="#">購物車</a>
-        </div>
+        </div> -->
         <!-- 流程顯示 -->
         <div class="Sp-checkout-nav-X">
           <!-- 每一個圓圈 -->

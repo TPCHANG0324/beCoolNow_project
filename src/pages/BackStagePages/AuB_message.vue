@@ -34,9 +34,9 @@
                   <td>abc@gmail.com</td>
                   <td>0912345678</td>
                   <td>2025-01-12</td>
-                  <td><button class="MmB_editBtn_H">查看</button></td>
+                  <td><button class="MmB_editBtn_H" @click="openEditPopup">查看</button></td>
                   <td class="deleteBtn">
-                    <button class="IcB_deleteBtn_H">
+                    <button class="IcB_deleteBtn_H" @click="openDeletePopup">
                       <i class="fa-solid fa-trash-can"></i>
                     </button>
                   </td>
@@ -47,9 +47,9 @@
                   <td>abc@gmail.com</td>
                   <td>0912345678</td>
                   <td>2025-01-12</td>
-                  <td><button class="MmB_editBtn_H">查看</button></td>
+                  <td><button class="MmB_editBtn_H" @click="openEditPopup">查看</button></td>
                   <td>
-                    <button class="IcB_deleteBtn_H">
+                    <button class="IcB_deleteBtn_H" @click="openDeletePopup">
                       <i class="fa-solid fa-trash-can"></i>
                     </button>
                   </td>
@@ -60,9 +60,9 @@
                   <td>abc@gmail.com</td>
                   <td>0912345678</td>
                   <td>2025-01-12</td>
-                  <td><button class="MmB_editBtn_H">查看</button></td>
+                  <td><button class="MmB_editBtn_H" @click="openEditPopup">查看</button></td>
                   <td>
-                    <button class="IcB_deleteBtn_H">
+                    <button class="IcB_deleteBtn_H" @click="openDeletePopup">
                       <i class="fa-solid fa-trash-can"></i>
                     </button>
                   </td>
@@ -74,22 +74,52 @@
         <BackStagePaginator></BackStagePaginator>
       </div>
     </div>
-    <BackStageConfirmPopup class="AuB_messageDelete_H">
-      <span></span>
-      <div>
-        <h3>確定將此訊息刪除嗎?</h3>
+    <transition name="fade">
+      <BackStageConfirmPopup class="AuB_messageDelete_H" v-if="isPopupVisible">
+        <span></span>
         <div>
-          <button>取消</button>
-          <button>確定</button>
+          <h3>確定將此訊息刪除嗎?</h3>
+          <div>
+            <button @click="closePopup">取消</button>
+            <button @click="updateArticle">確定</button>
+          </div>
         </div>
-      </div>
-    </BackStageConfirmPopup>
+      </BackStageConfirmPopup>
+  </transition>
   </div>
 </template>
 
 <script>
+import { ref } from 'vue';
 import BackStageSidebar from '@/components/items/BackStageItems/BackStageSidebar.vue';
 import backStagePaginator from '@/components/items/BackStageItems/BackStagePaginator.vue';
 import BackStageHeader from '@/components/layout/BackStageLayout/BackStageHeader.vue';
 import BackStageConfirmPopup from '@/components/layout/BackStageLayout/BackStageConfirmPopup.vue';
+
+export default {
+  components: {
+    BackStageSidebar,
+    backStagePaginator,
+    BackStageHeader,
+    BackStageConfirmPopup,
+  },
+  setup() {
+    const isPopupVisible = ref(false);
+    const openDeletePopup = () => {
+      isPopupVisible.value = true;
+    };
+    const closePopup = () => {
+      isPopupVisible.value = false;
+    };
+    const updateArticle = () => {
+      isPopupVisible.value = false;
+    };
+    return {
+      isPopupVisible,
+      openDeletePopup,
+      closePopup,
+      updateArticle,
+    };
+  },
+};
 </script>
