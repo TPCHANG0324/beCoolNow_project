@@ -12,6 +12,7 @@ export function useAuth() {
     const checkAuth = async () => {
         isLoading.value = true
         try {
+            // 環境路徑變數 , 輔導老師建議用這個方法 (.env.development, .env.production )
             const base_url = import.meta.env.VITE_AJAX_URL
             const res = await fetch(base_url + '/checkLogin.php', {
                 // credentials: 'include'
