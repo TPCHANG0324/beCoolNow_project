@@ -1,6 +1,8 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 
+console.log(import.meta.env.VITE_AJAX_URL);
+
 export function useAuth() {
     const router = useRouter()
     const isAuthenticated = ref(false)
@@ -10,8 +12,9 @@ export function useAuth() {
     const checkAuth = async () => {
         isLoading.value = true
         try {
-            const res = await fetch('/tid103/g1/php/checkLogin.php', {
-                credentials: 'include'
+            const base_url = import.meta.env.VITE_AJAX_URL
+            const res = await fetch(base_url + '/checkLogin.php', {
+                // credentials: 'include'
             });
             const data = await res.json();
             isAuthenticated.value = data.success
