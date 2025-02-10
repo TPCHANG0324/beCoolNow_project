@@ -169,8 +169,14 @@ export default {
           if (userEmail) {
             localStorage.setItem(`cartCount_${userEmail}`, cartCount.value.toString());
           }
-          cartCount.value = 0;
-          localStorage.removeItem('cartCount');
+
+          // 清除購物車數量
+      cartCount.value = 0;
+      localStorage.removeItem('cartCount');
+      // 清除手機號碼 -- 加入這一行
+      localStorage.removeItem('userPhone');
+          // cartCount.value = 0;
+          // localStorage.removeItem('cartCount');
           isLoggedIn.value = false;
           await closeLogoutPopup();
           alert(data.message);
