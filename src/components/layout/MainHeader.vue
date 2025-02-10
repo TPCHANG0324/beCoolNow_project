@@ -19,22 +19,24 @@
         </ul>
         <ul>
           <li>
-            <router-link to="/shop_cart"><i class="bi bi-handbag"></i></router-link>
+            <router-link to="/shop_cart" class="cart-icon-wrapper">
+              <i class="bi bi-handbag"></i>
+              <span class="cart-count" v-if="cartCount > 0">{{ cartCount }}</span>
+            </router-link>
           </li>
           <li>
-  <a v-if="!isLoggedIn" @click="toggleLoginPopup">
-    <i class="bi bi-person-circle" :class="{ 'logged-in': isLoggedIn }"></i>
-  </a>
-  <a v-else @click="confirmLogout">
-    <i class="bi bi-person-circle" :class="{ 'logged-in': isLoggedIn }"></i>
-  </a>
-</li>
+            <a v-if="!isLoggedIn" @click="toggleLoginPopup">
+              <i class="bi bi-person-circle"></i>
+            </a>
+            <a v-else @click="showLogoutPopup">
+              <i class="bi bi-person-circle" :class="{ 'logged-in': isLoggedIn }"></i>
+            </a>
+          </li>
         </ul>
       </nav>
     </div>
-    <!-- 使用 v-show 來控制彈窗的顯示與隱藏 -->
-   
   </header>
+
   <header class="mobile_header">
     <div class="logo">
       <router-link to="/">
@@ -44,34 +46,26 @@
     <div>
       <ul>
         <li>
-          <router-link to="/shop"><i class="bi bi-handbag"></i></router-link>
+          <router-link to="/shop_cart" class="cart-icon-wrapper">
+            <i class="bi bi-handbag"></i>
+            <span class="cart-count" v-if="cartCount > 0">{{ cartCount }}</span>
+          </router-link>
         </li>
         <li>
           <router-link to="/member"><i class="bi bi-person-circle"></i></router-link>
         </li>
       </ul>
-      <!-- 漢堡線 -->
-      <svg
-        class="ham hamRotate ham8"
-        viewBox="0 0 100 100"
-        width="80"
-        :class="{ active: isMenuOpen }"
-        @click="toggleMenu"
-      >
-        <path
-          class="line top"
-          d="m 30,33 h 40 c 3.722839,0 7.5,3.126468 7.5,8.578427 0,5.451959 -2.727029,8.421573 -7.5,8.421573 h -20"
-        />
+      <svg class="ham hamRotate ham8" viewBox="0 0 100 100" width="80" :class="{ active: isMenuOpen }"
+        @click="toggleMenu">
+        <path class="line top"
+          d="m 30,33 h 40 c 3.722839,0 7.5,3.126468 7.5,8.578427 0,5.451959 -2.727029,8.421573 -7.5,8.421573 h -20" />
         <path class="line middle" d="m 30,50 h 40" />
-        <path
-          class="line bottom"
-          d="m 70,67 h -40 c 0,0 -7.5,-0.802118 -7.5,-8.365747 0,-7.563629 7.5,-8.634253 7.5,-8.634253 h 20"
-        />
+        <path class="line bottom"
+          d="m 70,67 h -40 c 0,0 -7.5,-0.802118 -7.5,-8.365747 0,-7.563629 7.5,-8.634253 7.5,-8.634253 h 20" />
       </svg>
     </div>
   </header>
 
-  <!-- 子選單 -->
   <nav class="mobile_nav" :class="{ open: isMenuOpen }">
     <ul>
       <li><router-link to="/information">島嶼危機</router-link></li>
@@ -83,89 +77,188 @@
       <li><router-link to="/shop">環保市集</router-link></li>
     </ul>
   </nav>
-  <!-- <loginPopupChange v-if="isloginPopup"></loginPopupChange> -->
-     <!-- 添加遮罩層 -->
-  <div 
-    class="overlay_popup" 
-    v-show="isloginPopup" 
-    @click="closeLoginPopup"
-  ></div>
+
+  <div class="overlay_popup01" v-show="isLogoutPopupVisible" @click="closeLogoutPopup"></div>
   <loginPopupChange v-show="isloginPopup" @close="closeLoginPopup"></loginPopupChange>
 
+  <div class="logout-popup01" v-show="isLogoutPopupVisible">
+    <div class="logout-content">
+      <button class="close-btn" @click="closeLogoutPopup">&times;</button>
+      <h3>是否確定登出？</h3>
+      <div class="button-group">
+        <button class="logout-btn" @click="handleLogout">登出並回到首頁</button>
+        <button class="keep-login-btn" @click="goToMember">保持登入<br />前往會員頁</button>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
-import { ref, onMounted } from 'vue';
-import { RouterLink, useRouter } from 'vue-router';
+import { ref, onMounted, onUnmounted } from 'vue';
+import { useRouter } from 'vue-router';
+import { useAuth } from '@/utils/useAuth';
+import eventBus from '@/utils/eventBus';
 import loginPopupChange from '@/pages/loginPopupChange.vue';
-// import { ref, onMounted } from 'vue';
-// import { RouterLink, useRouter } from 'vue-router'; // 添加 useRouter
-// import loginPopupChange from '@/pages/loginPopupChange.vue';
 
 export default {
   name: 'MainHeader',
-  components:{loginPopupChange},
+  components: { loginPopupChange },
+  
   setup() {
-    const router = useRouter(); // 初始化 router
+    const router = useRouter();
+    const { userEmail, checkAuth } = useAuth();
     const isMenuOpen = ref(false);
     const isloginPopup = ref(false);
     const isLoggedIn = ref(false);
+    const isLogoutPopupVisible = ref(false);
+    const cartCount = ref(0);
 
-     // 檢查登入狀態
-     const checkLoginStatus = () => {
-      const loginStatus = localStorage.getItem('isLoggedIn');
-      isLoggedIn.value = loginStatus === 'true';
+    const checkLoginStatus = async () => {
+      isLoggedIn.value = await checkAuth();
+      
+      if (isLoggedIn.value) {
+        const userEmail = localStorage.getItem('userEmail');
+        const storedCount = localStorage.getItem(`cartCount_${userEmail}`);
+        cartCount.value = parseInt(storedCount) || 0;
+      } else {
+        const generalCount = localStorage.getItem('cartCount');
+        cartCount.value = parseInt(generalCount) || 0;
+      }
     };
 
-    // 在組件掛載時檢查登入狀態
-    onMounted(() => {
-      checkLoginStatus();
-    });
+    const toggleMenu = () => {
+      isMenuOpen.value = !isMenuOpen.value;
+    };
 
     const toggleLoginPopup = () => {
-      // 只有在未登入狀態下才顯示登入彈窗
       if (!isLoggedIn.value) {
         isloginPopup.value = !isloginPopup.value;
       }
     };
 
-
     const closeLoginPopup = () => {
       isloginPopup.value = false;
-    };
-  
-    const toggleMenu = () => {
-      isMenuOpen.value = !isMenuOpen.value;
-      // console.log('Menu toggled:', isMenuOpen.value);
-    };
-
-     // 新增確認登出方法
-     const confirmLogout = () => {
-      const confirmed = window.confirm('確定要登出?');
-      if (confirmed) {
-        // 執行登出操作
-        localStorage.removeItem('isLoggedIn');
-        localStorage.removeItem('userEmail');
-        isLoggedIn.value = false;
-        router.push('/');
+      checkLoginStatus();
+      if (localStorage.getItem('redirectPath')) {
+        localStorage.removeItem('redirectPath');
       }
     };
 
-    const handleLogout = () => {
-  localStorage.removeItem('isLoggedIn');
-  localStorage.removeItem('userEmail');
-  router.push('/');
-};
+    const showLogoutPopup = () => {
+      if (isLoggedIn.value) {
+        isLogoutPopupVisible.value = true;
+      }
+    };
+
+    const closeLogoutPopup = async () => {
+      isLogoutPopupVisible.value = false;
+      return new Promise(resolve => setTimeout(resolve, 100));
+    };
+
+    const showLoginPopup = () => {
+      isloginPopup.value = true;
+    };
+
+    const handleLogout = async () => {
+      try {
+        const res = await fetch(`/tid103/g1/php/logout.php`);
+        const data = await res.json();
+        
+        if (data.success) {
+          const userEmail = localStorage.getItem('userEmail');
+          if (userEmail) {
+            localStorage.setItem(`cartCount_${userEmail}`, cartCount.value.toString());
+          }
+
+          // 清除購物車數量
+      cartCount.value = 0;
+      localStorage.removeItem('cartCount');
+      // 清除手機號碼 -- 加入這一行
+      localStorage.removeItem('userPhone');
+          // cartCount.value = 0;
+          // localStorage.removeItem('cartCount');
+          isLoggedIn.value = false;
+          await closeLogoutPopup();
+          alert(data.message);
+          router.push('/');
+        }
+      } catch (err) {
+        console.error('登出操作失敗', err);
+        alert('登出操作失敗，請洽工作人員詢問');
+      }
+    };
+
+    const goToMember = () => {
+      closeLogoutPopup();
+      router.push('/member');
+    };
+
+    const handleCartCountUpdate = () => {
+      if (isLoggedIn.value) {
+        const userEmail = localStorage.getItem('userEmail');
+        const newCount = parseInt(localStorage.getItem('cartCount')) || 0;
+        cartCount.value = newCount;
+        localStorage.setItem(`cartCount_${userEmail}`, newCount.toString());
+      } else {
+        const newCount = parseInt(localStorage.getItem('cartCount')) || 0;
+        cartCount.value = newCount;
+      }
+    };
+
+    onMounted(() => {
+      if (!localStorage.getItem('isLoggedIn')) {
+        localStorage.setItem('isLoggedIn', 'false');
+      }
+      checkLoginStatus();
+      window.addEventListener('storage', checkLoginStatus);
+      window.addEventListener('updateCartCount', handleCartCountUpdate);
+      eventBus.on('show-login-popup', showLoginPopup);
+    });
+
+    onUnmounted(() => {
+      window.removeEventListener('storage', checkLoginStatus);
+      window.removeEventListener('updateCartCount', handleCartCountUpdate);
+      eventBus.off('show-login-popup', showLoginPopup);
+    });
 
     return {
       isMenuOpen,
       isloginPopup,
       isLoggedIn,
+      isLogoutPopupVisible,
+      cartCount,
       toggleLoginPopup,
       toggleMenu,
       closeLoginPopup,
-      confirmLogout,
+      showLogoutPopup,
+      closeLogoutPopup,
+      handleLogout,
+      goToMember,
+      userEmail
     };
-  },
+  }
 };
 </script>
+
+<style scoped>
+.cart-icon-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.cart-count {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: #d0ad44;
+  color: white;
+  border-radius: 50%;
+  min-width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+  font-size: 12px;
+}
+</style>

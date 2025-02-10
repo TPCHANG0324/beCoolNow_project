@@ -56,7 +56,6 @@
     </div>
 
     <!-- 互動問答 新增 -->
-    <transition name="fade">
       <BackStageSmallPopup class="IcB_addQAndAPopup_H" v-if="isAddPopupVisible">
         <span>
           <p>互動問答&nbsp;新增</p>
@@ -67,28 +66,37 @@
             <label for="IcB_question_H">題目描述:<br /><textarea id="IcB_question_H" name="IcB_question_H"></textarea>
             </label>
           </div>
-          <figure>
-            <label for="UploadPic">圖片:</label>
-            <input id="UploadPic" class="UploadPic" type="file" accept="image/*, image/svg+xml" />
-            <div class="preview">
-              <p>圖片預覽</p>
-            </div>
-          </figure>
-        </div>
-        <div class="IcB_answer_H">
-          <label for="IcB_answerA_H">A選項: <input id="IcB_answerA_H" class="input" type="text" /></label>
-          <label for="IcB_answerB_H">B選項: <input id="IcB_answerB_H" class="input" type="text" /></label>
-          <label for="IcB_answerC_H">C選項: <input id="IcB_answerC_H" class="input" type="text" /></label>
-        </div>
-        <div>
-          <button @click="closePopup">取消</button>
-          <button @click="saveArticle">儲存</button>
-        </div>
-      </BackStageSmallPopup>
-    </transition>
+      </div>
+      <div class="IcB_answer_H">
+        <section>
+          <div>
+            <label for="correctA">解答<input type="radio" id="correctA" class="correct" name="correct"></label>
+          </div>
+          <label for="IcB_answerA_H">A選項: <input id="IcB_answerA_H" class="input answer_input" type="text" /></label>
+        </section>
+
+        <section>
+          <div>
+            <label for="correctB">解答<input type="radio" id="correctB" class="correct" name="correct"></label>
+          </div>
+          <label for="IcB_answerB_H">B選項: <input id="IcB_answerB_H" class="input answer_input" type="text" /></label>
+        </section>
+
+        <section>
+          <div>
+            <label for="correctC">解答<input type="radio" id="correctC" class="correct" name="correct"></label>
+          </div>
+          <label for="IcB_answerC_H">C選項: <input id="IcB_answerC_H" class="input answer_input" type="text" /></label>
+        </section>
+
+      </div>
+      <div>
+        <button>取消</button>
+        <button>儲存</button>
+      </div>
+    </BackStageSmallPopup>
 
     <!-- 互動問答 編輯 -->
-    <transition name="fade">
       <BackStageSmallPopup class="IcB_editQAndAPopup_H" v-if="isEditPopupVisible">
         <span>
           <p>互動問答&nbsp;編輯</p>
@@ -99,25 +107,35 @@
             <label for="IcB_question_H">題目描述:<br /><textarea id="IcB_question_H" name="IcB_question_H"></textarea>
             </label>
           </div>
-          <figure>
-            <label for="UploadPic">圖片:</label>
-            <input id="UploadPic" class="UploadPic" type="file" accept="image/*, image/svg+xml" />
-            <div class="preview">
-              <p>圖片預覽</p>
-            </div>
-          </figure>
-        </div>
-        <div class="IcB_answer_H">
-          <label for="IcB_answerA_H">A選項: <input id="IcB_answerA_H" class="input" type="text" /></label>
-          <label for="IcB_answerB_H">B選項: <input id="IcB_answerB_H" class="input" type="text" /></label>
-          <label for="IcB_answerC_H">C選項: <input id="IcB_answerC_H" class="input" type="text" /></label>
-        </div>
-        <div>
-          <button @click="closePopup">取消</button>
-          <button @click="saveArticle">儲存</button>
-        </div>
-      </BackStageSmallPopup>
-    </transition>
+      </div>
+      <div class="IcB_answer_H">
+
+        <section>
+          <div>
+            <label for="correctAEdit">解答<input type="radio" id="correctAEdit" class="correctAEdit" name="correctEdit"></label>
+          </div>
+          <label for="IcB_answerAEdit_H">A選項: <input id="IcB_answerAEdit_H" class="input answer_input" type="text" /></label>
+        </section>
+
+        <section>
+          <div>
+            <label for="correctBEdit">解答<input type="radio" id="correctBEdit" class="correct" name="correctEdit"></label>
+          </div>
+          <label for="IcB_answerBEdit_H">B選項: <input id="IcB_answerBEdit_H" class="input answer_input" type="text" /></label>
+        </section>
+
+        <section>
+          <div>
+            <label for="correctCEdit">解答<input type="radio" id="correctCEdit" class="correct" name="correctEdit"></label>
+          </div>
+          <label for="IcB_answerCEdit_H">C選項: <input id="IcB_answerCEdit_H" class="input answer_input" type="text" /></label>
+        </section>
+      </div>
+      <div>
+        <button>取消</button>
+        <button>儲存</button>
+      </div>
+    </BackStageSmallPopup>
 
     <!-- 互動問答 刪除 -->
     <transition name="fade">

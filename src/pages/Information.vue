@@ -2,6 +2,11 @@
   <div>
     <MainHeader></MainHeader>
     <header class="Ic_header_R">
+
+       <!-- MP4 影片背景 -->
+       <video autoplay muted loop class="Ic_video_bg_R">
+        <source src="@/assets/videos/101 taipei new.mp4" type="video/mp4" />
+      </video>
       <div class="Ic_wrapper_R">
         <div class="Ic_banner_R">
           <h1 class="Ic_title_R">全球暖化下的臺灣</h1>
@@ -379,19 +384,20 @@ export default {
 
 
       if (selectedIndex === currentQuestion.value.correctIndex) {
-        feedback.value = 'YA答對！';
+        feedback.value = 'YA 答對！';
         feedbackclass.value = 'correct-animation';
         score.value++;
         console.log(isShaking.value);
 
       } else {
-        feedback.value = '答錯QQ';
+        feedback.value = '答錯 QQ';
         feedbackclass.value = 'wrong-animation';
-        isShaking.value = true; // 觸發晃動動畫
-        console.log(isShaking.value,
-          'FALSE'
-        );
-
+      // 強制重新觸發晃動動畫
+    const questionElement = document.querySelector('.Ic_game-question_R');
+    questionElement.classList.remove('shake');
+    void questionElement.offsetWidth; // 觸發重排
+    questionElement.classList.add('shake');
+        
       }
 
       setTimeout(() => {

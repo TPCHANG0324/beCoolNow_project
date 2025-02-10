@@ -1,4 +1,8 @@
+// import { name } from 'dayjs/locale/zh-cn';
 import { createRouter, createWebHistory } from 'vue-router';
+import eventBus from '@/utils/eventBus';
+import { useAuth } from '@/utils/useAuth';
+
 
 // path → component
 const routes = [
@@ -18,6 +22,15 @@ const routes = [
       // requiredLogin: false
     },
   },
+
+  {
+    path: '/donatefinish/',
+    component: () => import('@/pages/Donatefinish.vue'),
+    meta: {
+      title: '感謝捐款',
+      // requiredLogin: false
+    },
+  },
   {
     path: '/activity/',
     component: () => import('@/pages/Activity.vue'),
@@ -27,30 +40,26 @@ const routes = [
     },
   },
   {
-    path: '/social/',
+    path: '/social',
+    name: 'social',
     component: () => import('@/pages/social.vue'),
     meta: {
       title: '社群中心',
       // requiredLogin: true
     },
-    // children:[
-    //   {
-    //     path:'',
-    //     component: () => import('@/pages/Social_news.vue'),
-    //   },
-    //   {
-    //     path: 'article', // 'article/:id'
-    //     component:  () => import('@/pages/Social_article.vue'),
-    //   },
-    // ]
-  },
-  {
-    path: '/social_article/',
-    component: () => import('@/pages/Social_article.vue'),
-    meta: {
-      title: '社群中心_文章',
-      // requiredLogin: true
-    },
+    children: [
+      {
+        path: 'article/:id',
+        name: 'article-detail',
+        component: () => import('@/pages/Social_article.vue'),
+        meta: {
+          // title: '文章詳情',
+          title: null,
+          dynamicTitle: true
+        },
+        props: true
+      }
+    ]
   },
   {
     path: '/About/',
@@ -79,16 +88,9 @@ const routes = [
     component: () => import('@/pages/Social_write.vue'),
     meta: {
       title: '寫文章',
-      // requiredLogin: true
+      requiredLogin: true
     },
   },
-  // {
-  //   path: '/social_news',
-  //   component: () => import('@/pages/Social_news.vue'),
-  //   meta: {
-  //     title: '新聞',
-  //   },
-  // },
   {
     path: '/popup/',
     component: () => import('@/pages/popup.vue'),
@@ -166,7 +168,7 @@ const routes = [
     component: () => import('@/pages/Member.vue'),
     meta: {
       title: '會員中心',
-      // requiredLogin: true
+      requiredLogin: true
     },
   },
   {
@@ -194,7 +196,15 @@ const routes = [
     },
   },
   {
-    path: '/loginPopupChange',
+    path: '/loginPagePC/',
+    component: () => import('@/pages/loginPagePC.vue'),
+    meta: {
+      title: '前後台登入',
+      // requiredLogin: true
+    },
+  },
+  {
+    path: '/loginPopupChange/',
     component: () => import('@/pages/loginPopupChange.vue'),
     meta: {
       title: '登入彈窗切換',
@@ -202,92 +212,20 @@ const routes = [
     },
   },
   {
-    path: '/IcB_article/',
-    component: () => import('@/pages/BackStagePages/IcB_article.vue'),
-    meta: {
-      title: '島嶼文章管理',
-      // requiredLogin: true
-    },
-  },
-  {
-    path: '/IcB_edu/',
-    component: () => import('@/pages/BackStagePages/IcB_edu.vue'),
-    meta: {
-      title: '教育影片管理',
-      // requiredLogin: true
-    },
-  },
-  {
-    path: '/IcB_q&a/',
-    component: () => import('@/pages/BackStagePages/IcB_q&a.vue'),
-    meta: {
-      title: '互動問答管理',
-      // requiredLogin: true
-    },
-  },
-  {
-    path: '/AcB_earthMail/',
-    component: () => import('@/pages/BackStagePages/AcB_earthMail.vue'),
-    meta: {
-      title: '地球信件管理',
-      // requiredLogin: true
-    },
-  },
-  {
-    path: '/CB_forumBoard/',
-    component: () => import('@/pages/BackStagePages/CB_forumBoard.vue'),
-    meta: {
-      title: '討論板管理',
-      // requiredLogin: true
-    },
-  },
-  {
-    path: '/CB_messageBoard/',
-    component: () => import('@/pages/BackStagePages/CB_messageBoard.vue'),
-    meta: {
-      title: '留言板管理',
-      // requiredLogin: true
-    },
-  },
-  {
-    path: '/CtB_cityGame/',
-    component: () => import('@/pages/BackStagePages/CtB_cityGame.vue'),
-    meta: {
-      title: '遊戲互動管理',
-      // requiredLogin: true
-    },
-  },
-  {
-    path: '/AuB_message/',
-    component: () => import('@/pages/BackStagePages/AuB_message.vue'),
-    meta: {
-      title: '訊息管理',
-      // requiredLogin: true
-    },
-  },
-  {
-    path: '/SpB_product/',
-    component: () => import('@/pages/BackStagePages/SpB_product.vue'),
-    meta: {
-      title: '商品庫存管理',
-      // requiredLogin: true
-    },
-  },
-  {
-    path: '/SpB_order/',
-    component: () => import('@/pages/BackStagePages/SpB_order.vue'),
-    meta: {
-      title: '訂單管理',
-      // requiredLogin: true
-    },
-  },
-  {
-    path: '/MmB_member/',
-    component: () => import('@/pages/BackStagePages/MmB_member.vue'),
-    meta: {
-      title: '會員管理',
-      // requiredLogin: true
-    },
+    path: '/BackStagePages',
+    children: [
+      { path: '', component: () => import('@/pages/BackStagePages/IcB_article.vue'), meta:{title:'島嶼文章管理'} },
+      { path: 'IcB_edu', component: () => import('@/pages/BackStagePages/IcB_edu.vue'), meta:{title:'教育影片管理'} },
+      { path: 'IcB_q&a', component: () => import('@/pages/BackStagePages/IcB_q&a.vue'), meta:{title:'互動問答管理'} },
+      { path: 'AcB_earthMail', component: () => import('@/pages/BackStagePages/AcB_earthMail.vue'), meta:{title:'地球信件管理'} },
+      { path: 'CB_forumBoard', component: () => import('@/pages/BackStagePages/CB_forumBoard.vue'), meta:{title:'討論板管理'} },
+      { path: 'CB_messageBoard', component: () => import('@/pages/BackStagePages/CB_messageBoard.vue'), meta:{title:'留言板管理'} },
+      { path: 'CtB_cityGame', component: () => import('@/pages/BackStagePages/CtB_cityGame.vue'), meta:{title:'遊戲互動管理'} },
+      { path: 'AuB_message', component: () => import('@/pages/BackStagePages/AuB_message.vue'), meta:{title:'訊息管理'} },
+      { path: 'SpB_product', component: () => import('@/pages/BackStagePages/SpB_product.vue'), meta:{title:'商品庫存管理'} },
+      { path: 'SpB_order', component: () => import('@/pages/BackStagePages/SpB_order.vue'), meta:{title:'訂單管理'} },
+      { path: 'MmB_member', component: () => import('@/pages/BackStagePages/MmB_member.vue'), meta:{title:'會員管理'} },
+    ],
   },
 
   //----------------------------- 彈窗畫面
@@ -296,6 +234,30 @@ const routes = [
     component: () => import('@/components/layout/BackStageLayout/BackStageSmallPopup.vue'),
     meta: {
       title: '後臺-確認彈窗',
+      // requiredLogin: true
+    },
+  },
+  // {
+  //   path: '/MainHeader/',
+  //   component: () => import('@/components/layout/MainHeader.vue'),
+  //   meta: {
+  //     title: 'Header',
+  //     // requiredLogin: true
+  //   },
+  // },
+  {
+    path: '/ckeditor/',
+    component: () => import('@/components/items/ckeditor.vue'),
+    meta: {
+      title: 'ckeditor',
+      // requiredLogin: true
+    },
+  },
+  {
+    path: '/loading/',
+    component: () => import('@/components/items/loading.vue'),
+    meta: {
+      title: 'loading',
       // requiredLogin: true
     },
   },
@@ -318,25 +280,24 @@ router.beforeEach(async (to, from, next) => {
   //console.log(to);   // 連到目前的網址的物件資料
   //console.log(from); // 從哪個網址連過來的物件資料
 
+  const { checkAuth } = useAuth(); //檢查登入
+  if (to.matched.some(record => record.meta.requiredLogin)) {
 
-  if (to.meta.requiredLogin) {
-    // ======= 以下要取得使用者目前的登入狀態，會是 bool == //
-    // 取得是否已登入，可能是從 localStorage 抓資料或從後端判斷。
-    // let isAuthenticated = true;
-    const res = await fetch('https://notes.webmix.cc/login_test/login.php');
-    const data = await res.json();
-
-    console.log(data);
-
-    const isAuthenticated = data.login_status;
-    // ============================================== //
-
-    if (isAuthenticated) {
-      document.title = to.meta.title;
-      next();
-    } else {
-      // 未登入，就直接導回到首頁或其它頁面。
-      next('/');
+    try {
+      const isAuthenticated = await checkAuth();
+      if (!isAuthenticated) {
+        const askLogin = confirm('此頁面需要先登入再進行操作，請問是否繼續？');
+        if(askLogin){
+          localStorage.setItem('redirectPath', to.fullPath); //存儲原本要去的頁面
+          eventBus.emit('show-login-popup'); //跳出登入彈窗
+        }
+        next(false)
+      } else {
+        next()
+      }
+    } catch (err) {
+      console.error('檢查登入狀態失敗:', err);
+      next(false);
     }
   } else {
     document.title = to.meta.title;
@@ -344,5 +305,12 @@ router.beforeEach(async (to, from, next) => {
   }
 
 });
+
+router.afterEach((to, from) => {
+  //設置社群中心 - 文章詳情 頁面的 title
+  if (to.meta.title && !to.meta.dynamicTitle) {
+    document.title = to.meta.title
+  }
+})
 // 匯出 router
 export default router;

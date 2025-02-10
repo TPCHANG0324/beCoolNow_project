@@ -1,48 +1,69 @@
 <template>
-  <div class="popup-container">
-    <!-- 判斷當前顯示的彈窗 -->
-    <div v-if="currentPopup === 'login'">
-      <MemberLogin @switch="showNewMemberPopup()" />
-    </div>
-    <div v-if="currentPopup === 'register'">
-      <PopupNewMember @switch="showLoginPopup()" />
+  <div class="popup-wrapper_member">
+    <div class="overlay_member" @click="closePopup"></div>
+    <div class="popup-container_member">
+      <div v-if="currentPopup === 'login'">
+        <PopupLogin @switch="showNewMemberPopup" @close="$emit('close')" />
+      </div>
+      <div v-if="currentPopup === 'register'">
+        <PopupNewMember @switch="showLoginPopup" />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import MemberLogin from './popupnewmember.vue';
-import PopupNewMember from './popup.vue';
+import PopupLogin from './popup.vue';              // 登入組件
+import PopupNewMember from './popupnewmember.vue'; // 註冊組件
 
 export default {
   name: 'loginPopupChange',
-  components: { MemberLogin, PopupNewMember },
+  components: { PopupLogin, PopupNewMember },
   data() {
     return {
-      currentPopup: 'register', // 默認顯示登入彈窗
+      currentPopup: 'login', // 默認顯示登入彈窗
     };
   },
   methods: {
-    showNewMemberPopup() {
-      // console.log('SSSS');
-
-      this.currentPopup = 'register';
-    },
-
-    /**
-     * 顯示登入彈窗
-     */
     showLoginPopup() {
-      // console.log('SSSSSS');
-
       this.currentPopup = 'login';
     },
+    showNewMemberPopup() {
+      this.currentPopup = 'register';
+    },
+    closePopup() {
+      this.$emit('close');
+    }
   },
+
 };
 </script>
 
-<style>
-/* .popup-container {
-  display: none;
-} */
+<style lang="scss">
+.popup-wrapper_member {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.overlay_member {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); // 半透明黑色背景
+  z-index: 1000;
+}
+
+.popup-container_member {
+  position: relative;
+  z-index: 1001; // 確保彈窗在遮罩層上方
+}
 </style>

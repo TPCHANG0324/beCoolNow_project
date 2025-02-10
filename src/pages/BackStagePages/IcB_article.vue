@@ -42,7 +42,7 @@
     </div>
 
     <!-- 島嶼文章 新增 -->
-    <transition name="fade">
+    <!-- <transition name="fade"> -->
       <BackStageSmallPopup class="IcB_addPopup_H" v-if="isAddPopupVisible" @close="closePopup">
         <span>
           <p>島嶼危機文章&nbsp;新增</p>
@@ -77,7 +77,7 @@
           <button @click="saveArticle">儲存</button>
         </div>
       </BackStageSmallPopup>
-    </transition>
+    <!-- </transition> -->
 
     <!-- 島嶼文章 編輯 -->
     <transition name="fade">
@@ -197,9 +197,11 @@ export default {
     });
 
     const openAddPopup = () => {
-      newArticle.value = { title: '', url: '', content: '', image: '' };
-      isAddPopupVisible.value = true;
-    };
+  console.log('openAddPopup triggered');
+  newArticle.value = { title: '', url: '', content: '', image: '' };
+  isAddPopupVisible.value = true;
+  console.log('isAddPopupVisible:', isAddPopupVisible.value);
+};
 
     const openEditPopup = (id) => {
       currentArticleId.value = id;

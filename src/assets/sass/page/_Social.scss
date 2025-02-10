@@ -486,19 +486,20 @@ main {
     letter-spacing: 1px;
     color: $Green_1;
     background-color: $Ivory_white;
-    padding: 2rem;
+    padding: 1.6rem 2rem;
     margin-top: 20px;
     .Fb-Atricle-title-X {
         font-size: PC_h3($Green_1);
         font-weight: 700;
-        font-size: 1.25rem;
+        font-size: 1.6rem;
         line-height: 1.5;
     }
 
     .Fb-Atricle-info-X {
         display: flex;
         align-items: center;
-
+        margin: 1.6rem 0;
+        
         @include max_540() {
             font-size: 14px;
         }
@@ -526,10 +527,13 @@ main {
         }
 
         i {
+            font-style: normal;
             cursor: pointer;
-
+            span{
+                padding: 0 4px;
+            }
             &:not(:last-child) {
-                margin-right: 20px;
+                margin-right: 16px;
                 margin-left: auto;
 
                 // @include max_540() {
@@ -549,20 +553,30 @@ main {
         line-height: 2;
         text-align: justify;
 
+        // ol{
+        //     list-style: decimal;
+        // }
+    
+        strong, b {
+            font-weight: 700;
+        }
+    
+        i{
+            font-style: italic;
+        }
+    
+        img {
+            width: 100%;
+            display: block;
+            margin: 20px 0;
+        }
+
         @include max_540() {
             line-height: 1.5;
         }
     }
 
-    strong {
-        font-weight: 500;
-    }
 
-    img {
-        width: 100%;
-        display: block;
-        margin: 20px 0;
-    }
 
     //    .Fb-Atricle-quote-X{
     //     width: 100%;

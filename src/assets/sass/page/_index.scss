@@ -47,6 +47,7 @@
 
         article h1 {
             font-size: 5rem;
+            pointer-events: none;
         }
 
 
@@ -54,7 +55,7 @@
         article:first-of-type {
             margin-bottom: 0;
             // border: 1px solid yellow;
-            margin: 240px 0 0 160px;
+            margin: 180px 0 80px 160px;
             width: 30%;
 
             @include max_912 {
@@ -75,6 +76,7 @@
                 text-align: center;
                 font-weight: $font_weight_Bold;
                 text-shadow: $text_shadow;
+                pointer-events: none;
 
                 @include max_1024 {
                     font-size: $h3;
@@ -185,92 +187,160 @@
 //------------------------------ 首頁_災害Banner區塊 -------------------------------//
 
 .Fp_disasterIce_H {
-    background: linear-gradient(to right, rgba(0, 0, 0, .3), rgba(0, 0, 0, 0)), url('@/assets/images//Fp07.png');
-    // background-image: url('@/assets/images/Fp07.png');
+    // background: linear-gradient(to right, rgba(0, 0, 0, .3), rgba(0, 0, 0, 0)), url('@/assets/images/Fp07.png');
+    background-image: url('@/assets/images/Fp07.png');
     height: 100vh;
     background-position: center center;
     background-size: cover;
     width: 100%;
     background-repeat: no-repeat;
-    padding: 0 3vw;
+    // padding: 0 3vw;
     margin-bottom: 0;
-    margin-top: 5%;
-    padding-top: 240px;
+    // margin-top: 5%;
+    // padding-top: 240px;
+    position: relative;
+    margin-top: 62px;
 
     @include max_912 {
         padding-top: 500px;
+        margin-top: 114px;
     }
 
     @include max_430 {
         padding-top: 360px;
+        margin-top: 60px;
     }
 }
 
 .Fp_disasterFire_H {
-    background: linear-gradient(to left, rgba(0, 0, 0, .3), rgba(0, 0, 0, 0)), url('@/assets/images/Fp13.jpg');
-    // background-image: url('@/assets/images/Fp07.png');
+    // background: linear-gradient(to left, rgba(0, 0, 0, .3), rgba(0, 0, 0, 0)), url('@/assets/images/Fp13.jpg');
+    background-image: url('@/assets/images/Fp13.jpg');
     height: 100vh;
     background-position: center center;
     background-size: cover;
     width: 100%;
     background-repeat: no-repeat;
 
-    padding: 0 3vw;
+    // padding: 0 3vw;
     margin-bottom: 0;
-    padding-top: 240px;
+    // padding-top: 240px;
+    position: relative;
+
 
     @include max_912 {
-        padding-top: 500px;
+        // padding-top: 500px;
     }
 
     @include max_430 {
-        padding-top: 360px;
+        // padding-top: 360px;
     }
 }
 
 .Fp_disasterTyphoon_H {
-    background: linear-gradient(to right, rgba(0, 0, 0, .3), rgba(0, 0, 0, 0)), url('@/assets/images/Fp15.jpg');
-    // background-image: url('@/assets/images/Fp07.png');
+    // background: linear-gradient(to right, rgba(0, 0, 0, .3), rgba(0, 0, 0, 0)), url('@/assets/images/Fp15.jpg');
+    background-image: url('@/assets/images/Fp15.jpg');
     height: 100vh;
     background-position: center center;
     background-size: cover;
     width: 100%;
     background-repeat: no-repeat;
 
-    padding: 0 3vw;
+    // padding: 0 3vw;
     margin-bottom: 0;
-    padding-top: 240px;
+    // padding-top: 240px;
+    position: relative;
+
 
     @include max_912 {
-        padding-top: 500px;
+        // padding-top: 500px;
     }
 
     @include max_430 {
-        padding-top: 360px;
+        // padding-top: 360px;
     }
 }
 
 .Fp_disasterRain_H {
-    background: linear-gradient(to left, rgba(0, 0, 0, .3), rgba(0, 0, 0, 0)), url('@/assets/images/Fp18.jpg');
-    // background-image: url('@/assets/images/Fp07.png');
+    // background: linear-gradient(to left, rgba(0, 0, 0, .3), rgba(0, 0, 0, 0)), url('@/assets/images/Fp18.jpg');
+    background-image: url('@/assets/images/Fp18.jpg');
     height: 100vh;
     background-position: center center;
     background-size: cover;
     width: 100%;
     background-repeat: no-repeat;
 
-    padding: 0 3vw;
+    // padding: 0 3vw;
     margin-bottom: 0;
-    padding-top: 240px;
+    // padding-top: 240px;
+    position: relative;
+
 
     @include max_912 {
-        padding-top: 500px;
+        // padding-top: 500px;
     }
 
     @include max_430 {
-        padding-top: 360px;
+        // padding-top: 360px;
     }
 }
+
+
+// 動畫
+.Fp_disasterIce_H::before,
+.Fp_disasterFire_H::before,
+.Fp_disasterTyphoon_H::before,
+.Fp_disasterRain_H::before
+ {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--mask-gradient, linear-gradient(to left, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0))); /* 默認值 */
+  z-index: 1;
+  pointer-events: none; /* 避免遮罩影響點擊事件 */
+  transition: background 1s ease; /* 平滑過渡效果 */
+  background-position: var(--background-position, center); /* 使用變數控制背景位置 */
+}
+
+.Fp_disasterIce_H::before {
+    --background-image: url("@/assets/images/Fp07.png");
+  }
+
+/* 確保文字內容位於遮罩之上 */
+article .Fp_textContent_H,
+article .Fp_textContentRight_H {
+  // position: relative;
+  position: relative;
+  z-index: 100;
+
+  &.leftBlock{
+    position: absolute;
+    top: 40%;
+    left: 5%;
+
+    @include max_912{
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  &.rightBlock{
+    position: absolute;
+    top: 40%;
+    right: 5%;
+    left:auto;
+
+    @include max_912{
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+}
+
 
 //---------------------------------------------------------------------------------//
 //----------------------------- 首頁_主要文字內容版型 -------------------------------//
@@ -278,7 +348,7 @@
 .Fp_textContent_H {
     // border: 2px solid red;
     width: 38%;
-    margin: 0 auto auto 8%;
+    // margin: 0 auto auto 8%;
 
     @include max_912 {
         margin: 0 auto;
@@ -351,7 +421,7 @@
 }
 
 .Fp_textContentRight_H {
-    margin: 0 8% auto auto;
+    // margin: 0 8% auto auto;
     width: 38%;
 
     @include max_912 {
@@ -424,91 +494,187 @@
     }
 }
 
+
+
+
 //---------------------------------------------------------------------------------//
 //------------------------------ 首頁_什麼是全球暖化 --------------------------------//
 
+body {
+    background-color: $bgc_color; /* 預設為白色 */
+    transition: background-color .5s ease; /* 添加過渡效果 */
+  }
+.Fp_globalWarming_H.active {
+    // background-color: #000; /* 黑色背景 */
+    transition: background-color .5s ease; /* 添加過渡效果 */
+  }
 .Fp_globalWarming_H {
     margin: 0 auto;
-    max-width: 1200px;
+    max-width: 1440px;
+    // padding: 0 3vw;
     display: flex;
     z-index: 2;
+    // height: 100vh;
+    // border: 2px solid red;
+    background-color: $bgc_color;
+    transition: background-color 0.5s ease;
 
     @include max_912 {
-        position: relative;
+        height: 80vh;
+    }
+
+    @include max_820{
+      height: 80vh;
+    }
+    @include max_430{
+      height: 150vh;
     }
 
     figure {
-        height: 100vh;
+        height: 218vh;
         width: 50%;
-        @include center_flex;
+        position: absolute;
+        pointer-events: none;
+        // border: 5px solid red;
 
-        @include max_912 {
-            margin: 0 auto;
+        @include max_1024{
+          height: 170vh;
+        }
+        @media screen and (max-width:920px) {
+          height: 190vh;
         }
 
-        img {
-            width: 67%;
-            // 待測試
-            position: sticky;
-            top: 120px;
-            margin-bottom: 120px;
-            //
+        @include max_912 {
+            height: 80vh;
+            margin-top: 40px;
+            position: absolute;
+            z-index: 1;
+            width: 100%;
+            // max-width: 820px;
+        }
+        @include max_820{
+          height: 80vh;
+        }
+        @include max_430{
+          height: 150vh;
+        }
 
+         .earth_animation {
+            // width: 480px; /* 與地球動畫大小一致 */
+            width: 100%;
+            max-width: 480px;
+            height: auto;
+            // height: 480px;
+            aspect-ratio: 1 / 1; /* ✅ **保持圖片比例** */
+            background: url('@/assets/images/Fp08_2.png') no-repeat;
+            background-size: calc(24 * 480px) auto; /* ✅ 確保雪碧圖完整 */
+            animation: none;
+            transform: rotate(23.5deg); /* 旋轉角度 */
+            object-fit: contain;
+            display: block;
+            margin: 0 auto;
+            // 待測試
+            will-change: transform;
+            position: -webkit-sticky;
+            position: sticky;
+            top: 20vh;
+            margin-top: 80px;
+            margin-bottom: 80px;
+
+            //
+            @include max_1024{
+              max-width: 350px;
+            }
             @include max_912 {
-                top: 200px;
-                margin-bottom: 40%;
-                width: 80%;
+                top: 100px;
+                bottom: 20px;
                 opacity: .4;
+            }
+            @include max_820{
+              max-width: 330px; /* ✅ 平板 */
+              // height: 350px;
+              background-size: calc(24 * 350px) auto; /* ✅ RWD 設定 */
+              // top: 10vh;
+            }
+
+            @include max_430{
+              max-width: 250px; /* ✅ 手機 */
+              // height: 250px;
+              background-size: calc(24 * 250px) auto; /* ✅ 手機自適應 */
+              // top: 10vh;
             }
 
         }
     }
+    // @keyframes earth-spin {
+    //     from {
+    //       background-position: 0 0; /* 開始位置 */
+    //     }
+    //     to {
+    //       background-position: -11520px 0; /* 最後一幀位置 */
+    //     }
+    //   }
 
     article {
         width: 50%;
         // background-attachment: scroll;
-        margin-top: 24px;
+        margin: 0 0 0 auto;
+        margin-top: 160px;
+        z-index: 2;
+        // border: 5px solid skyblue;
 
-        height: 560px;
+        // overflow-y: hidden; // 初始禁止滾動
         /* 固定高度，讓內容溢出後滾動 */
-        overflow-y: scroll;
-        /* 垂直滾動 */
+        // overflow-y: scroll;
+        // /* 垂直滾動 */
 
-        &::-webkit-scrollbar {
-            display: none;
-        }
+        // &::-webkit-scrollbar {
+        //     display: none;
+        // }
 
         .Fp_textContent_H:last-of-type {
-            margin-bottom: 220px;
+            margin-bottom: 240px;
+
+            @include max_912{
+                margin-bottom: 0px;
+            }
         }
 
         .Fp_textContent_H {
             margin: 0;
+            // width: 100%;
             width: 100%;
-            margin-top: 115px;
+            margin-top: 40px;
             padding: 0 20px;
+            // border: 2px solid yellow;
 
+            color: $Gray_1; /* 預設文字顏色為黑色 */
+            transition: color 0.5s ease; /* 添加過渡效果 */
+
+            h2, span{
+                color: inherit;
+            }
         }
 
         @include max_912 {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            margin: 40px auto;
+            position: relative;
+            width: 60vw;
         }
 
         @include max_820 {
-            width: 60%;
+            width: 80%;
         }
 
         @include max_600 {
-            width: 70%;
+            width: 90%;
         }
 
         @include max_540 {
-            width: 90%;
+            width: 100%;
         }
     }
+
 }
 
 //---------------------------------------------------------------------------------//
@@ -521,7 +687,7 @@
     height: 100vh;
     background-size: cover;
     background-position: center center;
-    padding-top: 120px;
+    padding-top: 170px;
 
     @include max_912 {
         background: linear-gradient(to bottom, rgba(0, 0, 0, .3), rgba(0, 0, 0, 0)), url('@/assets/images/Fp02.1.jpg');
@@ -542,19 +708,21 @@
             margin-top: 160px;
         }
 
-        @include max_430 {
-            margin-top: 100px;
+        @include max_820 {
+          margin-top: 0px;
         }
 
+
         article {
-            margin: 120px 40px 0 18px;
+            margin: 60px 40px 0 18px;
 
             h2 {
-                color: $Ivory_white;
+                color: inherit;
             }
 
             p {
                 line-height: $line_height_140;
+                color: inherit;
             }
 
             @include max_912 {
@@ -565,11 +733,12 @@
 
         #carbonData,
         #iceData {
-            // border: 4px solid $Yellow_1;
+            // border: 2px solid $Yellow_1;
             width: 57%;
             // margin-right: 18px;
-            opacity: .8;
+            opacity: 1;
             border-radius: 10px;
+            backdrop-filter: blur(1px); /* ✅ 模糊遮罩 */
 
             @include max_912 {
                 display: block;
@@ -595,7 +764,7 @@
 }
 
 //---------------------------------------------------------------------------------//
-//---------------------------- 首頁_暖化證據_全球氣溫與海平面 -------------------------------//
+//---------------------------- 首頁_暖化證據_全球溫度與海平面 -------------------------------//
 
 .Fp_tempData_H,
 .Fp_seaLevelData_H {
@@ -604,7 +773,7 @@
     height: 100vh;
     background-size: cover;
     background-position: center center;
-    padding-top: 120px;
+    padding-top: 170px;
 
     @include max_912 {
         background: linear-gradient(to bottom, rgba(0, 0, 0, .3), rgba(0, 0, 0, 0)), url('@/assets/images/FP03.jpeg');
@@ -627,19 +796,20 @@
             margin-top: 160px;
         }
 
-        @include max_430 {
-            margin-top: 100px;
+        @include max_820 {
+          margin-top: 0px;
         }
 
         article {
-            margin: 120px 18px 0 40px;
+            margin: 60px 18px 0 40px;
 
             h2 {
-                color: $Ivory_white;
+                color: inherit;
             }
 
             p {
                 line-height: $line_height_140;
+                color: inherit;
             }
 
             @include max_912 {
@@ -652,8 +822,9 @@
         #seaLevelData {
             // border: 4px solid $Yellow_1;
             width: 57%;
-            opacity: .8;
+            opacity: 1;
             border-radius: 10px;
+            backdrop-filter: blur(1px); /* ✅ 模糊遮罩 */
 
             // margin-left: 18px;
             @include max_912 {
@@ -674,11 +845,24 @@
     @include max_912 {
         background: linear-gradient(to bottom, rgba(0, 0, 0, .3), rgba(0, 0, 0, 0)), url('@/assets/images/FP04.jpg');
         height: 100vh;
-        background-size: cover;
+        background-size: contain;
         background-position: center center;
     }
 }
 
+.Fp_carbonData_H,
+.Fp_tempData_H,
+.Fp_iceData_H,
+.Fp_seaLevelData_H {
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    @include max_912{
+        will-change: transform; /* ✅ 告訴瀏覽器這個元素將變化，提高效能 */
+        transform: translateZ(0); /* ✅ 嘗試啟用硬體加速 */
+        backface-visibility: hidden; /* ✅ 避免圖像閃爍 */
+    }
+}
 //---------------------------------------------------------------------------------//
 //-------------------------------- 首頁_頁尾- --------------------------------------//
 

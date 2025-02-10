@@ -4,7 +4,9 @@
   <treeanimation v-if="treePopup !== null"></treeanimation>
   <div class="wrapper">
     <div class="hero-section">
-      <img src="../assets/images/activity2.png" alt="banner" />
+      <video autoplay muted loop playsinline class="banner-video">
+        <source src="../assets/videos/leafgrowing.mp4" type="video/mp4">
+      </video>
       <div class="hero-text">
         <h1>「綠色行動，從今天開始」</h1>
         <h2>改變，讓奇蹟發生</h2>
@@ -12,8 +14,7 @@
     </div>
     <h3 class="Ac_h3">21 日減碳環保活動</h3>
     <!-- 卡片容器 -->
-     {{ cardLimit
- }}
+
     <div class="daily_card" data-expanded="false">
       <!-- 卡片範例 1 -->
       <div
@@ -101,7 +102,7 @@
         <!-- 信件內容輸入框 -->
         <div class="form-group">
           <label for="message" class="message">信件內容：</label>
-          <textarea id="message" v-model="formData.message" placeholder="寫下你的信給地球吧！"></textarea>
+          <textarea id="message" v-model="formData.message" placeholder="寫下給地球的一封信吧！"></textarea>
         </div>
 
         <!-- 驗證碼區塊 -->
@@ -113,7 +114,7 @@
         </div>
 
         <!-- 送出按鈕 -->
-        <button type="submit" class="submit-btn">寫給地球的一封信</button>
+        <button type="submit" class="submit-btn">寫下給地球的一封信</button>
       </form>
     </div>
   </div>
@@ -342,10 +343,10 @@ const done = (key) => {
   // isClicked.value = true
   // 遞增 action 計數
   cardData.value[key].action += 1;
-  
+
   // 儲存到 localStorage
   localStorage.setItem('cardData', JSON.stringify(cardData.value));
-  
+
   // 設定彈出視窗
   treePopup.value = key;
 
@@ -400,6 +401,9 @@ const handleSubmit = async (e) => {
   letters.value.unshift(newLetter);
   totalLetters.value++;
   formData.value = { name: '', message: '', captcha: '' };
+
+  alert('✅信件已成功提交！'); // 加入這行
+
   generateCaptcha();
 
   await nextTick();
