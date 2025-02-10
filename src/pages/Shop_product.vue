@@ -8,17 +8,115 @@
     <!-- 麵包屑導航 -->
     <BreadcrumbNavigation :price-range="currentPriceRange" />
 
-    <!-- 選擇規格及數量 -->
-    <section class="Sp_productChoice_top_H">
-      <figure>
-        <ul>
-          <li><img src="../assets/images/Sp15.jpg" alt="" /></li>
-          <li><img src="../assets/images/Sp16.jpg" alt="" /></li>
-          <li><img src="../assets/images/Sp17.jpg" alt="" /></li>
-          <li><img src="../assets/images/Sp18.jpg" alt="" /></li>
-        </ul>
-        <div><img src="../assets/images/Sp15.jpg" alt="" /></div>
-      </figure>
+      <!-- 選擇規格及數量 -->
+      <section class="Sp_productChoice_top_H">
+          <!-- <figure>
+            <ul>
+              <li><img src="../assets/images/Sp15.jpg" alt="" /></li>
+              <li><img src="../assets/images/Sp16.jpg" alt="" /></li>
+              <li><img src="../assets/images/Sp17.jpg" alt="" /></li>
+              <li><img src="../assets/images/Sp18.jpg" alt="" /></li>
+            </ul> -->
+            <!-- <div><img src="../assets/images/Sp15.jpg" alt="" /></div> -->
+            <!-- <slider></slider> -->
+          <!-- </figure>  -->
+        <figure>
+          <!-- 桌機版 (當螢幕 > 430px) -->
+        <div v-if="!isMobile">
+          <div class="desktop-view">
+            <!-- 大圖 -->
+            <div class="main-image">
+              <img :src="selectedImage" alt="Main Image" />
+            </div>
+            <!-- 小圖swiper滑動 -->
+            <swiper
+                ref="thumbnailSwiper"
+                v-if="isMounted"
+                class="thumbnail-swiper"
+                :modules="modules"
+                :slides-per-view="4"  
+                :space-between="20"
+                direction="vertical"  
+                :mousewheel="true" 
+                :css-mode="false"
+                :free-mode="true"
+                v-bind="swiperParams"
+                @mouseenter="startAutoScroll"
+                @mouseleave="stopAutoScroll"
+              
+              >
+                  <swiper-slide
+                    v-for="(image, index) in images"
+                    :key="index"
+                    @click="selectImage(image, index)"
+                  >
+                    <img :src="image" alt="Thumbnail" />
+                  </swiper-slide>
+                </swiper>
+          </div>
+        </div>
+
+          <!-- 手機版 (當螢幕 ≤ 430px) -->
+        <template>
+          <div>
+            <swiper
+              ref="mainImageSwiper"
+              v-if="isMobile"
+              :key="swiperKey"
+              class="main-image-swiper"
+              :modules="modules"
+              :slides-per-view="1"
+              :space-between="10"
+              :loop="true"
+              :breakpoints="{
+                  430: {
+                    slidesPerView: 'auto',  // 可以調整為顯示單張圖片，也可以自定設定展示數量
+                    spaceBetween: 10,       // 間距設置
+                    loop: true              // 或設置為循環顯示
+                  },
+                }"
+              :autoplay= "swiperParams.autoplay"
+              :enabled="swiperParams.enabled"
+              :pagination="{ clickable: true }"
+              :navigation="true"
+              @swiper="setMainImageSwiper"
+            >
+              <swiper-slide v-for="(image, index) in images" :key="index">
+                <img :src="image" alt="Main Image" class="main-image"/>
+              </swiper-slide>
+            </swiper>
+                <!-- Desktop View -->
+          <div v-else>
+              <div class="main-image-container">
+                <img :src="selectedImage" alt="Main Image" class="main-image" />
+              </div>
+              <swiper
+                :key="swiperKey"
+                :modules="modules"
+                :slides-per-view="4"
+                :space-between="10"
+                :breakpoints="{
+                  430: {
+                    slidesPerView: 'auto',  // 可以調整為顯示單張圖片，也可以自定設定展示數量
+                    spaceBetween: 10,       // 間距設置
+                    loop: true              // 或設置為循環顯示
+                  },
+                }"
+                :autoplay="{ delay: 3000, disableOnInteraction: false }"
+                @swiper="setThumbnailSwiper"
+                @mouseenter="stopAutoScroll"
+                @mouseleave="startAutoScroll"
+              >
+                <swiper-slide v-for="(image, index) in images" :key="index" @click="selectImage(image)">
+                  <img :src="image" alt="Thumbnail" class="thumbnail-image" />
+                </swiper-slide>
+              </swiper>
+            </div>
+
+          </div>
+        </template>
+        </figure>
+
 
       <aside class="Sp_productChoice_info_H">
         <section>
@@ -61,16 +159,44 @@
             </div>
           </div>
 
-          <div class="Sp_productChoice_buyNow_H">
-            <button type="button" @click="addToCart">加入購物車</button>
-            <button type="button">立即購買</button>
-          </div>
-        </section>
-      </aside>
+              <div class="Sp_productChoice_buyNow_H">
+                <button type="button" @click="addToCart">加入購物車</button>
+                <router-link to="/shop_cart" custom v-slot="{ navigate }">
+                  <button type="button" @click="navigate">
+                    立即購買
+                  </button>
+                </router-link>
+              </div>
+             
+              <!-- 遮罩層 -->
+            
+              <div v-if="isCartPopupVisible" class="overlay" 
+              @click="isCartPopupVisible = false"></div>
+            
+              <!-- 🛒 購物車彈窗 -->
+              <div v-if="isCartPopupVisible" class="cart-popup">
+                <div class="cart-popup-content">
+                  <h2>商品已加入購物車！</h2>
+                  <button class="close-btn" @click="closeCartPopup">X</button>
+                  <div class="cart-item">
+                    <img :src="selectedImage" alt="商品圖片" class="cart-image"/>
+                    <div class="cart-info">
+                      <p>商品：再生材質環保杯</p>
+                      <p>規格：{{ selectedSize || "未選擇" }}</p>
+                      <p>數量：{{ quantity }}</p>
+                      <p>總價：NT$ {{ quantity * 299 }}</p>
+                    </div>
+                  </div>
+                  <div class="cart-popup-actions">
+                    <button class="checkout-btn" @click="goToCheckout">立即結帳</button>
+                    <button class="continue-btn" @click="isCartPopupVisible = false">繼續購物</button>
+                  </div>
+                </div>
+              </div>
+           </section>
+          </aside>
+      </section>
     </section>
-  </section>
-
-
 
     <!-- 環保市集_商品頁面_商品詳情 -->
     <section class="Sp_productChoice_details_H">
@@ -203,118 +329,166 @@
 </template>
 
 <script>
-import { ref, computed } from 'vue';
-import { useRouter } from 'vue-router';
 import MainHeader from '@/components/layout/MainHeader.vue';
 import MainFooter from '@/components/layout/MainFooter.vue';
-import BreadcrumbNavigation from '@/components/BreadcrumbNavigation.vue';
-import { PRICE_RANGES } from '@/store/priceRanges.js';
+import { ref, onMounted, onUnmounted, nextTick} from 'vue';
+import { Navigation, Pagination, Scrollbar, A11y, Mousewheel, Autoplay } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/vue';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
 
 export default {
   name: 'ProductChoice',
   components: {
     MainHeader,
     MainFooter,
-    BreadcrumbNavigation
   },
 
   setup() {
-    const router = useRouter();
-    const showCartPopup = ref(false);
-    const quantity = ref(1);
-    const selectedSize = ref('');
+    // 判斷是否為手機 (小於等於 430px)
+    const isMobile = ref(window.innerWidth <= 430);
+    const isMounted = ref(false);
+    const swiperKey = ref(0);
+    const thumbnailSwiper = ref(null);
+    const mainImageSwiper = ref(null);
+    const images = [
+        new URL("../../public/images/Sp15.jpg", import.meta.url).href,
+        new URL("../../public/images/Sp16.jpg", import.meta.url).href,
+        new URL("../../public/images/Sp17.jpg", import.meta.url).href,
+        new URL("../../public/images/Sp18.jpg", import.meta.url).href,
+        new URL("../../public/images/Sp19.jpg", import.meta.url).href,
+      // require("../assets/images/Sp15.jpg"),
+      // require("../assets/images/Sp16.jpg"),
+      // require("../assets/images/Sp17.jpg"),
+      // require("../assets/images/Sp18.jpg"),
+    ];
+    const selectedImage = ref(images[0]); // 預設顯示第一張圖片
     const sizes = ref(['200ml', '350ml', '500ml', '750ml']);
-    const productPrice = ref(299);
+    const selectedSize = ref('');
+    const quantity = ref(1);
 
-    // 計算當前價格區間
-    const currentPriceRange = computed(() => {
-      const range = PRICE_RANGES.find(
-        range => productPrice.value > range.min && productPrice.value <= range.max
-      );
-      return range ? range.value : 'NT$300以上';
+    const selectImage = (image) => {
+      selectedImage.value = image;
+    }; 
+
+    const swiperParams = ref({
+      autoplay: false,
+      enabled: false
     });
+    // 控制 Swiper 自動滾動
+     const startAutoScroll = () => {
+            swiperParams.value = {
+            autoplay: {
+            delay: 1000,
+            disableOnInteraction: false
+            },
+            enabled: true
+          };
+        };
 
-    // 數量相關方法
-    const incrementQuantity = () => {
-      if (quantity.value < 99) {
-        quantity.value++;
-      }
-    };
-
-    const decrementQuantity = () => {
-      if (quantity.value > 1) {
-        quantity.value--;
-      }
-    };
-
-    const handleQuantityInput = (event) => {
-      let value = parseInt(event.target.value);
-      if (isNaN(value) || value < 1) {
-        quantity.value = 1;
-      } else if (value > 99) {
-        quantity.value = 99;
-      } else {
-        quantity.value = value;
-      }
-    };
-
-    // 購物車相關方法
-    const updateCartCount = (count) => {
-      const currentCount = parseInt(localStorage.getItem('cartCount')) || 0;
-      const newCount = currentCount + count;
-      localStorage.setItem('cartCount', newCount.toString());
-      window.dispatchEvent(new Event('updateCartCount'));
-    };
-
-    const addToCart = () => {
-      if (!selectedSize.value) {
-        alert('請選擇商品規格');
-        return;
-      }
-
-      // 建立購物車項目
-      const cartItem = {
-        id: Date.now(), // 臨時ID
-        name: '再生材質環保杯',
-        price: productPrice.value,
-        size: selectedSize.value,
-        quantity: quantity.value,
-        image: '/assets/images/Sp15.jpg'
+    const stopAutoScroll = () => {
+      swiperParams.value = {
+      autoplay: false,
+      enabled: false
       };
+    };
 
-      // 獲取現有購物車項目
-      const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-      cartItems.push(cartItem);
-      localStorage.setItem('cartItems', JSON.stringify(cartItems));
+    const increment = () => {
+      quantity.value++;
+    };
 
-      // 更新購物車數量
-      updateCartCount(quantity.value);
+    const decrement = () => {
+      if (quantity.value > 0) quantity.value--;
+    };
 
-      // 顯示成功彈窗
-      showCartPopup.value = true;
+      // 監聽視窗大小變化
+
+    const updateScreenSize = () => {
+        isMobile.value = window.innerWidth <= 430;
+        swiperKey.value = isMobile.value ? 1 : 0; // 強制切換 Swiper
+      };
+      swiperParams.value = {
+        autoplay: isMobile.value ? { delay: 1000, disableOnInteraction: false } : false,
+        enabled: isMobile.value
+      };
+      const setMainImageSwiper = (swiper) => {
+      mainImageSwiper.value = swiper;
+    };
+    const isCartPopupVisible = ref(false);
+    const openCartPopup = () => {
+      isCartPopupVisible.value = true;
     };
 
     const closeCartPopup = () => {
-      showCartPopup.value = false;
+      isCartPopupVisible.value = false;
     };
 
-    const goToCart = () => {
-      router.push('/shop_cart');
+    const cart = ref([]);
+    const addToCart = () => { 
+      if (!selectedImage.value || !selectedSize.value) {
+        alert("請選擇商品規格再加入購物車！");
+        return;
+    }
+    const product = {
+    image: selectedImage.value, // 圖片
+    size: selectedSize.value,   // 商品規格
+    quantity: quantity.value,   // 數量
+    price: 299,                 // 假設商品單價
     };
+      cart.value.push(product); // 加入購物車
+      isCartPopupVisible.value = true; // 顯示彈窗
+    };
+    const goToCheckout = () => {
+    console.log("跳轉到結帳頁面..."); //  這裡可以改為 `router.push('/checkout')`
+    };
+    
+      onMounted(async () => {
+        isMounted.value = true;
+        isMobile.value = window.innerWidth <= 430;
+        await nextTick(); // 確保 DOM 更新後取得 Swiper
 
-    return {
-      showCartPopup,
-      quantity,
-      selectedSize,
-      sizes,
-      productPrice,
-      currentPriceRange,
-      incrementQuantity,
-      decrementQuantity,
-      handleQuantityInput,
+      if (thumbnailSwiper.value?.swiper) {
+        thumbnailSwiper.value.swiper.autoplay.stop(); // 確保初始狀態是停止的
+      }
+      updateScreenSize();
+      window.addEventListener("resize", updateScreenSize);
+
+        // 手動更新 Swiper
+        if (mainImageSwiper.value?.swiper) {
+          mainImageSwiper.value.swiper.update();
+        }
+    });
+
+      onUnmounted(() => {
+        window.removeEventListener("resize", updateScreenSize);
+      });
+
+      return {
+      isMobile,
+      isMounted,
+      swiperKey,
+      images,
+      selectedImage,
+      selectImage,
       addToCart,
+      startAutoScroll,
+      stopAutoScroll,
+      thumbnailSwiper,
+      sizes,
+      selectedSize,
+      quantity,
+      increment,
+      decrement,
+      cart,
+      isCartPopupVisible,
+      mainImageSwiper,
+      setMainImageSwiper,
+      openCartPopup,
       closeCartPopup,
-      goToCart
+      goToCheckout,
+      modules: [Navigation, Pagination, Scrollbar, A11y, Mousewheel, Autoplay],
     };
   }
 };

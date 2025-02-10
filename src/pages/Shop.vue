@@ -87,8 +87,8 @@ const handleProductClick = (productId) => {
   }
 }
 
-// 處理加入購物車的方法
-const handleAddToCart = (productId) => {
+  // 處理加入購物車的方法
+  const handleAddToCart = (productId) => {
   // 檢查用戶是否登入
   const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
   const userEmail = localStorage.getItem('userEmail');
@@ -140,7 +140,7 @@ const handleAddToCart = (productId) => {
 // import shopVideo from '@/assets/videos/shop.mp4'
 
 // 導入所有圖片
-import Sp02 from '@/assets/images/Sp02.jpg'
+import Sp15 from '@/assets/images/Sp15.jpg'
 import Sp03 from '@/assets/images/Sp03.jpg'
 import Sp04 from '@/assets/images/Sp04.jpg'
 import Sp05 from '@/assets/images/Sp05.jpg'
@@ -155,9 +155,9 @@ import Sp13 from '@/assets/images/Sp13.jpg'
 
 // 商品資料
 const products = ref([
-  { id: 1, name: '環保吸管1', price: 150, image: Sp02, createdAt: '2024-02-01' },
-  { id: 2, name: '環保吸管2', price: 160, image: Sp03, createdAt: '2024-01-15' },
-  { id: 3, name: '環保吸管3', price: 200, image: Sp04, createdAt: '2024-02-10' },
+  { id: 1, name: '再生環保杯', price: 299, image: Sp15, createdAt: '2024-02-01' },
+  { id: 2, name: '環保吸管1', price: 160, image: Sp03, createdAt: '2024-01-15' },
+  { id: 3, name: '環保吸管2', price: 200, image: Sp04, createdAt: '2024-02-10' },
   { id: 4, name: '環保袋子1', price: 250, image: Sp05, createdAt: '2024-01-20' },
   { id: 5, name: '環保袋子2', price: 500, image: Sp06, createdAt: '2024-02-05' },
   { id: 6, name: '環保袋子3', price: 395, image: Sp07, createdAt: '2024-01-25' },
@@ -258,8 +258,6 @@ const filteredAndSortedProducts = computed(() => {
 const sortProducts = () => {
   // 排序邏輯已在 filteredAndSortedProducts 中實現
 }
-
-
 </script>
 <style lang="scss" scoped>
 .Sp-X {
