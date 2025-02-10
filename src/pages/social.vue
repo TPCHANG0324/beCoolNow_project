@@ -45,8 +45,8 @@
                   <h6 class="Fb-post-article-left-title-X">{{ data.title }}</h6>
                   <p v-html="data.content"></p>
                   <div class="Fb-post-react-X">
-                    <i class="bi bi-hand-thumbs-up">{{ data.handup }}</i>
-                    <i class="bi bi-chat">{{ data.chat }}</i>
+                    <i class="bi bi-hand-thumbs-up" style="font-style: normal;"><span style="padding: 0 4px;">{{ data.handup }}</span></i>
+                    <i class="bi bi-chat" style="font-style: normal;"><span style="padding: 0 4px;">{{ data.chat }}</span></i>
                     <i class="bi bi-share"></i>
                   </div>
                 </div>
@@ -82,14 +82,7 @@
           </div>
         </div>
       </div>
-
-
-
-
     </div>
-
-
-
     <MainFooter />
   </main>
 </template>
@@ -199,7 +192,8 @@ onMounted(fetchArticles);
 //假設這是資料庫中所有文章的資料
 // const articles = ref([
 //   {
-//     category: '氣候科學',
+//     category: '氣
+// 科學',
 //     time: '2024-12-25',
 //     title: '日本異常高溫 預估2024年均溫將續創統計史新高',
 //     content:

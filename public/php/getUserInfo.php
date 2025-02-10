@@ -22,7 +22,8 @@ include('connect.php');
 
 //需要的欄位再自行增加
 $sql = "
-    SELECT 
+    SELECT
+        id,
         account as nickname,
         email,
         phoneNumber,
