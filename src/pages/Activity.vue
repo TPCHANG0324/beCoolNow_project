@@ -102,7 +102,7 @@
         <!-- 信件內容輸入框 -->
         <div class="form-group">
           <label for="message" class="message">信件內容：</label>
-          <textarea id="message" v-model="formData.message" placeholder="寫下給地球的一封信吧！"></textarea>
+          <textarea id="message" v-model="formData.message" placeholder="寫下你的信給地球吧！"></textarea>
         </div>
 
         <!-- 驗證碼區塊 -->
@@ -114,7 +114,7 @@
         </div>
 
         <!-- 送出按鈕 -->
-        <button type="submit" class="submit-btn">寫下給地球的一封信</button>
+        <button type="submit" class="submit-btn">寫給地球的一封信</button>
       </form>
     </div>
   </div>
@@ -140,7 +140,9 @@
 </template>
 
 <script setup>
-import { ref, onMounted, watch, nextTick } from 'vue';
+import { ref, onMounted, watch } from 'vue';
+// import { ref, onMounted } from 'vue';
+import axios from 'axios';
 import MainHeader from '@/components/layout/MainHeader.vue';
 import MainFooter from '@/components/layout/MainFooter.vue';
 // import defaultAvatar from '@/assets/images/defaultavatar.jpeg';
@@ -154,13 +156,26 @@ import loginPopupChange from '@/pages/loginPopupChange.vue';
 // import Ac02 from '@/assets/images/Ac02.jpg'
 
 // 定義響應式數據
-const letters = ref(JSON.parse(localStorage.getItem('letters')) || []);
-const totalLetters = ref(parseInt(localStorage.getItem('totalLetters')) || 1228);
+const letters = ref([]);
+const totalLetters = ref(0);
 const formData = ref({
   name: '',
   message: '',
   captcha: '',
 });
+
+
+
+// 新增獲取信件列表函數
+// const fetchLetters = async () => {
+//   try {
+//     const response = await axios.get('/api/letters');
+//     letters.value = response.data.letters;
+//     totalLetters.value = response.data.total;
+//   } catch (error) {
+//     console.error('Error fetching letters:', error);
+//   }
+// };
 const cardData = ref(
 JSON.parse(localStorage.getItem('cardData')) || [
   {
@@ -291,10 +306,10 @@ JSON.parse(localStorage.getItem('cardData')) || [
   },
   ]
 );
-const currentCaptcha = ref();
+const currentCaptcha = ref('');
 const letterCardWidth = ref(0);
 const cardLimit = ref(6);
-const isClicked = ref(false);
+// const isClicked = ref(false);
 const treePopup = ref(null);
 const xiaoming = new URL('@/assets/images/Ac08.jpg', import.meta.url).href;
 const earthMan = new URL('@/assets/images/newAC.png', import.meta.url).href;
@@ -343,10 +358,10 @@ const done = (key) => {
   // isClicked.value = true
   // 遞增 action 計數
   cardData.value[key].action += 1;
-
+  
   // 儲存到 localStorage
   localStorage.setItem('cardData', JSON.stringify(cardData.value));
-
+  
   // 設定彈出視窗
   treePopup.value = key;
 
@@ -378,7 +393,7 @@ const generateCaptcha = () => {
   currentCaptcha.value = result;
 };
 
-// 處理表單提交
+// 更新 handleSubmit 函數
 const handleSubmit = async (e) => {
   e.preventDefault();
 
@@ -392,26 +407,82 @@ const handleSubmit = async (e) => {
     return;
   }
 
-  const newLetter = {
-    name: formData.value.name,
-    message: formData.value.message,
-    avatar: defaultAvatar,
-  };
+  try {
+    const letterData = {
+      name: formData.value.name,
+      message: formData.value.message,
+      timestamp: new Date().toISOString(),
+      avatar: defaultAvatar
+    };
 
-  letters.value.unshift(newLetter);
-  totalLetters.value++;
-  formData.value = { name: '', message: '', captcha: '' };
-
-  alert('✅信件已成功提交！'); // 加入這行
-
-  generateCaptcha();
-
-  await nextTick();
-  const newCard = document.querySelector('.letter-card');
-  if (newCard && letterCardWidth.value) {
-    newCard.style.width = `${letterCardWidth.value}px`;
+    const response = await api.post('/api/letters', letterData);
+    
+    if (response.data.success) {
+      await fetchLetters();
+      formData.value = { name: '', message: '', captcha: '' };
+      generateCaptcha();
+      alert('✅信件已成功提交！');
+    } else {
+      throw new Error(response.data.message || '提交失敗');
+    }
+  } catch (error) {
+    console.error('Error submitting letter:', error);
+    alert('提交失敗，請稍後再試！');
   }
 };
+
+// 建立 API 實例
+const api = axios.create({
+  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:3000',
+  withCredentials: true
+});
+
+// 修改獲取信件列表的函數
+// 更新 fetchLetters 函數
+const fetchLetters = async () => {
+  try {
+    const response = await api.get('/api/letters', {
+      params: {
+        page: 1,
+        limit: 10
+      }
+    });
+
+    if (response.data.success) {
+      letters.value = response.data.letters;
+      totalLetters.value = response.data.total;
+    } else {
+      throw new Error(response.data.message || '獲取信件失敗');
+    }
+  } catch (error) {
+    console.error('Error fetching letters:', error);
+    // 如果初始加載失敗，使用預設信件
+    if (!letters.value.length) {
+      letters.value = getDefaultLetters(); // 回傳預設信件
+    }
+  }
+};
+
+//   const newLetter = {
+//     name: formData.value.name,
+//     message: formData.value.message,
+//     avatar: defaultAvatar,
+//   };
+
+//   letters.value.unshift(newLetter);
+//   totalLetters.value++;
+//   formData.value = { name: '', message: '', captcha: '' };
+
+//   alert('✅信件已成功提交！'); // 加入這行
+
+//   generateCaptcha();
+
+//   await nextTick();
+//   const newCard = document.querySelector('.letter-card');
+//   if (newCard && letterCardWidth.value) {
+//     newCard.style.width = `${letterCardWidth.value}px`;
+//   }
+// };
 
 // 組件掛載時初始化
 onMounted(() => {
@@ -446,15 +517,15 @@ onMounted(() => {
   generateCaptcha(); // 生成初始驗證碼
 });
 
+
 const initializeNativeJS = () => {
   const treeButtons = document.querySelectorAll('.btn-Ac_done_btn');
   const popup = document.querySelector('.popup');
 };
 
 
-onMounted(() => {
-  console.log('Initializing component...');
-  // initializeAnimation();
-  initializeNativeJS();
-});
+
+  fetchLetters();
+  generateCaptcha();
+
 </script>
