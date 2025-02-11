@@ -38,8 +38,8 @@
                   <td class="CB_content_H">全球暖化釀嚴重海洋生態災難 科學家憂「大滅絕」再現</td>
                   <td>2025-01-12</td>
                   <td>0</td>
-                  <td><input type="checkbox" /></td>
-                  <th><button class="CB_buttonM_H">查看</button></th>
+                  <td><input type="checkbox" @click="deleteArticle"/></td>
+                  <th><button class="CB_buttonM_H" @click="openPopup">查看</button></th>
                 </tr>
                 <tr>
                   <td>2</td>
@@ -47,8 +47,8 @@
                   <td class="CB_content_H">全球暖化釀嚴重海洋生態災難 科學家憂「大滅絕」再現</td>
                   <td>2025-01-12</td>
                   <td>0</td>
-                  <td><input type="checkbox" /></td>
-                  <th><button class="CB_buttonM_H">查看</button></th>
+                  <td><input type="checkbox" @click="deleteArticle"/></td>
+                  <th><button class="CB_buttonM_H" @click="openPopup">查看</button></th>
                 </tr>
                 <tr>
                   <td>3</td>
@@ -56,8 +56,8 @@
                   <td class="CB_content_H">全球暖化釀嚴重海洋生態災難 科學家憂「大滅絕」再現</td>
                   <td>2025-01-12</td>
                   <td>0</td>
-                  <td><input type="checkbox" /></td>
-                  <th><button class="CB_buttonM_H">查看</button></th>
+                  <td><input type="checkbox" @click="deleteArticle"/></td>
+                  <th><button class="CB_buttonM_H" @click="openPopup">查看</button></th>
                 </tr>
                 <tr>
                   <td>4</td>
@@ -65,8 +65,8 @@
                   <td class="CB_content_H">全球暖化釀嚴重海洋生態災難 科學家憂「大滅絕」再現</td>
                   <td>2025-01-12</td>
                   <td>0</td>
-                  <td><input type="checkbox" /></td>
-                  <th><button class="CB_buttonM_H">查看</button></th>
+                  <td><input type="checkbox" @click="deleteArticle"/></td>
+                  <th><button class="CB_buttonM_H" @click="openPopup">查看</button></th>
                 </tr>
                 <tr>
                   <td>5</td>
@@ -74,8 +74,8 @@
                   <td class="CB_content_H">全球暖化釀嚴重海洋生態災難 科學家憂「大滅絕」再現</td>
                   <td>2025-01-12</td>
                   <td>0</td>
-                  <td><input type="checkbox" /></td>
-                  <th><button class="CB_buttonM_H">查看</button></th>
+                  <td><input type="checkbox" @click="deleteArticle"/></td>
+                  <th><button class="CB_buttonM_H" @click="openPopup">查看</button></th>
                 </tr>
                 <tr>
                   <td>6</td>
@@ -83,8 +83,8 @@
                   <td class="CB_content_H">全球暖化釀嚴重海洋生態災難 科學家憂「大滅絕」再現</td>
                   <td>2025-01-12</td>
                   <td>0</td>
-                  <td><input type="checkbox" /></td>
-                  <th><button class="CB_buttonM_H">查看</button></th>
+                  <td><input type="checkbox" @click="deleteArticle"/></td>
+                  <th><button class="CB_buttonM_H" @click="openPopup">查看</button></th>
                 </tr>
                 <tr>
                   <td>7</td>
@@ -92,8 +92,8 @@
                   <td class="CB_content_H">全球暖化釀嚴重海洋生態災難 科學家憂「大滅絕」再現</td>
                   <td>2025-01-12</td>
                   <td>0</td>
-                  <td><input type="checkbox" /></td>
-                  <th><button class="CB_buttonM_H">查看</button></th>
+                  <td><input type="checkbox" @click="deleteArticle"/></td>
+                  <th><button class="CB_buttonM_H" @click="openPopup">查看</button></th>
                 </tr>
                 <tr>
                   <td>8</td>
@@ -101,8 +101,8 @@
                   <td class="CB_content_H">全球暖化釀嚴重海洋生態災難 科學家憂「大滅絕」再現</td>
                   <td>2025-01-12</td>
                   <td>0</td>
-                  <td><input type="checkbox" /></td>
-                  <th><button class="CB_buttonM_H">查看</button></th>
+                  <td><input type="checkbox" @click="deleteArticle"/></td>
+                  <th><button class="CB_buttonM_H" @click="openPopup">查看</button></th>
                 </tr>
                 <tr>
                   <td>9</td>
@@ -110,8 +110,8 @@
                   <td class="CB_content_H">全球暖化釀嚴重海洋生態災難 科學家憂「大滅絕」再現</td>
                   <td>2025-01-12</td>
                   <td>0</td>
-                  <td><input type="checkbox" /></td>
-                  <th><button class="CB_buttonM_H">查看</button></th>
+                  <td><input type="checkbox" @click="deleteArticle"/></td>
+                  <th><button class="CB_buttonM_H" @click="openPopup">查看</button></th>
                 </tr>
               </tbody>
             </table>
@@ -122,22 +122,62 @@
     </div>
 
     <!-- 留言板 下架 -->
-    <BackStageConfirmPopup class="CB_goOffMessage_H">
-      <span></span>
-      <div>
-        <h3>確定將此留言下架嗎?</h3>
-        <div>
-          <button>取消</button>
-          <button>確定</button>
-        </div>
-      </div>
-    </BackStageConfirmPopup>
-  </div>
+     <transition name="fade">
+       <BackStageConfirmPopup class="CB_goOffMessage_H" v-if="isPopupVisible">
+         <span></span>
+         <div>
+           <h3>確定將此留言下架嗎?</h3>
+           <div>
+             <button @click="closePopup">取消</button>
+             <button @click="updateArticle">確定</button>
+           </div>
+         </div>
+       </BackStageConfirmPopup>
+      </transition>
+    </div>
 </template>
 
 <script>
+import { ref } from 'vue';
 import BackStageSidebar from '@/components/items/BackStageItems/BackStageSidebar.vue';
 import backStagePaginator from '@/components/items/BackStageItems/BackStagePaginator.vue';
 import BackStageHeader from '@/components/layout/BackStageLayout/BackStageHeader.vue';
 import BackStageConfirmPopup from '@/components/layout/BackStageLayout/BackStageConfirmPopup.vue';
+
+export default {
+  components: {
+    BackStageSidebar,
+    backStagePaginator,
+    BackStageHeader,
+    BackStageConfirmPopup,
+  },
+  setup() {
+    const isPopupVisible = ref(false);
+
+    const openPopup = () => {
+      isPopupVisible.value = true;
+    };
+
+    const closePopup = () => {
+      isPopupVisible.value = false;
+    };
+
+    const updateArticle = () => {
+      alert('已下架');
+      isPopupVisible.value = false;
+    };
+
+    const deleteArticle = () => {
+      alert('已刪除');
+    };
+
+    return {
+      isPopupVisible,
+      openPopup,
+      closePopup,
+      updateArticle,
+      deleteArticle,
+    };
+  },
+};
 </script>

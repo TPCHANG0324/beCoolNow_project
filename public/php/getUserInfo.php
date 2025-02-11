@@ -22,7 +22,8 @@ include('connect.php');
 // 查詢會員資料，並將 account 作為 name 與 nickname 返回
 $sql = "
     SELECT 
-        account as name,       -- 將 account 當作 name 返回
+        id,
+        account as name,
         account as nickname,
         email,
         phoneNumber,

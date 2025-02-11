@@ -2,6 +2,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import eventBus from '@/utils/eventBus';
 import { useAuth } from '@/utils/useAuth';
+import Shop_product from '@/pages/Shop_product.vue';
 
 
 // path → component
@@ -148,7 +149,8 @@ const routes = [
     },
   },
   {
-    path: '/shop_product/',
+    path: '/shop/:id',
+    name:'single-shop',
     component: () => import('@/pages/Shop_product.vue'),
     meta: {
       title: '環保市集_商品頁',

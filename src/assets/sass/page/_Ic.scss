@@ -461,7 +461,7 @@
     font-size: 20px;
     line-height: 2.0;
     letter-spacing: normal;
-    font-family: "DM Sans";
+    word-break: break-word;
 
     @include max_820 {
       width: 80%;

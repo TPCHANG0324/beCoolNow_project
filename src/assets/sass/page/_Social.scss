@@ -595,7 +595,12 @@ main {
     color: $Green_1;
     background-color: $Ivory_white;
     padding: 2rem;
+    .Fb-message-section-X{
 
+        &.cur{
+            cursor: pointer;
+        }
+    }
     .Fb-ms-other {
         .Fb-message-section-X {
             // @include max_768() {
@@ -670,6 +675,9 @@ main {
 
         &.self {
             border-bottom: 0;
+            button{
+                cursor: pointer;
+            }
 
             // @include max_768 {
             //     display: none;
@@ -684,7 +692,6 @@ main {
 
         .Fb-message-section-seeMore-X {
             color: $Yellow_1;
-            cursor: pointer;
 
             @include max_540() {
                 font-size: 14px;
