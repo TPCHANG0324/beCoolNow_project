@@ -704,13 +704,16 @@ article {
 
     // 圖片區塊樣式
     .image-content {
-        max-width: 40%;
-        margin-left: 32px;
-
         img {
             width: 100%;
             border-radius: 20px;
-            object-fit: cover;
+            transition: all 0.3s ease;
+            
+            &:hover {
+                filter: brightness(90%);
+                transform: translateY(-5px);
+                box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            }
         }
     }
 }
@@ -1265,19 +1268,18 @@ article {
         text-align: center;
         gap: 20px; // ✅ 增加元素之間的間隔
 
-        // ✅ 將圖片移到最上方
-        .image-content {
-            order: 1; // 將圖片放到最上方
-            width: 100%;
-            max-width: 100%;
-            margin: 0;
+    /* 選項 3：組合效果 */
+.image-content img {
+    width: 100%;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
 
-            img {
-                width: 100%;
-                border-radius: 20px;
-            }
-        }
-
+.image-content img:hover {
+    filter: brightness(90%);
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
         // ✅ 文字內容置中
         .text-content {
             order: 2; // 將文字置於中間
