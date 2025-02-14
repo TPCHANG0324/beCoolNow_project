@@ -36,3 +36,7 @@ dist-ssr
 
 # unplugin
 *.d.ts
+
+#images
+uploads/*
+!uploads/.gitkeep

@@ -40,7 +40,6 @@
     "axios": "^1.6.2",
     "bootstrap-icons": "^1.11.3",
     "chart.js": "^4.4.7",
-    "ckeditor5": "^44.1.0",
     "dayjs": "^1.11.10",
     "gsap": "^3.12.7",
     "jquery": "^3.7.1",
