@@ -409,7 +409,7 @@ export default {
     // Slideshow
     // Swiper Breakpoints
     const modules = [Navigation, Pagination];
-    const slides = ref([]);
+    const slides = ref([1,2,3]);
     const swiperBreakpoints = {
       830: { slidesPerView: 3, spaceBetween: 10 },
       810: { slidesPerView: 2, spaceBetween: 10 },

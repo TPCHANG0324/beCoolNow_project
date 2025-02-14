@@ -1,7 +1,7 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 
-console.log(import.meta.env.VITE_AJAX_URL);
+// console.log(import.meta.env.VITE_AJAX_URL);
 
 export function useAuth() {
     const router = useRouter()
