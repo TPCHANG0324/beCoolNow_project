@@ -74,14 +74,14 @@
       <div v-for="(letter, index) in letters" :key="index" class="letter_place1">
         <div class="letter-card">
           <p class="letter-content">
-            {{ letter.message }}
+            {{ letter.mailContents }}
           </p>
           <div class="signature-line">
             <div class="spacer"></div>
-            <div class="name">- {{ letter.name }}</div>
+            <div class="name">- {{ letter.poster }}</div>
           </div>
         </div>
-        <img :src="getAvatarPath(letter.avatar)" :alt="letter.name + '頭像'" class="avatar" />
+        <img :src="getAvatarPath(letter.avatar)" :alt="letter.poster + '頭像'" class="avatar" />
       </div>
     </div>
   </div>
@@ -93,25 +93,41 @@
     <!-- 信件表單區 -->
     <div class="letter-form-container">
       <form class="letter-form" @submit="handleSubmit">
-        <!-- 姓名輸入欄 -->
-        <div class="form-group">
-          <label for="name" class="message0">姓名或暱稱：</label>
-          <input id="name_Ac" v-model="formData.name" type="text" placeholder="請輸入您的姓名" />
-        </div>
+       <!-- 姓名輸入欄 -->
+<div class="form-group">
+  <label for="poster" class="message0">姓名或暱稱：</label>
+  <input 
+    id="poster_Ac" 
+    v-model="formData.poster" 
+    type="text" 
+    placeholder="請輸入您的姓名" 
+    required
+  />
+</div>
 
-        <!-- 信件內容輸入框 -->
-        <div class="form-group">
-          <label for="message" class="message">信件內容：</label>
-          <textarea id="message" v-model="formData.message" placeholder="寫下你的信給地球吧！"></textarea>
-        </div>
+<!-- 信件內容輸入框 -->
+<div class="form-group">
+  <label for="mailContents" class="message">信件內容：</label>
+  <textarea 
+    id="mailContents" 
+    v-model="formData.mailContents" 
+    placeholder="寫下你的信給地球吧！" 
+    required
+  ></textarea>
+</div>
 
-        <!-- 驗證碼區塊 -->
-        <div class="captcha-group">
-          <label for="captcha" class="message1">請輸入驗證碼：</label>
-          <input id="captcha" v-model="formData.captcha" type="text" />
-          <span class="captcha-code">{{ currentCaptcha }}</span>
-          <button type="button" class="refresh-captcha" @click="generateCaptcha">換一張</button>
-        </div>
+<!-- 驗證碼區塊 -->
+<div class="captcha-group">
+  <label for="captcha" class="message1">請輸入驗證碼：</label>
+  <input 
+    id="captcha" 
+    v-model="formData.captcha" 
+    type="text" 
+    required
+  />
+  <span class="captcha-code">{{ currentCaptcha }}</span>
+  <button type="button" class="refresh-captcha" @click="generateCaptcha">換一張</button>
+</div>
 
         <!-- 送出按鈕 -->
         <button type="submit" class="submit-btn">寫給地球的一封信</button>
@@ -153,14 +169,15 @@ import popupnewmember from '../pages/popupnewmember.vue';
 import treeanimation from '@/components/treeanimation.vue';
 import { RouterLink } from 'vue-router';
 import loginPopupChange from '@/pages/loginPopupChange.vue';
+// import { log } from 'console';
 // import Ac02 from '@/assets/images/Ac02.jpg'
 
 // 定義響應式數據
 const letters = ref([]);
 const totalLetters = ref(0);
 const formData = ref({
-  name: '',
-  message: '',
+  poster: '',
+  mailContents: '',
   captcha: '',
 });
 
@@ -394,127 +411,152 @@ const generateCaptcha = () => {
 };
 
 // 更新 handleSubmit 函數
+// 改進的 handleSubmit 函數
 const handleSubmit = async (e) => {
   e.preventDefault();
-
-  if (!formData.value.name || !formData.value.message) {
-    alert('請填寫姓名和信件內容！');
+  
+  // 驗證所有必填欄位
+  if (!formData.value.poster.trim()) {
+    alert('請輸入姓名或暱稱');
+    return;
+  }
+  
+  if (!formData.value.mailContents.trim()) {
+    alert('請輸入信件內容');
+    return;
+  }
+  
+  if (!formData.value.captcha) {
+    alert('請輸入驗證碼');
     return;
   }
 
+  // 驗證驗證碼
   if (formData.value.captcha !== currentCaptcha.value) {
-    alert('驗證碼錯誤！');
+    alert('驗證碼輸入錯誤');
+    generateCaptcha(); // 重新生成驗證碼
+    formData.value.captcha = ''; // 清空驗證碼輸入
     return;
   }
 
   try {
     const letterData = {
-      name: formData.value.name,
-      message: formData.value.message,
-      timestamp: new Date().toISOString(),
-      avatar: defaultAvatar
+      poster: formData.value.poster.trim(),
+      mailContents: formData.value.mailContents.trim(),
+      postTime: new Date().toISOString()
     };
-
-    const response = await api.post('/api/letters', letterData);
     
-    if (response.data.success) {
-      await fetchLetters();
-      formData.value = { name: '', message: '', captcha: '' };
+    console.log('準備發送的 letterData:', letterData);
+
+    const base_url = import.meta.env.VITE_AJAX_URL
+    const response = await axios.post(`${base_url}/letters.php`, letterData)
+    console.log('收到回應內容:', response.data);
+
+    if (response.data?.success) {
+      letters.value.unshift({
+        ...letterData,
+        id: response.data.id || Date.now()
+      });
+      
+      totalLetters.value++;
+      formData.value = { poster: '', mailContents: '', captcha: '' };
       generateCaptcha();
       alert('✅信件已成功提交！');
     } else {
-      throw new Error(response.data.message || '提交失敗');
+      console.error('後端回傳錯誤內容:', response.data);
+      throw new Error('提交失敗：' + (response.data?.message || '未知錯誤'));
     }
   } catch (error) {
-    console.error('Error submitting letter:', error);
-    alert('提交失敗，請稍後再試！');
+    console.log('完整錯誤信息:', {
+      errorName: error.name,
+      errorMessage: error.message,
+      requestURL: error.config?.url,
+      requestMethod: error.config?.method,
+      requestData: error.config?.data,
+      responseStatus: error.response?.status,
+      responseData: error.response?.data
+    });
+    
+    alert('提交失敗：' + error.message);
   }
 };
 
-// 建立 API 實例
+
+// 修改 API 配置
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:3000',
-  withCredentials: true
+  baseURL: import.meta.env.PROD 
+    ? 'http://localhost/tid103/g1/api'
+    : '/tid103/g1/api',
+  withCredentials: true,
+  headers: {
+    'Content-Type': 'application/json',
+    'X-Requested-With': 'XMLHttpRequest'
+  }
 });
 
 // 修改獲取信件列表的函數
-// 更新 fetchLetters 函數
+// 改進的 fetchLetters 函數
 const fetchLetters = async () => {
   try {
-    const response = await api.get('/api/letters', {
-      params: {
-        page: 1,
-        limit: 10
-      }
-    });
-
-    if (response.data.success) {
-      letters.value = response.data.letters;
+    const base_url = import.meta.env.VITE_AJAX_URL;
+    const response = await axios.get(`${base_url}/letters.php`);
+    
+    if (response.data?.success) {
+      letters.value = response.data.letters.map(letter => ({
+        poster: letter.poster,
+        mailContents: letter.mailContents,
+        avatar: defaultAvatar,
+        postTime: letter.postTime
+      }));
+      
       totalLetters.value = response.data.total;
-    } else {
-      throw new Error(response.data.message || '獲取信件失敗');
     }
   } catch (error) {
     console.error('Error fetching letters:', error);
-    // 如果初始加載失敗，使用預設信件
-    if (!letters.value.length) {
-      letters.value = getDefaultLetters(); // 回傳預設信件
-    }
+    useDefaultLetters();
   }
 };
-
-//   const newLetter = {
-//     name: formData.value.name,
-//     message: formData.value.message,
-//     avatar: defaultAvatar,
-//   };
-
-//   letters.value.unshift(newLetter);
-//   totalLetters.value++;
-//   formData.value = { name: '', message: '', captcha: '' };
-
-//   alert('✅信件已成功提交！'); // 加入這行
-
-//   generateCaptcha();
-
-//   await nextTick();
-//   const newCard = document.querySelector('.letter-card');
-//   if (newCard && letterCardWidth.value) {
-//     newCard.style.width = `${letterCardWidth.value}px`;
-//   }
-// };
+// 提取默認信件邏輯為獨立函數
+const useDefaultLetters = () => {
+  letters.value = [
+    {
+      poster: '小明',
+      mailContents: '親愛的地球：\n你好！我是小明，我最喜歡在公園裡跑來跑去，也喜歡去海邊玩沙子。\n媽媽說，我們要愛護你，不能亂丟垃圾，也不能浪費水。地球，我想告訴你，以後我會和同學一起種很多小樹，讓你變得更漂亮。希望等我長大，你還是一個很美麗的大地球！',
+      avatar: getAvatarPath(xiaoming),
+    },
+    {
+      poster: '愛你的地球公民',
+      mailContents: '親愛的地球：\n謝謝你無私地滋養著我們，給予藍天、白雲、青山與綠水。你的四季輪替，讓我們感受到生命的變化與美好。然而，我們也深知自己的行為正在傷害你。請相信我們仍在努力修補這段關係，從減少塑膠、節能減碳到植樹造林。我們希望未來的你，依然能展現純淨與和平，讓我們的後代也能擁抱你。',
+      avatar: getAvatarPath(earthMan),
+    }
+  ];
+  totalLetters.value = letters.value.length;
+  localStorage.setItem('letters', JSON.stringify(letters.value));
+};
 
 // 組件掛載時初始化
-onMounted(() => {
-  // 如果localStorage中沒有數據，設置默認信件
-  if (letters.value.length === 0) {
-    letters.value = [
-      {
-        name: '小明',
-        message:
-          '親愛的地球：\n你好！我是小明，我最喜歡在公園裡跑來跑去，也喜歡去海邊玩沙子。\n媽媽說，我們要愛護你，不能亂丟垃圾，也不能浪費水。地球，我想告訴你，以後我會和同學一起種很多小樹，讓你變得更漂亮。希望等我長大，你還是一個很美麗的大地球！',
-        avatar: getAvatarPath(xiaoming),
-      },
-      {
-        name: '愛你的地球公民',
-        message:
-          '親愛的地球：\n謝謝你無私地滋養著我們，給予藍天、白雲、青山與綠水。你的四季輪替，讓我們感受到生命的變化與美好。然而，我們也深知自己的行為正在傷害你。請相信我們仍在努力修補這段關係，從減少塑膠、節能減碳到植樹造林。我們希望未來的你，依然能展現純淨與和平，讓我們的後代也能擁抱你。',
-        avatar: getAvatarPath(earthMan),
-      },
-    ];
-    // 初始化時也保存到 localStorage
-    localStorage.setItem('letters', JSON.stringify(letters.value));
-  }
-
-  const initializeLetterCardWidth = () => {
-    const firstCard = document.querySelector('.letter-card');
-    if (firstCard) {
-      letterCardWidth.value = firstCard.offsetWidth;
+onMounted(async () => {
+  try {
+    await fetchLetters(); // 從資料庫獲取信件
+    
+    if (letters.value.length === 0) {
+      // 如果資料庫沒有資料，可以選擇是否要設置默認值
+      useDefaultLetters();
     }
-  };
+    
+    const initializeLetterCardWidth = () => {
+      const firstCard = document.querySelector('.letter-card');
+      if (firstCard) {
+        letterCardWidth.value = firstCard.offsetWidth;
+      }
+    };
 
-  initializeLetterCardWidth();
-  generateCaptcha(); // 生成初始驗證碼
+    initializeLetterCardWidth();
+    generateCaptcha();
+  } catch (error) {
+    console.error('Error initializing:', error);
+    useDefaultLetters(); // 如果獲取失敗，使用默認信件
+  }
 });
 
 

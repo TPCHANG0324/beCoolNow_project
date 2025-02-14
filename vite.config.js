@@ -12,9 +12,6 @@ export default ({ mode }) => {
   const { VITE_PORT } = loadEnv(mode, process.cwd());
 
   return defineConfig({
-    //base: VITE_BASE_URL,
-    // base: '/beCoolNow_project/',
-    // base: '/test_proj/',
     base: '/tid103/g1/',
 
     plugins: [
@@ -51,7 +48,6 @@ export default ({ mode }) => {
     resolve: {
       alias: {
         '@': path.resolve(__dirname, './src'),
-        // '@ckeditor': path.resolve(__dirname, 'node_modules/@ckeditor'),
       },
     },
     css: {
@@ -67,49 +63,30 @@ export default ({ mode }) => {
     },
     optimizeDeps: {
       include: ['mitt', 'dayjs', 'axios', 'pinia', '@vueuse/core'],
-      // include: ['@ckeditor/ckeditor5-vue'],
       exclude: ['@iconify-icons/lets-icons'],
     },
     server: {
-      // 端口号
       port: VITE_PORT,
-      // 监听所有地址
       host: '0.0.0.0',
-      // 服务启动时是否自动打开浏览器
       open: true,
-      // 允许跨域
       cors: true,
-      // 自定义代理规则
-      proxy: {},
-      // 预热文件以提前转换和缓存结果，降低启动期间的初始页面加载时长并防止转换瀑布
+      proxy: {
+        '/tid103/g1/api': {  // 修改這裡以匹配你的 base 路徑
+          target: 'http://localhost:80', // 修改為你的本地 PHP 服務器端口
+          changeOrigin: true,
+          secure: false,
+          // rewrite: (path) => path.replace(/^\/tid103\/g1\/api/, '/api')
+        }
+      },
       warmup: {
         clientFiles: ['./index.html', './src/{views,components}/*'],
       },
     },
+
     build: {
-      //   // 设置最终构建的浏览器兼容目标
-      //   target: 'es2015',
-      //   // 构建后是否生成 source map 文件
-      //   sourcemap: false,
-      //   //  chunk 大小警告的限制（以 kbs 为单位）
-      //   chunkSizeWarningLimit: 2000,
-      //   // 启用/禁用 gzip 压缩大小报告
-      //   reportCompressedSize: false,
-      // 自定义底层的 Rollup 打包配置
       rollupOptions: {
         output: {
-          //     // 指定 chunks 的入口文件模式
-          //     entryFileNames: 'static/js/[name]-[hash].js',
-          //     // 对代码分割中产生的 chunk 自定义命名
-          //     chunkFileNames: 'static/js/[name]-[hash].js',
-          //     // 自定义构建结果中的静态资源名称
           assetFileNames: 'assets/[name].[hash][extname]',
-          //     // 压缩 Rollup 产生的额外代码
-          //     compact: true,
-          //     // 创建自定义的公共 chunk
-          //     manualChunks: {
-          //       vue: ['vue', 'vue-router', 'pinia'],
-          //     },
         },
       },
     },

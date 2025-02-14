@@ -2,6 +2,9 @@ import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import { createPayment } from './create-payment.js';
+import lettersRoutes from './routes/letters.js';
+import adminLettersRoutes from './routes/admin/letters.js';
 
 // 載入環境變數
 dotenv.config();
@@ -10,13 +13,11 @@ const app = express();
 
 // CORS 設定
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:5173', // 前端網址
-  credentials: true,
-  methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+  origin: 'http://localhost:3000',
+  credentials: true
 }));
 
-// 中間件
+// 中間件（移除重複的中間件）
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -36,19 +37,17 @@ const connectDB = async () => {
 
 connectDB();
 
-// 路由
-import lettersRoutes from './routes/letters.js';
-import adminLettersRoutes from './routes/admin/letters.js';
-
 // API 路由
 app.use('/api/letters', lettersRoutes);
 app.use('/api/admin/letters', adminLettersRoutes);
+
+// LINE Pay 相關路由
+app.post('/api/create-payment', createPayment);
 
 // 錯誤處理中間件
 app.use((err, req, res, next) => {
   console.error('Error:', err);
   
-  // 區分不同類型的錯誤
   if (err instanceof mongoose.Error) {
     return res.status(400).json({
       success: false,
@@ -65,7 +64,6 @@ app.use((err, req, res, next) => {
     });
   }
 
-  // 預設錯誤回應
   res.status(err.status || 500).json({
     success: false,
     message: err.message || '伺服器錯誤',
@@ -81,17 +79,22 @@ app.use((req, res) => {
   });
 });
 
+// 設定端口
 const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, () => {
-  console.log(`伺服器運行在 port ${PORT}`);
+// 啟動服務器
+const server = app.listen(PORT, () => {
+  console.log(`伺服器運行在 http://localhost:${PORT}`);
+  console.log(`LINE Pay 支付端點: http://localhost:${PORT}/api/create-payment`);
 });
 
-// 優雅關閉程序
-process.on('SIGTERM', () => {
-  console.log('SIGTERM 收到信號，準備關閉');
-  mongoose.connection.close();
-  process.exit(0);
+// 錯誤處理
+server.on('error', (error) => {
+  if (error.code === 'EADDRINUSE') {
+    console.error(`端口 ${PORT} 已被占用`);
+  } else {
+    console.error('服務器啟動錯誤:', error);
+  }
 });
 
 export default app;
