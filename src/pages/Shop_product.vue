@@ -126,14 +126,14 @@
         <section>
           <div v-if="product.productName">
             <h3>{{ product.productName }}</h3>
-            <span>NT${{ product.price }}</span>
+            <span>NT${{ product.salePrice }}</span>
           </div>
           <p v-else>載入中...</p>
 
 
 
           <ul>
-            <li>{{ product.feature }}</li>
+            <li v-html="product.feature"></li>
             <!-- <li>重量僅有300g</li>
             <li>輕巧好攜帶</li>
             <li>質感必備</li> -->
@@ -192,7 +192,7 @@
                       <p>商品：{{ product.productName }}</p>
                       <p>規格：{{ selectedSize || "未選擇" }}</p>
                       <p>數量：{{ num }}</p>
-                      <p>總價：NT$ {{ num * product.price }}</p>
+                      <p>總價：NT$ {{ num * product.salePrice }}</p>
                     </div>
                   </div>
                   <div class="cart-popup-actions">
@@ -409,7 +409,7 @@ export default {
      const currentPriceRange = computed(() => {
       if (!product.value || !product.value.price) return "全部商品";
 
-      const price = Number(product.value.price);
+      const price = Number(product.value.salePrice);
       if (price >= 0 && price < 200) return "NT$0~$199";
       if (price >= 200 && price < 300) return "NT$200~$299";
       if (price >= 300 && price < 400) return "NT$300~$399";

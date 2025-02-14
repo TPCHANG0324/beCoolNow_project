@@ -154,7 +154,8 @@
           <article class="SpB_rightBlockPopup_H">
             <div>
               <p>狀態:&nbsp;</p>
-              <select v-model="editingProduct.status" @change="updateProductStatus(editingProduct)">
+              <select v-model="editingProduct.status">
+                <!-- @change="updateProductStatus(editingProduct)" -->
                 <option value="goTop">上架</option>
                 <option value="goOff">下架</option>
               </select>
@@ -162,8 +163,9 @@
             <figure>
               <label for="UploadPic">商品照:</label>
               <input @change="uploadImage" id="UploadPic" class="UploadPic" type="file" accept="image/*, image/svg+xml" />
+              <!-- @change="uploadImage" -->
               <div class="preview" style="overflow: hidden;">
-                <img :src="`/tid103/g1/images/${imagePreview}`" v-if="imagePreview" style="height: 100%; object-fit: contain;">
+                <img :src="imagePreview || `/tid103/g1/images/${editingProduct.productPic1}`" v-if="imagePreview || editingProduct.productPic1" style="height: 100%; object-fit: contain;">
                 <p v-else>請選擇圖片</p>
               </div>
             </figure>
@@ -267,8 +269,10 @@ export default {
       editingProduct.status = product.status; // ✅ 確保 `status` 是最新的
 
       // **確保 imagePreview 總是顯示該商品的最新 productPic1**
-      imagePreview.value = product.productPic1;
-
+      // imagePreview.value = product.productPic1;
+      // ✅ 預設為商品原始圖片
+      imagePreview.value = `/tid103/g1/images/${product.productPic1}`;
+      editingProduct.newImageFile = null; // ✅ 清空暫存圖片
       isEditPopupVisible.value = true;
     };
 
@@ -283,88 +287,219 @@ export default {
       status: "上架",
     });
 
-     // 上傳圖片並更新商品圖片路徑
+
+
+
+
+
+
     const uploadImage = async (event) => {
       const file = event.target.files[0]; // 取得使用者選擇的檔案
-      if (!file || !productID.value) {
-        alert("商品 ID 不存在，無法上傳圖片！");
-        return;
-      }
+      if (!file) return;
 
-      // 建立 FormData 物件
-      const formData = new FormData();
-      formData.append("image", file);
-      formData.append("productID", productID.value); // **傳遞商品 ID**
+      // **1️⃣ 立即更新圖片預覽（不影響資料庫）**
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        imagePreview.value = e.target.result; // ✅ 立即顯示新圖片（但不影響 `productPic1`）
+      };
+      reader.readAsDataURL(file);
 
-      try {
-        // 發送 API 請求
-        const response = await fetch(`${base_url}/productUploadImage.php`, {
-          method: "POST",
-          body: formData,
-        });
-
-        const result = await response.json();
-        if (result.success) {
-          console.log("圖片上傳成功，新的圖片路徑:", result.imagePath); // ✅ 確認圖片更新
-          imagePreview.value = result.imagePath; // 存入圖片路徑
-
-          // 更新該商品的 productPic1
-          products.value = products.value.map((p) =>
-            p.ID === productID.value ? { ...p, productPic1: result.imagePath } : p
-          );
-
-          // 同步更新編輯中的商品
-          editingProduct.productPic1 = result.imagePath;
-
-        } else {
-          alert("圖片上傳失敗：" + result.error);
-        }
-      } catch (error) {
-        console.error("圖片上傳錯誤:", error);
-      }
+      // **2️⃣ 暫存圖片檔案，等待儲存時才上傳**
+      editingProduct.newImageFile = file;
     };
+     // 上傳圖片並更新商品圖片路徑
+    // const uploadImage = async (event) => {
+    //   const file = event.target.files[0]; // 取得使用者選擇的檔案
+    //   if (!file || !productID.value) {
+    //     alert("商品 ID 不存在，無法上傳圖片！");
+    //     return;
+    //   }
+
+    //   // 建立 FormData 物件
+    //   const formData = new FormData();
+    //   formData.append("image", file);
+    //   formData.append("productID", productID.value); // **傳遞商品 ID**
+
+    //   try {
+    //     // 發送 API 請求
+    //     const response = await fetch(`${base_url}/productUploadImage.php`, {
+    //       method: "POST",
+    //       body: formData,
+    //     });
+
+    //     const result = await response.json();
+    //     if (result.success) {
+    //       console.log("圖片上傳成功，新的圖片路徑:", result.imagePath); // ✅ 確認圖片更新
+    //       imagePreview.value = result.imagePath; // 存入圖片路徑
+
+    //       // 更新該商品的 productPic1
+    //       products.value = products.value.map((p) =>
+    //         p.ID === productID.value ? { ...p, productPic1: result.imagePath } : p
+    //       );
+
+    //       // 同步更新編輯中的商品
+    //       editingProduct.productPic1 = result.imagePath;
+
+    //     } else {
+    //       alert("圖片上傳失敗：" + result.error);
+    //     }
+    //   } catch (error) {
+    //     console.error("圖片上傳錯誤:", error);
+    //   }
+    // };
 
     // 編輯彈窗更新商品狀態
-    const updateProductStatus = async (product) => {
-          const newStatus = product.status === "goTop" ? 1 : 0; // ✅ 轉換為資料庫格式 (1 or 0)
-          const confirmMessage = newStatus === 1 ? "確定要上架此商品嗎？" : "確定要下架此商品嗎？";
+    // const updateProductStatus = async (product) => {
+    //       const newStatus = product.status === "goTop" ? 1 : 0; // ✅ 轉換為資料庫格式 (1 or 0)
+    //       const confirmMessage = newStatus === 1 ? "確定要上架此商品嗎？" : "確定要下架此商品嗎？";
 
-          // 🚀 **彈出確認視窗**
-          if (!window.confirm(confirmMessage)) {
-            return; // **使用者取消，不執行更新**
-          }
+    //       // 🚀 **彈出確認視窗**
+    //       if (!window.confirm(confirmMessage)) {
+    //         return; // **使用者取消，不執行更新**
+    //       }
 
-          try {
-            const response = await fetch(`${base_url}/updateProductStatus.php`, {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ productID: product.ID, status: newStatus }),
-            });
+    //       try {
+    //         const response = await fetch(`${base_url}/updateProductStatus.php`, {
+    //           method: "POST",
+    //           headers: { "Content-Type": "application/json" },
+    //           body: JSON.stringify({ productID: product.ID, status: newStatus }),
+    //         });
 
-            const result = await response.json();
-            if (result.success) {
-              console.log(`✅ 商品 ${product.ID} 狀態更新為: ${product.status} (DB 值: ${newStatus})`);
+    //         const result = await response.json();
+    //         if (result.success) {
+    //           console.log(`✅ 商品 ${product.ID} 狀態更新為: ${product.status} (DB 值: ${newStatus})`);
 
-              // **同步更新 `products.value`，讓 `shop.vue` 立即變更**
-              const index = products.value.findIndex((p) => p.ID === product.ID);
-              if (index !== -1) {
-                products.value[index].status = product.status; // ✅ 更新商品狀態
-              }
+    //           // **同步更新 `products.value`，讓 `shop.vue` 立即變更**
+    //           const index = products.value.findIndex((p) => p.ID === product.ID);
+    //           if (index !== -1) {
+    //             products.value[index].status = product.status; // ✅ 更新商品狀態
+    //           }
 
-              // **確保商品重新排序**
-              products.value = [...products.value].sort((a, b) => {
-                if (a.status === "goTop" && b.status === "goOff") return -1;
-                if (a.status === "goOff" && b.status === "goTop") return 1;
-                return a.ID - b.ID;
-              });
+    //           // **確保商品重新排序**
+    //           products.value = [...products.value].sort((a, b) => {
+    //             if (a.status === "goTop" && b.status === "goOff") return -1;
+    //             if (a.status === "goOff" && b.status === "goTop") return 1;
+    //             return a.ID - b.ID;
+    //           });
 
-            } else {
-              alert("❌ 狀態更新失敗：" + result.error);
-            }
-          } catch (error) {
-            console.error("❌ 更新狀態錯誤:", error);
-          }
+    //         } else {
+    //           alert("❌ 狀態更新失敗：" + result.error);
+    //         }
+    //       } catch (error) {
+    //         console.error("❌ 更新狀態錯誤:", error);
+    //       }
+    // };
+
+    // 暫時關閉編輯彈窗
+    // const saveEditProduct = () => {
+    //   isEditPopupVisible.value = false;
+    // }
+
+
+
+    // 關閉「編輯商品」彈窗
+    const closeEditPopup = () => {
+      isEditPopupVisible.value = false;
+      imagePreview.value = editingProduct.productPic1; // ✅ 回復為原始圖片
+      resetNewProduct();
     };
+
+
+    const saveEditProduct = async () => {
+  if (!editingProduct.ID) {
+    alert("❌ 無法儲存，缺少商品 ID！");
+    return;
+  }
+
+  let updatedImagePath = editingProduct.productPic1; // 預設圖片路徑
+  const newStatus = editingProduct.status === "goTop" ? 1 : 0;
+
+  // **1️⃣ 確認是否變更上下架狀態**
+  const originalProduct = products.value.find((p) => p.ID === editingProduct.ID);
+  if (originalProduct && originalProduct.status !== editingProduct.status) {
+    const confirmMessage = newStatus === 1 ? "確定要上架此商品嗎？" : "確定要下架此商品嗎？";
+    if (!window.confirm(confirmMessage)) {
+      return;
+    }
+  }
+
+  // **2️⃣ 如果有選擇新圖片，先上傳圖片**
+  if (editingProduct.newImageFile) {
+    const formData = new FormData();
+    formData.append("image", editingProduct.newImageFile);
+    formData.append("productID", editingProduct.ID);
+
+    try {
+      const response = await fetch(`${base_url}/productUploadImage.php`, {
+        method: "POST",
+        body: formData,
+      });
+
+      const result = await response.json();
+      if (result.success) {
+        console.log("✅ 圖片上傳成功，新的圖片路徑:", result.imagePath);
+        updatedImagePath = result.imagePath;
+      } else {
+        alert("❌ 圖片上傳失敗：" + result.error);
+        return;
+      }
+    } catch (error) {
+      console.error("❌ 圖片上傳錯誤:", error);
+      return;
+    }
+  }
+
+  // **3️⃣ 統一更新商品資訊**
+  try {
+    const response = await fetch(`${base_url}/updateProductStatus.php`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        productID: editingProduct.ID,
+        status: newStatus,
+        productPic1: updatedImagePath,
+      }),
+    });
+
+    const result = await response.json();
+    if (result.success) {
+      alert("✅ 商品更新成功！");
+
+      // **4️⃣ 即時更新前端畫面**
+      const index = products.value.findIndex((p) => p.ID === editingProduct.ID);
+      if (index !== -1) {
+        products.value[index] = {
+          ...editingProduct,
+          status: newStatus === 1 ? "goTop" : "goOff", // ✅ 確保顯示正確的上下架文字
+          productPic1: updatedImagePath,
+        };
+      }
+
+      // **5️⃣ 確保商品排序**
+      products.value = [...products.value].sort((a, b) => {
+        if (a.status === "goTop" && b.status === "goOff") return -1;
+        if (a.status === "goOff" && b.status === "goTop") return 1;
+        return a.ID - b.ID;
+      });
+
+      closeEditPopup(); // **關閉彈窗**
+    } else {
+      alert("❌ 商品更新失敗：" + result.error);
+    }
+  } catch (error) {
+    console.error("❌ 更新錯誤:", error);
+  }
+};
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -376,13 +511,22 @@ export default {
       isPopupVisible.value = true;
     };
 
-
     // 關閉「新增商品」彈窗
     const closePopup = () => {
+      // **重置 newProduct，確保下一次打開彈窗時是全新狀態**
+      Object.assign(newProduct, {
+        productName: "",
+        price: 0,
+        salePrice: 0,
+        inventory: 0,
+        status: "goOff", // ✅ 預設回「下架」
+        productPic1: null,
+      });
+      imagePreview.value = null; // ✅ 清除圖片預覽
       isPopupVisible.value = false;
-      resetNewProduct(); // 重置表單
     };
 
+    // 新增商品彈窗儲存按鈕
     const saveProduct = async () => {
 
     // **驗證輸入**
@@ -397,7 +541,7 @@ export default {
     formData.append("price", newProduct.value.price);
     formData.append("salePrice", newProduct.value.salePrice);
     formData.append("inventory", newProduct.value.inventory);
-    formData.append("status", newProduct.value.status === "goOff" ? 0 : 1); // ✅ 轉換為數字
+    formData.append("status", newProduct.value.status === "goTop" ? 1 : 0); // ✅ 轉換為數字
     if (newProduct.value.image) {
       formData.append("image", newProduct.value.image);
     } else {
@@ -439,8 +583,9 @@ export default {
       console.error("❌ 新增商品錯誤:", error);
       alert("❌ 無法連線到伺服器");
     }
-  };
+    };
 
+    // 新增商品彈窗 圖片預覽功能
     const handleImageUpload = (event) => {
     const file = event.target.files[0];
     if (!file) {
@@ -450,7 +595,7 @@ export default {
 
     newProduct.value.image = file;
 
-    // **圖片預覽**
+    // 圖片預覽
     const reader = new FileReader();
     reader.onload = () => {
       imagePreview.value = reader.result;
@@ -458,7 +603,7 @@ export default {
     reader.readAsDataURL(file);
 
     console.log("🟢 選擇的圖片:", newProduct.value.image);
-  };
+    };
 
     // **重置表單**
     const resetNewProduct = () => {
@@ -467,22 +612,13 @@ export default {
         price: 0,
         salePrice: 0,
         inventory: 0,
-        status: "goTop",
+        status: "goOff",
         image: null,
       };
       imagePreview.value = null;
     };
 
-    // 暫時關閉編輯彈窗
-    const saveEditProduct = () => {
-      isEditPopupVisible.value = false;
-    }
 
-    // 關閉「編輯商品」彈窗
-    const closeEditPopup = () => {
-      resetNewProduct();
-      isEditPopupVisible.value = false;
-    };
 
     // 模擬儲存資料 (可改成實際串接 API)
     // const saveProduct = () => {
@@ -507,9 +643,9 @@ export default {
       fetchProducts,
       editingProduct,
       imagePreview,
-      uploadImage,
       productID,
-      updateProductStatus,
+      uploadImage, // 編輯彈窗 照片變更
+      // updateProductStatus, // 編輯彈窗 商品狀態更新
       newProduct,
       saveProduct,
       saveEditProduct, // 暫時關閉編輯彈窗

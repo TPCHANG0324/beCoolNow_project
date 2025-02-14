@@ -62,7 +62,7 @@
                 </div>
                 <div class="product-info">
                   <h3 class="product-card-name-X">{{ product.productName }}</h3>
-                  <p class="product-price">價格：NT${{ product.price || product.salePrice }}</p>
+                  <p class="product-price">價格：NT${{ product.salePrice || product.price }}</p>
                 </div>
               </li>
             </ul>
@@ -155,7 +155,7 @@ const filterByPrice = (range) => {
 const filteredAndSortedProducts = computed(() => {
   let result = [...products.value].map(product => ({
     ...product,
-    price: Number(product.price) // 🚀 確保 price 是數字
+    price: Number(product.salePrice) // 🚀 確保 price 是數字
   }));
 
   // ✅ 1️⃣ 價格篩選
