@@ -21,8 +21,8 @@
               </thead>
               <tbody>
                 <!-- 使用 v-for 動態渲染從資料庫取得的文章資料 -->
-                <tr v-for="article in articles" :key="article.ID">
-                  <td class="IcB_number_H">{{ article.ID }}</td>
+                <tr v-for="(article, index) in articles" :key="article.ID">
+                  <td class="IcB_number_H">{{ index + 1 }}</td>
                   <td class="IcB_title_H">{{ article.mediaTitle }}</td>
                   <td>
                     <button class="IcB_editBtn_H" @click="openEditPopup(article.ID)">編輯</button>
@@ -42,7 +42,7 @@
     </div>
 
     <!-- 島嶼文章 新增 -->
-    <!-- <transition name="fade"> -->
+    <transition name="fade">
       <BackStageSmallPopup class="IcB_addPopup_H" v-if="isAddPopupVisible" @close="closePopup">
         <span>
           <p>島嶼危機文章&nbsp;新增</p>
@@ -77,7 +77,7 @@
           <button @click="saveArticle">儲存</button>
         </div>
       </BackStageSmallPopup>
-    <!-- </transition> -->
+    </transition>
 
     <!-- 島嶼文章 編輯 -->
     <transition name="fade">
@@ -156,7 +156,9 @@ export default {
     const articles = ref([]);
     const IcB_fetchArticles = async () => {
       try {
-        const response = await fetch('./php/IcB_fetchArticles.php'); 
+        // 環境路徑變數 , 輔導老師建議用這個方法 (.env.development, .env.production )
+        const base_url = import.meta.env.VITE_AJAX_URL
+        const response = await fetch(base_url + '/IcB_fetchArticles.php'); 
         if (!response.ok) {
           throw new Error(`伺服器回應錯誤：${response.status}`);
         }
@@ -208,10 +210,13 @@ export default {
       // 注意：使用資料庫中回傳的欄位名稱 (ID 與 mediaTitle)
       const articleToEdit = articles.value.find(article => article.ID === id);
       if (articleToEdit) {
-        editArticle.value = { ...articleToEdit };
-        isEditPopupVisible.value = true;
-      }
-    };
+      console.log('編輯的文章資料：', articleToEdit); // 確認資料是否正確
+      editArticle.value = { ...articleToEdit };
+      isEditPopupVisible.value = true;
+    } else {
+      console.error('找不到要編輯的文章');
+    }
+  };
 
     const openDeletePopup = (id) => {
       currentArticleId.value = id;
@@ -229,54 +234,68 @@ export default {
     // 3. 儲存文章（新增或編輯）
     // -------------------------------
     const saveArticle = async () => {
-      let apiUrl = '';
-      let formData = new FormData();
+  let apiUrl = '';
+  let formData = new FormData();
 
-      if (isAddPopupVisible.value) {
-        apiUrl = 'php/IcB_addArticle.php';
-        formData.append('title', newArticle.value.title);
-        formData.append('url', newArticle.value.url);
-        formData.append('content', newArticle.value.content);
-        formData.append('image', newArticle.value.image);
-      } else if (isEditPopupVisible.value) {
-        apiUrl = 'php/IcB_editArticle.php';
-        formData.append('id', editArticle.value.id);
-        formData.append('title', editArticle.value.title);
-        formData.append('url', editArticle.value.url);
-        formData.append('content', editArticle.value.content);
-        // formData.append('image', editArticle.value.image);
-        formData.append('image' , 'example.png');
+  const base_url = import.meta.env.VITE_AJAX_URL; // 若有設定環境變數，或直接寫成相對/絕對路徑
 
-      }
-      console.log('formData:', formData);
+  if (isAddPopupVisible.value) {
+    apiUrl = base_url + '/IcB_addArticle.php';
+    formData.append('id', newArticle.value.ID);
+    formData.append('title', newArticle.value.title);
+    formData.append('url', newArticle.value.url);
+    formData.append('content', newArticle.value.content);
+    // 如果有選取檔案就送出檔案物件
+    if (newArticle.value.imageFile) {
+      formData.append('image', newArticle.value.imageFile);
+    }
+  } else if (isEditPopupVisible.value) {
+    apiUrl = base_url + '/IcB_editArticle.php';
+    formData.append('id', editArticle.value.ID);
+    formData.append('title', editArticle.value.title);
+    formData.append('url', editArticle.value.url);
+    formData.append('content', editArticle.value.content);
+    if (editArticle.value.imageFile) {
+      formData.append('image', editArticle.value.imageFile);
+    } else {
+      // 如果沒有更新圖片，則可以傳送原本的圖片路徑
+      formData.append('image', editArticle.value.image);
+    }
+  }
+  for (let [key, value] of formData.entries()) {
+    console.log(key, value);
+  }
 
-      try {
-        const response = await fetch(apiUrl, {
-          method: 'POST',
-          body: formData,
-        });
-        const result = await response.json();
-        console.log(result.value);
-        
-        if (result.success) {
-          alert('儲存成功');
-          // 儲存成功後重新撈取最新資料
-          await IcB_fetchArticles();
-        } else {
-          alert('儲存失敗：' + result.message);
-        }
-      } catch (error) {
-        console.error('儲存文章錯誤：', error);
-      }
-      closePopup();
-    };
+  try {
+    
+    const response = await fetch(apiUrl, {
+      method: 'POST',
+      body: formData,
+    });
+    
+    const result = await response.json();
+    
+    if (result.success) {
+      alert('儲存成功');
+      // 儲存成功後重新撈取最新資料
+      await IcB_fetchArticles();
+    } else {
+      alert('儲存失敗：' + result.message);
+    }
+  } catch (error) {
+    console.error('儲存文章錯誤：', error);
+  }
+  closePopup();
+};
+
 
     // -------------------------------
     // 4. 刪除文章
     // -------------------------------
     const deleteArticle = async () => {
       try {
-        const response = await fetch(`./php/IcB_deleteArticle.php?id=${currentArticleId.value}`);
+        const base_url = import.meta.env.VITE_AJAX_URL
+        const response = await fetch(base_url + `/IcB_deleteArticle.php?id=${currentArticleId.value}`);
         const result = await response.json();
         if (result.success) {
           alert('刪除成功');
@@ -291,29 +310,26 @@ export default {
     };
 
     // -------------------------------
-    // 5. 處理圖片上傳（將圖片轉為 base64 預覽）
+    // 5. 處理圖片上傳
     // -------------------------------
     const handleFileChange = (event) => {
-      const file = event.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          newArticle.value.image = e.target.result;
-        };
-        reader.readAsDataURL(file);
-      }
-    };
+  const file = event.target.files[0];
+  if (file) {
+    // 儲存檔案物件，用於上傳
+    newArticle.value.imageFile = file;
+    // 產生臨時預覽 URL
+    newArticle.value.image = URL.createObjectURL(file);
+  }
+};
 
-    const handleEditFileChange = (event) => {
-      const file = event.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          editArticle.value.image = e.target.result;
-        };
-        reader.readAsDataURL(file);
-      }
-    };
+const handleEditFileChange = (event) => {
+  const file = event.target.files[0];
+  if (file) {
+    editArticle.value.imageFile = file;
+    editArticle.value.image = URL.createObjectURL(file);
+  }
+};
+
 
     return {
       // 文章列表

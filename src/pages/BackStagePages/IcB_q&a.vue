@@ -17,32 +17,12 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td class="IcB_number_H">1</td>
-                  <td class="IcB_title_H">哪個是全球暖化導致的常見現象?</td>
-                  <td><button class="IcB_editBtn_H" @click="openEditPopup">編輯</button></td>
+                <tr v-for="(qna, index) in qnas" :key="qna.ID">
+                  <td class="IcB_number_H">{{ index + 1 }}</td>
+                  <td class="IcB_title_H">{{  qna.question}}</td>
+                  <td><button class="IcB_editBtn_H" @click="openEditPopup(qna.ID)">編輯</button></td>
                   <td>
-                    <button class="IcB_deleteBtn_H" @click="openDeletePopup">
-                      <i class="fa-solid fa-trash-can"></i>
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="IcB_number_H">2</td>
-                  <td class="IcB_title_H">全球暖化對海洋造成的影響是什麼？</td>
-                  <td><button class="IcB_editBtn_H" @click="openEditPopup">編輯</button></td>
-                  <td>
-                    <button class="IcB_deleteBtn_H" @click="openDeletePopup">
-                      <i class="fa-solid fa-trash-can"></i>
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="IcB_number_H">3</td>
-                  <td class="IcB_title_H">哪個是全球暖化的潛在生態影響？</td>
-                  <td><button class="IcB_editBtn_H" @click="openEditPopup">編輯</button></td>
-                  <td>
-                    <button class="IcB_deleteBtn_H" @click="openDeletePopup">
+                    <button class="IcB_deleteBtn_H" @click="openDeletePopup(qna.ID)">
                       <i class="fa-solid fa-trash-can"></i>
                     </button>
                   </td>
@@ -54,8 +34,8 @@
         <BackStagePaginator></BackStagePaginator>
       </div>
     </div>
-
     <!-- 互動問答 新增 -->
+    <transition name="fade">
       <BackStageSmallPopup class="IcB_addQAndAPopup_H" v-if="isAddPopupVisible">
         <span>
           <p>互動問答&nbsp;新增</p>
@@ -63,40 +43,45 @@
         </span>
         <div>
           <div class="IcB_addMain_H">
-            <label for="IcB_question_H">題目描述:<br /><textarea id="IcB_question_H" name="IcB_question_H"></textarea>
+            <label for="IcB_question_H">題目描述:<br>
+              <textarea id="IcB_question_H" name="IcB_question_H" v-model="newArticle.question"></textarea>
             </label>
           </div>
-      </div>
-      <div class="IcB_answer_H">
-        <section>
-          <div>
-            <label for="correctA">解答<input type="radio" id="correctA" class="correct" name="correct"></label>
-          </div>
-          <label for="IcB_answerA_H">A選項: <input id="IcB_answerA_H" class="input answer_input" type="text" /></label>
-        </section>
+        </div>
+        <div class="IcB_answer_H">
+          <section>
+            <div>
+              <label for="correctA">解答<input type="radio" id="correctA" class="correct" name="correct" value="A" v-model="newArticle.correctAnswer"></label>
+            </div>
+            <label for="IcB_answerA_H">A選項: 
+              <input v-model="newArticle.option1" id="IcB_answerA_H" class="input answer_input" type="text" />
+            </label>
+          </section>
 
-        <section>
-          <div>
-            <label for="correctB">解答<input type="radio" id="correctB" class="correct" name="correct"></label>
-          </div>
-          <label for="IcB_answerB_H">B選項: <input id="IcB_answerB_H" class="input answer_input" type="text" /></label>
-        </section>
+          <section>
+            <div>
+              <label for="correctB">解答<input type="radio" id="correctB" class="correct" name="correct" value="B" v-model="newArticle.correctAnswer"></label>
+            </div>
+            <label for="IcB_answerB_H">B選項: <input v-model="newArticle.option2" id="IcB_answerB_H" class="input answer_input" type="text" /></label>
+          </section>
 
-        <section>
-          <div>
-            <label for="correctC">解答<input type="radio" id="correctC" class="correct" name="correct"></label>
-          </div>
-          <label for="IcB_answerC_H">C選項: <input id="IcB_answerC_H" class="input answer_input" type="text" /></label>
-        </section>
+          <section>
+            <div>
+              <label for="correctC">解答<input type="radio" id="correctC" class="correct" name="correct" value="C" v-model="newArticle.correctAnswer"></label>
+            </div>
+            <label for="IcB_answerC_H">C選項: <input v-model="newArticle.option3" id="IcB_answerC_H" class="input answer_input" type="text" /></label>
+          </section>
 
-      </div>
-      <div>
-        <button>取消</button>
-        <button>儲存</button>
-      </div>
-    </BackStageSmallPopup>
+        </div>
+        <div>
+          <button @click="closePopup">取消</button>
+          <button @click="saveArticle">儲存</button>
+        </div>
+      </BackStageSmallPopup>
+    </transition>
 
     <!-- 互動問答 編輯 -->
+    <transition name="fade">
       <BackStageSmallPopup class="IcB_editQAndAPopup_H" v-if="isEditPopupVisible">
         <span>
           <p>互動問答&nbsp;編輯</p>
@@ -104,38 +89,45 @@
         </span>
         <div>
           <div class="IcB_addMain_H">
-            <label for="IcB_question_H">題目描述:<br /><textarea id="IcB_question_H" name="IcB_question_H"></textarea>
+            <label for="IcB_question_H">題目描述:<br /><textarea v-model="editQnA.question" id="IcB_question_H" name="IcB_question_H"></textarea>
             </label>
           </div>
-      </div>
-      <div class="IcB_answer_H">
+        </div>
+        <div class="IcB_answer_H">
 
-        <section>
-          <div>
-            <label for="correctAEdit">解答<input type="radio" id="correctAEdit" class="correctAEdit" name="correctEdit"></label>
-          </div>
-          <label for="IcB_answerAEdit_H">A選項: <input id="IcB_answerAEdit_H" class="input answer_input" type="text" /></label>
-        </section>
+          <section>
+            <div>
+              <label for="correctAEdit">解答<input type="radio" id="correctAEdit" class="correctAEdit" v-model="editQnA.correctAnswer" value="A"
+                  name="correctEdit"></label>
+            </div>
+            <label for="IcB_answerAEdit_H">A選項: <input v-model="editQnA.option1" id="IcB_answerAEdit_H" class="input answer_input" 
+                type="text" /></label>
+          </section>
 
-        <section>
-          <div>
-            <label for="correctBEdit">解答<input type="radio" id="correctBEdit" class="correct" name="correctEdit"></label>
-          </div>
-          <label for="IcB_answerBEdit_H">B選項: <input id="IcB_answerBEdit_H" class="input answer_input" type="text" /></label>
-        </section>
+          <section>
+            <div>
+              <label for="correctBEdit">解答<input type="radio" id="correctBEdit" class="correct" v-model="editQnA.correctAnswer" value="B"
+                  name="correctEdit"></label>
+            </div>
+            <label for="IcB_answerBEdit_H">B選項: <input v-model="editQnA.option2" id="IcB_answerBEdit_H" class="input answer_input" 
+                type="text" /></label>
+          </section>
 
-        <section>
-          <div>
-            <label for="correctCEdit">解答<input type="radio" id="correctCEdit" class="correct" name="correctEdit"></label>
-          </div>
-          <label for="IcB_answerCEdit_H">C選項: <input id="IcB_answerCEdit_H" class="input answer_input" type="text" /></label>
-        </section>
-      </div>
-      <div>
-        <button>取消</button>
-        <button>儲存</button>
-      </div>
-    </BackStageSmallPopup>
+          <section>
+            <div>
+              <label for="correctCEdit">解答<input type="radio" id="correctCEdit" class="correct" v-model="editQnA.correctAnswer" value="C"
+                  name="correctEdit"></label>
+            </div>
+            <label for="IcB_answerCEdit_H">C選項: <input v-model="editQnA.option3" id="IcB_answerCEdit_H" class="input answer_input" 
+                type="text" /></label>
+          </section>
+        </div>
+        <div>
+          <button @click="closePopup">取消</button>
+          <button @click="saveArticle">儲存</button>
+        </div>
+      </BackStageSmallPopup>
+    </transition>
 
     <!-- 互動問答 刪除 -->
     <transition name="fade">
@@ -170,20 +162,80 @@ export default {
     BackStageConfirmPopup,
   },
   setup() {
+    // -------------------------------
+    // 1. 取得文章列表（從後端 API 撈取）
+    // -------------------------------
+    const qnas = ref([]);
+
+const IcBqna_fetch = async () => {
+  try {
+    const base_url = import.meta.env.VITE_AJAX_URL;
+    const response = await fetch(base_url + '/IcBqna_fetch.php');
+    if (!response.ok) {
+      throw new Error(`伺服器回應錯誤：${response.status}`);
+    }
+    const data = await response.json();
+    qnas.value = data; // 這裡要改成 `qnas`
+    console.log('取得問答資料成功：', qnas.value);
+  } catch (error) {
+    console.error('取得問答資料失敗：', error);
+  }
+};
+
+
+    onMounted(() => {
+      IcBqna_fetch();
+    });
+
+    // -------------------------------
+    // 2. Popup 顯示狀態與表單資料
+    // -------------------------------
     const isAddPopupVisible = ref(false);
     const isEditPopupVisible = ref(false);
     const isDeletePopupVisible = ref(false);
-
     const currentArticleId = ref(null);
 
-    const openAddPopup = () => {
-      isAddPopupVisible.value = true;
-    };
+    // 用於新增文章的表單資料
+    const newArticle = ref({
+      question: '',
+      option1: '',
+      option2: '',
+      option3: '',
+    });
+    // 用於編輯文章的表單資料
+    const editQnA = ref({
+      id: null,
+      question: '',
+      option1: '',
+      option2: '',
+      option3: '',
+    });
 
-    const openEditPopup = (id) => {
-      currentArticleId.value = id;
-      isEditPopupVisible.value = true;
-    };
+    const openAddPopup = () => {
+  console.log('openAddPopup triggered');
+  newArticle.value = { question: '', option1: '', option2: '', option3: '' };
+  isAddPopupVisible.value = true;
+  console.log('isAddPopupVisible:', isAddPopupVisible.value);
+};
+
+const openEditPopup = (id) => {
+  const qnaToEdit = qnas.value.find(qna => qna.ID == id);
+  if (qnaToEdit) {
+    // 如果沒有正確答案，給一個預設值
+    if (!qnaToEdit.answer && !qnaToEdit.correctAnswer) {
+      qnaToEdit.correctAnswer = "A";
+    } else if (qnaToEdit.answer && !qnaToEdit.correctAnswer) {
+      qnaToEdit.correctAnswer = qnaToEdit.answer;
+    }
+    editQnA.value = { ...qnaToEdit };
+    isEditPopupVisible.value = true;
+  } else {
+    console.error("找不到對應的題目, ID:", id);
+  }
+};
+
+
+
 
     const openDeletePopup = (id) => {
       currentArticleId.value = id;
@@ -194,20 +246,101 @@ export default {
       isAddPopupVisible.value = false;
       isEditPopupVisible.value = false;
       isDeletePopupVisible.value = false;
+      currentArticleId.value = null;
     };
 
-    const saveArticle = () => {
-      closePopup();
-    };
+    // -------------------------------
+    // 3. 儲存文章（新增或編輯）
+    // -------------------------------
+    const saveArticle = async () => {
+  let apiUrl = '';
+  let formData = new FormData();
+  const base_url = import.meta.env.VITE_AJAX_URL;
+  
+  if (isAddPopupVisible.value) {
+    apiUrl = base_url + '/IcBqna_addqna.php';
+    formData.append('question', newArticle.value.question || "");
+    formData.append('option1', newArticle.value.option1 || "");
+    formData.append('option2', newArticle.value.option2 || "");
+    formData.append('option3', newArticle.value.option3 || "");
+    formData.append('correctAnswer', newArticle.value.correctAnswer || "A"); 
+  } else if (isEditPopupVisible.value) {
+    apiUrl = base_url + '/IcBqna_edit.php';
+    formData.append('id', editQnA.value.ID || "0");
+    formData.append('question', editQnA.value.question || "");
+    formData.append('option1', editQnA.value.option1 || "");
+    formData.append('option2', editQnA.value.option2 || "");
+    formData.append('option3', editQnA.value.option3 || "");
+    formData.append('answer', editQnA.value.correctAnswer || "A");
+  }
+  try {
+    const response = await fetch(apiUrl, {
+      method: 'POST',
+      body: formData,   
+    });
 
-    const deleteArticle = () => {
-      closePopup();
-    };
+    const text = await response.text();
+    console.log("伺服器回應的原始文字：", text);
+    const cleanedText = text.trim(); 
+
+    // 嘗試解析 JSON
+    let result;
+    try {
+      result = JSON.parse(cleanedText);
+      console.log("解析後的 JSON：", result);
+    } catch (error) {
+      console.error("JSON 解析失敗：", error);
+      console.error("原始數據：", cleanedText);
+      throw new Error("伺服器返回的數據不是有效的 JSON");
+    }
+
+    if (result.success) {
+      alert('儲存成功');
+      await IcBqna_fetch();
+    } else {
+      alert('儲存失敗：' + result.message);
+    }
+  } catch (error) {
+    console.error('儲存文章錯誤：', error);
+  }
+  closePopup();
+};
+
+
+
+    // -------------------------------
+    // 4. 刪除文章
+    // -------------------------------
+    const deleteArticle = async () => {
+  try {
+    const base_url = import.meta.env.VITE_AJAX_URL;
+    const response = await fetch(base_url + '/IcBqna_delete.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({ id: currentArticleId.value })
+    });
+    const result = await response.json();
+    if (result.success) {
+      alert('刪除成功');
+      await IcBqna_fetch();
+    } else {
+      alert('刪除失敗：' + result.message);
+    }
+  } catch (error) {
+    console.error('刪除問答錯誤：', error);
+  }
+  closePopup();
+};
 
     return {
+      // 文章列表
+      qnas,
+      // Popup 與表單
       isAddPopupVisible,
       isEditPopupVisible,
       isDeletePopupVisible,
+      newArticle,
+      editQnA,
       openAddPopup,
       openEditPopup,
       openDeletePopup,

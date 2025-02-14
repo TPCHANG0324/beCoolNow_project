@@ -104,8 +104,8 @@ export default {
       }
 
       
-
-      const url = `/tid103/g1/php/register.php`;
+      const base_url = import.meta.env.VITE_AJAX_URL
+      const url = base_url + `/register.php`;
       try {
         const res = await fetch(url, {
           method: 'POST',

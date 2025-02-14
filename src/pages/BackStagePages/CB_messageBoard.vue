@@ -18,100 +18,29 @@
         </div>
         <div class="wrapper">
           <BackStageSidebar></BackStageSidebar>
+
           <main class="CB_TableM_H">
             <table class="CB_mainMTable_H">
               <thead>
                 <tr>
                   <th class="CB_numberM_H">文章編號</th>
                   <th class="CB_memberIdM_H">會員編號</th>
-                  <th class="CB_contentM_H">內容</th>
-                  <th class="CB_editDateM_H">編輯日期</th>
+                  <th class="CB_contentM_H">留言內容</th>
+                  <th class="CB_editDateM_H">留言日期</th>
                   <th class="CB_report_H">被檢舉數量</th>
-                  <th class="CB_goOffM_H">下架</th>
+                  <!-- <th class="CB_goOffM_H">下架</th> -->
+                  <th></th>
                   <th></th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>113122101</td>
-                  <td class="CB_content_H">全球暖化釀嚴重海洋生態災難 科學家憂「大滅絕」再現</td>
-                  <td>2025-01-12</td>
-                  <td>0</td>
-                  <td><input type="checkbox" @click="deleteArticle"/></td>
-                  <th><button class="CB_buttonM_H" @click="openPopup">查看</button></th>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td>113122101</td>
-                  <td class="CB_content_H">全球暖化釀嚴重海洋生態災難 科學家憂「大滅絕」再現</td>
-                  <td>2025-01-12</td>
-                  <td>0</td>
-                  <td><input type="checkbox" @click="deleteArticle"/></td>
-                  <th><button class="CB_buttonM_H" @click="openPopup">查看</button></th>
-                </tr>
-                <tr>
-                  <td>3</td>
-                  <td>113122101</td>
-                  <td class="CB_content_H">全球暖化釀嚴重海洋生態災難 科學家憂「大滅絕」再現</td>
-                  <td>2025-01-12</td>
-                  <td>0</td>
-                  <td><input type="checkbox" @click="deleteArticle"/></td>
-                  <th><button class="CB_buttonM_H" @click="openPopup">查看</button></th>
-                </tr>
-                <tr>
-                  <td>4</td>
-                  <td>113122101</td>
-                  <td class="CB_content_H">全球暖化釀嚴重海洋生態災難 科學家憂「大滅絕」再現</td>
-                  <td>2025-01-12</td>
-                  <td>0</td>
-                  <td><input type="checkbox" @click="deleteArticle"/></td>
-                  <th><button class="CB_buttonM_H" @click="openPopup">查看</button></th>
-                </tr>
-                <tr>
-                  <td>5</td>
-                  <td>113122101</td>
-                  <td class="CB_content_H">全球暖化釀嚴重海洋生態災難 科學家憂「大滅絕」再現</td>
-                  <td>2025-01-12</td>
-                  <td>0</td>
-                  <td><input type="checkbox" @click="deleteArticle"/></td>
-                  <th><button class="CB_buttonM_H" @click="openPopup">查看</button></th>
-                </tr>
-                <tr>
-                  <td>6</td>
-                  <td>113122101</td>
-                  <td class="CB_content_H">全球暖化釀嚴重海洋生態災難 科學家憂「大滅絕」再現</td>
-                  <td>2025-01-12</td>
-                  <td>0</td>
-                  <td><input type="checkbox" @click="deleteArticle"/></td>
-                  <th><button class="CB_buttonM_H" @click="openPopup">查看</button></th>
-                </tr>
-                <tr>
-                  <td>7</td>
-                  <td>113122101</td>
-                  <td class="CB_content_H">全球暖化釀嚴重海洋生態災難 科學家憂「大滅絕」再現</td>
-                  <td>2025-01-12</td>
-                  <td>0</td>
-                  <td><input type="checkbox" @click="deleteArticle"/></td>
-                  <th><button class="CB_buttonM_H" @click="openPopup">查看</button></th>
-                </tr>
-                <tr>
-                  <td>8</td>
-                  <td>113122101</td>
-                  <td class="CB_content_H">全球暖化釀嚴重海洋生態災難 科學家憂「大滅絕」再現</td>
-                  <td>2025-01-12</td>
-                  <td>0</td>
-                  <td><input type="checkbox" @click="deleteArticle"/></td>
-                  <th><button class="CB_buttonM_H" @click="openPopup">查看</button></th>
-                </tr>
-                <tr>
-                  <td>9</td>
-                  <td>113122101</td>
-                  <td class="CB_content_H">全球暖化釀嚴重海洋生態災難 科學家憂「大滅絕」再現</td>
-                  <td>2025-01-12</td>
-                  <td>0</td>
-                  <td><input type="checkbox" @click="deleteArticle"/></td>
-                  <th><button class="CB_buttonM_H" @click="openPopup">查看</button></th>
+                <tr v-for="mes in messages" :key="mes.messageID">
+                  <td>{{ mes.articleID }}</td>
+                  <td>{{ mes.memberID }}</td>
+                  <td class="CB_content_H">{{ mes.content }}</td>
+                  <td>{{ mes.messageDate.split(' ')[0] }}</td>
+                  <td>{{ mes.reportCount }}</td>
+                  <td><button class="MmB_editBtn_H" @click="openEditPopup(mes)">編輯與查看</button></td>
                 </tr>
               </tbody>
             </table>
@@ -122,62 +51,159 @@
     </div>
 
     <!-- 留言板 下架 -->
-     <transition name="fade">
-       <BackStageConfirmPopup class="CB_goOffMessage_H" v-if="isPopupVisible">
-         <span></span>
-         <div>
-           <h3>確定將此留言下架嗎?</h3>
-           <div>
-             <button @click="closePopup">取消</button>
-             <button @click="updateArticle">確定</button>
-           </div>
-         </div>
-       </BackStageConfirmPopup>
-      </transition>
-    </div>
+    <!-- <transition name="fade">
+      <BackStageConfirmPopup class="CB_goOffMessage_H" v-if="isPopupVisible">
+        <span></span>
+        <div>
+          <h3>確定將此留言下架嗎?</h3>
+          <div>
+            <button @click="closePopup">取消</button>
+            <button @click="updateArticle">確定</button>
+          </div>
+        </div>
+      </BackStageConfirmPopup>
+    </transition> -->
+
+    <!-- 編輯文章的彈窗 -->
+    <transition name="fade">
+      <BackStageBigPopup class="SpB_editProduct_H" v-if="isEditPopupVisible">
+        <span>
+          <p>文章留言&nbsp;編輯與查看</p>
+          <!-- 這裡也可以加上 @click="closeEditPopup" 讓使用者點 X 就能關閉 -->
+          <i class="fa-solid fa-x" @click="closeEditPopup"></i>
+        </span>
+        <section>
+          <article class="SpB_leftBlockPopup_H">
+            <div>
+              <p>文章編號:&nbsp;</p>
+              <p>{{ currentMes.articleID }}</p>
+            </div>
+            <div>
+              <p>會員編號:&nbsp;</p>
+              <p>{{ currentMes.memberID }}</p>
+            </div>
+            <div>
+              <p>留言內容:&nbsp;</p>
+              <p>{{ currentMes.content }}</p>
+            </div>
+            <div>
+              <p>留言日期:&nbsp;</p>
+              <p>{{ currentMes.messageDate.split(' ')[0] }}</p>
+            </div>
+            <div>
+              <p>被檢舉數量:&nbsp;</p>
+              <p>{{ currentMes.reportCount }}</p>
+            </div>
+          </article>
+          <article class="SpB_rightBlockPopup_H">
+            <div>
+              <p>狀態:&nbsp;</p>
+              <select v-model="currentMes.messageShelves">
+                <option :value="1">上架</option>
+                <option :value="0">下架</option>
+              </select>
+            </div>
+          </article>
+        </section>
+        <div>
+          <button @click="closeEditPopup">取消</button>
+          <button @click="savePopup">儲存</button>
+        </div>
+      </BackStageBigPopup>
+    </transition>
+  </div>
 </template>
 
-<script>
-import { ref } from 'vue';
+<script setup>
+import { ref, onMounted, computed } from 'vue';
 import BackStageSidebar from '@/components/items/BackStageItems/BackStageSidebar.vue';
-import backStagePaginator from '@/components/items/BackStageItems/BackStagePaginator.vue';
+import BackStagePaginator from '@/components/items/BackStageItems/BackStagePaginator.vue';
 import BackStageHeader from '@/components/layout/BackStageLayout/BackStageHeader.vue';
+import BackStageBigPopup from '@/components/layout/BackStageLayout/BackStageBigPopup.vue';
 import BackStageConfirmPopup from '@/components/layout/BackStageLayout/BackStageConfirmPopup.vue';
 
-export default {
-  components: {
-    BackStageSidebar,
-    backStagePaginator,
-    BackStageHeader,
-    BackStageConfirmPopup,
-  },
-  setup() {
-    const isPopupVisible = ref(false);
+const base_url = import.meta.env.VITE_AJAX_URL //環境路徑
+const isEditPopupVisible = ref(false); // 控制「編輯彈窗」是否顯示
+const searchText = ref(''); // 搜尋框的文字
 
-    const openPopup = () => {
-      isPopupVisible.value = true;
-    };
+//載入留言資料
+const messages = ref([]);
+const fetchMess = async () => {
+  try {
+    const res = await fetch(base_url + '/getMessage.php')
+    const data = await res.json()
+    if (data.success) {
+      messages.value = data.messages;
+      messages.value = messages.value.reverse();
+      // console.log(messages.value)
+    } else {
+      console.log(data)
+    }
+  } catch (err) {
+    console.error(err)
+  }
+}
 
-    const closePopup = () => {
-      isPopupVisible.value = false;
-    };
 
-    const updateArticle = () => {
-      alert('已下架');
-      isPopupVisible.value = false;
-    };
 
-    const deleteArticle = () => {
-      alert('已刪除');
-    };
-
-    return {
-      isPopupVisible,
-      openPopup,
-      closePopup,
-      updateArticle,
-      deleteArticle,
-    };
-  },
+const currentMes = ref(null); //存儲目前開啟彈窗的內容
+// 開啟編輯彈窗
+const openEditPopup = (mes) => {
+  currentMes.value = JSON.parse(JSON.stringify(mes));
+  isEditPopupVisible.value = true;
 };
+
+//修改並存儲數據
+const savePopup = async () => {
+  try {
+    const res = await fetch(base_url + `/deleteSelfMessage.php`,{
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        messageID:currentMes.messageID
+      })
+    })
+    const data = await res.json()
+    if(data.success){
+      alert('留言下架成功！');
+      isEditPopupVisible.value = false;
+      fetchMess()
+    }else{
+      console.log(data)
+    }
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+// 關閉編輯彈窗
+const closeEditPopup = () => {
+  isEditPopupVisible.value = false;
+};
+
+
+onMounted(() => {
+  fetchMess()
+})
+
+
+/* 原本的編輯方式(checkbox) */
+// 直接定義響應式狀態  
+// const isPopupVisible = ref(false);
+// // 方法可以直接定義  
+// const openPopup = () => {
+//   isPopupVisible.value = true;
+// };
+// const closePopup = () => {
+//   isPopupVisible.value = false;
+// };
+// const updateArticle = () => {
+//   alert('已下架');
+//   isPopupVisible.value = false;
+// };
+// const deleteArticle = () => {
+//   alert('已刪除');
+// };  
 </script>

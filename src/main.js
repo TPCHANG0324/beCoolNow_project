@@ -18,6 +18,9 @@ import axios from 'axios';
 //郵件套件
 import emailjs from '@emailjs/browser';
 
+// 設定 axios 的 baseURL 為後端伺服器的地址與端口
+axios.defaults.baseURL = 'http://localhost:3000';
+
 const app = createApp(App);
 const pinia = createPinia();
 
@@ -26,9 +29,8 @@ app.use(router);
 // app.use(CKEditor);
 // app.component('CKEditor', CKEditor);
 app.config.globalProperties.$eventBus = app; // 創建事件總線
-app.config.globalProperties.$axios = axios; 
+app.config.globalProperties.$axios = axios;
 emailjs.init('5-GBPJlIL-R8kd1sM'); //初始化
 
 //component
-
 app.mount('#app');

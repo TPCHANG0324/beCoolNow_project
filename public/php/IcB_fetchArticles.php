@@ -1,6 +1,4 @@
 <?php
-// IcB_fetchArticles.php
-
 // 設定跨來源存取的 header 與 Content-Type
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST'); // GET 或 POST 視需求而定

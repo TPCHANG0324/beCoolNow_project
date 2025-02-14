@@ -10,7 +10,7 @@ main {
     background-color: $Light_Green;
     margin-top: 80px;
 
-    @include max_1100{
+    @include max_1100 {
         margin-top: 0;
     }
 
@@ -30,7 +30,8 @@ main {
             flex-grow: 1;
             flex-shrink: 0;
             position: relative;
-            @include max_1100{
+
+            @include max_1100 {
                 margin-top: 80px;
             }
 
@@ -157,12 +158,14 @@ main {
             }
 
             .Fb-post-article-X {
-                @include max_1024(){
+                @include max_1024() {
                     display: none;
-                    &.active{
+
+                    &.active {
                         display: block;
                     }
                 }
+
                 .Fb-post-article-top-X {
                     width: 100%;
 
@@ -249,6 +252,8 @@ main {
                                 overflow: hidden;
                                 -webkit-line-clamp: 2;
                                 text-overflow: ellipsis;
+                                word-break: break-all;
+
 
                                 @include max_1200() {
                                     -webkit-line-clamp: 1;
@@ -292,6 +297,7 @@ main {
                             }
 
                             img {
+                                width: 200px !important;
                                 display: block;
                                 font-size: 0;
                                 max-width: 100%;
@@ -310,13 +316,14 @@ main {
 
                 @include max_1024() {
                     display: none;
-                    &.active{
+
+                    &.active {
                         display: block;
                     }
                 }
 
                 article {
-                    a{
+                    a {
                         color: $Green_2;
                         display: flex;
                         gap: 16px;
@@ -325,6 +332,7 @@ main {
                         box-sizing: border-box;
                         background-color: $Ivory_white;
                     }
+
                     .new-left-X {
                         flex-basis: calc((100% - 16px) * 0.2);
 
@@ -405,9 +413,10 @@ main {
             flex-grow: 1;
             flex-shrink: 0;
 
-            @include max_1100{
+            @include max_1100 {
                 margin-top: 80px;
             }
+
             @include max_1024() {
                 display: none;
             }
@@ -421,12 +430,13 @@ main {
 
             .Fb-news-body-X {
                 article {
-                    a{
+                    a {
                         margin-bottom: 20px;
                         display: flex;
                         gap: 5%;
                         color: $Green_2;
                     }
+
                     img {
                         width: 40%;
                         height: 40%;
@@ -472,7 +482,7 @@ main {
                             }
                         }
                     }
-                    
+
                 }
             }
 
@@ -488,6 +498,7 @@ main {
     background-color: $Ivory_white;
     padding: 1.6rem 2rem;
     margin-top: 20px;
+
     .Fb-Atricle-title-X {
         font-size: PC_h3($Green_1);
         font-weight: 700;
@@ -499,7 +510,7 @@ main {
         display: flex;
         align-items: center;
         margin: 1.6rem 0;
-        
+
         @include max_540() {
             font-size: 14px;
         }
@@ -529,9 +540,11 @@ main {
         i {
             font-style: normal;
             cursor: pointer;
-            span{
+
+            span {
                 padding: 0 4px;
             }
+
             &:not(:last-child) {
                 margin-right: 16px;
                 margin-left: auto;
@@ -556,19 +569,35 @@ main {
         // ol{
         //     list-style: decimal;
         // }
-    
-        strong, b {
+
+        strong,
+        b {
             font-weight: 700;
         }
-    
-        i{
+
+        i {
             font-style: italic;
         }
-    
+
         img {
-            width: 100%;
-            display: block;
+            max-width: 100%;
+            height: auto;
             margin: 20px 0;
+            display: block;
+            font-size: 0;
+            object-fit: contain;
+        }
+
+        h1 {
+            font-size: 32px;
+        }
+
+        h2 {
+            font-size: 28px;
+        }
+
+        h3 {
+            font-size: 24px;
         }
 
         @include max_540() {
@@ -595,6 +624,13 @@ main {
     color: $Green_1;
     background-color: $Ivory_white;
     padding: 2rem;
+
+    .Fb-message-section-X {
+
+        &.cur {
+            cursor: pointer;
+        }
+    }
 
     .Fb-ms-other {
         .Fb-message-section-X {
@@ -671,6 +707,10 @@ main {
         &.self {
             border-bottom: 0;
 
+            button {
+                cursor: pointer;
+            }
+
             // @include max_768 {
             //     display: none;
             // }
@@ -684,7 +724,6 @@ main {
 
         .Fb-message-section-seeMore-X {
             color: $Yellow_1;
-            cursor: pointer;
 
             @include max_540() {
                 font-size: 14px;
@@ -919,10 +958,26 @@ main {
         max-width: 792px;
         margin: 0 auto;
         color: $Ivory_white;
-        
+
         // background-color: skyblue;
         @include max_820() {
             margin: 0 3vw;
+        }
+
+        .ck.ck-content {
+            color: #000 !important;
+
+            h1 {
+                font-size: 32px !important;
+            }
+
+            h2 {
+                font-size: 28px !important;
+            }
+
+            h3 {
+                font-size: 24px !important;
+            }
         }
 
         /* 標題 */
@@ -941,7 +996,7 @@ main {
                     // -webkit-text-stroke-width: 0.5;
                     // -webkit-text-stroke-color: var(--Primary-Colors-5b774a, #5B774A);
                     span {
-                        &:first-child {
+                        &.fir {
                             font-size: 2rem;
                             font-weight: 500;
 
@@ -950,7 +1005,7 @@ main {
                             }
                         }
 
-                        &:last-child {
+                        &.las {
                             font-size: 14px;
                             font-weight: normal;
                             margin-left: 20px;
@@ -1028,11 +1083,17 @@ main {
                 &::placeholder {
                     color: rgba(0, 0, 0, 0.3);
                 }
+
+                // @include max_820(){
+                //     max-width: auto;
+                // }
             }
         }
 
         /* 內文 */
         .FbW-content-X {
+            margin-bottom: 16px;
+
             label {
                 display: flex;
                 align-items: center;
@@ -1059,6 +1120,7 @@ main {
                 }
             }
 
+            /* 原本的主發文區 */
             .FbW-translate-X {
                 border: 2px solid $Green_1;
                 border-radius: 5px 5px 0 0;
@@ -1069,12 +1131,31 @@ main {
                 background-color: $Ivory_white;
                 display: flex;
                 align-items: center;
-                gap: 24px;
+                gap: 12px;
 
-                a {
+                select {
                     cursor: pointer;
                     font-size: 20px;
                     color: rgba(0, 0, 0, 0.3);
+                    outline: none;
+                    padding: 8px;
+                    border: 0px solid transparent;
+                    background-color: transparent;
+
+                    &:hover {
+                        background-color: rgba(0, 0, 0, 0.1);
+                    }
+                }
+
+                span {
+                    cursor: pointer;
+                    font-size: 20px;
+                    color: rgba(0, 0, 0, 0.3);
+                    padding: 8px;
+
+                    &:hover {
+                        background-color: rgba(0, 0, 0, 0.1);
+                    }
                 }
             }
 
@@ -1093,7 +1174,24 @@ main {
                 &::placeholder {
                     color: rgba(0, 0, 0, 0.3);
                 }
-            }
+
+                p {
+                    font-size: 16px;
+                }
+
+                h1 {
+                    font-size: 32px;
+                }
+
+                h2 {
+                    font-size: 28px;
+                }
+
+                h3 {
+                    font-size: 20px;
+                }
+            }  
+            
         }
 
         /* 預覽圖 */
@@ -1101,10 +1199,11 @@ main {
             padding: 1rem;
             border: 2px solid $Green_1;
             border-radius: 5px;
-            height: 200px;
+            // height: 200px;
             width: 100%;
             background-color: $Ivory_white;
             box-sizing: border-box;
+            margin-top: 40px;
 
             div {
                 display: flex;
@@ -1125,9 +1224,10 @@ main {
 
             .FbW-picture-slider-X {
                 border: 1px solid $Green_1;
-                width: 200px;
-                height: 120px;
-                margin: 1.5rem 0;
+                width: 50%;
+                // width: 200px;
+                // height: 120px;
+                margin: 1.5rem auto;
                 overflow: hidden;
 
                 img {
@@ -1165,34 +1265,40 @@ main {
 
 
 /* 頁數選擇器 */
-.Sp-pages-X{
+.Sp-pages-X {
     margin: 20px 0;
-    ul{
+
+    ul {
         display: flex;
         justify-content: center;
-        li{
+
+        li {
             cursor: pointer;
             padding: 1.4rem;
             border: 1px solid $Green_3;
             position: relative;
             border-right: 0;
             background-color: $Ivory_white;
-            span{
+
+            span {
                 position: absolute;
                 top: 50%;
                 left: 50%;
                 transform: translate(-50%, -50%);
             }
-            i{
+
+            i {
                 position: absolute;
                 top: 50%;
                 left: 50%;
                 transform: translate(-50%, -50%);
             }
-            &:last-child{
+
+            &:last-child {
                 border-right: 1px solid $Green_3;
             }
-            &.current{
+
+            &.current {
                 background-color: $Green_1;
                 color: $Ivory_white;
             }
@@ -1200,8 +1306,8 @@ main {
     }
 }
 
-.removeMT{
-    .footer{
+.removeMT {
+    .footer {
         margin-top: 0;
     }
 }

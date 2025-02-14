@@ -1,20 +1,20 @@
 <?php
-// editArticle.php
-// 設定跨來源存取的 header 與 Content-Type
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json; charset=utf-8');
 
+
 include('conn.php');  // 確保 connect.php 定義了 $dsn, $user, $password
 
+
 try {
-    // 取得 POST 中傳來的資料
-    // $id = isset($_POST['id']) ? trim($_POST['id']) : '';
+    $id = isset($_POST['id']) ? trim($_POST['id']) : '';
     $title = isset($_POST['title']) ? trim($_POST['title']) : '';
     $url = isset($_POST['url']) ? trim($_POST['url']) : '';
-    // $image = isset($_POST['image']) ? trim($_POST['image']) : '';
     $content = isset($_POST['content']) ? trim($_POST['content']) : '';
+    $image = isset($_FILES['image']) ? $_FILES['image'] : null;
 
-    if (empty($content) || empty($title) || empty($url)) {
+    // 檢查所有必要欄位（允許 image 為 null）
+    if (empty($title) || empty($url) || empty($content)) {
         echo json_encode([
             'success' => false,
             'message' => '所有欄位皆必須填寫'
@@ -22,15 +22,35 @@ try {
         exit;
     }
 
-    // 更新資料庫中對應的記錄
-    $sql = "UPDATE G1_Multimedia SET mediaTitle = ?, mediaURL = ?, mediaContents = ? WHERE ID = 1";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute([$title, $url, $content]);
+    // 處理圖片上傳
+    $imagePath = null;
+    if ($image && $image['error'] === UPLOAD_ERR_OK) {
+        $imagePath = 'uploads/' . basename($image['name']);
+        move_uploaded_file($image['tmp_name'], $imagePath);
+    }
 
-    echo json_encode([
-        'success' => true,
-        'message' => '文章更新成功'
-    ]);
+    // 更新 SQL
+    $sql = "UPDATE G1_Multimedia SET mediaTitle = ?, mediaURL = ?, mediaContents = ?" . ($imagePath ? ", mediaPic = ?" : "") . " WHERE ID = ?";
+    $stmt = $pdo->prepare($sql);
+
+    // 執行 SQL
+    $params = [$title, $url, $content];
+    if ($imagePath) {
+        $params[] = $imagePath;
+    }
+    $params[] = (int)$id;
+
+    if ($stmt->execute($params)) {
+        echo json_encode([
+            'success' => true,
+            'message' => '文章更新成功'
+        ]);
+    } else {
+        echo json_encode([
+            'success' => false,
+            'message' => '更新失敗：執行 SQL 時發生錯誤'
+        ]);
+    }
 } catch (PDOException $e) {
     echo json_encode([
         'success' => false,
