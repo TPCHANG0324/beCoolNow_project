@@ -103,7 +103,7 @@ import loginPopupChange from '@/pages/loginPopupChange.vue';
 export default {
   name: 'MainHeader',
   components: { loginPopupChange },
-  
+
   setup() {
     const router = useRouter();
     const { userEmail, checkAuth } = useAuth();
@@ -113,9 +113,10 @@ export default {
     const isLogoutPopupVisible = ref(false);
     const cartCount = ref(0);
 
+    // 檢查登入狀態
     const checkLoginStatus = async () => {
       isLoggedIn.value = await checkAuth();
-      
+
       if (isLoggedIn.value) {
         const userEmail = localStorage.getItem('userEmail');
         const storedCount = localStorage.getItem(`cartCount_${userEmail}`);
@@ -150,20 +151,28 @@ export default {
       }
     };
 
-    const closeLogoutPopup = async () => {
-      isLogoutPopupVisible.value = false;
-      return new Promise(resolve => setTimeout(resolve, 100));
+    //詢問是否要登出的彈窗消失改為異步
+     const closeLogoutPopup = () => { 
+      return new Promise((resolve) => {
+        isLogoutPopupVisible.value = false;
+        setTimeout(() => {
+          resolve();
+        }, 100)
+      })
     };
 
+    // 顯示登入燈箱
     const showLoginPopup = () => {
       isloginPopup.value = true;
     };
 
+    //登出
     const handleLogout = async () => {
+      const base_url = import.meta.env.VITE_AJAX_URL
       try {
-        const res = await fetch(`/tid103/g1/php/logout.php`);
+        const res = await fetch(base_url + `/logout.php`);
         const data = await res.json();
-        
+        // console.log(data);
         if (data.success) {
           const userEmail = localStorage.getItem('userEmail');
           if (userEmail) {
@@ -171,10 +180,10 @@ export default {
           }
 
           // 清除購物車數量
-      cartCount.value = 0;
-      localStorage.removeItem('cartCount');
-      // 清除手機號碼 -- 加入這一行
-      localStorage.removeItem('userPhone');
+          cartCount.value = 0;
+          localStorage.removeItem('cartCount');
+          // 清除手機號碼 -- 加入這一行
+          localStorage.removeItem('userPhone');
           // cartCount.value = 0;
           // localStorage.removeItem('cartCount');
           isLoggedIn.value = false;
@@ -206,17 +215,17 @@ export default {
     };
 
     onMounted(() => {
-      if (!localStorage.getItem('isLoggedIn')) {
-        localStorage.setItem('isLoggedIn', 'false');
-      }
+      // if (!localStorage.getItem('isLoggedIn')) {
+      //   localStorage.setItem('isLoggedIn', 'false');
+      // }
+      // window.addEventListener('storage', checkLoginStatus);
       checkLoginStatus();
-      window.addEventListener('storage', checkLoginStatus);
       window.addEventListener('updateCartCount', handleCartCountUpdate);
       eventBus.on('show-login-popup', showLoginPopup);
     });
 
     onUnmounted(() => {
-      window.removeEventListener('storage', checkLoginStatus);
+      // window.removeEventListener('storage', checkLoginStatus);
       window.removeEventListener('updateCartCount', handleCartCountUpdate);
       eventBus.off('show-login-popup', showLoginPopup);
     });

@@ -59,8 +59,8 @@ AgoDate.setDate(today.value.getDate() - 30);
 const from = getDate(AgoDate)
 const to = getDate(today.value)
 // const newURL = `https://newsapi.org/v2/everything?q=${q}&from=${from}&to=${to}&sortBy=popularity&apiKey=${apiKey}`
-
-const newURL = `/tid103/g1/php/news.php?query=${q}&from=${from}&to=${to}` //改為向後端請求，由後端充當本地伺服器
+const base_url = import.meta.env.VITE_AJAX_URL
+const newURL = base_url + `/news.php?query=${q}&from=${from}&to=${to}` //改為向後端請求，由後端充當本地伺服器
 //請求 NEWS API 的資料
 const getNEWS = async () => {
     try {

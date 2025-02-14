@@ -75,7 +75,6 @@
       </div>
     </div>
 
-
   </div>
 </template>
 
@@ -92,6 +91,7 @@ const selfName = ref(null); //自己留言區的暱稱
 const selfId = ref(null); //自己的 id
 const messages = ref([]); //別人的留言
 const isShowAll = ref(false); //是否顯示全部的留言
+const base_url = import.meta.env.VITE_AJAX_URL //環境路徑
 
 //由 props 接收文章的 id
 const props = defineProps({
@@ -101,17 +101,17 @@ const props = defineProps({
   }
 })
 //route.params.id
-const fetchArticlesURL = `/tid103/g1/php/getArticles.php?id=${props.id}`;
+const fetchArticlesURL = base_url + `/getArticles.php?id=${props.id}`;
 const fetchArticle = async () => {
   try {
     const res = await fetch(fetchArticlesURL);
     const data = await res.json();
-    article.value = data[0];
+    article.value = data.data[0];
 
     //更新標題
-    if (data[0] && data[0].title) {
-      route.meta.title = data[0].title + ' - 涼城即時';
-      document.title = data[0].title + ' - 涼城即時';
+    if (data.data[0] && data.data[0].title) {
+      route.meta.title = data.data[0].title + ' - 涼城即時';
+      document.title = data.data[0].title + ' - 涼城即時';
     }
   } catch (error) {
     console.error("獲取文章時發生錯誤:", error);
@@ -127,7 +127,7 @@ const getAvatarSource = () => {
 const handupActive = ref(true);
 const handup = async () => {
   try {
-    const res = await fetch('/tid103/g1/php/updateLikes.php', {
+    const res = await fetch(base_url + '/updateLikes.php', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -164,7 +164,7 @@ const handup = async () => {
 //自己的留言區：需要大頭貼和暱稱
 const getAvatar = async () => {
   try {
-    const res = await fetch(`/tid103/g1/php/getUserInfo.php`)
+    const res = await fetch(base_url + `/getMemberInfo.php`)
     const data = await res.json()
     if (data.success) {
       selfId.value = data.data.id
@@ -188,7 +188,7 @@ const checkLogin = async () => {
 //獲取該文章的留言
 const getMessage = async () => {
   try {
-    const res = await fetch(`/tid103/g1/php/getMessage.php?id=${props.id}`)
+    const res = await fetch(base_url + `/getMessage.php?id=${props.id}`)
     const data = await res.json()
     if (data.success) {
       messages.value = data.messages
@@ -233,7 +233,7 @@ const report = async (messageID) => {
     return
   }
   try {
-    const res = await fetch(`/tid103/g1/php/reportMessages.php`, {
+    const res = await fetch(base_url + `/reportMessages.php`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -247,6 +247,8 @@ const report = async (messageID) => {
       alert(data.message)
       records.push(messageID)
       localStorage.setItem('reportMessage', JSON.stringify(records));
+    }else{
+      alert(data.message)
     }
   } catch (err) {
     console.error(`${err}`)
@@ -260,7 +262,7 @@ const deleteSelf = async (messageID) => {
     return
   }
   try {
-    const res = await fetch(`/tid103/g1/php/deleteSelfMessage.php`, {
+    const res = await fetch(base_url + `/deleteSelfMessage.php`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -289,7 +291,7 @@ const otherAvatarSource = (avatar) => {
 const sendMessage = async () => {
   if (message.value) {
     try {
-      const res = await fetch(`/tid103/g1/php/sendMessage.php`, {
+      const res = await fetch(base_url + `/sendMessage.php`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -306,7 +308,7 @@ const sendMessage = async () => {
         alert(data.message)
         message.value = ''
       } else {
-        alert(data.message + '請先登入再進行操作！')
+        alert('請先登入再進行操作！')
       }
     } catch (err) {
       console.error(`登入驗證失敗：${err}`)

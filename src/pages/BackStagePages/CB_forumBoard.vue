@@ -6,15 +6,8 @@
         <div class="CB_tag_H">
           <h3 class="CB_titleF_H">討論板管理</h3>
           <div class="MmB_searchBar_H">
-            <input
-              id=""
-              class="input"
-              type="text"
-              name=""
-              placeholder="搜尋文章"
-              v-model="searchText"
-              @input="filterArticles"
-            />
+            <input id="" class="input" type="text" name="" placeholder="搜尋文章" v-model="searchText"
+              @input="filterArticles" />
             <i class="fa-solid fa-magnifying-glass"></i>
           </div>
         </div>
@@ -30,43 +23,28 @@
                   <th class="CB_numberF_H">文章編號</th>
                   <th class="CB_memberIdF_H">會員編號</th>
                   <th class="CB_articleF_H">文章分類</th>
-                  <th class="CB_topicF_H">標題</th>
-                  <th class="CB_editDateF_H">編輯日期</th>
-                  <th class="CB_goTopCheckF_H">是否置頂</th>
-                  <th class="CB_goOffF_H">下架</th>
+                  <th class="CB_topicF_H">文章標題</th>
+                  <th class="CB_editDateF_H">發布日期</th>
+                  <!-- <th class="CB_goTopCheckF_H">是否置頂</th> -->
+                  <th class="CB_goOffF_H"></th>
                 </tr>
               </thead>
               <tbody>
                 <!-- 用 filteredArticles 來動態渲染每一筆資料 -->
-                <tr v-for="article in filteredArticles" :key="article.id">
+                <tr v-for="article in filteredArticles" :key="article.ID">
                   <!-- 依照你資料表的欄位，對應顯示 -->
-                  <td>{{ article.id }}</td>
-                  <td>{{ article.member_id }}</td>
+                  <td>{{ article.ID }}</td>
+                  <td>{{ article.memberId }}</td>
                   <td>{{ article.category }}</td>
-                  <td class="CB_content_H">{{ article.topic }}</td>
-                  <td>{{ article.edit_date }}</td>
-
-                  <!-- 置頂 & 下架的勾選狀態也可以綁定到資料 -->
-                  <td>
-                    <input
-                      type="checkbox"
-                      :checked="article.is_top"
-                      @click="goTopCheck(article.id)"
-                    />
-                  </td>
-                  <td>
-                    <input
-                      type="checkbox"
-                      :checked="article.is_deleted"
-                      @click="deleteCheck(article.id)"
-                    />
-                  </td>
+                  <td class="CB_content_H">{{ article.title }}</td>
+                  <td>{{ article.time.split(' ')[0] }}</td>
+                  <td><button class="MmB_editBtn_H" @click="openEditPopup(article)">編輯與查看</button></td>
                 </tr>
               </tbody>
             </table>
           </main>
         </div>
-        
+
         <BackStagePaginator></BackStagePaginator>
       </div>
     </div>
@@ -98,128 +76,206 @@
         </div>
       </BackStageConfirmPopup>
     </transition>
+
+    <!-- 編輯文章的彈窗 -->
+    <transition name="fade">
+      <BackStageBigPopup class="SpB_editProduct_H" v-if="isEditPopupVisible">
+        <span>
+          <p>文章資訊&nbsp;編輯與查看</p>
+          <!-- 這裡也可以加上 @click="closeEditPopup" 讓使用者點 X 就能關閉 -->
+          <i class="fa-solid fa-x" @click="closeEditPopup"></i>
+        </span>
+        <section>
+          <article class="SpB_leftBlockPopup_H">
+            <div>
+              <p>文章編號:&nbsp;</p>
+              <p>{{ currentArticle.ID }}</p>
+            </div>
+            <div>
+              <p>文章分類:&nbsp;</p>
+              <p>{{ currentArticle.category }}</p>
+            </div>
+            <div>
+              <p>會員編號:&nbsp;</p>
+              <p>{{ currentArticle.memberId }}</p>
+            </div>
+            <div>
+              <p>文章標題:&nbsp;</p>
+              <p>{{ currentArticle.title }}</p>
+            </div>
+            <div>
+              <p>編輯日期:&nbsp;</p>
+              <p>{{ currentArticle.time.split(' ')[0] }}</p>
+            </div>
+          </article>
+          <article class="SpB_rightBlockPopup_H">
+            <div>
+              <p>狀態:&nbsp;</p>
+              <select v-model="currentArticle.articleShelves">
+                <option :value="1">上架</option>
+                <option :value="0">下架</option>
+              </select>
+            </div>
+          </article>
+        </section>
+        <div>
+          <button @click="closeEditPopup">取消</button>
+          <button @click="savePopup">儲存</button>
+        </div>
+      </BackStageBigPopup>
+    </transition>
   </div>
 </template>
 
-<script>
+<script setup>
 import { ref, onMounted, computed } from 'vue';
 import BackStageSidebar from '@/components/items/BackStageItems/BackStageSidebar.vue';
 import BackStagePaginator from '@/components/items/BackStageItems/BackStagePaginator.vue';
 import BackStageHeader from '@/components/layout/BackStageLayout/BackStageHeader.vue';
+import BackStageBigPopup from '@/components/layout/BackStageLayout/BackStageBigPopup.vue';
 import BackStageConfirmPopup from '@/components/layout/BackStageLayout/BackStageConfirmPopup.vue';
 
-export default {
-  components: {
-    BackStageSidebar,
-    BackStagePaginator,
-    BackStageHeader,
-    BackStageConfirmPopup,
-  },
-  setup() {
-    // ======================================================
-    // 1. 文章資料 (從後端撈取)
-    // ======================================================
-    const articles = ref([]);   // 用來存放後端回傳的所有文章
-    const searchText = ref(''); // 搜尋框的文字
 
-    // ======================================================
-    // 2. 建立 fetchData 函式，載入資料庫資料
-    //    注意 fetchArticles.php 路徑，要與實際檔案位置對應
-    // ======================================================
-    const fetchData = async () => {
-      try {
-        const response = await fetch('fetchArticles.php');
-        if (!response.ok) {
-          throw new Error('伺服器回應狀態：' + response.status);
-        }
-        // 後端回傳 JSON：[{ id, member_id, category, ... }, ...]
-        const data = await response.json();
-        articles.value = data;
-      } catch (error) {
-        console.error('取得文章資料失敗:', error);
-      }
-    };
+const base_url = import.meta.env.VITE_AJAX_URL //環境路徑
+const isEditPopupVisible = ref(false); // 控制「編輯彈窗」是否顯示
+const searchText = ref(''); // 搜尋框的文字
 
-    // 元件掛載(onMounted)時呼叫 fetchData
-    onMounted(() => {
+//載入文章資料
+const articles = ref([]);
+const fetchData = async () => {
+  try {
+    const res = await fetch(base_url + '/getArticles.php');
+    if (!res.ok) { //狀態碼異常的話
+      throw new Error('伺服器回應狀態：' + res.status);
+    }
+    const data = await res.json();
+    articles.value = processArticles(data.data);
+    // articles.value = articles.value.reverse();
+  } catch (error) {
+    console.error('取得文章資料失敗:', error);
+  }
+};
+
+//清除 content 帶有的 html 等等
+const cleanContent = (htmlContent) => {
+  // 移除所有 Base64 圖片
+  const withoutImages = htmlContent.replace(/<img[^>]*>/g, '');
+  // 移除所有 HTML 標籤
+  const withoutTags = withoutImages.replace(/<[^>]*>/g, '');
+  // 移除多餘空白
+  return withoutTags.trim().replace(/\s+/g, ' ');
+}
+const processArticles = (articles) => {
+  return articles.map(article => ({
+    ...article,
+    content: cleanContent(article.content), // 處理 content
+  }));
+};
+
+const currentArticle = ref(null); //存儲目前開啟彈窗的內容
+// 開啟編輯彈窗
+const openEditPopup = (article) => {
+  currentArticle.value = JSON.parse(JSON.stringify(article)); //改用深拷貝
+  isEditPopupVisible.value = true;
+};
+
+//修改並存儲數據
+const savePopup = async () => {
+  try {
+    const res = await fetch(base_url + '/deleteArticles.php', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        ArticleID: currentArticle.value.ID,
+        shelfStatus: currentArticle.value.articleShelves
+      })
+    })
+    const data = await res.json()
+    if (data.success) {
+      alert('修改成功！')
+      isEditPopupVisible.value = false;
       fetchData();
-    });
+    }else{
+      alert(data.message)
+      console.log(data)
+    }
 
-    // ======================================================
-    // 3. 搜尋 / 過濾邏輯 (可選)
-    // ======================================================
-    // 這裡示範最簡單的寫法：輸入 id / topic 就能搜尋
-    const filteredArticles = computed(() => {
-      if (!searchText.value) {
-        return articles.value;
-      }
-      return articles.value.filter((art) => {
-        // 依需求比對哪些欄位
-        return (
-          String(art.id).includes(searchText.value) ||
-          String(art.topic).includes(searchText.value)
-        );
-      });
-    });
+  } catch (err) {
+    console.error(err)
+  }
+}
 
-    // 若要當用戶輸入時即重新過濾
-    const filterArticles = () => {
-      // 其實不需要任何動作，已經用 computed 自動運算
-    };
 
-    // ======================================================
-    // 4. Popup 顯示 / 關閉 與事件
-    // ======================================================
-    const isDeletePopupVisible = ref(false);
-    const isCheckPopupVisible = ref(false);
-    
-    // 目前要操作的文章 (例如 置頂 or 下架) 的 ID
-    const currentArticleId = ref(null);
 
-    // 置頂勾選
-    const goTopCheck = (id) => {
-      currentArticleId.value = id;
-      isCheckPopupVisible.value = true;
-    };
+// 關閉編輯彈窗
+const closeEditPopup = () => {
+  isEditPopupVisible.value = false;
+};
 
-    // 下架勾選
-    const deleteCheck = (id) => {
-      currentArticleId.value = id;
-      isDeletePopupVisible.value = true;
-    };
 
-    // 關閉 popup
-    const closePopup = () => {
-      isDeletePopupVisible.value = false;
-      isCheckPopupVisible.value = false;
-      currentArticleId.value = null;
-    };
 
-    // 更新文章 (示範：置頂 or 下架)
-    const updateArticle = async () => {
-      // TODO: 這裡你可以根據 currentArticleId.value，
-      //       發送 AJAX 請求給後端，更新資料庫中該筆文章的欄位
-      // 例如：updateArticles.php?type=top&id=xxx
-      //       updateArticles.php?type=delete&id=xxx
 
-      // 目前只示範前端 alert
-      alert(`已更新文章ID = ${currentArticleId.value}`);
-      closePopup();
-    };
 
-    return {
-      articles,
-      searchText,
-      filterArticles,
-      filteredArticles,
 
-      isDeletePopupVisible,
-      isCheckPopupVisible,
-      goTopCheck,
-      deleteCheck,
-      closePopup,
-      updateArticle,
-    };
-  },
+
+
+// 後端回傳 JSON：[{ id, member_id, category, ... }, ...]
+// 元件掛載時呼叫 fetchData
+onMounted(() => {
+  fetchData();
+});
+
+// ======================================================
+// 3. 搜尋 / 過濾邏輯
+// ======================================================
+const filteredArticles = computed(() => {
+  if (!searchText.value) {
+    return articles.value;
+  }
+  return articles.value.filter((art) => {
+    return (
+      String(art.id).includes(searchText.value) ||
+      String(art.topic).includes(searchText.value)
+    );
+  });
+});
+
+// 若要當用戶輸入時即重新過濾
+const filterArticles = () => {
+  // 其實不需要任何動作，已經用 computed 自動運算
+};
+
+// ======================================================
+// 4. Popup 顯示 / 關閉 與事件
+// ======================================================
+const isDeletePopupVisible = ref(false);
+const isCheckPopupVisible = ref(false);
+const currentArticleId = ref(null);
+
+// 置頂勾選
+// const goTopCheck = (id) => {
+//   currentArticleId.value = id;
+//   isCheckPopupVisible.value = true;
+// };
+
+// // 下架勾選
+// const deleteCheck = (id) => {
+//   currentArticleId.value = id;
+//   isDeletePopupVisible.value = true;
+// };
+
+// 關閉 popup
+const closePopup = () => {
+  isDeletePopupVisible.value = false;
+  isCheckPopupVisible.value = false;
+  currentArticleId.value = null;
+};
+
+// 更新文章
+const updateArticle = async () => {
+  alert(`已更新文章ID = ${currentArticleId.value}`);
+  closePopup();
 };
 </script>
