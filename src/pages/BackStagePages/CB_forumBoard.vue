@@ -6,8 +6,7 @@
         <div class="CB_tag_H">
           <h3 class="CB_titleF_H">討論板管理</h3>
           <div class="MmB_searchBar_H">
-            <input id="" class="input" type="text" name="" placeholder="搜尋文章" v-model="searchText"
-              @input="filterArticles" />
+            <input id="" class="input" type="text" name="" placeholder="搜尋 文章編號 或 文章標題" v-model="searchText"/>
             <i class="fa-solid fa-magnifying-glass"></i>
           </div>
         </div>
@@ -16,7 +15,8 @@
           <BackStageSidebar></BackStageSidebar>
 
           <!-- 主要表格：用 v-for 迭代資料庫抓到的資料 -->
-          <main class="CB_TableF_H">
+          <main class="main">
+            <div class="CB_TableF_H">
             <table class="CB_mainFTable_H">
               <thead>
                 <tr>
@@ -31,7 +31,7 @@
               </thead>
               <tbody>
                 <!-- 用 filteredArticles 來動態渲染每一筆資料 -->
-                <tr v-for="article in filteredArticles" :key="article.ID">
+                <tr v-for="article in datas" :key="article.ID">
                   <!-- 依照你資料表的欄位，對應顯示 -->
                   <td>{{ article.ID }}</td>
                   <td>{{ article.memberId }}</td>
@@ -42,10 +42,13 @@
                 </tr>
               </tbody>
             </table>
+          </div>
+          <Paginator :currentPage="currentP" :totalPages="totalItemCount" @page-changed="handlePageChange" />
           </main>
+          
         </div>
-
-        <BackStagePaginator></BackStagePaginator>
+        
+        <!-- <BackStagePaginator></BackStagePaginator> -->
       </div>
     </div>
 
@@ -134,7 +137,7 @@ import BackStagePaginator from '@/components/items/BackStageItems/BackStagePagin
 import BackStageHeader from '@/components/layout/BackStageLayout/BackStageHeader.vue';
 import BackStageBigPopup from '@/components/layout/BackStageLayout/BackStageBigPopup.vue';
 import BackStageConfirmPopup from '@/components/layout/BackStageLayout/BackStageConfirmPopup.vue';
-
+import Paginator from '@/components/paginator.vue';
 
 const base_url = import.meta.env.VITE_AJAX_URL //環境路徑
 const isEditPopupVisible = ref(false); // 控制「編輯彈窗」是否顯示
@@ -207,45 +210,54 @@ const savePopup = async () => {
   }
 }
 
-
-
 // 關閉編輯彈窗
 const closeEditPopup = () => {
   isEditPopupVisible.value = false;
 };
 
-
-
-
-
-
-
-
-// 後端回傳 JSON：[{ id, member_id, category, ... }, ...]
-// 元件掛載時呼叫 fetchData
-onMounted(() => {
-  fetchData();
-});
-
-// ======================================================
-// 3. 搜尋 / 過濾邏輯
-// ======================================================
+//篩選文章
 const filteredArticles = computed(() => {
   if (!searchText.value) {
     return articles.value;
   }
   return articles.value.filter((art) => {
     return (
-      String(art.id).includes(searchText.value) ||
-      String(art.topic).includes(searchText.value)
+      String(art.ID).includes(searchText.value) ||
+      String(art.title).includes(searchText.value)
     );
   });
 });
 
-// 若要當用戶輸入時即重新過濾
-const filterArticles = () => {
-  // 其實不需要任何動作，已經用 computed 自動運算
+
+//計算頁數 //一頁十則文章
+const currentP = ref(1); //當前頁碼，預設 1
+
+const totalItemCount = computed(() => {
+  return Math.ceil(filteredArticles.value.length / 10);
+});
+
+//當翻頁的時候，就更新當前的頁碼
+const handlePageChange = (newPage) => {
+  currentP.value = newPage;
+  window.scrollTo({
+    top: 0, // 滾動到頂部
+    behavior: 'smooth', // 平滑滾動
+  });
 };
+
+//真正要渲染到頁面的文章資料
+const datas = computed(() => {
+  const start = (currentP.value - 1) * 10;
+  const to = currentP.value * 10;
+  return filteredArticles.value.slice(start, to);
+})
+
+
+onMounted(() => {
+  fetchData();
+});
+
+
 
 // ======================================================
 // 4. Popup 顯示 / 關閉 與事件
@@ -253,18 +265,6 @@ const filterArticles = () => {
 const isDeletePopupVisible = ref(false);
 const isCheckPopupVisible = ref(false);
 const currentArticleId = ref(null);
-
-// 置頂勾選
-// const goTopCheck = (id) => {
-//   currentArticleId.value = id;
-//   isCheckPopupVisible.value = true;
-// };
-
-// // 下架勾選
-// const deleteCheck = (id) => {
-//   currentArticleId.value = id;
-//   isDeletePopupVisible.value = true;
-// };
 
 // 關閉 popup
 const closePopup = () => {

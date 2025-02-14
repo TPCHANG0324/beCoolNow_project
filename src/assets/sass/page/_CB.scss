@@ -24,168 +24,181 @@
   }
 
   .wrapper {
-
-    // 討論板 table
-    .CB_TableF_H {
+    .main {
       width: 75%;
       height: 100%;
-      table-layout: fixed;
-      border: 1px solid $Gray_1;
-      border-radius: 10px;
-      background-color: $Ivory_white;
-      padding: 24px 28px;
-      @include PC_h6($Gray_1);
-      font-weight: bold;
 
-      .CB_mainFTable_H {
-        width: 100%;
+      // 討論板 table
+      .CB_TableF_H {
+        table-layout: fixed;
+        border: 1px solid $Gray_1;
+        border-radius: 10px;
+        background-color: $Ivory_white;
+        padding: 24px 28px;
+        @include PC_h6($Gray_1);
+        font-weight: bold;
 
-        thead {
-          border-bottom: 1px solid $Gray_1;
+        .CB_mainFTable_H {
+          width: 100%;
 
-          tr {
+          thead {
+            border-bottom: 1px solid $Gray_1;
 
-            .CB_numberF_H {
-              width: 70px;
-              text-align: center;
-              font-weight: bold;
+            tr {
+              .CB_numberF_H {
+                width: 70px;
+                text-align: center;
+                font-weight: bold;
+              }
+
+              .CB_memberIdF_H {
+                padding: 0;
+                width: 100px;
+              }
+
+              .CB_articleF_H {
+                width: 100px;
+              }
+
+              .CB_topicF_H {
+                width: 320px;
+              }
+
+              .CB_editDateF_H {
+                width: 80px;
+              }
+
+              .CB_goTopCheckF_H {
+                width: 80px;
+              }
+
+              
+            }
+          }
+
+          th,
+          td {
+            // border: 1px solid;
+            padding: 12px 0;
+          }
+
+          tbody {
+            text-align: center;
+
+            .CB_content_H {
+              text-align: left;
+              padding-left: 16px;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: wrap;
+              display: -webkit-box;
+              -webkit-box-orient: vertical;
+              -webkit-line-clamp: 1;
+              height: 50px;
+              line-height: 32px;
             }
 
-            .CB_memberIdF_H {
+            .MmB_editBtn_H {
+              @include btn_style($btn_radius_30px, 100%, 28px);
+              line-height: 100%;
               padding: 0;
-              width: 100px;
-            }
-
-            .CB_articleF_H {
-              width: 100px;
-            }
-
-            .CB_topicF_H {
-              width: 320px;
-            }
-
-            .CB_editDateF_H {
-              width: 80px;
-            }
-
-            .CB_goTopCheckF_H {
-              width: 80px;
-            }
-          }
-        }
-
-        th,
-        td {
-          // border: 1px solid;
-          padding: 12px 0;
-        }
-
-        tbody {
-          text-align: center;
-
-          .CB_content_H {
-            text-align: left;
-            padding-left: 16px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: wrap;
-            display: -webkit-box;
-            -webkit-box-orient: vertical;
-            -webkit-line-clamp: 1;
-            height: 50px;
-            line-height: 32px;
-          }
-        }
-
-
-
-
-      }
-
-
-
-    }
-
-    // 留言板 table
-    .CB_TableM_H {
-      width: 75%;
-      height: 100%;
-      table-layout: fixed;
-      border: 1px solid $Gray_1;
-      border-radius: 10px;
-      background-color: $Ivory_white;
-      padding: 24px 28px;
-      @include PC_h6($Gray_1);
-      font-weight: bold;
-
-      .CB_mainMTable_H {
-        width: 100%;
-
-        thead {
-          border-bottom: 1px solid $Gray_1;
-
-          tr {
-
-            .CB_numberM_H {
-              width: 70px;
-              text-align: center;
+              font-size: 16px;
               font-weight: bold;
-            }
-
-            .CB_memberIdM_H {
-              padding: 0;
               width: 100px;
             }
-
-            .CB_contentM_H {
-              width: 320px;
-            }
-
-            .CB_editDateM_H {
-              width: 80px;
-            }
-
-            .CB_report_H {
-              width: 100px;
-            }
-
-            .CB_goOffM_H {
-              width: 80px;
-            }
-          }
-        }
-
-        th,
-        td {
-          // border: 1px solid;
-          padding: 12px 0;
-        }
-
-        tbody {
-          text-align: center;
-
-          .CB_content_H {
-            text-align: left;
-            padding-left: 16px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: wrap;
-            display: -webkit-box;
-            -webkit-box-orient: vertical;
-            -webkit-line-clamp: 1;
-            height: 50px;
-            line-height: 32px;
-          }
-
-          .CB_buttonM_H {
-            @include btn_style($btn_radius_30px, 100%, 28px);
-            // line-height: 100%;
-            padding: 0;
-            font-size: $h6;
           }
         }
       }
+
+      // 留言板 table
+      .CB_TableM_H {
+        table-layout: fixed;
+        border: 1px solid $Gray_1;
+        border-radius: 10px;
+        background-color: $Ivory_white;
+        padding: 24px 28px;
+        @include PC_h6($Gray_1);
+        font-weight: bold;
+
+        .CB_mainMTable_H {
+          width: 100%;
+
+          thead {
+            border-bottom: 1px solid $Gray_1;
+
+            tr {
+
+              .CB_numberM_H {
+                width: 70px;
+                text-align: center;
+                font-weight: bold;
+              }
+
+              .CB_memberIdM_H {
+                padding: 0;
+                width: 100px;
+              }
+
+              .CB_contentM_H {
+                width: 320px;
+              }
+
+              .CB_editDateM_H {
+                width: 80px;
+              }
+
+              .CB_report_H {
+                width: 100px;
+              }
+
+              .CB_goOffM_H {
+                width: 80px;
+              }
+            }
+          }
+
+          th,
+          td {
+            // border: 1px solid;
+            padding: 12px 0;
+          }
+
+          tbody {
+            text-align: center;
+
+            .CB_content_H {
+              text-align: left;
+              padding-left: 16px;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: wrap;
+              display: -webkit-box;
+              -webkit-box-orient: vertical;
+              -webkit-line-clamp: 1;
+              height: 50px;
+              line-height: 32px;
+            }
+
+            .CB_buttonM_H {
+              @include btn_style($btn_radius_30px, 100%, 28px);
+              // line-height: 100%;
+              padding: 0;
+              font-size: $h6;
+            }
+
+            .MmB_editBtn_H {
+              @include btn_style($btn_radius_30px, 100%, 28px);
+              line-height: 100%;
+              padding: 0;
+              font-size: 16px;
+              font-weight: bold;
+              width: 100px;
+            }
+          }
+        }
+      }
+
+      
     }
   }
-
 }

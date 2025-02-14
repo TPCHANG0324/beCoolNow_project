@@ -5,48 +5,46 @@
       <div class="backStage_wrapper">
         <div class="CB_tag_H">
           <h3 class="CB_titleM_H">留言板管理</h3>
-          <div class="CB_searchBar_H">
-            <div>
-              <input id="" class="input" type="text" name="" placeholder="搜尋文章編號" />
-              <i class="fa-solid fa-magnifying-glass"></i>
-            </div>
-            <div>
-              <input id="" class="input" type="text" name="" placeholder="關鍵字" />
-              <i class="fa-solid fa-magnifying-glass"></i>
-            </div>
+          <div class="MmB_searchBar_H">
+            <input id="" class="input" type="text" name="" placeholder="搜尋 文章編號 或 留言關鍵字" v-model="searchText" />
+            <i class="fa-solid fa-magnifying-glass"></i>
           </div>
         </div>
         <div class="wrapper">
           <BackStageSidebar></BackStageSidebar>
 
-          <main class="CB_TableM_H">
-            <table class="CB_mainMTable_H">
-              <thead>
-                <tr>
-                  <th class="CB_numberM_H">文章編號</th>
-                  <th class="CB_memberIdM_H">會員編號</th>
-                  <th class="CB_contentM_H">留言內容</th>
-                  <th class="CB_editDateM_H">留言日期</th>
-                  <th class="CB_report_H">被檢舉數量</th>
-                  <!-- <th class="CB_goOffM_H">下架</th> -->
-                  <th></th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-for="mes in messages" :key="mes.messageID">
-                  <td>{{ mes.articleID }}</td>
-                  <td>{{ mes.memberID }}</td>
-                  <td class="CB_content_H">{{ mes.content }}</td>
-                  <td>{{ mes.messageDate.split(' ')[0] }}</td>
-                  <td>{{ mes.reportCount }}</td>
-                  <td><button class="MmB_editBtn_H" @click="openEditPopup(mes)">編輯與查看</button></td>
-                </tr>
-              </tbody>
-            </table>
+          <main class="main">
+            <div class="CB_TableM_H">
+              <table class="CB_mainMTable_H">
+                <thead>
+                  <tr>
+                    <th class="CB_numberM_H">文章編號</th>
+                    <th class="CB_memberIdM_H">會員編號</th>
+                    <th class="CB_contentM_H">留言內容</th>
+                    <th class="CB_editDateM_H">留言日期</th>
+                    <th class="CB_report_H">被檢舉數量</th>
+                    <!-- <th class="CB_goOffM_H">下架</th> -->
+                    <th></th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="mes in datas" :key="mes.messageID">
+                    <td>{{ mes.articleID }}</td>
+                    <td>{{ mes.memberID }}</td>
+                    <td class="CB_content_H">{{ mes.content }}</td>
+                    <td>{{ mes.messageDate.split(' ')[0] }}</td>
+                    <td>{{ mes.reportCount }}</td>
+                    <td><button class="MmB_editBtn_H" @click="openEditPopup(mes)">編輯與查看</button></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <Paginator :currentPage="currentP" :totalPages="totalItemCount" @page-changed="handlePageChange" />
           </main>
         </div>
-        <BackStagePaginator></BackStagePaginator>
+        <!-- <BackStagePaginator></BackStagePaginator> -->
+
       </div>
     </div>
 
@@ -121,9 +119,11 @@ import BackStagePaginator from '@/components/items/BackStageItems/BackStagePagin
 import BackStageHeader from '@/components/layout/BackStageLayout/BackStageHeader.vue';
 import BackStageBigPopup from '@/components/layout/BackStageLayout/BackStageBigPopup.vue';
 import BackStageConfirmPopup from '@/components/layout/BackStageLayout/BackStageConfirmPopup.vue';
+import Paginator from '@/components/paginator.vue';
 
 const base_url = import.meta.env.VITE_AJAX_URL //環境路徑
 const isEditPopupVisible = ref(false); // 控制「編輯彈窗」是否顯示
+const searchID = ref(''); // 搜尋框的ID
 const searchText = ref(''); // 搜尋框的文字
 
 //載入留言資料
@@ -144,8 +144,6 @@ const fetchMess = async () => {
   }
 }
 
-
-
 const currentMes = ref(null); //存儲目前開啟彈窗的內容
 // 開啟編輯彈窗
 const openEditPopup = (mes) => {
@@ -156,21 +154,21 @@ const openEditPopup = (mes) => {
 //修改並存儲數據
 const savePopup = async () => {
   try {
-    const res = await fetch(base_url + `/deleteSelfMessage.php`,{
+    const res = await fetch(base_url + `/deleteSelfMessage.php`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        messageID:currentMes.messageID
+        messageID: currentMes.messageID
       })
     })
     const data = await res.json()
-    if(data.success){
+    if (data.success) {
       alert('留言下架成功！');
       isEditPopupVisible.value = false;
       fetchMess()
-    }else{
+    } else {
       console.log(data)
     }
   } catch (err) {
@@ -182,6 +180,42 @@ const savePopup = async () => {
 const closeEditPopup = () => {
   isEditPopupVisible.value = false;
 };
+
+//篩選留言
+const filterMessages = computed(() => {
+  if (!searchText) {
+    return messages.value
+  }
+  return messages.value.filter((item) => {
+    return (
+      String(item.articleID).includes(searchText.value) ||
+      String(item.content).includes(searchText.value)
+    )
+  })
+})
+
+//計算頁數 //一頁十筆留言
+const currentP = ref(1); //當前頁碼，預設 1
+
+const totalItemCount = computed(() => {
+  return Math.ceil(filterMessages.value.length / 10);
+});
+
+//當翻頁的時候，就更新當前的頁碼
+const handlePageChange = (newPage) => {
+  currentP.value = newPage;
+  window.scrollTo({
+    top: 0, // 滾動到頂部
+    behavior: 'smooth', // 平滑滾動
+  });
+};
+
+//真正要渲染到頁面的文章資料
+const datas = computed(() => {
+  const start = (currentP.value - 1) * 10;
+  const to = currentP.value * 10;
+  return filterMessages.value.slice(start, to);
+})
 
 
 onMounted(() => {
