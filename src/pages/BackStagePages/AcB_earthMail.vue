@@ -162,15 +162,26 @@ const cancelDelete = () => {
 const deleteLetter = async () => {
   if(loading.value) return;
   loading.value = true;
+  
+  // 保存要刪除的信件索引
+  const letterToDelete = letters.value.find(letter => letter._id === selectedLetterId.value);
+  const letterIndex = letters.value.findIndex(letter => letter._id === selectedLetterId.value);
+  
+  // 先從畫面移除
+  letters.value = letters.value.filter(letter => letter._id !== selectedLetterId.value);
+  totalLetters.value--;
 
   try {
     const base_url = import.meta.env.VITE_AJAX_URL;
     const response = await axios.delete(`${base_url}/admin_letters.php/${selectedLetterId.value}`);
     
     if (response.data.success) {
-      await fetchLetters();
+      // 如果刪除成功，不需要重新獲取資料，因為已經更新了
       alert('刪除成功');
     } else {
+      // 如果刪除失敗，恢復原始資料
+      letters.value.splice(letterIndex, 0, letterToDelete);
+      totalLetters.value++;
       throw new Error(response.data.message || '刪除失敗');
     }
   } catch (error) {
