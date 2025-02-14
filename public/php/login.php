@@ -1,5 +1,5 @@
 <?php
-header('Access-Control-Allow-Origin: http://localhost');
+header('Access-Control-Allow-Origin: http://localhost:3000');
 header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Content-Type');
 header('Content-Type: application/json; charset=utf-8');
@@ -10,10 +10,10 @@ $password = $login['password'];
 
 include('connect.php');
 
-$sql = "SELECT password FROM G2_MEMBER WHERE email = ?";  
-$statement = $pdo->prepare($sql);  
-$statement->bindValue(1, $email);  
-$statement->execute();  
+$sql = "SELECT password FROM G2_MEMBER WHERE email = ?";
+$statement = $pdo->prepare($sql);
+$statement->bindValue(1, $email);
+$statement->execute();
 
 $data = $statement->fetch(PDO::FETCH_ASSOC);
 

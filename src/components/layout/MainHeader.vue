@@ -103,7 +103,7 @@ import loginPopupChange from '@/pages/loginPopupChange.vue';
 export default {
   name: 'MainHeader',
   components: { loginPopupChange },
-  
+
   setup() {
     const router = useRouter();
     const { userEmail, checkAuth } = useAuth();
@@ -112,10 +112,11 @@ export default {
     const isLoggedIn = ref(false);
     const isLogoutPopupVisible = ref(false);
     const cartCount = ref(0);
+    const base_url = import.meta.env.VITE_AJAX_URL
 
     const checkLoginStatus = async () => {
       isLoggedIn.value = await checkAuth();
-      
+
       if (isLoggedIn.value) {
         const userEmail = localStorage.getItem('userEmail');
         const storedCount = localStorage.getItem(`cartCount_${userEmail}`);
@@ -161,9 +162,10 @@ export default {
 
     const handleLogout = async () => {
       try {
-        const res = await fetch(`/tid103/g1/php/logout.php`);
+
+        const res = await fetch(`${base_url}/logout.php`);
         const data = await res.json();
-        
+
         if (data.success) {
           const userEmail = localStorage.getItem('userEmail');
           if (userEmail) {

@@ -85,6 +85,9 @@ export default ({ mode }) => {
       warmup: {
         clientFiles: ['./index.html', './src/{views,components}/*'],
       },
+      optimizeDeps: {
+        exclude: ['ecpay_aio_nodejs']
+      }
     },
     build: {
       //   // 设置最终构建的浏览器兼容目标

@@ -239,6 +239,14 @@ const routes = [
       // requiredLogin: true
     },
   },
+  {
+    path: '/BreadcrumbNavigation/',
+    component: () => import('@/components/BreadcrumbNavigation.vue'),
+    meta: {
+      title: '後臺-確認彈窗',
+      // requiredLogin: true
+    },
+  },
   // {
   //   path: '/MainHeader/',
   //   component: () => import('@/components/layout/MainHeader.vue'),
@@ -263,6 +271,8 @@ const routes = [
       // requiredLogin: true
     },
   },
+  // 忽略 php 路由
+  // { path: '/:pathMatch(.*)*', redirect: '/' }
 ];
 
 // 建立 router

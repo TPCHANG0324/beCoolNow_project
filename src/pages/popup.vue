@@ -140,8 +140,8 @@ export default {
       // this.$router.push('/member');
       // this.$emit('close');
       // 如果你想要關閉 popup
-
-      const url = `/tid103/g1/php/login.php`;
+      const base_url = import.meta.env.VITE_AJAX_URL
+      const url = `${base_url}/login.php`;
       try {
         const res = await fetch(url, {
           method: 'POST',

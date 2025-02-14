@@ -2,6 +2,7 @@
   max-width: 1200px;
   margin: 0 auto;
   margin-top: 80px;
+  gap: 28px;
 
   .Sp-checkout-nav-X {
     text-align: center;
@@ -85,20 +86,20 @@
       }
     }
   }
-  gap: 28px;
+
 
 }
 
-  /* 流程顯示 */
-  .Sp-checkout-nav-X {
-    text-align: center;
-    margin-top: 120px;
+/* 流程顯示 */
+.Sp-checkout-nav-X {
+  text-align: center;
+  margin-top: 140px;
 
-.breadcrumb {
-  display: flex;
-  align-items: center; /* 垂直置中 */
-  text-decoration: none;
-  padding-top: 61px;
+  .breadcrumb {
+    display: flex;
+    align-items: center; /* 垂直置中 */
+    text-decoration: none;
+    padding-top: 61px;
 
   .si_bread_r{
     display: flex;
@@ -107,13 +108,13 @@
       color: #000;
       cursor: pointer;
     }
-  
+
     a:hover {
       color: rgb(54, 54, 224)
     }
   }
 
-}
+  }
     /* 每一個圓圈 */
     .Sp-step-X {
       display: inline-block;
@@ -189,7 +190,7 @@
         }
       }
     }
-  }
+}
 
 
 // .breadcrumb {
@@ -511,7 +512,7 @@
     .si_return_R {
       display: flex;
       align-items: flex-end;
-     
+
       a {
         display: inline-block;
         background-color: $Green_1;  // 主色調，可自行替換
@@ -524,7 +525,7 @@
         transition: background-color 0.3s ease, transform 0.3s ease;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
       }
-    
+
       a:hover {
         background-color: $Yellow_1;
         transform: translateY(-3px);

@@ -28,17 +28,17 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td class="SpB_number_H">1134444</td>
-                  <td>環保吸管</td>
-                  <td>50</td>
-                  <td>50</td>
-                  <td>522</td>
-                  <td>上架</td>
+                <tr v-for="product in products" :key="product.ID">
+                  <td class="SpB_number_H">{{ product.ID }}</td>
+                  <td>{{ product.productName }}</td>
+                  <td>{{ product.price }}</td>
+                  <td>{{ product.salePrice }}</td>
+                  <td>{{ product.saleCount }}</td>
+                  <td :class="{'text-red': product.status === 'goOff'}">{{ product.status === "goTop" ? "上架" : "下架" }}</td>
                   <!-- 呼叫 openEditPopup -->
-                  <td><button class="MmB_editBtn_H" @click="openEditPopup">編輯與查看</button></td>
+                  <td><button class="MmB_editBtn_H" @click="openEditPopup(product)">編輯與查看</button></td>
                 </tr>
-                <tr>
+                <!-- <tr>
                   <td class="SpB_number_H">1134444</td>
                   <td>玻璃吸管</td>
                   <td>100</td>
@@ -55,7 +55,7 @@
                   <td>602</td>
                   <td>上架</td>
                   <td><button class="MmB_editBtn_H" @click="openEditPopup">編輯與查看</button></td>
-                </tr>
+                </tr> -->
               </tbody>
             </table>
           </main>
@@ -79,42 +79,43 @@
             </div>
             <div>
               <p>商品名稱:&nbsp;</p>
-              <input class="input" type="text" />
+              <input v-model="newProduct.productName" class="input" type="text" />
             </div>
             <div>
               <p>原價:&nbsp;</p>
-              <input class="input" type="number" min="0" />
+              <input v-model="newProduct.price" class="input" type="number" min="0" />
             </div>
 
             <div>
               <p>售價:&nbsp;</p>
-              <input class="input" type="number" min="0" />
+              <input v-model="newProduct.salePrice" class="input" type="number" min="0" />
             </div>
             <div>
               <p>庫存數量:&nbsp;</p>
-              <input class="input" type="number" min="0" />
+              <input v-model="newProduct.inventory" class="input" type="number" min="0" />
             </div>
           </article>
           <article class="SpB_rightBlockPopup_H">
             <div>
               <p>狀態:&nbsp;</p>
-              <select>
+              <select v-model="newProduct.status">
                 <option value="goTop">上架</option>
                 <option value="goOff">下架</option>
               </select>
             </div>
             <figure>
               <label for="UploadPic">商品照:</label>
-              <input id="UploadPic" class="UploadPic" type="file" accept="image/*, image/svg+xml" />
-              <div class="preview">
-                <p>圖片預覽</p>
+              <input @change="handleImageUpload" id="UploadPic" class="UploadPic" type="file" accept="image/*, image/svg+xml" />
+              <div class="preview" style="overflow: hidden;">
+                <img :src="imagePreview" v-if="imagePreview" style="height: 100%; object-fit: contain;" />
+                <p v-else>請選擇圖片</p>
               </div>
             </figure>
           </article>
         </section>
         <div>
           <button @click="closePopup">取消</button>
-          <button @click="savePopup">儲存</button>
+          <button @click="saveProduct">儲存</button>
         </div>
       </BackStageBigPopup>
     </transition>
@@ -131,45 +132,46 @@
           <article class="SpB_leftBlockPopup_H">
             <div>
               <p>商品編號:&nbsp;</p>
-              <p>1234456</p>
-            </div>
-            <div>
-              <p>原價:&nbsp;</p>
-              <p>200</p>
-            </div>
-            <div>
-              <p>庫存數量:&nbsp;</p>
-              <p>100</p>
+              <p>{{ editingProduct.ID }}</p>
             </div>
             <div>
               <p>商品名稱:&nbsp;</p>
-              <p>環保袋</p>
+              <p>{{ editingProduct.productName }}</p>
+            </div>
+            <div>
+              <p>原價:&nbsp;</p>
+              <p>{{ editingProduct.price }}</p>
             </div>
             <div>
               <p>售價:&nbsp;</p>
-              <p>200</p>
+              <p>{{ editingProduct.salePrice }}</p>
+            </div>
+            <div>
+              <p>庫存數量:&nbsp;</p>
+              <p>{{ editingProduct.inventory }}</p>
             </div>
           </article>
           <article class="SpB_rightBlockPopup_H">
             <div>
               <p>狀態:&nbsp;</p>
-              <select>
+              <select v-model="editingProduct.status" @change="updateProductStatus(editingProduct)">
                 <option value="goTop">上架</option>
                 <option value="goOff">下架</option>
               </select>
             </div>
             <figure>
               <label for="UploadPic">商品照:</label>
-              <input id="UploadPic" class="UploadPic" type="file" accept="image/*, image/svg+xml" />
-              <div class="preview">
-                <p>圖片預覽</p>
+              <input @change="uploadImage" id="UploadPic" class="UploadPic" type="file" accept="image/*, image/svg+xml" />
+              <div class="preview" style="overflow: hidden;">
+                <img :src="`/tid103/g1/images/${imagePreview}`" v-if="imagePreview" style="height: 100%; object-fit: contain;">
+                <p v-else>請選擇圖片</p>
               </div>
             </figure>
           </article>
         </section>
         <div>
           <button @click="closeEditPopup">取消</button>
-          <button @click="savePopup">儲存</button>
+          <button @click="saveEditProduct">儲存</button>
         </div>
       </BackStageBigPopup>
     </transition>
@@ -193,39 +195,305 @@ export default {
     BackStageBigPopup,
   },
   setup() {
+
+    const base_url = import.meta.env.VITE_AJAX_URL
+    const products = ref([]);
+    const loading = ref(true);
+    const error = ref(null);
+    const productID = ref(null);
+    const newProduct = ref({
+      productName: "",
+      price: 0,
+      salePrice: 0,
+      inventory: 0,
+      saleCount:0,
+      status: "goOff", // 預設為下架
+      image: null, // 存圖片檔案
+    });
+
+
+    // 獲取商品資料與排序
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch(`${base_url}/getAllProducts.php`);
+        if (!response.ok) {
+          throw new Error("無法取得商品資料");
+        }
+        let data = await response.json();
+
+        // 🚀 **確保 status 是數字，並轉換成 "goTop" / "goOff"**
+        data = data.map(product => {
+        const numericStatus = Number(product.status); // **確保 `status` 是數字**
+        return {
+          ...product,
+          status: numericStatus === 1 ? "goTop" : "goOff", // **正確轉換上下架狀態**
+        };
+      });
+
+        // **商品排序：上架的排前面，然後依據 ID 由小到大**
+        products.value = [...data].sort((a, b) => {
+          if (a.status === "goTop" && b.status === "goOff") return -1;
+          if (a.status === "goOff" && b.status === "goTop") return 1;
+          return a.ID - b.ID;
+        });
+
+        // products.value = await response.json();
+        console.log("✅ 轉換後的商品資料:", products.value);
+
+      } catch (err) {
+        error.value = err.message;
+      } finally {
+        loading.value = false;
+      }
+    };
+
+    // 當元件掛載時獲取資料
+    onMounted(fetchProducts);
+
     // 控制「新增彈窗」是否顯示
     const isPopupVisible = ref(false);
     // 控制「編輯彈窗」是否顯示
     const isEditPopupVisible = ref(false);
 
+    const imagePreview = ref(null);
+
+
+    //編輯彈窗功能待整合
+    // 打開編輯彈窗
+    const openEditPopup = (product) => {
+      console.log("選中的商品 ID:", product.ID); // ✅ 確保正確抓取 ID
+      Object.assign(editingProduct, product); // ✅ 更新當前編輯的商品資訊
+      productID.value = product.ID; // ✅ 設定商品 ID
+      editingProduct.status = product.status; // ✅ 確保 `status` 是最新的
+
+      // **確保 imagePreview 總是顯示該商品的最新 productPic1**
+      imagePreview.value = product.productPic1;
+
+      isEditPopupVisible.value = true;
+    };
+
+    // 當前編輯的商品
+    const editingProduct = reactive({
+      ID: null,
+      productName: "",
+      price: 0,
+      salePrice: 0,
+      saleCount: 0,
+      inventory: 0,
+      status: "上架",
+    });
+
+     // 上傳圖片並更新商品圖片路徑
+    const uploadImage = async (event) => {
+      const file = event.target.files[0]; // 取得使用者選擇的檔案
+      if (!file || !productID.value) {
+        alert("商品 ID 不存在，無法上傳圖片！");
+        return;
+      }
+
+      // 建立 FormData 物件
+      const formData = new FormData();
+      formData.append("image", file);
+      formData.append("productID", productID.value); // **傳遞商品 ID**
+
+      try {
+        // 發送 API 請求
+        const response = await fetch(`${base_url}/productUploadImage.php`, {
+          method: "POST",
+          body: formData,
+        });
+
+        const result = await response.json();
+        if (result.success) {
+          console.log("圖片上傳成功，新的圖片路徑:", result.imagePath); // ✅ 確認圖片更新
+          imagePreview.value = result.imagePath; // 存入圖片路徑
+
+          // 更新該商品的 productPic1
+          products.value = products.value.map((p) =>
+            p.ID === productID.value ? { ...p, productPic1: result.imagePath } : p
+          );
+
+          // 同步更新編輯中的商品
+          editingProduct.productPic1 = result.imagePath;
+
+        } else {
+          alert("圖片上傳失敗：" + result.error);
+        }
+      } catch (error) {
+        console.error("圖片上傳錯誤:", error);
+      }
+    };
+
+    // 編輯彈窗更新商品狀態
+    const updateProductStatus = async (product) => {
+          const newStatus = product.status === "goTop" ? 1 : 0; // ✅ 轉換為資料庫格式 (1 or 0)
+          const confirmMessage = newStatus === 1 ? "確定要上架此商品嗎？" : "確定要下架此商品嗎？";
+
+          // 🚀 **彈出確認視窗**
+          if (!window.confirm(confirmMessage)) {
+            return; // **使用者取消，不執行更新**
+          }
+
+          try {
+            const response = await fetch(`${base_url}/updateProductStatus.php`, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ productID: product.ID, status: newStatus }),
+            });
+
+            const result = await response.json();
+            if (result.success) {
+              console.log(`✅ 商品 ${product.ID} 狀態更新為: ${product.status} (DB 值: ${newStatus})`);
+
+              // **同步更新 `products.value`，讓 `shop.vue` 立即變更**
+              const index = products.value.findIndex((p) => p.ID === product.ID);
+              if (index !== -1) {
+                products.value[index].status = product.status; // ✅ 更新商品狀態
+              }
+
+              // **確保商品重新排序**
+              products.value = [...products.value].sort((a, b) => {
+                if (a.status === "goTop" && b.status === "goOff") return -1;
+                if (a.status === "goOff" && b.status === "goTop") return 1;
+                return a.ID - b.ID;
+              });
+
+            } else {
+              alert("❌ 狀態更新失敗：" + result.error);
+            }
+          } catch (error) {
+            console.error("❌ 更新狀態錯誤:", error);
+          }
+    };
+
+
+
+
     // 開啟「新增商品」彈窗
     const openAddPopup = () => {
+      console.log("🟢 開啟新增商品彈窗");
+      console.log("🟢 初始 newProduct:", newProduct.value);
       isPopupVisible.value = true;
     };
 
-    // 開啟「編輯商品」彈窗
-    const openEditPopup = () => {
-      isEditPopupVisible.value = true;
-    };
 
     // 關閉「新增商品」彈窗
     const closePopup = () => {
       isPopupVisible.value = false;
+      resetNewProduct(); // 重置表單
     };
+
+    const saveProduct = async () => {
+
+    // **驗證輸入**
+    if (!newProduct.value.productName || newProduct.value.price <= 0) {
+      alert("請填寫完整商品資訊");
+      return;
+    }
+
+    // **建立 FormData**
+    const formData = new FormData();
+    formData.append("productName", newProduct.value.productName);
+    formData.append("price", newProduct.value.price);
+    formData.append("salePrice", newProduct.value.salePrice);
+    formData.append("inventory", newProduct.value.inventory);
+    formData.append("status", newProduct.value.status === "goOff" ? 0 : 1); // ✅ 轉換為數字
+    if (newProduct.value.image) {
+      formData.append("image", newProduct.value.image);
+    } else {
+      console.warn("⚠️ 未選擇圖片！");
+    }
+
+     // ✅ **Console 顯示 FormData 內容**
+    for (let pair of formData.entries()) {
+      console.log("📦 FormData:", pair[0], pair[1]);
+    }
+
+    try {
+      const response = await fetch(`${base_url}/addProduct.php`, {
+        method: "POST",
+        body: formData,
+      });
+
+      const result = await response.json();
+      if (result.success) {
+        alert("✅ 商品新增成功！");
+
+        // **更新商品列表**
+        products.value.push({
+          ID: result.newID,
+          productName: newProduct.value.productName,
+          price: newProduct.value.price,
+          salePrice: newProduct.value.salePrice,
+          saleCount: 0, // 預設為 0，讓畫面立即顯示
+          inventory: newProduct.value.inventory,
+          productPic1: result.imagePath || null, // 圖片路徑
+          status: newProduct.value.status,
+        });
+        resetNewProduct(); // 清空輸入欄位 & 圖片
+        closePopup();
+      } else {
+        alert("❌ 商品新增失敗：" + result.error);
+      }
+    } catch (error) {
+      console.error("❌ 新增商品錯誤:", error);
+      alert("❌ 無法連線到伺服器");
+    }
+  };
+
+    const handleImageUpload = (event) => {
+    const file = event.target.files[0];
+    if (!file) {
+      console.warn("⚠️ 未選擇圖片");
+      return;
+    }
+
+    newProduct.value.image = file;
+
+    // **圖片預覽**
+    const reader = new FileReader();
+    reader.onload = () => {
+      imagePreview.value = reader.result;
+    };
+    reader.readAsDataURL(file);
+
+    console.log("🟢 選擇的圖片:", newProduct.value.image);
+  };
+
+    // **重置表單**
+    const resetNewProduct = () => {
+      newProduct.value = {
+        productName: "",
+        price: 0,
+        salePrice: 0,
+        inventory: 0,
+        status: "goTop",
+        image: null,
+      };
+      imagePreview.value = null;
+    };
+
+    // 暫時關閉編輯彈窗
+    const saveEditProduct = () => {
+      isEditPopupVisible.value = false;
+    }
 
     // 關閉「編輯商品」彈窗
     const closeEditPopup = () => {
+      resetNewProduct();
       isEditPopupVisible.value = false;
     };
 
     // 模擬儲存資料 (可改成實際串接 API)
-    const savePopup = () => {
-      // 這裡可放對應的儲存邏輯
-      alert('已儲存');
-      isPopupVisible.value = false;
-      // 如果「編輯」與「新增」要分開控制，也可在這裡依需求決定是否要關閉 edit popup
-      // isEditPopupVisible.value = false;
-    };
+    // const saveProduct = () => {
+    //   // 這裡可放對應的儲存邏輯
+    //   alert('已儲存');
+    //   isPopupVisible.value = false;
+    //   // 如果「編輯」與「新增」要分開控制，也可在這裡依需求決定是否要關閉 edit popup
+    //   // isEditPopupVisible.value = false;
+    // };
+
+
 
     return {
       isPopupVisible,
@@ -234,8 +502,34 @@ export default {
       openEditPopup,
       closePopup,
       closeEditPopup,
-      savePopup,
+      // savePopup,
+      products,
+      fetchProducts,
+      editingProduct,
+      imagePreview,
+      uploadImage,
+      productID,
+      updateProductStatus,
+      newProduct,
+      saveProduct,
+      saveEditProduct, // 暫時關閉編輯彈窗
+      handleImageUpload,
     };
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.SpB_leftBlockPopup_H {
+  div{
+    &:last-of-type{
+      justify-content: left;
+    }
+  }
+}
+
+.text-red {
+  color: red;
+  font-weight: bold;
+}
+</style>
