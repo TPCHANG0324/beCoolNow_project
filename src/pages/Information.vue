@@ -280,11 +280,11 @@ export default {
     const tabs = ref([]);
     // 用來記錄目前活躍的 tab ID
     const activeTab = ref('');
-
+    const base_url = import.meta.env.VITE_AJAX_URL
     // 呼叫後端 API 取得文章管理資料
     const fetchConferenceArticles = async () => {
       try {
-        const response = await fetch('./php/IcB_fetchArticles.php'); // 請根據實際路徑調整
+        const response = await fetch(`${base_url}/IcB_fetchArticles.php`); // 請根據實際路徑調整
         const data = await response.json();
         // 假設回傳的 data 為陣列，每筆資料至少含有 id, title, image, content
         const transformedData = data.map(item => ({
@@ -330,7 +330,7 @@ export default {
       },
       {
         question: 'COP29 的主要議題之一是什麼?',
-        options: ['A.\t協助開發中國應對氣候變化', 'B.\t氣候變化對北極熊棲息地的影響', 'C.\t太陽能技術的發展和補貼政策'],
+        options: ['A.\t協助開發中國家應對氣候變化', 'B.\t氣候變化對北極熊棲息地的影響', 'C.\t太陽能技術的發展和補貼政策'],
         correctIndex: 0,
       },
       {

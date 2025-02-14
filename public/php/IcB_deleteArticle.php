@@ -6,7 +6,7 @@ header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json; charset=utf-8');
 
 // 載入連線設定（確保 connect.php 中正確定義 $dsn, $db_user, $db_pass, 並建立 $pdo）
-include('connect.php');
+include('conn.php');
 
 try {
     // 從 GET 取得文章 ID

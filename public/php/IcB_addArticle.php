@@ -5,7 +5,7 @@
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json; charset=utf-8');
 
-include('connect.php'); // 確保 connect.php 中已定義 $dsn, $db_user, $db_pass 並建立 $pdo
+include('conn.php'); // 確保 connect.php 中已定義 $dsn, $db_user, $db_pass 並建立 $pdo
 
 try {    
     // 取得 POST 傳來的資料

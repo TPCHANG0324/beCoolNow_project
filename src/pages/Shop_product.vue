@@ -131,7 +131,7 @@
           <p>規格</p>
 
           <div class="Sp_productChoice_btnGroup_H">
-            <select v-model="selectedSize"
+            <select v-model="selectedSize" 
               @change="selectSize"
               class="form-select"
               >
@@ -148,12 +148,12 @@
           <div class="Sp_productChoice_inputGroup_H">
             <div class="quantity-input-group">
               <button class="btn-minus" @click="decrementQuantity">-</button>
-              <input
-                v-model.number="quantity"
-                type="text"
-                min="1"
+              <input 
+                v-model.number="quantity" 
+                type="text" 
+                min="1" 
                 max="99"
-                class="quantity-input"
+                class="quantity-input" 
                 @input="handleQuantityInput"
               />
               <button class="btn-plus" @click="incrementQuantity">+</button>
@@ -245,7 +245,7 @@
         </li>
       </ol>
     </section> -->
-
+ 
   <!-- 環保市集_商品頁面_相關商品 -->
   <section class="Sp_productChoice_related_H">
     <h3>相關商品</h3>
@@ -286,7 +286,7 @@
   <!-- 環保市集_商品頁面_頁尾 -->
   <!-- <footer class="Fp_Footer_H">頁尾</footer> -->
 
-
+  
 <!-- 購物車成功加入彈窗 -->
 <div class="cart-overlay" v-if="showCartPopup" @click="closeCartPopup"></div>
   <div class="cart-success-popup" v-if="showCartPopup">
@@ -321,6 +321,8 @@ export default {
   name: 'ProductChoice',
   components: {
     Swiper,
+    SwiperSlide,
+    Swiper, 
     SwiperSlide,
     MainHeader,
     MainFooter,
@@ -423,7 +425,7 @@ export default {
         quantity.value = value;
       }
     };
-
+    
     // 購物車相關方法
     const updateCartCount = (count) => {
       const currentCount = parseInt(localStorage.getItem('cartCount')) || 0;
@@ -455,7 +457,7 @@ export default {
 
       // 更新購物車數量
       updateCartCount(quantity.value);
-
+      
       // 顯示成功彈窗
       showCartPopup.value = true;
     };

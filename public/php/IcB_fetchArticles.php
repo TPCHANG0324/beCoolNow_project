@@ -7,7 +7,7 @@ header('Access-Control-Allow-Methods: GET, POST'); // GET 或 POST 視需求而�
 header('Access-Control-Allow-Headers: Content-Type');
 header('Content-Type: application/json; charset=utf-8');
 
-include('connect.php');
+include('conn.php');
 
 try {
     // 撈取文章資料，依 id 升冪排序

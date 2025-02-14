@@ -106,10 +106,13 @@
 
 <script>
 import { RouterLink } from 'vue-router';
-import { ref, computed } from 'vue';
+import { ref } from 'vue';
 
 export default {
+
   setup() {
+    const base_url = import.meta.env.VITE_AJAX_URL; 
+    
     const name = ref('');
     const email = ref('');
     const phone = ref('');
@@ -121,7 +124,7 @@ export default {
       message: '',
     });
 
-    // Email 驗證
+    // **1️⃣ Email 驗證**
     const validateEmail = () => {
       const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
       if (!email.value) {
@@ -133,7 +136,7 @@ export default {
       }
     };
 
-    // 手機驗證（台灣格式）
+    // **2️⃣ 手機驗證（台灣格式）**
     const validatePhone = () => {
       const phonePattern = /^09\d{8}$/; // 09 開頭 + 8 位數字
       if (!phone.value) {
@@ -145,7 +148,7 @@ export default {
       }
     };
 
-    // 姓名驗證
+    // **3️⃣ 姓名驗證**
     const validateName = () => {
       if (!name.value.trim()) {
         errors.value.name = '請輸入姓名';
@@ -154,7 +157,7 @@ export default {
       }
     };
 
-    // 訊息驗證
+    // **4️⃣ 訊息驗證**
     const validateMessage = () => {
       if (!message.value.trim()) {
         errors.value.message = '請輸入您的建議';
@@ -163,21 +166,47 @@ export default {
       }
     };
 
-    // 表單提交
-    const submitForm = () => {
+    // **5️⃣ 表單提交**
+    const submitForm = async () => {
       validateName();
       validateEmail();
       validatePhone();
       validateMessage();
 
-      // 如果有錯誤，阻止提交
-      if (errors.value.name || errors.value.email || errors.value.phone || errors.value.message) {
+      // **如果有錯誤，阻止提交**
+      if (Object.values(errors.value).some(error => error !== '')) {
         alert('請填寫完整並修正錯誤後再送出');
         return;
       }
 
-      alert('表單提交成功！');
-      // 可加入 API 發送邏輯
+      try {
+        const response = await fetch(`${base_url}/AuB_addmessage.php`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: name.value,
+            email: email.value,
+            phone: phone.value,
+            message: message.value,
+          }),
+        });
+
+        const result = await response.json();
+        if (response.ok) {
+          alert('訊息已成功送出！');
+
+          // **成功後清空表單**
+          name.value = '';
+          email.value = '';
+          phone.value = '';
+          message.value = '';
+        } else {
+          alert('送出失敗: ' + result.error);
+        }
+      } catch (error) {
+        alert('提交時發生錯誤，請稍後再試');
+        console.error('提交時發生錯誤:', error);
+          }
     };
 
     return {
