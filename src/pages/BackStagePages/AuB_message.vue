@@ -28,20 +28,23 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td class="SpB_number_H">1</td>
-                  <td>王小明</td>
-                  <td>abc@gmail.com</td>
-                  <td>0912345678</td>
-                  <td>2025-01-12</td>
+                <tr v-for="contact in contactList" :key="contact.ID">
+                  <td class="SpB_number_H">{{ contact.ID }}</td>
+                  <td>{{ contact.name }}</td>
+                  <td>{{ contact['e-mail'] }}</td>
+                  <td>{{ contact.cellPhone }}</td>
+                  <td>{{ contact.contactDate }}</td>
                   <td><button class="MmB_editBtn_H" @click="openEditPopup">查看</button></td>
                   <td class="deleteBtn">
-                    <button class="IcB_deleteBtn_H" @click="openDeletePopup">
+                    <!-- <button class="IcB_deleteBtn_H" @click="openDeletePopup">
+                      <i class="fa-solid fa-trash-can"></i>
+                    </button> -->
+                    <button class="IcB_deleteBtn_H" @click="openDeletePopup(contact.ID)">
                       <i class="fa-solid fa-trash-can"></i>
                     </button>
                   </td>
                 </tr>
-                <tr>
+                <!-- <tr>
                   <td class="SpB_number_H">2</td>
                   <td>王小明</td>
                   <td>abc@gmail.com</td>
@@ -66,7 +69,7 @@
                       <i class="fa-solid fa-trash-can"></i>
                     </button>
                   </td>
-                </tr>
+                </tr> -->
               </tbody>
             </table>
           </main>
@@ -81,7 +84,7 @@
           <h3>確定將此訊息刪除嗎?</h3>
           <div>
             <button @click="closePopup">取消</button>
-            <button @click="updateArticle">確定</button>
+            <button @click="deleteMessage">確定</button>
           </div>
         </div>
       </BackStageConfirmPopup>
@@ -90,7 +93,7 @@
 </template>
 
 <script>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import BackStageSidebar from '@/components/items/BackStageItems/BackStageSidebar.vue';
 import backStagePaginator from '@/components/items/BackStageItems/BackStagePaginator.vue';
 import BackStageHeader from '@/components/layout/BackStageLayout/BackStageHeader.vue';
@@ -105,20 +108,94 @@ export default {
   },
   setup() {
     const isPopupVisible = ref(false);
-    const openDeletePopup = () => {
+    const contactList = ref([]); // 存放後端撈取的資料
+    const selectedMessageId = ref(null); // 存放要刪除的訊息 ID
+    const base_url = import.meta.env.VITE_AJAX_URL 
+
+    // 1️⃣ 從後端撈取 `G1_ContactUS` 的資料
+    const fetchContacts = async () => {
+      try {
+        const response = await fetch(`${base_url}/AuB_fettchmessage.php`); // 替換成你的 API
+        const data = await response.json();
+        contactList.value = data; // 將 API 回傳的資料存入 contactList
+      } catch (error) {
+        console.error('撈取資料失敗:', error);
+      }
+    };
+
+     // 2️⃣ 顯示刪除彈窗
+    const openDeletePopup = (id) => {
+      selectedMessageId.value = id;
       isPopupVisible.value = true;
     };
+
+    // 3️⃣ 關閉彈窗
     const closePopup = () => {
       isPopupVisible.value = false;
+      selectedMessageId.value = null;
     };
+
+    // 4️⃣ 刪除訊息
+    const deleteMessage = async () => {
+      if (!selectedMessageId.value) return;
+      try {
+        const response = await fetch(`${base_url}/AuB_deletemessage.php?id=${selectedMessageId.value}`, {
+          method: 'DELETE',
+        });
+        if (response.ok) {
+          contactList.value = contactList.value.filter((item) => item.ID !== selectedMessageId.value);
+          closePopup();
+        } else {
+          console.error('刪除失敗，HTTP 狀態碼:', response.status);
+        }
+      } catch (error) {
+        console.error('刪除時發生錯誤:', error);
+      }
+    };
+
+    // **5️⃣ 新增訊息**
+    const submitForm = async () => {
+      try {
+        const response = await fetch(`${base_url}/AuB_addmessage.php`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: "測試用戶",
+            email: "test@example.com",
+            phone: "0912345678",
+            message: "這是一則測試訊息"
+          }),
+        });
+
+        const result = await response.json();
+        if (response.ok) {
+          alert('訊息已成功送出！');
+          fetchContacts(); // **🔄 立即更新後台資料**
+        } else {
+          alert('送出失敗: ' + result.error);
+        }
+      } catch (error) {
+        alert('提交時發生錯誤，請稍後再試');
+        console.error('提交時發生錯誤:', error);
+      }
+    };
+
+    // 在頁面載入時撈取資料
+    onMounted(fetchContacts);
+
+
     const updateArticle = () => {
       isPopupVisible.value = false;
     };
     return {
       isPopupVisible,
+      contactList,
       openDeletePopup,
       closePopup,
       updateArticle,
+      deleteMessage,
+      fetchContacts,
+      submitForm,
     };
   },
 };
