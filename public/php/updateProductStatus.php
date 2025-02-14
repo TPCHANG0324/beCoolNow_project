@@ -18,7 +18,7 @@ $status = ($data["status"] === 1) ? 1 : 0; // ✅ 確保只接受 1 或 0
 
 try {
     // **確認商品是否存在**
-    $stmt = $pdo->prepare("SELECT ID FROM g2.G1_Product WHERE ID = ?");
+    $stmt = $pdo->prepare("SELECT ID FROM G1_Product WHERE ID = ?");
     $stmt->execute([$productID]);
     if ($stmt->rowCount() === 0) {
         echo json_encode(["success" => false, "error" => "商品不存在"]);
@@ -26,7 +26,7 @@ try {
     }
 
     // **更新商品狀態**
-    $stmt = $pdo->prepare("UPDATE g2.G1_Product SET status = ? WHERE ID = ?");
+    $stmt = $pdo->prepare("UPDATE G1_Product SET status = ? WHERE ID = ?");
     $stmt->execute([$status, $productID]);
 
     echo json_encode(["success" => true]);

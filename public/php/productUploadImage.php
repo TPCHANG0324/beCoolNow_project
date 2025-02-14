@@ -28,7 +28,7 @@ $targetFilePath = $uploadDir . $fileName;
 
 try {
     // **檢查該商品是否存在**
-    $stmt = $pdo->prepare("SELECT ID FROM g2.G1_Product WHERE ID = ?");
+    $stmt = $pdo->prepare("SELECT ID FROM G1_Product WHERE ID = ?");
     $stmt->execute([$productID]);
 
     if ($stmt->rowCount() === 0) {
@@ -45,7 +45,7 @@ try {
 
     if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetFilePath)) {
         // **更新對應商品的 `productPic1`**
-        $stmt = $pdo->prepare("UPDATE g2.G1_Product SET productPic1 = ? WHERE ID = ?");
+        $stmt = $pdo->prepare("UPDATE G1_Product SET productPic1 = ? WHERE ID = ?");
         $stmt->execute([$fileName, $productID]);
 
         echo json_encode(["success" => true, "imagePath" => $fileName]);

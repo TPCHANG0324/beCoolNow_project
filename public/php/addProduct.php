@@ -60,7 +60,7 @@ try {
     }
 
     // 寫入資料庫
-    $stmt = $pdo->prepare("INSERT INTO g2.G1_Product (productName, price, salePrice, saleCount , inventory, status, productPic1)
+    $stmt = $pdo->prepare("INSERT INTO G1_Product (productName, price, salePrice, saleCount , inventory, status, productPic1)
                            VALUES (?, ?, ?, ?, ?, ?, ?)");
     $stmt->execute([$productName, $price, $salePrice, $saleCount, $inventory, $status, $imagePath]);
 
