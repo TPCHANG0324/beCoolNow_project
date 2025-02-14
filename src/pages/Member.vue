@@ -2,17 +2,17 @@
   <div>
     <MainHeader />
 
-    <div class="wrapperpr">
+    <div class="wrapperpr" >
       <h1 class="profile-title">會員資訊</h1>
       <div class="profile_top">
         <div class="profile-container-special_left">
           <div class="profile-header-special">
             <img :src="userAvatar" alt="會員頭像" class="profile-pic-special" />
-            <h1 class="profile-greeting-special">{{ userData.name }} 您好！</h1>
+            <h1 class="profile-greeting-special" v-if="userData && userData.name">{{ userData.name }} 您好！</h1>
           </div>
         </div>
 
-        <div class="profile-container-special_right">
+        <div class="profile-container-special_right" v-if="userData && userData.name">
           <div class="profile-info-special">
             <div class="profile-field">
               <label for="nickname" class="label_mb">暱稱</label>
@@ -227,12 +227,14 @@ const savePhone = async () => {
   if (confirmAdd) {
     try {
       const formData = new FormData()
+      const userEmail = localStorage.getItem('userEmail')
       formData.append('phone', tempData.value.phone.trim())
-      
-      const res = await fetch('/tid103/g1/php/updateUserInfo.php', {
+      formData.append('email', userEmail)
+      const base_url = import.meta.env.VITE_AJAX_URL
+      const res = await fetch(base_url+'/updateUserInfo.php', {
         method: 'POST',
         body: formData,
-        credentials: 'include'
+        // credentials: 'include'
       })
       
       const data = await res.json()
@@ -294,7 +296,22 @@ const validateField = (field) => {
 // API 相關函數
 const getUserInfo = async () => {
   try {
-    const res = await fetch('/tid103/g1/php/getUserInfo.php')
+    const base_url = import.meta.env.VITE_AJAX_URL
+
+    const userEmail = localStorage.getItem('userEmail')
+
+
+    // const res = await fetch(base_url+'/getUserInfo.php')
+
+    const res = await fetch(base_url + '/getUserInfo.php', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        userEmail: userEmail,
+      })
+    });
     const data = await res.json()
     
     if (data.success) {

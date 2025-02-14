@@ -13,14 +13,16 @@ export function useAuth() {
         isLoading.value = true
         try {
             // 環境路徑變數 , 輔導老師建議用這個方法 (.env.development, .env.production )
-            const base_url = import.meta.env.VITE_AJAX_URL
-            const res = await fetch(base_url + '/checkLogin.php', {
-                // credentials: 'include'
-            });
-            const data = await res.json();
-            isAuthenticated.value = data.success
-            userEmail.value = data.success ? data.email : ''
-            return data.success //返回登入狀態與否
+            // const base_url = import.meta.env.VITE_AJAX_URL
+            // const res = await fetch(base_url + '/checkLogin.php', {
+            //     // credentials: 'include'
+            // });
+            // const data = await res.json();
+            // isAuthenticated.value = data.success
+            // userEmail.value = data.success ? data.email : ''
+            // localStorage.setItem('isLoggedIn', 'true');
+            const is_login = localStorage.getItem('isLoggedIn');
+            return is_login === 'true' //返回登入狀態與否
         } catch (error) {
             console.error('檢查登入狀態失敗:', error);
             router.push('/');

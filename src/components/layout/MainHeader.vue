@@ -184,6 +184,7 @@ export default {
           localStorage.removeItem('cartCount');
           // 清除手機號碼 -- 加入這一行
           localStorage.removeItem('userPhone');
+          localStorage.removeItem('isLoggedIn');
           // cartCount.value = 0;
           // localStorage.removeItem('cartCount');
           isLoggedIn.value = false;
