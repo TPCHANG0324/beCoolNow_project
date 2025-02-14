@@ -210,10 +210,13 @@ export default {
       // 注意：使用資料庫中回傳的欄位名稱 (ID 與 mediaTitle)
       const articleToEdit = articles.value.find(article => article.ID === id);
       if (articleToEdit) {
-        editArticle.value = { ...articleToEdit };
-        isEditPopupVisible.value = true;
-      }
-    };
+      console.log('編輯的文章資料：', articleToEdit); // 確認資料是否正確
+      editArticle.value = { ...articleToEdit };
+      isEditPopupVisible.value = true;
+    } else {
+      console.error('找不到要編輯的文章');
+    }
+  };
 
     const openDeletePopup = (id) => {
       currentArticleId.value = id;
@@ -233,10 +236,12 @@ export default {
     const saveArticle = async () => {
   let apiUrl = '';
   let formData = new FormData();
+
   const base_url = import.meta.env.VITE_AJAX_URL; // 若有設定環境變數，或直接寫成相對/絕對路徑
 
   if (isAddPopupVisible.value) {
     apiUrl = base_url + '/IcB_addArticle.php';
+    formData.append('id', newArticle.value.ID);
     formData.append('title', newArticle.value.title);
     formData.append('url', newArticle.value.url);
     formData.append('content', newArticle.value.content);
@@ -246,7 +251,7 @@ export default {
     }
   } else if (isEditPopupVisible.value) {
     apiUrl = base_url + '/IcB_editArticle.php';
-    formData.append('id', editArticle.value.id);
+    formData.append('id', editArticle.value.ID);
     formData.append('title', editArticle.value.title);
     formData.append('url', editArticle.value.url);
     formData.append('content', editArticle.value.content);
@@ -257,14 +262,18 @@ export default {
       formData.append('image', editArticle.value.image);
     }
   }
+  for (let [key, value] of formData.entries()) {
+    console.log(key, value);
+  }
 
   try {
+    
     const response = await fetch(apiUrl, {
       method: 'POST',
       body: formData,
     });
+    
     const result = await response.json();
-    console.log(result);
     
     if (result.success) {
       alert('儲存成功');

@@ -134,12 +134,13 @@
                 <h4>{{ currentQuestion.question }}</h4>
                 <div class="Ic_game-options_R">
                   <p v-for="(option, index) in currentQuestion.options" :key="index">
-                    {{ option }}
+                    {{ letters[index] }}. {{ option }}
                   </p>
                 </div>
                 <div class="Ic_game-buttons_R">
-                  <button v-for="(option, index) in currentQuestion.options" :key="index"
-                    :data-correct="index === currentQuestion.correctIndex" @click="submitAnswer(index)">
+                  <button v-for="(option, index) in currentQuestion.options" 
+                    :key="index"
+                    :data-correct="index === currentQuestion.answer" @click="submitAnswer(index)">
                     {{ letters[index] }}
                   </button>
                 </div>
@@ -317,103 +318,87 @@ export default {
 
     // Quiz Game
     const currentScreen = ref('start');
-    const questions = ref([
-      {
-        question: '哪個是全球暖化導致的常見現象?',
-        options: ['A.\t冬季降雪量增加', 'B.\t海平面上升', 'C.\t沙漠地區變得更涼爽'],
-        correctIndex: 1,
-      },
-      {
-        question: '哪個行為有助於減少碳排放?',
-        options: ['A.\t多吃肉', 'B.\t搭乘大眾交通工具', 'C.\t開冷氣睡覺'],
-        correctIndex: 1,
-      },
-      {
-        question: 'COP29 的主要議題之一是什麼?',
-        options: ['A.\t協助開發中國應對氣候變化', 'B.\t氣候變化對北極熊棲息地的影響', 'C.\t太陽能技術的發展和補貼政策'],
-        correctIndex: 0,
-      },
-      {
-        question: 'TWCAE 4th 台灣氣候行動高峰論壇的主要目的是什麼?',
-        options: [
-          'A.\t研究太陽能技術的最新進展',
-          'B.\t討論全球石化能源的未來走向',
-          'C.\t探討台灣如何在國際舞台上推動氣候政策',
-        ],
-        correctIndex: 2,
-      },
-      {
-        question: 'TWCAE 4th 提出的台灣碳中和目標的具體實現時間為何?',
-        options: ['A.\t2030年', 'B.\t2050年', 'C.\t2100年'],
-        correctIndex: 1,
-      },
-      {
-        question: '下列哪種能源是可再生能源?',
-        options: ['A.\t太陽能', 'B.\t石油', 'C.\t煤炭'],
-        correctIndex: 0,
-      },
-      {
-        question: '哪種溫室氣體的全球暖化潛勢(GWP)最高?',
-        options: ['A.\t二氧化碳(CO₂)', 'B.\t甲烷(CH₄)', 'C.\t氟利昂(CFCs)'],
-        correctIndex: 2,
-      },
-    ]);
+    const questions = ref([]);
     const currentQuestionIndex = ref(0);
-    const currentQuestion = ref(questions.value[currentQuestionIndex.value]);
+    const currentQuestion = ref({});
     const score = ref(0);
     const feedback = ref('');
     const letters = ['A', 'B', 'C'];
     const feedbackclass = ref(''); // 新增變數儲存動畫 class
-    const isShaking = ref(false); // 新增控制晃動的狀態
     const isSubmit = ref(false)
+    // const isShaking = ref(false); // 新增控制晃動的狀態
 
-    const startGame = () => {
-      currentScreen.value = 'quiz';
-      score.value = 0;
-      currentQuestionIndex.value = 0;
-      currentQuestion.value = questions.value[currentQuestionIndex.value];
+     // 從後端取得題目資料
+     const fetchQuestions = async () => {
+  const base_url = import.meta.env.VITE_AJAX_URL;
+  try {
+    const response = await fetch('http://localhost/beCoolNow_project/public/php/IcBqna_fetch.php');
+    if (!response.ok) {
+      throw new Error(`伺服器回應錯誤：${response.status}`);
+    }
+    const data = await response.json();
+    console.log('取得的題目資料：', data); // 除錯用
+
+    // 將資料轉換為前端預期的格式
+    questions.value = data.map(item => ({
+      question: item.question,
+      options: [item.option1, item.option2, item.option3], // 將 option1, option2, option3 轉為陣列
+      answer: item.answer // 使用後端回傳的 correctIndex
+    }));
+
+    console.log(questions.value);
+    
+
+    console.log('轉換後的題目資料：', questions.value); // 除錯用
+  } catch (error) {
+    console.error('取得題目資料失敗：', error);
+  }
+};
+
+    const startGame = async () => {
+      await fetchQuestions(); // 先取得題目
+      if (questions.value.length > 0) {
+        currentScreen.value = 'quiz';
+        score.value = 0;
+        currentQuestionIndex.value = 0;
+        currentQuestion.value = questions.value[currentQuestionIndex.value];
+        console.log('當前題目：', currentQuestion.value); // 除錯用
+      } else {
+        alert('目前沒有題目資料，請稍後再試。');
+      }
     };
 
-
     const submitAnswer = (selectedIndex) => {
-      if (isSubmit.value === true) return
-      isSubmit.value = true
-      feedbackclass.value = ''; // 重置動畫
-      // isShaking.value = false; // 重置晃動狀態
-      console.log(isShaking.value);
 
+      const traform_array = ['A', 'B', 'C'];
+      if (isSubmit.value === true) return;
+      isSubmit.value = true;
+      feedbackclass.value = '';
 
-      if (selectedIndex === currentQuestion.value.correctIndex) {
+      if (traform_array[selectedIndex] === currentQuestion.value.answer) {
         feedback.value = 'YA 答對！';
         feedbackclass.value = 'correct-animation';
         score.value++;
-        console.log(isShaking.value);
-
       } else {
         feedback.value = '答錯 QQ';
         feedbackclass.value = 'wrong-animation';
-      // 強制重新觸發晃動動畫
-    const questionElement = document.querySelector('.Ic_game-question_R');
-    questionElement.classList.remove('shake');
-    void questionElement.offsetWidth; // 觸發重排
-    questionElement.classList.add('shake');
-        
+        // 重新觸發晃動動畫
+        const questionElement = document.querySelector('.Ic_game-question_R');
+        questionElement.classList.remove('shake');
+        void questionElement.offsetWidth;
+        questionElement.classList.add('shake');
       }
 
       setTimeout(() => {
         feedback.value = '';
         feedbackclass.value = '';
-        isShaking.value = false; // 停止晃動
-        console.log(isShaking.value);
-
         if (currentQuestionIndex.value + 1 < questions.value.length) {
           currentQuestionIndex.value++;
           currentQuestion.value = questions.value[currentQuestionIndex.value];
         } else {
           currentScreen.value = 'end';
         }
-        isSubmit.value = false
-
+        isSubmit.value = false;
       }, 1000);
     };
 
