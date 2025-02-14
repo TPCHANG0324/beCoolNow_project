@@ -37,7 +37,7 @@
             </div>
             <!-- po 文顯示區 -->
             <section>
-              <article v-for="(data, index) in datas" :key="index" @click="goToArticle(data.ID)">
+              <article v-for="(data, index) in datas" :key="data.ID" @click="goToArticle(data.ID)">
                 <div class="Fb-post-article-left-X">
                   <div class="Fb-post-article-left-C-T-X">
                     <span>{{ data.category }}</span>&nbsp;‧&nbsp;<span>{{ data.time.split(' ')[0] }}</span>
@@ -45,8 +45,10 @@
                   <h6 class="Fb-post-article-left-title-X">{{ data.title }}</h6>
                   <p v-html="data.content"></p>
                   <div class="Fb-post-react-X">
-                    <i class="bi bi-hand-thumbs-up" style="font-style: normal;"><span style="padding: 0 4px;">{{ data.handup }}</span></i>
-                    <i class="bi bi-chat" style="font-style: normal;"><span style="padding: 0 4px;">{{ data.chat }}</span></i>
+                    <i class="bi bi-hand-thumbs-up" style="font-style: normal;"><span style="padding: 0 4px;">{{
+                        data.handup }}</span></i>
+                    <i class="bi bi-chat" style="font-style: normal;"><span style="padding: 0 4px;">{{ data.chat
+                        }}</span></i>
                     <i class="bi bi-share"></i>
                   </div>
                 </div>
@@ -88,12 +90,14 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue';
+import { ref, computed, onMounted, watch } from 'vue';
 import { useRouter } from 'vue-router';
 import MainFooter from '@/components/layout/MainFooter.vue';
 import MainHeader from '@/components/layout/MainHeader.vue';
 import Paginator from '@/components/paginator.vue';
 import NewsApi from '@/components/newsApi.vue';
+
+const base_url = import.meta.env.VITE_AJAX_URL //環境路徑
 
 //文章的類別
 const category = ref(['全部文章', '氣候科學', '生態危機', '綠色生活', '政策國際']);
@@ -169,20 +173,45 @@ const goToArticle = (ID) => {
 
 //文章資料從 getArticles.php 求取
 const articles = ref([])
-const fetchArticlesURL = '/tid103/g1/php/getArticles.php';
+const fetchArticlesURL = base_url + '/getArticles.php';
 const fetchArticles = async () => {
   try {
     const res = await fetch(fetchArticlesURL);
     const data = await res.json();
-    articles.value = data;
+    if (data.success) {
+      articles.value = processArticles(data.data);
+      articles.value = articles.value.filter((item) => {
+        return item.articleShelves == 1 //上架的才顯示
+      })
+      // console.log(articles.value)
+    } else {
+      console.log(data)
+    }
   } catch (error) {
     console.error("獲取文章時發生錯誤:", error);
   }
 };
 
-//封面圖(要再修改)
+const cleanContent = (htmlContent) => {
+  // 移除所有 Base64 圖片
+  const withoutImages = htmlContent.replace(/<img[^>]*>/g, '');
+  // 移除所有 HTML 標籤
+  const withoutTags = withoutImages.replace(/<[^>]*>/g, '');
+  // 移除多餘空白
+  return withoutTags.trim().replace(/\s+/g, ' ');
+}
+
+const processArticles = (articles) => {
+  return articles.map(article => ({
+    ...article,
+    content: cleanContent(article.content), // 處理 content
+  }));
+};
+
+
+//封面圖
 const getCoverImage = (Image) => {
-  return Image ? new URL(Image, import.meta.url).href : new URL('@/assets/images/defaultavatar.jpeg', import.meta.url).href
+  return Image ? Image : new URL('@/assets/images/defaultavatar.jpeg', import.meta.url).href
 }
 
 onMounted(fetchArticles);
@@ -192,8 +221,7 @@ onMounted(fetchArticles);
 //假設這是資料庫中所有文章的資料
 // const articles = ref([
 //   {
-//     category: '氣
-// 科學',
+//     category: '氣候科學',
 //     time: '2024-12-25',
 //     title: '日本異常高溫 預估2024年均溫將續創統計史新高',
 //     content:

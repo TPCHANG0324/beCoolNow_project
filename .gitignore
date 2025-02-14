@@ -36,3 +36,11 @@ dist-ssr
 
 # unplugin
 *.d.ts
+
+# env files
+.env
+.env.local
+.env.*.local
+#images
+uploads/*
+!uploads/.gitkeep

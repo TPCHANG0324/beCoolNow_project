@@ -35,7 +35,7 @@ try {
     $stmt1 = $pdo->prepare($sql1);
     $stmt1->bindValue(1, $email);
     $stmt1->bindValue(2, $Contents);
-    $stmt1->bindValue(3, $forumBoardId, PDO::PARAM_INT);
+    $stmt1->bindValue(3, $forumBoardId);
     $stmt1->execute();
 
     
@@ -47,8 +47,8 @@ try {
              )
              WHERE ID = ?";
     $stmt2 = $pdo->prepare($sql2);
-    $stmt2->bindValue(1, $forumBoardId, PDO::PARAM_INT);
-    $stmt2->bindValue(2, $forumBoardId, PDO::PARAM_INT);
+    $stmt2->bindValue(1, $forumBoardId);
+    $stmt2->bindValue(2, $forumBoardId);
     $stmt2->execute();
 
     // commit 事務

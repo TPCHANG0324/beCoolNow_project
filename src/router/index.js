@@ -2,7 +2,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import eventBus from '@/utils/eventBus';
 import { useAuth } from '@/utils/useAuth';
-import Shop_product from '@/pages/Shop_product.vue';
+// import Shop_product from '@/pages/Shop_product.vue';
 
 
 // path → component
@@ -89,7 +89,7 @@ const routes = [
     component: () => import('@/pages/Social_write.vue'),
     meta: {
       title: '寫文章',
-      requiredLogin: true
+      // requiredLogin: true
     },
   },
   {
@@ -132,6 +132,12 @@ const routes = [
       // requiredLogin: true
     },
   },
+
+  {
+    path: '/donation/confirm',
+    name: 'DonationConfirm',
+    component: () => import('@/pages/DonationConfirm.vue')
+  },
   {
     path: '/pay2/',
     component: () => import('@/pages/pay2.vue'),
@@ -148,15 +154,15 @@ const routes = [
       // requiredLogin: true
     },
   },
-  {
-    path: '/shop/:id',
-    name:'single-shop',
-    component: () => import('@/pages/Shop_product.vue'),
-    meta: {
-      title: '環保市集_商品頁',
-      // requiredLogin: true
-    },
-  },
+  // {
+  //   path: '/shop/:id',
+  //   name:'single-shop',
+  //   component: () => import('@/pages/Shop_product.vue'),
+  //   meta: {
+  //     title: '環保市集_商品頁',
+  //     // requiredLogin: true
+  //   },
+  // },
   {
     path: '/shop_cart/',
     component: () => import('@/pages/Shop_cart.vue'),
