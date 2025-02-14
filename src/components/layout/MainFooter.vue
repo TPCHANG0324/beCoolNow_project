@@ -22,7 +22,7 @@
             <RouterLink to="/About">關於我們</RouterLink>
             <!-- <a href="#">聯絡我們</a> -->
           </li>
-          <li><a href="#">好站連結</a></li>
+          <li><a href="https://tibamef2e.com/tid103/g2/home">好站連結</a></li>
           <li><RouterLink to="/shop">環保市集</RouterLink></li>
           <li><RouterLink to="/member">會員中心</RouterLink></li>
         </ul>

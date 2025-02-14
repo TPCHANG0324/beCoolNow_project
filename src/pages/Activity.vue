@@ -144,11 +144,17 @@
         透過即時的交通資訊與數據化的減碳工具，讓通勤族和環保推動者輕鬆採取更低碳、更高效的生活方式。<br />
         一“碳”究竟的友站致力於讓低碳選擇變得便捷且有趣，激發更多人為地球的可持續發展貢獻力量。
       </p>
-      <button class="learn-more-button">深入了解</button>
+      <!-- 按鈕部分 -->
+<button class="learn-more-button" @click="goToG2Site">深入了解</button>
     </div>
     <div class="image-content">
-      <img src="../assets/images/acfinial.png" alt="煙囪排放煙霧的圖片" />
-    </div>
+  <img 
+    src="../assets/images/acfinial.png" 
+    alt="煙囪排放煙霧的圖片" 
+    @click="goToG2Site"
+    style="cursor: pointer;" 
+  />
+</div>
   </div>
   <member_login class="member_login"></member_login>
   <!-- <loginPopupChange></loginPopupChange> -->
@@ -180,6 +186,11 @@ const formData = ref({
   mailContents: '',
   captcha: '',
 });
+
+// 添加導航函數
+const goToG2Site = () => {
+  window.location.href = 'https://tibamef2e.com/tid103/g2/home';
+};
 
 
 

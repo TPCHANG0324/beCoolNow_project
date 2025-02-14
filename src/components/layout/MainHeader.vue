@@ -14,7 +14,7 @@
           <li><router-link to="/social">社群中心</router-link></li>
           <li><router-link to="/city">綠境方城市</router-link></li>
           <li><router-link to="/About">關於我們</router-link></li>
-          <li><a href="#">好站連結</a></li>
+          <li><a href="https://tibamef2e.com/tid103/g2/home">好站連結</a></li>
           <li><router-link to="/shop">環保市集</router-link></li>
         </ul>
         <ul>
