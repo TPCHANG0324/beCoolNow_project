@@ -132,6 +132,12 @@ const routes = [
       // requiredLogin: true
     },
   },
+
+  {
+    path: '/donation/confirm',
+    name: 'DonationConfirm',
+    component: () => import('@/pages/DonationConfirm.vue')
+  },
   {
     path: '/pay2/',
     component: () => import('@/pages/pay2.vue'),

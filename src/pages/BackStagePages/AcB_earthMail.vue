@@ -19,27 +19,27 @@
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="(letter, index) in letters" :key="letter._id">
-                  <td class="IcB_number_H">
-                    {{ (currentPage - 1) * itemsPerPage + index + 1 }}
-                  </td>
-                  <td class="IcB_name_H">{{ letter.name }}</td>
-                  <td class="IcB_content_H">
-                    {{ letter.message.substring(0, 50) }}...
-                  </td>
-                  <td class="IcB_time_H">{{ formatDate(letter.timestamp) }}</td>
-                  <td>
-                    <button class="IcB_viewBtn_H" @click="viewLetter(letter)">
-                      查看
-                    </button>
-                  </td>
-                  <td>
-                    <button class="IcB_deleteBtn_H" @click="confirmDelete(letter._id)">
-                      <i class="fa-solid fa-trash-can"></i>
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
+  <tr v-for="(letter, index) in letters" :key="letter._id">
+    <td class="IcB_number_H">
+      {{ (currentPage - 1) * itemsPerPage + index + 1 }}
+    </td>
+    <td class="IcB_name_H">{{ letter.name }}</td>
+    <td class="IcB_content_H">
+      {{ letter.message.substring(0, 50) }}...
+    </td>
+    <td class="IcB_time_H">{{ formatDate(letter.timestamp) }}</td>
+    <td>
+      <button class="IcB_viewBtn_H" @click="viewLetter(letter)">
+        查看
+      </button>
+    </td>
+    <td>
+      <button class="IcB_deleteBtn_H" @click="confirmDelete(letter._id)">
+        <i class="fa-solid fa-trash-can"></i>
+      </button>
+    </td>
+  </tr>
+</tbody>
             </table>
           </main>
         </div>
@@ -52,16 +52,18 @@
       </div>
     </div>
 
-    <!-- 查看信件彈窗 -->
-    <div v-if="showViewPopup" class="view-popup">
-      <div class="popup-content">
-        <h3>{{ selectedLetter.name }} 的信件</h3>
-        <p>{{ selectedLetter.message }}</p>
-        <p>{{ formatDate(selectedLetter.timestamp) }}</p>
-        <button @click="closeViewPopup">關閉</button>
-      </div>
-    </div>
-
+   <!-- 查看信件彈窗 -->
+<div v-if="selectedLetter !== null" 
+     class="view-popup" 
+     @click="closeViewPopup">  <!-- 添加點擊事件 -->
+  <div class="popup-content" 
+       @click.stop>  <!-- 防止點擊內容區域時關閉 -->
+    <h3>{{ selectedLetter.name }} 的信件</h3>
+    <p>{{ selectedLetter.message }}</p>
+    <p>{{ formatDate(selectedLetter.timestamp) }}</p>
+    <button @click="closeViewPopup">關閉</button>
+  </div>
+</div>
     <!-- 刪除確認彈窗 -->
     <BackStageConfirmPopup v-if="showDeletePopup" class="AcB_DeletePopup_H">
       <span></span>
@@ -85,6 +87,8 @@ import BackStageHeader from '@/components/layout/BackStageLayout/BackStageHeader
 import BackStageConfirmPopup from '@/components/layout/BackStageLayout/BackStageConfirmPopup.vue';
 import BackStageSidebar from '@/components/items/BackStageItems/BackStageSidebar.vue';
 import BackStagePaginator from '@/components/items/BackStageItems/BackStagePaginator.vue';
+import LetterViewModal from '@/components/LetterViewModal.vue';
+
 
 const letters = ref([]);
 const totalLetters = ref(0);
@@ -98,21 +102,25 @@ const loading = ref(false);
 
 // 取得信件列表（後台 API 路徑 /api/admin/letters 需與後端對應）
 const fetchLetters = async () => {
+  if(loading.value) return;
   loading.value = true;
+
   try {
-    const response = await axios.get('/api/admin/letters', {
+    const base_url = import.meta.env.VITE_AJAX_URL;
+    const response = await axios.get(`${base_url}/admin_letters.php`, {
       params: {
         page: currentPage.value,
         limit: itemsPerPage.value
-      },
-      headers: {
-        'Content-Type': 'application/json'
-        // 如需認證，可加入 'Authorization': `Bearer ${token}`
       }
     });
 
     if (response.data.success) {
-      letters.value = response.data.letters;
+      letters.value = response.data.letters.map(letter => ({
+        _id: letter.id, // 假設資料庫中的主鍵欄位為 id
+        name: letter.poster, // 資料庫中的 poster 欄位
+        message: letter.mailContents, // 資料庫中的 mailContents 欄位
+        timestamp: letter.postTime // 資料庫中的 postTime 欄位
+      }));
       totalLetters.value = response.data.total;
     } else {
       throw new Error(response.data.message || '獲取信件失敗');
@@ -128,12 +136,12 @@ const fetchLetters = async () => {
 // 查看信件
 const viewLetter = (letter) => {
   selectedLetter.value = letter;
-  showViewPopup.value = true;
+  // showViewPopup.value = letter;
 };
 
 // 關閉查看彈窗
 const closeViewPopup = () => {
-  showViewPopup.value = false;
+  // showViewPopup.value = false;
   selectedLetter.value = null;
 };
 
@@ -152,9 +160,13 @@ const cancelDelete = () => {
 // 刪除信件（後台 API DELETE /api/admin/letters/:id）
 // 更新刪除信件函數
 const deleteLetter = async () => {
+  if(loading.value) return;
   loading.value = true;
+
   try {
-    const response = await api.delete(`/api/admin/letters/${selectedLetterId.value}`);
+    const base_url = import.meta.env.VITE_AJAX_URL;
+    const response = await axios.delete(`${base_url}/admin_letters.php/${selectedLetterId.value}`);
+    
     if (response.data.success) {
       await fetchLetters();
       alert('刪除成功');
@@ -170,10 +182,11 @@ const deleteLetter = async () => {
     selectedLetterId.value = null;
   }
 };
-
 // 分頁處理
 const handlePageChange = async (page) => {
+  if(loading.value) return;
   loading.value = true;
+
   try {
     currentPage.value = page;
     await fetchLetters();
@@ -204,3 +217,104 @@ onMounted(() => {
   fetchLetters();
 });
 </script>
+<style scoped>
+/* 遮罩層 */
+.view-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  cursor: pointer; /* 添加指針樣式表示可點擊 */
+}
+
+.popup-content {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  max-width: 80%;
+  width: fit-content;
+  min-width: 300px;
+  max-height: 80vh;
+  overflow-y: auto;
+  position: relative;
+  cursor: default; /* 內容區域恢復預設指針樣式 */
+}
+
+/* 彈窗標題 */
+.popup-content h3 {
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+/* 彈窗內文 */
+.popup-content p {
+  margin-bottom: 1rem;
+  line-height: 1.6;
+  color: #666;
+}
+
+/* 時間戳記的特殊樣式 */
+.popup-content p:last-of-type {
+  color: #999;
+  font-size: 0.9rem;
+}
+
+/* 關閉按鈕 */
+.popup-content button {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: #e0e0e0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.popup-content button:hover {
+  background-color: #d0d0d0;
+}
+
+/* 滾動條美化 */
+.popup-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.popup-content::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.popup-content::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 3px;
+}
+
+.popup-content::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* 動畫效果 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.view-popup {
+  animation: fadeIn 0.3s ease-out;
+}
+</style>

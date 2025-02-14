@@ -11,7 +11,7 @@ $email = htmlspecialchars($register['email']); //電郵
 $password = password_hash($register['password'], PASSWORD_DEFAULT); //密碼加密
 
 //建立連線
-include('connect.php');
+include('conn.php');
 
 // 檢查電郵是否已存在
 $checkSql = "SELECT COUNT(*) FROM G2_MEMBER WHERE email = ?";

@@ -9,11 +9,13 @@ ini_set('display_errors', 0);
 error_reporting(E_ALL);
 
 // 設置跨域請求頭
-header('Access-Control-Allow-Origin: http://localhost:5173'); 
-header('Access-Control-Allow-Credentials: true');
-header('Access-Control-Allow-Methods: POST, OPTIONS');
-header('Access-Control-Allow-Headers: Content-Type');
-header('Content-Type: application/json; charset=utf-8');
+// header('Access-Control-Allow-Origin: http://localhost:5173'); 
+// header('Access-Control-Allow-Credentials: true');
+// header('Access-Control-Allow-Methods: POST, OPTIONS');
+// header('Access-Control-Allow-Headers: Content-Type');
+// header('Content-Type: application/json; charset=utf-8');
+
+include('conn.php');
 
 // 錯誤日誌函數
 function logError($message, $data = null) {
@@ -25,17 +27,17 @@ function logError($message, $data = null) {
 }
 
 try {
-    session_start();
-    logError("Session 狀態", $_SESSION);
+    // session_start();
+    // logError("Session 狀態", $_SESSION);
 
-    if (!isset($_SESSION['email'])) {
+    if (!isset($_POST['email'])) {
         throw new Exception('未登入狀態');
     }
 
-    $email = $_SESSION['email'];
+    $email = $_POST['email'];
     logError("使用者 email: " . $email);
 
-    require_once('connect.php');
+    // require_once('connect.php');
 
     // 處理手機號碼更新
     if (isset($_POST['phone'])) {
