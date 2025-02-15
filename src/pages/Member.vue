@@ -9,8 +9,8 @@
           <div class="profile-header-special">
             <img :src="userAvatar" alt="會員頭像" class="profile-pic-special" />
             <h1 class="profile-greeting-special" v-if="userData && (userData.name || userData.nickname)">
-  {{ userData.nickname || userData.name }} 您好！
-</h1>
+              {{ userData.nickname || userData.name }} 您好！
+            </h1>
           </div>
         </div>
 
@@ -130,7 +130,7 @@
               </tbody>
             </table>
 
-            <table v-if="activeSection === 'articles'" class="table_arti">
+            <table v-if="activeSection === 'articles'" class="table_arti arti">
               <thead>
                 <tr>
                   <th>日期</th>
@@ -152,7 +152,13 @@
                 </tr>
               </tbody>
               <tbody v-else>
-                <p style="margin: 20px 0;">尚未有文章記錄，歡迎踴躍發表^_^</p>
+                <tr>
+                  <td colspan="6">
+                    <div style="text-align: start; margin-left: 20px;">
+                      <p>尚未有文章記錄，歡迎踴躍發表^_^</p>
+                    </div>
+                  </td>
+                </tr>
               </tbody>
             </table>
           </div>

@@ -650,7 +650,7 @@
   }
 
   .purchase-record-special table {
-    width: 97%;
+    // width: 97%;
     margin: 0px;
     overflow-x: auto;
     display: block;
@@ -928,33 +928,39 @@
 
 //文章記錄
 .table_arti {
-  background: #e6eccc;
-  width: 100%;
-  border-collapse: collapse;
-  text-align: center;
-  margin-top: 80px;
-  width: 1194px;
-  margin: 0 auto;
-  overflow-x: auto;
-  th {
-    background-color: $Ivory_white;
-    padding: 10px;
+  &.arti{
+    background: #e6eccc;
+    width: 100%;
+    border-collapse: collapse;
     text-align: center;
-  }
-  td {
-    padding: 10px;
-    text-align: center;
-    &.goto{
-      color: #d0ad44;
-      text-decoration: underline;
-      cursor: pointer;
+    margin-top: 80px;
+    width: 1194px;
+    margin: 0 auto;
+    overflow-x: auto;
+    @include max_820{
+      display: table;
     }
-    &.del{
+    th {
+      background-color: $Ivory_white;
+      padding: 10px;
+      text-align: center;
+
+    }
+    td {
+      padding: 10px;
+      text-align: center;
+      &.goto{
+        color: #d0ad44;
+        text-decoration: underline;
+        cursor: pointer;
+      }
+      &.del{
+        color: green;
+        cursor: pointer;
+      }
+    }
+    .delivered-special {
       color: green;
-      cursor: pointer;
     }
-  }
-  .delivered-special {
-    color: green;
   }
 }

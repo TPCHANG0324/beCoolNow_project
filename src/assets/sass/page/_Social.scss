@@ -950,7 +950,7 @@ main {
     background-attachment: fixed;
     width: 100%;
     position: relative;
-    margin-top: 80px;
+    padding-top: 80px;
 
     // filter: blur(3px);
     .FbW-wrapper-X {
@@ -1011,7 +1011,7 @@ main {
                             margin-left: 20px;
 
                             @include max_540() {
-                                margin-left: 5px;
+                                margin-left: 10px;
                             }
                         }
                     }
@@ -1060,7 +1060,7 @@ main {
                     color: white;
                     font-size: 12px;
 
-                    @include max_430() {
+                    @include max_540() {
                         right: 8px;
                         font-size: 10px;
                     }
