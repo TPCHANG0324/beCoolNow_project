@@ -209,6 +209,7 @@ const addToCart = (product) => {
       id: product.ID,
       name: product.productName,
       price: product.price,
+      salePrice: product.salePrice,
       num: 1, // 數量
       image: product.productPic1, // 使用第一張圖片
     });

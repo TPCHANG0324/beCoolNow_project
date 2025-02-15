@@ -450,10 +450,10 @@ const addToCart = (index) => {
   );
 
   if (existingItem) {
-    // **如果商品已存在，數量增加**
+    // 如果商品已存在，數量增加
     existingItem.num += 1;
   } else {
-    // **如果商品不存在，新增到購物車**
+    // 如果商品不存在，新增到購物車
     const newCartItem = {
       id: selectedProduct.ID,
       image: selectedProduct.productPic1
