@@ -54,7 +54,7 @@ export default {
         email: '',
         password: '',
       }
-    
+
     };
   },
   watch: {
@@ -138,7 +138,7 @@ export default {
       // this.$emit('close');
       // 如果你想要關閉 popup
       const base_url = import.meta.env.VITE_AJAX_URL
-      const url = base_url + `/login.php`;
+      const url = `${base_url}/login.php`;
       try {
         const res = await fetch(url, {
           method: 'POST',
@@ -153,10 +153,10 @@ export default {
         })
         const data = await res.json();
         if (data.success) {
-         
-          
+
+
           // const redirectPath = localStorage.getItem('redirectPath') || '/';
-          
+
           // this.$router.push(redirectPath);
 
                 // 如果所有驗證都通過

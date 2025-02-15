@@ -31,14 +31,14 @@ if ($emailExists) {
 
 $sql = "INSERT INTO G2_MEMBER(account, email, password, createTime) VALUES (?, ?, ?, NOW())";
 
-$statement = $pdo->prepare($sql);  
+$statement = $pdo->prepare($sql);
 $statement->bindValue(1, $account);
 $statement->bindValue(2, $email);
 $statement->bindValue(3, $password);
 
 // 判斷註冊成功與否
-try {  
-    // 準備並執行插入操作  
+try {
+    // 準備並執行插入操作
     if ($statement->execute()) {
         echo json_encode([
             "success" => true,
@@ -50,12 +50,12 @@ try {
             "error" => "新增失敗！",
         ]);
     }
-} catch (PDOException $e) {  
+} catch (PDOException $e) {
     echo json_encode([
         "success" => false,
         "error" => "錯誤信息：" . $e->getMessage(),
-    ]);  
-} 
+    ]);
+}
 
 $pdo = null;
 

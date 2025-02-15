@@ -112,6 +112,7 @@ export default {
     const isLoggedIn = ref(false);
     const isLogoutPopupVisible = ref(false);
     const cartCount = ref(0);
+    const base_url = import.meta.env.VITE_AJAX_URL
 
     // 檢查登入狀態
     const checkLoginStatus = async () => {
@@ -152,7 +153,7 @@ export default {
     };
 
     //詢問是否要登出的彈窗消失改為異步
-     const closeLogoutPopup = () => { 
+     const closeLogoutPopup = () => {
       return new Promise((resolve) => {
         isLogoutPopupVisible.value = false;
         setTimeout(() => {
@@ -170,9 +171,10 @@ export default {
     const handleLogout = async () => {
       const base_url = import.meta.env.VITE_AJAX_URL
       try {
-        const res = await fetch(base_url + `/logout.php`);
+
+        const res = await fetch(`${base_url}/logout.php`);
         const data = await res.json();
-        // console.log(data);
+
         if (data.success) {
           const userEmail = localStorage.getItem('userEmail');
           if (userEmail) {
@@ -244,7 +246,8 @@ export default {
       closeLogoutPopup,
       handleLogout,
       goToMember,
-      userEmail
+      userEmail,
+      base_url,
     };
   }
 };

@@ -1,164 +1,166 @@
 <!-- 已經 RWD 820/ 430 完成 -->
 <template>
-  <MainHeader></MainHeader>
-  <treeanimation v-if="treePopup !== null"></treeanimation>
-  <div class="wrapper">
-    <div class="hero-section">
-      <video autoplay muted loop playsinline class="banner-video">
-        <source src="../assets/videos/leafgrowing.mp4" type="video/mp4">
-      </video>
-      <div class="hero-text">
-        <h1>「綠色行動，從今天開始」</h1>
-        <h2>改變，讓奇蹟發生</h2>
-      </div>
-    </div>
-    <h3 class="Ac_h3">21 日減碳環保活動</h3>
-    <!-- 卡片容器 -->
-
-    <div class="daily_card" data-expanded="false">
-      <!-- 卡片範例 1 -->
-      <div
-        v-for="(item, key) in cardData.slice(0, cardLimit)"
-        :key="key"
-        class="AcB_card"
-        :class="{ darkGreen_card: key % 2 === 1 }"
-      >
-        <header>
-          <i class="fa-regular fa-circle-check"></i>
-          累積<span class="action-count">{{ item.action }}</span
-          >次行動
-        </header>
-
-        <img :src="item.img" alt="" />
-
-        <h3 class="Ac_h3">{{ item.title }}</h3>
-        <article>
-          {{ item.desc }}
-        </article>
-        <button class="btn btn-Ac_done_btn" :class="{ disabled: treePopup === key }" @click="done(key)">
-          {{ treePopup === key ? '感謝你的響應！' : '我也完成 +1' }}
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <div v-if="cardLimit !== cardData.length" id="learnMoreBtn" class="learn_more">
-    <a @click.prevent="expandCards">Learn More</a>
-  </div>
-
-  <div v-else class="collapse_section">
-    <button id="collapseBtn" class="btnclose" @click.prevent="collapseCards">收合</button>
-  </div>
-  <hr class="dashed-line" />
-
-  <!-- 信件標題 -->
-
-  <h3 class="Ac_h3"><br />給地球的一封信</h3>
-
-  <!-- 信件展示區 -->
-
-  <div class="letter-container">
-    <!-- 信件統計數字 -->
-    <!-- 模擬 MacOS 標題列 -->
-    <div class="mac-window">
-      <div class="mac-buttons">
-        <div class="mac-btn red"></div>
-        <div class="mac-btn yellow"></div>
-        <div class="mac-btn green"></div>
-      </div>
-    </div>
-    <div class="stats-bar">現在總共有 {{ totalLetters }} 封給地球的信</div>
-
-    <!-- 信件卡片結構修改 -->
-    <div class="letter scrollable-content">
-      <div v-for="(letter, index) in letters" :key="index" class="letter_place1">
-        <div class="letter-card">
-          <p class="letter-content">
-            {{ letter.mailContents }}
-          </p>
-          <div class="signature-line">
-            <div class="spacer"></div>
-            <div class="name">- {{ letter.poster }}</div>
-          </div>
+  <div>
+    <MainHeader></MainHeader>
+    <treeanimation v-if="treePopup !== null"></treeanimation>
+    <div class="wrapper">
+      <div class="hero-section">
+        <video autoplay muted loop playsinline class="banner-video">
+          <source src="../assets/videos/leafgrowing.mp4" type="video/mp4">
+        </video>
+        <div class="hero-text">
+          <h1>「綠色行動，從今天開始」</h1>
+          <h2>改變，讓奇蹟發生</h2>
         </div>
-        <img :src="getAvatarPath(letter.avatar)" :alt="letter.poster + '頭像'" class="avatar" />
+      </div>
+      <h3 class="Ac_h3">21 日減碳環保活動</h3>
+      <!-- 卡片容器 -->
+
+      <div class="daily_card" data-expanded="false">
+        <!-- 卡片範例 1 -->
+        <div
+          v-for="(item, key) in cardData.slice(0, cardLimit)"
+          :key="key"
+          class="AcB_card"
+          :class="{ darkGreen_card: key % 2 === 1 }"
+        >
+          <header>
+            <i class="fa-regular fa-circle-check"></i>
+            累積<span class="action-count">{{ item.action }}</span
+            >次行動
+          </header>
+
+          <img :src="item.img" alt="" />
+
+          <h3 class="Ac_h3">{{ item.title }}</h3>
+          <article>
+            {{ item.desc }}
+          </article>
+          <button class="btn btn-Ac_done_btn" :class="{ disabled: treePopup === key }" @click="done(key)">
+            {{ treePopup === key ? '感謝你的響應！' : '我也完成 +1' }}
+          </button>
+        </div>
       </div>
     </div>
-  </div>
 
-  <!-- 背景圖片容器 -->
-  <div class="background-container">
-    <img src="../assets/images/ACd.png" alt="背景圖片" class="background-image" />
-
-    <!-- 信件表單區 -->
-    <div class="letter-form-container">
-      <form class="letter-form" @submit="handleSubmit">
-       <!-- 姓名輸入欄 -->
-<div class="form-group">
-  <label for="poster" class="message0">姓名或暱稱：</label>
-  <input 
-    id="poster_Ac" 
-    v-model="formData.poster" 
-    type="text" 
-    placeholder="請輸入您的姓名" 
-    required
-  />
-</div>
-
-<!-- 信件內容輸入框 -->
-<div class="form-group">
-  <label for="mailContents" class="message">信件內容：</label>
-  <textarea 
-    id="mailContents" 
-    v-model="formData.mailContents" 
-    placeholder="寫下你的信給地球吧！" 
-    required
-  ></textarea>
-</div>
-
-<!-- 驗證碼區塊 -->
-<div class="captcha-group">
-  <label for="captcha" class="message1">請輸入驗證碼：</label>
-  <input 
-    id="captcha" 
-    v-model="formData.captcha" 
-    type="text" 
-    required
-  />
-  <span class="captcha-code">{{ currentCaptcha }}</span>
-  <button type="button" class="refresh-captcha" @click="generateCaptcha">換一張</button>
-</div>
-
-        <!-- 送出按鈕 -->
-        <button type="submit" class="submit-btn">寫給地球的一封信</button>
-      </form>
+    <div v-if="cardLimit !== cardData.length" id="learnMoreBtn" class="learn_more">
+      <a @click.prevent="expandCards">Learn More</a>
     </div>
-  </div>
 
-  <hr class="dashed-line" />
-
-  <div class="carbon-reduction-card">
-    <div class="text-content">
-      <h1>今日減碳行動：<br />讓我們一‘碳’究境碳排放的真相</h1>
-      <p>
-        透過即時的交通資訊與數據化的減碳工具，讓通勤族和環保推動者輕鬆採取更低碳、更高效的生活方式。<br />
-        一“碳”究境的友站致力於讓低碳選擇變得便捷且有趣，激發更多人為地球的可持續發展貢獻力量。
-      </p>
-      <!-- 按鈕部分 -->
-<button class="learn-more-button" @click="goToG2Site">深入了解</button>
+    <div v-else class="collapse_section">
+      <button id="collapseBtn" class="btnclose" @click.prevent="collapseCards">收合</button>
     </div>
-    <div class="image-content">
-  <img 
-    src="../assets/images/acfinial.png" 
-    alt="煙囪排放煙霧的圖片" 
-    @click="goToG2Site"
-    style="cursor: pointer;" 
-  />
-</div>
+    <hr class="dashed-line" />
+
+    <!-- 信件標題 -->
+
+    <h3 class="Ac_h3"><br />給地球的一封信</h3>
+
+    <!-- 信件展示區 -->
+
+    <div class="letter-container">
+      <!-- 信件統計數字 -->
+      <!-- 模擬 MacOS 標題列 -->
+      <div class="mac-window">
+        <div class="mac-buttons">
+          <div class="mac-btn red"></div>
+          <div class="mac-btn yellow"></div>
+          <div class="mac-btn green"></div>
+        </div>
+      </div>
+      <div class="stats-bar">現在總共有 {{ totalLetters }} 封給地球的信</div>
+
+      <!-- 信件卡片結構修改 -->
+      <div class="letter scrollable-content">
+        <div v-for="(letter, index) in letters" :key="index" class="letter_place1">
+          <div class="letter-card">
+            <p class="letter-content">
+              {{ letter.mailContents }}
+            </p>
+            <div class="signature-line">
+              <div class="spacer"></div>
+              <div class="name">- {{ letter.poster }}</div>
+            </div>
+          </div>
+          <img :src="getAvatarPath(letter.avatar)" :alt="letter.poster + '頭像'" class="avatar" />
+        </div>
+      </div>
+    </div>
+
+    <!-- 背景圖片容器 -->
+    <div class="background-container">
+      <img src="../assets/images/ACd.png" alt="背景圖片" class="background-image" />
+
+      <!-- 信件表單區 -->
+      <div class="letter-form-container">
+        <form class="letter-form" @submit="handleSubmit">
+        <!-- 姓名輸入欄 -->
+  <div class="form-group">
+    <label for="poster" class="message0">姓名或暱稱：</label>
+    <input
+      id="poster_Ac"
+      v-model="formData.poster"
+      type="text"
+      placeholder="請輸入您的姓名"
+      required
+    />
   </div>
-  <member_login class="member_login"></member_login>
-  <!-- <loginPopupChange></loginPopupChange> -->
-  <MainFooter></MainFooter>
+
+  <!-- 信件內容輸入框 -->
+  <div class="form-group">
+    <label for="mailContents" class="message">信件內容：</label>
+    <textarea
+      id="mailContents"
+      v-model="formData.mailContents"
+      placeholder="寫下你的信給地球吧！"
+      required
+    ></textarea>
+  </div>
+
+  <!-- 驗證碼區塊 -->
+  <div class="captcha-group">
+    <label for="captcha" class="message1">請輸入驗證碼：</label>
+    <input
+      id="captcha"
+      v-model="formData.captcha"
+      type="text"
+      required
+    />
+    <span class="captcha-code">{{ currentCaptcha }}</span>
+    <button type="button" class="refresh-captcha" @click="generateCaptcha">換一張</button>
+  </div>
+
+          <!-- 送出按鈕 -->
+          <button type="submit" class="submit-btn">寫給地球的一封信</button>
+        </form>
+      </div>
+    </div>
+
+    <hr class="dashed-line" />
+
+    <div class="carbon-reduction-card">
+      <div class="text-content">
+        <h1>今日減碳行動：<br />讓我們一‘碳’究境碳排放的真相</h1>
+        <p>
+          透過即時的交通資訊與數據化的減碳工具，讓通勤族和環保推動者輕鬆採取更低碳、更高效的生活方式。<br />
+          一“碳”究境的友站致力於讓低碳選擇變得便捷且有趣，激發更多人為地球的可持續發展貢獻力量。
+        </p>
+        <!-- 按鈕部分 -->
+  <button class="learn-more-button" @click="goToG2Site">深入了解</button>
+      </div>
+      <div class="image-content">
+    <img
+      src="../assets/images/acfinial.png"
+      alt="煙囪排放煙霧的圖片"
+      @click="goToG2Site"
+      style="cursor: pointer;"
+    />
+  </div>
+    </div>
+    <member_login class="member_login"></member_login>
+    <!-- <loginPopupChange></loginPopupChange> -->
+    <MainFooter></MainFooter>
+  </div>
 </template>
 
 <script setup>
@@ -356,7 +358,7 @@ const expandCards = () => {
 
 
 const collapseCards = () => {
-  
+
   cardLimit.value = 6;
   // nextTick(() => {
   //   const dailyCard = document.querySelector('.daily_card');
@@ -386,10 +388,10 @@ const done = (key) => {
   // isClicked.value = true
   // 遞增 action 計數
   cardData.value[key].action += 1;
-  
+
   // 儲存到 localStorage
   localStorage.setItem('cardData', JSON.stringify(cardData.value));
-  
+
   // 設定彈出視窗
   treePopup.value = key;
 
@@ -425,18 +427,18 @@ const generateCaptcha = () => {
 // 改進的 handleSubmit 函數
 const handleSubmit = async (e) => {
   e.preventDefault();
-  
+
   // 驗證所有必填欄位
   if (!formData.value.poster.trim()) {
     alert('請輸入姓名或暱稱');
     return;
   }
-  
+
   if (!formData.value.mailContents.trim()) {
     alert('請輸入信件內容');
     return;
   }
-  
+
   if (!formData.value.captcha) {
     alert('請輸入驗證碼');
     return;
@@ -456,7 +458,7 @@ const handleSubmit = async (e) => {
       mailContents: formData.value.mailContents.trim(),
       postTime: new Date().toISOString()
     };
-    
+
     console.log('準備發送的 letterData:', letterData);
 
     const base_url = import.meta.env.VITE_AJAX_URL
@@ -468,7 +470,7 @@ const handleSubmit = async (e) => {
         ...letterData,
         id: response.data.id || Date.now()
       });
-      
+
       totalLetters.value++;
       formData.value = { poster: '', mailContents: '', captcha: '' };
       generateCaptcha();
@@ -487,7 +489,7 @@ const handleSubmit = async (e) => {
       responseStatus: error.response?.status,
       responseData: error.response?.data
     });
-    
+
     alert('提交失敗：' + error.message);
   }
 };
@@ -495,7 +497,7 @@ const handleSubmit = async (e) => {
 
 // 修改 API 配置
 const api = axios.create({
-  baseURL: import.meta.env.PROD 
+  baseURL: import.meta.env.PROD
     ? 'http://localhost/tid103/g1/api'
     : '/tid103/g1/api',
   withCredentials: true,
@@ -511,7 +513,7 @@ const fetchLetters = async () => {
   try {
     const base_url = import.meta.env.VITE_AJAX_URL;
     const response = await axios.get(`${base_url}/letters.php`);
-    
+
     if (response.data?.success) {
       letters.value = response.data.letters.map(letter => ({
         poster: letter.poster,
@@ -519,7 +521,7 @@ const fetchLetters = async () => {
         avatar: defaultAvatar,
         postTime: letter.postTime
       }));
-      
+
       totalLetters.value = response.data.total;
     }
   } catch (error) {
@@ -549,12 +551,12 @@ const fetchLetters = async () => {
 onMounted(async () => {
   try {
     await fetchLetters(); // 從資料庫獲取信件
-    
+
     if (letters.value.length === 0) {
       // 如果資料庫沒有資料，可以選擇是否要設置默認值
       useDefaultLetters();
     }
-    
+
     const initializeLetterCardWidth = () => {
       const firstCard = document.querySelector('.letter-card');
       if (firstCard) {

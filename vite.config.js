@@ -81,6 +81,9 @@ export default ({ mode }) => {
       warmup: {
         clientFiles: ['./index.html', './src/{views,components}/*'],
       },
+      optimizeDeps: {
+        exclude: ['ecpay_aio_nodejs']
+      }
     },
 
     build: {
