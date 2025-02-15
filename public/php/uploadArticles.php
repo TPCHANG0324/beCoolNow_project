@@ -1,8 +1,8 @@
 <?php
-header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Methods: POST');
-header('Access-Control-Allow-Credentials: true');
-header('Content-Type: application/json; charset=utf-8');
+// header('Access-Control-Allow-Origin: *');
+// header('Access-Control-Allow-Methods: POST');
+// header('Access-Control-Allow-Credentials: true');
+// header('Content-Type: application/json; charset=utf-8');
 
 session_start();
 
@@ -18,6 +18,7 @@ if (!isset($_SESSION['login']) || $_SESSION['login'] !== true) {
 $email = $_SESSION['email'];
 
 include('connect.php');
+include('conn.php');
 
 try {
     $pdo->beginTransaction();

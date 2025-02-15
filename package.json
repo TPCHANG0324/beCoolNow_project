@@ -46,6 +46,7 @@
     "dayjs": "^1.11.10",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
+    "ecpay_aio_nodejs": "^1.2.2",
     "gsap": "^3.12.7",
     "jquery": "^3.7.1",
     "mitt": "^3.0.1",

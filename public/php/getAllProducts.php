@@ -19,9 +19,16 @@ try {
             productPic1,
             productPic2,
             productPic3,
-            OrderDetail_ID
-        FROM g2.G1_Product
-        ORDER BY ID DESC";
+            productPic4,
+            productPic5,
+            feature,
+            product_details1,
+            product_details2,
+            product_details3,
+            OrderDetail_ID,
+            status
+        FROM G1_Product
+        ORDER BY ID ASC";
 
     $stmt = $pdo->prepare($sql);
     $stmt->execute();

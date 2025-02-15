@@ -4,12 +4,13 @@ header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Origin: *");
 
 //建立連線
-include('connect.php');
+// include('connect.php');
+include('conn.php');
 
 $articleId = isset($_GET['id']) ? $_GET['id'] : null;
 
 $sql = "
-    SELECT 
+    SELECT
         f.ID,
         f.articleTitle AS title,
         f.articleShelves,
@@ -61,9 +62,9 @@ try {
         }
 
         // 轉換成會員圖像路徑 (可選處理)
-        if ($article['imagePath']) {
-            $article['imagePath'] = 'data:image/jpeg;base64,' . base64_encode(file_get_contents($article['imagePath']));
-        }
+        // if ($article['imagePath']) {
+        //     $article['imagePath'] = 'data:image/jpeg;base64,' . base64_encode(file_get_contents($article['imagePath']));
+        // }
     }
 
     // 回傳 JSON 格式資料

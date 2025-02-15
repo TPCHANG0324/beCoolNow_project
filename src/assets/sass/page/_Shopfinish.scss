@@ -11,13 +11,121 @@
     overflow: hidden;
   }
 
+  /* 流程顯示 */
+  .Sp-checkout-nav-X {
+    text-align: center;
+    margin-top: 0;
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -54%);
+    width: 100%;
+
+    .breadcrumb {
+      display: flex;
+      align-items: center; /* 垂直置中 */
+      text-decoration: none;
+      padding-top: 61px;
+
+    .si_bread_r{
+      display: flex;
+      margin-right: auto; /* 讓 si_bread_r 靠左邊 */
+      a {
+        color: #000;
+        cursor: pointer;
+      }
+
+      a:hover {
+        color: rgb(54, 54, 224)
+      }
+    }
+
+    }
+      /* 每一個圓圈 */
+      .Sp-step-X {
+        display: inline-block;
+        vertical-align: top;
+        width: 240px;
+        max-width: 33%;
+        margin-left: -2px;
+        margin-right: -2px;
+        color: black;
+
+        &.active.Sp-badge-X::after {
+          background-color: $Yellow_1!important;
+        }
+
+        &:first-child .Sp-badge-X::before {
+          width: 50%;
+          left: 50%;
+        }
+
+        &:last-child .Sp-badge-X::before {
+          width: 50%;
+          right: 50%;
+        }
+
+
+        span {
+          display: block;
+          padding: 2px 5px;
+          // color: $Green_1;
+          color: #fffff0;
+        }
+
+        span.Sp-badge-X {
+          position: relative;
+          background-color: transparent;
+          height: 50px;
+          line-height: 50px;
+          padding: 0;
+          color: $Green_2;
+          text-align: center;
+          white-space: nowrap;
+
+          &::before {
+            content: " ";
+            background-color: $Ivory_white;
+            height: 2px;
+            width: 100%;
+            position: absolute;
+            left: 0;
+            top: 50%;
+            margin-top: -1px;
+            z-index: 0;
+            box-sizing: border-box;
+          }
+
+          &::after {
+            content: " ";
+            background-color: $Light_Yellow;
+            transform: translate(-50%, -50%);
+            border-radius: 15px;
+            height: 30px;
+            width: 30px;
+            left: 50%;
+            top: 50%;
+            position: absolute;
+            z-index: 0;
+            box-sizing: border-box;
+          }
+
+          .Sp-badge-text-X {
+            position: absolute;
+            width: 100%;
+            z-index: 1;
+            line-height: 50px;
+          }
+        }
+      }
+  }
 
   .fs_overlay_R {
     position: absolute;
-    top: 40%;
+    top: 55%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(255, 255, 240, 0.8);
     border-radius: 20px;
     padding: 40px 79px;
     text-align: center;
