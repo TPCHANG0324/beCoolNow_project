@@ -8,13 +8,13 @@ include('conn.php'); // 連接資料庫
 
 // **檢查請求**
 $data = json_decode(file_get_contents("php://input"), true);
-if (!isset($data["productID"]) || !isset($data["status"])) {
+if (!isset($data["productID"]) || !isset($data["productStatus"])) {
     echo json_encode(["success" => false, "error" => "缺少必要參數"]);
     exit;
 }
 
 $productID = intval($data["productID"]);
-$status = ($data["status"] === 1) ? 1 : 0; // ✅ 確保只接受 1 或 0
+$productStatus = ($data["productStatus"] === 1) ? 1 : 0; // ✅ 確保只接受 1 或 0
 
 try {
     // **確認商品是否存在**
@@ -26,8 +26,8 @@ try {
     }
 
     // **更新商品狀態**
-    $stmt = $pdo->prepare("UPDATE G1_Product SET status = ? WHERE ID = ?");
-    $stmt->execute([$status, $productID]);
+    $stmt = $pdo->prepare("UPDATE G1_Product SET productStatus = ? WHERE ID = ?");
+    $stmt->execute([$productStatus, $productID]);
 
     echo json_encode(["success" => true]);
 } catch (PDOException $e) {
