@@ -1,11 +1,11 @@
 <?php
 
-header("Content-Type: application/json; charset=UTF-8");
-header('Access-Control-Allow-Credentials: true');
-header("Access-Control-Allow-Origin: *");
+// header("Content-Type: application/json; charset=UTF-8");
+// header('Access-Control-Allow-Credentials: true');
+// header("Access-Control-Allow-Origin: *");
 
 //建立連線
-include('connect.php');
+include('conn.php');
 
 $forumBoardId = isset($_GET['id']) ? $_GET['id'] : '';
 

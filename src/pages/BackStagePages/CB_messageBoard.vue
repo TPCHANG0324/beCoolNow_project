@@ -23,9 +23,7 @@
                     <th class="CB_contentM_H">留言內容</th>
                     <th class="CB_editDateM_H">留言日期</th>
                     <th class="CB_report_H">被檢舉數量</th>
-                    <!-- <th class="CB_goOffM_H">下架</th> -->
-                    <th></th>
-                    <th></th>
+                    <th class="CB_goOffM_H">狀態</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -35,6 +33,7 @@
                     <td class="CB_content_H">{{ mes.content }}</td>
                     <td>{{ mes.messageDate.split(' ')[0] }}</td>
                     <td>{{ mes.reportCount }}</td>
+                    <td>{{ mes.messageShelves ? '上架' : '下架' }}</td>
                     <td><button class="MmB_editBtn_H" @click="openEditPopup(mes)">編輯與查看</button></td>
                   </tr>
                 </tbody>

@@ -94,14 +94,14 @@ import { Navigation, Pagination } from 'swiper/modules';
 import { useRouter } from 'vue-router';
 const router = useRouter();
 
-//由這段判斷是否經過登入驗證，並且取得用戶的 email 作為資料的獲取渠道
-const { isAuthenticated, userEmail, checkAuth, isLoading } = useAuth()
+//由這段判斷是否經過登入驗證
+const { checkAuth, isLoading } = useAuth()
 
 const title = ref(''); //標題
 const theme = ref('主題選擇');
 const hasThumbnail = ref(false); //是否選擇封面圖片
 const editorData = ref(''); //編輯器
-const email = userEmail.value //使用者的 email
+const email = localStorage.getItem('userEmail') //使用者的 email
 
 //主題的索引對照
 const themeMapping = {
@@ -252,6 +252,10 @@ const isUploading = ref(false);
 
 //送出文章
 const handleSubmit = async () => {
+  const isLoggin = checkAuth()
+  if(!isLoggin){
+    alert('請先登入！')
+  }
   //檢查標題
   if (title.value.length < 5 || title.value.length > 40) {
     alert('標題必須在 5 至 40 字之間')
@@ -283,7 +287,7 @@ const handleSubmit = async () => {
     theme: themeMapping[theme.value],
     hasThumbnail: hasThumbnail.value,
     thumbnailUrl: hasThumbnail.value && slides.value.length > 0 ? slides.value[getCurrentSlide()].img : null,
-    email: email
+    userEmail: email
   };
 
   try {

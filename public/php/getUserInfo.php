@@ -43,6 +43,7 @@ if ($data) {
     echo json_encode([
         "success" => true,
         "data" => [
+            "id"       => $data['id'],
             "name"     => $data['name'],
             "nickname" => $data['nickname'],
             "email"    => $data['email'],

@@ -223,6 +223,11 @@
   margin-left: 400px;
   margin-top: 30px;
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+  &.exp {
+    padding: 0;
+    margin: 0;
+  }
 }
 
 // .purchase-record-special {
@@ -233,6 +238,13 @@
   // justify-content: space-between;
   margin-left: 80px;
   border: none;
+
+  &.prof {
+    margin-left: 0;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 40px;
+  }
 }
 
 .purchase-record-special {
@@ -259,6 +271,13 @@
     text-shadow: #545454 1px 1px 1px;
     border: none;
     cursor: pointer;
+
+    &.rec {
+      margin-top: 0;
+      margin-bottom: 0;
+      font-size: 28px;
+      width: auto;
+    }
 
     &:hover {
       text-decoration: underline 5px;
@@ -393,6 +412,23 @@
   font-size: 16px;
 }
 
+@media (max-width: 960px) {
+  .purchase-record-special .btn2_btn {
+    margin-left: 0;
+    justify-content: center;
+    flex-direction: column-reverse;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .btn2_btn.prof {
+    padding: 0;
+    padding-bottom: 20px;
+  }
+}
+
+
+
 // 平板樣式 (小於 820px)
 @media (max-width: 820px) {
   .wrapperpr {
@@ -426,7 +462,7 @@
 
   .profile-greeting-special {
     order: 2;
-    width: 80%;
+    // width: 80%;
     margin: 0 auto;
   }
 
@@ -458,7 +494,7 @@
   .profile-stats-special {
     order: 4;
     margin: 20px auto;
-    width: 80%;
+    // width: 80%;
     display: flex;
     justify-content: center;
     margin: 0 auto;
@@ -501,7 +537,7 @@
   .profile-stats-special {
     order: 4;
     margin: 20px auto;
-    width: 120%;
+    // width: 120%;
     display: flex;
     justify-content: center;
     margin-left: 0;
@@ -531,7 +567,7 @@
     .profile-stats-special {
       order: 4;
       margin: 20px auto;
-      width: 120%;
+      // width: 120%;
       display: flex;
       justify-content: center;
       margin-left: 0;
@@ -634,6 +670,25 @@
   }
 }
 
+@media (max-width: 560px) {
+  .profile_bottom .btn2_btn_top {
+    gap: 20px;
+  }
+
+  .purchase-record-special .purchase-record-btn11.rec,
+  .purchase-record-special .purchase-record-btn12.rec {
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 500px) {}
+
+@media (max-width: 430px) {
+  .btn2_btn.prof {
+    padding-bottom: 0;
+  }
+}
+
 // 手機樣式 (小於 430px)
 @media (max-width: 430px) {
 
@@ -671,7 +726,7 @@
     font-style: normal;
     font-weight: 700;
     line-height: normal;
-    padding-left: 40px;
+    // padding-left: 40px;
     margin-top: 40px;
     margin-bottom: 40px;
     background-color: initial;
@@ -809,7 +864,7 @@
       flex-direction: column;
       align-items: center;
       margin-left: 0;
-      margin-right: 50px;
+      // margin-right: 50px;
     }
 
     .purchase-record-special {
@@ -869,4 +924,37 @@
 
   }
 
+}
+
+//文章記錄
+.table_arti {
+  background: #e6eccc;
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+  margin-top: 80px;
+  width: 1194px;
+  margin: 0 auto;
+  overflow-x: auto;
+  th {
+    background-color: $Ivory_white;
+    padding: 10px;
+    text-align: center;
+  }
+  td {
+    padding: 10px;
+    text-align: center;
+    &.goto{
+      color: #d0ad44;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+    &.del{
+      color: green;
+      cursor: pointer;
+    }
+  }
+  .delivered-special {
+    color: green;
+  }
 }

@@ -28,8 +28,20 @@ try {
     $articleData = json_decode(file_get_contents("php://input"), true);
 
     // 基本資料驗證
-    if (empty($articleData['title']) || empty($articleData['content'])) {
+    if (empty($articleData['id']) || empty($articleData['title']) || empty($articleData['content'])) {
         throw new Exception("缺少必要資料");
+    }
+
+    // 首先驗證文章是否存在且屬於該用戶
+    $checkSql = "SELECT fb.ID 
+                 FROM G1_ForumBoard fb 
+                 JOIN G2_MEMBER m ON fb.member_ID = m.id 
+                 WHERE fb.ID = ? AND m.email = ?";
+    $checkStmt = $pdo->prepare($checkSql);
+    $checkStmt->execute([$articleData['id'], $email]);
+
+    if ($checkStmt->rowCount() === 0) {
+        throw new Exception("無權限修改此文章或文章不存在");
     }
 
     // 處理文章內容中的圖片
@@ -62,30 +74,35 @@ try {
         return 'src="' . $line . date('Y/m/') . $fileName . '"';
     }, $content);
 
-    // 準備封面圖片 URL（假設前端傳來封面圖片 URL）
-    $coverImage = isset($articleData['hasThumbnail']) && $articleData['hasThumbnail'] ? $articleData['thumbnailUrl'] : null;
-
     // 插入文章
-    $sql = "INSERT INTO G1_ForumBoard (articleTitle, content, articletype_ID, member_ID, coverImageUrl) 
-            VALUES (?, ?, ?, (SELECT id FROM G2_MEMBER WHERE email = ?), ?)";
+    $sql = "UPDATE G1_ForumBoard 
+            SET articleTitle = ?, 
+                content = ?, 
+                articletype_ID = ?, 
+                coverImageUrl = ?,
+                editDate = CURRENT_TIMESTAMP
+            WHERE ID = ? AND member_ID = (SELECT id FROM G2_MEMBER WHERE email = ?)";
 
     $stmt = $pdo->prepare($sql);
     $stmt->execute([
         htmlspecialchars($articleData['title']),
         $content,
         $articleData['theme'],
-        $email,
-        $articleData['hasThumbnail'] ? $articleData['thumbnailUrl'] : null
+        $articleData['hasThumbnail'] ? $articleData['thumbnailUrl'] : null,
+        $articleData['id'],
+        $email
     ]);
 
-    $articleId = $pdo->lastInsertId();
+    if ($stmt->rowCount() === 0) {
+        throw new Exception("更新失敗，文章不存在或無權限");
+    }
 
     $pdo->commit();
 
     echo json_encode([
         "success" => true,
-        "message" => "文章發布成功！",
-        "articleId" => $articleId
+        "message" => "文章更新成功！",
+        "articleId" => $articleData['id']
     ]);
 } catch (Exception $e) {
     $pdo->rollBack();

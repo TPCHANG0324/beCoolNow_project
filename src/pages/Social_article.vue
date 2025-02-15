@@ -163,8 +163,17 @@ const handup = async () => {
 
 //自己的留言區：需要大頭貼和暱稱
 const getAvatar = async () => {
+  const userEmail = localStorage.getItem('userEmail')
   try {
-    const res = await fetch(base_url + `/getMemberInfo.php`)
+    const res = await fetch(base_url + `/getMemberInfo.php`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        userEmail
+      })
+    })
     const data = await res.json()
     if (data.success) {
       selfId.value = data.data.id
@@ -223,6 +232,10 @@ const toggleMessages = () => {
 
 //檢舉留言：要登入才能檢舉，已經檢舉過紀錄在 localstorage，就不能再檢舉了
 const report = async (messageID) => {
+  if (!checkLogin) {
+    alert('請先登入！')
+    return
+  }
   const check = confirm('是否要檢舉該則留言？');
   if (!check) {
     return
@@ -247,7 +260,7 @@ const report = async (messageID) => {
       alert(data.message)
       records.push(messageID)
       localStorage.setItem('reportMessage', JSON.stringify(records));
-    }else{
+    } else {
       alert(data.message)
     }
   } catch (err) {
@@ -268,7 +281,8 @@ const deleteSelf = async (messageID) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        messageID
+        messageID,
+        forumBoardId: props.id
       })
     })
     const data = await res.json()
@@ -289,6 +303,11 @@ const otherAvatarSource = (avatar) => {
 
 //輸入留言
 const sendMessage = async () => {
+  const userEmail = localStorage.getItem('userEmail')
+  if (!checkLogin) {
+    alert('請先登入！')
+    return
+  }
   if (message.value) {
     try {
       const res = await fetch(base_url + `/sendMessage.php`, {
@@ -299,7 +318,8 @@ const sendMessage = async () => {
         body: JSON.stringify({
           id: selfId.value,
           contents: message.value,
-          forumBoardId: props.id
+          forumBoardId: props.id,
+          userEmail
         })
       })
       const data = await res.json()

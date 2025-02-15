@@ -22,7 +22,7 @@ export function useAuth() {
             // userEmail.value = data.success ? data.email : ''
             // localStorage.setItem('isLoggedIn', 'true');
             const is_login = localStorage.getItem('isLoggedIn');
-            return is_login === 'true' //返回登入狀態與否
+            return is_login //返回登入狀態與否
         } catch (error) {
             console.error('檢查登入狀態失敗:', error);
             router.push('/');

@@ -93,6 +93,14 @@ const routes = [
     },
   },
   {
+    path:'/social_write/edit/:id',
+    name: 'article-edit',
+    component: () => import('@/pages/Social_edit.vue'),
+    meta:{
+      title:'修改文章',
+    }
+  },
+  {
     path: '/popup/',
     component: () => import('@/pages/popup.vue'),
     meta: {
@@ -154,15 +162,15 @@ const routes = [
       // requiredLogin: true
     },
   },
-  // {
-  //   path: '/shop/:id',
-  //   name:'single-shop',
-  //   component: () => import('@/pages/Shop_product.vue'),
-  //   meta: {
-  //     title: '環保市集_商品頁',
-  //     // requiredLogin: true
-  //   },
-  // },
+  {
+    path: '/shop/:id',
+    name:'single-shop',
+    component: () => import('@/pages/Shop_product.vue'),
+    meta: {
+      title: '環保市集_商品頁',
+      // requiredLogin: true
+    },
+  },
   {
     path: '/shop_cart/',
     component: () => import('@/pages/Shop_cart.vue'),
