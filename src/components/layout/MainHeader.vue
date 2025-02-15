@@ -14,7 +14,7 @@
           <li><router-link to="/social">社群中心</router-link></li>
           <li><router-link to="/city">綠境方城市</router-link></li>
           <li><router-link to="/About">關於我們</router-link></li>
-          <li><a href="#">好站連結</a></li>
+          <li><a href="https://tibamef2e.com/tid103/g2/home">好站連結</a></li>
           <li><router-link to="/shop">環保市集</router-link></li>
         </ul>
         <ul>
@@ -112,6 +112,7 @@ export default {
     const isLoggedIn = ref(false);
     const isLogoutPopupVisible = ref(false);
     const cartCount = ref(0);
+    const base_url = import.meta.env.VITE_AJAX_URL
 
     // 檢查登入狀態
     const checkLoginStatus = async () => {
@@ -152,7 +153,7 @@ export default {
     };
 
     //詢問是否要登出的彈窗消失改為異步
-     const closeLogoutPopup = () => { 
+     const closeLogoutPopup = () => {
       return new Promise((resolve) => {
         isLogoutPopupVisible.value = false;
         setTimeout(() => {
@@ -170,9 +171,10 @@ export default {
     const handleLogout = async () => {
       const base_url = import.meta.env.VITE_AJAX_URL
       try {
-        const res = await fetch(base_url + `/logout.php`);
+
+        const res = await fetch(`${base_url}/logout.php`);
         const data = await res.json();
-        // console.log(data);
+
         if (data.success) {
           const userEmail = localStorage.getItem('userEmail');
           if (userEmail) {
@@ -244,7 +246,8 @@ export default {
       closeLogoutPopup,
       handleLogout,
       goToMember,
-      userEmail
+      userEmail,
+      base_url,
     };
   }
 };

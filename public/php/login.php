@@ -6,6 +6,8 @@
 // header('Content-Type: application/json; charset=utf-8');
 include('conn.php');
 
+
+
 session_start();
 $login =  json_decode(file_get_contents("php://input"), true);
 $email = htmlspecialchars($login['email']); //防止注射攻擊
@@ -14,10 +16,10 @@ $password = $login['password'];
 // include('connect.php');
 
 
-$sql = "SELECT password FROM G2_MEMBER WHERE email = ?";  
-$statement = $pdo->prepare($sql);  
-$statement->bindValue(1, $email);  
-$statement->execute();  
+$sql = "SELECT password FROM G2_MEMBER WHERE email = ?";
+$statement = $pdo->prepare($sql);
+$statement->bindValue(1, $email);
+$statement->execute();
 
 $data = $statement->fetch(PDO::FETCH_ASSOC);
 

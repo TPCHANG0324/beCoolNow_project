@@ -103,9 +103,9 @@ export default {
         return;
       }
 
-      
+
       const base_url = import.meta.env.VITE_AJAX_URL
-      const url = base_url + `/register.php`;
+      const url = `${base_url}/register.php`;
       try {
         const res = await fetch(url, {
           method: 'POST',

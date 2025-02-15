@@ -8,7 +8,9 @@
         <div class="profile-container-special_left">
           <div class="profile-header-special">
             <img :src="userAvatar" alt="會員頭像" class="profile-pic-special" />
-            <h1 class="profile-greeting-special" v-if="userData && userData.name">{{ userData.name }} 您好！</h1>
+            <h1 class="profile-greeting-special" v-if="userData && (userData.name || userData.nickname)">
+  {{ userData.nickname || userData.name }} 您好！
+</h1>
           </div>
         </div>
 
@@ -270,7 +272,11 @@ const savePhone = async () => {
     validationErrors.value.phone = ''
   }
 }
-
+// 新增 editField 函式，用來啟動編輯狀態並將原本資料帶入輸入框
+const editField = (field) => {
+  editStates.value[field] = true
+  tempData.value[field] = userData.value[field]
+}
 
 
 // 完整的驗證函數
@@ -471,6 +477,7 @@ const getPersonalRecords = async () => {
   }
 }
 
+
 //獲取個人文章記錄
 const getPersonalArticles = async () => {
   const memberId = userData.value['id'];
@@ -540,45 +547,58 @@ const updateArticle = (ID) => {
   router.push(`/social_write/edit/${ID}`);
 }
 
+
+// API 更新函式（適用於所有欄位）
+
 const updateUserInfo = async (field, value) => {
   try {
     const formData = new FormData()
+    const userEmail = localStorage.getItem('userEmail')
     formData.append(field, value)
 
-    const res = await fetch('/tid103/g1/php/updateUserInfo.php', {
+
+    formData.append('email', userEmail)
+
+    const base_url = import.meta.env.VITE_AJAX_URL
+    const res = await fetch(base_url + '/updateUserInfo.php', {
       method: 'POST',
       body: formData
     })
 
     const data = await res.json()
     if (data.success) {
-      getUserInfo() // 重新獲取更新後的資料
-      localStorage.setItem('userData', JSON.stringify(userData.value)) // 更新本地存儲
+      // 更新本地資料
+      userData.value[field] = value
+      alert('更新成功！')
+      return true
     } else {
-      console.error('更新用戶資料失敗')
+      alert(data.message || '更新失敗，請稍後再試')
+      return false
     }
   } catch (err) {
     console.error(`更新用戶資料錯誤：${err}`)
+    alert('系統錯誤，請稍後再試')
+    return false
   }
 }
 
-// UI 操作相關函數
-const editField = (field) => {
-  tempData.value[field] = userData.value[field]
-  editStates.value[field] = true
-  validationErrors.value[field] = ''
-}
 
+// 修改 saveField 函數
 const saveField = async (field) => {
   if (!validateField(field)) return
 
   if (tempData.value[field]?.trim()) {
-    await updateUserInfo(field, tempData.value[field].trim())
-    editStates.value[field] = false
-    tempData.value[field] = ''
-    validationErrors.value[field] = ''
+    const success = await updateUserInfo(field, tempData.value[field].trim())
+    if (success) {
+      editStates.value[field] = false
+      tempData.value[field] = ''
+      validationErrors.value[field] = ''
+      // 可選：重新獲取使用者資料來同步最新資訊
+      // await getUserInfo()
+    }
   }
 }
+
 
 const formatEmail = (email) => {
   return email?.replace(/(.{30})/g, '$1\n') || ''

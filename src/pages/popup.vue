@@ -138,7 +138,7 @@ export default {
       // this.$emit('close');
       // 如果你想要關閉 popup
       const base_url = import.meta.env.VITE_AJAX_URL
-      const url = base_url + `/login.php`;
+      const url = `${base_url}/login.php`;
       try {
         const res = await fetch(url, {
           method: 'POST',
