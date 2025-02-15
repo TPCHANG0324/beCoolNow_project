@@ -20,9 +20,11 @@
                 </tr>
               </thead>
               <tbody>
-                <!-- 使用 v-for 動態渲染從資料庫取得的文章資料 -->
-                <tr v-for="(article, index) in articles" :key="article.ID">
-                  <td class="IcB_number_H">{{ index + 1 }}</td>
+                <!-- 使用 paginatedArticles 替代原本的 articles -->
+                <tr v-for="(article, index) in paginatedArticles" :key="article.ID">
+                  <td class="IcB_number_H">
+                    {{ index + (currentPage - 1) * itemsPerPage + 1 }}
+                  </td>
                   <td class="IcB_title_H">{{ article.mediaTitle }}</td>
                   <td>
                     <button class="IcB_editBtn_H" @click="openEditPopup(article.ID)">編輯</button>
@@ -37,7 +39,12 @@
             </table>
           </main>
         </div>
-        <BackStagePaginator></BackStagePaginator>
+        <!-- 使用自訂分頁器元件 -->
+        <Paginator 
+          :currentPage="currentPage" 
+          :totalPages="totalPages" 
+          @page-changed="handlePageChange" 
+        />
       </div>
     </div>
 
@@ -134,12 +141,14 @@
 </template>
 
 <script>
-import { ref, onMounted } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import BackStageSidebar from '@/components/items/BackStageItems/BackStageSidebar.vue';
 import BackStagePaginator from '@/components/items/BackStageItems/BackStagePaginator.vue';
 import BackStageHeader from '@/components/layout/BackStageLayout/BackStageHeader.vue';
 import BackStageSmallPopup from '@/components/layout/BackStageLayout/BackStageSmallPopup.vue';
 import BackStageConfirmPopup from '@/components/layout/BackStageLayout/BackStageConfirmPopup.vue';
+// 引入自訂分頁器元件
+import Paginator from '@/components/paginator.vue';
 
 export default {
   components: {
@@ -148,6 +157,7 @@ export default {
     BackStageHeader,
     BackStageSmallPopup,
     BackStageConfirmPopup,
+    Paginator,
   },
   setup() {
     // -------------------------------
@@ -156,8 +166,7 @@ export default {
     const articles = ref([]);
     const IcB_fetchArticles = async () => {
       try {
-        // 環境路徑變數 , 輔導老師建議用這個方法 (.env.development, .env.production )
-        const base_url = import.meta.env.VITE_AJAX_URL
+        const base_url = import.meta.env.VITE_AJAX_URL;
         const response = await fetch(base_url + '/IcB_fetchArticles.php'); 
         if (!response.ok) {
           throw new Error(`伺服器回應錯誤：${response.status}`);
@@ -199,24 +208,23 @@ export default {
     });
 
     const openAddPopup = () => {
-  console.log('openAddPopup triggered');
-  newArticle.value = { title: '', url: '', content: '', image: '' };
-  isAddPopupVisible.value = true;
-  console.log('isAddPopupVisible:', isAddPopupVisible.value);
-};
+      console.log('openAddPopup triggered');
+      newArticle.value = { title: '', url: '', content: '', image: '' };
+      isAddPopupVisible.value = true;
+      console.log('isAddPopupVisible:', isAddPopupVisible.value);
+    };
 
     const openEditPopup = (id) => {
       currentArticleId.value = id;
-      // 注意：使用資料庫中回傳的欄位名稱 (ID 與 mediaTitle)
       const articleToEdit = articles.value.find(article => article.ID === id);
       if (articleToEdit) {
-      console.log('編輯的文章資料：', articleToEdit); // 確認資料是否正確
-      editArticle.value = { ...articleToEdit };
-      isEditPopupVisible.value = true;
-    } else {
-      console.error('找不到要編輯的文章');
-    }
-  };
+        console.log('編輯的文章資料：', articleToEdit);
+        editArticle.value = { ...articleToEdit };
+        isEditPopupVisible.value = true;
+      } else {
+        console.error('找不到要編輯的文章');
+      }
+    };
 
     const openDeletePopup = (id) => {
       currentArticleId.value = id;
@@ -234,67 +242,61 @@ export default {
     // 3. 儲存文章（新增或編輯）
     // -------------------------------
     const saveArticle = async () => {
-  let apiUrl = '';
-  let formData = new FormData();
+      let apiUrl = '';
+      let formData = new FormData();
+      const base_url = import.meta.env.VITE_AJAX_URL;
 
-  const base_url = import.meta.env.VITE_AJAX_URL; // 若有設定環境變數，或直接寫成相對/絕對路徑
+      if (isAddPopupVisible.value) {
+        apiUrl = base_url + '/IcB_addArticle.php';
+        formData.append('id', newArticle.value.ID);
+        formData.append('title', newArticle.value.title);
+        formData.append('url', newArticle.value.url);
+        formData.append('content', newArticle.value.content);
+        if (newArticle.value.imageFile) {
+          formData.append('image', newArticle.value.imageFile);
+        }
+      } else if (isEditPopupVisible.value) {
+        apiUrl = base_url + '/IcB_editArticle.php';
+        formData.append('id', editArticle.value.ID);
+        formData.append('title', editArticle.value.title);
+        formData.append('url', editArticle.value.url);
+        formData.append('content', editArticle.value.content);
+        if (editArticle.value.imageFile) {
+          formData.append('image', editArticle.value.imageFile);
+        } else {
+          formData.append('image', editArticle.value.image);
+        }
+      }
 
-  if (isAddPopupVisible.value) {
-    apiUrl = base_url + '/IcB_addArticle.php';
-    formData.append('id', newArticle.value.ID);
-    formData.append('title', newArticle.value.title);
-    formData.append('url', newArticle.value.url);
-    formData.append('content', newArticle.value.content);
-    // 如果有選取檔案就送出檔案物件
-    if (newArticle.value.imageFile) {
-      formData.append('image', newArticle.value.imageFile);
-    }
-  } else if (isEditPopupVisible.value) {
-    apiUrl = base_url + '/IcB_editArticle.php';
-    formData.append('id', editArticle.value.ID);
-    formData.append('title', editArticle.value.title);
-    formData.append('url', editArticle.value.url);
-    formData.append('content', editArticle.value.content);
-    if (editArticle.value.imageFile) {
-      formData.append('image', editArticle.value.imageFile);
-    } else {
-      // 如果沒有更新圖片，則可以傳送原本的圖片路徑
-      formData.append('image', editArticle.value.image);
-    }
-  }
-  for (let [key, value] of formData.entries()) {
-    console.log(key, value);
-  }
+      // 除錯用：印出所有送出的資料
+      for (let [key, value] of formData.entries()) {
+        console.log(key, value);
+      }
 
-  try {
-    
-    const response = await fetch(apiUrl, {
-      method: 'POST',
-      body: formData,
-    });
-    
-    const result = await response.json();
-    
-    if (result.success) {
-      alert('儲存成功');
-      // 儲存成功後重新撈取最新資料
-      await IcB_fetchArticles();
-    } else {
-      alert('儲存失敗：' + result.message);
-    }
-  } catch (error) {
-    console.error('儲存文章錯誤：', error);
-  }
-  closePopup();
-};
-
+      try {
+        const response = await fetch(apiUrl, {
+          method: 'POST',
+          body: formData,
+        });
+        const result = await response.json();
+        if (result.success) {
+          alert('儲存成功');
+          await IcB_fetchArticles();
+        } else {
+          alert('儲存失敗：' + result.message);
+        }
+      } catch (error) {
+        console.error('儲存文章錯誤：', error);
+      }
+      closePopup();
+    };
 
     // -------------------------------
     // 4. 刪除文章
     // -------------------------------
     const deleteArticle = async () => {
       try {
-        const base_url = import.meta.env.VITE_AJAX_URL
+        const base_url = import.meta.env.VITE_AJAX_URL;
         const response = await fetch(base_url + `/IcB_deleteArticle.php?id=${currentArticleId.value}`);
         const result = await response.json();
         if (result.success) {
@@ -313,28 +315,50 @@ export default {
     // 5. 處理圖片上傳
     // -------------------------------
     const handleFileChange = (event) => {
-  const file = event.target.files[0];
-  if (file) {
-    // 儲存檔案物件，用於上傳
-    newArticle.value.imageFile = file;
-    // 產生臨時預覽 URL
-    newArticle.value.image = URL.createObjectURL(file);
-  }
-};
+      const file = event.target.files[0];
+      if (file) {
+        newArticle.value.imageFile = file;
+        newArticle.value.image = URL.createObjectURL(file);
+      }
+    };
 
-const handleEditFileChange = (event) => {
-  const file = event.target.files[0];
-  if (file) {
-    editArticle.value.imageFile = file;
-    editArticle.value.image = URL.createObjectURL(file);
-  }
-};
+    const handleEditFileChange = (event) => {
+      const file = event.target.files[0];
+      if (file) {
+        editArticle.value.imageFile = file;
+        editArticle.value.image = URL.createObjectURL(file);
+      }
+    };
 
+    // -------------------------------
+    // 6. 分頁器功能
+    // -------------------------------
+    const currentPage = ref(1);
+    const itemsPerPage = 10;
+    const totalPages = computed(() => Math.ceil(articles.value.length / itemsPerPage));
+    const paginatedArticles = computed(() => {
+      const start = (currentPage.value - 1) * itemsPerPage;
+      const end = start + itemsPerPage;
+      return articles.value.slice(start, end);
+    });
+
+    const handlePageChange = (newPage) => {
+      currentPage.value = newPage;
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      });
+    };
 
     return {
-      // 文章列表
+      // 文章列表與分頁
       articles,
-      // Popup 與表單
+      currentPage,
+      itemsPerPage,
+      totalPages,
+      paginatedArticles,
+      handlePageChange,
+      // Popup 與表單資料
       isAddPopupVisible,
       isEditPopupVisible,
       isDeletePopupVisible,
