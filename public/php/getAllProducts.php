@@ -26,7 +26,7 @@ try {
             product_details2,
             product_details3,
             OrderDetail_ID,
-            status
+            productStatus
         FROM G1_Product
         ORDER BY ID ASC";
 
