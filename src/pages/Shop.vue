@@ -95,10 +95,10 @@ const fetchProducts = async () => {
     }
 
     const data = await response.json();
-    // **確保 `status` 轉換正確**
+    // **確保 `productStatus` 轉換正確**
     products.value = data.map(product => ({
       ...product,
-      status: Number(product.status) === 1 ? "goTop" : "goOff", // ✅ 轉換 1 ➝ "goTop"，0 ➝ "goOff"
+      productStatus: Number(product.productStatus) === 1 ? "goTop" : "goOff", // ✅ 轉換 1 ➝ "goTop"，0 ➝ "goOff"
     }));
     // products.value = data;
   } catch (error) {
@@ -168,7 +168,7 @@ const filteredAndSortedProducts = computed(() => {
   }
 
   // ✅ 1️⃣ 過濾掉 "下架" 商品
-  result = result.filter(product => product.status === "goTop");
+  result = result.filter(product => product.productStatus === "goTop");
 
    // ✅ 2️⃣ 排序
   switch (selectedSort.value) {

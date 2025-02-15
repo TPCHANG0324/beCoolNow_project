@@ -7,7 +7,7 @@ include('conn.php'); // 連接資料庫
 
 try {
     // **確保前端有傳來商品資訊**
-    if (!isset($_POST['productName'], $_POST['price'], $_POST['salePrice'], $_POST['inventory'], $_POST['status'])) {
+    if (!isset($_POST['productName'], $_POST['price'], $_POST['salePrice'], $_POST['inventory'], $_POST['productStatus'])) {
         echo json_encode(["success" => false, "error" => "❌ 缺少必要的欄位"]);
         exit;
     }
@@ -16,7 +16,7 @@ try {
     $price = $_POST['price'];
     $salePrice = $_POST['salePrice'];
     $inventory = $_POST['inventory'];
-    $status = isset($_POST['status']) ? ($_POST['status'] === "goOff" ? 1 : 0) : 0; // ✅ `"goTop"` 轉 `1`，`"goOff"` 轉 `0`
+    $productStatus = isset($_POST['productStatus']) ? ($_POST['productStatus'] === "goOff" ? 1 : 0) : 0; // ✅ `"goTop"` 轉 `1`，`"goOff"` 轉 `0`
     $saleCount = 0; // ✅ 新增商品時，`saleCount` 預設為 `0`
 
     // 處理圖片上傳
@@ -60,9 +60,9 @@ try {
     }
 
     // 寫入資料庫
-    $stmt = $pdo->prepare("INSERT INTO G1_Product (productName, price, salePrice, saleCount , inventory, status, productPic1)
+    $stmt = $pdo->prepare("INSERT INTO G1_Product (productName, price, salePrice, saleCount , inventory, productStatus, productPic1)
                            VALUES (?, ?, ?, ?, ?, ?, ?)");
-    $stmt->execute([$productName, $price, $salePrice, $saleCount, $inventory, $status, $imagePath]);
+    $stmt->execute([$productName, $price, $salePrice, $saleCount, $inventory, $productStatus, $imagePath]);
 
     $newID = $pdo->lastInsertId();
     echo json_encode(["success" => true, "newID" => $newID, "imagePath" => $imagePath]);

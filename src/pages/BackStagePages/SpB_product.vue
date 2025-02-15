@@ -34,7 +34,7 @@
                   <td>{{ product.price }}</td>
                   <td>{{ product.salePrice }}</td>
                   <td>{{ product.saleCount }}</td>
-                  <td :class="{'text-red': product.status === 'goOff'}">{{ product.status === "goTop" ? "上架" : "下架" }}</td>
+                  <td :class="{'text-red': product.productStatus === 'goOff'}">{{ product.productStatus === "goTop" ? "上架" : "下架" }}</td>
                   <!-- 呼叫 openEditPopup -->
                   <td><button class="MmB_editBtn_H" @click="openEditPopup(product)">編輯與查看</button></td>
                 </tr>
@@ -98,7 +98,7 @@
           <article class="SpB_rightBlockPopup_H">
             <div>
               <p>狀態:&nbsp;</p>
-              <select v-model="newProduct.status">
+              <select v-model="newProduct.productStatus">
                 <option value="goTop">上架</option>
                 <option value="goOff">下架</option>
               </select>
@@ -154,7 +154,7 @@
           <article class="SpB_rightBlockPopup_H">
             <div>
               <p>狀態:&nbsp;</p>
-              <select v-model="editingProduct.status">
+              <select v-model="editingProduct.productStatus">
                 <!-- @change="updateProductStatus(editingProduct)" -->
                 <option value="goTop">上架</option>
                 <option value="goOff">下架</option>
@@ -209,7 +209,7 @@ export default {
       salePrice: 0,
       inventory: 0,
       saleCount:0,
-      status: "goOff", // 預設為下架
+      productStatus: "goOff", // 預設為下架
       image: null, // 存圖片檔案
     });
 
@@ -223,19 +223,19 @@ export default {
         }
         let data = await response.json();
 
-        // 🚀 **確保 status 是數字，並轉換成 "goTop" / "goOff"**
+        // 🚀 **確保 productStatus 是數字，並轉換成 "goTop" / "goOff"**
         data = data.map(product => {
-        const numericStatus = Number(product.status); // **確保 `status` 是數字**
+        const numericStatus = Number(product.productStatus); // **確保 `productStatus` 是數字**
         return {
           ...product,
-          status: numericStatus === 1 ? "goTop" : "goOff", // **正確轉換上下架狀態**
+          productStatus: numericStatus === 1 ? "goTop" : "goOff", // **正確轉換上下架狀態**
         };
       });
 
         // **商品排序：上架的排前面，然後依據 ID 由小到大**
         products.value = [...data].sort((a, b) => {
-          if (a.status === "goTop" && b.status === "goOff") return -1;
-          if (a.status === "goOff" && b.status === "goTop") return 1;
+          if (a.productStatus === "goTop" && b.productStatus === "goOff") return -1;
+          if (a.productStatus === "goOff" && b.productStatus === "goTop") return 1;
           return a.ID - b.ID;
         });
 
@@ -266,7 +266,7 @@ export default {
       console.log("選中的商品 ID:", product.ID); // ✅ 確保正確抓取 ID
       Object.assign(editingProduct, product); // ✅ 更新當前編輯的商品資訊
       productID.value = product.ID; // ✅ 設定商品 ID
-      editingProduct.status = product.status; // ✅ 確保 `status` 是最新的
+      editingProduct.productStatus = product.productStatus; // ✅ 確保 `productStatus` 是最新的
 
       // **確保 imagePreview 總是顯示該商品的最新 productPic1**
       // imagePreview.value = product.productPic1;
@@ -284,7 +284,7 @@ export default {
       salePrice: 0,
       saleCount: 0,
       inventory: 0,
-      status: "上架",
+      productStatus: "上架",
     });
 
 
@@ -412,11 +412,11 @@ export default {
   }
 
   let updatedImagePath = editingProduct.productPic1; // 預設圖片路徑
-  const newStatus = editingProduct.status === "goTop" ? 1 : 0;
+  const newStatus = editingProduct.productStatus === "goTop" ? 1 : 0;
 
   // **1️⃣ 確認是否變更上下架狀態**
   const originalProduct = products.value.find((p) => p.ID === editingProduct.ID);
-  if (originalProduct && originalProduct.status !== editingProduct.status) {
+  if (originalProduct && originalProduct.productStatus !== editingProduct.productStatus) {
     const confirmMessage = newStatus === 1 ? "確定要上架此商品嗎？" : "確定要下架此商品嗎？";
     if (!window.confirm(confirmMessage)) {
       return;
@@ -456,7 +456,7 @@ export default {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         productID: editingProduct.ID,
-        status: newStatus,
+        productStatus: newStatus,
         productPic1: updatedImagePath,
       }),
     });
@@ -470,15 +470,15 @@ export default {
       if (index !== -1) {
         products.value[index] = {
           ...editingProduct,
-          status: newStatus === 1 ? "goTop" : "goOff", // ✅ 確保顯示正確的上下架文字
+          productStatus: newStatus === 1 ? "goTop" : "goOff", // ✅ 確保顯示正確的上下架文字
           productPic1: updatedImagePath,
         };
       }
 
       // **5️⃣ 確保商品排序**
       products.value = [...products.value].sort((a, b) => {
-        if (a.status === "goTop" && b.status === "goOff") return -1;
-        if (a.status === "goOff" && b.status === "goTop") return 1;
+        if (a.productStatus === "goTop" && b.productStatus === "goOff") return -1;
+        if (a.productStatus === "goOff" && b.productStatus === "goTop") return 1;
         return a.ID - b.ID;
       });
 
@@ -519,7 +519,7 @@ export default {
         price: 0,
         salePrice: 0,
         inventory: 0,
-        status: "goOff", // ✅ 預設回「下架」
+        productStatus: "goOff", // ✅ 預設回「下架」
         productPic1: null,
       });
       imagePreview.value = null; // ✅ 清除圖片預覽
@@ -541,7 +541,7 @@ export default {
     formData.append("price", newProduct.value.price);
     formData.append("salePrice", newProduct.value.salePrice);
     formData.append("inventory", newProduct.value.inventory);
-    formData.append("status", newProduct.value.status === "goTop" ? 1 : 0); // ✅ 轉換為數字
+    formData.append("productStatus", newProduct.value.productStatus === "goTop" ? 1 : 0); // ✅ 轉換為數字
     if (newProduct.value.image) {
       formData.append("image", newProduct.value.image);
     } else {
@@ -572,7 +572,7 @@ export default {
           saleCount: 0, // 預設為 0，讓畫面立即顯示
           inventory: newProduct.value.inventory,
           productPic1: result.imagePath || null, // 圖片路徑
-          status: newProduct.value.status,
+          productStatus: newProduct.value.productStatus,
         });
         resetNewProduct(); // 清空輸入欄位 & 圖片
         closePopup();
@@ -612,7 +612,7 @@ export default {
         price: 0,
         salePrice: 0,
         inventory: 0,
-        status: "goOff",
+        productStatus: "goOff",
         image: null,
       };
       imagePreview.value = null;
