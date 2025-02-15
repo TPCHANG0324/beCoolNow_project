@@ -10,7 +10,7 @@ include('conn.php');
 $articleId = isset($_GET['id']) ? $_GET['id'] : null;
 
 $sql = "
-    SELECT 
+    SELECT
         f.ID,
         f.articleTitle AS title,
         f.articleShelves,

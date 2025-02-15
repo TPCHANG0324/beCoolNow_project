@@ -10,10 +10,10 @@
     min-height: 100vh;
     overflow: hidden;
   }
-  
+
     .fs_overlay_R {
       position: absolute;
-      top: 40%;
+      top: 55%;
       left: 50%;
       transform: translate(-50%, -50%);
       background-color: rgba(255, 255, 255, 0.8);
@@ -21,34 +21,34 @@
       padding: 40px 79px;
       text-align: center;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  
+
       h2 {
         font-size: 43px;
         font-weight: bold;
         color: #2e4e3f;
         margin-bottom: 40px;
       }
-  
+
       p {
         font-size: 32px;
         font-weight: bold;
         color: #2e4e3f;
         margin-bottom: 40px;
       }
-  
+
       .btn {
         border-radius: 30px;
         width: 320px;
       }
-  
+
     }
-  
-  
-  
+
+
+
     .SF_footer {
       .footer {
         margin-top: auto;
       }
     }
-  
+
   }
