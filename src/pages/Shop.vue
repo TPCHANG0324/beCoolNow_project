@@ -161,9 +161,9 @@ const filteredAndSortedProducts = computed(() => {
   // ✅ 1️⃣ 價格篩選
   if (selectedPriceRange.value) {
     result = result.filter(product => {
-      if (selectedPriceRange.value === '500+') return product.price >= 500;
+      if (selectedPriceRange.value === '500+') return product.salePrice >= 500;
       const [min, max] = selectedPriceRange.value.split('-').map(Number);
-      return product.price >= min && product.price <= max;
+      return product.salePrice >= min && product.salePrice <= max;
     });
   }
 
@@ -179,10 +179,10 @@ const filteredAndSortedProducts = computed(() => {
       result.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
       break;
     case 'priceDesc':
-      result.sort((a, b) => b.price - a.price);
+      result.sort((a, b) => b.salePrice - a.salePrice);
       break;
     case 'priceAsc':
-      result.sort((a, b) => a.price - b.price);
+      result.sort((a, b) => a.salePrice - b.salePrice);
       break;
   }
 
