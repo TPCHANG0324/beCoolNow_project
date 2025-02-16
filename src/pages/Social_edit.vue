@@ -312,48 +312,11 @@ const handleSubmit = async () => {
         if (!data.success) {
             throw new Error(data.message);
         } else {
-            // const modal = document.createElement('div');
-            // modal.style.cssText = `
-            //     position: fixed;
-            //     top: 50%;
-            //     left: 50%;
-            //     transform: translate(-50%, -50%);
-            //     background: white;
-            //     padding: 20px;
-            //     border: 1px solid #ccc;
-            //     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            //     z-index: 1000;
-            //     text-align: center;
-            // `;
-
-            // let timeLeft = 10;
-            // const updateText = () => {
-            //     modal.innerHTML = `
-            //         <p>${data.message}</p>
-            //         <p>${timeLeft} 秒後自動跳轉，點擊確定立即跳轉</p>
-            //         <button onclick="this.parentElement.remove(); window.location.href='/social/article/${articleId}'">確定</button>
-            //     `;
-            // };
-
-            // updateText();
-            // document.body.appendChild(modal);
-
-            // const timer = setInterval(() => {
-            //     timeLeft--;
-            //     updateText();
-            //     if (timeLeft <= 0) {
-            //         clearInterval(timer);
-            //         modal.remove();
-            //         router.push(`/social/article/${articleId}`);
-            //     }
-            // }, 1000);
-            // 創建一個自定義的確認對話框
             const result = await showCustomAlert(data.message);
             if (result) {
                 // 用戶點擊確定，立即跳轉
                 router.push(`/social/article/${articleId}`);
             }
-            //router.push(`/social/article/${data.articleId}`);
         }
     } catch (error) {
         console.error('Error:', error);
@@ -458,12 +421,6 @@ const showCustomAlert = (message) => {
 //圖片的 swiper
 const modules = [Navigation, Pagination];
 const slides = ref([]);
-// const swiperBreakpoints = {
-//   830: { slidesPerView: 3, spaceBetween: 10 },/
-//   810: { slidesPerView: 2, spaceBetween: 10 },
-//   0: { slidesPerView: 1, spaceBetween: 10 },
-// };
-
 let swiperInstance = null;
 
 const onSwiper = (swiper) => {
@@ -507,7 +464,6 @@ const fetchArticle = async () => {
         alert('獲取文章數據失敗');
     }
 };
-
 
 
 

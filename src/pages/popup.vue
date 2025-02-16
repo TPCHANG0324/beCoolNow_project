@@ -155,9 +155,8 @@ export default {
         if (data.success) {
 
 
-          // const redirectPath = localStorage.getItem('redirectPath') || '/';
-
-          // this.$router.push(redirectPath);
+          const redirectPath = localStorage.getItem('redirectPath') || '/';
+          this.$router.push(redirectPath);
 
           // 如果所有驗證都通過
           // alert('登入成功!歡迎光臨涼城即時');

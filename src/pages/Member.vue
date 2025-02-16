@@ -146,7 +146,7 @@
                   <td>{{ item.time.split(' ')[0] }}</td>
                   <td>{{ item.category }}</td>
                   <td @click="goToArticle(item.ID)" class="goto">{{ item.title }}</td>
-                  <td>{{ item.articleShelves === 1 ? '上架' : '下架' }}</td>
+                  <td :style="{ color: item.articleShelves ? '#545454' : '#DA0606' }">{{ item.articleShelves === 1 ? '上架' : '下架' }}</td>
                   <td class="del" @click="updateArticle(item.ID)"><i class="bi bi-pencil-square"></i></td>
                   <td class="del" @click="deleteArticle(item.ID)"><i class="bi bi-trash3-fill"></i></td>
                 </tr>

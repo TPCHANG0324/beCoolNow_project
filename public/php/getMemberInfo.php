@@ -34,18 +34,28 @@ $sql = "
         FROM G2_MEMBER WHERE email = ?";
 $statement = $pdo->prepare($sql);
 $statement->bindValue(1, $email);
-$statement->execute();
 
-$data = $statement->fetch(PDO::FETCH_ASSOC);
 
-if ($data) {
-    echo json_encode([
-        "success" => true,
-        "data" => $data
-    ]);
-} else {
-    echo json_encode([
-        "success" => false,
-        "message" => "找不到會員資料"
-    ]);
+try {
+    $statement->execute();
+    $data = $statement->fetch(PDO::FETCH_ASSOC);
+    if ($data) {
+        $fieldsToDecode = ['nickname', 'email']; //要解碼的欄位
+        foreach ($fieldsToDecode as $field) {
+            if (isset($data[$field])) {
+                $data[$field] = htmlspecialchars_decode($data[$field]);
+            }
+        }
+        echo json_encode([
+            "success" => true,
+            "data" => $data
+        ]);
+    } else {
+        echo json_encode([
+            "success" => false,
+            "message" => "找不到會員資料"
+        ]);
+    }
+} catch (PDOException $e) {
+    echo json_encode(["error" => "資料庫連線失敗: " . $e->getMessage()]);
 }

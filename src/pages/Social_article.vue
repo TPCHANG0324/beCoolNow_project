@@ -125,8 +125,11 @@ const getAvatarSource = () => {
 
 //點讚：預設所有人都可以點讚
 const handupActive = ref(true);
+const isLoading = ref(false); //執行狀態
 const handup = async () => {
+  if(isLoading.value) return
   try {
+    isLoading.value = true
     const res = await fetch(base_url + '/updateLikes.php', {
       method: 'POST',
       headers: {
@@ -158,6 +161,8 @@ const handup = async () => {
     }
   } catch (error) {
     console.error('點讚操作失敗:', error);
+  }finally{
+    isLoading.value = false //重置狀態
   }
 }
 
