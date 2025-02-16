@@ -191,7 +191,7 @@ const userData = ref({
   email: '',
 })
 
-const userAvatar = ref(new URL('@/assets/images/defaultavatar.jpeg', import.meta.url).href)
+const userAvatar = ref(new URL('@/assets/images/defaultavater2.png', import.meta.url).href)
 const tempData = ref({
   nickname: '',
   phone: '',
@@ -361,7 +361,7 @@ const getUserInfo = async () => {
       // if (userData.value.phone) {
       //   isPhoneAdded.value = true
       // }
-      userAvatar.value = data.data.avatar || new URL('@/assets/images/defaultavatar.jpeg', import.meta.url).href
+      userAvatar.value = data.data.avatar || new URL('@/assets/images/defaultavater2.png', import.meta.url).href
     } else {
       console.error('獲取用戶資料失敗')
     }

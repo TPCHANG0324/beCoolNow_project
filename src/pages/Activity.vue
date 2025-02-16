@@ -343,7 +343,7 @@ const cardLimit = ref(6);
 const treePopup = ref(null);
 const xiaoming = new URL('@/assets/images/Ac08.jpg', import.meta.url).href;
 const earthMan = new URL('@/assets/images/newAC.png', import.meta.url).href;
-const defaultAvatar = new URL('@/assets/images/defaultavatar.jpeg', import.meta.url).href;
+const defaultAvatar = new URL('@/assets/images/defaultavater2.png', import.meta.url).href;
 
 const expandCards = () => {
 
@@ -533,8 +533,8 @@ const fetchLetters = async () => {
 const useDefaultLetters = () => {
   letters.value = [
     {
-      poster: '小明',
-      mailContents: '親愛的地球：\n你好！我是小明，我最喜歡在公園裡跑來跑去，也喜歡去海邊玩沙子。\n媽媽說，我們要愛護你，不能亂丟垃圾，也不能浪費水。地球，我想告訴你，以後我會和同學一起種很多小樹，讓你變得更漂亮。希望等我長大，你還是一個很美麗的大地球！',
+      poster: '瑋宸',
+      mailContents: '親愛的地球：\n你好！我是瑋宸，我最喜歡在公園裡跑來跑去，也喜歡去海邊玩沙子。\n媽媽說，我們要愛護你，不能亂丟垃圾，也不能浪費水。地球，我想告訴你，以後我會和同學一起種很多小樹，讓你變得更漂亮。希望等我長大，你還是一個很美麗的大地球！',
       avatar: getAvatarPath(xiaoming),
     },
     {
