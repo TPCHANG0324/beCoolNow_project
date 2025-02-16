@@ -164,7 +164,7 @@ max-width: 300px;
 
 
   &.input_editing {
-    color: #000000;
+    color: #545454;
     text-shadow: none;
     border: 2px solid #B8860B;
   }
@@ -314,6 +314,7 @@ max-width: 300px;
     margin-top: 80px;
     width: 1194px;
     margin: 0 auto;
+    color:#545454;
 
 
     th {
@@ -364,6 +365,7 @@ max-width: 300px;
     margin-top: 80px;
     width: 1194px;
     margin: 0 auto;
+    color:#545454;
 
     th {
       background-color: $Ivory_white;
@@ -393,6 +395,7 @@ max-width: 300px;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch; // 提升 iOS 滾動體驗
   margin-bottom: 20px;
+  color:#545454;
 
   // 隱藏 scrollbar 但保持功能 (可選)
   &::-webkit-scrollbar {
