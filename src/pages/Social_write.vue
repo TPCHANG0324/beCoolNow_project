@@ -81,7 +81,7 @@
 </template>
 
 <script setup>
-import { ref, computed, watch } from 'vue';
+import { ref, computed, watch, nextTick, onMounted, onActivated } from 'vue';
 import MainFooter from '@/components/layout/MainFooter.vue';
 import MainHeader from '@/components/layout/MainHeader.vue';
 import { useAuth } from '@/utils/useAuth';
@@ -253,7 +253,7 @@ const isUploading = ref(false);
 //送出文章
 const handleSubmit = async () => {
   const isLoggin = checkAuth()
-  if(!isLoggin){
+  if (!isLoggin) {
     alert('請先登入！')
   }
   //檢查標題
@@ -332,11 +332,6 @@ const handleSubmit = async () => {
 //圖片的 swiper
 const modules = [Navigation, Pagination];
 const slides = ref([]);
-// const swiperBreakpoints = {
-//   830: { slidesPerView: 3, spaceBetween: 10 },
-//   810: { slidesPerView: 2, spaceBetween: 10 },
-//   0: { slidesPerView: 1, spaceBetween: 10 },
-// };
 
 let swiperInstance = null;
 
@@ -358,9 +353,14 @@ const getCurrentSlide = () => {
 
 onMounted(async () => {
   try {
-    await checkAuth()
+    await checkAuth();
+    // nextTick(() => {
+    //   alert('請遵守社交禮儀，勿發表與主題無關的文章，若經查證，會由工作人員下架您的文章，請留意');
+    // });
+  } catch (error) {
+    console.error("驗證失敗:", error);
   } finally {
-    isLoading.value = false
+    isLoading.value = false;
   }
 })
 
@@ -397,22 +397,19 @@ onMounted(async () => {
 
 /* 整個編輯器 */
 ::v-deep .ck.ck-reset.ck-editor {
-    border: 2px solid #5b774a !important;
-    border-radius: 5px;
-    background-color: #fffff0 !important;
+  border: 2px solid #5b774a !important;
+  border-radius: 5px;
+  background-color: #fffff0 !important;
 }
 
 /* 工具列 */
 ::v-deep .ck.ck-toolbar {
-    background-color: #fffff0 !important;
+  background-color: #fffff0 !important;
 }
 
 /* 編輯區域 */
 ::v-deep .ck-editor__editable {
-    background-color: #fffff0 !important;
-    min-height: 200px !important;
+  background-color: #fffff0 !important;
+  min-height: 200px !important;
 }
-
-
-
 </style>

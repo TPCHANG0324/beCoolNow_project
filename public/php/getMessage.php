@@ -36,6 +36,23 @@ try {
     }
     $stmt->execute();
     $messages = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    //要解碼的欄位
+    $fieldsToDecodeMap = [
+        'content',
+        'nickname'
+    ];
+
+    //陣列中有多筆欄位需要解碼使用
+    $messages = array_map(function($message) use ($fieldsToDecodeMap) {
+        foreach ($fieldsToDecodeMap as $field) {
+            if (isset($message[$field])) {
+                $message[$field] = htmlspecialchars_decode($message[$field]);
+            }
+        }
+        return $message;
+    }, $messages);
+
     echo json_encode([
         "success" => true,
         "messages" => $messages
