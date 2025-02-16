@@ -18,7 +18,7 @@ include('conn.php');
 
 // $email = $_SESSION['email'];
 $data = json_decode(file_get_contents('php://input'), true);
-$email=$data['userEmail'];
+$email = $data['userEmail'];
 
 // 查詢會員資料，並將 account 作為 name 與 nickname 返回
 $sql = "
@@ -39,6 +39,12 @@ $statement->execute();
 $data = $statement->fetch(PDO::FETCH_ASSOC);
 
 if ($data) {
+    $fieldsToDecode = ['name', 'nickname', 'email']; //要解碼的欄位
+    foreach ($fieldsToDecode as $field) {
+        if (isset($data[$field])) {
+            $data[$field] = htmlspecialchars_decode($data[$field]);
+        }
+    }
     // 將資料中的 phoneNumber 改成 phone，再回傳給前端
     echo json_encode([
         "success" => true,
@@ -57,5 +63,3 @@ if ($data) {
         "message" => "找不到會員資料"
     ]);
 }
-
-?>

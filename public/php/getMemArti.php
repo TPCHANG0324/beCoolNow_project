@@ -31,11 +31,16 @@ $sql = "
 $stmt = $pdo->prepare($sql);
 
 try {
-    // 執行查詢
     $stmt->bindValue(1, $memberId);
     $stmt->execute();
     $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    // 回傳 JSON 格式資料
+    
+    foreach ($data as &$dat) {
+        $dat['title'] = htmlspecialchars_decode($dat['title']);
+    }
+
+    unset($dat);//解除參考
+    
     echo json_encode([
         'success' => true,
         'data' => $data

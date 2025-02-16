@@ -47,6 +47,20 @@ try {
     $stmt->execute();
     $articles = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+    //要解碼的欄位
+    $fieldsToDecodeMap = [
+        'title',
+        'account'
+    ];
+    $articles = array_map(function($article) use ($fieldsToDecodeMap) {
+        foreach ($fieldsToDecodeMap as $field) {
+            if (isset($article[$field])) {
+                $article[$field] = htmlspecialchars_decode($article[$field]);
+            }
+        }
+        return $article;
+    }, $articles);
+
     //處理文章內容與封面圖
     foreach ($articles as &$article) {
         // 處理完整文章內容
