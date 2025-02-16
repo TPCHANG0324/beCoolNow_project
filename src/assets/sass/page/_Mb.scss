@@ -17,6 +17,12 @@
 
 }
 
+.label_mb {
+  width: 80px; // 給所有標籤固定寬度
+  text-align: right; // 文字靠右對齊
+  flex-shrink: 0; // 防止標籤壓縮
+}
+
 .profile-title {
   color: var(--second-Colors-fffff0, #FFFFF0);
   text-align: center;
@@ -153,6 +159,8 @@
   text-shadow: #545454 1px 1px 1px;
   font-weight: 700;
   font-size: 20px;
+flex:1;
+max-width: 300px;
 
 
   &.input_editing {
@@ -193,10 +201,15 @@
   justify-content: center;
   font-size: 16px; // 統一字體大小
   font-weight: 500; // 統一字重
+  flex-shrink: 0; // 防止按鈕壓縮
 
   &:hover {
     background: #B8860B;
   }
+}
+.btn_btn2_bottom {
+  margin-right: 100px;
+  
 }
 
 .profile-stats-special {
@@ -243,8 +256,15 @@
     margin-left: 0;
     justify-content: space-between;
     align-items: center;
-    padding: 30px 40px;
+    // padding: 30px 40px;
+    margin-bottom: 40px;
+    margin-left: 30px;
   }
+}
+
+.profile_bottom .btn2_btn_top{
+  margin-left:60px;
+  gap: 80px;
 }
 
 .purchase-record-special {
@@ -425,6 +445,12 @@
     padding: 0;
     padding-bottom: 20px;
   }
+
+  .profile_bottom .btn2_btn_top{
+    // margin-left: 10px;
+    // margin: 0 auto;
+    margin: 0 auto;
+  }
 }
 
 
@@ -472,10 +498,10 @@
 
     .profile-info-special {
       width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-top: 100px;
+      max-width: 600px; // 限制最大寬度，保持整體居中
+      margin: 100px auto 0;
+      padding: 0 20px;
+      
     }
 
     .profile-field {
@@ -483,10 +509,24 @@
       justify-content: center; // 水平置中
       width: 100%;
       gap: 15px; // 調整間距
+      display: flex;
+      justify-content: flex-start; // 左對齊
+      width: 100%;
 
-      input {
-        width: auto; // 移除100%寬度
+      .label_mb {
+        width: 80px; // 保持固定寬度
+        margin-right: 10px; // 統一間距
+        text-align: right;
+        font-size: 24px; // 調整字體大小確保一致性
+      }
+
+      .input_2 {
+        width: calc(100% - 200px); // 減去標籤和按鈕的寬度
         max-width: 300px;
+      }
+      
+      .button_mb {
+        margin-left: 10px; // 統一間距
       }
     }
   }
@@ -549,7 +589,7 @@
     width: 100%;
 
     .btn2_btn {
-      margin-left: 0;
+      margin-right: 60px;
       justify-content: center;
       flex-direction: row; // 改為水平排列
       align-items: center;
@@ -683,135 +723,37 @@
 
 @media (max-width: 500px) {}
 
-@media (max-width: 430px) {
-  .btn2_btn.prof {
-    padding-bottom: 0;
-  }
-}
-
-// 手機樣式 (小於 430px)
-@media (max-width: 430px) {
-
-  .btn2_btn.profile-stats-special {
-    padding: 20px;
-    // background: rgba(51, 51, 51, 0.60);
-    border-radius: 20px;
-    color: var(--second-Colors-fffff0, #FFFFF0);
-    font-family: "DM Sans", sans-serif;
-    font-size: 16px;
-    font-weight: 700;
-    line-height: normal;
-
-    // ✅ 讓文字水平置中對齊
-    display: flex;
-    justify-content: center; // 水平置中對齊
-    align-items: center; // 垂直置中對齊
-    text-align: center; // 確保多行文本也置中
-    flex-direction: column-reverse; // ✅ 如果需要多行內容也能垂直居中
-    gap: 10px; // ✅ 增加文字之間的間距
-    margin: 0 auto;
-    margin-right: 50px;
-    // order: 1;       // ✅ 讓整個元素在畫面中置中
-  }
-
-  .purchase-record-special .bt2_btn .btn2_btn_bottom.profile-stats-special {
-    margin-right: 500px;
-  }
-
-  .btn2_btn.purchase-record-special .purchase-record-btn11,
-  .purchase-record-special .purchase-record-btn12.purchase-record-btn12 {
-    color: var(--second-Colors-fffff0, #FFFFF0);
-    font-family: "DM Sans";
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-    // padding-left: 40px;
-    margin-top: 40px;
-    margin-bottom: 40px;
-    background-color: initial;
-    display: inline-block;
-    text-shadow: #545454 1px 1px 1px;
-    border: none;
-    margin: 0 auto;
-    flex-direction: column-reverse;
-  }
-
-  .profile-field {
-    .button_mb {
-      min-width: 70px; // 手機版稍微縮小按鈕
-      height: 36px; // 手機版稍微縮小按鈕
-      font-size: 14px; // 手機版縮小字體
-    }
-  }
-
-  .table-container_mb {
-    margin: 0 -10px; // 負margin可以讓表格視覺上延伸到邊緣
-    padding: 0 10px;
-  }
-
-  .table_mb,
-  .personal-record {
-    min-width: 600px; // 手機版可以稍微縮小最小寬度
-  }
-
-  .purchase-record-special.btn2_btn {
-    display: column;
-  }
-
-  .profile-field {
-    display: table-column;
-    align-items: center;
-    gap: 10px;
-    margin: 0 auto;
-    text-align: center;
-  }
-
-  .profile-field .button_mb {
-    min-width: 70px;
-    height: 36px;
-    font-size: 14px;
-    margin: 0 auto;
-    margin-top: 20px;
-  }
-
-  .btn2_btn {
-    display: flex;
-    margin: 0 auto;
-
-    display: column-reverse;
-
-  }
-
-  @media screen and (max-width: 430px) {
-    .wrapperpr {
-      width: 100%;
-      padding: 10px;
-      background-size: cover;
-    }
-
+@media screen and (max-width: 430px) {
+  // 整體容器
+  .wrapperpr {
+    width: 100%;
+    padding: 10px;
+    background-size: cover;
+    
     .profile-title {
       font-size: 32px;
-      padding-bottom: 40px;
+      padding: 40px 0;
       padding-top: 80px;
     }
+  }
 
-    .profile_top {
-      flex-direction: column;
-      align-items: center;
-      width: 100%;
-    }
+  // 頂部區域
+  .profile_top {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
 
     .profile-container-special_left,
     .profile-container-special_right {
       width: 100%;
       text-align: center;
     }
+  }
 
-    .profile-header-special {
-      align-items: center;
-      margin-bottom: 20px;
-    }
+  // 頭像和問候語區域
+  .profile-header-special {
+    align-items: center;
+    margin-bottom: 20px;
 
     .profile-pic-special {
       width: 120px;
@@ -824,108 +766,120 @@
       padding: 15px;
       margin-bottom: 30px;
     }
-
-    .profile-info-special {
-      width: 100%;
-      align-items: center;
-    }
-
-    .profile-field {
-      flex-direction: column;
-      align-items: flex-start;
-      // padding-top: -50px;
-    }
-
-    .label_mb {
-      font-size: 16px;
-      padding-bottom: 5px;
-    }
-
-    .input_2 {
-      width: 100%;
-      font-size: 16px;
-    }
-
-    .button_mb {
-      font-size: 14px;
-      padding: 8px 12px;
-      height: auto;
-      min-width: 70px;
-    }
-
-    .profile-stats-special {
-      font-size: 16px;
-      padding: 10px;
-      margin: 10px 0;
-      margin-left: 0;
-    }
-
-    .btn2_btn {
-      flex-direction: column;
-      align-items: center;
-      margin-left: 0;
-      // margin-right: 50px;
-    }
-
-    .purchase-record-special {
-      padding: 20px;
-      height: auto;
-      // margin-righ;
-    }
-
-    .purchase-record-btn11,
-    .purchase-record-btn12 {
-      font-size: 18px;
-      padding: 10px 0;
-    }
-
-    .table-container_mb {
-      width: 100%;
-      margin-top: 20px;
-    }
-
-    .table_mb,
-    .personal-record {
-      width: 100%;
-      font-size: 14px;
-
-      th,
-      td {
-        padding: 8px;
-      }
-    }
-
-    button.order-detail-btn {
-      font-size: 12px;
-      // padding-right:10px;
-    }
-
-    .email-display {
-      font-size: 14px;
-      max-width: 100%;
-    }
-
-    .error-message {
-      font-size: 12px;
-      bottom: -16px;
-    }
-
-    .footer_member {
-      .footer {
-        margin-top: 20px;
-      }
-    }
-
-    .profile-container-special_right .profile-info-special {
-      margin-top: 0px;
-    }
-
-    $footer_layout: 430px;
-
   }
 
+  @media screen and (max-width: 430px) {
+    // ... (previous styles remain the same until profile-container-special_right)
+  
+    .profile-container-special_right {
+     text-align: center;
+     width: 100%;
+     margin-left: 20px;
+      .profile-info-special {
+        width: 100%;
+        align-items: flex-start; // 改為靠左對齊
+        margin: 0 auto;
+        padding: 0 15px;
+      }
+  
+      .profile-field {
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start; // 改為靠左對齊
+        gap: 10px;
+        margin-bottom: 25px;
+        width: 100%;
+        padding: 0 20px; // 添加內邊距確保不會貼邊
+        flex-wrap: wrap;
+  
+        .label_mb {
+          width: 60px; // 固定寬度
+          min-width: 60px;
+          text-align: left; // 改為靠左對齊
+          padding-bottom: 0;
+          margin: 0;
+          font-size: 18px;
+        }
+  
+        .input_2 {
+          width: auto;
+          flex: 0 1 auto;
+          margin: 0;
+          max-width: 120px;
+          text-align: left;
+        }
+  
+        .button_mb {
+          margin: 0;
+          white-space: nowrap;
+          padding: 8px 12px;
+          font-size: 14px;
+        }
+  
+        button[disabled] {
+          width: auto;
+          min-width: 120px;
+        }
+  
+        .error-message {
+          width: 100%;
+          text-align: left; // 錯誤訊息也靠左對齊
+          margin-top: 5px;
+          padding-left: 60px; // 對齊輸入框
+        }
+      }
+    }
+  
+    // 購買紀錄、個人紀錄、文章記錄按鈕組 - 保持水平排列
+    .btn2_btn {
+      &.prof {
+        .btn2_btn_top {
+          flex-direction: row;
+          justify-content: center;
+          gap: 15px;
+          margin: 0 auto;
+          padding: 20px 0;
+          flex-wrap: wrap;
+  
+          .purchase-record-btn12.rec {
+            font-size: 16px;
+            margin: 0;
+            width: auto;
+            white-space: nowrap;
+            padding: 5px 10px;
+          }
+        }
+      }
+    }
+  
+    // 確保按鈕容器水平置中
+    .profile_bottom {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+  
+      .purchase-record-special {
+        width: 100%;
+        padding: 15px;
+  
+        .btn2_btn {
+          width: 100%;
+          margin: 0;
+          justify-content: center;
+        }
+      }
+    }
+  
+    // 調整 email 顯示
+    .email-display {
+      text-align: left;
+      max-width: 120px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
 }
-
 //文章記錄
 .table_arti {
   &.arti{

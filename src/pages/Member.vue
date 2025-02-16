@@ -77,16 +77,16 @@
         <div class="purchase-record-special">
           <div class="btn2_btn prof">
             <div class="btn2_btn_top">
-              <button class="purchase-record-btn11 rec" @click="showSection('purchase')">購買紀錄</button>
+              <button class="purchase-record-btn12 rec" @click="showSection('purchase')">購買紀錄</button>
               <button class="purchase-record-btn12 rec" @click="showSection('profile')">個人紀錄</button>
               <button class="purchase-record-btn12 rec" @click="showSection('articles')">文章紀錄</button>
             </div>
-            <div class="bt2_btn_bottom">
+            <!-- <div class="bt2_btn_bottom">
               <div class="profile-stats-special exp">
                 <p>小寵物經驗值: <strong>{{ personalStats.experience }}</strong> | 累積地球幣: <strong>{{ personalStats.points
                     }}</strong></p>
               </div>
-            </div>
+            </div> -->
           </div>
 
           <div class="table-container_mb">
