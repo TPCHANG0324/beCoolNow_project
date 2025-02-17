@@ -74,8 +74,8 @@
             <input id="UploadPic" class="UploadPic" type="file" accept="image/*, image/svg+xml"
               @change="handleFileChange" />
             <div class="preview">
-              <p>圖片預覽</p>
               <img v-if="newArticle.mediaPic" :src="newArticle.mediaPic" alt="預覽圖片" />
+              <!-- <p>圖片預覽</p> -->
             </div>
           </figure>
         </div>

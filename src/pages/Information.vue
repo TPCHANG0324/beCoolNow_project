@@ -20,22 +20,22 @@
         <!-- 圖標列表 -->
         <div class="icon-list">
           <button @click="openPanel('Thunderstorm Icon')">
-            <font-awesome-icon :icon="['fas', 'cloud-bolt']" class="hover-icon_Info" />
+            <font-awesome-icon :icon="['fas', 'cloud-bolt']" class="hover-icon_Info" id="auto-animate-icon" />
           </button>
           <button @click="openPanel('Wave Icon')">
-            <font-awesome-icon :icon="['fas', 'water']" class="hover-icon_Info" />
+            <font-awesome-icon :icon="['fas', 'water']" class="hover-icon_Info" id="auto-animate-icon2" />
           </button>
           <button @click="openPanel('Typhoon Icon')">
-            <font-awesome-icon :icon="['fas', 'hurricane']" class="hover-icon_Info" />
+            <font-awesome-icon :icon="['fas', 'hurricane']" class="hover-icon_Info" id="auto-animate-icon3" />
           </button>
           <button @click="openPanel('Tree Icon')">
-            <font-awesome-icon :icon="['fas', 'tree']" class="hover-icon_Info" />
+            <font-awesome-icon :icon="['fas', 'tree']" class="hover-icon_Info" id="auto-animate-icon4" />
           </button>
           <button @click="openPanel('Temperature Icon')">
-            <font-awesome-icon :icon="['fas', 'temperature-arrow-up']" class="hover-icon_Info" />
+            <font-awesome-icon :icon="['fas', 'temperature-arrow-up']" class="hover-icon_Info" id="auto-animate-icon5" />
           </button>
           <button @click="openPanel('CO2 Icon')">
-            <font-awesome-icon :icon="['fas', 'head-side-mask']" class="hover-icon_Info" />
+            <font-awesome-icon :icon="['fas', 'head-side-mask']" class="hover-icon_Info" id="auto-animate-icon6" />
           </button>
         </div>
 
