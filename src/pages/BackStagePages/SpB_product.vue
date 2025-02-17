@@ -28,7 +28,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="product in products" :key="product.ID">
+                <tr v-for="product in paginatedProducts" :key="product.ID">
                   <td class="SpB_number_H">{{ product.ID }}</td>
                   <td>{{ product.productName }}</td>
                   <td>{{ product.price }}</td>
@@ -60,7 +60,13 @@
             </table>
           </main>
         </div>
-        <BackStagePaginator></BackStagePaginator>
+         <!-- 分頁器元件，傳入 currentPage 與 totalPages -->
+         <Paginator 
+          class="paginator_H"
+          :currentPage="currentPage" 
+          :totalPages="totalPages" 
+          @page-changed="handlePageChange" 
+        />
       </div>
     </div>
 
@@ -184,17 +190,20 @@
 import { ref } from 'vue';
 // 建議將 import 的名稱與實際用在 template 裡的名稱對應
 import BackStageSidebar from '@/components/items/BackStageItems/BackStageSidebar.vue';
-import BackStagePaginator from '@/components/items/BackStageItems/BackStagePaginator.vue';
 import BackStageHeader from '@/components/layout/BackStageLayout/BackStageHeader.vue';
 import BackStageBigPopup from '@/components/layout/BackStageLayout/BackStageBigPopup.vue';
+import BackStagePaginator from '@/components/items/BackStageItems/BackStagePaginator.vue';
+// 引入自訂分頁器元件（請確認此元件存在）
+import Paginator from '@/components/paginator.vue';
 
 export default {
   name: 'ProductManagement',
   components: {
+    BackStageHeader,
     BackStageSidebar,
     BackStagePaginator,
-    BackStageHeader,
     BackStageBigPopup,
+    Paginator,
   },
   setup() {
 
@@ -288,8 +297,18 @@ export default {
     });
 
 
-
-
+    // 分頁器狀態與計算屬性
+    const currentPage = ref(1);
+    const itemsPerPage = 10;
+    const totalPages = computed(() => Math.ceil(products.value.length / itemsPerPage));
+    const paginatedProducts = computed(() => {
+      const start = (currentPage.value - 1) * itemsPerPage;
+      return products.value.slice(start, start + itemsPerPage);
+    });
+    const handlePageChange = (newPage) => {
+      currentPage.value = newPage;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
 
 
 
@@ -632,6 +651,11 @@ export default {
 
 
     return {
+      paginatedProducts,
+      currentPage,
+      itemsPerPage,
+      totalPages,
+      handlePageChange,
       isPopupVisible,
       isEditPopupVisible,
       openAddPopup,
