@@ -242,7 +242,7 @@
               <div class="si_recipt_body">
                 <label for="">發票類型</label>
                 <select id="" name="" class="input" style="padding: 0;">
-                  <option value="捐贈發票/雲端發票">捐贈發票/雲端發票</option>
+                  <option value="雲端發票">雲端發票</option>
                 </select>
                 <label for="">載具類型</label>
                 <select id="" name="" class="input" style="padding: 0;">
@@ -544,10 +544,10 @@ const errors = ref({
 const validateForm = () => {
   let hasError = false;
 
-  console.log("🔍【1. 開始驗證】");
-  console.log("📌【1.1 驗證前的表單資料】", JSON.stringify(customerInfo.value));
-  console.log("📌【1.2 驗證前的收件人資料】", JSON.stringify(recipientInfo.value));
-  console.log("📌【1.3 驗證前的付款資料】", JSON.stringify(paymentInfo.value));
+  // console.log("🔍【1. 開始驗證】");
+  // console.log("📌【1.1 驗證前的表單資料】", JSON.stringify(customerInfo.value));
+  // console.log("📌【1.2 驗證前的收件人資料】", JSON.stringify(recipientInfo.value));
+  // console.log("📌【1.3 驗證前的付款資料】", JSON.stringify(paymentInfo.value));
 
   // 確保 `errors` 內的結構存在
   if (!errors.value.customerInfo) errors.value.customerInfo = {};
@@ -711,9 +711,9 @@ const validateForm = () => {
     errors.value.paymentInfo.securityCode = ''; // 清除錯誤訊息
   }
 
-  console.log("📌【2.1 驗證後的表單資料】", JSON.stringify(customerInfo.value));
-  console.log("📌【2.2 驗證後的收件人資料】", JSON.stringify(recipientInfo.value));
-  console.log("📌【2.3 驗證後的付款資料】", JSON.stringify(paymentInfo.value));
+  // console.log("📌【2.1 驗證後的表單資料】", JSON.stringify(customerInfo.value));
+  // console.log("📌【2.2 驗證後的收件人資料】", JSON.stringify(recipientInfo.value));
+  // console.log("📌【2.3 驗證後的付款資料】", JSON.stringify(paymentInfo.value));
 
   return !hasError; // 若 `hasError = false`，則表示表單驗證成功
 };
@@ -749,25 +749,15 @@ watch(isSameAsCustomer, (newValue) => {
 
 
 
+
 // 提交訂單
 const submitOrder = async () => {
 
-  console.log("🚀【0. 提交訂單 - 按鈕點擊】");
-
-console.log("📌【0.1 提交前的表單資料】", JSON.stringify(customerInfo.value));
-console.log("📌【0.2 提交前的收件人資料】", JSON.stringify(recipientInfo.value));
-console.log("📌【0.3 提交前的付款資料】", JSON.stringify(paymentInfo.value));
   const isValid = validateForm();
   if (!isValid) {
     alert("⚠️ 請填寫完整的訂單資訊！");
     return;
   }
-  // 檢查使用者是否填寫完整資訊
-  // if (!customerInfo.value.name || !customerInfo.value.email || !customerInfo.value.phone ||
-  //     !recipientInfo.value.name || !recipientInfo.value.email || !recipientInfo.value.phone || !recipientInfo.value.address) {
-  //   alert("⚠️ 請填寫完整的訂單資訊！");
-  //   return;
-  // }
 
   if (cartItems.value.length === 0) {
     alert("⚠️ 購物車內沒有商品，無法提交訂單！");
@@ -776,21 +766,31 @@ console.log("📌【0.3 提交前的付款資料】", JSON.stringify(paymentInfo
 
   console.log("✅【1. 驗證通過】繼續提交訂單...");
 
-  // **準備訂單資料**
-  const orderData = {
-    customer: customerInfo.value, // 顧客資訊
-    recipient: recipientInfo.value, // 收件人資訊
-    orderDetails: orderDetails.value, // 訂單細節
-    items: cartItems.value, // 購物車商品
-    total: total.value, // 總金額
-    usePoints: usePoints.value, // 使用點數
-    orderNotes: orderNotes.value,   // 訂單備註
-    paymentInfo: paymentInfo.value, // 付款資訊
-  };
+  // **1️⃣ 讀取運費**
+  const shippingFee = parseInt(localStorage.getItem("deliverCost")) || 100;
+  const payMethod = parseInt(localStorage.getItem("payMethod")) || 0; // **讀取付款方式**
 
-  console.log("📡【2. 發送 API 請求】", JSON.stringify(orderData));
+  console.log("📌【1.1 運費】", shippingFee);
+  console.log("📌【1.2 付款方式】", payMethod);
+
+
+    // **2️⃣ 準備訂單資料**
+    const orderData = {
+      customer: customerInfo.value, // 顧客資訊
+      recipient: recipientInfo.value, // 收件人資訊
+      orderDetails: orderDetails.value, // 訂單細節
+      items: cartItems.value, // 購物車商品
+      total: total.value, // 總金額
+      usePoints: usePoints.value, // 使用點數
+      orderNotes: orderNotes.value, // 訂單備註
+      paymentInfo: paymentInfo.value, // 付款資訊
+      shippingFee: shippingFee,  // 直接加入運費
+      payMethod: payMethod, // 加入付款方式
+      shipMethod: localStorage.getItem("selectedDelivery") === "新竹物流宅配" ? 0 : 1, // 設定運送方式 (0 = 新竹物流, 1 = 台灣離島)
+    };
+
+    console.log("📡【2. 發送 API 請求】", JSON.stringify(orderData));
   try {
-    console.log("📡 發送 API 請求123:", orderData);
     const response = await fetch(`${base_url}/submitOrder.php`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -798,12 +798,7 @@ console.log("📌【0.3 提交前的付款資料】", JSON.stringify(paymentInfo
     });
 
     const result = await response.json();
-    console.log("✅ 訂單提交成功456:", result);
-
-    // const text = await response.text();
-    // console.log("📥 後端返回資料:", text);
-    // const result = JSON.parse(text); // **嘗試解析 JSON**
-    // console.log("✅ 訂單提交成功:", result);
+    console.log("✅ 訂單提交成功:", result);
 
     if (!result.success) {
       throw new Error(result.message || "訂單提交失敗");
@@ -811,15 +806,13 @@ console.log("📌【0.3 提交前的付款資料】", JSON.stringify(paymentInfo
 
     if (result.success) {
       alert("✅ 訂單提交成功，將跳轉至付款頁面！");
-      // 跳轉到付款頁面 (Line Pay / 綠界)
-      // window.location.href = `${base_url}/ecpay_payment.php?Order_ID=${result.Order_ID}`;
 
-
-      // 清除 localStorage
+      // **3️⃣ 清除 localStorage**
       localStorage.removeItem("cart");
       localStorage.removeItem("usePoints");
-      localStorage.removeItem('selectedDelivery');
-      localStorage.removeItem('deliverCost');
+      localStorage.removeItem("selectedDelivery");
+      localStorage.removeItem("deliverCost");
+      localStorage.removeItem("payMethod");
 
       router.push("/shop_finish");
     } else {
@@ -830,5 +823,7 @@ console.log("📌【0.3 提交前的付款資料】", JSON.stringify(paymentInfo
     alert("❌ 伺服器錯誤，請稍後再試！");
   }
 };
+
+
 
 </script>

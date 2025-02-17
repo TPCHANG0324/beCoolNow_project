@@ -33,22 +33,25 @@ $recipient = $data['recipient'];
 $orderDetails = $data['orderDetails'];
 $items = $data['items'];
 $total = $data['total'];
+$shippingFee = floatval($data['shippingFee']);  // 接收運費
+$payMethod = intval($data['payMethod']);  // **✅ 接收付款方式**
 $usePoints = $data['usePoints'] ?? 0; // 預設 0，避免 null 錯誤
 $orderNotes = !empty($data['orderNotes']) ? $data['orderNotes'] : "無備註"; // 預設 "無備註"
 $paymentInfo = $data['paymentInfo'];
+$shipMethod = isset($data["shipMethod"]) ? intval($data["shipMethod"]) : 0; // 預設 0 = 新竹物流
 
 // 付款狀態
 $payStatus = 0; // 0 = 待付款, 1 = 已付款 先寫死
 
 
-$memberID = 1; // 會員編號 寫死
+$memberID = 15; // 會員編號 寫死
 // ✅ 取得會員 ID（這裡應該從 session 或 token 取得，而不是寫死）
 // $memberID = isset($_SESSION['member_ID']) ? $_SESSION['member_ID'] : 1; // 假設使用者已登入
 
 try {
     // ✅ 存入 `G1_Order` 資料表
-    $sql = "INSERT INTO G1_Order (member_ID, customerName, customerEmail, customerPhone, recipientName, recipientEmail, recipientPhone, recipientAdress, total, usepoints, orderNotes, payStatus)
-            VALUES (:memberID, :cname, :cemail, :cphone, :rname, :remail, :rphone, :raddress, :total, :usePoints, :orderNotes, :payStatus)";
+    $sql = "INSERT INTO G1_Order (member_ID, customerName, customerEmail, customerPhone, recipientName, recipientEmail, recipientPhone, recipientAdress, total, usepoints, orderNotes, payStatus, shippingFee, payMethod, shipMethod)
+            VALUES (:memberID, :cname, :cemail, :cphone, :rname, :remail, :rphone, :raddress, :total, :usePoints, :orderNotes, :payStatus, :shippingFee, :payMethod, :shipMethod)";
 
     $stmt = $pdo->prepare($sql);
     $stmt->execute([
@@ -64,6 +67,9 @@ try {
         ':usePoints' => $usePoints,
         ':orderNotes' => $orderNotes,
         ':payStatus' => $payStatus,
+        ':shippingFee' => $shippingFee,
+        ':payMethod' => $payMethod,
+        ':shipMethod'=> $shipMethod
     ]);
 
 
@@ -72,19 +78,19 @@ try {
 
     // 存入 `G1_OrderDetail` 資料表
 
-    $sql = "INSERT INTO G1_OrderDetail (Order_ID, Product_ID, quantity, price)
-    VALUES (:Order_ID, :Product_ID, :quantity, :price)";
+    $sql = "INSERT INTO G1_OrderDetail (Order_ID, Product_ID, quantity, salePrice)
+    VALUES (:Order_ID, :Product_ID, :quantity, :salePrice)";
     $stmt = $pdo->prepare($sql);
 
     foreach ($items as $item) {
-        // $sql = "INSERT INTO G1_OrderDetail (order_id, product_id, quantity, price)
-        //         VALUES (:order_id, :product_id, :quantity, :price)";
+        // $sql = "INSERT INTO G1_OrderDetail (order_id, product_id, quantity, salePrice)
+        //         VALUES (:order_id, :product_id, :quantity, :salePrice)";
         // $stmt = $pdo->prepare($sql);
         $stmt->execute([
             ':Order_ID' => $orderID,
             ':Product_ID' => $item['id'], // 確保這是對應的 `product_id`
             ':quantity' => $item['num'],
-            ':price' => $item['price']
+            ':salePrice' => $item['salePrice']
         ]);
     }
 

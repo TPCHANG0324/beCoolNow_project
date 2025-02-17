@@ -343,7 +343,7 @@ const cardLimit = ref(6);
 const treePopup = ref(null);
 const xiaoming = new URL('@/assets/images/Ac08.jpg', import.meta.url).href;
 const earthMan = new URL('@/assets/images/newAC.png', import.meta.url).href;
-const defaultAvatar = new URL('@/assets/images/defaultavatar.jpeg', import.meta.url).href;
+const defaultAvatar = new URL('@/assets/images/defaultavater2.png', import.meta.url).href;
 
 const expandCards = () => {
 
@@ -360,6 +360,11 @@ const expandCards = () => {
 const collapseCards = () => {
 
   cardLimit.value = 6;
+  const daily_card_element = document.querySelector('.daily_card');
+  daily_card_element.scrollIntoView({
+    // top: 0, // 滾動到頂部
+    behavior: 'smooth', // 平滑滾動
+  });
   // nextTick(() => {
   //   const dailyCard = document.querySelector('.daily_card');
   //   if (dailyCard) {
@@ -384,6 +389,16 @@ watch(totalLetters, (newTotal) => {
   localStorage.setItem('totalLetters', newTotal.toString());
 });
 const done = (key) => {
+  let clicked = localStorage.getItem('clicked');
+  if(clicked){
+    clicked = JSON.parse(clicked);
+  }
+  if(clicked && clicked['key-'+key]) {
+    alert('一個任務只能打卡一次哦！')
+    return
+  }
+
+  // 判斷有沒有案過的 STORAGE 有的話就 return
   if(treePopup.value) return
   // isClicked.value = true
   // 遞增 action 計數
@@ -394,6 +409,17 @@ const done = (key) => {
 
   // 設定彈出視窗
   treePopup.value = key;
+  // 確定岸好了就設定 localStorage
+  if(!clicked){
+    clicked = {}
+    clicked['key-'+key] = true
+    localStorage.setItem('clicked', JSON.stringify(clicked));
+  }else{
+    clicked['key-'+key] = true
+    localStorage.setItem('clicked', JSON.stringify(clicked));
+    
+  }
+  
 
   setTimeout(() => {
     treePopup.value = null;
@@ -497,10 +523,10 @@ const handleSubmit = async (e) => {
 
 // 修改 API 配置
 const api = axios.create({
-  baseURL: import.meta.env.PROD
-    ? 'http://localhost/tid103/g1/api'
-    : '/tid103/g1/api',
-  withCredentials: true,
+  // baseURL: import.meta.env.PROD
+  //   ? 'http://localhost/tid103/g1/api'
+  //   : '/tid103/g1/api',
+  // withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
     'X-Requested-With': 'XMLHttpRequest'
@@ -533,8 +559,8 @@ const fetchLetters = async () => {
 const useDefaultLetters = () => {
   letters.value = [
     {
-      poster: '小明',
-      mailContents: '親愛的地球：\n你好！我是小明，我最喜歡在公園裡跑來跑去，也喜歡去海邊玩沙子。\n媽媽說，我們要愛護你，不能亂丟垃圾，也不能浪費水。地球，我想告訴你，以後我會和同學一起種很多小樹，讓你變得更漂亮。希望等我長大，你還是一個很美麗的大地球！',
+      poster: '瑋宸',
+      mailContents: '親愛的地球：\n你好！我是瑋宸，我最喜歡在公園裡跑來跑去，也喜歡去海邊玩沙子。\n媽媽說，我們要愛護你，不能亂丟垃圾，也不能浪費水。地球，我想告訴你，以後我會和同學一起種很多小樹，讓你變得更漂亮。希望等我長大，你還是一個很美麗的大地球！',
       avatar: getAvatarPath(xiaoming),
     },
     {

@@ -25,6 +25,10 @@
             white-space: nowrap;
             line-height: 1.6;
             padding-top: 80px;
+
+            @include max_430() {
+                font-size: 40px; 
+            }
         }
     }
 

@@ -47,7 +47,8 @@
         <h2>Contact</h2>
         <div class="aboutus_input_R">
           <div class="form-group">
-            <p>姓名：</p>
+            <p>* 姓名：</p>
+
             <input class="input" type="text" v-model="name" @blur="validateName" />
             <span v-if="errors.name" class="error-text_about">{{ errors.name }}</span>
           </div>
@@ -57,7 +58,8 @@
             <span v-if="errors.email" class="error-text_about">{{ errors.email }}</span>
           </div>
           <div class="form-group">
-            <p>手機：</p>
+            <p>* 手機：</p>
+
             <input class="input" type="text" v-model="phone" @blur="validatePhone" />
           <span v-if="errors.phone" class="error-text_about">{{ errors.phone }}</span>
           </div>
@@ -82,19 +84,19 @@
           <li>
             <div class="icon-text-wrapper">
               <img src="../assets/images/afakelogo2.png" alt="GitHub" style="width: 80px; height: 80px" />
-              <span>綠能科技</span>
-            </div>
-          </li>
-          <li>
-            <div class="icon-text-wrapper">
-              <img src="../assets/images/afakelogo3.png" alt="Google" style="width: 80px; height: 80px" />
               <span>綠城建築</span>
             </div>
           </li>
           <li>
             <div class="icon-text-wrapper">
-              <img src="../assets/images/afakelogo4.png" alt="Facebook" style="width: 80px; height: 80px" />
+              <img src="../assets/images/afakelogo3.png" alt="Google" style="width: 80px; height: 80px" />
               <span>永續農業</span>
+            </div>
+          </li>
+          <li>
+            <div class="icon-text-wrapper">
+              <img src="../assets/images/afakelogo4.png" alt="Facebook" style="width: 80px; height: 80px" />
+              <span>綠能科技</span>
             </div>
           </li>
         </ul>

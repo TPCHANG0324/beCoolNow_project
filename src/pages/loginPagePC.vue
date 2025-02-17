@@ -2,6 +2,9 @@
   <div class="three-container" style="overflow: hidden;">
     <!-- Three.js 畫布 -->
     <canvas ref="threeCanvas" class="three-canvas"></canvas>
+
+    <!-- ✅ Vue 控制的登入彈窗 -->
+    <member_login v-if="isLoginPopupOpen" @login-success="handleLoginSuccess" @close="isLoginPopupOpen = false" />
   </div>
 </template>
 
@@ -13,10 +16,14 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { TextureLoader } from "three";
 import { CSS3DRenderer, CSS3DObject } from "three/examples/jsm/renderers/CSS3DRenderer.js";
 import logoImage from "@/assets/images/logo_color4.svg";
+import member_login from "@/pages/popup.vue";
 
 const isLoaded = ref(false);
 const threeCanvas = ref(null);
-const hdrPath = ref(new URL("@/assets/images/threePic/kloofendal_48d_partly_cloudy_puresky_8k.hdr", import.meta.url).href);
+const hdrPath = ref(new URL("@/assets/images/threePic/kloofendal_48d_partly_cloudy_puresky_1k.hdr", import.meta.url).href);
+const isLoginPopupOpen = ref(false); // ✅ Vue 內部控制彈窗開關
+const isRedirecting = ref(false); // ✅ 防止多次跳轉
+const animationFrameId = ref(null); // ✅ 定義動畫幀 ID，避免 `ReferenceError`
 // const texturePath = new URL("@/assets/images/threePic/sky360.hdr", import.meta.url).href; // **球體材質圖片**
 // const minY = -window.innerHeight / 2; // **視窗最低點**
 // const maxY = window.innerHeight / 2;  // **視窗最高點**
@@ -29,17 +36,62 @@ let windowHalfY = window.innerHeight / 2;
 let spheres = [];
 let cssRenderer;
 
+// ✅ **Vue 設定全域方法，讓 Three.js 的 `create3DHTML()` 使用**
+// ✅ Vue 設定全域方法，讓 Three.js 內的 `create3DHTML()` 可以開啟登入彈窗
+window.openLoginModal = () => {
+  isLoginPopupOpen.value = true;
+  console.log("🔥 Vue 內部控制：登入彈窗開啟！");
+};
+
+// ✅ **登入成功後的處理**
+const handleLoginSuccess = () => {
+  if (isRedirecting.value) return; // 防止多次點擊
+  isRedirecting.value = true;
+
+  console.log("✅ 使用者登入成功，導向後台！");
+
+  // ✅ **先關閉登入彈窗**
+  isLoginPopupOpen.value = false;
+
+  // ✅ **短暫延遲，讓 UI 更新後再跳轉**
+  setTimeout(() => {
+    cancelAnimationFrame(animationFrameId.value); // ✅ 停止動畫
+    disposeThreeJS(); // ✅ 確保 Three.js 完全釋放資源
+    window.location.href = "/tid103/g1/BackStagePages"; // 🚀 **確保登入成功後才跳轉**
+  }, 500);
+};
+
+// ✅ 清理 Three.js 場景，避免記憶體洩漏
+const disposeThreeJS = () => {
+  console.log("🔥 清理 Three.js 場景與動畫");
+  cancelAnimationFrame(animationFrameId.value);
+
+   // ✅ 釋放 WebGL 資源
+   renderer.dispose();
+  scene.traverse((object) => {
+    if (!object.isMesh) return;
+    object.geometry.dispose();
+    object.material.dispose();
+  });
+
+  // ✅ 從 DOM 移除 Three.js 畫布
+  if (threeCanvas.value) {
+    threeCanvas.value.removeChild(renderer.domElement);
+  }
+};
+
 
 onMounted(() => {
   initThree();
   loadHDRBackground(hdrPath.value);
-  createGlassBall(100); // 新增玻璃球
+  createGlassBall(80); // 新增玻璃球
   animate();
   window.addEventListener("resize", onWindowResize);
   document.addEventListener("mousemove", onDocumentMouseMove);
   initCSSRenderer();
   create3DHTML();
   document.body.style.overflow = "hidden"; // 🚀 進入此頁時隱藏滾動條
+  create3DHTML(); // 🚀 **原生 JS 方式建立按鈕**
 });
 
 async function loadAllResources() {
@@ -52,34 +104,34 @@ async function loadAllResources() {
 onUnmounted(() => {
   document.body.style.overflow = ""; // 🎯 離開此頁時恢復正常滾動
   console.log("🔥 清除 Three.js 場景 & 動畫");
+  disposeThreeJS();
+  // **取消動畫**
+  cancelAnimationFrame(animationFrameId);
 
-      // **取消動畫**
-      cancelAnimationFrame(animationFrameId);
+  // **移除監聽事件**
+  window.removeEventListener("resize", onWindowResize);
 
-      // **移除監聽事件**
-      window.removeEventListener("resize", onWindowResize);
+  // **釋放 WebGL 資源**
+  renderer.dispose();
 
-      // **釋放 WebGL 資源**
-      renderer.dispose();
+  // **清除場景中的所有物件**
+  scene.traverse((object) => {
+    if (!object.isMesh) return;
+    object.geometry.dispose();
+    object.material.dispose();
+  });
 
-      // **清除場景中的所有物件**
-      scene.traverse((object) => {
-        if (!object.isMesh) return;
-        object.geometry.dispose();
-        object.material.dispose();
-      });
+  // **從 DOM 移除 Three.js 畫布**
+  if (threeContainer.value) {
+    threeContainer.value.removeChild(renderer.domElement);
+  }
 
-      // **從 DOM 移除 Three.js 畫布**
-      if (threeContainer.value) {
-        threeContainer.value.removeChild(renderer.domElement);
-      }
-
-      // **確保 Three.js 物件設為 `null`，避免記憶體洩漏**
-      scene = null;
-      camera = null;
-      renderer = null;
-      animationFrameId = null;
-    });
+  // **確保 Three.js 物件設為 `null`，避免記憶體洩漏**
+  scene = null;
+  camera = null;
+  renderer = null;
+  animationFrameId = null;
+});
 
 
 
@@ -251,9 +303,23 @@ function create3DHTML() {
       <div class="be-cool-now-logo">
         <img src="${logoImage}" alt="涼城即時 Be Cool Now LOGO" />
       </div>
-      <a href="/tid103/g1/BackStagePages"><div class="be-cool-now-button be-cool-now-back-btn">後台</div></a>
+      <a><div id="backend-login-btn" class="be-cool-now-button be-cool-now-back-btn">後台</div></a>
     </div>
   `;
+
+  setTimeout(() => {
+    const backendBtn = document.getElementById("backend-login-btn");
+    if (backendBtn) {
+      backendBtn.addEventListener("click", () => {
+        if (window.openLoginModal) {
+          window.openLoginModal(); // 🚀 **透過 Vue 內部方法開啟登入彈窗**
+        } else {
+          console.error("window.openLoginModal 未定義");
+        }
+      });
+    }
+  }, 500);
+
 
   const htmlObject = new CSS3DObject(div);
   htmlObject.position.set(0, 100, -500); // **放置到 Three.js 空間**

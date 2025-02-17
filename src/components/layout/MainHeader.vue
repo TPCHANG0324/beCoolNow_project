@@ -254,6 +254,23 @@ export default {
 </script>
 
 <style scoped>
+
+.logout-popup01 .close-btn {
+    position: absolute;
+    right: 1rem;
+    /* top: 1rem; */
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    color: #545454;
+    box-shadow: none;
+
+    &:hover {
+      color: #d0ad44;
+      /* box-shadow: #545454; */
+    }
+}
 .cart-icon-wrapper {
   position: relative;
   display: inline-block;

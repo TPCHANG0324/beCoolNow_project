@@ -27,7 +27,7 @@
         </div>
         <div class="info-row">
           <span class="label">配送狀態：</span>
-          <span>{{ order.status }}</span>
+          <span>{{ order.status == 1 ? "已出貨" : "未出貨" }}</span>
         </div>
         <div class="info-row">
           <span class="label">收件地址：</span>
