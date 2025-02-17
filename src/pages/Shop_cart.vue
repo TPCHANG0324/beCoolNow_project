@@ -297,9 +297,6 @@ import { ref, computed, onMounted, watch } from 'vue';
 
 //---------------------
 
-
->>>>>>> sunny
-
 const route = useRoute();
 const router = useRouter();
 
