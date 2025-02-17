@@ -1048,4 +1048,8 @@ export default {
   flex-grow: 1; /* ✅ 讓遊戲區塊佔據剩餘的空間 */
   height: calc(100vh - 80px); /* ✅ 讓遊戲畫面填滿剩餘空間 */
 }
+#gameContainer canvas {
+ display: block;
+ margin: auto;
+}
 </style>

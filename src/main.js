@@ -19,7 +19,7 @@ import axios from 'axios';
 import emailjs from '@emailjs/browser';
 
 // 設定 axios 的 baseURL 為後端伺服器的地址與端口
-axios.defaults.baseURL = 'http://localhost:3000';
+// axios.defaults.baseURL = 'http://localhost:3000';
 
 const app = createApp(App);
 const pinia = createPinia();

@@ -384,6 +384,16 @@ watch(totalLetters, (newTotal) => {
   localStorage.setItem('totalLetters', newTotal.toString());
 });
 const done = (key) => {
+  let clicked = localStorage.getItem('clicked');
+  if(clicked){
+    clicked = JSON.parse(clicked);
+  }
+  if(clicked && clicked['key-'+key]) {
+    alert('不要洗次數')
+    return
+  }
+
+  // 判斷有沒有案過的 STORAGE 有的話就 return
   if(treePopup.value) return
   // isClicked.value = true
   // 遞增 action 計數
@@ -394,6 +404,17 @@ const done = (key) => {
 
   // 設定彈出視窗
   treePopup.value = key;
+  // 確定岸好了就設定 localStorage
+  if(!clicked){
+    clicked = {}
+    clicked['key-'+key] = true
+    localStorage.setItem('clicked', JSON.stringify(clicked));
+  }else{
+    clicked['key-'+key] = true
+    localStorage.setItem('clicked', JSON.stringify(clicked));
+    
+  }
+  
 
   setTimeout(() => {
     treePopup.value = null;

@@ -27,7 +27,7 @@
     <td class="IcB_content_H">
       {{ letter.message.substring(0, 50) }}...
     </td>
-    <td class="IcB_time_H">{{ formatDate(letter.timestamp) }}</td>
+    <td class="IcB_time_H">{{ formatDate(letter.timestamp).split(' ')[0] }}</td>
     <td>
       <button class="IcB_viewBtn_H" @click="viewLetter(letter)">
         查看
@@ -60,7 +60,7 @@
        @click.stop>  <!-- 防止點擊內容區域時關閉 -->
     <h3>{{ selectedLetter.name }} 的信件</h3>
     <p>{{ selectedLetter.message }}</p>
-    <p>{{ formatDate(selectedLetter.timestamp) }}</p>
+    <p>{{ formatDate(selectedLetter.timestamp).split(' ')[0] }}</p>
     <button @click="closeViewPopup">關閉</button>
   </div>
 </div>
