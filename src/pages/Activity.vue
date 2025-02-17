@@ -497,10 +497,10 @@ const handleSubmit = async (e) => {
 
 // 修改 API 配置
 const api = axios.create({
-  baseURL: import.meta.env.PROD
-    ? 'http://localhost/tid103/g1/api'
-    : '/tid103/g1/api',
-  withCredentials: true,
+  // baseURL: import.meta.env.PROD
+  //   ? 'http://localhost/tid103/g1/api'
+  //   : '/tid103/g1/api',
+  // withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
     'X-Requested-With': 'XMLHttpRequest'

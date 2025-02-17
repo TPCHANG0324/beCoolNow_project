@@ -1,14 +1,14 @@
 <?php
-header('Content-Type: application/json');
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+// header('Content-Type: application/json');
+// error_reporting(E_ALL);
+// ini_set('display_errors', 1);
 
 // 記錄接收到的數據
-file_put_contents('debug.log', print_r([
-    'POST_DATA' => file_get_contents('php://input'),
-    'REQUEST_METHOD' => $_SERVER['REQUEST_METHOD'],
-    'CONTENT_TYPE' => $_SERVER['CONTENT_TYPE'] ?? 'not set'
-], true), FILE_APPEND);
+// file_put_contents('debug.log', print_r([
+//     'POST_DATA' => file_get_contents('php://input'),
+//     'REQUEST_METHOD' => $_SERVER['REQUEST_METHOD'],
+//     'CONTENT_TYPE' => $_SERVER['CONTENT_TYPE'] ?? 'not set'
+// ], true), FILE_APPEND);
 
 // 引入數據庫連接文件
 include('conn.php');
