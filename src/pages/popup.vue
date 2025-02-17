@@ -154,6 +154,14 @@ export default {
         const data = await res.json();
         if (data.success) {
 
+          // 儲存登入狀態和用戶信息到 localStorage
+          localStorage.setItem("isLoggedIn", "true");
+          localStorage.setItem("userEmail", data.email);
+          localStorage.setItem("member_ID", data.member_ID);
+          localStorage.setItem("account", data.account);
+          localStorage.setItem("phoneNumber", data.phoneNumber);
+          localStorage.setItem("enterCity", data.enterCity);
+
 
           const redirectPath = localStorage.getItem('redirectPath') || '/';
           this.$router.push(redirectPath);
@@ -161,11 +169,7 @@ export default {
           // 如果所有驗證都通過
           // alert('登入成功!歡迎光臨涼城即時');
           alert(`${data.message}歡迎光臨涼城即時！`);
-          // 儲存登入狀態和用戶信息到 localStorage
-          localStorage.setItem('isLoggedIn', 'true');
-          localStorage.setItem('userEmail', this.formData.email);
           this.resetForm();
-
           this.closePopup();
           // this.$router.push('/member');
         } else {

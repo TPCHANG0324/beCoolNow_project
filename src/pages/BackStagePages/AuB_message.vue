@@ -34,7 +34,7 @@
                   <td>{{ contact['e-mail'] }}</td>
                   <td>{{ contact.cellPhone }}</td>
                   <td>{{ contact.contactDate }}</td>
-                  <td><button class="MmB_editBtn_H" @click="openEditPopup">查看</button></td>
+                  <td><button class="MmB_editBtn_H" @click="openEditPopup(contact)">查看</button></td>
                   <td class="deleteBtn">
                     <!-- <button class="IcB_deleteBtn_H" @click="openDeletePopup">
                       <i class="fa-solid fa-trash-can"></i>
@@ -77,6 +77,12 @@
         <BackStagePaginator></BackStagePaginator>
       </div>
     </div>
+
+    <BackStageMessagePopup
+      :isVisible="isMessagePopupVisible"
+      :messageData="selectedMessage"
+      @close="closeEditPopup"
+    />
     <transition name="fade">
       <BackStageConfirmPopup class="AuB_messageDelete_H" v-if="isPopupVisible">
         <span></span>
@@ -110,17 +116,34 @@ export default {
     const isPopupVisible = ref(false);
     const contactList = ref([]); // 存放後端撈取的資料
     const selectedMessageId = ref(null); // 存放要刪除的訊息 ID
-    const base_url = import.meta.env.VITE_AJAX_URL 
+    const base_url = import.meta.env.VITE_AJAX_URL; 
+
+    const isMessagePopupVisible = ref(false);
+    const selectedMessage = ref({});
 
     // 1️⃣ 從後端撈取 `G1_ContactUS` 的資料
     const fetchContacts = async () => {
       try {
         const response = await fetch(`${base_url}/AuB_fettchmessage.php`); // 替換成你的 API
         const data = await response.json();
-        contactList.value = data; // 將 API 回傳的資料存入 contactList
+      //   contactList.value = data; // 將 API 回傳的資料存入 contactList
+      // } catch (error) {
+      //   console.error('撈取資料失敗:', error);
+      // }
+      // ✅ 按 ID 由小到大排序 (ASC)
+        contactList.value = data.sort((a, b) => a.ID - b.ID); 
       } catch (error) {
-        console.error('撈取資料失敗:', error);
+        console.error("撈取資料失敗:", error);
       }
+    };
+    const openEditPopup = (contact) => {
+      selectedMessage.value = { ...contact };
+      isMessagePopupVisible.value = true;
+    };
+
+    const closeEditPopup = () => {
+      isMessagePopupVisible.value = false;
+      selectedMessage.value = {};
     };
 
      // 2️⃣ 顯示刪除彈窗
@@ -190,8 +213,12 @@ export default {
     return {
       isPopupVisible,
       contactList,
+      openEditPopup,
+      closeEditPopup,
       openDeletePopup,
       closePopup,
+      isMessagePopupVisible,
+      selectedMessage,
       updateArticle,
       deleteMessage,
       fetchContacts,
