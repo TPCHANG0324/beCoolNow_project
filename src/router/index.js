@@ -134,13 +134,29 @@ const routes = [
     },
   },
   {
-    path: '/pay1/',
+    path: '/support/:paymentMethod',
     component: () => import('@/pages/pay1.vue'),
     meta: {
-      title: '捐款頁面1',
-      // requiredLogin: true
+      title: '填寫個人資訊',
+    },
+    props: true,
+    beforeEnter: (to, from, next) => {
+      const allowedPaymentMethods = ['linePay', 'creditCard'];
+      if (allowedPaymentMethods.includes(to.params.paymentMethod)) {
+        next(); // 允許進入
+      } else {
+        next('/support'); // 導向回 support 頁面
+      }
     },
   },
+  // {
+  //   path: '/pay1/',
+  //   component: () => import('@/pages/pay1.vue'),
+  //   meta: {
+  //     title: '捐款頁面1',
+  //     // requiredLogin: true
+  //   },
+  // },
 
   {
     path: '/donation/confirm',
