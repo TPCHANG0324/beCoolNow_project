@@ -6,7 +6,7 @@
         <div class="CB_tag_H">
           <h3 class="CB_titleF_H">討論板管理</h3>
           <div class="MmB_searchBar_H">
-            <input id="" class="input" type="text" name="" placeholder="搜尋 文章編號 或 文章標題" v-model="searchText"/>
+            <input id="" class="input" type="text" name="" placeholder="搜尋 文章編號 或 文章標題" v-model="searchText" />
             <i class="fa-solid fa-magnifying-glass"></i>
           </div>
         </div>
@@ -17,39 +17,40 @@
           <!-- 主要表格：用 v-for 迭代資料庫抓到的資料 -->
           <main class="main">
             <div class="CB_TableF_H">
-            <table class="CB_mainFTable_H">
-              <thead>
-                <tr>
-                  <th class="CB_numberF_H">文章編號</th>
-                  <th class="CB_memberIdF_H">會員編號</th>
-                  <th class="CB_articleF_H">文章分類</th>
-                  <th class="CB_topicF_H">文章標題</th>
-                  <th class="CB_editDateF_H">發布日期</th>
-                  <th class="CB_goTopCheckF_H">狀態</th>
-                  <!-- <th class="CB_goTopCheckF_H">是否置頂</th> -->
-                  <th class="CB_goOffF_H"></th>
-                </tr>
-              </thead>
-              <tbody>
-                <!-- 用 filteredArticles 來動態渲染每一筆資料 -->
-                <tr v-for="article in datas" :key="article.ID">
-                  <!-- 依照你資料表的欄位，對應顯示 -->
-                  <td>{{ article.ID }}</td>
-                  <td>{{ article.memberId }}</td>
-                  <td>{{ article.category }}</td>
-                  <td class="CB_content_H">{{ article.title }}</td>
-                  <td>{{ article.time.split(' ')[0] }}</td>
-                  <td :style="{ color: article.articleShelves ? '#545454' : 'rgba(84, 84, 84, 0.5)' }">{{ article.articleShelves? '上架':'下架' }}</td>
-                  <td><button class="MmB_editBtn_H" @click="openEditPopup(article)">編輯與查看</button></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <Paginator :currentPage="currentP" :totalPages="totalItemCount" @page-changed="handlePageChange" />
+              <table class="CB_mainFTable_H">
+                <thead>
+                  <tr>
+                    <th class="CB_numberF_H">文章編號</th>
+                    <th class="CB_memberIdF_H">會員編號</th>
+                    <th class="CB_articleF_H">文章分類</th>
+                    <th class="CB_topicF_H">文章標題</th>
+                    <th class="CB_editDateF_H">發布日期</th>
+                    <th class="CB_goTopCheckF_H">狀態</th>
+                    <!-- <th class="CB_goTopCheckF_H">是否置頂</th> -->
+                    <th class="CB_goOffF_H"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- 用 filteredArticles 來動態渲染每一筆資料 -->
+                  <tr v-for="article in datas" :key="article.ID">
+                    <!-- 依照你資料表的欄位，對應顯示 -->
+                    <td>{{ article.ID }}</td>
+                    <td>{{ article.memberId }}</td>
+                    <td>{{ article.category }}</td>
+                    <td class="CB_content_H">{{ article.title }}</td>
+                    <td>{{ article.time.split(' ')[0] }}</td>
+                    <td :style="{ color: article.articleShelves ? '#545454' : 'rgba(84, 84, 84, 0.5)' }">{{
+                      article.articleShelves ? '上架' : '下架' }}</td>
+                    <td><button class="MmB_editBtn_H" @click="openEditPopup(article)">編輯與查看</button></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <Paginator :currentPage="currentP" :totalPages="totalItemCount" @page-changed="handlePageChange" />
           </main>
-          
+
         </div>
-        
+
         <!-- <BackStagePaginator></BackStagePaginator> -->
       </div>
     </div>
@@ -90,38 +91,29 @@
           <!-- 這裡也可以加上 @click="closeEditPopup" 讓使用者點 X 就能關閉 -->
           <i class="fa-solid fa-x" @click="closeEditPopup"></i>
         </span>
-        <section>
-          <article class="SpB_leftBlockPopup_H">
-            <div>
-              <p>文章編號:&nbsp;</p>
-              <p>{{ currentArticle.ID }}</p>
-            </div>
-            <div>
-              <p>文章分類:&nbsp;</p>
-              <p>{{ currentArticle.category }}</p>
-            </div>
-            <div>
-              <p>會員編號:&nbsp;</p>
-              <p>{{ currentArticle.memberId }}</p>
-            </div>
-            <div>
-              <p>文章標題:&nbsp;</p>
-              <p>{{ currentArticle.title }}</p>
-            </div>
-            <div>
-              <p>編輯日期:&nbsp;</p>
-              <p>{{ currentArticle.time.split(' ')[0] }}</p>
-            </div>
-          </article>
-          <article class="SpB_rightBlockPopup_H">
-            <div>
-              <p>狀態:&nbsp;</p>
+        <section class="arti">
+
+          <div class="inn">
+            <p>文章分類： {{ currentArticle.category }}</p>
+            <p>編輯日期： {{ currentArticle.time.split(' ')[0] }}</p>
+          </div>
+          <div class="inn">
+            <p>文章編號： {{ currentArticle.ID }}</p>
+            <p>會員編號： {{ currentArticle.memberId }}</p>
+          </div>
+          <div class="inn">
+            <p>封面圖片：{{ currentArticle.coverImage ? '有' : '無' }}</p>
+            <p>文章狀態:
               <select v-model="currentArticle.articleShelves">
                 <option :value="1">上架</option>
                 <option :value="0">下架</option>
               </select>
-            </div>
-          </article>
+            </p>
+          </div>
+          <div class="inn">
+            <p>文章標題： {{ currentArticle.title }}</p>
+          </div>
+          <div class="con">文章內容： <textarea name="" id="" disabled>{{ currentArticle.content }}</textarea></div>
         </section>
         <div>
           <button @click="closeEditPopup">取消</button>
@@ -202,7 +194,7 @@ const savePopup = async () => {
       alert('修改成功！')
       isEditPopupVisible.value = false;
       fetchData();
-    }else{
+    } else {
       alert(data.message)
       console.log(data)
     }

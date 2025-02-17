@@ -102,8 +102,8 @@
                   <option :value="item" v-for="(item, index) in deliver" :key="index">{{ item }}</option>
                 </select>
                 <label for="">付款方式</label>
-                <select name="" id="">
-                  <option :value="index" v-for="(item, index) in pay" :key="index">{{ item }}</option>
+                <select v-model="selectedPayMethod" name="" id="">
+                  <option :value="item.id" v-for="(item, index) in pay" :key="index">{{ item.name }}</option>
                 </select>
               </div>
             </section>
@@ -579,7 +579,21 @@ const updateDeliveryCost = () => {
 watch(selectedDelivery, updateDeliveryCost);
 
 //付款方式
-const pay = ref(['信用卡 (Visa/Master/JCB)', 'Line Pay'])
+const pay = ref([
+  { id: 0, name: "信用卡 (Visa/Master/JCB)" },
+  { id: 1, name: "Line Pay" },
+]);
+
+// 使用者選擇的付款方式（從 localStorage 讀取，如果沒有則預設為 0）
+const selectedPayMethod = ref(
+  parseInt(localStorage.getItem("payMethod")) || 0
+);
+
+// 監聽 `selectedPayMethod`，當使用者選擇時存入 `localStorage`
+watch(selectedPayMethod, (newValue) => {
+  localStorage.setItem("payMethod", newValue);
+});
+
 
 
 //計算合計金額

@@ -27,7 +27,7 @@ body {
         // div {
         //     height: 360px;
         //     border: 2px solid;
-        @include max_820{
+        @include max_1100{
             margin-top: 0;
         }
         img {
@@ -42,18 +42,32 @@ body {
             @include PC_h1($Ivory_white);
             z-index: 2;
             position: absolute;
-            top: 25%;
-            left: 25%;
-            // transform: translate(-50%, -50%);
+            // top: 25%;
+            // left: 25%;
             text-align: center;
+
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            
+            white-space: nowrap;
+            @include max_1100{
+                top: 55%;
+            }
 
             @include max_820 {
                 font-size: 3rem;
-                top: 50%;
+                top: 60%;
+            }
+            @include max_540{
+                font-size: 2.3rem;
+                top: 65%;
             }
 
             @include max_430 {
-                font-size: $h3;
+                font-size: 2rem;
+                // top: 70%;
+                // font-size: $h3;
                 // top:65%;
                 // left:20%;
             }
@@ -67,11 +81,13 @@ body {
         margin: 0 auto;
 
         .donate_choise_S {
+
             .donate_type_month,
             .donate_type_once {
                 cursor: pointer; // 確保兩個按鈕都可以點擊
                 transition: background-color 0.3s ease;
-
+                outline: none;
+                border: 0px solid transparent;
                 &.active {
                     background-color: $Green_2 !important; // 使用 !important 覆蓋其他樣式
                     color: $Ivory_white !important;
@@ -93,6 +109,7 @@ body {
 
           .donate_amount_S {
             .amount {
+                
               cursor: pointer;
               transition: background-color 0.3s ease;
               
@@ -115,17 +132,20 @@ body {
             margin-bottom: 20px;
             font-weight: bold;
 
-            @include max_430 {
+            @include max_540 {
                 font-size: $h6;
             }
 
         }
 
         .donate_choise_S {
+            margin: 0 auto;
             display: flex;
             justify-content: center;
 
-            
+            @include max_768{
+                width: 85vw;
+            }
 
             .donate_type_month {
                 width: 300px;
@@ -137,9 +157,11 @@ body {
                 outline: none;
                 font-weight: bold;
 
+                
+
                 @include max_540 {
-                    width: 200px;
-                    // height: 40px;
+                    // width: 200px;
+                    height: 55px;
                     font-size: $h5;
                 }
 
@@ -157,15 +179,15 @@ body {
                 font-weight: bold;
                 cursor: pointer;
                 transition: background-color 0.3s ease;
-                padding-top: 20px;
+                // padding-top: 20px;
 
                 // &:hover {
                 //     background-color: $Green_1;
                 // }
 
                 @include max_540 {
-                    width: 200px;
-                    // height: 40px;
+                    // width: 200px;
+                    height: 55px;
                     font-size: $h5;
                 }
             }
@@ -190,6 +212,14 @@ body {
             align-items: center;
             gap: 35px;
             
+            @include max_768{
+                max-width: 85vw;
+            }
+
+            @include max_540{
+                margin-top: 20px;
+                gap: 25px;
+            }
 
             // padding: 11px 44px 7px 44px;
             @include max_430 {
@@ -205,6 +235,8 @@ body {
                 font-weight: bold;
                 border-radius: 20px;
                 cursor: pointer;
+                outline: none;
+                border: 2px solid $Green_1;
 
                 // &:hover {
                 //     background-color: $Green_2;
@@ -232,13 +264,27 @@ body {
         }
 
         .custom_amount_S {
+            margin: 0 auto;
             margin-top: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            
+
+            @include max_768{
+                max-width: 85vw;
+            }
+
+            @include max_540{
+                margin-top: 20px;
+            }
 
             span {
                 margin-right: 16px;
                 color: $Green_2;
                 font-size: $h3;
                 font-weight: bold;
+                white-space: nowrap;
 
                 @include max_540 {
                     font-size: $h4;
@@ -258,23 +304,49 @@ body {
                    
                 }
 
-                @include max_540 {
-                    width: 160px;
-                    height: 24x;
+                @include max_768{
+                    max-width: 70%;
                 }
+
+                &::placeholder{
+                    @include max_540{
+                        font-size: 12px;
+                    }
+                }
+
+                // @include max_540 {
+                //     width: 160px;
+                //     height: 24x;
+                // }
             }
         }
 
         .payment_section_S {
+            
             margin-top: 40px;
 
+            @include max_540{
+                margin-top: 20px;
+            }
+
             .payment_content {
+                margin: 0 auto;
                 display: flex;
                 justify-content: center;
                 align-items: flex-start;
-                font-size: $h4;
+                font-size: $h3;
+                color: $Green_2;
                 font-weight: bold;
                 gap: 30px;
+
+                @include max_768{
+                    max-width: 85vw;
+                    flex-direction: column;
+                }
+
+                @include max_540{
+                    gap: 20px;
+                }
 
                 .ecpay {
                     display: flex;
@@ -321,9 +393,12 @@ body {
                 }
             }
         }
-        .linepay, .ecpay {
+        .how,.linepay, .ecpay {
             display: flex;
             align-items: center;
+            @include max_540 {
+                font-size: $h4;
+            }
         }
 
         
@@ -334,7 +409,7 @@ body {
                     flex-direction: column;
                     align-items: stretch;
                     font-size: 1.2 rem;
-                    margin-top: 45px;
+                    // margin-top: 45px;
 
                 }
 
@@ -351,7 +426,7 @@ body {
             }
 
             .payment_step_S {
-                margin-top: 64px;
+                margin-top: 30px;
                 margin-bottom: 40px;
 
                 .next_step {
@@ -378,3 +453,16 @@ body {
             }
 
         }
+
+.dona-wrap{
+    // margin: 0 auto;
+    // display: flex;
+    // flex-direction: column;
+    // align-items: center;
+    // align-items: flex-start;
+    // max-width: 85vw;
+
+    // @include max_1200() {
+    //     margin: 0 3vw;
+    // }
+}

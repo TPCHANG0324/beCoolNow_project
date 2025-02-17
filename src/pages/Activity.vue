@@ -360,6 +360,11 @@ const expandCards = () => {
 const collapseCards = () => {
 
   cardLimit.value = 6;
+  const daily_card_element = document.querySelector('.daily_card');
+  daily_card_element.scrollIntoView({
+    // top: 0, // 滾動到頂部
+    behavior: 'smooth', // 平滑滾動
+  });
   // nextTick(() => {
   //   const dailyCard = document.querySelector('.daily_card');
   //   if (dailyCard) {
@@ -384,6 +389,16 @@ watch(totalLetters, (newTotal) => {
   localStorage.setItem('totalLetters', newTotal.toString());
 });
 const done = (key) => {
+  let clicked = localStorage.getItem('clicked');
+  if(clicked){
+    clicked = JSON.parse(clicked);
+  }
+  if(clicked && clicked['key-'+key]) {
+    alert('一個任務只能打卡一次哦！')
+    return
+  }
+
+  // 判斷有沒有案過的 STORAGE 有的話就 return
   if(treePopup.value) return
   // isClicked.value = true
   // 遞增 action 計數
@@ -394,6 +409,17 @@ const done = (key) => {
 
   // 設定彈出視窗
   treePopup.value = key;
+  // 確定岸好了就設定 localStorage
+  if(!clicked){
+    clicked = {}
+    clicked['key-'+key] = true
+    localStorage.setItem('clicked', JSON.stringify(clicked));
+  }else{
+    clicked['key-'+key] = true
+    localStorage.setItem('clicked', JSON.stringify(clicked));
+    
+  }
+  
 
   setTimeout(() => {
     treePopup.value = null;
@@ -497,10 +523,10 @@ const handleSubmit = async (e) => {
 
 // 修改 API 配置
 const api = axios.create({
-  baseURL: import.meta.env.PROD
-    ? 'http://localhost/tid103/g1/api'
-    : '/tid103/g1/api',
-  withCredentials: true,
+  // baseURL: import.meta.env.PROD
+  //   ? 'http://localhost/tid103/g1/api'
+  //   : '/tid103/g1/api',
+  // withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
     'X-Requested-With': 'XMLHttpRequest'

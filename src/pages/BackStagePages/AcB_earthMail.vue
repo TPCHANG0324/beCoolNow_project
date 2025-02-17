@@ -19,28 +19,27 @@
                 </tr>
               </thead>
               <tbody>
-                <!-- 使用 v-for 迭代目前頁的信件 -->
-                <tr v-for="(letter, index) in letters" :key="letter._id">
-                  <td class="IcB_number_H">
-                    {{ (currentPage - 1) * itemsPerPage + index + 1 }}
-                  </td>
-                  <td class="IcB_name_H">{{ letter.name }}</td>
-                  <td class="IcB_content_H">
-                    {{ letter.message.substring(0, 50) }}...
-                  </td>
-                  <td class="IcB_time_H">{{ formatDate(letter.timestamp) }}</td>
-                  <td>
-                    <button class="IcB_viewBtn_H" @click="viewLetter(letter)">
-                      查看
-                    </button>
-                  </td>
-                  <td>
-                    <button class="IcB_deleteBtn_H" @click="confirmDelete(letter._id)">
-                      <i class="fa-solid fa-trash-can"></i>
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
+  <tr v-for="(letter, index) in letters" :key="letter._id">
+    <td class="IcB_number_H">
+      {{ (currentPage - 1) * itemsPerPage + index + 1 }}
+    </td>
+    <td class="IcB_name_H">{{ letter.name }}</td>
+    <td class="IcB_content_H">
+      {{ letter.message.substring(0, 50) }}...
+    </td>
+    <td class="IcB_time_H">{{ formatDate(letter.timestamp).split(' ')[0] }}</td>
+    <td>
+      <button class="IcB_viewBtn_H" @click="viewLetter(letter)">
+        查看
+      </button>
+    </td>
+    <td>
+      <button class="IcB_deleteBtn_H" @click="confirmDelete(letter._id)">
+        <i class="fa-solid fa-trash-can"></i>
+      </button>
+    </td>
+  </tr>
+</tbody>
             </table>
           </main>
         </div>
@@ -53,21 +52,18 @@
         />
       </div>
     </div>
-
     <!-- 查看信件彈窗 -->
-    <div
-      v-if="selectedLetter !== null"
-      class="view-popup"
-      @click="closeViewPopup"
-    >
-      <div class="popup-content" @click.stop>
-        <h3>{{ selectedLetter.name }} 的信件</h3>
-        <p>{{ selectedLetter.message }}</p>
-        <p>{{ formatDate(selectedLetter.timestamp) }}</p>
-        <button @click="closeViewPopup">關閉</button>
-      </div>
-    </div>
-
+    <div v-if="selectedLetter !== null" 
+     class="view-popup" 
+     @click="closeViewPopup">  <!-- 添加點擊事件 -->
+  <div class="popup-content" 
+       @click.stop>  <!-- 防止點擊內容區域時關閉 -->
+    <h3>{{ selectedLetter.name }} 的信件</h3>
+    <p>{{ selectedLetter.message }}</p>
+    <p>{{ formatDate(selectedLetter.timestamp).split(' ')[0] }}</p>
+    <button @click="closeViewPopup">關閉</button>
+  </div>
+</div>
     <!-- 刪除確認彈窗 -->
     <BackStageConfirmPopup v-if="showDeletePopup" class="AcB_DeletePopup_H">
       <span></span>

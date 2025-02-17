@@ -26,18 +26,42 @@
                 </tr>
               </thead>
               <tbody>
-                <!-- 迭代 paginatedMembers -->
                 <tr v-for="(member, index) in paginatedMembers" :key="member.id">
-                  <td class="MmB_number_H">{{ member.id }}</td>
-                  <td class="MmB_name_H">{{ member.name }}</td>
-                  <td class="MmB_phone_H">{{ member.phone }}</td>
-                  <td class="MmB_mail_H">{{ member.email }}</td>
-                  <td class="MmB_pet_H">{{ member.pet }}</td>
-                  <td class="MmB_createDate_H">{{ member.createDate }}</td>
-                  <td>
-                    <button class="MmB_editBtn_H" @click="openEditPopup(member)">編輯與查看</button>
-                  </td>
+                  <!-- <td class="MmB_number_H">113122101</td>
+                  <td class="MmB_name_H">王小明</td>
+                  <td class="MmB_phone_H">0912345678</td>
+                  <td class="MmB_mail_H">tibame@gmail.com</td> -->
+                  <td>{{ member.id }}</td>
+                  <td>{{ member.account }}</td>
+                 
+                  <td>{{ member.phoneNumber || "未提供" }}</td>
+                  <td>{{ member.email }}</td>
+                  <td class="MmB_pet_H">氓阿狐</td>
+                  <td>{{ member.createTime }}</td>
+                  
+                  <!-- <td class="MmB_createDate_H">2025-01-12</td> -->
+                  <!-- 這裡加上 @click 事件 -->
+                  <td><button class="MmB_editBtn_H" @click="openEditPopup(member)">查看</button></td>
                 </tr>
+
+                <!-- <tr>
+                  <td class="MmB_number_H">113122102</td>
+                  <td class="MmB_name_H">王小明</td>
+                  <td class="MmB_phone_H">0912345678</td>
+                  <td class="MmB_mail_H">tibame@gmail.com</td>
+                  <td class="MmB_pet_H">氓阿狐</td>
+                  <td class="MmB_createDate_H">2025-01-12</td>
+                  <td><button class="MmB_editBtn_H" @click="openEditPopup">編輯與查看</button></td>
+                </tr>
+                <tr>
+                  <td class="MmB_number_H">113122103</td>
+                  <td class="MmB_name_H">王小明</td>
+                  <td class="MmB_phone_H">0912345678</td>
+                  <td class="MmB_mail_H">tibame@gmail.com</td>
+                  <td class="MmB_pet_H">氓阿狐</td>
+                  <td class="MmB_createDate_H">2025-01-12</td>
+                  <td><button class="MmB_editBtn_H" @click="openEditPopup">編輯與查看</button></td>
+                </tr> -->
               </tbody>
             </table>
           </main>
@@ -52,71 +76,88 @@
       </div>
     </div>
 
-    <!-- 小彈窗 -->
-    <transition name="fade">
-      <BackStageSmallPopup class="MmB_EditView_H" v-if="isEditPopupVisible">
-        <span>
-          <p>編輯與查看</p>
-          <i class="fa-solid fa-x" @click="closeEditPopup"></i>
-        </span>
-        <section>
-          <article>
-            <div>
-              <p>會員編號:&nbsp;</p>
-              <p>{{ currentMember.id }}</p>
-            </div>
-            <div>
-              <p>帳號:&nbsp;</p>
-              <p>{{ currentMember.email }}</p>
-            </div>
-            <div>
-              <p>姓名:&nbsp;</p>
-              <p>{{ currentMember.name }}</p>
-            </div>
-            <div>
-              <p>地址:&nbsp;</p>
-              <p>{{ currentMember.address }}</p>
-            </div>
-          </article>
-          <article>
-            <div>
-              <p>性別:&nbsp;</p>
-              <p>{{ currentMember.gender }}</p>
-            </div>
-            <div>
-              <p>手機:&nbsp;</p>
-              <p>{{ currentMember.phone }}</p>
-            </div>
-            <div>
-              <p>帳號狀態:&nbsp;</p>
-              <select v-model="currentMember.status">
-                <option value="normal">正常</option>
-                <option value="suspend">停權</option>
-              </select>
-            </div>
-            <div>
-              <p>創建時間:&nbsp;</p>
-              <p>{{ currentMember.createDate }}</p>
-            </div>
-          </article>
-        </section>
-        <div>
-          <button @click="closeEditPopup">取消</button>
-          <button @click="savePopup">儲存</button>
-        </div>
-      </BackStageSmallPopup>
-    </transition>
+    <!-- 用 v-if 控制小彈窗的顯示 -->
+     <transition name="fade">
+    <BackStageSmallPopup class="MmB_EditView_H" v-if="isEditPopupVisible">
+      <span class="popup-header">
+        <p>編輯與查看</p>
+        <!-- 關閉圖示也加上 @click 事件 -->
+        <i class="fa-solid fa-x" @click="closeEditPopup"></i>
+      </span>
+      <!-- <section class="popup-content"> -->
+      <div class="popup-content">
+        <article class="popup-column">
+          <div>
+            <p class="label">會員編號:&nbsp;</p>
+            <!-- <p>113122101</p> -->
+            <p>{{ selectedMember.id || 'N/A' }}</p>
+          </div>
+          <div>
+            <p class="label">帳號:&nbsp;</p>
+            <p>{{selectedMember.email || 'N/A' }}</p>
+          </div>
+          <div>
+            <p class="label">姓名:&nbsp;</p>
+            <!-- <p>黃小吉</p> -->
+             <p>{{ selectedMember.account || 'N/A' }}</p>
+
+          </div>
+          <div>
+            <p class="label">地址:&nbsp;</p>
+            <p>臺北市中山區南京東路三段219號5樓</p>
+          </div>
+        </article>
+
+        <article class="popup-column">
+          <div>
+            <!-- <p>性別:&nbsp;</p>
+            <p>女</p> -->
+            <p class="label">性別:</p>
+            <select v-model="selectedMember.gender">
+              <option value="male">男</option>
+              <option value="female">女</option>
+            </select>
+          </div>
+          <div>
+            <p class="label">手機:&nbsp;</p>
+            <!-- <p>0912345678</p> -->
+            <p>{{ selectedMember.phoneNumber || 'N/A' }}</p>
+          </div>
+          <div>
+            <p class="label">帳號狀態:&nbsp;</p>
+            <select v-model="selectedMember.status">
+              <option value="1">啟用</option>
+              <option value="0">停用</option>
+              <option value="2">管理員</option>
+              <!-- <option value="suspend">停權</option> -->
+            </select>
+          </div>
+          <div>
+            <p class="label">創建時間:&nbsp;</p>
+            <!-- <p>2025-01-12</p> -->
+            <p>{{ selectedMember.createTime || 'N/A' }}</p>
+          </div>
+        </article>
+        <!-- </section> -->
+      </div>
+      <div class="popup-footer">
+        <button @click="closeEditPopup">取消</button>
+        <button @click="savePopup">儲存</button>
+      </div>
+    </BackStageSmallPopup>
+  </transition>
   </div>
 </template>
 
 <script>
-import { ref, computed } from 'vue';
+import { ref, onMounted } from 'vue';
 import BackStageSidebar from '@/components/items/BackStageItems/BackStageSidebar.vue';
 import BackStagePaginator from '@/components/items/BackStageItems/BackStagePaginator.vue';
 import BackStageHeader from '@/components/layout/BackStageLayout/BackStageHeader.vue';
 import BackStageSmallPopup from '@/components/layout/BackStageLayout/BackStageSmallPopup.vue';
 // 引入分頁器元件，請確保此元件已建立
 import Paginator from '@/components/paginator.vue';
+import { reactive } from "vue";
 
 export default {
   name: 'MemberManagement',
@@ -128,14 +169,28 @@ export default {
     Paginator,
   },
   setup() {
-    // 假設會員資料，實際上可透過 API 撈取
-    const members = ref([
-      { id: '113122101', name: '王小明', phone: '0912345678', email: 'tibame@gmail.com', pet: '氓阿狐', createDate: '2025-01-12', address: '臺北市中山區某路', gender: '女', status: 'normal' },
-      { id: '113122102', name: '王小明', phone: '0912345678', email: 'tibame@gmail.com', pet: '氓阿狐', createDate: '2025-01-12', address: '臺北市中山區某路', gender: '女', status: 'normal' },
-      { id: '113122103', name: '王小明', phone: '0912345678', email: 'tibame@gmail.com', pet: '氓阿狐', createDate: '2025-01-12', address: '臺北市中山區某路', gender: '女', status: 'normal' },
-      // 可加入更多會員資料...
-    ]);
-
+    const base_url = import.meta.env.VITE_AJAX_URL; // 確保有設置環境變數
+    const members = ref([]);
+    // 用來控制小彈窗的顯示 / 隱藏
+    const isEditPopupVisible = ref(false);
+    
+    // 1. 撈取會員資料
+    const fetchMembers = async () => {
+      try {
+        const response = await fetch(`${base_url}/MmB_getmembers.php`);
+        members.value = await response.json();
+        console.log("後台會員資料:", members.value); // 確認資料
+      } catch (error) {
+        console.error("撈取會員資料失敗:", error);
+      }
+    };
+    // 點「編輯與查看」時，打開彈窗
+    const openEditPopup = (member) => {
+      // if (!member) return; // 防呆，確保 `member` 存在
+      // selectedMember.value = { ...member }; // 正確存入資料
+      Object.assign(selectedMember, member); 
+      isEditPopupVisible.value = true;
+    };
     // 分頁器狀態
     const currentPage = ref(1);
     const itemsPerPage = 10;
@@ -149,33 +204,61 @@ export default {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
-    // 小彈窗控制
-    const isEditPopupVisible = ref(false);
-    const currentMember = ref({});
-
-    const openEditPopup = (member) => {
-      currentMember.value = member;
-      isEditPopupVisible.value = true;
-    };
-
+    const selectedMember = reactive({
+      id: "",
+      account: "",
+      email: "",
+      phoneNumber: "",
+      status: "",
+      createTime: "",
+    });
     const closeEditPopup = () => {
       isEditPopupVisible.value = false;
+      selectedMember.value = {};
     };
 
-    const savePopup = () => {
-      alert('會員資料已儲存 / 更新');
-      isEditPopupVisible.value = false;
+
+    // 儲存時做一些操作，比如更新會員資料、呼叫 API 等
+    // const savePopup = () => {
+    //   alert('會員資料已儲存 / 更新');
+    //   // 儲存完後關閉視窗
+    //   isEditPopupVisible.value = false;
+    // };
+
+    // 4️⃣ 更新會員資料 (儲存變更)
+    const savePopup = async () => {
+      try {
+        const response = await fetch(`${base_url}/MmB_updatemember.php`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(selectedMember.value),
+        });
+
+        const result = await response.json();
+        if (response.ok) {
+          alert("會員資料已更新！");
+          fetchMembers(); // 重新載入會員列表
+          closeEditPopup();
+        } else {
+          alert("更新失敗：" + result.error);
+        }
+      } catch (error) {
+        console.error("更新會員資料失敗:", error);
+      }
     };
+
+    // **在組件載入時撈取會員資料**
+    onMounted(fetchMembers);
 
     return {
-      members,
+      members,  
       currentPage,
       itemsPerPage,
       totalPages,
       paginatedMembers,
       handlePageChange,
       isEditPopupVisible,
-      currentMember,
+      selectedMember,
       openEditPopup,
       closeEditPopup,
       savePopup,
@@ -183,3 +266,89 @@ export default {
   },
 };
 </script>
+
+<style lang="css" scoped>
+
+.MmB_EditView_H .popup-content{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 20px;
+}
+
+
+/* 標題區 */
+.popup-header {
+  /* display: flex;
+  justify-content: space-between;
+  align-items: center; */
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 10px;
+}
+
+/* 內容區 */
+.popup-content {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 10px 0;
+}
+
+/* 每個欄位區塊 */
+.popup-column {
+  width: 48%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  color: #333;
+}
+
+/* 標籤 */
+.label {
+  font-weight: bold;
+  color: #555;
+  display: inline-block;
+  min-width: 130px;
+}
+
+/* 選單 */
+select {
+  width: 100%;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+/* 按鈕區 */
+.popup-footer {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  padding-top: 10px;
+}
+
+.popup-footer button {
+  padding: 8px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.popup-footer button:first-child {
+  background: #ccc;
+  color: black;
+}
+
+.popup-footer button:last-child {
+  background: #5b774a;
+  color: white;
+}
+
+</style>

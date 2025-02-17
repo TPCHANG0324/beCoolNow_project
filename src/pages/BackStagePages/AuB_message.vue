@@ -36,9 +36,7 @@
                   <td>{{ contact['e-mail'] }}</td>
                   <td>{{ contact.cellPhone }}</td>
                   <td>{{ contact.contactDate }}</td>
-                  <td>
-                    <button class="MmB_editBtn_H" @click="openEditPopup">查看</button>
-                  </td>
+                  <td><button class="MmB_editBtn_H" @click="openEditPopup(contact)">查看</button></td>
                   <td class="deleteBtn">
                     <button class="IcB_deleteBtn_H" @click="openDeletePopup(contact.ID)">
                       <i class="fa-solid fa-trash-can"></i>
@@ -58,7 +56,12 @@
         />
       </div>
     </div>
-    <!-- 刪除訊息的彈窗 -->
+
+    <BackStageMessagePopup
+      :isVisible="isMessagePopupVisible"
+      :messageData="selectedMessage"
+      @close="closeEditPopup"
+    />
     <transition name="fade">
       <BackStageConfirmPopup class="AuB_messageDelete_H" v-if="isPopupVisible">
         <span></span>
@@ -96,16 +99,32 @@ export default {
     const contactList = ref([]); // 後端撈取的資料
     const selectedMessageId = ref(null);
     const base_url = import.meta.env.VITE_AJAX_URL;
+    const isMessagePopupVisible = ref(false);
+    const selectedMessage = ref({});
 
     // 撈取訊息資料
     const fetchContacts = async () => {
       try {
         const response = await fetch(`${base_url}/AuB_fettchmessage.php`);
         const data = await response.json();
-        contactList.value = data;
+      //   contactList.value = data; // 將 API 回傳的資料存入 contactList
+      // } catch (error) {
+      //   console.error('撈取資料失敗:', error);
+      // }
+      // ✅ 按 ID 由小到大排序 (ASC)
+        contactList.value = data.sort((a, b) => a.ID - b.ID); 
       } catch (error) {
-        console.error('撈取資料失敗:', error);
+        console.error("撈取資料失敗:", error);
       }
+    };
+    const openEditPopup = (contact) => {
+      selectedMessage.value = { ...contact };
+      isMessagePopupVisible.value = true;
+    };
+
+    const closeEditPopup = () => {
+      isMessagePopupVisible.value = false;
+      selectedMessage.value = {};
     };
 
     // 在頁面載入時撈取資料
@@ -188,29 +207,29 @@ export default {
         behavior: 'smooth',
       });
     };
-
-    // 若需要查看訊息的彈窗（此處範例僅關閉刪除彈窗）
-    const openEditPopup = () => {
-      // 此處可擴充查看功能
+    const updateArticle = () => {
       isPopupVisible.value = false;
-    };
-
+    }
     return {
       isPopupVisible,
       contactList,
       selectedMessageId,
+      openEditPopup,
+      closeEditPopup,
       openDeletePopup,
       closePopup,
+      isMessagePopupVisible,
+      selectedMessage,
       deleteMessage,
       fetchContacts,
       submitForm,
+      updateArticle,
       // 分頁器相關
       currentPage,
       itemsPerPage,
       totalPages,
       paginatedContacts,
       handlePageChange,
-      openEditPopup,
     };
   },
 };

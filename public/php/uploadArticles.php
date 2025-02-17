@@ -56,8 +56,8 @@ try {
         }
 
         //正式服的路徑修改
-        // $line = "https://tibamef2e.com/tid103/g1/php/uploads/";
-        $line = "http://localhost/tid103/g1/php/uploads/";
+        $line = "https://tibamef2e.com/tid103/g1/php/uploads/";
+        // $line = "http://localhost/tid103/g1/php/uploads/";
 
         return 'src="' . $line . date('Y/m/') . $fileName . '"';
     }, $content);
