@@ -195,8 +195,113 @@
 import MainFooter from '@/components/layout/MainFooter.vue';
 import MainHeader from '@/components/layout/MainHeader.vue';
 // import { useCounterStore } from '@/store/cart';
+<<<<<<< HEAD
 import { ref, computed } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
+=======
+import { ref, computed, onMounted, watch } from 'vue';
+//---------------------測試按鈕
+
+// const testBtn = async () => {
+//   const res = await fetch('/tid103/g1/php/test.php')
+//   const data = await res.json()
+//   console.log(data)
+// }
+
+
+
+// //---------------------測試用：註冊
+
+// const account1 = ref(null)
+// const password1 = ref(null)
+
+// const register = async () => {
+//   if (!account1.value || !password1.value) {
+//     alert("帳號或密碼不可為空！");
+//     return;
+//   }
+//   const url = `/tid103/g1/php/register.php`;
+//   try {
+//     const res = await fetch(url, {
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/json'
+//       },
+//       body: JSON.stringify({
+//         account: account1.value,
+//         password: password1.value
+//       })
+//     })
+//     const data = await res.json()
+//     console.log(data) //註冊完之後看一下成功與否
+
+//     if (data.success) {
+//       console.log("註冊成功！");
+//     } else {
+//       console.log(`註冊失敗：${data.error}`);
+//     }
+
+//   } catch (e) {
+//     console.log(`請求出現錯誤：${error.message}`);
+//   }
+// }
+
+// //---------------------測試用：登入
+
+// const account2 = ref(null)
+// const password2 = ref(null)
+
+// const login = async () => {
+//   if (!account2.value || !password2.value) {
+//     alert("帳號或密碼不可為空！");
+//     return;
+//   }
+//   const url = `/tid103/g1/php/login.php`;
+//   try {
+//     const res = await fetch(url, {
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/json'
+//       },
+//       body: JSON.stringify({
+//         account: account2.value,
+//         password: password2.value
+//       })
+//     })
+
+//     const data = await res.json();
+//     console.log(data); //看一下登入結果
+
+//     if (data.success) {
+//       console.log(data.message, data)
+//     }
+//   } catch (e) {
+//     console.log(`請求出現錯誤：${e}`);
+//   }
+// }
+//---------------------
+
+// import { CKEditor } from '@ckeditor/ckeditor5-vue';
+// import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+
+// const editor = ClassicEditor; // 使用已导入的 ClassicEditor
+// const editorData = ref('<p>初始内容</p>'); // 使用 ref 创建响应式的数据
+
+// // 编辑器准备就绪的处理函数
+// const onReady = (editorInstance) => {
+//   console.log('编辑器准备好了!', editorInstance);
+// };
+
+// // 处理编辑器数据更改
+// const onChange = ({ editor }) => {
+//   const data = editor.getData();
+//   editorData.value = data; // 更新响应式数据
+// };
+
+//---------------------
+
+
+>>>>>>> sunny
 
 const route = useRoute();
 const router = useRouter();
@@ -214,6 +319,27 @@ const router = useRouter();
 
 const base_url = import.meta.env.VITE_AJAX_URL
 const buys = ref([]); // 商品資料取自localStorage
+// 所有商品
+const allProducts = ref([]);
+
+// 精選商品
+const featuredItems = ref([]);
+
+// 定義 updateCartCount 函式（與第一頁相同邏輯）
+const updateCartCount = () => {
+  // const currentCount = parseInt(localStorage.getItem('cartCount')) || 0;
+  // const newCount = currentCount + count;
+  const totalCount = buys.value.reduce((sum, item) => sum + item.num, 0);
+  // localStorage.setItem('cartCount', newCount.toString());
+  localStorage.setItem('cartCount', totalCount.toString());
+  window.dispatchEvent(new Event('updateCartCount'));
+};
+
+// 載入 localStorage 內的購物車商品
+const loadCart = () => {
+  buys.value = JSON.parse(localStorage.getItem("cart")) || [];
+  console.log("🛒 載入購物車資料:", buys.value);
+};
 
 //精選商品
 // const items = ref([
@@ -250,6 +376,7 @@ const deleteItem = (index) => {
   if (d) {
     buys.value.splice(index, 1);
     updateLocalStorage();
+    updateCartCount();
   }
 };
 
@@ -278,12 +405,6 @@ const blurItem = (index, num) => {
   }
   updateLocalStorage();
 };
-
-// 所有商品
-const allProducts = ref([]);
-
-// 精選商品
-const featuredItems = ref([]);
 
 // 資料庫取所有商品資料
 const fetchAllProducts = async () => {
@@ -361,6 +482,9 @@ const addToCart = (index) => {
     // **更新購物車狀態，讓畫面即時變化**
     buys.value = cart;
 
+     // 更新全域購物車數量
+    updateCartCount();
+
     console.log("✅ 商品已加入購物車:", cart);
   }
 
@@ -374,13 +498,6 @@ const addToCart = (index) => {
   // })
   // updateLocalStorage();
 }
-
-
-// 載入 localStorage 內的購物車商品
-const loadCart = () => {
-  buys.value = JSON.parse(localStorage.getItem("cart")) || [];
-  console.log("🛒 載入購物車資料:", buys.value);
-};
 
 //還沒加運費跟點數的小計 (運費上面那項)
 const substotal = computed(() => {

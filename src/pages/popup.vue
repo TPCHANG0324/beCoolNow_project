@@ -174,6 +174,7 @@ export default {
           // 儲存登入狀態和用戶信息到 localStorage
           localStorage.setItem("isLoggedIn", "true");
           localStorage.setItem("userEmail", data.email);
+          // localStorage.setItem("userEmail", this.formData.email);
           localStorage.setItem("member_ID", data.member_ID);
           localStorage.setItem("account", data.account);
           localStorage.setItem("phoneNumber", data.phoneNumber);
