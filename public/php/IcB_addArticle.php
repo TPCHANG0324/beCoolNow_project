@@ -4,12 +4,18 @@
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json; charset=utf-8');
 
-include('conn.php'); // 確保 connect.php 中已定義 $dsn, $db_user, $db_pass 並建立 $pdo
+include('connect.php');  // 確保 connect.php 定義了 $dsn, $db_user, $db_pass
 
+$limit = 4; 
 
 try {
     $pdo = new PDO($dsn, $db_user, $db_pass); // 請確認 connect.php 中的變數名稱一致
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    // 取得目前文章數量，並為 COUNT 結果命名為 total
+    $countStmt = $pdo->query("SELECT COUNT(*) AS total FROM G1_Multimedia");
+    $row = $countStmt->fetch(PDO::FETCH_ASSOC);
+    $currentCount = $row['total'];
 
     // 取得 POST 文字資料
     $title = isset($_POST['title']) ? trim($_POST['title']) : '';
@@ -24,10 +30,19 @@ try {
         ]);
         exit;
     }
+    
+    // 檢查是否超過數量上限
+    if ($currentCount >= $limit) {
+        echo json_encode([
+            'success' => false,
+            'message' => '文章數量已達上限'
+        ]);
+        exit;
+    }
 
     // 處理圖片上傳
     if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
-        $uploadDir = 'uploads/'; // 請確保此資料夾存在並具有寫入權限
+        $uploadDir = 'uploads/'; // 確保此資料夾存在並具有寫入權限
         if (!is_dir($uploadDir)) {
             mkdir($uploadDir, 0777, true);
         }
@@ -40,10 +55,8 @@ try {
         $destPath = $uploadDir . $newFileName;
 
         if (move_uploaded_file($fileTmpPath, $destPath)) {
-            // 根據你的需求，將路徑存入資料庫（可以是相對路徑或完整 URL）
-            // 例如，如果你的網站 URL 是 http://localhost/tid103/g1/，
-            // 則完整 URL 為： http://localhost/tid103/g1/uploads/xxxx.jpg
-            $imageUrl = 'http://localhost/tid103/g1/' . $destPath;
+            // 儲存相對路徑或完整 URL，這邊採用相對路徑
+            $imageUrl = $destPath;
         } else {
             echo json_encode([
                 'success' => false,
@@ -52,7 +65,7 @@ try {
             exit;
         }
     } else {
-        // 如果沒有上傳圖片，可設定預設圖片或空字串
+        // 若沒有上傳圖片，則設定為空字串或預設圖片
         $imageUrl = '';
     }
 

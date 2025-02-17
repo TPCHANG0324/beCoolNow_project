@@ -30,8 +30,8 @@
 
       .sidebar {
         // border: 2px solid red;
-        width: 11%;
-        margin: 0 80px 0 48px;
+        width: 25%;
+        padding: 0 80px 0 48px;
 
         button {
           @include btn_style($btn_radius_30px, 100%, 42px);
@@ -50,7 +50,6 @@
         }
 
       }
-
       .IcB_table_H {
         width: 75%;
         height: 100%;
@@ -324,6 +323,11 @@
       background-color: $Ivory_white;
       text-align: center;
       line-height: 48px;
+    }
+    .paginator-wrapper{
+      display: flex;
+  justify-content: center;
+  margin-top: 40px; // 可根據需要調整間距
     }
 
   }

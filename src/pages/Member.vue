@@ -2,13 +2,15 @@
   <div>
     <MainHeader />
 
-    <div class="wrapperpr" >
+    <div class="wrapperpr">
       <h1 class="profile-title">會員資訊</h1>
       <div class="profile_top">
         <div class="profile-container-special_left">
           <div class="profile-header-special">
             <img :src="userAvatar" alt="會員頭像" class="profile-pic-special" />
-            <h1 class="profile-greeting-special" v-if="userData && userData.name">{{ userData.name }} 您好！</h1>
+            <h1 class="profile-greeting-special" v-if="userData && (userData.name || userData.nickname)">
+              {{ userData.nickname || userData.name }} 您好！
+            </h1>
           </div>
         </div>
 
@@ -17,14 +19,8 @@
             <div class="profile-field">
               <label for="nickname" class="label_mb">暱稱</label>
               <template v-if="editStates.nickname">
-                <input
-                  type="text"
-                  id="nickname"
-                  v-model="tempData.nickname"
-                  placeholder="輸入您的暱稱"
-                  class="input_2 input_editing"
-                  @keyup.enter="saveField('nickname')"
-                />
+                <input type="text" id="nickname" v-model="tempData.nickname" placeholder="輸入您的暱稱"
+                  class="input_2 input_editing" @keyup.enter="saveField('nickname')" />
                 <button class="button_mb" @click="saveField('nickname')">儲存</button>
               </template>
               <template v-else>
@@ -36,30 +32,19 @@
             <div class="profile-field">
               <label for="phone" class="label_mb">手機</label>
               <template v-if="!userData.phone || !isPhoneAdded">
-                <input
-        type="text"
-        id="phone"
-        v-model="tempData.phone"
-        placeholder="輸入您的手機"
-        class="input_2 input_editing"
-        @keyup.enter="savePhone"
-        :class="{ 'input-error': validationErrors.phone }"
-        :disabled="isPhoneAdded"
-      />
-      <button 
-        class="button_mb" 
-        @click="savePhone"
-      
-      >
-        新增
-      </button>
-      <span v-if="validationErrors.phone" class="error-message">{{ validationErrors.phone }}</span>
+                <input type="text" id="phone" v-model="tempData.phone" placeholder="輸入您的手機"
+                  class="input_2 input_editing" @keyup.enter="savePhone"
+                  :class="{ 'input-error': validationErrors.phone }" :disabled="isPhoneAdded" />
+                <button class="button_mb" @click="savePhone">
+                  新增
+                </button>
+                <span v-if="validationErrors.phone" class="error-message">{{ validationErrors.phone }}</span>
 
               </template>
-             <template v-else>
-      <span class="input_2">{{ userData.phone }}</span>
-      <button class="button_mb" disabled>已新增的手機號碼</button>
-    </template>
+              <template v-else>
+                <span class="input_2">{{ userData.phone }}</span>
+                <button class="button_mb" disabled>已新增的手機號碼</button>
+              </template>
             </div>
 
             <div class="profile-field">
@@ -90,16 +75,18 @@
 
       <div class="profile_bottom">
         <div class="purchase-record-special">
-          <div class="btn2_btn">
+          <div class="btn2_btn prof">
             <div class="btn2_btn_top">
-              <button class="purchase-record-btn11" @click="showSection('purchase')">購買紀錄</button>
-              <button class="purchase-record-btn12" @click="showSection('profile')">個人紀錄</button>
+              <button class="purchase-record-btn12 rec" @click="showSection('purchase')">購買紀錄</button>
+              <button class="purchase-record-btn12 rec" @click="showSection('profile')">個人紀錄</button>
+              <button class="purchase-record-btn12 rec" @click="showSection('articles')">文章紀錄</button>
             </div>
-            <div class="bt2_btn_bottom">
-              <div class="profile-stats-special">
-                <p>小寵物經驗值: <strong>{{ personalStats.experience }}</strong> | 累積地球幣: <strong>{{ personalStats.points }}</strong></p>
+            <!-- <div class="bt2_btn_bottom">
+              <div class="profile-stats-special exp">
+                <p>小寵物經驗值: <strong>{{ personalStats.experience }}</strong> | 累積地球幣: <strong>{{ personalStats.points
+                    }}</strong></p>
               </div>
-            </div>
+            </div> -->
           </div>
 
           <div class="table-container_mb">
@@ -142,16 +129,44 @@
                 </tr>
               </tbody>
             </table>
+
+            <table v-if="activeSection === 'articles'" class="table_arti arti">
+              <thead>
+                <tr>
+                  <th>日期</th>
+                  <th>文章類別</th>
+                  <th>文章名稱</th>
+                  <th>上下架狀態</th>
+                  <th>修改</th>
+                  <th>刪除</th>
+                </tr>
+              </thead>
+              <tbody v-for="item in personalArticles" :key="item.ID" v-if="personalArticles.length != 0">
+                <tr>
+                  <td>{{ item.time.split(' ')[0] }}</td>
+                  <td>{{ item.category }}</td>
+                  <td @click="goToArticle(item.ID)" class="goto">{{ item.title }}</td>
+                  <td :style="{ color: item.articleShelves ? '#545454' : '#DA0606' }">{{ item.articleShelves === 1 ? '上架' : '下架' }}</td>
+                  <td class="del" @click="updateArticle(item.ID)"><i class="bi bi-pencil-square"></i></td>
+                  <td class="del" @click="deleteArticle(item.ID)"><i class="bi bi-trash3-fill"></i></td>
+                </tr>
+              </tbody>
+              <tbody v-else>
+                <tr>
+                  <td colspan="6">
+                    <div style="text-align: start; margin-left: 20px;">
+                      <p>尚未有文章記錄，歡迎踴躍發表^_^</p>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
     </div>
 
-    <OrderDetailPopup
-      :is-visible="showOrderPopup"
-      :order="selectedOrder"
-      @close="closeOrderPopup"
-    />
+    <OrderDetailPopup :is-visible="showOrderPopup" :order="selectedOrder" @close="closeOrderPopup" />
 
     <MainFooter class="footer_member" />
   </div>
@@ -159,19 +174,24 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
+import { useRouter } from 'vue-router';
 import MainHeader from '@/components/layout/MainHeader.vue'
 import MainFooter from '@/components/layout/MainFooter.vue'
 import OrderDetailPopup from '@/pages/popUpdetailshop.vue'
 
+const router = useRouter();
+const base_url = import.meta.env.VITE_AJAX_URL //環境路徑
+
 // 基本資料相關的 ref
 const userData = ref({
+  id: '',
   name: '',
   nickname: '',
   phone: '',
   email: '',
 })
 
-const userAvatar = ref(new URL('@/assets/images/defaultavatar.jpeg', import.meta.url).href)
+const userAvatar = ref(new URL('@/assets/images/defaultavater2.png', import.meta.url).href)
 const tempData = ref({
   nickname: '',
   phone: '',
@@ -196,6 +216,7 @@ const selectedOrder = ref(null)
 const isPhoneAdded = ref(false)
 const purchaseRecords = ref([])
 const personalRecords = ref([])
+const personalArticles = ref([]) //個人文章
 const personalStats = ref({
   experience: 200,
   points: 300
@@ -223,7 +244,7 @@ const savePhone = async () => {
 
   // 先跳出確認視窗
   const confirmAdd = confirm('手機號碼一旦新增無法修改，確定新增嗎？')
-  
+
   if (confirmAdd) {
     try {
       const formData = new FormData()
@@ -231,14 +252,14 @@ const savePhone = async () => {
       formData.append('phone', tempData.value.phone.trim())
       formData.append('email', userEmail)
       const base_url = import.meta.env.VITE_AJAX_URL
-      const res = await fetch(base_url+'/updateUserInfo.php', {
+      const res = await fetch(base_url + '/updateUserInfo.php', {
         method: 'POST',
         body: formData,
         // credentials: 'include'
       })
-      
+
       const data = await res.json()
-      
+
       if (data.success) {
         userData.value.phone = tempData.value.phone.trim()
         isPhoneAdded.value = true
@@ -257,10 +278,14 @@ const savePhone = async () => {
     validationErrors.value.phone = ''
   }
 }
+// 新增 editField 函式，用來啟動編輯狀態並將原本資料帶入輸入框
+const editField = (field) => {
+  editStates.value[field] = true
+  tempData.value[field] = userData.value[field]
+}
 
 
-  
- // 完整的驗證函數
+// 完整的驗證函數
 const validateField = (field) => {
   if (field === 'email') {
     if (!tempData.value.email) {
@@ -313,7 +338,7 @@ const getUserInfo = async () => {
       })
     });
     const data = await res.json()
-    
+
     if (data.success) {
       userData.value = {
         ...userData.value,
@@ -336,7 +361,7 @@ const getUserInfo = async () => {
       // if (userData.value.phone) {
       //   isPhoneAdded.value = true
       // }
-      userAvatar.value = data.data.avatar || new URL('@/assets/images/defaultavatar.jpeg', import.meta.url).href
+      userAvatar.value = data.data.avatar || new URL('@/assets/images/defaultavater2.png', import.meta.url).href
     } else {
       console.error('獲取用戶資料失敗')
     }
@@ -348,8 +373,8 @@ const getUserInfo = async () => {
     //   userData.value.phone = storedPhone
     //   isPhoneAdded.value = true
     //   }
-    }
   }
+}
 
 
 const getPurchaseRecords = async () => {
@@ -374,65 +399,65 @@ const getPurchaseRecords = async () => {
         source: "環保市集"
       },
       {
-    orderId: "ORD002",
-    date: "2024/12/20",
-    productName: "可重複使用水壺",
-    price: 450,
-    quantity: 1,
-    status: "已出貨",
-    address: "新北市板橋區文化路二段",
-    source: "環保市集"
-  },
-  {
-    orderId: "ORD003",
-    date: "2024/12/15",
-    productName: "竹纖維餐具組",
-    price: 580,
-    quantity: 1,
-    status: "已送達",
-    address: "台中市西屯區逢甲路",
-    source: "環保市集"
-  },
-  {
-    orderId: "ORD004",
-    date: "2024/12/10",
-    productName: "有機棉購物袋",
-    price: 250,
-    quantity: 2,
-    status: "處理中",
-    address: "高雄市鳳山區",
-    source: "環保市集"
-  },
-  {
-    orderId: "ORD005",
-    date: "2024/12/05",
-    productName: "天然洗髮精",
-    price: 380,
-    quantity: 1,
-    status: "已送達",
-    address: "台南市東區",
-    source: "環保市集"
-  },
-  {
-    orderId: "ORD006",
-    date: "2024/12/25",
-    productName: "環保吸管",
-    price: 300,
-    quantity: 1,
-    status: "已送達",
-    address: "台北市大安區復興南路一段390號2樓",
-    source: "環保市集"
-  },
-  {
-    orderId: "ORD007",
-    date: "2024/12/20",
-    productName: "可重複使用水壺",
-    price: 450,
-    quantity: 1,
-    status: "已出貨",
-    address: "新北市板橋區文化路二段",
-    source: "環保市集"
-  }
+        orderId: "ORD002",
+        date: "2024/12/20",
+        productName: "可重複使用水壺",
+        price: 450,
+        quantity: 1,
+        status: "已出貨",
+        address: "新北市板橋區文化路二段",
+        source: "環保市集"
+      },
+      {
+        orderId: "ORD003",
+        date: "2024/12/15",
+        productName: "竹纖維餐具組",
+        price: 580,
+        quantity: 1,
+        status: "已送達",
+        address: "台中市西屯區逢甲路",
+        source: "環保市集"
+      },
+      {
+        orderId: "ORD004",
+        date: "2024/12/10",
+        productName: "有機棉購物袋",
+        price: 250,
+        quantity: 2,
+        status: "處理中",
+        address: "高雄市鳳山區",
+        source: "環保市集"
+      },
+      {
+        orderId: "ORD005",
+        date: "2024/12/05",
+        productName: "天然洗髮精",
+        price: 380,
+        quantity: 1,
+        status: "已送達",
+        address: "台南市東區",
+        source: "環保市集"
+      },
+      {
+        orderId: "ORD006",
+        date: "2024/12/25",
+        productName: "環保吸管",
+        price: 300,
+        quantity: 1,
+        status: "已送達",
+        address: "台北市大安區復興南路一段390號2樓",
+        source: "環保市集"
+      },
+      {
+        orderId: "ORD007",
+        date: "2024/12/20",
+        productName: "可重複使用水壺",
+        price: 450,
+        quantity: 1,
+        status: "已出貨",
+        address: "新北市板橋區文化路二段",
+        source: "環保市集"
+      }
     ]
   }
 }
@@ -458,45 +483,128 @@ const getPersonalRecords = async () => {
   }
 }
 
+
+//獲取個人文章記錄
+const getPersonalArticles = async () => {
+  const memberId = userData.value['id'];
+  try {
+    const res = await fetch(base_url + '/getMemArti.php', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        memberId
+      })
+    })
+    const data = await res.json()
+    personalArticles.value = data.data
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+//連結到個人寫的該篇文章
+const goToArticle = (ID) => {
+  const check = confirm('請問是否要前往該文章？')
+  if (!check) {
+    return
+  }
+  router.push(`/social/article/${ID}`);
+}
+
+//刪除個人的文章
+const deleteArticle = async (ID) => {
+  if (!localStorage.getItem('isLoggedIn') && localStorage.getItem('userEmail')) {
+    alert('請先登入再進行操作！')
+  }
+  const check = confirm('請問是否要刪除此篇文章？')
+  if (!check) {
+    return
+  }
+  const checkAgain = confirm('刪除文章後將無法還原，請確認是否要繼續進行操作？')
+  if (!checkAgain) {
+    return
+  }
+  try {
+    const res = await fetch(base_url + '/deleteSelfArticle.php', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        ArticleID: ID
+      })
+    })
+    const data = await res.json()
+    alert(data.message)
+    getPersonalArticles()
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+//修改個人的文章
+const updateArticle = (ID) => {
+  const check = confirm('請問是否要修改此篇文章？')
+  if (!check) {
+    return
+  }
+  router.push(`/social_write/edit/${ID}`);
+}
+
+
+// API 更新函式（適用於所有欄位）
+
 const updateUserInfo = async (field, value) => {
   try {
     const formData = new FormData()
+    const userEmail = localStorage.getItem('userEmail')
     formData.append(field, value)
-    
-    const res = await fetch('/tid103/g1/php/updateUserInfo.php', {
+
+
+    formData.append('email', userEmail)
+
+    const base_url = import.meta.env.VITE_AJAX_URL
+    const res = await fetch(base_url + '/updateUserInfo.php', {
       method: 'POST',
       body: formData
     })
-    
+
     const data = await res.json()
     if (data.success) {
-      getUserInfo() // 重新獲取更新後的資料
-      localStorage.setItem('userData', JSON.stringify(userData.value)) // 更新本地存儲
+      // 更新本地資料
+      userData.value[field] = value
+      alert('更新成功！')
+      return true
     } else {
-      console.error('更新用戶資料失敗')
+      alert(data.message || '更新失敗，請稍後再試')
+      return false
     }
   } catch (err) {
     console.error(`更新用戶資料錯誤：${err}`)
+    alert('系統錯誤，請稍後再試')
+    return false
   }
 }
 
-// UI 操作相關函數
-const editField = (field) => {
-  tempData.value[field] = userData.value[field]
-  editStates.value[field] = true
-  validationErrors.value[field] = ''
-}
 
+// 修改 saveField 函數
 const saveField = async (field) => {
   if (!validateField(field)) return
-  
+
   if (tempData.value[field]?.trim()) {
-    await updateUserInfo(field, tempData.value[field].trim())
-    editStates.value[field] = false
-    tempData.value[field] = ''
-    validationErrors.value[field] = ''
+    const success = await updateUserInfo(field, tempData.value[field].trim())
+    if (success) {
+      editStates.value[field] = false
+      tempData.value[field] = ''
+      validationErrors.value[field] = ''
+      // 可選：重新獲取使用者資料來同步最新資訊
+      // await getUserInfo()
+    }
   }
 }
+
 
 const formatEmail = (email) => {
   return email?.replace(/(.{30})/g, '$1\n') || ''
@@ -524,5 +632,6 @@ onMounted(async () => {
   }
   await getPurchaseRecords()
   await getPersonalRecords()
+  await getPersonalArticles()
 })
 </script>

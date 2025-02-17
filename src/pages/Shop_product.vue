@@ -507,7 +507,7 @@ export default {
 
       console.log(" 檢查商品資訊:", product.value);
       // 檢查 `product` 是否已經載入
-      if (!product.value || !product.value.ID || !product.value.productName || !product.value.price) {
+      if (!product.value || !product.value.ID || !product.value.productName || !product.value.salePrice) {
         alert("⚠️ 商品資訊未載入，請稍候再試！");
         console.warn("⚠️ 商品資訊未載入:", product.value);
         return;
@@ -525,6 +525,7 @@ export default {
         size: selectedSize.value,  // 使用使用者選擇的規格
         num: num.value,  // 使用者輸入的數量
         price: product.value.price,
+        salePrice: product.value.salePrice,
       };
 
       console.log("✅ 加入購物車的商品資訊:", newProduct);

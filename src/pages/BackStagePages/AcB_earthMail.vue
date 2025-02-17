@@ -45,7 +45,8 @@
           </main>
         </div>
         <!-- 傳入當前頁與總頁數，並監聽分頁切換事件 -->
-        <BackStagePaginator
+        <Paginator
+          class="paginator_H"
           :current-page="currentPage"
           :total-pages="totalPages"
           @page-change="handlePageChange"
@@ -89,7 +90,7 @@ import axios from 'axios';
 import BackStageHeader from '@/components/layout/BackStageLayout/BackStageHeader.vue';
 import BackStageConfirmPopup from '@/components/layout/BackStageLayout/BackStageConfirmPopup.vue';
 import BackStageSidebar from '@/components/items/BackStageItems/BackStageSidebar.vue';
-import BackStagePaginator from '@/components/items/BackStageItems/BackStagePaginator.vue';
+import Paginator from '@/components/paginator.vue';
 
 const letters = ref([]);
 const totalLetters = ref(0);
@@ -187,7 +188,7 @@ const deleteLetter = async () => {
 
 // 分頁處理：當頁碼變更時，更新 currentPage 並重新撈取資料
 const handlePageChange = async (page) => {
-  if (loading.value) return;
+  // if (loading.value) return;
   currentPage.value = page;
   await fetchLetters();
 };

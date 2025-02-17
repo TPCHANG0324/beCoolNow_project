@@ -141,7 +141,9 @@
         display: block;
         margin-left: 64px;
         margin-top: 20px;
-
+        img{
+          height: 100%;
+        }
         p {
           @include PC_h6($Gray_1);
           line-height: 120px;

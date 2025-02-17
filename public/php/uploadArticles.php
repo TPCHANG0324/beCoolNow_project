@@ -4,20 +4,21 @@
 // header('Access-Control-Allow-Credentials: true');
 // header('Content-Type: application/json; charset=utf-8');
 
-session_start();
+// session_start();
 
-// 檢查是否已登入
-if (!isset($_SESSION['login']) || $_SESSION['login'] !== true) {
-    echo json_encode([
-        "success" => false,
-        "message" => "驗證失敗，請先登入！"
-    ]);
-    exit;
-}
+// // 檢查是否已登入
+// if (!isset($_SESSION['login']) || $_SESSION['login'] !== true) {
+//     echo json_encode([
+//         "success" => false,
+//         "message" => "驗證失敗，請先登入！"
+//     ]);
+//     exit;
+// }
 
-$email = $_SESSION['email'];
+// $email = $_SESSION['email'];
+$source = json_decode(file_get_contents("php://input"), true);
+$email = htmlspecialchars($source['userEmail']);
 
-include('connect.php');
 include('conn.php');
 
 try {
@@ -57,7 +58,7 @@ try {
         //正式服的路徑修改
         // $line = "https://tibamef2e.com/tid103/g1/php/uploads/";
         $line = "http://localhost/tid103/g1/php/uploads/";
-        
+
         return 'src="' . $line . date('Y/m/') . $fileName . '"';
     }, $content);
 

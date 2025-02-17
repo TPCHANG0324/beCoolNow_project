@@ -30,7 +30,7 @@ if ($ArticleID <= 0) {
     exit;
 }
 
-include('connect.php');
+include('conn.php');
 
 $sql = "UPDATE G1_ForumBoard SET articleShelves = ? WHERE ID = ?";
 $stmt = $pdo->prepare($sql);

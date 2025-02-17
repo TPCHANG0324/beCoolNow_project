@@ -89,8 +89,17 @@ const routes = [
     component: () => import('@/pages/Social_write.vue'),
     meta: {
       title: '寫文章',
-      // requiredLogin: true
+      requiredLogin: true
     },
+  },
+  {
+    path:'/social_write/edit/:id',
+    name: 'article-edit',
+    component: () => import('@/pages/Social_edit.vue'),
+    meta:{
+      title:'修改文章',
+      requiredLogin: true
+    }
   },
   {
     path: '/popup/',

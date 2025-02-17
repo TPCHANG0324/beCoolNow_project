@@ -5,16 +5,16 @@ header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Credentials: true');
 header('Content-Type: application/json; charset=utf-8');
 
-session_start();
+// session_start();
 
-// 檢查是否已登入
-if (!isset($_SESSION['login']) || $_SESSION['login'] !== true) {
-    echo json_encode([
-        "success" => false,
-        "message" => "請先登入！"
-    ]);
-    exit;
-}
+// // 檢查是否已登入
+// if (!isset($_SESSION['login']) || $_SESSION['login'] !== true) {
+//     echo json_encode([
+//         "success" => false,
+//         "message" => "請先登入！"
+//     ]);
+//     exit;
+// }
 
 //取得前端的資料
 $source = json_decode(file_get_contents("php://input"), true);
@@ -29,7 +29,7 @@ if ($messageID <= 0) {
     exit;
 }
 
-include('connect.php');
+include('conn.php');
 
 $sql = "UPDATE G1_Message SET reportCount = reportCount + 1 WHERE ID = ?";
 $stmt = $pdo->prepare($sql);

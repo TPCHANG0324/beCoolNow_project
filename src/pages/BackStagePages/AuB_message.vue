@@ -51,6 +51,7 @@
         </div>
         <!-- 使用分頁器元件 -->
         <Paginator 
+          class="paginator_H"
           :currentPage="currentPage" 
           :totalPages="totalPages" 
           @page-changed="handlePageChange" 

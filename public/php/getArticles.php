@@ -4,9 +4,9 @@ header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Origin: *");
 
 //建立連線
-// include('connect.php');
 include('conn.php');
 
+//由查詢字串取得
 $articleId = isset($_GET['id']) ? $_GET['id'] : null;
 
 $sql = "
@@ -32,6 +32,7 @@ $sql = "
 if ($articleId) {
     $sql .= " WHERE f.ID = ?";
 }
+
 $sql .= " ORDER BY f.editDate DESC";
 
 // 執行查詢
@@ -45,6 +46,20 @@ try {
     }
     $stmt->execute();
     $articles = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    //要解碼的欄位
+    $fieldsToDecodeMap = [
+        'title',
+        'account'
+    ];
+    $articles = array_map(function($article) use ($fieldsToDecodeMap) {
+        foreach ($fieldsToDecodeMap as $field) {
+            if (isset($article[$field])) {
+                $article[$field] = htmlspecialchars_decode($article[$field]);
+            }
+        }
+        return $article;
+    }, $articles);
 
     //處理文章內容與封面圖
     foreach ($articles as &$article) {

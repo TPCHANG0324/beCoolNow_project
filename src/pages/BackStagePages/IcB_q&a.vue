@@ -39,7 +39,7 @@
           </main>
         </div>
         <!-- 分頁器元件 -->
-        <Paginator :currentPage="currentPage" :totalPages="totalPages" @page-changed="handlePageChange" />
+        <Paginator class="paginator_H" :currentPage="currentPage" :totalPages="totalPages" @page-changed="handlePageChange" />
       </div>
     </div>
     <!-- 互動問答 新增 -->

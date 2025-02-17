@@ -25,6 +25,7 @@
                   <th class="CB_articleF_H">文章分類</th>
                   <th class="CB_topicF_H">文章標題</th>
                   <th class="CB_editDateF_H">發布日期</th>
+                  <th class="CB_goTopCheckF_H">狀態</th>
                   <!-- <th class="CB_goTopCheckF_H">是否置頂</th> -->
                   <th class="CB_goOffF_H"></th>
                 </tr>
@@ -38,6 +39,7 @@
                   <td>{{ article.category }}</td>
                   <td class="CB_content_H">{{ article.title }}</td>
                   <td>{{ article.time.split(' ')[0] }}</td>
+                  <td :style="{ color: article.articleShelves ? '#545454' : 'rgba(84, 84, 84, 0.5)' }">{{ article.articleShelves? '上架':'下架' }}</td>
                   <td><button class="MmB_editBtn_H" @click="openEditPopup(article)">編輯與查看</button></td>
                 </tr>
               </tbody>

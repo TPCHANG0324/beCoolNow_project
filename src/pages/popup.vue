@@ -155,25 +155,24 @@ export default {
         if (data.success) {
 
 
-          // const redirectPath = localStorage.getItem('redirectPath') || '/';
+          const redirectPath = localStorage.getItem('redirectPath') || '/';
+          this.$router.push(redirectPath);
 
-          // this.$router.push(redirectPath);
+          // 如果所有驗證都通過
+          // alert('登入成功!歡迎光臨涼城即時');
+          alert(`${data.message}歡迎光臨涼城即時！`);
+          // 儲存登入狀態和用戶信息到 localStorage
+          localStorage.setItem('isLoggedIn', 'true');
+          localStorage.setItem('userEmail', this.formData.email);
+          this.resetForm();
 
-                // 如果所有驗證都通過
-      // alert('登入成功!歡迎光臨涼城即時');
-      alert(`${data.message}歡迎光臨涼城即時！`);
-      // 儲存登入狀態和用戶信息到 localStorage
-      localStorage.setItem('isLoggedIn', 'true');
-      localStorage.setItem('userEmail', this.formData.email);
-      this.resetForm();
-
-      this.closePopup();
-      // this.$router.push('/member');
+          this.closePopup();
+          // this.$router.push('/member');
         } else {
-          if(data.message === '密碼錯誤，請查明後再試！'){
+          if (data.message === '密碼錯誤，請查明後再試！') {
             alert(data.message);
             this.resetForm();
-          }else if(data.message === '查無此帳號密碼，請先註冊後再登入！'){
+          } else if (data.message === '查無此帳號密碼，請先註冊後再登入！') {
             alert(data.message);
             this.resetForm();
             this.$emit('switch');

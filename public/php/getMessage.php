@@ -1,11 +1,11 @@
 <?php
 
-header("Content-Type: application/json; charset=UTF-8");
-header('Access-Control-Allow-Credentials: true');
-header("Access-Control-Allow-Origin: *");
+// header("Content-Type: application/json; charset=UTF-8");
+// header('Access-Control-Allow-Credentials: true');
+// header("Access-Control-Allow-Origin: *");
 
 //建立連線
-include('connect.php');
+include('conn.php');
 
 $forumBoardId = isset($_GET['id']) ? $_GET['id'] : '';
 
@@ -36,6 +36,23 @@ try {
     }
     $stmt->execute();
     $messages = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    //要解碼的欄位
+    $fieldsToDecodeMap = [
+        'content',
+        'nickname'
+    ];
+
+    //陣列中有多筆欄位需要解碼使用
+    $messages = array_map(function($message) use ($fieldsToDecodeMap) {
+        foreach ($fieldsToDecodeMap as $field) {
+            if (isset($message[$field])) {
+                $message[$field] = htmlspecialchars_decode($message[$field]);
+            }
+        }
+        return $message;
+    }, $messages);
+
     echo json_encode([
         "success" => true,
         "messages" => $messages

@@ -95,10 +95,10 @@ const fetchProducts = async () => {
     }
 
     const data = await response.json();
-    // **確保 `status` 轉換正確**
+    // **確保 `productStatus` 轉換正確**
     products.value = data.map(product => ({
       ...product,
-      status: Number(product.status) === 1 ? "goTop" : "goOff", // ✅ 轉換 1 ➝ "goTop"，0 ➝ "goOff"
+      productStatus: Number(product.productStatus) === 1 ? "goTop" : "goOff", // ✅ 轉換 1 ➝ "goTop"，0 ➝ "goOff"
     }));
     // products.value = data;
   } catch (error) {
@@ -161,14 +161,14 @@ const filteredAndSortedProducts = computed(() => {
   // ✅ 1️⃣ 價格篩選
   if (selectedPriceRange.value) {
     result = result.filter(product => {
-      if (selectedPriceRange.value === '500+') return product.price >= 500;
+      if (selectedPriceRange.value === '500+') return product.salePrice >= 500;
       const [min, max] = selectedPriceRange.value.split('-').map(Number);
-      return product.price >= min && product.price <= max;
+      return product.salePrice >= min && product.salePrice <= max;
     });
   }
 
   // ✅ 1️⃣ 過濾掉 "下架" 商品
-  result = result.filter(product => product.status === "goTop");
+  result = result.filter(product => product.productStatus === "goTop");
 
    // ✅ 2️⃣ 排序
   switch (selectedSort.value) {
@@ -179,10 +179,10 @@ const filteredAndSortedProducts = computed(() => {
       result.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
       break;
     case 'priceDesc':
-      result.sort((a, b) => b.price - a.price);
+      result.sort((a, b) => b.salePrice - a.salePrice);
       break;
     case 'priceAsc':
-      result.sort((a, b) => a.price - b.price);
+      result.sort((a, b) => a.salePrice - b.salePrice);
       break;
   }
 

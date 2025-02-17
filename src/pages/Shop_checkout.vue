@@ -172,7 +172,7 @@
                   <div class="si_aselect">
                     <div style="width: 25%;">
                       <!-- 城市選擇 -->
-                      <select v-model="selectedCity" class="input" style="width: 100%; padding: 0;" >
+                      <select v-model="selectedCity" class="input" style="width: 100%; padding: 0; " >
                         <option value="">請選擇城市</option>
                         <option v-for="city in cities" :value="city.name" :key="city.name">
                           {{ city.name }}
@@ -250,7 +250,7 @@
                 </select>
               </div>
             </section>
-            <RouterLink to="#" @click="submitOrder" class="si_submit_R btn">提交訂單</RouterLink>
+            <RouterLink to="" @click="submitOrder" class="si_submit_R btn">提交訂單</RouterLink>
           </div>
         </div>
       </div>
@@ -361,7 +361,7 @@ const cities = [
   },
   {
     name: "新竹縣",
-    districts: ["北區", "香山區", "竹北市", "湖口鄉", "新豐鄉", "芎林鄉", "關西鎮", "五峰鄉", "八里區", "橫山鄉", "峨眉鄉", "寶山鄉", "尖石鄉", "北埔鄉", "横山乡", "竹东镇"]
+    districts: ["北區", "香山區", "竹北市", "湖口鄉", "新豐鄉", "芎林鄉", "關西鎮", "五峰鄉", "八里區", "橫山鄉", "峨眉鄉", "寶山鄉", "尖石鄉", "北埔鄉", "横山鄉", "竹東鎮"]
   },
   {
     name: "苗栗縣",
@@ -544,11 +544,17 @@ const errors = ref({
 const validateForm = () => {
   let hasError = false;
 
+  console.log("🔍【1. 開始驗證】");
+  console.log("📌【1.1 驗證前的表單資料】", JSON.stringify(customerInfo.value));
+  console.log("📌【1.2 驗證前的收件人資料】", JSON.stringify(recipientInfo.value));
+  console.log("📌【1.3 驗證前的付款資料】", JSON.stringify(paymentInfo.value));
+
   // 確保 `errors` 內的結構存在
   if (!errors.value.customerInfo) errors.value.customerInfo = {};
   if (!errors.value.recipientInfo) errors.value.recipientInfo = {};
   if (!errors.value.paymentInfo) errors.value.paymentInfo = {};
   if (!errors.value.addressInfo) errors.value.addressInfo = {};
+
 
   // 移除 `-` 符號後驗證
   let rawCardNumber = paymentInfo.value.cardNumber.replace(/-/g, '');
@@ -635,7 +641,9 @@ const validateForm = () => {
   }
 
   // 確保 `recipientInfo.address` 先被更新，避免舊數據觸發錯誤
-  recipientInfo.value.address = `${selectedCity.value}${selectedDistrict.value}${recipientInfo.value.address}`.trim();
+  if (!recipientInfo.value.address.includes(selectedCity.value) && !recipientInfo.value.address.includes(selectedDistrict.value)) {
+  recipientInfo.value.address = `${selectedCity.value} ${selectedDistrict.value} ${addressDetail.value}`.trim();
+}
 
   if (!recipientInfo.value.address.trim()) {
     errors.value.addressInfo.addressDetail = '請輸入詳細地址';
@@ -703,6 +711,9 @@ const validateForm = () => {
     errors.value.paymentInfo.securityCode = ''; // 清除錯誤訊息
   }
 
+  console.log("📌【2.1 驗證後的表單資料】", JSON.stringify(customerInfo.value));
+  console.log("📌【2.2 驗證後的收件人資料】", JSON.stringify(recipientInfo.value));
+  console.log("📌【2.3 驗證後的付款資料】", JSON.stringify(paymentInfo.value));
 
   return !hasError; // 若 `hasError = false`，則表示表單驗證成功
 };
@@ -741,8 +752,14 @@ watch(isSameAsCustomer, (newValue) => {
 // 提交訂單
 const submitOrder = async () => {
 
-  if (!validateForm()) {
-    alert("請填寫相關資料！");
+  console.log("🚀【0. 提交訂單 - 按鈕點擊】");
+
+console.log("📌【0.1 提交前的表單資料】", JSON.stringify(customerInfo.value));
+console.log("📌【0.2 提交前的收件人資料】", JSON.stringify(recipientInfo.value));
+console.log("📌【0.3 提交前的付款資料】", JSON.stringify(paymentInfo.value));
+  const isValid = validateForm();
+  if (!isValid) {
+    alert("⚠️ 請填寫完整的訂單資訊！");
     return;
   }
   // 檢查使用者是否填寫完整資訊
@@ -752,10 +769,12 @@ const submitOrder = async () => {
   //   return;
   // }
 
-  // if (cartItems.value.length === 0) {
-  //   alert("⚠️ 購物車內沒有商品，無法提交訂單！");
-  //   return;
-  // }
+  if (cartItems.value.length === 0) {
+    alert("⚠️ 購物車內沒有商品，無法提交訂單！");
+    return;
+  }
+
+  console.log("✅【1. 驗證通過】繼續提交訂單...");
 
   // **準備訂單資料**
   const orderData = {
@@ -769,7 +788,7 @@ const submitOrder = async () => {
     paymentInfo: paymentInfo.value, // 付款資訊
   };
 
-
+  console.log("📡【2. 發送 API 請求】", JSON.stringify(orderData));
   try {
     console.log("📡 發送 API 請求123:", orderData);
     const response = await fetch(`${base_url}/submitOrder.php`, {
@@ -795,12 +814,14 @@ const submitOrder = async () => {
       // 跳轉到付款頁面 (Line Pay / 綠界)
       // window.location.href = `${base_url}/ecpay_payment.php?Order_ID=${result.Order_ID}`;
 
+
       // 清除 localStorage
       localStorage.removeItem("cart");
       localStorage.removeItem("usePoints");
+      localStorage.removeItem('selectedDelivery');
+      localStorage.removeItem('deliverCost');
 
       router.push("/shop_finish");
-
     } else {
       alert(`❌ 訂單提交失敗：${result.message}`);
     }
