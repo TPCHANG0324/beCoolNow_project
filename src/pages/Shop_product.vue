@@ -233,12 +233,9 @@
         <img :src="getImageUrl(product.productPic2)" alt="商品圖片" style="object-fit: cover; object-position: center center;" />
         <div>
           <p>常見尺寸(容量):</p>
-          <ol>
-            <li>{{ product.product_details3 }}</li>
-            <!-- <li>小型: 200ml (7 oz)</li>
-            <li>中型: 350ml (12 oz)</li>
-            <li>大型: 500ml (17 oz)</li>
-            <li>特大: 750ml以上 (26 oz)</li> -->
+          
+          <ol v-for="(item,index) in selectedSizeOptions" :key="index">
+            <li>{{ item }}</li> 
           </ol>
         </div>
       </article>
@@ -605,7 +602,7 @@ export default {
       // });
 
 
-
+    
 
       onUnmounted(() => {
         window.removeEventListener("resize", updateScreenSize);

@@ -210,7 +210,7 @@
 import MainFooter from '@/components/layout/MainFooter.vue';
 import MainHeader from '@/components/layout/MainHeader.vue';
 // import { useCounterStore } from '@/store/cart';
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted, watch } from 'vue';
 //---------------------測試按鈕
 
 // const testBtn = async () => {
@@ -327,6 +327,27 @@ import { ref, computed } from 'vue';
 
 const base_url = import.meta.env.VITE_AJAX_URL
 const buys = ref([]); // 商品資料取自localStorage
+// 所有商品
+const allProducts = ref([]);
+
+// 精選商品
+const featuredItems = ref([]);
+
+// 定義 updateCartCount 函式（與第一頁相同邏輯）
+const updateCartCount = () => {
+  // const currentCount = parseInt(localStorage.getItem('cartCount')) || 0;
+  // const newCount = currentCount + count;
+  const totalCount = buys.value.reduce((sum, item) => sum + item.num, 0);
+  // localStorage.setItem('cartCount', newCount.toString());
+  localStorage.setItem('cartCount', totalCount.toString());
+  window.dispatchEvent(new Event('updateCartCount'));
+};
+
+// 載入 localStorage 內的購物車商品
+const loadCart = () => {
+  buys.value = JSON.parse(localStorage.getItem("cart")) || [];
+  console.log("🛒 載入購物車資料:", buys.value);
+};
 
 //精選商品
 // const items = ref([
@@ -363,6 +384,7 @@ const deleteItem = (index) => {
   if (d) {
     buys.value.splice(index, 1);
     updateLocalStorage();
+    updateCartCount();
   }
 };
 
@@ -391,12 +413,6 @@ const blurItem = (index, num) => {
   }
   updateLocalStorage();
 };
-
-// 所有商品
-const allProducts = ref([]);
-
-// 精選商品
-const featuredItems = ref([]);
 
 // 資料庫取所有商品資料
 const fetchAllProducts = async () => {
@@ -474,6 +490,9 @@ const addToCart = (index) => {
     // **更新購物車狀態，讓畫面即時變化**
     buys.value = cart;
 
+     // 更新全域購物車數量
+    updateCartCount();
+
     console.log("✅ 商品已加入購物車:", cart);
   }
 
@@ -487,13 +506,6 @@ const addToCart = (index) => {
   // })
   // updateLocalStorage();
 }
-
-
-// 載入 localStorage 內的購物車商品
-const loadCart = () => {
-  buys.value = JSON.parse(localStorage.getItem("cart")) || [];
-  console.log("🛒 載入購物車資料:", buys.value);
-};
 
 //還沒加運費跟點數的小計 (運費上面那項)
 const substotal = computed(() => {
