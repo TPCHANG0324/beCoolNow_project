@@ -101,7 +101,7 @@
                   <th>訂單詳情</th>
                 </tr>
               </thead>
-              <tbody v-for="order in purchaseRecords" :key="order.orderId">
+              <tbody v-for="order in purchaseRecords" :key="order.ID" v-if="purchaseRecords.length != 0">
                 <tr>
                   <td>{{ order.date.split(" ")[0] }}</td>
                   <td>{{ order.productName }}</td>
@@ -109,6 +109,16 @@
                   <td>{{ productSource }}</td>
                   <td class="delivered-special">{{ order.status == 1 ? "已出貨" : "未出貨" }}</td>
                   <td><button class="order-detail-btn" @click="showOrderDetail(order)">訂單詳情</button></td>
+                </tr>
+              </tbody>
+
+              <tbody v-else>
+                <tr>
+                  <td colspan="6">
+                    <div style="text-align: start; margin-left: 20px;">
+                      <p>你好窮QQ 快來買點東西吧</p>
+                    </div>
+                  </td>
                 </tr>
               </tbody>
             </table>

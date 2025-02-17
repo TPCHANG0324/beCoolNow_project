@@ -422,6 +422,9 @@
   -webkit-overflow-scrolling: touch; // 提升 iOS 滾動體驗
   margin-bottom: 20px;
   color:#545454;
+  height: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
 
   // 隱藏 scrollbar 但保持功能 (可選)
   &::-webkit-scrollbar {
