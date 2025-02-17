@@ -17,10 +17,12 @@ $sql = "SELECT
           m.messageShelves,
           m.reportCount,
           m.ForumBoard_ID AS articleID,
+          fb.articleTitle AS articleTitle,
           mem.account AS nickname,
           mem.imagePath AS avatar
         FROM G1_Message AS m
-        JOIN G2_MEMBER AS mem ON m.member_ID = mem.id";
+        JOIN G2_MEMBER AS mem ON m.member_ID = mem.id
+        JOIN G1_ForumBoard AS fb ON m.ForumBoard_ID = fb.ID";
 
 
 if ($forumBoardId) {

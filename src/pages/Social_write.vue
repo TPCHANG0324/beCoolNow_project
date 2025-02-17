@@ -9,7 +9,7 @@
   <main>
     <MainHeader />
     <!-- 撰寫文章，縮寫FbW - 功能 - 代號X -->
-    <div class="FbW-X">
+    <div class="FbW-X" :style="bgi">
       <!-- 發文區 -->
       <form action="" class="FbW-wrapper-X" @submit.prevent="handleSubmit">
         <!-- 標題 -->
@@ -102,6 +102,7 @@ const theme = ref('主題選擇');
 const hasThumbnail = ref(false); //是否選擇封面圖片
 const editorData = ref(''); //編輯器
 const email = localStorage.getItem('userEmail') //使用者的 email
+const bgi = {backgroundImage: `url('${new URL('@/assets/images/Fb08.jpg', import.meta.url).href}')`}  
 
 //主題的索引對照
 const themeMapping = {

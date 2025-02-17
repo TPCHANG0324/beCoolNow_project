@@ -13,14 +13,15 @@
             <span>購物車</span>
         </div>
 
-        <div class="Sp-step-X active">
+        <!-- <div class="Sp-step-X active"> -->
+        <div class="Sp-step-X">
             <span class="Sp-badge-X">
                 <div class="Sp-badge-text-X">2</div>
             </span>
             <span>填寫資料</span>
         </div>
 
-        <div class="Sp-step-X">
+        <div class="Sp-step-X active">
             <span class="Sp-badge-X">
                 <div class="Sp-badge-text-X">3</div>
             </span>

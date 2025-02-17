@@ -14,7 +14,7 @@ try {
     $image = isset($_FILES['image']) ? $_FILES['image'] : null;
 
     // 檢查所有必要欄位（允許 image 為 null）
-    if (empty($title) || empty($url) || empty($content)) {
+    if (empty(trim($title)) || empty(trim($url)) || empty(trim($content))) {
         echo json_encode([
             'success' => false,
             'message' => '所有欄位皆必須填寫'

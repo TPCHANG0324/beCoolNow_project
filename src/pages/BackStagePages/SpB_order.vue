@@ -6,7 +6,7 @@
         <div>
           <h3>訂單管理</h3>
           <div class="MmB_searchBar_H">
-            <input id="" class="input" type="text" name="" placeholder="搜尋訂單" />
+            <input class="input" type="text" placeholder="搜尋訂單" />
             <i class="fa-solid fa-magnifying-glass"></i>
           </div>
         </div>
@@ -26,7 +26,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="(order, index) in orders" :key="order.ID">
+                <tr v-for="(order, index) in paginatedOrders" :key="order.ID">
                   <td class="MmB_name_H">{{ order.ID }}</td>
                   <td class="MmB_phone_H">{{ order.member_ID }}</td>
                   <td :class="{ 'text-red': order.payStatus === '未付款' }">{{ order.payStatus }}</td>
@@ -58,7 +58,13 @@
             </table>
           </main>
         </div>
-        <BackStagePaginator></BackStagePaginator>
+        <!-- 分頁器元件，傳入 currentPage 與 totalPages -->
+        <Paginator 
+          class="paginator_H"
+          :currentPage="currentPage" 
+          :totalPages="totalPages" 
+          @page-changed="handlePageChange" 
+        />
       </div>
     </div>
 
@@ -186,6 +192,8 @@ import BackStageSidebar from '@/components/items/BackStageItems/BackStageSidebar
 import BackStagePaginator from '@/components/items/BackStageItems/BackStagePaginator.vue';
 import BackStageHeader from '@/components/layout/BackStageLayout/BackStageHeader.vue';
 import BackStageBigPopup from '@/components/layout/BackStageLayout/BackStageBigPopup.vue';
+// 引入自訂分頁器元件（請確認此元件存在）
+import Paginator from '@/components/paginator.vue';
 
 export default {
   name: 'OrderManagement',
@@ -194,9 +202,9 @@ export default {
     BackStageSidebar,
     BackStagePaginator,
     BackStageBigPopup,
+    Paginator,
   },
   setup() {
-
     const base_url = import.meta.env.VITE_AJAX_URL;
     const orders = ref([]); // 使用 ref([]) 來確保它是響應式變數
     const orderId = ref();
@@ -278,6 +286,18 @@ export default {
         console.error("API 錯誤:", error);
       }
     };
+     // 分頁器狀態與計算屬性
+     const currentPage = ref(1);
+    const itemsPerPage = 10;
+    const totalPages = computed(() => Math.ceil(orders.value.length / itemsPerPage));
+    const paginatedOrders = computed(() => {
+      const start = (currentPage.value - 1) * itemsPerPage;
+      return orders.value.slice(start, start + itemsPerPage);
+    });
+    const handlePageChange = (newPage) => {
+      currentPage.value = newPage;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
 
     // **關閉彈窗**
     const closeEditPopup = () => {
@@ -285,7 +305,6 @@ export default {
       selectedOrder.value = null;
       selectedOrderDetails.value = [];
     };
-
     // **儲存訂單**
     const saveOrder = async () => {
 
@@ -365,16 +384,15 @@ export default {
         }
 
     };
-
-
-
-
-
-
-
     onMounted(fetchOrders); // 在組件加載時執行 fetchOrders()
 
     return {
+      orders,
+      currentPage,
+      itemsPerPage,
+      totalPages,
+      paginatedOrders,
+      handlePageChange,
       base_url,
       fetchOrders,
       isEditPopupVisible,

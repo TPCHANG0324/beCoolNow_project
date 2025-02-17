@@ -47,22 +47,24 @@
         <h2>Contact</h2>
         <div class="aboutus_input_R">
           <div class="form-group">
-            <p>* 姓名:</p>
+            <p>* 姓名：</p>
+
             <input class="input" type="text" v-model="name" @blur="validateName" />
             <span v-if="errors.name" class="error-text_about">{{ errors.name }}</span>
           </div>
           <div class="form-group">
-            <p>* Email:</p>
+            <p>* Email：</p>
             <input class="input" type="email" v-model="email" @blur="validateEmail" />
             <span v-if="errors.email" class="error-text_about">{{ errors.email }}</span>
           </div>
           <div class="form-group">
-            <p>* 手機:</p>
+            <p>* 手機：</p>
+
             <input class="input" type="text" v-model="phone" @blur="validatePhone" />
           <span v-if="errors.phone" class="error-text_about">{{ errors.phone }}</span>
           </div>
           <div class="form-group">
-            <p>* 您的建議:</p>
+            <p>* 您的建議：</p>
             <textarea class="input" rows="4" v-model="message" @blur="validateMessage"></textarea>
           <span v-if="errors.message" class="error-text_about">{{ errors.message }}</span>
           </div>

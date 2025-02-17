@@ -69,7 +69,8 @@
               </div>
 
             </div>
-            <p v-else style="height: 80px; font: 20px/80px 'DM Sans, Noto Sans'; color: #d0ad44; text-align: center;">哎呀！您真窮</p>
+            <p v-else style="height: 80px; font: 20px/80px 'DM Sans, Noto Sans'; color: #d0ad44; text-align: center;">
+              哎呀！您真窮</p>
           </section>
           <!-- 精選商品 -->
           <section class="Sp-shopping-cart-addon-X">
@@ -128,7 +129,8 @@
                   <label for="">本次使用點數：</label>
                   <form action="">
                     <span @click="minusPoints"><i class="bi bi-dash"></i></span>
-                    <input @change="revisePoints" @blur="blurPoints" type="number" v-model="usePoints" step="100" min="0">
+                    <input @change="revisePoints" @blur="blurPoints" type="number" v-model="usePoints" step="100"
+                      min="0">
                     <span @click="addPoints"><i class="bi bi-plus"></i></span>
                   </form>
                 </div>
@@ -141,7 +143,9 @@
                   <span>合計：</span>
                   <span>NT$ {{ total }}</span>
                 </div>
-                <router-link to="/shop_checkout" class="Sp-checkout-Btn">前往結帳</router-link>
+                <!-- <router-link to="/shop_checkout" class="Sp-checkout-Btn">前往結帳</router-link> -->
+                <a class="Sp-checkout-Btn" @click="goToPay">前往結帳</a>
+
               </div>
             </section>
           </section>
@@ -182,25 +186,6 @@
 
         </div>
       </div>
-
-      <!-- <p>{{ counterStore.count }}</p> -->
-      <!-- <button @click="counterStore.accumulate">測試按鈕</button> -->
-
-      <!-- <button @click="testBtn">測試按鈕</button> -->
-
-
-      <!-- 測試用：註冊 -->
-      <!-- <form action="" @submit.prevent="register">
-        帳號：<input type="text" name="account" v-model="account1">
-        密碼：<input type="password" name="password" v-model="password1">
-        <input type="submit" value="註冊">
-      </form> -->
-      <!-- 測試用：登入 -->
-      <!-- <form action="" @submit.prevent="login">
-        帳號：<input type="text" name="account" v-model="account2">
-        密碼：<input type="password" name="password" v-model="password2">
-        <input type="submit" value="登入">
-      </form> -->
     </main>
     <MainFooter></MainFooter>
   </div>
@@ -210,7 +195,8 @@
 import MainFooter from '@/components/layout/MainFooter.vue';
 import MainHeader from '@/components/layout/MainHeader.vue';
 // import { useCounterStore } from '@/store/cart';
-import { ref, computed } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
+import { ref, computed, onMounted, watch } from 'vue';
 //---------------------測試按鈕
 
 // const testBtn = async () => {
@@ -312,7 +298,10 @@ import { ref, computed } from 'vue';
 //---------------------
 
 
+>>>>>>> sunny
 
+const route = useRoute();
+const router = useRouter();
 
 // const counterStore = ref(useCounterStore());
 //new URL('@/assets/images/Sp08.jpg', import.meta.url).href
@@ -327,6 +316,27 @@ import { ref, computed } from 'vue';
 
 const base_url = import.meta.env.VITE_AJAX_URL
 const buys = ref([]); // 商品資料取自localStorage
+// 所有商品
+const allProducts = ref([]);
+
+// 精選商品
+const featuredItems = ref([]);
+
+// 定義 updateCartCount 函式（與第一頁相同邏輯）
+const updateCartCount = () => {
+  // const currentCount = parseInt(localStorage.getItem('cartCount')) || 0;
+  // const newCount = currentCount + count;
+  const totalCount = buys.value.reduce((sum, item) => sum + item.num, 0);
+  // localStorage.setItem('cartCount', newCount.toString());
+  localStorage.setItem('cartCount', totalCount.toString());
+  window.dispatchEvent(new Event('updateCartCount'));
+};
+
+// 載入 localStorage 內的購物車商品
+const loadCart = () => {
+  buys.value = JSON.parse(localStorage.getItem("cart")) || [];
+  console.log("🛒 載入購物車資料:", buys.value);
+};
 
 //精選商品
 // const items = ref([
@@ -352,7 +362,7 @@ const minusItem = (index) => {
   // if (buys.value[index].num > 1) {
   //   buys.value[index].num--;
   // }
-  else{
+  else {
     buys.value[index].num--;
   }
   updateLocalStorage();
@@ -363,6 +373,7 @@ const deleteItem = (index) => {
   if (d) {
     buys.value.splice(index, 1);
     updateLocalStorage();
+    updateCartCount();
   }
 };
 
@@ -391,12 +402,6 @@ const blurItem = (index, num) => {
   }
   updateLocalStorage();
 };
-
-// 所有商品
-const allProducts = ref([]);
-
-// 精選商品
-const featuredItems = ref([]);
 
 // 資料庫取所有商品資料
 const fetchAllProducts = async () => {
@@ -487,13 +492,6 @@ const addToCart = (index) => {
   // })
   // updateLocalStorage();
 }
-
-
-// 載入 localStorage 內的購物車商品
-const loadCart = () => {
-  buys.value = JSON.parse(localStorage.getItem("cart")) || [];
-  console.log("🛒 載入購物車資料:", buys.value);
-};
 
 //還沒加運費跟點數的小計 (運費上面那項)
 const substotal = computed(() => {
@@ -619,12 +617,38 @@ const onTouchMove = (e) => {
   e.currentTarget.scrollLeft = scrollLeft.value - walk; // 更新滾動位置
 };
 
+// const updateLocalStorage = () => {
+//   localStorage.setItem("cart", JSON.stringify(buys.value));
+//   localStorage.setItem("usePoints", JSON.stringify(usePoints.value)); // 🔹 存入折抵點數
+//   console.log("🛒 購物車更新:", buys.value);
+//   console.log("🛒 更新購物車 & 點數折抵:", buys.value, "折抵點數:", usePoints.value);
+// };
+
+//判定購物車內有沒有商品，沒有的話就導回環保商店購物
 const updateLocalStorage = () => {
-  localStorage.setItem("cart", JSON.stringify(buys.value));
-  localStorage.setItem("usePoints", JSON.stringify(usePoints.value)); // 🔹 存入折抵點數
-  console.log("🛒 購物車更新:", buys.value);
-  console.log("🛒 更新購物車 & 點數折抵:", buys.value, "折抵點數:", usePoints.value);
+  localStorage.setItem("usePoints", JSON.stringify(usePoints.value));
+  if (buys.value.length === 0) {
+    localStorage.removeItem('cart');
+  } else {
+    localStorage.setItem('cart', JSON.stringify(buys.value));
+  }
 };
+
+//前往結帳
+const goToPay = () => {
+  let paymentMethodPath = ''
+  if(selectedPayMethod.value === 0){ //信用卡結帳
+    paymentMethodPath = 'creditCard';
+  }else{ //linePay 結帳
+    paymentMethodPath = 'linePay';
+  }
+  router.push({
+    path:`/shop_cart/${paymentMethodPath}`
+  })
+}
+
+
+
 
 onMounted(() => {
   const storedCart = localStorage.getItem("cart");
@@ -632,7 +656,11 @@ onMounted(() => {
     buys.value = JSON.parse(storedCart);
   }
   console.log("📦 載入購物車資料:", buys.value);
-
+  if (!storedCart) {
+    alert('目前購物車無商品，請前往環保商店選購');
+    router.push('/shop');
+    return;
+  }
   loadCart();
   fetchAllProducts();
 
@@ -649,7 +677,7 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 .Sp-checkout-nav-X {
-      text-align: center;
-      margin-top: 60px;
+  text-align: center;
+  margin-top: 60px;
 }
 </style>

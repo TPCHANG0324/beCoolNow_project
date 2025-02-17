@@ -1,7 +1,8 @@
-<template> 
+<template>
   <div>
     <!-- 後臺 島嶼文章管理系統 -->
     <BackStageHeader></BackStageHeader>
+
     <div class="backStage_bgc">
       <div class="backStage_wrapper">
         <h3>島嶼文章管理</h3>
@@ -40,11 +41,9 @@
           </main>
         </div>
         <!-- 使用自訂分頁器元件 -->
-        <Paginator 
-          :currentPage="currentPage" 
-          :totalPages="totalPages" 
-          @page-changed="handlePageChange" 
-        />
+        <div class="paginator-wrapper">
+          <!-- <Paginator :currentPage="currentPage" :totalPages="totalPages" @page-changed="handlePageChange" /> -->
+        </div>
       </div>
     </div>
 
@@ -72,10 +71,11 @@
           </div>
           <figure>
             <label for="UploadPic">圖片:</label>
-            <input id="UploadPic" class="UploadPic" type="file" accept="image/*, image/svg+xml" @change="handleFileChange" />
+            <input id="UploadPic" class="UploadPic" type="file" accept="image/*, image/svg+xml"
+              @change="handleFileChange" />
             <div class="preview">
               <p>圖片預覽</p>
-              <img v-if="newArticle.image" :src="newArticle.image" alt="預覽圖片" />
+              <img v-if="newArticle.mediaPic" :src="newArticle.mediaPic" alt="預覽圖片" />
             </div>
           </figure>
         </div>
@@ -97,23 +97,24 @@
           <div class="IcB_addMain_H">
             <label for="IcB_editTopic_H">
               文章標題:
-              <input id="IcB_editTopic_H" class="input" type="text" v-model="editArticle.title" />
+              <input id="IcB_editTopic_H" class="input" type="text" v-model="editArticle.mediaTitle" />
             </label>
             <label for="IcB_editUrl_H">
               外部鏈結:
-              <input id="IcB_editUrl_H" class="input" type="text" v-model="editArticle.url" />
+              <input id="IcB_editUrl_H" class="input" type="text" v-model="editArticle.mediaURL" />
             </label>
             <label for="IcB_editContent_H">
               內容描述:<br />
-              <textarea id="IcB_editContent_H" name="IcB_editContent_H" v-model="editArticle.content"></textarea>
+              <textarea id="IcB_editContent_H" name="IcB_editContent_H" v-model="editArticle.mediaContents"></textarea>
             </label>
           </div>
           <figure>
             <label for="UploadPicEdit">圖片:</label>
-            <input id="UploadPicEdit" class="UploadPic" type="file" accept="image/*, image/svg+xml" @change="handleEditFileChange" />
+            <input id="UploadPicEdit" class="UploadPic" type="file" accept="image/*, image/svg+xml"
+              @change="handleEditFileChange" />
             <div class="preview">
               <p>圖片預覽</p>
-              <img v-if="editArticle.image" :src="editArticle.image" alt="預覽圖片" />
+              <img v-if="editArticle.mediaPic" :src="'/tid103/g1/php/'+editArticle.mediaPic" alt="預覽圖片" />
             </div>
           </figure>
         </div>
@@ -167,7 +168,7 @@ export default {
     const IcB_fetchArticles = async () => {
       try {
         const base_url = import.meta.env.VITE_AJAX_URL;
-        const response = await fetch(base_url + '/IcB_fetchArticles.php'); 
+        const response = await fetch(base_url + '/IcB_fetchArticles.php');
         if (!response.ok) {
           throw new Error(`伺服器回應錯誤：${response.status}`);
         }
@@ -196,7 +197,8 @@ export default {
       title: '',
       url: '',
       content: '',
-      image: '',
+      mediaPic: '',
+      imageFile:'',
     });
     // 用於編輯文章的表單資料
     const editArticle = ref({
@@ -204,12 +206,14 @@ export default {
       title: '',
       url: '',
       content: '',
-      image: '',
+      mediaPic: '',
+      imageFile:'',
     });
 
     const openAddPopup = () => {
       console.log('openAddPopup triggered');
-      newArticle.value = { title: '', url: '', content: '', image: '' };
+
+      newArticle.value = { title: '', url: '', content: '', mediaPic: '', imageFile: '' };
       isAddPopupVisible.value = true;
       console.log('isAddPopupVisible:', isAddPopupVisible.value);
     };
@@ -225,7 +229,6 @@ export default {
         console.error('找不到要編輯的文章');
       }
     };
-
     const openDeletePopup = (id) => {
       currentArticleId.value = id;
       isDeletePopupVisible.value = true;
@@ -258,13 +261,13 @@ export default {
       } else if (isEditPopupVisible.value) {
         apiUrl = base_url + '/IcB_editArticle.php';
         formData.append('id', editArticle.value.ID);
-        formData.append('title', editArticle.value.title);
-        formData.append('url', editArticle.value.url);
-        formData.append('content', editArticle.value.content);
+        formData.append('title', editArticle.value.mediaTitle);
+        formData.append('url', editArticle.value.mediaURL);
+        formData.append('content', editArticle.value.mediaContents);
         if (editArticle.value.imageFile) {
           formData.append('image', editArticle.value.imageFile);
         } else {
-          formData.append('image', editArticle.value.image);
+          formData.append('image', editArticle.value.imageFile);
         }
       }
 
@@ -318,7 +321,8 @@ export default {
       const file = event.target.files[0];
       if (file) {
         newArticle.value.imageFile = file;
-        newArticle.value.image = URL.createObjectURL(file);
+        newArticle.value.mediaPic = URL.createObjectURL(file);
+        console.log('圖片預覽 URL:', newArticle.value.mediaPic); // 除錯用
       }
     };
 
@@ -326,7 +330,8 @@ export default {
       const file = event.target.files[0];
       if (file) {
         editArticle.value.imageFile = file;
-        editArticle.value.image = URL.createObjectURL(file);
+        editArticle.value.mediaPic = URL.createObjectURL(file);
+        console.log('編輯圖片預覽 URL:', editArticle.value.mediaPic); // 除錯用
       }
     };
 

@@ -26,7 +26,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="member in members" :key="member.id">
+                <tr v-for="(member, index) in paginatedMembers" :key="member.id">
                   <!-- <td class="MmB_number_H">113122101</td>
                   <td class="MmB_name_H">王小明</td>
                   <td class="MmB_phone_H">0912345678</td>
@@ -37,8 +37,9 @@
                   <td>{{ member.phoneNumber || "未提供" }}</td>
                   <td>{{ member.email }}</td>
                   <td class="MmB_pet_H">氓阿狐</td>
-                  <td>{{ member.createTime }}</td>
-                  
+                  <!-- <td>{{ member.createTime }}</td> -->
+                  <td>{{ member.createTime ? member.createTime.split(' ')[0] : 'N/A' }}</td>
+
                   <!-- <td class="MmB_createDate_H">2025-01-12</td> -->
                   <!-- 這裡加上 @click 事件 -->
                   <td><button class="MmB_editBtn_H" @click="openEditPopup(member)">查看</button></td>
@@ -66,7 +67,13 @@
             </table>
           </main>
         </div>
-        <BackStagePaginator></BackStagePaginator>
+        <!-- 使用自訂分頁器元件 -->
+        <Paginator 
+          class="paginator_H"
+          :currentPage="currentPage" 
+          :totalPages="totalPages" 
+          @page-changed="handlePageChange" 
+        />
       </div>
     </div>
 
@@ -129,7 +136,7 @@
           <div>
             <p class="label">創建時間:&nbsp;</p>
             <!-- <p>2025-01-12</p> -->
-            <p>{{ selectedMember.createTime || 'N/A' }}</p>
+            <p>{{ (selectedMember.createTime || 'N/A').split(' ')[0] }}</p>
           </div>
         </article>
         <!-- </section> -->
@@ -149,6 +156,8 @@ import BackStageSidebar from '@/components/items/BackStageItems/BackStageSidebar
 import BackStagePaginator from '@/components/items/BackStageItems/BackStagePaginator.vue';
 import BackStageHeader from '@/components/layout/BackStageLayout/BackStageHeader.vue';
 import BackStageSmallPopup from '@/components/layout/BackStageLayout/BackStageSmallPopup.vue';
+// 引入分頁器元件，請確保此元件已建立
+import Paginator from '@/components/paginator.vue';
 import { reactive } from "vue";
 
 export default {
@@ -156,8 +165,9 @@ export default {
   components: {
     BackStageHeader,
     BackStageSidebar,
-    BackStagePaginator,
+    BackStagePaginator, // 若你仍需用到其他的 paginator 樣式
     BackStageSmallPopup,
+    Paginator,
   },
   setup() {
     const base_url = import.meta.env.VITE_AJAX_URL; // 確保有設置環境變數
@@ -182,6 +192,18 @@ export default {
       Object.assign(selectedMember, member); 
       isEditPopupVisible.value = true;
     };
+    // 分頁器狀態
+    const currentPage = ref(1);
+    const itemsPerPage = 10;
+    const totalPages = computed(() => Math.ceil(members.value.length / itemsPerPage));
+    const paginatedMembers = computed(() => {
+      const start = (currentPage.value - 1) * itemsPerPage;
+      return members.value.slice(start, start + itemsPerPage);
+    });
+    const handlePageChange = (newPage) => {
+      currentPage.value = newPage;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
 
     const selectedMember = reactive({
       id: "",
@@ -191,12 +213,11 @@ export default {
       status: "",
       createTime: "",
     });
-
-    // 點 X 或「取消」時，關閉彈窗
     const closeEditPopup = () => {
       isEditPopupVisible.value = false;
       selectedMember.value = {};
     };
+
 
     // 儲存時做一些操作，比如更新會員資料、呼叫 API 等
     // const savePopup = () => {
@@ -227,15 +248,23 @@ export default {
       }
     };
 
+    const formatDate = (dateTime) => {
+      if (!dateTime) return "N/A"; // 防止 null 值
+      return new Date(dateTime).toISOString().split("T")[0]; // 轉換成 YYYY-MM-DD
+    };
+
     // **在組件載入時撈取會員資料**
     onMounted(fetchMembers);
 
     return {
-      members,
-      // 資料
+      members,  
+      currentPage,
+      itemsPerPage,
+      totalPages,
+      paginatedMembers,
+      handlePageChange,
       isEditPopupVisible,
       selectedMember,
-      // 方法
       openEditPopup,
       closeEditPopup,
       savePopup,
@@ -294,6 +323,9 @@ export default {
   min-width: 130px;
 }
 
+p{
+  margin: auto;
+}
 /* 選單 */
 select {
   width: 100%;

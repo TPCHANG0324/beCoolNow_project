@@ -33,7 +33,8 @@
                     <td class="CB_content_H">{{ mes.content }}</td>
                     <td>{{ mes.messageDate.split(' ')[0] }}</td>
                     <td>{{ mes.reportCount }}</td>
-                    <td :style="{ color: mes.messageShelves ? '#545454' : 'rgba(84, 84, 84, 0.5)' }">{{ mes.messageShelves ? '上架' : '下架' }}</td>
+                    <td :style="{ color: mes.messageShelves ? '#545454' : 'rgba(84, 84, 84, 0.5)' }">{{
+                      mes.messageShelves ? '上架' : '下架' }}</td>
                     <td><button class="MmB_editBtn_H" @click="openEditPopup(mes)">編輯與查看</button></td>
                   </tr>
                 </tbody>
@@ -61,7 +62,7 @@
       </BackStageConfirmPopup>
     </transition> -->
 
-    <!-- 編輯文章的彈窗 -->
+    <!-- 編輯留言的彈窗 -->
     <transition name="fade">
       <BackStageBigPopup class="SpB_editProduct_H" v-if="isEditPopupVisible">
         <span>
@@ -69,7 +70,7 @@
           <!-- 這裡也可以加上 @click="closeEditPopup" 讓使用者點 X 就能關閉 -->
           <i class="fa-solid fa-x" @click="closeEditPopup"></i>
         </span>
-        <section>
+        <!-- <section>
           <article class="SpB_leftBlockPopup_H">
             <div>
               <p>文章編號:&nbsp;</p>
@@ -101,6 +102,30 @@
               </select>
             </div>
           </article>
+        </section> -->
+        <section class="arti">
+
+          <div class="inn">
+            <p>文章標題： {{ currentMes.articleTitle }}</p>
+            <p>文章編號： {{ currentMes.articleID }}</p>
+          </div>
+          <div class="inn">
+            <p>留言日期： {{ currentMes.messageDate.split(' ')[0] }}</p>
+            <p>會員編號： {{ currentMes.memberID }}</p>
+          </div>
+          <div class="inn">
+            <p>檢舉數量：{{ currentMes.reportCount }}</p>
+            <p>留言狀態:
+              <select v-model="currentMes.messageShelves">
+                <option :value="1">上架</option>
+                <option :value="0">下架</option>
+              </select>
+            </p>
+          </div>
+          <div class="inn">
+            <p>留言內容： {{ currentMes.content }}</p>
+          </div>
+          
         </section>
         <div>
           <button @click="closeEditPopup">取消</button>

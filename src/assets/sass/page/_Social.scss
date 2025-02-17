@@ -944,7 +944,7 @@ main {
 
 /* ----- 撰寫文章 ----- */
 .FbW-X {
-    background-image: url('src/assets/images/Fb08.jpg');
+    // background-image: url('src/assets/images/Fb08.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -1266,12 +1266,18 @@ main {
 
 /* 頁數選擇器 */
 .Sp-pages-X {
-    margin: 20px 0;
-
+    margin: 20px 0 !important;
+    display: block!important;
+    &.paginator_H{
+        ul{
+            width: 75%;
+            margin-right: 0;
+            margin-left: auto;
+        }
+    }
     ul {
-        display: flex;
-        justify-content: center;
-
+        display: flex ;
+        justify-content: center ;
         li {
             cursor: pointer;
             padding: 1.4rem;
