@@ -39,10 +39,27 @@
 import { useRouter } from 'vue-router';
 export default {
   name: 'member_login',
-  // setup() {
+  setup(props, { expose }) {
   //   const router = useRouter();
   //   return { router };
-  // },
+
+  const isOpen = ref(false);
+
+    // ✅ 開啟 & 關閉彈窗的方法
+    const open = () => {
+      isOpen.value = true;
+    };
+
+    const close = () => {
+      isOpen.value = false;
+    };
+
+    // ✅ 讓外部可以呼叫 `open()` 方法
+    expose({ open });
+
+    return { isOpen, open, close };
+
+  },
   data() {
     return {
       formData: {

@@ -3,7 +3,7 @@
 // error_reporting(E_ALL);
 // ini_set('display_errors', 1);
 
-// 記錄接收到的數據
+// // 記錄接收到的數據
 // file_put_contents('debug.log', print_r([
 //     'POST_DATA' => file_get_contents('php://input'),
 //     'REQUEST_METHOD' => $_SERVER['REQUEST_METHOD'],
@@ -26,14 +26,14 @@ switch ($method) {
         // 獲取信件列表
         try {
             $stmt = $pdo->prepare("
-                SELECT poster, mailContents, postTime 
-                FROM G1_EarthMail 
+                SELECT poster, mailContents, postTime
+                FROM G1_EarthMail
                 ORDER BY postTime DESC
             ");
-            
+
             $stmt->execute();
             $letters = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            
+
             echo json_encode([
                 'success' => true,
                 'letters' => $letters,
@@ -51,23 +51,23 @@ switch ($method) {
         // 添加新信件
         try {
             $data = json_decode(file_get_contents('php://input'), true);
-            
+
             if (!isset($data['poster']) || !isset($data['mailContents'])) {
                 throw new Exception('Missing required fields');
             }
-    
+
             $stmt = $pdo->prepare("
                 INSERT INTO G1_EarthMail (poster, mailContents, postTime)
                 VALUES (:poster, :mailContents, NOW())
             ");
-    
+
             $stmt->execute([
                 ':poster' => $data['poster'],
                 ':mailContents' => $data['mailContents'],
             ]);
-    
+
             $id = $pdo->lastInsertId();
-    
+
             echo json_encode([
                 'success' => true,
                 'message' => 'Letter submitted successfully',
