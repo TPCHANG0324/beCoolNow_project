@@ -772,10 +772,12 @@ const submitOrder = async () => {
 
   console.log("📌【1.1 運費】", shippingFee);
   console.log("📌【1.2 付款方式】", payMethod);
-
+  const member_ID = localStorage.getItem('member_ID')
+  console.log(member_ID);
 
     // **2️⃣ 準備訂單資料**
     const orderData = {
+      member_ID: parseInt(member_ID), // ✅ 傳遞會員 ID
       customer: customerInfo.value, // 顧客資訊
       recipient: recipientInfo.value, // 收件人資訊
       orderDetails: orderDetails.value, // 訂單細節

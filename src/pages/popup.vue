@@ -39,27 +39,10 @@
 import { useRouter } from 'vue-router';
 export default {
   name: 'member_login',
-  setup(props, { expose }) {
+  // setup() {
   //   const router = useRouter();
   //   return { router };
-
-  const isOpen = ref(false);
-
-    // ✅ 開啟 & 關閉彈窗的方法
-    const open = () => {
-      isOpen.value = true;
-    };
-
-    const close = () => {
-      isOpen.value = false;
-    };
-
-    // ✅ 讓外部可以呼叫 `open()` 方法
-    expose({ open });
-
-    return { isOpen, open, close };
-
-  },
+  // },
   data() {
     return {
       formData: {
@@ -174,6 +157,7 @@ export default {
           // 儲存登入狀態和用戶信息到 localStorage
           localStorage.setItem("isLoggedIn", "true");
           localStorage.setItem("userEmail", data.email);
+          // localStorage.setItem("userEmail", this.formData.email);
           localStorage.setItem("member_ID", data.member_ID);
           localStorage.setItem("account", data.account);
           localStorage.setItem("phoneNumber", data.phoneNumber);
