@@ -394,7 +394,7 @@ const done = (key) => {
     clicked = JSON.parse(clicked);
   }
   if(clicked && clicked['key-'+key]) {
-    alert('不要洗次數')
+    alert('一個任務只能打卡一次哦！')
     return
   }
 
