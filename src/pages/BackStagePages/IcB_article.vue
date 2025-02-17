@@ -75,7 +75,6 @@
               @change="handleFileChange" />
             <div class="preview">
               <img v-if="newArticle.mediaPic" :src="newArticle.mediaPic" alt="預覽圖片" />
-              <!-- <p>圖片預覽</p> -->
             </div>
           </figure>
         </div>
@@ -113,7 +112,6 @@
             <input id="UploadPicEdit" class="UploadPic" type="file" accept="image/*, image/svg+xml"
               @change="handleEditFileChange" />
             <div class="preview">
-              <p>圖片預覽</p>
               <img v-if="editArticle.mediaPic" :src="'/tid103/g1/php/'+editArticle.mediaPic" alt="預覽圖片" />
             </div>
           </figure>
