@@ -226,19 +226,19 @@ components: {
     handleSubmit() {
       // 檢查是否有空白欄位
       if (!this.formData.name.trim() || !this.formData.email.trim() || !this.formData.phone.trim()) {
-        alert('請填寫所有必填欄位');
+        alert('🌏 請填寫所有必填欄位');
         return;
       }
 
       // 進行所有欄位的驗證
       if (!this.validateAll()) {
-        alert('請確認所有欄位都已正確填寫');
+        alert('🌏 請確認所有欄位都已正確填寫');
         return;
       }
 
       // 檢查是否同意隱私權政策
       if (!this.formData.agree) {
-        alert('請同意隱私權政策');
+        alert('🌏 請同意隱私權政策');
         return;
       }
 

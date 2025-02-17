@@ -175,7 +175,7 @@ export default {
 
       // **如果有錯誤，阻止提交**
       if (Object.values(errors.value).some(error => error !== '')) {
-        alert('請填寫完整並修正錯誤後再送出');
+        alert('🌏 請填寫完整並修正錯誤後再送出');
         return;
       }
 
@@ -193,7 +193,7 @@ export default {
 
         const result = await response.json();
         if (response.ok) {
-          alert('訊息已成功送出！');
+          alert('☘️ 訊息已成功送出！');
 
           // **成功後清空表單**
           name.value = '';
@@ -201,11 +201,11 @@ export default {
           phone.value = '';
           message.value = '';
         } else {
-          alert('送出失敗: ' + result.error);
+          alert('🍂 送出失敗: ' + result.error);
         }
       } catch (error) {
-        alert('提交時發生錯誤，請稍後再試');
-        console.error('提交時發生錯誤:', error);
+        alert('🍂 提交時發生錯誤，請稍後再試');
+        console.error('🍂 提交時發生錯誤:', error);
           }
     };
 

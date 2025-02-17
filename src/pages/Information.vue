@@ -364,7 +364,7 @@ export default {
         currentQuestion.value = questions.value[currentQuestionIndex.value];
         console.log('當前題目：', currentQuestion.value); // 除錯用
       } else {
-        alert('目前沒有題目資料，請稍後再試。');
+        alert('🌏 目前沒有題目資料，請稍後再試。');
       }
     };
 

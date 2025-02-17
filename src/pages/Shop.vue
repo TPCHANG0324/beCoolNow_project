@@ -219,7 +219,7 @@ const addToCart = (product) => {
   localStorage.setItem("cart", JSON.stringify(cartItems));
 
   console.log("🛒 購物車更新成功", cartItems);
-  alert("商品已加入購物車！");
+  alert("🛒 商品已加入購物車！");
 };
 
 

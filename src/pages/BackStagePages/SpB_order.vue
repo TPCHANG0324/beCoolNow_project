@@ -314,7 +314,7 @@ export default {
         "已出貨": 1,
       };
       try {
-        alert("訂單資料已儲存！");
+        alert("☘️ 訂單資料已儲存！");
 
         // **轉換 orderStatus 為數字**
         const orderStatusValue = statusMappingReverse[selectedOrder.value.orderStatus] ?? 0;
@@ -353,15 +353,15 @@ export default {
 
 
           if (result.success) {
-            alert("✅ 訂單狀態更新成功！");
+            alert("☘️ 訂單狀態更新成功！");
             isEditPopupVisible.value = false;
             fetchOrders(); // 重新獲取訂單列表
           } else {
-            alert(`❌ 訂單更新失敗：${result.message}`);
+            alert(`🍂 訂單更新失敗：${result.message}`);
           }
         } catch (error) {
-          console.error("❌ 訂單更新錯誤:", error);
-          alert("❌ 伺服器錯誤，請稍後再試！");
+          console.error("🍂 訂單更新錯誤:", error);
+          alert("🍂 伺服器錯誤，請稍後再試！");
         }
 
     };

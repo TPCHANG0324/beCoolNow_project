@@ -528,7 +528,7 @@ watch(isSameAsCustomer, (newValue) => {
           if (validateForm()) {
           return true; // 訂單資訊正確
         } else {
-          alert('請檢查訂單資料是否正確！');
+          alert('🌏 請檢查訂單資料是否正確！');
           return false; // 訂單有錯誤
         }
     };
@@ -539,7 +539,7 @@ watch(isSameAsCustomer, (newValue) => {
       if (validatePayment()) {
       return true; // 付款資訊正確
     } else {
-      alert('請檢查付款資料是否完整！');
+      alert('🌏 請檢查付款資料是否完整！');
       return false; // 付款資料有錯誤
     }
   };
@@ -550,10 +550,10 @@ watch(isSameAsCustomer, (newValue) => {
       const paymentValid = validatePayment();
       console.log(errors.value);
       if (formValid && paymentValid) {
-      alert('訂單與付款成功！');
+      alert('☘️ 訂單與付款成功！');
       router.push('/shop_finish'); // 成功後導向訂單完成頁面
       } else {
-      alert('請修正錯誤後再提交');
+      alert('🌏 請修正錯誤後再提交');
       }
     };
 //   // 提交付款資料

@@ -196,7 +196,7 @@ export default {
         }
       } catch (err) {
         console.error('登出操作失敗', err);
-        alert('登出操作失敗，請洽工作人員詢問');
+        alert('🍂 登出操作失敗，請洽工作人員詢問');
       }
     };
 

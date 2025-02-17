@@ -133,7 +133,7 @@ export default {
       // 檢查是否有錯誤訊息
       if (this.formErrors.email || this.formErrors.password) {
         // 如果有錯誤，不提交表單
-        alert('驗證失敗：\n' +
+        alert('🍂 驗證失敗：\n' +
           (this.formErrors.email ? this.formErrors.email + '\n' : '') +
           (this.formErrors.password ? this.formErrors.password : ''));
         return;
@@ -141,7 +141,7 @@ export default {
 
       // 如果密碼驗證不通過
       if (!this.validatePasswordFormat(this.formData.password)) {
-        this.formErrors.password = '密碼必須包含大寫字母、小寫字母和數字';
+        this.formErrors.password = '🌏 密碼必須包含大寫字母、小寫字母和數字';
         alert(this.formErrors.password);
         return;
       }
@@ -185,15 +185,15 @@ export default {
 
           // 如果所有驗證都通過
           // alert('登入成功!歡迎光臨涼城即時');
-          alert(`${data.message}歡迎光臨涼城即時！`);
+          alert(`${data.message}🌏 歡迎光臨涼城即時！`);
           this.resetForm();
           this.closePopup();
           // this.$router.push('/member');
         } else {
-          if (data.message === '密碼錯誤，請查明後再試！') {
+          if (data.message === '🍂 密碼錯誤，請查明後再試！') {
             alert(data.message);
             this.resetForm();
-          } else if (data.message === '查無此帳號密碼，請先註冊後再登入！') {
+          } else if (data.message === '🌏 查無此帳號密碼，請先註冊後再登入！') {
             alert(data.message);
             this.resetForm();
             this.$emit('switch');
@@ -202,7 +202,7 @@ export default {
 
       } catch (err) {
         console.log(`請求出現錯誤：${err.message}`);
-        alert(`請求出現錯誤：請洽工作人員詢問！`);
+        alert(`🍂 請求出現錯誤：請洽工作人員詢問！`);
       }
     },
     resetForm() {

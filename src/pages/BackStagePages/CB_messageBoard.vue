@@ -164,7 +164,7 @@ const savePopup = async () => {
     })
     const data = await res.json()
     if (data.success) {
-      alert('留言下架成功！');
+      alert('☘️ 留言下架成功！');
       isEditPopupVisible.value = false;
       fetchMess()
     } else {

@@ -133,7 +133,7 @@ export default {
       // ✅ 按 ID 由小到大排序 (ASC)
         contactList.value = data.sort((a, b) => a.ID - b.ID); 
       } catch (error) {
-        console.error("撈取資料失敗:", error);
+        console.error("🍂 撈取資料失敗:", error);
       }
     };
     const openEditPopup = (contact) => {
@@ -192,14 +192,14 @@ export default {
 
         const result = await response.json();
         if (response.ok) {
-          alert('訊息已成功送出！');
+          alert('☘️ 訊息已成功送出！');
           fetchContacts(); // **🔄 立即更新後台資料**
         } else {
-          alert('送出失敗: ' + result.error);
+          alert('🍂 送出失敗: ' + result.error);
         }
       } catch (error) {
-        alert('提交時發生錯誤，請稍後再試');
-        console.error('提交時發生錯誤:', error);
+        alert('🍂 提交時發生錯誤，請稍後再試');
+        console.error('🍂 提交時發生錯誤:', error);
       }
     };
 

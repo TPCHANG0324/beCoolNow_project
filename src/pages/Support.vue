@@ -140,7 +140,7 @@ export default {
   methods: {
     handlePaymentMethodChange() {
       if (!this.payment_method) {
-        alert('請選擇付款方式！');
+        alert('🌏 請選擇付款方式！');
         this.formErrors.payment = true;
       } else {
         this.formErrors.payment = false;
@@ -149,7 +149,7 @@ export default {
 
     setDonationType(type) {
       if (!type) {
-        alert('請選擇捐款類型！');
+        alert('🌏 請選擇捐款類型！');
         return;
       }
       this.donationType = type;
@@ -160,7 +160,7 @@ export default {
 
     setAmount(amount) {
       if (!amount) {
-        alert('請選擇捐款金額！');
+        alert('🌏 請選擇捐款金額！');
         return;
       }
       this.selectedAmount = amount;
@@ -230,7 +230,7 @@ export default {
         errors.push('請選擇付款方式！');
         this.formErrors.payment = true;
         isValid = false;
-        alert('請選擇付款方式！');
+        alert('🌏 請選擇付款方式！');
         return { isValid, errors };
       }
 
@@ -249,7 +249,7 @@ export default {
 
     async handleNextStep() {
   if (!this.payment_method) {
-    alert('請選擇付款方式！');
+    alert('🌏 請選擇付款方式！');
     return;
   }
 
@@ -260,7 +260,7 @@ export default {
   }
 
   if (parseInt(this.finalAmount) <= 0) {
-    alert('捐款金額必須大於 0！');
+    alert('🌏 捐款金額必須大於 0！');
     return;
   }
 
@@ -308,7 +308,7 @@ export default {
     }
   } catch (error) {
     console.error('Payment processing error:', error);
-    alert('付款處理發生錯誤，請稍後再試！');
+    alert('🍂 付款處理發生錯誤，請稍後再試！');
   } finally {
     this.isProcessing = false;
   }

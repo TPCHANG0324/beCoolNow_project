@@ -407,7 +407,7 @@ export default {
 
     const saveEditProduct = async () => {
   if (!editingProduct.ID) {
-    alert("❌ 無法儲存，缺少商品 ID！");
+    alert("🍂 無法儲存，缺少商品 ID！");
     return;
   }
 
@@ -437,14 +437,14 @@ export default {
 
       const result = await response.json();
       if (result.success) {
-        console.log("✅ 圖片上傳成功，新的圖片路徑:", result.imagePath);
+        console.log("☘️ 圖片上傳成功，新的圖片路徑:", result.imagePath);
         updatedImagePath = result.imagePath;
       } else {
-        alert("❌ 圖片上傳失敗：" + result.error);
+        alert("🍂 圖片上傳失敗：" + result.error);
         return;
       }
     } catch (error) {
-      console.error("❌ 圖片上傳錯誤:", error);
+      console.error("🍂 圖片上傳錯誤:", error);
       return;
     }
   }
@@ -463,7 +463,7 @@ export default {
 
     const result = await response.json();
     if (result.success) {
-      alert("✅ 商品更新成功！");
+      alert("☘️ 商品更新成功！");
 
       // **4️⃣ 即時更新前端畫面**
       const index = products.value.findIndex((p) => p.ID === editingProduct.ID);
@@ -484,10 +484,10 @@ export default {
 
       closeEditPopup(); // **關閉彈窗**
     } else {
-      alert("❌ 商品更新失敗：" + result.error);
+      alert("🍂 商品更新失敗：" + result.error);
     }
   } catch (error) {
-    console.error("❌ 更新錯誤:", error);
+    console.error("🍂 更新錯誤:", error);
   }
 };
 
@@ -561,7 +561,7 @@ export default {
 
       const result = await response.json();
       if (result.success) {
-        alert("✅ 商品新增成功！");
+        alert("☘️ 商品新增成功！");
 
         // **更新商品列表**
         products.value.push({
@@ -577,11 +577,11 @@ export default {
         resetNewProduct(); // 清空輸入欄位 & 圖片
         closePopup();
       } else {
-        alert("❌ 商品新增失敗：" + result.error);
+        alert("🍂 商品新增失敗：" + result.error);
       }
     } catch (error) {
-      console.error("❌ 新增商品錯誤:", error);
-      alert("❌ 無法連線到伺服器");
+      console.error("🍂 新增商品錯誤:", error);
+      alert("🍂 無法連線到伺服器");
     }
     };
 
@@ -589,7 +589,7 @@ export default {
     const handleImageUpload = (event) => {
     const file = event.target.files[0];
     if (!file) {
-      console.warn("⚠️ 未選擇圖片");
+      console.warn("🌏 未選擇圖片");
       return;
     }
 
@@ -602,7 +602,7 @@ export default {
     };
     reader.readAsDataURL(file);
 
-    console.log("🟢 選擇的圖片:", newProduct.value.image);
+    console.log("🌏 選擇的圖片:", newProduct.value.image);
     };
 
     // **重置表單**

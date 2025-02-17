@@ -238,16 +238,16 @@ const toggleMessages = () => {
 //檢舉留言：要登入才能檢舉，已經檢舉過紀錄在 localstorage，就不能再檢舉了
 const report = async (messageID) => {
   if (!checkLogin) {
-    alert('請先登入！')
+    alert('🌏 請先登入！')
     return
   }
-  const check = confirm('是否要檢舉該則留言？');
+  const check = confirm('🌏 是否要檢舉該則留言？');
   if (!check) {
     return
   }
   const records = JSON.parse(localStorage.getItem('reportMessage')) || [];
   if (records.includes(messageID)) {
-    alert('你已檢舉過該則留言！')
+    alert('🌏 你已檢舉過該則留言！')
     return
   }
   try {
@@ -275,7 +275,7 @@ const report = async (messageID) => {
 
 //下架自己的留言
 const deleteSelf = async (messageID) => {
-  const check = confirm('是否要刪除該則留言？');
+  const check = confirm('🌏 是否要刪除該則留言？');
   if (!check) {
     return
   }
@@ -310,7 +310,7 @@ const otherAvatarSource = (avatar) => {
 const sendMessage = async () => {
   const userEmail = localStorage.getItem('userEmail')
   if (!checkLogin) {
-    alert('請先登入！')
+    alert('🌏 請先登入！')
     return
   }
   if (message.value) {
@@ -333,13 +333,13 @@ const sendMessage = async () => {
         alert(data.message)
         message.value = ''
       } else {
-        alert('請先登入再進行操作！')
+        alert('🌏 請先登入再進行操作！')
       }
     } catch (err) {
       console.error(`登入驗證失敗：${err}`)
     }
   } else {
-    alert('不能輸入空留言！')
+    alert('🌏 不能輸入空留言！')
   }
 }
 
@@ -348,10 +348,10 @@ const shareArticle = async () => {
   try {
     // 使用 Clipboard API 複製目前頁面的 URL，需要在 HTTPS 執行
     await navigator.clipboard.writeText(window.location.href);
-    alert('連結已複製');
+    alert('🌏 連結已複製');
   } catch (error) {
     console.error('複製連結失敗：', error);
-    alert('無法複製連結');
+    alert('🍂 無法複製連結');
   }
 };
 

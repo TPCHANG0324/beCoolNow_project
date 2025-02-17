@@ -254,17 +254,17 @@ const isUploading = ref(false);
 const handleSubmit = async () => {
   const isLoggin = checkAuth()
   if (!isLoggin) {
-    alert('請先登入！')
+    alert('🌏 請先登入！')
   }
   //檢查標題
   if (title.value.length < 5 || title.value.length > 40) {
-    alert('標題必須在 5 至 40 字之間')
+    alert('🌏 標題必須在 5 至 40 字之間')
     return
   }
 
   //檢查文章類別
   if (theme.value === '主題選擇') {
-    alert('請選擇文章主題');
+    alert('🌏 請選擇文章主題');
     return;
   }
 
@@ -276,7 +276,7 @@ const handleSubmit = async () => {
 
   //檢查文章字數
   if (cleanedContent.length < 50) {
-    alert('內文至少需要50字');
+    alert('🌏 內文至少需要50字');
     return;
   }
 
@@ -309,7 +309,7 @@ const handleSubmit = async () => {
       throw new Error(data.message);
     } else {
       alert(data.message);
-      const readArticle = confirm('是否查看發布的文章？');
+      const readArticle = confirm('🌏 是否查看發布的文章？');
       if (readArticle) {
         router.push(`/social/article/${data.articleId}`);
       } else {

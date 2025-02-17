@@ -127,7 +127,7 @@ const fetchLetters = async () => {
     }
   } catch (error) {
     console.error('Error fetching letters:', error);
-    alert(error.response?.data?.message || '獲取信件失敗，請稍後再試！');
+    alert(error.response?.data?.message || '🍂 獲取信件失敗，請稍後再試！');
   } finally {
     loading.value = false;
   }
@@ -177,7 +177,7 @@ const deleteLetter = async () => {
     
     if (response.data.success) {
       // 如果刪除成功，不需要重新獲取資料，因為已經更新了
-      alert('刪除成功');
+      alert('☘️ 刪除成功');
     } else {
       // 如果刪除失敗，恢復原始資料
       letters.value.splice(letterIndex, 0, letterToDelete);
@@ -186,7 +186,7 @@ const deleteLetter = async () => {
     }
   } catch (error) {
     console.error('Error:', error);
-    alert('刪除失敗，請稍後再試！');
+    alert('🍂 刪除失敗，請稍後再試！');
   } finally {
     loading.value = false;
     showDeletePopup.value = false;
