@@ -360,6 +360,11 @@ const expandCards = () => {
 const collapseCards = () => {
 
   cardLimit.value = 6;
+  const daily_card_element = document.querySelector('.daily_card');
+  daily_card_element.scrollIntoView({
+    // top: 0, // 滾動到頂部
+    behavior: 'smooth', // 平滑滾動
+  });
   // nextTick(() => {
   //   const dailyCard = document.querySelector('.daily_card');
   //   if (dailyCard) {
