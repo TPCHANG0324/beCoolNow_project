@@ -82,19 +82,19 @@
           <li>
             <div class="icon-text-wrapper">
               <img src="../assets/images/afakelogo2.png" alt="GitHub" style="width: 80px; height: 80px" />
-              <span>綠能科技</span>
-            </div>
-          </li>
-          <li>
-            <div class="icon-text-wrapper">
-              <img src="../assets/images/afakelogo3.png" alt="Google" style="width: 80px; height: 80px" />
               <span>綠城建築</span>
             </div>
           </li>
           <li>
             <div class="icon-text-wrapper">
-              <img src="../assets/images/afakelogo4.png" alt="Facebook" style="width: 80px; height: 80px" />
+              <img src="../assets/images/afakelogo3.png" alt="Google" style="width: 80px; height: 80px" />
               <span>永續農業</span>
+            </div>
+          </li>
+          <li>
+            <div class="icon-text-wrapper">
+              <img src="../assets/images/afakelogo4.png" alt="Facebook" style="width: 80px; height: 80px" />
+              <span>綠能科技</span>
             </div>
           </li>
         </ul>
