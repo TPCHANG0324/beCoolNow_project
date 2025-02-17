@@ -82,6 +82,7 @@ import MainFooter from '@/components/layout/MainFooter.vue';
 
 const router = useRouter();
 const products = ref([]); // 存放從後端 API 獲取的商品數據
+const quantity = ref(1);
 
 // 取得商品數據（使用 Fetch）
 const fetchProducts = async () => {
@@ -105,9 +106,20 @@ const fetchProducts = async () => {
     console.error('載入商品失敗:', error);
   }
 };
+const cartCount = ref(0);
+const cartIconColor = ref('defaultColor');
 
 
-onMounted(fetchProducts);
+onMounted(() => {
+  fetchProducts();
+  window.addEventListener('updateCartCount', () => {
+    // 從 localStorage 取得最新購物車數量
+    const count = parseInt(localStorage.getItem('cartCount')) || 0;
+    // 根據 count 來變更購物車圖示顏色及顯示的數量
+    cartCount.value = count;
+    cartIconColor.value = count > 0 ? 'highlightColor' : 'defaultColor';
+  });
+});
 
 // 點擊商品導向詳情頁
 // const handleProductClick = (productId) => {
@@ -149,8 +161,6 @@ const filterByPrice = (range) => {
   // selectedSort.value = 'default';
 };
 
-
-
 // 依據價格篩選商品
 const filteredAndSortedProducts = computed(() => {
   let result = [...products.value].map(product => ({
@@ -190,36 +200,56 @@ const filteredAndSortedProducts = computed(() => {
   // console.log("🟢 選擇的價格區間:", selectedPriceRange.value);
   // console.log("🟢 選擇的排序方式:", selectedSort.value);
 
+  
   return result;
 
 });
+// 購物車相關方法
+const updateCartCount = (count) => {
+      const currentCount = parseInt(localStorage.getItem('cartCount')) || 0;
+      const newCount = currentCount + count;
+      localStorage.setItem('cartCount', newCount.toString());
+      window.dispatchEvent(new Event('updateCartCount'));
+    };
 
-
+// 加入購物車
 const addToCart = (product) => {
 
   const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
-
+  
+  // 建立新的購物車項目
+  const newCartItem = {
+    id: product.ID,
+    name: product.productName,
+    price: product.salePrice,
+    quantity: quantity.value, // 依照目前選擇的數量
+    image: product.productPic1, // 使用第一張圖片
+  };
+  
   // 檢查商品是否已存在購物車
-  const existingItem = cartItems.find((item) => item.id === product.ID === product.productName);
+  const existingItem = cartItems.find(item => item.id === product.ID);
 
   if (existingItem) {
-    existingItem.num += 1; // 如果商品已存在，增加數量
+    existingItem.quantity += quantity.value; // 如果商品已存在，增加數量
   } else {
-    cartItems.push({
-      id: product.ID,
-      name: product.productName,
-      price: product.price,
-      salePrice: product.salePrice,
-      num: 1, // 數量
-      image: product.productPic1, // 使用第一張圖片
-    });
+    cartItems.push(newCartItem); // 如果商品不存在，新增商品
   }
+    // cartItems.push({
+    //   id: product.ID,
+    //   name: product.productName,
+    //   price: product.price,
+    //   salePrice: product.salePrice,
+    //   num: 1, // 數量
+    //   image: product.productPic1, // 使用第一張圖片
+    // });
 
   // 更新 localStorage
   localStorage.setItem("cart", JSON.stringify(cartItems));
 
   console.log("🛒 購物車更新成功", cartItems);
-  alert("商品已加入購物車！");
+  alert("🛒 商品已加入購物車！");
+  // 更新購物車總數（此函式內部會 dispatch updateCartCount 事件）
+  updateCartCount(quantity.value);
 };
 
 

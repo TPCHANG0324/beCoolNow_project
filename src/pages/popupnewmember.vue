@@ -83,23 +83,23 @@ export default {
     },
     async handleSubmit() {
       if (!this.formData.name || !this.formData.email || !this.formData.password || !this.formData.confirmPassword) {
-        alert('請填寫所有欄位！');
+        alert('🌏 請填寫所有欄位！');
         return;
       }
 
       if (!this.validatePassword(this.formData.password)) {
-        alert('密碼必須包含大寫字母、小寫字母和數字！');
+        alert('🌏 密碼必須包含大寫字母、小寫字母和數字！');
         return;
       }
 
       if (this.formData.password !== this.formData.confirmPassword) {
-        alert('兩次輸入的密碼不一致！');
+        alert('🌏 兩次輸入的密碼不一致！');
         return;
       }
 
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailRegex.test(this.formData.email)) {
-        alert('請輸入有效的電子郵件地址！');
+        alert('🌏 請輸入有效的電子郵件地址！');
         return;
       }
 
@@ -123,15 +123,15 @@ export default {
 
         if (data.success) {
           // console.log("註冊成功！");
-          alert('註冊成功！歡迎加入涼城即時！');
+          alert('🌏 註冊成功！歡迎加入涼城即時！');
           this.test();
         } else {
           // console.log(`註冊失敗：${data.error}`);
-          alert(`註冊失敗：${data.error}`);
+          alert(`🍂 註冊失敗：${data.error}`);
         }
       } catch (err) {
         console.log(`請求出現錯誤：${err.message}`);
-        alert(`請求出現錯誤：請洽工作人員詢問！`);
+        alert(`🌏 請求出現錯誤：請洽工作人員詢問！`);
       }
     },
     handleCancel() {

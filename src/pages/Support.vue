@@ -128,7 +128,7 @@ const handlePaymentMethodChange = () => {
 // 設定捐款類型，並在每月捐款時若付款方式為 Line Pay，則清除付款方式
 const setDonationType = (type) => {
   if (!type) {
-    alert('請選擇捐款類型！');
+    alert('🌏請選擇捐款類型！');
     return;
   }
   donationType.value = type;
@@ -217,7 +217,7 @@ const handleNextStep = () => {
   if (!isValid) return;
 
   if (finalAmount.value <= 0) {
-    alert('捐款金額必須大於 0！');
+    alert('🌏捐款金額必須大於 0！');
     return;
   }
   isProcessing.value = true;

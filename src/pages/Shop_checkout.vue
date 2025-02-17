@@ -755,12 +755,12 @@ const submitOrder = async () => {
 
   const isValid = validateForm();
   if (!isValid) {
-    alert("⚠️ 請填寫完整的訂單資訊！");
+    alert("🌏 請填寫完整的訂單資訊！");
     return;
   }
 
   if (cartItems.value.length === 0) {
-    alert("⚠️ 購物車內沒有商品，無法提交訂單！");
+    alert("🌏 購物車內沒有商品，無法提交訂單！");
     return;
   }
 
@@ -798,14 +798,14 @@ const submitOrder = async () => {
     });
 
     const result = await response.json();
-    console.log("✅ 訂單提交成功:", result);
+    console.log("☘️ 訂單提交成功:", result);
 
     if (!result.success) {
       throw new Error(result.message || "訂單提交失敗");
     }
 
     if (result.success) {
-      alert("✅ 訂單提交成功，將跳轉至付款頁面！");
+      alert("☘️ 訂單提交成功，將跳轉至付款頁面！");
 
       // **3️⃣ 清除 localStorage**
       localStorage.removeItem("cart");
@@ -816,11 +816,11 @@ const submitOrder = async () => {
 
       router.push("/shop_finish");
     } else {
-      alert(`❌ 訂單提交失敗：${result.message}`);
+      alert(`🍂 訂單提交失敗：${result.message}`);
     }
   } catch (error) {
-    console.error("❌ 訂單提交錯誤:", error);
-    alert("❌ 伺服器錯誤，請稍後再試！");
+    console.error("🍂 訂單提交錯誤:", error);
+    alert("🍂 伺服器錯誤，請稍後再試！");
   }
 };
 

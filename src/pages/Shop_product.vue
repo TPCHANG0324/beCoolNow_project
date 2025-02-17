@@ -233,12 +233,9 @@
         <img :src="getImageUrl(product.productPic2)" alt="商品圖片" style="object-fit: cover; object-position: center center;" />
         <div>
           <p>常見尺寸(容量):</p>
-          <ol>
-            <li>{{ product.product_details3 }}</li>
-            <!-- <li>小型: 200ml (7 oz)</li>
-            <li>中型: 350ml (12 oz)</li>
-            <li>大型: 500ml (17 oz)</li>
-            <li>特大: 750ml以上 (26 oz)</li> -->
+          
+          <ol v-for="(item,index) in selectedSizeOptions" :key="index">
+            <li>{{ item }}</li> 
           </ol>
         </div>
       </article>
@@ -508,13 +505,13 @@ export default {
       console.log(" 檢查商品資訊:", product.value);
       // 檢查 `product` 是否已經載入
       if (!product.value || !product.value.ID || !product.value.productName || !product.value.salePrice) {
-        alert("⚠️ 商品資訊未載入，請稍候再試！");
-        console.warn("⚠️ 商品資訊未載入:", product.value);
+        alert("🌏 商品資訊未載入，請稍候再試！");
+        console.warn("🌏 商品資訊未載入:", product.value);
         return;
       }
 
       if (!selectedImage.value || !selectedSize.value) {
-        alert("請選擇商品規格再加入購物車！");
+        alert("🌏 請選擇商品規格再加入購物車！");
         return;
       }
 
@@ -528,7 +525,7 @@ export default {
         salePrice: product.value.salePrice,
       };
 
-      console.log("✅ 加入購物車的商品資訊:", newProduct);
+      console.log("🛒 加入購物車的商品資訊:", newProduct);
 
       // **取得 localStorage 內的購物車資料**
       let cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -552,7 +549,7 @@ export default {
        // 彈窗目前顯示不了
        if (!isBuyNow) {
         isCartPopupVisible.value = true; // 顯示彈窗
-        console.log("✅ 商品已加入購物車:", newProduct);
+        console.log("🛒 商品已加入購物車:", newProduct);
       } else {
         // 如果是「立即購買」，跳轉到購物車
         router.push("/shop_cart");
@@ -562,7 +559,7 @@ export default {
 
     // 立即結帳功能
     const goToCheckout = () => {
-      console.log("✅ 跳轉到結帳頁面...");
+      console.log("🌏 跳轉到結帳頁面...");
     router.push("/shop_cart");
     };
 
@@ -605,7 +602,7 @@ export default {
       // });
 
 
-
+    
 
       onUnmounted(() => {
         window.removeEventListener("resize", updateScreenSize);

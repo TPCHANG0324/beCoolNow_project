@@ -325,13 +325,13 @@ export default {
         }
 
         if (result.success) {
-          alert('儲存成功');
+          alert('☘️ 儲存成功');
           await IcBqna_fetch();
         } else {
-          alert('儲存失敗：' + result.message);
+          alert('🍂 儲存失敗：' + result.message);
         }
       } catch (error) {
-        console.error('儲存文章錯誤：', error);
+        console.error('🍂 儲存文章錯誤：', error);
       }
       closePopup();
     };
@@ -349,13 +349,13 @@ export default {
         });
         const result = await response.json();
         if (result.success) {
-          alert('刪除成功');
+          alert('☘️ 刪除成功');
           await IcBqna_fetch();
         } else {
-          alert('刪除失敗：' + result.message);
+          alert('🍂 刪除失敗：' + result.message);
         }
       } catch (error) {
-        console.error('刪除問答錯誤：', error);
+        console.error('🍂 刪除問答錯誤：', error);
       }
       closePopup();
     };

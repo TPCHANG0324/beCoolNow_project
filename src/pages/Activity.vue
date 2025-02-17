@@ -112,7 +112,7 @@
     <textarea
       id="mailContents"
       v-model="formData.mailContents"
-      placeholder="寫下你的信給地球吧！"
+      placeholder="寫下給地球的一封信吧！"
       required
     ></textarea>
   </div>
@@ -394,7 +394,7 @@ const done = (key) => {
     clicked = JSON.parse(clicked);
   }
   if(clicked && clicked['key-'+key]) {
-    alert('一個任務只能打卡一次哦！')
+    alert('🌏 一個任務只能打卡一次哦！')
     return
   }
 
@@ -456,23 +456,23 @@ const handleSubmit = async (e) => {
 
   // 驗證所有必填欄位
   if (!formData.value.poster.trim()) {
-    alert('請輸入姓名或暱稱');
+    alert('🌏 請輸入姓名或暱稱');
     return;
   }
 
   if (!formData.value.mailContents.trim()) {
-    alert('請輸入信件內容');
+    alert('🌏 請輸入信件內容');
     return;
   }
 
   if (!formData.value.captcha) {
-    alert('請輸入驗證碼');
+    alert('🌏 請輸入驗證碼');
     return;
   }
 
   // 驗證驗證碼
   if (formData.value.captcha !== currentCaptcha.value) {
-    alert('驗證碼輸入錯誤');
+    alert('🍂 驗證碼輸入錯誤');
     generateCaptcha(); // 重新生成驗證碼
     formData.value.captcha = ''; // 清空驗證碼輸入
     return;
@@ -500,7 +500,7 @@ const handleSubmit = async (e) => {
       totalLetters.value++;
       formData.value = { poster: '', mailContents: '', captcha: '' };
       generateCaptcha();
-      alert('✅信件已成功提交！');
+      alert('☘️ 信件已成功提交！');
     } else {
       console.error('後端回傳錯誤內容:', response.data);
       throw new Error('提交失敗：' + (response.data?.message || '未知錯誤'));
@@ -516,7 +516,7 @@ const handleSubmit = async (e) => {
       responseData: error.response?.data
     });
 
-    alert('提交失敗：' + error.message);
+    alert('🍂 提交失敗：' + error.message);
   }
 };
 

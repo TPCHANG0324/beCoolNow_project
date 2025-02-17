@@ -218,7 +218,7 @@ export default {
     },
     async handleSubmit() {
       if (!this.validateAll()) {
-        alert('請確認所有欄位都已正確填寫');
+        alert('🌏 請確認所有欄位都已正確填寫');
         return;
       }
 
@@ -239,7 +239,7 @@ export default {
         this.$router.push('/donatefinish/');
       } catch (error) {
         console.error('Error:', error);
-        alert('發送失敗，請稍後再試');
+        alert('🍂 發送失敗，請稍後再試');
       }
     }
   }

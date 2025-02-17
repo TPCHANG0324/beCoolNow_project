@@ -37,8 +37,9 @@
                   <td>{{ member.phoneNumber || "未提供" }}</td>
                   <td>{{ member.email }}</td>
                   <td class="MmB_pet_H">氓阿狐</td>
-                  <td>{{ member.createTime }}</td>
-                  
+                  <!-- <td>{{ member.createTime }}</td> -->
+                  <td>{{ member.createTime ? member.createTime.split(' ')[0] : 'N/A' }}</td>
+
                   <!-- <td class="MmB_createDate_H">2025-01-12</td> -->
                   <!-- 這裡加上 @click 事件 -->
                   <td><button class="MmB_editBtn_H" @click="openEditPopup(member)">查看</button></td>
@@ -135,7 +136,7 @@
           <div>
             <p class="label">創建時間:&nbsp;</p>
             <!-- <p>2025-01-12</p> -->
-            <p>{{ selectedMember.createTime || 'N/A' }}</p>
+            <p>{{ (selectedMember.createTime || 'N/A').split(' ')[0] }}</p>
           </div>
         </article>
         <!-- </section> -->
@@ -236,15 +237,20 @@ export default {
 
         const result = await response.json();
         if (response.ok) {
-          alert("會員資料已更新！");
+          alert("☘️ 會員資料已更新！");
           fetchMembers(); // 重新載入會員列表
           closeEditPopup();
         } else {
-          alert("更新失敗：" + result.error);
+          alert("🍂 更新失敗：" + result.error);
         }
       } catch (error) {
-        console.error("更新會員資料失敗:", error);
+        console.error("🍂 更新會員資料失敗:", error);
       }
+    };
+
+    const formatDate = (dateTime) => {
+      if (!dateTime) return "N/A"; // 防止 null 值
+      return new Date(dateTime).toISOString().split("T")[0]; // 轉換成 YYYY-MM-DD
     };
 
     // **在組件載入時撈取會員資料**
@@ -317,6 +323,9 @@ export default {
   min-width: 130px;
 }
 
+p{
+  margin: auto;
+}
 /* 選單 */
 select {
   width: 100%;

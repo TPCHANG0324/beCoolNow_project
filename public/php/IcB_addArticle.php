@@ -4,7 +4,7 @@
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json; charset=utf-8');
 
-include('connect.php');  // 確保 connect.php 定義了 $dsn, $db_user, $db_pass
+include('conn.php');  // 確保 connect.php 定義了 $dsn, $db_user, $db_pass
 
 $limit = 4; 
 
