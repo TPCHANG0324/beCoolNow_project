@@ -4,6 +4,10 @@
 // header('Access-Control-Allow-Methods: POST');
 // header('Access-Control-Allow-Headers: Content-Type');
 // header('Content-Type: application/json; charset=utf-8');
+header("Content-Type: application/json; charset=UTF-8");
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: POST");
+header("Access-Control-Allow-Headers: Content-Type");
 include('conn.php');
 
 
@@ -16,7 +20,7 @@ $password = $login['password'];
 // include('connect.php');
 
 
-$sql = "SELECT password FROM G2_MEMBER WHERE email = ?";
+$sql = "SELECT id, password, account, phoneNumber, enterCity FROM G2_MEMBER WHERE email = ?";
 $statement = $pdo->prepare($sql);
 $statement->bindValue(1, $email);
 $statement->execute();
@@ -33,7 +37,11 @@ if ($data) {
             "success" => true,
             "message" => "登入成功！",
             "sessionId" => session_id(),
-            "email" => $email
+            "email" => $email,
+            "member_ID" => $data['id'],
+            "account" => $data['account'],
+            "phoneNumber" => $data['phoneNumber'],
+            "enterCity" => $data['enterCity']
         ]);
     }else{
         echo json_encode([

@@ -103,11 +103,11 @@
               </thead>
               <tbody v-for="order in purchaseRecords" :key="order.orderId">
                 <tr>
-                  <td>{{ order.date }}</td>
+                  <td>{{ order.date.split(" ")[0] }}</td>
                   <td>{{ order.productName }}</td>
                   <td>{{ order.price }}</td>
-                  <td>{{ order.source }}</td>
-                  <td class="delivered-special">{{ order.status }}</td>
+                  <td>{{ productSource }}</td>
+                  <td class="delivered-special">{{ order.status == 1 ? "已出貨" : "未出貨" }}</td>
                   <td><button class="order-detail-btn" @click="showOrderDetail(order)">訂單詳情</button></td>
                 </tr>
               </tbody>
@@ -206,6 +206,7 @@ const validationErrors = ref({
   phone: '',
   email: ''
 })
+const productSource = ref('環保市集');
 
 
 
@@ -215,12 +216,12 @@ const showOrderPopup = ref(false)
 const selectedOrder = ref(null)
 const isPhoneAdded = ref(false)
 const purchaseRecords = ref([])
-const personalRecords = ref([])
+// const personalRecords = ref([])
 const personalArticles = ref([]) //個人文章
-const personalStats = ref({
-  experience: 200,
-  points: 300
-})
+// const personalStats = ref({
+//   experience: 200,
+//   points: 300
+// })
 
 // 驗證函數
 // 修改現有的驗證函數
@@ -379,109 +380,137 @@ const getUserInfo = async () => {
 
 const getPurchaseRecords = async () => {
   try {
-    const res = await fetch('/tid103/g1/php/getPurchaseRecords.php')
-    const data = await res.json()
-    if (data.success) {
-      purchaseRecords.value = data.data
+
+    const memberID = localStorage.getItem("member_ID");
+    if (!memberID) {
+      console.error("❌ 會員 ID 未找到");
+      return;
     }
-  } catch (err) {
-    console.error(`獲取購買記錄錯誤：${err}`)
-    // 使用範例資料作為備份
-    purchaseRecords.value = [
-      {
-        orderId: "ORD001",
-        date: "2024/12/25",
-        productName: "環保吸管",
-        price: 300,
-        quantity: 1,
-        status: "已送達",
-        address: "台北市大安區復興南路一段390號2樓",
-        source: "環保市集"
-      },
-      {
-        orderId: "ORD002",
-        date: "2024/12/20",
-        productName: "可重複使用水壺",
-        price: 450,
-        quantity: 1,
-        status: "已出貨",
-        address: "新北市板橋區文化路二段",
-        source: "環保市集"
-      },
-      {
-        orderId: "ORD003",
-        date: "2024/12/15",
-        productName: "竹纖維餐具組",
-        price: 580,
-        quantity: 1,
-        status: "已送達",
-        address: "台中市西屯區逢甲路",
-        source: "環保市集"
-      },
-      {
-        orderId: "ORD004",
-        date: "2024/12/10",
-        productName: "有機棉購物袋",
-        price: 250,
-        quantity: 2,
-        status: "處理中",
-        address: "高雄市鳳山區",
-        source: "環保市集"
-      },
-      {
-        orderId: "ORD005",
-        date: "2024/12/05",
-        productName: "天然洗髮精",
-        price: 380,
-        quantity: 1,
-        status: "已送達",
-        address: "台南市東區",
-        source: "環保市集"
-      },
-      {
-        orderId: "ORD006",
-        date: "2024/12/25",
-        productName: "環保吸管",
-        price: 300,
-        quantity: 1,
-        status: "已送達",
-        address: "台北市大安區復興南路一段390號2樓",
-        source: "環保市集"
-      },
-      {
-        orderId: "ORD007",
-        date: "2024/12/20",
-        productName: "可重複使用水壺",
-        price: 450,
-        quantity: 1,
-        status: "已出貨",
-        address: "新北市板橋區文化路二段",
-        source: "環保市集"
-      }
-    ]
+
+    const base_url = import.meta.env.VITE_AJAX_URL
+    // const res = await fetch(`${base_url}/getPurchaseRecords.php`)
+    const res = await fetch(`${base_url}/getPurchaseRecords.php?member_ID=${memberID}`);
+
+
+    if (!res.ok) throw new Error(`HTTP 錯誤！狀態碼: ${res.status}`);
+
+    const data = await res.json();
+    console.log("✅ API 回應:", data);
+
+    if (data.success) {
+      purchaseRecords.value = data.records;
+    } else {
+      console.error("❌ 無法獲取購買紀錄:", data.message);
+    }
+  } catch (error) {
+    console.error("❌ API 錯誤:", error);
   }
 }
+  // } catch (err) {
+  //   console.error(`獲取購買記錄錯誤：${err}`)
+  //   // 使用範例資料作為備份
+  //   purchaseRecords.value = [
+  //     {
+  //       orderId: "ORD001",
+  //       date: "2024/12/25",
+  //       productName: "環保吸管",
+  //       price: 300,
+  //       quantity: 1,
+  //       status: "已送達",
+  //       address: "台北市大安區復興南路一段390號2樓",
+  //       source: "環保市集"
+  //     },
+      // {
+      //   orderId: "ORD002",
+      //   date: "2024/12/20",
+      //   productName: "可重複使用水壺",
+      //   price: 450,
+      //   quantity: 1,
+      //   status: "已出貨",
+      //   address: "新北市板橋區文化路二段",
+      //   source: "環保市集"
+      // },
+      // {
+      //   orderId: "ORD003",
+      //   date: "2024/12/15",
+      //   productName: "竹纖維餐具組",
+      //   price: 580,
+      //   quantity: 1,
+      //   status: "已送達",
+      //   address: "台中市西屯區逢甲路",
+      //   source: "環保市集"
+      // },
+      // {
+      //   orderId: "ORD004",
+      //   date: "2024/12/10",
+      //   productName: "有機棉購物袋",
+      //   price: 250,
+      //   quantity: 2,
+      //   status: "處理中",
+      //   address: "高雄市鳳山區",
+      //   source: "環保市集"
+      // },
+      // {
+      //   orderId: "ORD005",
+      //   date: "2024/12/05",
+      //   productName: "天然洗髮精",
+      //   price: 380,
+      //   quantity: 1,
+      //   status: "已送達",
+      //   address: "台南市東區",
+      //   source: "環保市集"
+      // },
+      // {
+      //   orderId: "ORD006",
+      //   date: "2024/12/25",
+      //   productName: "環保吸管",
+      //   price: 300,
+      //   quantity: 1,
+      //   status: "已送達",
+      //   address: "台北市大安區復興南路一段390號2樓",
+      //   source: "環保市集"
+      // },
+      // {
+      //   orderId: "ORD007",
+      //   date: "2024/12/20",
+      //   productName: "可重複使用水壺",
+      //   price: 450,
+      //   quantity: 1,
+      //   status: "已出貨",
+      //   address: "新北市板橋區文化路二段",
+      //   source: "環保市集"
+      // }
+//     ]
+//   }
+// }
 
-const getPersonalRecords = async () => {
-  try {
-    const res = await fetch('/tid103/g1/php/getPersonalRecords.php')
-    const data = await res.json()
-    if (data.success) {
-      personalRecords.value = data.data
-    }
-  } catch (err) {
-    console.error(`獲取個人記錄錯誤：${err}`)
-    // 使用範例資料作為備份
-    personalRecords.value = [
-      { date: "2024/12/25", points: 300, experience: 200 },
-      { date: "2024/12/25", points: 300, experience: 200 },
-      { date: "2024/12/25", points: 300, experience: 200 },
-      { date: "2024/12/25", points: 300, experience: 200 },
-      { date: "2024/12/25", points: 300, experience: 200 }
+// const getPersonalRecords = async () => {
+//   try {
+//     const res = await fetch(`${base_url}/getPersonalRecords.php`)
+//     const data = await res.json()
+//     if (data.success) {
+//       personalRecords.value = data.data
+//     }
+//   } catch (err) {
+//     console.error(`獲取個人記錄錯誤：${err}`)
+//     // 使用範例資料作為備份
+//     personalRecords.value = [
+//       { date: "2024/12/25", points: 300, experience: 200 },
+//       { date: "2024/12/25", points: 300, experience: 200 },
+//       { date: "2024/12/25", points: 300, experience: 200 },
+//       { date: "2024/12/25", points: 300, experience: 200 },
+//       { date: "2024/12/25", points: 300, experience: 200 }
 
-    ]
-  }
-}
+//     ]
+//   }
+// }
+
+const personalRecords = ref([
+      { date: "2024/12/25", points: 300, experience: 200 },
+      { date: "2024/12/25", points: 300, experience: 200 },
+      { date: "2024/12/25", points: 300, experience: 200 },
+      { date: "2024/12/25", points: 300, experience: 200 },
+      { date: "2024/12/25", points: 300, experience: 200 }])
 
 
 //獲取個人文章記錄
@@ -631,7 +660,7 @@ onMounted(async () => {
     isPhoneAdded.value = true
   }
   await getPurchaseRecords()
-  await getPersonalRecords()
+  // await getPersonalRecords()
   await getPersonalArticles()
 })
 </script>

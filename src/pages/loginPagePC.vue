@@ -16,7 +16,7 @@ import logoImage from "@/assets/images/logo_color4.svg";
 
 const isLoaded = ref(false);
 const threeCanvas = ref(null);
-const hdrPath = ref(new URL("@/assets/images/threePic/kloofendal_48d_partly_cloudy_puresky_8k.hdr", import.meta.url).href);
+const hdrPath = ref(new URL("@/assets/images/threePic/kloofendal_48d_partly_cloudy_puresky_1k.hdr", import.meta.url).href);
 // const texturePath = new URL("@/assets/images/threePic/sky360.hdr", import.meta.url).href; // **球體材質圖片**
 // const minY = -window.innerHeight / 2; // **視窗最低點**
 // const maxY = window.innerHeight / 2;  // **視窗最高點**
@@ -33,7 +33,7 @@ let cssRenderer;
 onMounted(() => {
   initThree();
   loadHDRBackground(hdrPath.value);
-  createGlassBall(100); // 新增玻璃球
+  createGlassBall(80); // 新增玻璃球
   animate();
   window.addEventListener("resize", onWindowResize);
   document.addEventListener("mousemove", onDocumentMouseMove);
