@@ -10,7 +10,7 @@
       <button class="btn" @click="goToGamePage">立即創建</button>
     </div>
   </div>
-  <MainFooter></MainFooter>
+  <MainFooter class="donate_finish_footer"></MainFooter>
 </template>
 <script setup>
 import { ref, computed, watch, nextTick, onMounted, onActivated } from 'vue';
@@ -52,8 +52,19 @@ onMounted(() => {
     const userData = JSON.parse(decodeURIComponent(userDataEncoded))
     console.log(userData)
     sendEmail(userData); // 呼叫寄信函數
-  }else{
+  }
+  else{
     router.push('/support')
   }
 })
 </script>
+
+<style lang="scss">
+
+.donate_finish_footer{
+  .footer{
+    margin: 0 !important;
+  }
+
+}
+</style>
