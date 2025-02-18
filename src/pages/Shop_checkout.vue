@@ -938,6 +938,70 @@ const submitOrder = async () => {
   };
 
   console.log("📡【2. 發送 API 請求】", JSON.stringify(orderData));
+
+  // try {
+  //   const response = await fetch(`${base_url}/submitOrder.php`, {
+  //     method: "POST",
+  //     headers: { "Content-Type": "application/json" },
+  //     body: JSON.stringify(orderData),
+  //   });
+
+  //   const result = await response.json();
+  //   // console.log("☘️ 訂單提交成功:", result);
+    
+
+  //   if (!result.success) {
+  //     throw new Error(result.message || "訂單提交失敗");
+  //   }
+
+  //   if (result.success) {
+  //     alert("☘️ 訂單提交成功，將跳轉至付款頁面！");
+
+  //     // **3️⃣ 清除 localStorage**
+  //     // localStorage.removeItem("cart");
+  //     // localStorage.removeItem("usePoints");
+  //     // localStorage.removeItem("selectedDelivery");
+  //     // localStorage.removeItem("deliverCost");
+  //     // localStorage.removeItem("payMethod");
+      
+  //     console.log(result)
+
+  //     if (payMethod === 0) {  //進行 信用卡付款
+
+  //     }
+
+
+  //     if (payMethod === 1) {  //進行 linepay付款
+  //       // try {
+  //       //   const res = await fetch(`${base_url}/shop_linePay.php`, {
+  //       //     method: "POST",
+  //       //     headers: { "Content-Type": "application/json" },
+  //       //     body: JSON.stringify({
+
+  //       //     }),
+  //       //   })
+  //       //   const data = await res.json()
+  //       //   console.log(data)
+  //       // } catch (err) {
+  //       //   console.error(err)
+  //       // }
+  //     }
+
+  //     // router.push("/shop_finish");
+  //   } else {
+  //     alert(`🍂 訂單提交失敗：${result.message}`);
+  //   }
+  // } catch (error) {
+  //   console.error("🍂 訂單提交錯誤:", error);
+  //   alert("🍂 伺服器錯誤，請稍後再試！");
+  // }
+
+
+
+
+
+
+
   try {
     const response = await fetch(`${base_url}/submitOrder.php`, {
       method: "POST",
