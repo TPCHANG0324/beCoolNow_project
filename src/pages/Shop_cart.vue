@@ -197,109 +197,6 @@ import MainHeader from '@/components/layout/MainHeader.vue';
 // import { useCounterStore } from '@/store/cart';
 import { useRoute, useRouter } from 'vue-router';
 import { ref, computed, onMounted, watch } from 'vue';
-//---------------------測試按鈕
-
-// const testBtn = async () => {
-//   const res = await fetch('/tid103/g1/php/test.php')
-//   const data = await res.json()
-//   console.log(data)
-// }
-
-
-
-// //---------------------測試用：註冊
-
-// const account1 = ref(null)
-// const password1 = ref(null)
-
-// const register = async () => {
-//   if (!account1.value || !password1.value) {
-//     alert("帳號或密碼不可為空！");
-//     return;
-//   }
-//   const url = `/tid103/g1/php/register.php`;
-//   try {
-//     const res = await fetch(url, {
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'application/json'
-//       },
-//       body: JSON.stringify({
-//         account: account1.value,
-//         password: password1.value
-//       })
-//     })
-//     const data = await res.json()
-//     console.log(data) //註冊完之後看一下成功與否
-
-//     if (data.success) {
-//       console.log("註冊成功！");
-//     } else {
-//       console.log(`註冊失敗：${data.error}`);
-//     }
-
-//   } catch (e) {
-//     console.log(`請求出現錯誤：${error.message}`);
-//   }
-// }
-
-// //---------------------測試用：登入
-
-// const account2 = ref(null)
-// const password2 = ref(null)
-
-// const login = async () => {
-//   if (!account2.value || !password2.value) {
-//     alert("帳號或密碼不可為空！");
-//     return;
-//   }
-//   const url = `/tid103/g1/php/login.php`;
-//   try {
-//     const res = await fetch(url, {
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'application/json'
-//       },
-//       body: JSON.stringify({
-//         account: account2.value,
-//         password: password2.value
-//       })
-//     })
-
-//     const data = await res.json();
-//     console.log(data); //看一下登入結果
-
-//     if (data.success) {
-//       console.log(data.message, data)
-//     }
-//   } catch (e) {
-//     console.log(`請求出現錯誤：${e}`);
-//   }
-// }
-//---------------------
-
-// import { CKEditor } from '@ckeditor/ckeditor5-vue';
-// import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-
-// const editor = ClassicEditor; // 使用已导入的 ClassicEditor
-// const editorData = ref('<p>初始内容</p>'); // 使用 ref 创建响应式的数据
-
-// // 编辑器准备就绪的处理函数
-// const onReady = (editorInstance) => {
-//   console.log('编辑器准备好了!', editorInstance);
-// };
-
-// // 处理编辑器数据更改
-// const onChange = ({ editor }) => {
-//   const data = editor.getData();
-//   editorData.value = data; // 更新响应式数据
-// };
-
-//---------------------
-
-
->>>>>>> sunny
-
 const route = useRoute();
 const router = useRouter();
 
@@ -629,6 +526,8 @@ const updateLocalStorage = () => {
   localStorage.setItem("usePoints", JSON.stringify(usePoints.value));
   if (buys.value.length === 0) {
     localStorage.removeItem('cart');
+    alert('目前購物車無商品，請前往環保商店選購');
+    router.push('/shop');
   } else {
     localStorage.setItem('cart', JSON.stringify(buys.value));
   }
