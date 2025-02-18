@@ -133,7 +133,7 @@ export default {
       // 檢查是否有錯誤訊息
       if (this.formErrors.email || this.formErrors.password) {
         // 如果有錯誤，不提交表單
-        alert('🍂 驗證失敗：\n' +
+        alert('驗證失敗：\n' +
           (this.formErrors.email ? this.formErrors.email + '\n' : '') +
           (this.formErrors.password ? this.formErrors.password : ''));
         return;
@@ -191,10 +191,10 @@ export default {
           this.closePopup();
           // this.$router.push('/member');
         } else {
-          if (data.message === '🍂 密碼錯誤，請查明後再試！') {
+          if (data.message === '密碼錯誤，請查明後再試！') {
             alert(data.message);
             this.resetForm();
-          } else if (data.message === '🌏 查無此帳號密碼，請先註冊後再登入！') {
+          } else if (data.message === '查無此帳號密碼，請先註冊後再登入！') {
             alert(data.message);
             this.resetForm();
             this.$emit('switch');
