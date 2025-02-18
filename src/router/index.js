@@ -11,7 +11,7 @@ const routes = [
     path: '/',
     component: () => import('@/pages/Home.vue'),
     meta: {
-      title: '首頁',
+      title: '涼城即時',
       // requiredLogin: false
     },
   },
@@ -284,6 +284,7 @@ const routes = [
       { path: 'SpB_order', component: () => import('@/pages/BackStagePages/SpB_order.vue'), meta:{title:'訂單管理'} },
       { path: 'MmB_member', component: () => import('@/pages/BackStagePages/MmB_member.vue'), meta:{title:'會員管理'} },
     ],
+    requiredLogin: true
   },
 
   //----------------------------- 彈窗畫面
@@ -379,6 +380,14 @@ router.afterEach((to, from) => {
   if (to.meta.title && !to.meta.dynamicTitle) {
     document.title = to.meta.title
   }
-})
+});
+
+// ✅ **監聽畫面跳轉完成後，確保 `redirectPath` 被清除**
+// router.afterEach(() => {
+//   console.log("🗑️ `redirectPath` 跳轉後清除！");
+//   localStorage.removeItem("redirectPath");
+// });
+
+
 // 匯出 router
 export default router;

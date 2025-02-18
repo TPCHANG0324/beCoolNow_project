@@ -328,17 +328,15 @@ body {
         border: none;
         border-radius: 30px;
        
-        // width: 200%;
+        
         color: white;
         font-size: 1rem;
         cursor: pointer;
         font-weight: 700;
-        // width: 500px;
-        margin-left:78px;
-        margin-bottom: 55px;
-        padding: 20px;
-        margin-left: 100px;
-
+        
+        padding: 8px 20px;
+        margin: 0 auto;
+        display: block;
         &:hover {
             background: darken(#d8ba5b, 10%);
         }

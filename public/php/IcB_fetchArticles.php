@@ -6,7 +6,7 @@ header('Access-Control-Allow-Headers: Content-Type');
 header('Content-Type: application/json; charset=utf-8');
 
 // include('conn.php');
-include('connect.php');  // 確保 connect.php 定義了 $dsn, $user, $password
+include('conn.php');  // 確保 connect.php 定義了 $dsn, $user, $password
 
 
 try {

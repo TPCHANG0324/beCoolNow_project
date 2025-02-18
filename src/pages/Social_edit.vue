@@ -258,17 +258,17 @@ const isUploading = ref(false);
 const handleSubmit = async () => {
     const isLoggin = checkAuth()
     if (!isLoggin) {
-        alert('請先登入！')
+        alert('🌏 請先登入！')
     }
     //檢查標題
     if (title.value.length < 5 || title.value.length > 40) {
-        alert('標題必須在 5 至 40 字之間')
+        alert('🌏 標題必須在 5 至 40 字之間')
         return
     }
 
     //檢查文章類別
     if (theme.value === '主題選擇') {
-        alert('請選擇文章主題');
+        alert('🌏 請選擇文章主題');
         return;
     }
 
@@ -280,7 +280,7 @@ const handleSubmit = async () => {
 
     //檢查文章字數
     if (cleanedContent.length < 50) {
-        alert('內文至少需要50字');
+        alert('🌏 內文至少需要50字');
         return;
     }
 
@@ -320,7 +320,7 @@ const handleSubmit = async () => {
         }
     } catch (error) {
         console.error('Error:', error);
-        alert('發生錯誤：' + error.message);
+        alert('🍂 發生錯誤：' + error.message);
     } finally {
         isUploading.value = false;
     }
@@ -461,7 +461,7 @@ const fetchArticle = async () => {
         }
     } catch (error) {
         console.error('Error fetching article:', error);
-        alert('獲取文章數據失敗');
+        alert('🍂 獲取文章數據失敗');
     }
 };
 

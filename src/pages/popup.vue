@@ -39,27 +39,10 @@
 import { useRouter } from 'vue-router';
 export default {
   name: 'member_login',
-  setup(props, { expose }) {
+  // setup() {
   //   const router = useRouter();
   //   return { router };
-
-  const isOpen = ref(false);
-
-    // ✅ 開啟 & 關閉彈窗的方法
-    const open = () => {
-      isOpen.value = true;
-    };
-
-    const close = () => {
-      isOpen.value = false;
-    };
-
-    // ✅ 讓外部可以呼叫 `open()` 方法
-    expose({ open });
-
-    return { isOpen, open, close };
-
-  },
+  // },
   data() {
     return {
       formData: {
@@ -141,7 +124,7 @@ export default {
 
       // 如果密碼驗證不通過
       if (!this.validatePasswordFormat(this.formData.password)) {
-        this.formErrors.password = '密碼必須包含大寫字母、小寫字母和數字';
+        this.formErrors.password = '🌏 密碼必須包含大寫字母、小寫字母和數字';
         alert(this.formErrors.password);
         return;
       }
@@ -186,7 +169,7 @@ export default {
 
           // 如果所有驗證都通過
           // alert('登入成功!歡迎光臨涼城即時');
-          alert(`${data.message}歡迎光臨涼城即時！`);
+          alert(`${data.message}🌏 歡迎光臨涼城即時！`);
           this.resetForm();
           this.closePopup();
           // this.$router.push('/member');
@@ -203,7 +186,7 @@ export default {
 
       } catch (err) {
         console.log(`請求出現錯誤：${err.message}`);
-        alert(`請求出現錯誤：請洽工作人員詢問！`);
+        alert(`🍂 請求出現錯誤：請洽工作人員詢問！`);
       }
     },
     resetForm() {

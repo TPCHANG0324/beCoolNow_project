@@ -275,13 +275,13 @@ const savePhone = async () => {
         userData.value.phone = tempData.value.phone.trim()
         isPhoneAdded.value = true
         localStorage.setItem('userPhone', userData.value.phone)
-        alert('手機號碼新增成功！')
+        alert('☘️ 手機號碼新增成功！')
       } else {
-        alert(data.message || '新增失敗，請稍後再試')
+        alert(data.message || '🍂 新增失敗，請稍後再試')
       }
     } catch (err) {
       console.error('錯誤詳情:', err)
-      alert('系統錯誤，請稍後再試')
+      alert('🍂 系統錯誤，請稍後再試')
     }
   } else {
     // 用戶按下取消，清空輸入框並返回編輯狀態
@@ -555,13 +555,13 @@ const goToArticle = (ID) => {
 //刪除個人的文章
 const deleteArticle = async (ID) => {
   if (!localStorage.getItem('isLoggedIn') && localStorage.getItem('userEmail')) {
-    alert('請先登入再進行操作！')
+    alert('🌏 請先登入再進行操作！')
   }
-  const check = confirm('請問是否要刪除此篇文章？')
+  const check = confirm('🌏請問是否要刪除此篇文章？')
   if (!check) {
     return
   }
-  const checkAgain = confirm('刪除文章後將無法還原，請確認是否要繼續進行操作？')
+  const checkAgain = confirm('🌏刪除文章後將無法還原，請確認是否要繼續進行操作？')
   if (!checkAgain) {
     return
   }
@@ -585,7 +585,7 @@ const deleteArticle = async (ID) => {
 
 //修改個人的文章
 const updateArticle = (ID) => {
-  const check = confirm('請問是否要修改此篇文章？')
+  const check = confirm('🌏請問是否要修改此篇文章？')
   if (!check) {
     return
   }
@@ -614,15 +614,15 @@ const updateUserInfo = async (field, value) => {
     if (data.success) {
       // 更新本地資料
       userData.value[field] = value
-      alert('更新成功！')
+      alert('☘️ 更新成功！')
       return true
     } else {
-      alert(data.message || '更新失敗，請稍後再試')
+      alert(data.message || '🍂 更新失敗，請稍後再試')
       return false
     }
   } catch (err) {
     console.error(`更新用戶資料錯誤：${err}`)
-    alert('系統錯誤，請稍後再試')
+    alert('🍂 系統錯誤，請稍後再試')
     return false
   }
 }

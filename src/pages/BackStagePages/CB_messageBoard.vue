@@ -147,7 +147,6 @@ import Paginator from '@/components/paginator.vue';
 
 const base_url = import.meta.env.VITE_AJAX_URL //環境路徑
 const isEditPopupVisible = ref(false); // 控制「編輯彈窗」是否顯示
-const searchID = ref(''); // 搜尋框的ID
 const searchText = ref(''); // 搜尋框的文字
 
 //載入留言資料
@@ -184,12 +183,14 @@ const savePopup = async () => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        messageID: currentMes.messageID
+        messageID: currentMes.value.messageID,
+        forumBoardId: currentMes.value.articleID,
+        messageShelves: currentMes.value.messageShelves
       })
     })
     const data = await res.json()
     if (data.success) {
-      alert('留言下架成功！');
+      alert('☘️ 修改成功！');
       isEditPopupVisible.value = false;
       fetchMess()
     } else {
@@ -234,7 +235,7 @@ const handlePageChange = (newPage) => {
   });
 };
 
-//真正要渲染到頁面的文章資料
+//真正要渲染到頁面的留言資料
 const datas = computed(() => {
   const start = (currentP.value - 1) * 10;
   const to = currentP.value * 10;

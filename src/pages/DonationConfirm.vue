@@ -99,7 +99,7 @@
   
       retryPayment() {
         // 返回捐款頁面重新進行付款
-        this.$router.push('/donation')
+        this.$router.push('/support')
       }
     }
   }

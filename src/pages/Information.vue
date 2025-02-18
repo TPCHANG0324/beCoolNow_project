@@ -20,22 +20,22 @@
         <!-- 圖標列表 -->
         <div class="icon-list">
           <button @click="openPanel('Thunderstorm Icon')">
-            <font-awesome-icon :icon="['fas', 'cloud-bolt']" class="hover-icon_Info" />
+            <font-awesome-icon :icon="['fas', 'cloud-bolt']" class="hover-icon_Info" id="auto-animate-icon" />
           </button>
           <button @click="openPanel('Wave Icon')">
-            <font-awesome-icon :icon="['fas', 'water']" class="hover-icon_Info" />
+            <font-awesome-icon :icon="['fas', 'water']" class="hover-icon_Info" id="auto-animate-icon2" />
           </button>
           <button @click="openPanel('Typhoon Icon')">
-            <font-awesome-icon :icon="['fas', 'hurricane']" class="hover-icon_Info" />
+            <font-awesome-icon :icon="['fas', 'hurricane']" class="hover-icon_Info" id="auto-animate-icon3" />
           </button>
           <button @click="openPanel('Tree Icon')">
-            <font-awesome-icon :icon="['fas', 'tree']" class="hover-icon_Info" />
+            <font-awesome-icon :icon="['fas', 'tree']" class="hover-icon_Info" id="auto-animate-icon4" />
           </button>
           <button @click="openPanel('Temperature Icon')">
-            <font-awesome-icon :icon="['fas', 'temperature-arrow-up']" class="hover-icon_Info" />
+            <font-awesome-icon :icon="['fas', 'temperature-arrow-up']" class="hover-icon_Info" id="auto-animate-icon5" />
           </button>
           <button @click="openPanel('CO2 Icon')">
-            <font-awesome-icon :icon="['fas', 'head-side-mask']" class="hover-icon_Info" />
+            <font-awesome-icon :icon="['fas', 'head-side-mask']" class="hover-icon_Info" id="auto-animate-icon6" />
           </button>
         </div>
 
@@ -358,7 +358,7 @@ export default {
         currentQuestion.value = questions.value[currentQuestionIndex.value];
         console.log('當前題目：', currentQuestion.value); // 除錯用
       } else {
-        alert('目前沒有題目資料，請稍後再試。');
+        alert('🌏 目前沒有題目資料，請稍後再試。');
       }
     };
 
@@ -412,7 +412,7 @@ export default {
 
     // Fetch
     const fetchYoutubeVideos = async (query) => {
-      const apiKey = 'AIzaSyCZvTGvYRkTDOAbAeN5FA8QQEybsEQSixk';
+      const apiKey = 'AIzaSyBlexB9DW_Mmd9vF4MXlwE1xjlmANF-AWQ';
       const maxResults = 6;
       const q = `氣候變遷 全球暖化`;
       const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${q}&key=${apiKey}&type=video&safeSearch=strict&video&maxResults=${maxResults}`;

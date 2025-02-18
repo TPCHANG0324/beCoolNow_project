@@ -1,6 +1,10 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
     RewriteBase /tid103/g1
+
+    RewriteCond %{REQUEST_URI} ^/tid103/g1/favicon.ico$ [NC]
+    RewriteRule ^ - [L]
+
     RewriteRule ^tid103/g1/index\.html$ - [L]
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d

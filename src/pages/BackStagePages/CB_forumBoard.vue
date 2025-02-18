@@ -191,7 +191,7 @@ const savePopup = async () => {
     })
     const data = await res.json()
     if (data.success) {
-      alert('修改成功！')
+      alert('☘️ 修改成功！')
       isEditPopupVisible.value = false;
       fetchData();
     } else {
@@ -269,7 +269,7 @@ const closePopup = () => {
 
 // 更新文章
 const updateArticle = async () => {
-  alert(`已更新文章ID = ${currentArticleId.value}`);
+  alert(`☘️ 已更新文章ID = ${currentArticleId.value}`);
   closePopup();
 };
 </script>

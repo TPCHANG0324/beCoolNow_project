@@ -7,7 +7,7 @@ header('Content-Type: application/json; charset=utf-8');
 
 // 載入連線設定（確保 connect.php 中正確定義 $dsn, $db_user, $db_pass, 並建立 $pdo）
 // include('conn.php');
-include('connect.php');  // 確保 connect.php 定義了 $dsn, $user, $password
+include('conn.php');  // 確保 connect.php 定義了 $dsn, $user, $password
 
 
 try {

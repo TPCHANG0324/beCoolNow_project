@@ -56,6 +56,8 @@ export default {
 
     let scrollAnimation = null; // ✅ 儲存 GSAP 動畫
 
+
+
     onMounted(() => {
       // 監聽 DOM 變化，確保 `header` 被渲染
       const observer = new MutationObserver(() => {
@@ -79,7 +81,7 @@ export default {
         physics: {
           default: 'arcade', // ✅ 使用 Arcade 物理系統
           arcade: {
-            gravity: { y: 300 }, // ✅ 設定重力，讓角色能夠跳躍
+            gravity: { y: 240 }, // ✅ 設定重力，讓角色能夠跳躍
             debug: false, // ✅ 關閉偵錯模式
           },
         },
@@ -102,11 +104,11 @@ export default {
         // 城市地基
         this.load.image('ground', new URL('@/assets/images/city/city_ground.png', import.meta.url).href);
         // 平台
-        this.load.image('platform_white', new URL('@/assets/images/city/platform_white.png', import.meta.url).href);
+        this.load.image('platform_white', new URL('@/assets/images/city/block.svg', import.meta.url).href);
         // 傳送門
         this.load.image('outdoor', new URL('@/assets/images/city/outdoor.png', import.meta.url).href);
         // 垃圾
-        this.load.image('trash', new URL('@/assets/images/city/trash2.png', import.meta.url).href);
+        this.load.image('trash', new URL('@/assets/images/city/trash3.png', import.meta.url).href);
         // 炸彈
         this.load.image('bomb', new URL('@/assets/images/city/bomb.png', import.meta.url).href);
         // 鳥: 飛行動畫
@@ -145,23 +147,67 @@ export default {
 
 
         // 小寵物: 獅子
-        this.load.spritesheet('lion', new URL('@/assets/images/city/lionWalk.png', import.meta.url).href, {
+        this.load.spritesheet('lion', new URL('@/assets/images/city/Character/lion/lionWalk.png', import.meta.url).href, {
           frameWidth: 700,
           frameHeight: 700,
         });
-        this.load.spritesheet('lionIdle', new URL('@/assets/images/city/lionIdle.png', import.meta.url).href, {
+        this.load.spritesheet('lionIdle', new URL('@/assets/images/city/Character/lion/lionIdle.png', import.meta.url).href, {
             frameWidth: 700,
             frameHeight: 700,
         });
-        this.load.image('lionDie', new URL('@/assets/images/city/Die_009.png', import.meta.url).href);
+        this.load.image('lionDie', new URL('@/assets/images/city/Character/lion/Die_009.png', import.meta.url).href);
+
+
+
+        // 小寵物: 狐狸
+        // this.load.spritesheet('foxy', new URL('@/assets/images/city/Character/Character_Sprites/fox_walk.png', import.meta.url).href, {
+        //   frameWidth: 700,
+        //   frameHeight: 700,
+        // });
+        // this.load.spritesheet('foxyIdle', new URL('@/assets/images/city/Character/Character_Sprites/fox_Idle.png', import.meta.url).href, {
+        //     frameWidth: 700,
+        //     frameHeight: 700,
+        // });
+        // this.load.image('foxDie', new URL('@/assets/images/city/Character/Character_Sprites/fox_die.png', import.meta.url).href);
+
 
 
       }
 
 
+      let player;
+
       // **📌 遊戲初始化**
       function create() {
+
+        if (!this.input) {
+          console.error("🚨 `this.input` 尚未初始化，鍵盤監聽失敗！");
+          return;
+        }
+
+        // ✅ 選擇隨機角色
+        const characterKeys = ['lion', 'fox'];
+        const selectedCharacterKey = Phaser.Utils.Array.GetRandom(characterKeys);
+
+        // ✅ 創建角色
+        player = this.physics.add.sprite(400, 300, selectedCharacterKey);
+        player.setCollideWorldBounds(true); // 限制在畫面內
+
+
+
+
+        this.physics.resume();
+        console.log("✅ 物理引擎已啟動:", !this.physics.world.isPaused);
         gameOver = false; // ✅ 遊戲重新開始時重置 `gameOver`
+
+        if (!cursors) {
+            console.error("⛔ `cursors` 尚未初始化，重新綁定鍵盤事件！");
+            cursors = this.input.keyboard.createCursorKeys();
+          }
+
+          console.log("⌨️ `this.input.keyboard.enabled` 狀態:", this.input.keyboard.enabled);
+
+
 
         // ✅ 確保動畫不重複創建
         if (this.anims.exists('left')) {
@@ -286,13 +332,29 @@ export default {
 
         // ✅ 建立白色平台（靜態）
         platformsWhite = this.physics.add.staticGroup();
-        // platformsWhite.create(430, 362, 'platform_white').refreshBody();
-        // platformsWhite.create(120, 218, 'platform_white').refreshBody();
-        // platformsWhite.create(120, 425, 'platform_white').refreshBody();
-        // platformsWhite.create(1110, 390, 'platform_white').refreshBody();
-        // platformsWhite.create(975, 90, 'platform_white').refreshBody();
-        // platformsWhite.create(1335, 255, 'platform_white').refreshBody();
-        // platformsWhite.create(565, 150, 'platform_white').refreshBody();
+        let p1 = platformsWhite.create(425, 350, 'platform_white').setScale(0.11, 0.2).refreshBody();
+        p1.setSize(80, 20).refreshBody(); // 設定碰撞範圍
+
+        let p2 = platformsWhite.create(120, 218, 'platform_white').setScale(0.11, 0.2).refreshBody();
+        p2.setSize(80, 20).refreshBody();
+
+        let p3 = platformsWhite.create(120, 425, 'platform_white').setScale(0.11, 0.2).refreshBody();
+        p3.setSize(80, 20).refreshBody();
+
+        let p4 = platformsWhite.create(1110, 450, 'platform_white').setScale(0.11, 0.2).refreshBody();
+        p4.setSize(80, 20).refreshBody();
+
+        let p5 = platformsWhite.create(975, 200, 'platform_white').setScale(0.11, 0.2).refreshBody();
+        p5.setSize(80, 20).refreshBody();
+
+        let p6 = platformsWhite.create(1300, 255, 'platform_white').setScale(0.11, 0.2).refreshBody();
+        p6.setSize(80, 20).refreshBody();
+
+        let p7 = platformsWhite.create(565, 150, 'platform_white').setScale(0.11, 0.2).refreshBody();
+        p7.setSize(80, 20).refreshBody();
+
+
+
 
 
 
@@ -557,7 +619,7 @@ export default {
         player.setBounce(0.2); // ✅ 讓角色有彈性
         player.setScale(0.15); // ✅ 縮小角色到 30% 大小
         player.setDepth(50);
-        player.body.setGravityY(5); // ✅ 確保角色受重力影響
+        player.body.setGravityY(8); // ✅ 確保角色受重力影響
         player.setCollideWorldBounds(true); // ✅ 角色不會掉出場外
         this.lionDie = this.add.image(player.x, player.y, 'lionDie');
         this.lionDie.setOrigin(0.7);
@@ -591,7 +653,6 @@ export default {
         });
 
 
-        // ✅ **建立傳送門**
         // ✅ **建立傳送門**
         this.outdoor = this.physics.add.staticImage(623, 510, 'outdoor').setScale(0.3);
         this.nearPortal = false; // ✅ 追蹤玩家是否在傳送門範圍內
@@ -692,6 +753,7 @@ export default {
             let dialogText = this.add.text(500, 250, "是否要進入傳送門？", {
                 fontSize: "24px",
                 fill: "#ffffff",
+                padding: { x: 10, y: 5 },
             }).setDepth(101);
 
             let leaveButton = this.add.text(500, 300, "✅ 確定離開", {
@@ -710,7 +772,7 @@ export default {
 
             leaveButton.on("pointerdown", () => {
                 console.log("✅ 傳送至新場景...");
-                this.scene.start("NewScene");
+                window.location.href = "https://tibamef2e.com/tid103/g2/game";  // 一碳究竟 創建寵物頁
             });
 
             stayButton.on("pointerdown", () => {
@@ -732,10 +794,10 @@ export default {
 
 
 
-        // 顯示物件的實際尺寸
-        this.physics.world.createDebugGraphic();
+        // 顯示物件的實際尺寸 物件外框
+        // this.physics.world.createDebugGraphic();
 
-        console.log("🎮 玩家 `hitbox` 尺寸：", player.body.width, player.body.height);
+        // console.log("🎮 玩家 `hitbox` 尺寸：", player.body.width, player.body.height);
 
 
 
@@ -751,7 +813,7 @@ export default {
 
         // ✅ 建立鍵盤輸入
         cursors = this.input.keyboard.createCursorKeys();
-        console.log('偵測到cursors', cursors);
+        // console.log('偵測到cursors', cursors);
 
 
         // ✅ 設定碰撞
@@ -776,14 +838,14 @@ export default {
         // ✅ **垃圾群組**
         trashS = this.physics.add.group({
           key: 'trash',
-          repeat: 1,
-          setXY: { x: 25, y: 0, stepX: 100 },
+          repeat: 10,
+          setXY: { x: 100, y: 0, stepX: 100 },
         });
 
         // ✅ **讓垃圾有隨機彈跳 + 設定大小**
         trashS.children.iterate((child) => {
           child.setBounceY(Phaser.Math.FloatBetween(0.3, 0.5)); // 讓垃圾有隨機彈跳
-          child.setScale(Phaser.Math.FloatBetween(0.2, 0.4)); // ✅ 調整大小
+          child.setScale(Phaser.Math.FloatBetween(0.07, 0.1)); // ✅ 調整大小
           child.setDepth(20); // ✅ **所有垃圾統一設為深度**
         });
 
@@ -819,8 +881,8 @@ export default {
               if (trashS.countActive(true) === 0) { // 確保垃圾真的被收集完
                 trashS.children.iterate((child) => {
                   child.enableBody(true, Phaser.Math.Between(50, 1200), Phaser.Math.Between(50, 500), true, true);
-                  child.setScale(Phaser.Math.FloatBetween(0.3, 0.5)); // ✅ 確保每次生成的垃圾大小不同
-                  child.setBounceY(Phaser.Math.FloatBetween(0.3, 0.6)); // ✅ 讓垃圾繼續有彈性
+                  child.setScale(Phaser.Math.FloatBetween(0.07, 0.1)); // ✅ 確保每次生成的垃圾大小不同
+                  // child.setBounceY(Phaser.Math.FloatBetween(0.3, 0.6)); // ✅ 讓垃圾繼續有彈性
                   child.setAlpha(1); // ✅ 重新設回可見
                 });
 
@@ -925,11 +987,15 @@ export default {
 
       // 📌 **更新函式**
       function update() {
+        if (!cursors) {
+        console.warn("⚠️ `cursors` 在 update() 內為 undefined，重新初始化！");
+        cursors = this.input.keyboard.createCursorKeys();
+    }
 
-        // console.log("🛑 touching.down:", player.body.touching.down);
         if (!cursors) {
         cursors = this.input.keyboard.createCursorKeys(); // 確保 `cursors` 存在
         }
+
 
         // ✅ 確保 this.lionDie 存在，避免 `undefined` 錯誤
         if (!this.lionDie) return;
@@ -954,10 +1020,12 @@ export default {
 
 
           if (cursors.left.isDown) {
+            // console.log("⬅️ 左鍵按下！");
             player.setVelocityX(-160);
             player.anims.play('left', true);
             player.flipX = true; // ✅ 將圖片反轉面向左邊
           } else if (cursors.right.isDown) {
+            // console.log("➡️ 右鍵按下！");
             player.setVelocityX(160);
             player.anims.play('right', true);
             player.flipX = false; // ✅ 恢復正常方向

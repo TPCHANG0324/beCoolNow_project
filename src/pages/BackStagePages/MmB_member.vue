@@ -237,14 +237,14 @@ export default {
 
         const result = await response.json();
         if (response.ok) {
-          alert("會員資料已更新！");
+          alert("☘️ 會員資料已更新！");
           fetchMembers(); // 重新載入會員列表
           closeEditPopup();
         } else {
-          alert("更新失敗：" + result.error);
+          alert("🍂 更新失敗：" + result.error);
         }
       } catch (error) {
-        console.error("更新會員資料失敗:", error);
+        console.error("🍂 更新會員資料失敗:", error);
       }
     };
 

@@ -250,11 +250,11 @@ const deleteItem = (index) => {
 //商品數量的輸入框
 const reviseItem = (index, newNum) => {
   if (newNum < 0) {
-    alert('商品數量不可為負！');
+    alert('🌏商品數量不可為負！');
     buys.value[index].num = 1
     return
   } else if (newNum === 0) {
-    let d = confirm('是否要刪除這個商品？')
+    let d = confirm('🌏是否要刪除這個商品？')
     if (d) {
       buys.value.splice(index, 1)
     } else {
@@ -292,12 +292,12 @@ const fetchAllProducts = async () => {
     const response = await fetch(`${base_url}/getAllProducts.php`); // 你的 API 路徑
     if (!response.ok) throw new Error("獲取商品失敗");
     allProducts.value = await response.json();
-    console.log("✅ 獲取的所有商品:", allProducts.value);
+    console.log("☘️ 獲取的所有商品:", allProducts.value);
 
     // ✅ 生成精選商品（確保不重複）
     generateFeaturedItems();
   } catch (error) {
-    console.error("❌ 無法獲取商品:", error);
+    console.error("🍂 無法獲取商品:", error);
   }
 };
 
@@ -339,7 +339,7 @@ const addToCart = (index) => {
   const selectedProduct = featuredItems.value[index];
 
   if (!selectedProduct) {
-    console.warn("⚠️ 找不到該商品！");
+    console.warn("🍂 找不到該商品！");
     return;
   }
 
@@ -376,7 +376,8 @@ const addToCart = (index) => {
     // **更新購物車狀態，讓畫面即時變化**
     buys.value = cart;
     updateCartCount();
-    console.log("✅ 商品已加入購物車:", cart);
+
+    console.log("☘️ 商品已加入購物車:", cart);
   }
 
   // buys.value.push({
@@ -431,11 +432,11 @@ const addPoints = () => {
 //點數的輸入框
 const revisePoints = () => {
   if (usePoints.value < 0) {
-    alert('點數不能為負值，已自動改為0！');
+    alert('🌏 點數不能為負值，已自動改為0！');
     usePoints.value = 0;
   }
   else if (usePoints.value % 100 !== 0) {
-    alert('請以 100 為單位進行輸入！');
+    alert('🌏 請以 100 為單位進行輸入！');
     usePoints.value = Math.round(usePoints.value / 100) * 100; // 向上或向下取整至最近的 100
   }
   updateLocalStorage();
@@ -532,6 +533,8 @@ const updateLocalStorage = () => {
   localStorage.setItem("usePoints", JSON.stringify(usePoints.value));
   if (buys.value.length === 0) {
     localStorage.removeItem('cart');
+    alert('目前購物車無商品，請前往環保商店選購');
+    router.push('/shop');
   } else {
     localStorage.setItem('cart', JSON.stringify(buys.value));
   }

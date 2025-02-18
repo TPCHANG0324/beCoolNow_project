@@ -74,7 +74,6 @@
             <input id="UploadPic" class="UploadPic" type="file" accept="image/*, image/svg+xml"
               @change="handleFileChange" />
             <div class="preview">
-              <p>圖片預覽</p>
               <img v-if="newArticle.mediaPic" :src="newArticle.mediaPic" alt="預覽圖片" />
             </div>
           </figure>
@@ -113,7 +112,6 @@
             <input id="UploadPicEdit" class="UploadPic" type="file" accept="image/*, image/svg+xml"
               @change="handleEditFileChange" />
             <div class="preview">
-              <p>圖片預覽</p>
               <img v-if="editArticle.mediaPic" :src="'/tid103/g1/php/'+editArticle.mediaPic" alt="預覽圖片" />
             </div>
           </figure>
@@ -283,13 +281,13 @@ export default {
         });
         const result = await response.json();
         if (result.success) {
-          alert('儲存成功');
+          alert('☘️ 儲存成功');
           await IcB_fetchArticles();
         } else {
-          alert('儲存失敗：' + result.message);
+          alert('🍂 儲存失敗：' + result.message);
         }
       } catch (error) {
-        console.error('儲存文章錯誤：', error);
+        console.error('🍂 儲存文章錯誤：', error);
       }
       closePopup();
     };
@@ -303,13 +301,13 @@ export default {
         const response = await fetch(base_url + `/IcB_deleteArticle.php?id=${currentArticleId.value}`);
         const result = await response.json();
         if (result.success) {
-          alert('刪除成功');
+          alert('☘️ 刪除成功');
           await IcB_fetchArticles();
         } else {
-          alert('刪除失敗：' + result.message);
+          alert('🍂 刪除失敗：' + result.message);
         }
       } catch (error) {
-        console.error('刪除文章錯誤：', error);
+        console.error('🍂 刪除文章錯誤：', error);
       }
       closePopup();
     };

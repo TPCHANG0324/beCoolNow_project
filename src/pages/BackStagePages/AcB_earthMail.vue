@@ -122,7 +122,7 @@ const fetchLetters = async () => {
     }
   } catch (error) {
     console.error('Error fetching letters:', error);
-    alert(error.response?.data?.message || '獲取信件失敗，請稍後再試！');
+    alert(error.response?.data?.message || '🍂 獲取信件失敗，請稍後再試！');
   } finally {
     loading.value = false;
   }
@@ -165,7 +165,8 @@ const deleteLetter = async () => {
     const base_url = import.meta.env.VITE_AJAX_URL;
     const response = await axios.delete(`${base_url}/admin_letters.php/${selectedLetterId.value}`);
     if (response.data.success) {
-      alert('刪除成功');
+      // 如果刪除成功，不需要重新獲取資料，因為已經更新了
+      alert('☘️ 刪除成功');
     } else {
       // 刪除失敗則恢復原資料
       letters.value.splice(letterIndex, 0, letterToDelete);
@@ -174,7 +175,7 @@ const deleteLetter = async () => {
     }
   } catch (error) {
     console.error('Error:', error);
-    alert('刪除失敗，請稍後再試！');
+    alert('🍂 刪除失敗，請稍後再試！');
   } finally {
     loading.value = false;
     showDeletePopup.value = false;
