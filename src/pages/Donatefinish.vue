@@ -10,13 +10,15 @@
       <button class="btn" @click="goToGamePage">立即創建</button>
     </div>
   </div>
-  <MainFooter></MainFooter>
+  <MainFooter class="donate_finish_footer"></MainFooter>
 </template>
 <script setup>
 import { ref, computed, watch, nextTick, onMounted, onActivated } from 'vue';
 import MainHeader from '@/components/layout/MainHeader.vue';
 import MainFooter from '@/components/layout/MainFooter.vue';
 import emailjs from '@emailjs/browser';
+import { useRouter } from 'vue-router';
+const router = useRouter();
 
 const goToGamePage = () => {
   window.location.href = 'https://tibamef2e.com/tid103/g2/game';
@@ -51,5 +53,18 @@ onMounted(() => {
     console.log(userData)
     sendEmail(userData); // 呼叫寄信函數
   }
+  else{
+    router.push('/support')
+  }
 })
 </script>
+
+<style lang="scss">
+
+.donate_finish_footer{
+  .footer{
+    margin: 0 !important;
+  }
+
+}
+</style>

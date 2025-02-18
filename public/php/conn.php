@@ -6,7 +6,7 @@ header('Access-Control-Allow-Credentials: true');
 header('Content-Type: application/json; charset=utf-8');
 
     //MySQL相關資訊
-        // $db_host = "localhost";
+        $db_host = "localhost";
         $db_host = "34.58.74.78";
         $db_user = "root";
         $db_pass = "Touyhh9527!";

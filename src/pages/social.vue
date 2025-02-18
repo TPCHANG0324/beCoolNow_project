@@ -30,7 +30,7 @@
           <!-- <router-view :key="$route.path" :activeItem="activeItem" :datas="datas"   @category-changed="changeCategory" /> -->
 
           <!-- 文章區 -->
-          <div class="Fb-post-article-X" :class="{ active: !RWDnews }">
+          <div class="Fb-post-article-X" :class="{ active: !RWDnews }" v-if="articles.length !== 0">
             <!-- 置頂區：放廣告或站上的精華文章 -->
             <div class="Fb-post-article-top-X">
               <!-- <div class="Fb-post-article-banner-X"></div> -->
@@ -61,6 +61,8 @@
             <!-- 頁數 -->
             <Paginator :currentPage="currentP" :totalPages="totalItemCount" @page-changed="handlePageChange" />
           </div>
+
+          <div v-else style="text-align: center; margin: 100px 0; color: #2E4E3F;">載入文章中，請稍後...</div>
 
           <!-- RWD 的時候才會出現的新聞區 -->
           <div class="Fb-news-article-X" :class="{ active: RWDnews }">
