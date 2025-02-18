@@ -5,6 +5,8 @@
 $source = json_decode(file_get_contents("php://input"), true);
 $messageID = htmlspecialchars($source['messageID']);
 $forumBoardId = htmlspecialchars($source['forumBoardId']);
+$messageShelves = isset($source['messageShelves']) ? htmlspecialchars($source['messageShelves']) : 0;
+
 
 //檢查一下留言的 id 是否正常
 if ($messageID <= 0) {
@@ -22,9 +24,10 @@ try {
     $pdo->beginTransaction();
 
     // 更新留言的 messageShelves 狀態
-    $sql1 = "UPDATE G1_Message SET messageShelves = 0 WHERE ID = ?";
+    $sql1 = "UPDATE G1_Message SET messageShelves = ? WHERE ID = ?";
     $stmt1 = $pdo->prepare($sql1);
-    $stmt1->bindValue(1, $messageID, PDO::PARAM_INT); // 整數處理
+    $stmt1->bindValue(1, $messageShelves);
+    $stmt1->bindValue(2, $messageID, PDO::PARAM_INT); // 整數處理
     $stmt1->execute();
 
     // 更新 G1_ForumBoard 的 chat 欄位
