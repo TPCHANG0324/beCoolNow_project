@@ -920,22 +920,24 @@ const submitOrder = async () => {
 
   console.log("📌【1.1 運費】", shippingFee);
   console.log("📌【1.2 付款方式】", payMethod);
+  const member_ID = localStorage.getItem('member_ID')
+  console.log(member_ID);
 
-
-  // **2️⃣ 準備訂單資料**
-  const orderData = {
-    customer: customerInfo.value, // 顧客資訊
-    recipient: recipientInfo.value, // 收件人資訊
-    orderDetails: orderDetails.value, // 訂單細節
-    items: cartItems.value, // 購物車商品
-    total: total.value, // 總金額
-    usePoints: usePoints.value, // 使用點數
-    orderNotes: orderNotes.value, // 訂單備註
-    paymentInfo: paymentInfo.value, // 付款資訊
-    shippingFee: shippingFee,  // 直接加入運費
-    payMethod: payMethod, // 加入付款方式
-    shipMethod: localStorage.getItem("selectedDelivery") === "新竹物流宅配" ? 0 : 1, // 設定運送方式 (0 = 新竹物流, 1 = 台灣離島)
-  };
+    // **2️⃣ 準備訂單資料**
+    const orderData = {
+      member_ID: parseInt(member_ID), // ✅ 傳遞會員 ID
+      customer: customerInfo.value, // 顧客資訊
+      recipient: recipientInfo.value, // 收件人資訊
+      orderDetails: orderDetails.value, // 訂單細節
+      items: cartItems.value, // 購物車商品
+      total: total.value, // 總金額
+      usePoints: usePoints.value, // 使用點數
+      orderNotes: orderNotes.value, // 訂單備註
+      paymentInfo: paymentInfo.value, // 付款資訊
+      shippingFee: shippingFee,  // 直接加入運費
+      payMethod: payMethod, // 加入付款方式
+      shipMethod: localStorage.getItem("selectedDelivery") === "新竹物流宅配" ? 0 : 1, // 設定運送方式 (0 = 新竹物流, 1 = 台灣離島)
+    };
 
   console.log("📡【2. 發送 API 請求】", JSON.stringify(orderData));
 

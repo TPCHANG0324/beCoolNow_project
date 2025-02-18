@@ -44,9 +44,14 @@ $shipMethod = isset($data["shipMethod"]) ? intval($data["shipMethod"]) : 0; // �
 $payStatus = 0; // 0 = 待付款, 1 = 已付款 先寫死
 
 
-$memberID = 15; // 會員編號 寫死
-// ✅ 取得會員 ID（這裡應該從 session 或 token 取得，而不是寫死）
-// $memberID = isset($_SESSION['member_ID']) ? $_SESSION['member_ID'] : 1; // 假設使用者已登入
+
+$memberID = isset($data['member_ID']) ? intval($data['member_ID']) : 0;
+
+if ($memberID === 0) {
+    echo json_encode(["success" => false, "message" => "❌ 無法取得有效的會員 ID，請重新登入"]);
+    exit;
+}
+
 
 try {
     // ✅ 存入 `G1_Order` 資料表
