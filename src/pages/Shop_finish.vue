@@ -34,7 +34,7 @@
       <button class="btn" @click="goToGamePage">立即創建</button>
     </div>
   </div>
-  <MainFooter></MainFooter>
+  <MainFooter class="shop_finish_footer"></MainFooter>
 </template>
 
 <script setup>
@@ -45,3 +45,13 @@ const goToGamePage = () => {
   window.location.href = 'https://tibamef2e.com/tid103/g2/game';
 };
 </script>
+
+<style lang="scss">
+
+.shop_finish_footer{
+  .footer{
+    margin: 0 !important;
+  }
+
+}
+</style>
