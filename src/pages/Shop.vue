@@ -205,55 +205,70 @@ const filteredAndSortedProducts = computed(() => {
 
 });
 // 購物車相關方法
-const updateCartCount = (count) => {
-      const currentCount = parseInt(localStorage.getItem('cartCount')) || 0;
-      const newCount = currentCount + count;
-      localStorage.setItem('cartCount', newCount.toString());
+// const updateCartCount = (count) => {
+      // const currentCount = parseInt(localStorage.getItem('cartCount')) || 0;
+      // const newCount = currentCount + count;
+      const updateCartCount = () => {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const totalCount = cart.reduce((sum, item) => sum + Number(item.quantity), 0);
+      // localStorage.setItem('cartCount', newCount.toString());
+      localStorage.setItem('cartCount', totalCount.toString());
+      cartCount.value = totalCount; // 直接更新 ref
+      cartIconColor.value = totalCount > 0 ? 'highlightColor' : 'defaultColor';
       window.dispatchEvent(new Event('updateCartCount'));
     };
 
 // 加入購物車
 const addToCart = (product) => {
+  try{
+    const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+    console.log("購物車資料：", cartItems);
 
-  const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
-  
-  // 建立新的購物車項目
-  const newCartItem = {
-    id: product.ID,
-    name: product.productName,
-    price: product.salePrice,
-    quantity: quantity.value, // 依照目前選擇的數量
-    image: product.productPic1, // 使用第一張圖片
-  };
-  
-  // 檢查商品是否已存在購物車
-  const existingItem = cartItems.find(item => item.id === product.ID);
+    // 建立新的購物車項目
+    const newCartItem = {
+      id: product.ID,
+      name: product.productName,
+      salePrice: product.salePrice,
+      // price: Number(String(product.salePrice).replace(/[^0-9.]/g, '')), // 移除非數字字符
+      quantity: quantity.value, // 依照目前選擇的數量
+      image: product.productPic1, // 使用第一張圖片
+    };
+    
+    // 檢查商品是否已存在購物車
+    const existingItemIndex = cartItems.findIndex(item => item.id === product.ID);
 
-  if (existingItem) {
-    existingItem.quantity += quantity.value; // 如果商品已存在，增加數量
-  } else {
-    cartItems.push(newCartItem); // 如果商品不存在，新增商品
-  }
-    // cartItems.push({
-    //   id: product.ID,
-    //   name: product.productName,
-    //   price: product.price,
-    //   salePrice: product.salePrice,
-    //   num: 1, // 數量
-    //   image: product.productPic1, // 使用第一張圖片
-    // });
+    if (existingItemIndex !== -1) {
+      // existingItem.quantity += quantity.value; // 如果商品已存在，增加數量
+      cartItems[existingItemIndex].quantity += Number(quantity.value);
+      cartItems[existingItemIndex].price = Number(product.salePrice);
+    } else {
+      cartItems.push(newCartItem); // 如果商品不存在，新增商品
+    }
+      // cartItems.push({
+      //   id: product.ID,
+      //   name: product.productName,
+      //   price: product.price,
+      //   salePrice: product.salePrice,
+      //   num: 1, // 數量
+      //   image: product.productPic1, // 使用第一張圖片
+      // });
 
-  // 更新 localStorage
-  localStorage.setItem("cart", JSON.stringify(cartItems));
+    // 更新 localStorage
+    localStorage.setItem("cart", JSON.stringify(cartItems));
 
-  // 更新購物車總數（此函式內部會 dispatch updateCartCount 事件）
-  updateCartCount(quantity.value);
+    // 更新購物車總數（此函式內部會 dispatch updateCartCount 事件）
+    updateCartCount();
 
-  // console.log("🛒 購物車更新成功", cartItems);
+    // console.log("🛒 購物車更新成功", cartItems);
 
-  alert("商品已加入購物車！");
+    alert("商品已加入購物車！");
+
+    console.log("購物車更新成功：", cartItems);
+  } catch (error) {
+      console.error("加入購物車時發生錯誤：", error);
+      alert("加入購物車失敗，請重試");
+    }
 };
-
 
 </script>
 
