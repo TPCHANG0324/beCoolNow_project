@@ -11,7 +11,7 @@ const routes = [
     path: '/',
     component: () => import('@/pages/Home.vue'),
     meta: {
-      title: '首頁',
+      title: '涼城即時',
       // requiredLogin: false
     },
   },
