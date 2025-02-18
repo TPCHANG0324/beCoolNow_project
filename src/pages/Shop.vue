@@ -200,7 +200,7 @@ const filteredAndSortedProducts = computed(() => {
   // console.log("🟢 選擇的價格區間:", selectedPriceRange.value);
   // console.log("🟢 選擇的排序方式:", selectedSort.value);
 
-  
+
   return result;
 
 });
@@ -216,7 +216,7 @@ const updateCartCount = (count) => {
 const addToCart = (product) => {
 
   const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
-  
+
   // 建立新的購物車項目
   const newCartItem = {
     id: product.ID,
@@ -225,7 +225,7 @@ const addToCart = (product) => {
     quantity: quantity.value, // 依照目前選擇的數量
     image: product.productPic1, // 使用第一張圖片
   };
-  
+
   // 檢查商品是否已存在購物車
   const existingItem = cartItems.find(item => item.id === product.ID);
 
