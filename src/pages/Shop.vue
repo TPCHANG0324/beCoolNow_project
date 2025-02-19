@@ -212,10 +212,19 @@ const updateCartCount = (count) => {
       window.dispatchEvent(new Event('updateCartCount'));
     };
 
+
+const selectedSize = ref('');
 // 加入購物車
 const addToCart = (product) => {
 
   const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+
+  const selectedSizeOptions = product.product_details3
+    ? product.product_details3.split(", ").map(size => size.trim())
+    : [];
+
+  // 決定存入的規格：
+  selectedSize.value = selectedSize.value || selectedSizeOptions[0] || "未選擇";
 
   // 建立新的購物車項目
   const newCartItem = {
@@ -225,7 +234,7 @@ const addToCart = (product) => {
     salePrice: product.salePrice, // 添加 salePrice 字段
     num: quantity.value, // 使用 num 替代 quantity
     image: product.productPic1, // 使用第一張圖片
-    size: product.product_details3 || "未選擇" // 添加 size 字段
+    size: selectedSize.value || "未選擇" // 添加 size 字段
   };
 
   console.log("🔍 檢查 newCartItem:", newCartItem); // **確認數值是否正確**
@@ -235,7 +244,7 @@ const addToCart = (product) => {
 
 
   // 檢查商品是否已存在購物車
-  const existingItem = cartItems.find(item => item.id === product.ID);
+  const existingItem = cartItems.find(item => item.id === product.ID === newCartItem.size);
 
   if (existingItem) {
     existingItem.num += quantity.value; // 使用 num 替代 quantity

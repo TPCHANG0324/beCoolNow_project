@@ -48,7 +48,7 @@
 
               <div class="Sp-cart-item-X" v-for="(buy, index) in buys" :key="buy.id">
                 <div class="Sp-cart-item-info-X">
-                  <a href="#" target="_blank" :style="{ backgroundImage: `url(/tid103/g1/images/${buy.image})` }"></a>
+                  <a :href="`/tid103/g1/shop/${buy.id}`" target="_blank" :style="{ backgroundImage: `url(/tid103/g1/images/${buy.image})` }"></a>
                   <span>{{ buy.name }}
                   </span>
                 </div>
@@ -79,7 +79,7 @@
             <!-- 項目內容 -->
             <div class="Sp-cart-addon-wrapper-X">
               <div class="Sp-cart-addon-item-X" v-for="(item, index) in featuredItems" :key="item.ID">
-                <a href="#" target="_blank" class="Sp-cart-addon-item-img">
+                <a :href="`/tid103/g1/shop/${item.ID}`" target="_blank" class="Sp-cart-addon-item-img">
                   <img :src="`/tid103/g1/images/${item.productPic1}`" alt="商品圖片">
                 </a>
                 <div class="Sp-cart-addon-item-content">
@@ -333,10 +333,18 @@ const addItem = (index) => {
   updateLocalStorage();
 };
 
-
+const selectedSize = ref({});
 //精選商品加入購物車
 const addToCart = (index) => {
   const selectedProduct = featuredItems.value[index];
+
+  // 解析 `product_details3` 為規格選項陣列
+  const selectedSizeOptions = selectedProduct.product_details3
+    ? selectedProduct.product_details3.split(", ").map(size => size.trim())
+    : [];
+
+  // 如果未選擇規格，則預設為第一個規格或 "未選擇"
+  const finalSelectedSize = selectedSize.value[selectedProduct.ID] || selectedSizeOptions[0] || "未選擇";
 
   if (!selectedProduct) {
     console.warn("🍂 找不到該商品！");
@@ -348,8 +356,9 @@ const addToCart = (index) => {
 
   // 檢查是否已經存在相同商品（依據 `id` + `size`）
   const existingItem = cart.find(
-    (item) => item.id === selectedProduct.ID && item.size === selectedProduct.product_details3
+    (item) => item.id === selectedProduct.ID && item.size === finalSelectedSize
   );
+
 
   if (existingItem) {
     // 如果商品已存在，數量增加
@@ -364,7 +373,7 @@ const addToCart = (index) => {
       name: selectedProduct.productName,
       price: selectedProduct.salePrice,
       salePrice: selectedProduct.salePrice,
-      size: selectedProduct.product_details3 || "未選擇",
+      size: finalSelectedSize || "未選擇",
       num: 1, // 預設數量 1
     };
 
