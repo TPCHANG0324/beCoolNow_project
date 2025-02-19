@@ -184,7 +184,7 @@
               <!-- 🛒 購物車彈窗 -->
               <div v-if="isCartPopupVisible" class="cart-popup">
                 <div class="cart-popup-content">
-                  <h2>商品已加入購物車！</h2>
+                  <h2>🛒 商品已加入購物車！</h2>
                   <button class="close-btn" @click="closeCartPopup">X</button>
                   <div class="cart-item">
                     <img :src="selectedImage" alt="商品圖片" class="cart-image"/>
@@ -303,7 +303,7 @@
 import { useRouter } from 'vue-router';
 import MainHeader from '@/components/layout/MainHeader.vue';
 import MainFooter from '@/components/layout/MainFooter.vue';
-import { ref, onMounted, onUnmounted, nextTick, computed, watch } from 'vue';
+import { ref, onMounted, onUnmounted, nextTick, computed, watch, provide } from 'vue';
 import { Navigation, Pagination, Scrollbar, A11y, Mousewheel, Autoplay } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import 'swiper/css';
@@ -320,7 +320,8 @@ export default {
     MainHeader,
     MainFooter,
     Swiper,
-    SwiperSlide
+    SwiperSlide,
+    BreadcrumbNavigation,
   },
 
   setup() {
@@ -329,6 +330,23 @@ export default {
     // 判斷是否為手機 (小於等於 430px)
     const router = useRouter();
     const route = useRoute();
+
+    // 新增購物車數量的響應式引用
+    const cartItemCount = ref(0);
+
+    // 更新購物車數量的方法
+    const updateCartItemCount = () => {
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      cartItemCount.value = cart.reduce((total, item) => total + item.num, 0);
+      // 也可以同步更新 localStorage 中的 cartCount
+      localStorage.setItem("cartCount", cartItemCount.value.toString());
+      window.dispatchEvent(new Event('updateCartCount'));
+    };
+
+    // 提供購物車數量給其他組件使用
+    provide('cartItemCount', cartItemCount);
+
+
     const isMobile = ref(window.innerWidth <= 430);
     const isMounted = ref(false);
     const swiperKey = ref(0);
@@ -514,7 +532,7 @@ export default {
 
       console.log(" 檢查商品資訊:", product.value);
       // 檢查 `product` 是否已經載入
-      if (!product.value || !product.value.ID || !product.value.productName || !product.value.salePrice) {
+      if (!product.value || !product.value.ID || !product.value.productName || !product.value.salePrice ==null) {
         alert("🌏 商品資訊未載入，請稍候再試！");
         console.warn("🌏 商品資訊未載入:", product.value);
         return;
@@ -531,7 +549,7 @@ export default {
         image: product.value.productPic1 ? `${product.value.productPic1}` : "",
         size: selectedSize.value,  // 使用使用者選擇的規格
         num: num.value,  // 使用者輸入的數量
-        price: product.value.price,
+        price: product.value.saleprice,
         salePrice: product.value.salePrice,
       };
 
@@ -552,11 +570,12 @@ export default {
 
       // **更新 localStorage**
       localStorage.setItem("cart", JSON.stringify(cart));
-      console.log("🛒 更新後的購物車:", cart);
+    
+      // **更新購物車數量**
+      updateCartItemCount();
+      // alert("🛒 商品已加入購物車！");
+      num.value = 1; // 重置數量為 1
 
-
-
-       // 彈窗目前顯示不了
        if (!isBuyNow) {
         isCartPopupVisible.value = true; // 顯示彈窗
         console.log("🛒 商品已加入購物車:", newProduct);
@@ -579,9 +598,10 @@ export default {
     // console.log("購物車內容：", cartStore.cart);
 
       onMounted(async () => {
+        updateCartItemCount();
         isMounted.value = true;
         isMobile.value = window.innerWidth <= 430;
-
+        
         fetchProduct();
 
         await nextTick(); // 確保 DOM 更新後取得 Swiper
@@ -626,6 +646,9 @@ export default {
       selectedImage,
       selectImage,
       addToCart,
+      cartItemCount,
+      updateCartItemCount,
+      fetchProduct,
       startAutoScroll,
       stopAutoScroll,
       thumbnailSwiper,

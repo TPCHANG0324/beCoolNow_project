@@ -87,7 +87,7 @@
                     <p>{{ item.productName }}</p>
                     <span>NT$ {{ item.salePrice }}</span>
                   </div>
-                  <button @click="addToCart(index)">加入購物車</button>
+                  <button @click="addToCart(item)">加入購物車</button>
                 </div>
               </div>
             </div>
@@ -303,6 +303,7 @@ const fetchAllProducts = async () => {
 
 // 隨機選取 `n` 個不與購物車內重複的商品
 const getRandomItems = (arr, n, excludeIds) => {
+  
   // 排除購物車內的商品
   let filteredItems = arr.filter(item => !excludeIds.includes(item.ID));
 
@@ -312,12 +313,12 @@ const getRandomItems = (arr, n, excludeIds) => {
   // 洗牌並選取前 `n` 個
   return [...filteredItems].sort(() => 0.5 - Math.random()).slice(0, n);
 };
-
 // 隨機挑選 4 種不重複商品
 const generateFeaturedItems = () => {
-  const cartItemIds = buys.value.map(item => item.id); // 取得購物車內的商品 ID
-  featuredItems.value = getRandomItems(allProducts.value, 4, cartItemIds);
+    const cartItemIds = buys.value.map(item => item.id); // 取得購物車內的商品 ID
+    featuredItems.value = getRandomItems(allProducts.value, 4, cartItemIds);
 };
+
 
 //精選商品
 // const items = ref([
@@ -333,63 +334,113 @@ const addItem = (index) => {
   updateLocalStorage();
 };
 
-const selectedSize = ref({});
+const cartItems = ref([]);
+// const buys = ref([]); // 購物車商品
+// const selectedSize = ref({});
+const product = ref({});
+// const num = ref(1);
+
+
 //精選商品加入購物車
-const addToCart = (index) => {
-  const selectedProduct = featuredItems.value[index];
+const addToCart = (selectedProduct) => {
+  // 檢查商品資訊是否完整
+  if (!selectedProduct || !selectedProduct.ID || !selectedProduct.productName || !selectedProduct.salePrice) {
+    alert("商品資訊不完整，請稍候再試！");
+    return;
+  }
 
   // 解析 `product_details3` 為規格選項陣列
-  const selectedSizeOptions = selectedProduct.product_details3
+  const sizeOptions = selectedProduct.product_details3
     ? selectedProduct.product_details3.split(", ").map(size => size.trim())
     : [];
 
   // 如果未選擇規格，則預設為第一個規格或 "未選擇"
-  const finalSelectedSize = selectedSize.value[selectedProduct.ID] || selectedSizeOptions[0] || "未選擇";
+  const finalSize = sizeOptions[0] || "未選擇";
 
-  if (!selectedProduct) {
-    console.warn("🍂 找不到該商品！");
-    return;
-  }
-
-  // 讀取 localStorage 內的購物車
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-  // 檢查是否已經存在相同商品（依據 `id` + `size`）
-  const existingItem = cart.find(
-    (item) => item.id === selectedProduct.ID && item.size === finalSelectedSize
-  );
-
-
-  if (existingItem) {
-    // 如果商品已存在，數量增加
-    existingItem.num += 1;
-  } else {
-    // 如果商品不存在，新增到購物車
+    // 建立新商品對象
     const newCartItem = {
       id: selectedProduct.ID,
-      image: selectedProduct.productPic1
-        ? `${selectedProduct.productPic1}`
-        : "",
+      // image: selectedProduct.productPic1 ? `${selectedProduct.productPic1}` : "",
+      image: selectedProduct.productPic1 || "",
       name: selectedProduct.productName,
       price: selectedProduct.salePrice,
       salePrice: selectedProduct.salePrice,
-      size: finalSelectedSize || "未選擇",
+      size: finalSize,
       num: 1, // 預設數量 1
     };
+   
+    // // 找到對應的商品（根據 id 與規格）
+    // const index = cart.findIndex(cartItem => cartItem.id === item.id && cartItem.size === item.size);
+    // if (index !== -1) {
+    //   cart[index].num = item.num;
+    // }
+    // // 更新 localStorage
+    // localStorage.setItem("cart", JSON.stringify(cart));
+    // buys.value = cart; // 同步更新 reactive 購物車資料
+    // updateCartItemCount();
+    // alert("🛒 商品已加入購物車！");
+    // return;
+    
+    // 從 localStorage 取得現有購物車資料
+    const storedCart = localStorage.getItem("cart");
+    let cartData = storedCart ? JSON.parse(storedCart) : [];
 
+    // const selectedProduct = featuredItems.value[index];
+    // if (!selectedProduct) {
+    //   console.warn("🍂 找不到該商品！");
+    //   return;
+    // }
 
+    // 檢查是否已經存在相同商品（依據 `id` + `size`）
+    const existingIndex = cartData.findIndex(item =>
+      item.id === selectedProduct.ID && item.size === finalSize
+    );
 
-    cart.push(newCartItem);
+    if (existingIndex !== -1) {
+      // 如果存在，累加數量
+      cartData[existingIndex].num += 1;
+      } else {
+      // 若不存在，加入新商品
+      cartData.push(newCartItem);
+    }
+    // 如果商品不存在，新增到購物車
+    // const newCartItem = {
+    //   id: selectedProduct.ID,
+    //   image: selectedProduct.productPic1
+    //     ? `${selectedProduct.productPic1}`
+    //     : "",
+    //   name: selectedProduct.productName,
+    //   price: selectedProduct.salePrice,
+    //   salePrice: selectedProduct.salePrice,
+    //   size: finalSelectedSize || "未選擇",
+    //   num: 1, // 預設數量 1
+    // };
+
+    // cart.push(newCartItem);
 
     // **更新 localStorage**
-    localStorage.setItem("cart", JSON.stringify(cart));
+     // 更新 localStorage 與 reactive 狀態
+    localStorage.setItem("cart", JSON.stringify(cartData));
+    buys.value = cartData;
+    updateCartItemCount();
 
-    // **更新購物車狀態，讓畫面即時變化**
-    buys.value = cart;
-    updateCartCount();
+    console.log("☘️ 商品已加入購物車:", cartData);
+    alert("🛒 商品已加入購物車！");
+   
+    // 每次加入購物車後重新生成精選商品
+    generateFeaturedItems();
+  };
+  
+  const cartItemCount = ref(0);
 
-    console.log("☘️ 商品已加入購物車:", cart);
-  }
+  const updateCartItemCount = () => {
+    const storedCart = localStorage.getItem("cart");
+    const cart = storedCart ? JSON.parse(storedCart) : [];
+    const count = cart.reduce((total, item) => total + Number(item.num), 0);
+    cartItemCount.value = count;
+    localStorage.setItem("cartCount", count.toString());
+    window.dispatchEvent(new Event('updateCartCount'));
+  };
 
   // buys.value.push({
   //   id: buys.value.length - 1,
@@ -400,24 +451,24 @@ const addToCart = (index) => {
   //   num: buys.value[index].num,
   // })
   // updateLocalStorage();
-}
 
-// 載入 localStorage 內的購物車商品
-const loadCart = () => {
-  buys.value = JSON.parse(localStorage.getItem("cart")) || [];
-  console.log("🛒 載入購物車資料:", buys.value);
-};
 
-//還沒加運費跟點數的小計 (運費上面那項)
-const substotal = computed(() => {
-  return buys.value.reduce((sum, item) => {
-// 確保 salePrice 和 num 都是數字類型
-    const price = Number(item.salePrice);
-    const quantity = Number(item.num);
-    return sum + (price * quantity);
-    // return sum + item.salePrice * item.num;
-  }, 0)
-})
+  // 載入 localStorage 內的購物車商品
+  const loadCart = () => {
+    buys.value = JSON.parse(localStorage.getItem("cart")) || [];
+    console.log("🛒 載入購物車資料:", buys.value);
+  };
+
+    //還沒加運費跟點數的小計 (運費上面那項)
+    const substotal = computed(() => {
+      return buys.value.reduce((sum, item) => {
+      // 確保 salePrice 和 num 都是數字類型
+      const price = Number(item.salePrice);
+      const quantity = Number(item.num);
+      return sum + (price * quantity);
+      // return sum + item.salePrice * item.num;
+      }, 0)
+    })
 
 
 
@@ -470,8 +521,6 @@ const discount = computed(() => {
   return usePoints.value / 100;
 });
 
-const cartItems = ref([]);
-
 //送貨方式
 const deliver = ref(['新竹物流宅配', '台灣離島郵寄']);
 const selectedDelivery = ref(localStorage.getItem('selectedDelivery') || deliver.value[0]);
@@ -517,8 +566,6 @@ watch(selectedPayMethod, (newValue) => {
 const total = computed(() => {
   return substotal.value + deliverCost.value - discount.value;
 })
-
-
 
 
 // 用於滑動的邏輯
@@ -575,7 +622,9 @@ const goToPay = () => {
 onMounted(() => {
   const storedCart = localStorage.getItem("cart");
   if (storedCart) {
-    buys.value = JSON.parse(storedCart);
+    const parsedCart = JSON.parse(storedCart);
+    cartItems.value = parsedCart;
+    buys.value = parsedCart;
   }
   console.log("📦 載入購物車資料:", buys.value);
   if (!storedCart) {
