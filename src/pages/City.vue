@@ -110,7 +110,7 @@ export default {
         // 垃圾
         this.load.image('trash', new URL('@/assets/images/city/trash3.png', import.meta.url).href);
         // 炸彈
-        this.load.image('bomb', new URL('@/assets/images/city/bomb.png', import.meta.url).href);
+        this.load.image('bomb', new URL('@/assets/images/city/attack.svg', import.meta.url).href);
         // 鳥: 飛行動畫
         this.load.spritesheet('birdFly', new URL('@/assets/images/city/animals/birds/bird_fly/bird_fly.png', import.meta.url).href, {
             frameWidth: 80,
@@ -894,6 +894,7 @@ export default {
               bomb.setBounce(Phaser.Math.FloatBetween(0.8, 1)); // ✅ **確保炸彈保持彈跳**
               bomb.setCollideWorldBounds(true); // ✅ **讓炸彈與場景邊界碰撞**
               bomb.setVelocity(Phaser.Math.Between(-150, 150), -Phaser.Math.Between(100, 200)); // ✅ **確保炸彈往上拋**
+              bomb.setScale(0.2);
               bomb.body.allowGravity = true; // ✅ **確保炸彈受重力影響**
               bomb.body.onWorldBounds = true; // ✅ **監聽邊界碰撞**
 

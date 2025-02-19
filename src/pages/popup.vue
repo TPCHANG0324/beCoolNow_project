@@ -164,7 +164,7 @@ export default {
           localStorage.setItem("enterCity", data.enterCity);
 
 
-          const redirectPath = localStorage.getItem('redirectPath') || '/';
+          const redirectPath = localStorage.getItem('redirectPath') || '/home';
           this.$router.push(redirectPath);
 
           // 如果所有驗證都通過

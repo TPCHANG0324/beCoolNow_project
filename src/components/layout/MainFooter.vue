@@ -3,7 +3,7 @@
   <footer class="layout_footer">
     <div class="footer">
       <div class="footer-wrapper">
-        <RouterLink to="/loginPage/" class="logo-a"><img src="../../assets/images/logo_color2.svg" alt="" /></RouterLink>
+        <RouterLink to="/home" class="logo-a"><img src="../../assets/images/logo_color2.svg" alt="" /></RouterLink>
         <ul>
           <li>
             <RouterLink to="/information">島嶼危機</RouterLink>

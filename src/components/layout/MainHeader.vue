@@ -3,7 +3,7 @@
   <header class="layout_header">
     <div class="header-wrapper">
       <div class="logo">
-        <router-link to="/">
+        <router-link to="/home">
           <img src="../../assets/images/headerlogo.png" alt="logo" />
         </router-link>
       </div>
@@ -39,7 +39,7 @@
 
   <header class="mobile_header">
     <div class="logo">
-      <router-link to="/">
+      <router-link to="/home">
         <img src="../../assets/images/headerlogo.png" alt="logo" />
       </router-link>
     </div>
@@ -192,7 +192,7 @@ export default {
           isLoggedIn.value = false;
           await closeLogoutPopup();
           alert(data.message);
-          router.push('/');
+          router.push('/home');
         }
       } catch (err) {
         console.error('登出操作失敗', err);
