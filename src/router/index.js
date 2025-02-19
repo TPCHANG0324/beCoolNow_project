@@ -2,13 +2,25 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import eventBus from '@/utils/eventBus';
 import { useAuth } from '@/utils/useAuth';
+// 前台頁面
+import MainHeader from "@/components/layout/MainHeader.vue"; // 前台Header
+import Home from '@/pages/Home.vue';
+import information from '@/pages/Information.vue';
+import donatefinish from '@/pages/Donatefinish.vue';
+import activity from '@/pages/Activity.vue';
+import social from '@/pages/social.vue';
+
+
+
+// 後台頁面
+import BackStageHeader from "@/components/layout/BackStageLayout/BackStageHeader.vue"; // 後台Header
 // import Shop_product from '@/pages/Shop_product.vue';
 
 
 // path → component
 const routes = [
   {
-    path: '/',
+    path: '/home/',
     component: () => import('@/pages/Home.vue'),
     meta: {
       title: '涼城即時',
@@ -247,7 +259,7 @@ const routes = [
     },
   },
   {
-    path: '/loginPage/',
+    path: '/',
     component: () => import('@/pages/loginPage.vue'),
     meta: {
       title: '前後台登入',

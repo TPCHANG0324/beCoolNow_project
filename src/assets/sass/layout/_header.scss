@@ -15,7 +15,7 @@ $header_layout: 1200px !default;
     @include max_1100 {
         display: none;
     }
-    
+
     .header-wrapper {
 
         padding: 15px 0;
@@ -25,7 +25,7 @@ $header_layout: 1200px !default;
         align-items: center;
         justify-content: space-between;
 
-        
+
         .logo {
             width: 140px;
 
@@ -45,7 +45,7 @@ $header_layout: 1200px !default;
                     margin-left: 20px;
 
                     a {
-                        
+
                         @include PC_h4($Gray_1);
                         font-weight: bold;
 
@@ -53,25 +53,31 @@ $header_layout: 1200px !default;
                             color: $Yellow_1;
                         }
 
-                     
+                        /* 點擊後的 active 樣式 */
+                        &.router-link-active, &.router-link-exact-active {
+                            color: $Yellow_1; // 變更文字顏色
+                            border-bottom: 3px solid $Yellow_1; // 加底線
+                        }
+
+
                         .bi-person-circle {
                             color: $Gray_1; // 添加默認顏色
                             transition: color 0.3s; // 添加過渡效果
-                            
+
                             &:hover {
                               color: $Yellow_1;
                               cursor: pointer;
                             }
-                            
+
                             &.logged-in {
                               color: #4CAF50 !important; // 使用 !important 確保優先級
                             }
                           }
 
-                          
+
                           .cart-icon {
                             position: relative;
-                            
+
                             .cart-count {
                               position: absolute;
                               top: -8px;
@@ -118,24 +124,24 @@ $header_layout: 1200px !default;
     width: 90%;
     max-width: 400px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  
+
     .logout-content {
       width: 100%;
       padding: 20px;
-      
+
       h3 {
         text-align: center;
         color: $Gray_1;
         margin-bottom: 1.5rem;
         font-size: 1.5rem;
       }
-  
+
       .button-group {
         display: flex; // 改為水平排列
         gap: 1rem;
       }
     }
-    
+
     .close-btn {
       position: absolute;
       right: 1rem;
@@ -146,12 +152,12 @@ $header_layout: 1200px !default;
       cursor: pointer;
       color: $Gray_1;
       box-shadow: none;
-      
+
       &:hover {
         color: $Yellow_1;
       }
     }
-  
+
     button {
       flex: 1; // 平均分配寬度
       padding: 0.75rem;
@@ -162,20 +168,20 @@ $header_layout: 1200px !default;
       transition: background-color 0.3s;
       box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
     }
-  
+
     .logout-btn {
       background-color: #5b774a;
       color: white;
-  
+
       &:hover {
         background-color: darken(#5b774a, 10%);
       }
     }
-  
+
     .keep-login-btn {
       background-color: #d0ad44;
       color: white;
-  
+
       &:hover {
         background-color: darken(#d0ad44, 10%);
       }

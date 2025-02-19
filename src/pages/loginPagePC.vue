@@ -406,7 +406,7 @@ function create3DHTML() {
   div.classList.add("three-html-container"); // **讓它適用 CSS 樣式**
   div.innerHTML = `
     <div class="be-cool-now-container" style="display:none;">
-      <a href="/tid103/g1/"><div class="be-cool-now-button be-cool-now-front-btn">前台</div></a>
+      <a href="/tid103/g1/home"><div class="be-cool-now-button be-cool-now-front-btn">前台</div></a>
       <div class="be-cool-now-logo">
         <img src="${logoImage}" alt="涼城即時 Be Cool Now LOGO" />
       </div>

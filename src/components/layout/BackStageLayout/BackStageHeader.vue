@@ -3,7 +3,7 @@
 <template>
   <header class="backStage_header">
     <div>
-      <RouterLink to="/"><img src="../../../assets/images/logo_color1.svg" alt="網站標誌" /></RouterLink>
+      <RouterLink to="/home"><img src="../../../assets/images/logo_color1.svg" alt="網站標誌" /></RouterLink>
       <h2>後臺管理系統</h2>
       <svg @click="handleLogout" xmlns="http://www.w3.org/2000/svg" width="54" height="50" viewBox="0 0 54 50" fill="none">
         <path
