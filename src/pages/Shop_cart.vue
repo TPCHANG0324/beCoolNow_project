@@ -400,7 +400,11 @@ const loadCart = () => {
 //還沒加運費跟點數的小計 (運費上面那項)
 const substotal = computed(() => {
   return buys.value.reduce((sum, item) => {
-    return sum + item.salePrice * item.num;
+// 確保 salePrice 和 num 都是數字類型
+    const price = Number(item.salePrice);
+    const quantity = Number(item.num);
+    return sum + (price * quantity);
+    // return sum + item.salePrice * item.num;
   }, 0)
 })
 
@@ -447,8 +451,6 @@ const blurPoints = () => {
     usePoints.value = 0;
   }
 }
-
-
 
 //計算點數折抵
 const discount = computed(() => {

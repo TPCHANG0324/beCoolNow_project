@@ -222,15 +222,17 @@ const addToCart = (product) => {
     id: product.ID,
     name: product.productName,
     price: product.salePrice,
-    quantity: quantity.value, // 依照目前選擇的數量
+    salePrice: product.salePrice, // 添加 salePrice 字段
+    num: quantity.value, // 使用 num 替代 quantity
     image: product.productPic1, // 使用第一張圖片
+    size: product.product_details3 || "未選擇" // 添加 size 字段
   };
   
   // 檢查商品是否已存在購物車
   const existingItem = cartItems.find(item => item.id === product.ID);
 
   if (existingItem) {
-    existingItem.quantity += quantity.value; // 如果商品已存在，增加數量
+    existingItem.num += quantity.value; // 使用 num 替代 quantity
   } else {
     cartItems.push(newCartItem); // 如果商品不存在，新增商品
   }
