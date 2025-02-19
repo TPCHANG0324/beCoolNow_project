@@ -233,9 +233,9 @@
         <img :src="getImageUrl(product.productPic2)" alt="商品圖片" style="object-fit: cover; object-position: center center;" />
         <div>
           <p>常見尺寸(容量):</p>
-          
+
           <ol v-for="(item,index) in selectedSizeOptions" :key="index">
-            <li>{{ item }}</li> 
+            <li>{{ item }}</li>
           </ol>
         </div>
       </article>
@@ -246,13 +246,13 @@
   <section class="Sp_productChoice_related_H">
     <h3>相關商品</h3>
     <ol>
-      <li>
-        <a href="">
-          <img src="../../public/images/Sp04.jpg" alt="" />
-          <p>環保吸管3</p>
+      <li v-for="item in relatedProducts" :key="item.ID">
+        <a :href="`/tid103/g1/shop/${item.ID}`">
+          <img :src="`/tid103/g1/images/${item.productPic1}`" alt="" />
+          <p>{{ item.productName }}</p>
         </a>
       </li>
-      <li>
+      <!-- <li>
         <a href="">
           <img src="../../public/images/Sp11.jpg" alt="" />
           <p>環保筷子1</p>
@@ -275,7 +275,7 @@
           <img src="../../public/images/Sp08.jpg" alt="" />
           <p>環保杯子1</p>
         </a>
-      </li>
+      </li> -->
     </ol>
   </section>
 
@@ -347,6 +347,8 @@ export default {
     const selectedImage = ref(images.value[0]); // 預設顯示第一張圖片
     const selectedSize = ref("");
     const selectedSizeOptions = ref("");
+    const relatedProducts = ref([]);
+
 
     const fetchProduct = async () => {
       try {
@@ -364,6 +366,14 @@ export default {
         // console.log('foundProduct:', foundProduct);
 
         product.value = foundProduct;  //  Vue 追蹤變更
+
+
+        // ✅ 隨機選取 5 個「不同於當前商品」的相關商品
+        relatedProducts.value = data
+          .filter(item => item.ID !== foundProduct.ID) // 過濾掉當前商品
+          .sort(() => Math.random() - 0.5) // 打亂順序
+          .slice(0, 5); // 取前 5 個
+
 
         // 確保圖片 URL 正確，避免 `null`
         images.value = [
@@ -602,7 +612,7 @@ export default {
       // });
 
 
-    
+
 
       onUnmounted(() => {
         window.removeEventListener("resize", updateScreenSize);
@@ -638,6 +648,7 @@ export default {
       currentPriceRange,
       getImageUrl,
       selectedSizeOptions,
+      relatedProducts,
     };
   }
 };

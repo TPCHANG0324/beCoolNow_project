@@ -201,6 +201,7 @@ const routes = [
     component: () => import('@/pages/Shop_checkout.vue'),
     meta: {
       title: '市集結帳',
+      requiredLogin: true
     },
     props: true,
     beforeEnter: (to, from, next) => {

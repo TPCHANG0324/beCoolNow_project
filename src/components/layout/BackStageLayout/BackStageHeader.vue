@@ -56,7 +56,7 @@ export default {
 
       // await closeLogoutPopup();
       alert(data.message);
-      window.location.href = "/"; // 🚀 **登出後導向首頁**
+      window.location.href = "/tid103/g1/"; // 🚀 **登出後導向首頁**
     } else {
       throw new Error(data.message || "登出失敗");
     }
