@@ -231,9 +231,15 @@ const updateCartCount = () => {
 
 // 載入 localStorage 內的購物車商品
 const loadCart = () => {
-  buys.value = JSON.parse(localStorage.getItem("cart")) || [];
-  console.log("🛒 載入購物車資料:", buys.value);
+  buys.value = JSON.parse(localStorage.getItem("cart") || "[]").map(item => ({
+    ...item,
+    quantity: Number(item.quantity) || 1, // ✅ 確保數量為數字
+    salePrice: Number(item.salePrice) || 0, // ✅ 確保價格為數字
+  }));
+
+  console.log("🛒 載入購物車資料 (確保數量 & 價格是數字):", buys.value);
 };
+
 
 //精選商品
 // const items = ref([
@@ -368,6 +374,8 @@ const addToCart = (index) => {
       num: 1, // 預設數量 1
     };
 
+
+
     cart.push(newCartItem);
 
     // **更新 localStorage**
@@ -396,6 +404,8 @@ const substotal = computed(() => {
     return sum + item.salePrice * item.num;
   }, 0)
 })
+
+
 
 //使用者點數：100 點折抵 1 元
 const points = ref(1000); //正式應該從資料庫取得

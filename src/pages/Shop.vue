@@ -221,16 +221,22 @@ const addToCart = (product) => {
   const newCartItem = {
     id: product.ID,
     name: product.productName,
-    price: product.salePrice,
+    salePrice: Number(product.salePrice), // ✅ 強制轉換為數字
     quantity: quantity.value, // 依照目前選擇的數量
     image: product.productPic1, // 使用第一張圖片
   };
+
+  console.log("🔍 檢查 newCartItem:", newCartItem); // **確認數值是否正確**
+  console.log("🔍 newCartItem.price (應該是數字):", typeof newCartItem.price, newCartItem.price);
+
+  console.log(newCartItem.price);
+
 
   // 檢查商品是否已存在購物車
   const existingItem = cartItems.find(item => item.id === product.ID);
 
   if (existingItem) {
-    existingItem.quantity += quantity.value; // 如果商品已存在，增加數量
+    existingItem.quantity += Number(quantity.value); // ✅ 確保數量累加時為數字
   } else {
     cartItems.push(newCartItem); // 如果商品不存在，新增商品
   }
@@ -243,6 +249,7 @@ const addToCart = (product) => {
     //   image: product.productPic1, // 使用第一張圖片
     // });
 
+    console.log("🔍 儲存前的購物車內容:", cartItems);
   // 更新 localStorage
   localStorage.setItem("cart", JSON.stringify(cartItems));
 
