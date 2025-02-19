@@ -368,6 +368,8 @@ const addToCart = (index) => {
       num: 1, // 預設數量 1
     };
 
+
+
     cart.push(newCartItem);
 
     // **更新 localStorage**
@@ -407,6 +409,8 @@ const substotal = computed(() => {
     // return sum + item.salePrice * item.num;
   }, 0)
 })
+
+
 
 //使用者點數：100 點折抵 1 元
 const points = ref(1000); //正式應該從資料庫取得
