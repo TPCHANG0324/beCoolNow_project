@@ -296,14 +296,14 @@ const initializeAnimation = () => {
     stopAndReset();
     setupAnimation();
     playAnimation();
-    console.log('Animation initialized successfully');
+    // console.log('Animation initialized successfully');
   } catch (error) {
     console.error('Error initializing animation:', error);
   }
 };
 
 const setupAnimation = () => {
-  console.log('Setting up animation');
+  // console.log('Setting up animation');
 
   TweenMax.set('#shadow', { scale: 0, transformOrigin: '15px 8px' });
   TweenMax.set('#tree', { scale: 0, transformOrigin: '154px bottom' });
@@ -315,7 +315,7 @@ const setupAnimation = () => {
 };
 
 const playAnimation = () => {
-  console.log('Starting animation');
+  // console.log('Starting animation');
   treeTimeline.value = new TimelineMax({
     delay: 0.42,
     repeat: 0,
@@ -335,7 +335,7 @@ const playAnimation = () => {
 };
 
 const stopAndReset = () => {
-  console.log('Stopping animation');
+  // console.log('Stopping animation');
   TweenMax.killAll(false, true, false);
 
   ['#tree', '#shadow', '#leaf-top', '#leaf-rb', '#leaf-rm', '#leaf-lb', '#leaf-lm'].forEach((selector) => {

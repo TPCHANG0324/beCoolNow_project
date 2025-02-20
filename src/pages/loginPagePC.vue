@@ -45,7 +45,7 @@ let openLoginModal; // ✅ 先用 let 定義變數
 // ✅ Vue 設定全域方法，讓 Three.js 內的 `create3DHTML()` 可以開啟登入彈窗
 window.openLoginModal = () => {
   isLoginPopupOpen.value = true;
-  console.log("🔥 Vue 內部控制：登入彈窗開啟！");
+  // console.log("🔥 Vue 內部控制：登入彈窗開啟！");
 };
 
 // ✅ **登入成功後的處理**
@@ -53,7 +53,7 @@ const handleLoginSuccess = () => {
   if (isRedirecting.value) return; // 防止多次點擊
   isRedirecting.value = true;
 
-  console.log("✅ 使用者登入成功，導向後台！");
+  // console.log("✅ 使用者登入成功，導向後台！");
 
   // ✅ **先關閉登入彈窗**
   isLoginPopupOpen.value = false;
@@ -66,32 +66,32 @@ const handleLoginSuccess = () => {
 };
 
 const disposeThreeJS = () => {
-  console.log("🔥 開始清理 Three.js 場景與動畫");
+  // console.log("🔥 開始清理 Three.js 場景與動畫");
 
-  console.log("📌 animationFrameId:", animationFrameId);
-  console.log("📌 renderer:", renderer);
-  console.log("📌 scene:", scene);
-  console.log("📌 threeCanvas.value:", threeCanvas.value);
-  console.log("📌 controls:", controls);
+  // console.log("📌 animationFrameId:", animationFrameId);
+  // console.log("📌 renderer:", renderer);
+  // console.log("📌 scene:", scene);
+  // console.log("📌 threeCanvas.value:", threeCanvas.value);
+  // console.log("📌 controls:", controls);
 
  // ✅ **確保 animationFrameId 存在才取消動畫**
  if (typeof animationFrameId !== "undefined" && animationFrameId !== null) {
     cancelAnimationFrame(animationFrameId);
     animationFrameId = null;
-    console.log("🛑 停止動畫");
+    // console.log("🛑 停止動畫");
   } else {
     console.warn("⚠️ animationFrameId 不存在，跳過停止動畫");
   }
 
    // ✅ **確保 WebGLRenderer 存在才釋放**
    if (renderer && typeof renderer.dispose === "function") {
-    console.log("✅ 釋放 WebGL 渲染器");
+    // console.log("✅ 釋放 WebGL 渲染器");
     renderer.dispose();
 
     // 🔥 **確保 WebGL 畫布也被移除**
     if (renderer.domElement && renderer.domElement.parentNode) {
       renderer.domElement.parentNode.removeChild(renderer.domElement);
-      console.log("✅ WebGL 畫布已從 DOM 移除");
+      // console.log("✅ WebGL 畫布已從 DOM 移除");
     } else {
       console.warn("⚠️ WebGL 畫布 (`renderer.domElement`) 不存在，跳過移除");
     }
@@ -104,26 +104,26 @@ const disposeThreeJS = () => {
 
   // ✅ **完全清除 CSS3DRenderer 產生的 HTML**
 if (cssRenderer) {
-  console.log("✅ 嘗試清除 CSS3DRenderer 產生的 HTML 物件");
+  // console.log("✅ 嘗試清除 CSS3DRenderer 產生的 HTML 物件");
 
   // 1️⃣ **移除 `.three-html-container` 內的 HTML**
   document.querySelectorAll(".three-html-container").forEach((obj) => {
     obj.remove();
   });
-  console.log("✅ 已移除 .three-html-container 內的 HTML");
+  // console.log("✅ 已移除 .three-html-container 內的 HTML");
 
   // 2️⃣ **強制刪除 `preserve-3d` & `translateZ` 相關的 `div`**
   document.querySelectorAll("div[style*='preserve-3d'], div[style*='translateZ'], div[style*='absolute']").forEach((container) => {
     if (container.parentNode) {
       container.parentNode.removeChild(container);
-      console.log("✅ 已移除 CSS3DRenderer 產生的 div (preserve-3d)");
+      // console.log("✅ 已移除 CSS3DRenderer 產生的 div (preserve-3d)");
     }
   });
 
   // 3️⃣ **移除 `cssRenderer.domElement`**
   if (cssRenderer.domElement && cssRenderer.domElement.parentNode) {
     cssRenderer.domElement.parentNode.removeChild(cssRenderer.domElement);
-    console.log("✅ CSS3DRenderer 畫布已從 DOM 移除");
+    // console.log("✅ CSS3DRenderer 畫布已從 DOM 移除");
   }
 
   // 4️⃣ **強制 `cssRenderer` 設為 `null`，避免記憶體洩漏**
@@ -135,7 +135,7 @@ if (cssRenderer) {
 
   // ✅ 確保 controls 存在才禁用
   if (controls && typeof controls.dispose === "function") {
-  console.log("✅ 移除 OrbitControls");
+  // console.log("✅ 移除 OrbitControls");
   controls.dispose();
   controls = null;
   } else {
@@ -147,7 +147,7 @@ if (cssRenderer) {
   if (threeCanvas.value && threeCanvas.value.contains(renderer?.domElement)) {
     try {
       threeCanvas.value.removeChild(renderer.domElement);
-      console.log("✅ 移除 threeCanvas");
+      // console.log("✅ 移除 threeCanvas");
     } catch (error) {
       console.warn("⚠️ 無法移除 threeCanvas，可能已被銷毀", error);
     }
@@ -159,7 +159,7 @@ if (cssRenderer) {
 if (animationFrameId) {
   cancelAnimationFrame(animationFrameId);
   animationFrameId = null;
-  console.log("🛑 停止動畫");
+  // console.log("🛑 停止動畫");
 }
 
 
@@ -168,7 +168,7 @@ if (animationFrameId) {
   cssRenderer = null;
   animationFrameId = null;
 
-  console.log("🎉 Three.js 清理完成！");
+  // console.log("🎉 Three.js 清理完成！");
 };
 
 
@@ -215,7 +215,7 @@ onUnmounted(() => {
   cancelAnimationFrame(animationFrameId); // ✅ **確保動畫結束**
   window.removeEventListener("login-success", () => {});
   animationFrameId = null;
-  console.log("🔥 清除 Three.js 場景 & 動畫");
+  // console.log("🔥 清除 Three.js 場景 & 動畫");
   disposeThreeJS();
   // **取消動畫**
   cancelAnimationFrame(animationFrameId);
@@ -275,13 +275,13 @@ function initThree() {
 
 
 function loadHDRBackground(hdrUrl) {
-  console.log("🔍 嘗試載入 `.hdr`: ", hdrUrl);
+  // console.log("🔍 嘗試載入 `.hdr`: ", hdrUrl);
 
   const loader = new RGBELoader();
   loader.load(
     hdrUrl,
     (texture) => {
-      console.log("✅ `.hdr` 解析成功", texture);
+      // console.log("✅ `.hdr` 解析成功", texture);
       texture.mapping = THREE.EquirectangularReflectionMapping;
       scene.background = texture; // 設置全景背景
       scene.environment = texture; // 設置環境光
@@ -419,7 +419,7 @@ function create3DHTML() {
     const backendBtn = document.getElementById("backend-login-btn");
     if (backendBtn) {
       backendBtn.addEventListener("click", () => {
-        console.log("🟠 進入後台登入模式");
+        // console.log("🟠 進入後台登入模式");
 
         // ✅ **設定 `redirectPath` 為後台路徑**
         localStorage.setItem("redirectPath", "/BackStagePages");
@@ -428,7 +428,7 @@ function create3DHTML() {
         window.openLoginModal();
       });
     }
-}, 100);
+}, 500);
 
 
   const htmlObject = new CSS3DObject(div);
@@ -441,11 +441,27 @@ function create3DHTML() {
     const frontBtn = div.querySelector(".be-cool-now-front-btn");
     const backBtn = div.querySelector(".be-cool-now-back-btn");
 
+
+    if (!frontBtn || !backBtn) {
+      console.error("❌ 找不到前台/後台按鈕，事件綁定失敗！");
+      return;
+    }
+
+    // console.log("✅ 成功找到按鈕，綁定 hover 事件");
+
     // 滑鼠移入動畫
     frontBtn.addEventListener("mouseenter", () => {
+      // console.log("🎯 `frontBtn` hover 觸發");
       frontBtn.style.transform = "scale(1.2)";
       frontBtn.style.filter = "drop-shadow(0px 0px 15px #d4a548)";
       frontBtn.style.backgroundColor = "rgb(212, 165, 72, .7)";
+    });
+
+    backBtn.addEventListener("mouseenter", () => {
+      // console.log("🎯 `backBtn` hover 觸發");
+      backBtn.style.transform = "scale(1.2)";
+      backBtn.style.filter = "drop-shadow(0px 0px 15px #d4a548)";
+      backBtn.style.backgroundColor = "rgb(212, 165, 72, .7)";
     });
 
     window.openLoginModal = () => {
@@ -460,11 +476,11 @@ function create3DHTML() {
     frontBtn.style.backgroundColor = "rgb(212, 165, 72, .5)";
     });
 
-  backBtn.addEventListener("mouseleave", () => {
-    backBtn.style.transform = "scale(1)";
-    backBtn.style.filter = "drop-shadow(0px 0px 0px #d4a548)";
-    backBtn.style.backgroundColor = "rgb(212, 165, 72, .5)";
-  });
+    backBtn.addEventListener("mouseleave", () => {
+      backBtn.style.transform = "scale(1)";
+      backBtn.style.filter = "drop-shadow(0px 0px 0px #d4a548)";
+      backBtn.style.backgroundColor = "rgb(212, 165, 72, .5)";
+    });
 
   }, 1000);
 

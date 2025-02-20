@@ -138,7 +138,7 @@
                   </p>
                 </div>
                 <div class="Ic_game-buttons_R">
-                  <button v-for="(option, index) in currentQuestion.options" 
+                  <button v-for="(option, index) in currentQuestion.options"
                     :key="index"
                     :data-correct="index === currentQuestion.answer" @click="submitAnswer(index)">
                     {{ letters[index] }}
@@ -331,7 +331,7 @@ export default {
       throw new Error(`伺服器回應錯誤：${response.status}`);
     }
     const data = await response.json();
-    console.log('取得的題目資料：', data); // 除錯用
+    // console.log('取得的題目資料：', data); // 除錯用
 
     // 將資料轉換為前端預期的格式
     questions.value = data.map(item => ({
@@ -341,7 +341,7 @@ export default {
     }));
 
     console.log(questions.value);
-    
+
 
     console.log('轉換後的題目資料：', questions.value); // 除錯用
   } catch (error) {

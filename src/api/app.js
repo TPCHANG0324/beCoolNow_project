@@ -47,7 +47,7 @@ app.post('/api/create-payment', createPayment);
 // 錯誤處理中間件
 app.use((err, req, res, next) => {
   console.error('Error:', err);
-  
+
   if (err instanceof mongoose.Error) {
     return res.status(400).json({
       success: false,

@@ -35,9 +35,9 @@
     },
   },
   setup(props) {
-    console.log("📢 [Breadcrumb] 收到價格範圍:", props.priceRange);
+    // console.log("📢 [Breadcrumb] 收到價格範圍:", props.priceRange);
     onMounted(() => {
-      console.log("📢 [Breadcrumb] 組件已掛載！");
+      // console.log("📢 [Breadcrumb] 組件已掛載！");
     });
   }
 

@@ -61,11 +61,11 @@
           </main>
         </div>
          <!-- 分頁器元件，傳入 currentPage 與 totalPages -->
-         <Paginator 
+         <Paginator
           class="paginator_H"
-          :currentPage="currentPage" 
-          :totalPages="totalPages" 
-          @page-changed="handlePageChange" 
+          :currentPage="currentPage"
+          :totalPages="totalPages"
+          @page-changed="handlePageChange"
         />
       </div>
     </div>
@@ -249,7 +249,7 @@ export default {
         });
 
         // products.value = await response.json();
-        console.log("✅ 轉換後的商品資料:", products.value);
+        // console.log("✅ 轉換後的商品資料:", products.value);
 
       } catch (err) {
         error.value = err.message;
@@ -272,7 +272,7 @@ export default {
     //編輯彈窗功能待整合
     // 打開編輯彈窗
     const openEditPopup = (product) => {
-      console.log("選中的商品 ID:", product.ID); // ✅ 確保正確抓取 ID
+      // console.log("選中的商品 ID:", product.ID); // ✅ 確保正確抓取 ID
       Object.assign(editingProduct, product); // ✅ 更新當前編輯的商品資訊
       productID.value = product.ID; // ✅ 設定商品 ID
       editingProduct.productStatus = product.productStatus; // ✅ 確保 `productStatus` 是最新的
@@ -456,7 +456,7 @@ export default {
 
       const result = await response.json();
       if (result.success) {
-        console.log("☘️ 圖片上傳成功，新的圖片路徑:", result.imagePath);
+        // console.log("☘️ 圖片上傳成功，新的圖片路徑:", result.imagePath);
         updatedImagePath = result.imagePath;
       } else {
         alert("🍂 圖片上傳失敗：" + result.error);
@@ -525,8 +525,8 @@ export default {
 
     // 開啟「新增商品」彈窗
     const openAddPopup = () => {
-      console.log("🟢 開啟新增商品彈窗");
-      console.log("🟢 初始 newProduct:", newProduct.value);
+      // console.log("🟢 開啟新增商品彈窗");
+      // console.log("🟢 初始 newProduct:", newProduct.value);
       isPopupVisible.value = true;
     };
 
@@ -569,7 +569,7 @@ export default {
 
      // ✅ **Console 顯示 FormData 內容**
     for (let pair of formData.entries()) {
-      console.log("📦 FormData:", pair[0], pair[1]);
+      // console.log("📦 FormData:", pair[0], pair[1]);
     }
 
     try {
@@ -621,7 +621,7 @@ export default {
     };
     reader.readAsDataURL(file);
 
-    console.log("🌏 選擇的圖片:", newProduct.value.image);
+    // console.log("🌏 選擇的圖片:", newProduct.value.image);
     };
 
     // **重置表單**
