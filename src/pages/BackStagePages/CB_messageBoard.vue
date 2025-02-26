@@ -33,8 +33,8 @@
                     <td class="CB_content_H">{{ mes.content }}</td>
                     <td>{{ mes.messageDate.split(' ')[0] }}</td>
                     <td>{{ mes.reportCount }}</td>
-                    <td :style="{ color: mes.messageShelves ? '#545454' : 'rgba(84, 84, 84, 0.5)' }">{{
-                      mes.messageShelves ? '上架' : '下架' }}</td>
+                    <td :style="{ color: mes.messageShelves == '1' || mes.messageShelves === true ? '#545454' : 'rgba(84, 84, 84, 0.5)' }">{{
+                      mes.messageShelves == '1' || mes.messageShelves === true ? '上架' : '下架' }}</td>
                     <td><button class="MmB_editBtn_H" @click="openEditPopup(mes)">編輯與查看</button></td>
                   </tr>
                 </tbody>
@@ -266,3 +266,14 @@ onMounted(() => {
 //   alert('已刪除');
 // };  
 </script>
+
+
+<style>
+.shelves-on {
+  color: #545454;
+}
+.shelves-off {
+  color: rgba(84, 84, 84, 0.5);
+}
+
+</style>

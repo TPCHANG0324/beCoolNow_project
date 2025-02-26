@@ -31,7 +31,7 @@ const sendEmail = (userData) => {
   const templateParams = {
     to_name: userData.name,
     site_name: '涼城即時',
-    donation_name:userData.name,
+    donation_name: userData.name,
     donation_date: new Date(),
     donation_amount: userData.amount,
     to_email: userData.email,
@@ -45,24 +45,36 @@ const sendEmail = (userData) => {
     });
 }
 
-onMounted(() => {
-  const urlParams = new URLSearchParams(window.location.search);
-  const userDataEncoded = urlParams.get('userData');
-  if (userDataEncoded) {
-    const userData = JSON.parse(decodeURIComponent(userDataEncoded))
-    console.log(userData)
-    sendEmail(userData); // 呼叫寄信函數
+//取得捐款者資料
+const getDonateData = async () => {
+  const base_url = import.meta.env.VITE_AJAX_URL //環境路徑
+  try {
+    const res = await fetch(base_url + `/getMailInfo.php`)
+    if (!res.ok) {
+      throw new Error(`HTTP error! Status: ${res.status}`);
+    }
+    const data = await res.json()
+    if (data.success) {
+      sendEmail(data.data);
+    } else {
+      router.push('/support');
+    }
+  } catch (err) {
+    console.error("Error fetching user data:", err)
+    router.push('/support');
   }
-  else{
-    router.push('/support')
-  }
+}
+
+
+
+onMounted(async() => {
+  await getDonateData()
 })
 </script>
 
 <style lang="scss">
-
-.donate_finish_footer{
-  .footer{
+.donate_finish_footer {
+  .footer {
     margin: 0 !important;
   }
 

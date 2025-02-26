@@ -39,8 +39,8 @@
                     <td>{{ article.category }}</td>
                     <td class="CB_content_H">{{ article.title }}</td>
                     <td>{{ article.time.split(' ')[0] }}</td>
-                    <td :style="{ color: article.articleShelves ? '#545454' : 'rgba(84, 84, 84, 0.5)' }">{{
-                      article.articleShelves ? '上架' : '下架' }}</td>
+                    <td :style="{ color: article.articleShelves == '1' || article.articleShelves == true ? '#545454' : 'rgba(84, 84, 84, 0.5)' }">{{
+                      article.articleShelves == '1' || article.articleShelves == true ? '上架' : '下架' }}</td>
                     <td><button class="MmB_editBtn_H" @click="openEditPopup(article)">編輯與查看</button></td>
                   </tr>
                 </tbody>

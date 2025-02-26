@@ -11,7 +11,7 @@ ini_set('display_errors', 1);
 $transactionId = $_GET['transactionId'] ?? '';
 $orderId = $_GET['orderId'] ?? '';
 $amount = $_GET['amount'] ?? 0;
-$userData = $_SESSION['userData'] ?? null; //上一步存的捐款者資訊
+// $userData = $_SESSION['userData'] ?? null; //上一步存的捐款者資訊
 
 if (!empty($transactionId)) {
     try {
@@ -46,11 +46,8 @@ if (!empty($transactionId)) {
         $result = json_decode($response, true);
 
         if (isset($result['returnCode']) && $result['returnCode'] === '0000') {
-            session_unset();
-            session_destroy();
-            $userDataEncoded = urlencode(json_encode($userData));
             // 交易成功，重定向到成功頁面
-            header("Location: https://tibamef2e.com/tid103/g1/donatefinish?userData={$userDataEncoded}");
+            header("Location: https://tibamef2e.com/tid103/g1/donatefinish");
             exit();
         } else {
             // 交易失敗，重定向到失敗頁面
