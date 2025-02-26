@@ -143,7 +143,7 @@ export default {
             frameHeight: 48,
         });
 
-        console.log("✅ 已載入所有貓咪圖片！");
+        // console.log("✅ 已載入所有貓咪圖片！");
 
 
         // 小寵物: 獅子
@@ -197,7 +197,7 @@ export default {
 
 
         this.physics.resume();
-        console.log("✅ 物理引擎已啟動:", !this.physics.world.isPaused);
+        // console.log("✅ 物理引擎已啟動:", !this.physics.world.isPaused);
         gameOver = false; // ✅ 遊戲重新開始時重置 `gameOver`
 
         if (!cursors) {
@@ -205,7 +205,7 @@ export default {
             cursors = this.input.keyboard.createCursorKeys();
           }
 
-          console.log("⌨️ `this.input.keyboard.enabled` 狀態:", this.input.keyboard.enabled);
+          // console.log("⌨️ `this.input.keyboard.enabled` 狀態:", this.input.keyboard.enabled);
 
 
 
@@ -272,37 +272,37 @@ export default {
 
           // 🎯 **點擊按鈕後開始遊戲**
           this.startButton.on("pointerdown", () => {
-            console.log("✅ 遊戲開始！");
+            // console.log("✅ 遊戲開始！");
 
             // ✅ **防止多次點擊**
             this.startButton.disableInteractive();
 
             // ✅ **確保所有 UI 元素已刪除**
             if (this.overlay) {
-              console.log("🔄 移除遮罩");
+              // console.log("🔄 移除遮罩");
               this.overlay.destroy();
               this.overlay = null;
             }
 
             if (this.popupBackground) {
-              console.log("🔄 移除彈窗背景");
+              // console.log("🔄 移除彈窗背景");
               this.popupBackground.destroy();
               this.popupBackground = null;
             }
 
             if (this.instructions) {
-              console.log("🔄 移除遊戲說明");
+              // console.log("🔄 移除遊戲說明");
               this.instructions.destroy();
               this.instructions = null;
             }
 
             if (this.startButton) {
-              console.log("🔄 移除開始按鈕");
+              // console.log("🔄 移除開始按鈕");
               this.startButton.destroy();
               this.startButton = null;
             }
 
-            console.log("🎯 所有彈窗元素已成功刪除！");
+            // console.log("🎯 所有彈窗元素已成功刪除！");
           });
         }
 
@@ -473,7 +473,7 @@ export default {
           // console.log(`✅ 成功創建動畫: ${cat}_walk_left / ${cat}_walk_right`);
         });
 
-        console.log("所有已載入的貼圖:", this.textures.list);
+        // console.log("所有已載入的貼圖:", this.textures.list);
 
         // ✅ **洗牌函數 (讓每輪的貓咪出現次數相同)**
         function shuffleArray(array) {
@@ -669,9 +669,9 @@ export default {
         // console.log("📢 正在監聽 overlap 事件...");
         // console.log("🔍 檢查傳送門物件：", this.outdoor);
         // console.log("🔍 檢查玩家物件：", player);
-        console.log(`📍 玩家座標: x=${player.x}, y=${player.y}`);
-        console.log(`📍 傳送門座標: x=${this.outdoor.x}, y=${this.outdoor.y}`);
-        console.log("🛑 是否相交？", Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), this.outdoor.getBounds()));
+        // console.log(`📍 玩家座標: x=${player.x}, y=${player.y}`);
+        // console.log(`📍 傳送門座標: x=${this.outdoor.x}, y=${this.outdoor.y}`);
+        // console.log("🛑 是否相交？", Phaser.Geom.Intersects.RectangleToRectangle(player.getBounds(), this.outdoor.getBounds()));
 
         // ✅ **繪製圓角矩形背景**
         let textBg = this.add.graphics();
@@ -713,20 +713,20 @@ export default {
 
             if (distance < portalRadius && !this.nearPortal) {
                 this.nearPortal = true;
-                console.log("✅ 玩家進入傳送門範圍");
+                // console.log("✅ 玩家進入傳送門範圍");
             } else if (distance >= portalRadius && this.nearPortal) {
                 this.nearPortal = false;
-                console.log("❌ 玩家離開傳送門範圍");
+                // console.log("❌ 玩家離開傳送門範圍");
             }
         };
 
         // ✅ **監聽 Enter 鍵，只有在範圍內才能觸發**
         this.input.keyboard.on("keydown-ENTER", () => {
             if (this.nearPortal) {
-                console.log("🛑 玩家按下 Enter，顯示傳送確認對話框");
+                // console.log("🛑 玩家按下 Enter，顯示傳送確認對話框");
                 this.showConfirmDialog();
             } else {
-                console.log("⛔ 玩家不在傳送門範圍內，無法開啟對話框");
+                // console.log("⛔ 玩家不在傳送門範圍內，無法開啟對話框");
             }
         }, this);
 
@@ -734,16 +734,16 @@ export default {
         // ✅ **監聽 Enter 鍵，只有在範圍內才能觸發**
         this.input.keyboard.on("keydown-ENTER", () => {
             if (this.nearPortal) {
-                console.log("🛑 玩家按下 Enter，顯示傳送確認對話框");
+                // console.log("🛑 玩家按下 Enter，顯示傳送確認對話框");
                 this.showConfirmDialog();
             } else {
-                console.log("⛔ 玩家不在傳送門範圍內，無法開啟對話框");
+                // console.log("⛔ 玩家不在傳送門範圍內，無法開啟對話框");
             }
         }, this);
 
         // ✅ **顯示確認對話框**
         this.showConfirmDialog = () => {
-            console.log("🛑 顯示傳送確認對話框");
+            // console.log("🛑 顯示傳送確認對話框");
 
             let dialogBox = this.add.graphics();
             dialogBox.fillStyle(0x000000, 0.7);
@@ -771,12 +771,12 @@ export default {
             }).setInteractive().setDepth(101);
 
             leaveButton.on("pointerdown", () => {
-                console.log("✅ 傳送至新場景...");
+                // console.log("✅ 傳送至新場景...");
                 window.location.href = "https://tibamef2e.com/tid103/g2/game";  // 一碳究竟 創建寵物頁
             });
 
             stayButton.on("pointerdown", () => {
-                console.log("❌ 取消傳送，回到遊戲");
+                // console.log("❌ 取消傳送，回到遊戲");
                 dialogBox.destroy();
                 dialogText.destroy();
                 leaveButton.destroy();
@@ -789,7 +789,7 @@ export default {
         if (!this.outdoor) {
           console.error("🚨 `this.outdoor` 尚未被正確建立！");
         } else {
-          console.log("✅ `this.outdoor` 已經建立成功");
+          // console.log("✅ `this.outdoor` 已經建立成功");
         }
 
 
@@ -898,7 +898,7 @@ export default {
               bomb.body.allowGravity = true; // ✅ **確保炸彈受重力影響**
               bomb.body.onWorldBounds = true; // ✅ **監聽邊界碰撞**
 
-              console.log(`💣 新炸彈生成！當前炸彈數量: ${bombs.countActive(true)}`);
+              // console.log(`💣 新炸彈生成！當前炸彈數量: ${bombs.countActive(true)}`);
               }
             }
           });
@@ -914,12 +914,12 @@ export default {
           player.anims.play('turn');
           gameOver = true;
 
-          console.log("遊戲結束，顯示 Restart 按鈕");
+          // console.log("遊戲結束，顯示 Restart 按鈕");
 
           // ✅ **確保不會重複創建「重新開始」按鈕**
           if (this.restartButton) {
             this.restartButton.destroy();
-            console.log("🔄 已移除舊的 Restart 按鈕");
+            // console.log("🔄 已移除舊的 Restart 按鈕");
           }
 
           // ✅ 按鈕背景
@@ -947,12 +947,12 @@ export default {
             .setInteractive()
             .setDepth(96); // ✅ **確保在最上層**
 
-          console.log("✅ Restart 按鈕已創建");
+          // console.log("✅ Restart 按鈕已創建");
 
           setTimeout(() => {
             if (this.restartButton) {
               this.restartButton.on("pointerdown", () => {
-                console.log("🎮 按下 Restart 按鈕，準備重新啟動遊戲");
+                // console.log("🎮 按下 Restart 按鈕，準備重新啟動遊戲");
                 restartGame(this);
               });
             }
@@ -961,7 +961,7 @@ export default {
 
         // 📌 **重新開始遊戲**
         function restartGame(scene) {
-          console.log("重新開始遊戲");
+          // console.log("重新開始遊戲");
 
           // ✅ 移除舊動畫，確保重新載入場景時不會有衝突
           scene.anims.remove('left');

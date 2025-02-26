@@ -417,9 +417,9 @@ const done = (key) => {
   }else{
     clicked['key-'+key] = true
     localStorage.setItem('clicked', JSON.stringify(clicked));
-    
+
   }
-  
+
 
   setTimeout(() => {
     treePopup.value = null;
@@ -485,11 +485,11 @@ const handleSubmit = async (e) => {
       postTime: new Date().toISOString()
     };
 
-    console.log('準備發送的 letterData:', letterData);
+    // console.log('準備發送的 letterData:', letterData);
 
     const base_url = import.meta.env.VITE_AJAX_URL
     const response = await axios.post(`${base_url}/letters.php`, letterData)
-    console.log('收到回應內容:', response.data);
+    // console.log('收到回應內容:', response.data);
 
     if (response.data?.success) {
       letters.value.unshift({
@@ -506,15 +506,15 @@ const handleSubmit = async (e) => {
       throw new Error('提交失敗：' + (response.data?.message || '未知錯誤'));
     }
   } catch (error) {
-    console.log('完整錯誤信息:', {
-      errorName: error.name,
-      errorMessage: error.message,
-      requestURL: error.config?.url,
-      requestMethod: error.config?.method,
-      requestData: error.config?.data,
-      responseStatus: error.response?.status,
-      responseData: error.response?.data
-    });
+    // console.log('完整錯誤信息:', {
+    //   errorName: error.name,
+    //   errorMessage: error.message,
+    //   requestURL: error.config?.url,
+    //   requestMethod: error.config?.method,
+    //   requestData: error.config?.data,
+    //   responseStatus: error.response?.status,
+    //   responseData: error.response?.data
+    // });
 
     alert('🍂 提交失敗：' + error.message);
   }

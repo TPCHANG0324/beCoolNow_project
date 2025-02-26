@@ -411,11 +411,11 @@ export default {
         : [];
 
 
-        console.log("解析後的商品規格:", selectedSizeOptions.value);
+        // console.log("解析後的商品規格:", selectedSizeOptions.value);
 
           // 監聽選擇的容量，確保正確更新
           watch(selectedSize, (newValue) => {
-            console.log("選擇的容量:", newValue);
+            // console.log("選擇的容量:", newValue);
           });
 
 
@@ -530,7 +530,7 @@ export default {
     // 加入購物車
     const addToCart = (isBuyNow = false) => {
 
-      console.log(" 檢查商品資訊:", product.value);
+      // console.log(" 檢查商品資訊:", product.value);
       // 檢查 `product` 是否已經載入
       if (!product.value || !product.value.ID || !product.value.productName || !product.value.salePrice ==null) {
         alert("🌏 商品資訊未載入，請稍候再試！");
@@ -553,7 +553,7 @@ export default {
         salePrice: product.value.salePrice,
       };
 
-      console.log("🛒 加入購物車的商品資訊:", newProduct);
+      // console.log("🛒 加入購物車的商品資訊:", newProduct);
 
       // **取得 localStorage 內的購物車資料**
       let cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -570,7 +570,7 @@ export default {
 
       // **更新 localStorage**
       localStorage.setItem("cart", JSON.stringify(cart));
-    
+
       // **更新購物車數量**
       updateCartItemCount();
       // alert("🛒 商品已加入購物車！");
@@ -578,7 +578,7 @@ export default {
 
        if (!isBuyNow) {
         isCartPopupVisible.value = true; // 顯示彈窗
-        console.log("🛒 商品已加入購物車:", newProduct);
+        // console.log("🛒 商品已加入購物車:", newProduct);
       } else {
         // 如果是「立即購買」，跳轉到購物車
         router.push("/shop_cart");
@@ -588,7 +588,7 @@ export default {
 
     // 立即結帳功能
     const goToCheckout = () => {
-      console.log("🌏 跳轉到結帳頁面...");
+      // console.log("🌏 跳轉到結帳頁面...");
     router.push("/shop_cart");
     };
 
@@ -601,7 +601,7 @@ export default {
         updateCartItemCount();
         isMounted.value = true;
         isMobile.value = window.innerWidth <= 430;
-        
+
         fetchProduct();
 
         await nextTick(); // 確保 DOM 更新後取得 Swiper

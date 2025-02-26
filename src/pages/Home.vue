@@ -312,7 +312,7 @@ export default {
       end: "bottom center", // 當區塊的底部到達視窗中心時結束
 
       onEnter: () => {
-        console.log("進入區塊");
+        // console.log("進入區塊");
 
         const enterTimeline = gsap.timeline({
           defaults: {
@@ -331,7 +331,7 @@ export default {
 
       },
       onLeave: () => {
-        console.log("離開區塊");
+        // console.log("離開區塊");
 
         // 使用單獨的時間線處理離場動畫
         const leaveTimeline = gsap.timeline({
@@ -349,7 +349,7 @@ export default {
 
       },
       onEnterBack: () => {
-        console.log("重新進入區塊");
+        // console.log("重新進入區塊");
 
         // 返回進場時重新使用單獨的時間線
         const enterBackTimeline = gsap.timeline({
@@ -366,7 +366,7 @@ export default {
 
       },
       onLeaveBack: () => {
-        console.log("再次離開區塊");
+        // console.log("再次離開區塊");
 
         // 返回離場時重新使用單獨的時間線
         const leaveBackTimeline = gsap.timeline({
@@ -708,7 +708,7 @@ export default {
 
 
     onUnmounted(() => {
-      console.log("🚀 清除 GSAP & ScrollTrigger");
+      // console.log("🚀 清除 GSAP & ScrollTrigger");
 
       gsap.globalTimeline.clear(); // ✅ 清除所有 GSAP 動畫
       ScrollTrigger.killAll(); // ✅ 清除所有 ScrollTrigger

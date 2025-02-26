@@ -59,11 +59,11 @@
           </main>
         </div>
         <!-- 分頁器元件，傳入 currentPage 與 totalPages -->
-        <Paginator 
+        <Paginator
           class="paginator_H"
-          :currentPage="currentPage" 
-          :totalPages="totalPages" 
-          @page-changed="handlePageChange" 
+          :currentPage="currentPage"
+          :totalPages="totalPages"
+          @page-changed="handlePageChange"
         />
       </div>
     </div>
@@ -216,7 +216,7 @@ export default {
 
 
     watch(selectedOrder, (newVal) => {
-      console.log("🔍 監聽到的 selectedOrder:", newVal);
+      // console.log("🔍 監聽到的 selectedOrder:", newVal);
     });
     // **統一的狀態對應表**
     const statusMapping = {
@@ -244,11 +244,11 @@ export default {
         const data = await response.json();
 
 
-        console.log("📡 API 回應 (應該是字串):", data);
+        // console.log("📡 API 回應 (應該是字串):", data);
 
         if (data.success) {
           orders.value = data.orders;
-          console.log("📌 所有訂單資料: ", orders.value);
+          // console.log("📌 所有訂單資料: ", orders.value);
         } else {
           console.error("❌ 取得訂單失敗:", data.message);
         }
@@ -260,7 +260,7 @@ export default {
     // **開啟「編輯與查看」的彈窗**
     const openEditPopup = async (orderId) => {
       try {
-        console.log("開啟彈窗，訂單 ID:", orderId);
+        // console.log("開啟彈窗，訂單 ID:", orderId);
         const response = await fetch(`${base_url}/getOrder.php?id=${orderId}`);
         const data = await response.json();
 
@@ -278,7 +278,7 @@ export default {
           // **在這裡手動轉換 orderStatus**
           selectedOrderDetails.value = data.order_details;
           isEditPopupVisible.value = true;
-          console.log("📌 轉換後的 `selectedOrder`: ", selectedOrder.value);
+          // console.log("📌 轉換後的 `selectedOrder`: ", selectedOrder.value);
         } else {
           console.error("取得訂單詳情失敗:", data.message);
         }
@@ -343,15 +343,15 @@ export default {
         const shipStatusValue = shipStatusMappingReverse[selectedOrder.value.shipStatus] ?? 0;
 
 
-        console.log("📌 送出訂單更新，數據:", {
-          orderID: selectedOrder.value.ID,
-          orderStatus: orderStatusValue,
-          payStatus: payStatusValue,
-          payMethod: payMethodValue,
-          shipMethod: shipMethodValue,
-          shipStatus: shipStatusValue,
-          shippingFee: selectedOrder.value.shippingFee,
-        });
+        // console.log("📌 送出訂單更新，數據:", {
+        //   orderID: selectedOrder.value.ID,
+        //   orderStatus: orderStatusValue,
+        //   payStatus: payStatusValue,
+        //   payMethod: payMethodValue,
+        //   shipMethod: shipMethodValue,
+        //   shipStatus: shipStatusValue,
+        //   shippingFee: selectedOrder.value.shippingFee,
+        // });
 
         const response = await fetch(`${base_url}/updateOrder.php`, {
         method: "POST",
@@ -368,7 +368,7 @@ export default {
         });
 
         const result = await response.json();
-        console.log("📥 後端回應:", result); // 🔍 確保 `result` 正確
+        // console.log("📥 後端回應:", result); // 🔍 確保 `result` 正確
 
 
           if (result.success) {

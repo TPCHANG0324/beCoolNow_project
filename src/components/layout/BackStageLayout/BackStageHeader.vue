@@ -26,12 +26,12 @@ export default {
       // ✅ **顯示確認彈窗**
       const isConfirmed = confirm("確定要登出嗎？");
       if (!isConfirmed) {
-        console.log("🚫 使用者取消登出");
+        // console.log("🚫 使用者取消登出");
         return; // ❌ 取消登出
       }
 
   try {
-    console.log("🚀 發送登出請求至:", logoutUrl);
+    // console.log("🚀 發送登出請求至:", logoutUrl);
 
     const res = await fetch(logoutUrl, {
       method: "POST",  // ✅ 確保使用 POST
@@ -44,15 +44,15 @@ export default {
     if (!res.ok) throw new Error(`HTTP 錯誤: ${res.status}`);
 
     const data = await res.json();
-    console.log("🔍 伺服器回應:", data);
+    // console.log("🔍 伺服器回應:", data);
 
     if (data.success) {
-      console.log("✅ 登出成功：", data.message);
+      // console.log("✅ 登出成功：", data.message);
 
       localStorage.removeItem("userPhone");
       localStorage.removeItem("isLoggedIn");
       localStorage.removeItem("redirectPath"); // **確保清除**
-      console.log("🗑️ `redirectPath` 已從 localStorage 清除");
+      // console.log("🗑️ `redirectPath` 已從 localStorage 清除");
 
       // await closeLogoutPopup();
       alert(data.message);

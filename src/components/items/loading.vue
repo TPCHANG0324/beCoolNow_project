@@ -70,7 +70,7 @@ onMounted(() => {
       bulbMercury.value.style.background = "#FFA500";
       temperatureValue.value = 0;
 
-      console.log("🎬 開始同步動畫...");
+      // console.log("🎬 開始同步動畫...");
 
       // ✅ 地球浮動畫
       gsap.to(earth.value, {
@@ -93,8 +93,8 @@ onMounted(() => {
         duration: 2.5,
         ease: "sine.inOut",
         stagger: 0.2,
-        onStart: () => console.log("🎨 水銀球變色開始"),
-        onComplete: () => console.log("✅ 水銀球變色完成")
+        // onStart: () => console.log("🎨 水銀球變色開始"),
+        // onComplete: () => console.log("✅ 水銀球變色完成")
       }, 0)
 
       .to(temperatureValue, {
@@ -102,12 +102,12 @@ onMounted(() => {
         duration: 2.5,
         roundProps: "value",
         ease: "sine.inOut",
-        onStart: () => console.log("🔢 數字動畫開始"),
+        // onStart: () => console.log("🔢 數字動畫開始"),
         onUpdate: () => {
           temperatureValue.value = Math.round(temperatureValue.value);
-          console.log(`🔢 當前數字： ${temperatureValue.value}`);
+          // console.log(`🔢 當前數字： ${temperatureValue.value}`);
         },
-        onComplete: () => console.log("✅ 數字動畫完成")
+        // onComplete: () => console.log("✅ 數字動畫完成")
       }, 0)
 
       .to(mercury.value, {
@@ -115,8 +115,8 @@ onMounted(() => {
         background: mercuryGradient,
         duration: 2.5,
         ease: "sine.inOut",
-        onStart: () => console.log("📏 水銀柱動畫開始"),
-        onComplete: () => console.log("✅ 水銀柱動畫完成")
+        // onStart: () => console.log("📏 水銀柱動畫開始"),
+        // onComplete: () => console.log("✅ 水銀柱動畫完成")
       }, 0)
 
       // ✅ **所有動畫結束後，讓地球、溫度計、數字、遮罩「同步淡出」**
@@ -124,14 +124,14 @@ onMounted(() => {
         opacity: 0,
         duration: .5,
         ease: "sine.inOut",
-        onStart: () => console.log("🎭 全部元素淡出開始"),
+        // onStart: () => console.log("🎭 全部元素淡出開始"),
         onComplete: () => {
-          console.log("🚀 動畫完全結束，隱藏所有元素");
+          // console.log("🚀 動畫完全結束，隱藏所有元素");
         }
       }, "+=.5") // **確保在動畫結束 0.5 秒後開始淡出**
 
       .then(() => {
-        console.log("🎉 所有動畫 & 淡出效果已完成！");
+        // console.log("🎉 所有動畫 & 淡出效果已完成！");
       });
     }
   });
