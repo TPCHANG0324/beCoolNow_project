@@ -55,7 +55,7 @@ const q = `氣候%綠能`  //關鍵字
 
 //取得 30 天前 ~ 今天的日期  的格式化字串
 const AgoDate = new Date(today.value);
-AgoDate.setDate(today.value.getDate() - 30);
+AgoDate.setDate(today.value.getDate() - 28);
 const from = getDate(AgoDate)
 const to = getDate(today.value)
 // const newURL = `https://newsapi.org/v2/everything?q=${q}&from=${from}&to=${to}&sortBy=popularity&apiKey=${apiKey}`
