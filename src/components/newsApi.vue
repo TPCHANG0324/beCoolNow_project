@@ -49,9 +49,9 @@ const getDate = (date) => {
 }
 
 const apiKey = `c37e23185827432d8fd46365f1de40be`
-const keyWords = ['氣候變遷', '暖化', '綠能', '回收', '汙染', '永續', '能源政策', '環保']  //求到的資料再用關鍵字去篩選
+const keyWords = ['氣候變遷', '地球氣候', '極端天氣', '極端氣候', '暖化', '綠能', '回收', '永續', '能源政策', '再生能源', '環保', '植樹', '碳排', '減碳', '二氧化碳', '水資源短缺', '增加降雨']  //求到的資料再用關鍵字去篩選
 const regex = new RegExp(keyWords.join('|'))
-const q = `氣候%綠能`  //關鍵字
+const q = `氣候`  //關鍵字
 
 //取得 30 天前 ~ 今天的日期  的格式化字串
 const AgoDate = new Date(today.value);
@@ -63,6 +63,8 @@ const base_url = import.meta.env.VITE_AJAX_URL
 const newURL = base_url + `/news.php?query=${q}&from=${from}&to=${to}` //改為向後端請求，由後端充當本地伺服器
 //請求 NEWS API 的資料
 const getNEWS = async () => {
+    //沒有圖片預設使用的圖
+    const defaultImg = `https://image-cdn-flare.qdm.cloud/q67836fa02bf78/image/data/%E6%96%B0%E8%81%9E%E6%88%AA%E5%9C%96/62992171a8af003838e9c71ebc5fa071.jpg`
     try {
         const res = await fetch(newURL);
         const data = await res.json();
